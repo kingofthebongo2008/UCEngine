@@ -1,0 +1,39 @@
+import depthstencil
+import rasterizer
+import blend
+
+PipelineStateObject static_geometry =
+{
+    .RootSignature          = default_signature
+    .BlendState             = blend_disabled
+    .SampleMask             = FFFFFFFF
+    .RasterizerState        = solid
+    .DepthStencilState      = depth_prepass_opaque
+    .StripCutValue          = Disabled
+    .PrimitiveTopology      = Line
+    .RTVFormats             = { }
+    .DSVFormat              = D32_FLOAT
+    .SampleDescription      = { .Count = 1 .Quality = 0 }
+}
+
+InputLayout position = 
+{
+    InputLayoutElement = 
+    {
+        .SemanticName = "position"
+        .SemanticIndex = 0
+        .Format = R32G32B32_FLOAT
+        .InputSlot = 0
+        .AlignedByteOffset = 0
+        .Classification = PER_VERTEX_DATA
+    }
+}
+
+PipelineStateObject depth_prepass_lines : static_geometry =
+{
+    .VertexShader           = depth_prepass_vertex
+    .InputLayout            = position
+}
+
+
+

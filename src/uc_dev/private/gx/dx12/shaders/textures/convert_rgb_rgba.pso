@@ -1,0 +1,9 @@
+PipelineStateObject convert_rgb_rgba =
+{
+    .RootSignature 	   		= default_signature
+    .ComputeShader			= convert_rgb_rgba_cs
+}
+
+
+
+

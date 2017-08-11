@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\building.pso">
+      <EntryPointName>building</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured.pso">
+      <EntryPointName>textured</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned.pso">
+      <EntryPointName>textured_skinned</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass.pso">
+      <EntryPointName>depth_prepass</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_skinned.pso">
+      <EntryPointName>depth_prepass_skinned</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines.pso">
+      <EntryPointName>depth_prepass_lines</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\mipmap.pso">
+      <EntryPointName>compute_mip_map</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </ComputePipelineStateObject>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\convert_rgb_rgba.pso">
+      <EntryPointName>convert_rgb_rgba</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </ComputePipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\imgui.pso">
+      <EntryPointName>imgui_main</EntryPointName>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorDev</Backend>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\librocket.pso">
+      <EntryPointName>librocket_main</EntryPointName>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorDev</Backend>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\skeleton.pso">
+      <EntryPointName>skeleton</EntryPointName>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorDev</Backend>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\full_screen_color.pso">
+      <EntryPointName>full_screen_color</EntryPointName>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorDev</Backend>
+    </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\indexed_mesh.pso">
+      <EntryPointName>indexed_mesh_main</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+  </ItemGroup>
+</Project>

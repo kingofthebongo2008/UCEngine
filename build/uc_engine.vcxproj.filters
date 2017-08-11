@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\uc_engine\pch.cpp" />
+    <ClCompile Include="..\src\uc_engine\dll_main.cpp" />
+    <ClCompile Include="..\src\uc_engine\io\mouse.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\io\keyboard.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\io\game_pad.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\resource_create_context.cpp">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\resource_create_context_internal.cpp">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\device_resources.cpp">
+      <Filter>graphics\device_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\upload_queue.cpp">
+      <Filter>graphics\upload_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\upload_queue_internal.cpp">
+      <Filter>graphics\upload_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\back_buffer.cpp">
+      <Filter>graphics\back_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\back_buffer_internal.cpp">
+      <Filter>graphics\back_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\window_swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\background_swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\overlay_swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\window_overlay_swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_queue.cpp">
+      <Filter>graphics\direct_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_queue_internal.cpp">
+      <Filter>graphics\direct_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\composition_swap_chain_resources.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\swap_chain_resources_impl.cpp">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_queue_impl.cpp">
+      <Filter>graphics\direct_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_command_context.cpp">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_command_context_impl.cpp">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\direct_command_context_internal.cpp">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\fence_handle.cpp">
+      <Filter>graphics\fence_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\fence_handle_impl.cpp">
+      <Filter>graphics\fence_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\fence_handle_internal.cpp">
+      <Filter>graphics\fence_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\depth_buffer.cpp">
+      <Filter>graphics\depth_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\depth_buffer_internal.cpp">
+      <Filter>graphics\depth_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\color_buffer.cpp">
+      <Filter>graphics\color_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\color_buffer_internal.cpp">
+      <Filter>graphics\color_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\resource_create_context_impl.cpp">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\gpu_virtual_resource.cpp">
+      <Filter>graphics\gpu_virtual_resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\pixel_buffer.cpp">
+      <Filter>graphics\pixel_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_queue_impl.cpp">
+      <Filter>graphics\compute_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_queue_internal.cpp">
+      <Filter>graphics\compute_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_queue_impl.cpp">
+      <Filter>graphics\copy_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_queue_internal.cpp">
+      <Filter>graphics\copy_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_queue.cpp">
+      <Filter>graphics\copy_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_queue.cpp">
+      <Filter>graphics\compute_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\device_resources_impl.cpp">
+      <Filter>graphics\device_resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\gpu_command_context.cpp">
+      <Filter>graphics\gpu_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\gpu_command_context_impl.cpp">
+      <Filter>graphics\gpu_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_command_context.cpp">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_command_context_impl.cpp">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_command_context_internal.cpp">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_command_context.cpp">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_command_context_impl.cpp">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\copy_command_context_internal.cpp">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\graphics_pipeline_state.cpp">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\graphics_pipeline_state_impl.cpp">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_pipeline_state.cpp">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_pipeline_state_internal.cpp">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\compute_pipeline_state_impl.cpp">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\root_signature.cpp">
+      <Filter>graphics\root_signature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\root_signature_impl.cpp">
+      <Filter>graphics\root_signature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\root_signature_internal.cpp">
+      <Filter>graphics\root_signature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\depth_stencil_buffer.cpp">
+      <Filter>graphics\depth_stencil_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\depth_stencil_buffer_internal.cpp">
+      <Filter>graphics\depth_stencil_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\graphics_pipeline_state_internal.cpp">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\descriptor_handle.cpp">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\descriptor_handle_impl.cpp">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\descriptor_handle_internal.cpp">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\shader_resource_view.cpp">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\shader_resource_view_impl.cpp">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\shader_resource_view_internal.cpp">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\render_target_view.cpp">
+      <Filter>graphics\render_target_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\render_target_view_impl.cpp">
+      <Filter>graphics\render_target_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\render_target_view_internal.cpp">
+      <Filter>graphics\render_target_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\unordered_access_view.cpp">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\unordered_access_view_internal.cpp">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\unordered_access_view_impl.cpp">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\texture_2d.cpp">
+      <Filter>graphics\texture_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\texture_2d_impl.cpp">
+      <Filter>graphics\texture_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\texture_2d_internal.cpp">
+      <Filter>graphics\texture_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\imaging\image_factory.cpp">
+      <Filter>imaging\image_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\imaging\image_factory_impl.cpp">
+      <Filter>imaging\image_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\imaging\image_2d.cpp">
+      <Filter>imaging\image_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\imaging\image_2d_impl.cpp">
+      <Filter>imaging\image_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\imaging\image_2d_internal.cpp">
+      <Filter>imaging\image_2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\geometry_factory.cpp">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\geometry_factory_impl.cpp">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\geometry_factory_internal.cpp">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\parametrized_indexed_geometry.cpp">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\parametrized_indexed_geometry_impl.cpp">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\parametrized_indexed_geometry_internal.cpp">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\position_indexed_geometry.cpp">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\position_indexed_geometry_impl.cpp">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\position_indexed_geometry_internal.cpp">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\ranged_parametrized_geometry.cpp">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\ranged_parametrized_geometry_impl.cpp">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\ranged_parametrized_geometry_internal.cpp">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry.cpp">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_impl.cpp">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_internal.cpp">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_ranged_geometry.cpp">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_ranged_geometry_impl.cpp">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_ranged_geometry_internal.cpp">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\upload_queue_impl.cpp">
+      <Filter>graphics\upload_queue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\buffer.cpp">
+      <Filter>graphics\buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\buffer_impl.cpp">
+      <Filter>graphics\buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\buffer_internal.cpp">
+      <Filter>graphics\buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\resource_create_context.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\buddy_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\coalesceable_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\command_queue.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\placement_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\upload_queue.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\gpu\managed_buffer.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\gpu\managed_texture_2d.cpp" />
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_geometry_factory.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_geometry_factory_impl.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_geometry_factory_internal.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_geometry_allocation.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\object_allocator.cpp" />
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_allocation.cpp">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_factory.cpp">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_factory_impl.cpp">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_geometry_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_mesh_allocator.cpp" />
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\indexed_geometry_allocation_impl.cpp">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\graphics\geometry\skinned_geometry_allocation_impl.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_geometry_allocator.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_meshes_allocator.cpp">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\graphics\skinned_model.cpp">
+      <Filter>assets\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\graphics\graphics.cpp">
+      <Filter>assets\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\graphics\texture_2d.cpp">
+      <Filter>assets\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\graphics\texture_2d_factory.cpp">
+      <Filter>assets\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\graphics\skinned_model_factory.cpp">
+      <Filter>assets\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\animation.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\math.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\model.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\structs.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
+    <ClCompile Include="..\src\uc_engine\assets\animations\skeleton.cpp">
+      <Filter>assets\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\animations\skeleton_factory.cpp">
+      <Filter>assets\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\animations\joint_animation.cpp">
+      <Filter>assets\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\animations\joint_animations_factory.cpp">
+      <Filter>assets\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\assets\animations\joint_animations.cpp">
+      <Filter>assets\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\animations\joint_animation_instance_factory.cpp">
+      <Filter>animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\animations\skeleton_instance_factory.cpp">
+      <Filter>animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\animations\joint_animation_instance.cpp">
+      <Filter>animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\animations\skeleton_instance.cpp">
+      <Filter>animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\animation_instance.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_instance.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_animation_map.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\transforms.cpp" />
+    <ClCompile Include="..\src\uc_engine\system\timer.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\system\timer_factory.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\render\skinned_render_object.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\render\skinned_render_object_factory.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_engine\render\pinhole_camera.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\uc_engine\pch.h" />
+    <ClInclude Include="..\include\uc_public\io\mouse.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\keyboard.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\uwp\uwp_create_mouse_params.h">
+      <Filter>io\uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\create_mouse_params.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\game_pad.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\uwp\uwp_create_game_pad_params.h">
+      <Filter>io\uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\uwp\uwp_create_keyboard_params.h">
+      <Filter>io\uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\io.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\resource_create_context.h">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\resource_create_context_impl.h">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\resource_create_context_internal.h">
+      <Filter>graphics\resource_create_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\device_resources_impl.h">
+      <Filter>graphics\device_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\upload_queue_impl.h">
+      <Filter>graphics\upload_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\upload_queue_internal.h">
+      <Filter>graphics\upload_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\device_resources.h">
+      <Filter>graphics\device_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\swap_chain_resources_impl.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\uc_base.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\uc_non_copyable.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\uc_pimpl.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\uc_pimpl_impl.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\uc_propagate_const.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\graphics_types.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\graphics.h">
+      <Filter>graphics\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\io\create_game_pad_params.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\back_buffer.h">
+      <Filter>graphics\back_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\back_buffer_internal.h">
+      <Filter>graphics\back_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\back_buffer_impl.h">
+      <Filter>graphics\back_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\window_swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\background_swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\overlay_swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\window_overlay_swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\direct_queue.h">
+      <Filter>graphics\direct_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\direct_queue_internal.h">
+      <Filter>graphics\direct_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\direct_queue_impl.h">
+      <Filter>graphics\direct_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\upload_queue.h">
+      <Filter>graphics\upload_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\window_environment.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\composition_swap_chain_resources.h">
+      <Filter>graphics\swap_chain_resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\fence_handle.h">
+      <Filter>graphics\fence_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\fence_handle_impl.h">
+      <Filter>graphics\fence_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\fence_handle_internal.h">
+      <Filter>graphics\fence_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\direct_command_context_impl.h">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\direct_command_context_internal.h">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\direct_command_context.h">
+      <Filter>graphics\direct_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\depth_buffer.h">
+      <Filter>graphics\depth_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\depth_buffer_impl.h">
+      <Filter>graphics\depth_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\depth_buffer_internal.h">
+      <Filter>graphics\depth_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\color_buffer.h">
+      <Filter>graphics\color_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\color_buffer_impl.h">
+      <Filter>graphics\color_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\color_buffer_internal.h">
+      <Filter>graphics\color_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\gpu_virtual_resource.h">
+      <Filter>graphics\gpu_virtual_resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\gpu_virtual_resource_impl.h">
+      <Filter>graphics\gpu_virtual_resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\gpu_virtual_resource_internal.h">
+      <Filter>graphics\gpu_virtual_resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\pixel_buffer_impl.h">
+      <Filter>graphics\pixel_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\pixel_buffer.h">
+      <Filter>graphics\pixel_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_queue_internal.h">
+      <Filter>graphics\compute_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\copy_queue_internal.h">
+      <Filter>graphics\copy_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_queue_impl.h">
+      <Filter>graphics\compute_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\copy_queue_impl.h">
+      <Filter>graphics\copy_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\copy_queue.h">
+      <Filter>graphics\copy_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\compute_queue.h">
+      <Filter>graphics\compute_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\gpu_command_context.h">
+      <Filter>graphics\gpu_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\gpu_command_context_impl.h">
+      <Filter>graphics\gpu_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\compute_command_context.h">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_command_context_impl.h">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_command_context_internal.h">
+      <Filter>graphics\compute_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\copy_command_context.h">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\copy_command_context_impl.h">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\copy_command_context_internal.h">
+      <Filter>graphics\copy_command_context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\root_signature.h">
+      <Filter>graphics\root_signature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\root_signature_impl.h">
+      <Filter>graphics\root_signature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\root_signature_internal.h">
+      <Filter>graphics\root_signature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\depth_stencil_buffer_internal.h">
+      <Filter>graphics\depth_stencil_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\depth_stencil_buffer.h">
+      <Filter>graphics\depth_stencil_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\depth_stencil_buffer_impl.h">
+      <Filter>graphics\depth_stencil_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\compute_pipeline_state.h">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_pipeline_state_impl.h">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\compute_pipeline_state_internal.h">
+      <Filter>graphics\compute_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\graphics_pipeline_state.h">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\graphics_pipeline_state_impl.h">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\graphics_pipeline_state_internal.h">
+      <Filter>graphics\graphics_pipeline_state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\descriptor_handle.h">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\descriptor_handle_impl.h">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\descriptor_handle_internal.h">
+      <Filter>graphics\descriptor_handle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\shader_resource_view.h">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\shader_resource_view_impl.h">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\shader_resource_view_internal.h">
+      <Filter>graphics\shader_resource_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\render_target_view.h">
+      <Filter>graphics\render_target_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\render_target_view_impl.h">
+      <Filter>graphics\render_target_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\render_target_view_internal.h">
+      <Filter>graphics\render_target_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\unordered_access_view_impl.h">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\unordered_access_view_internal.h">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\unordered_access_view.h">
+      <Filter>graphics\unordered_access_view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\texture_2d.h">
+      <Filter>graphics\texture_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\texture_2d_impl.h">
+      <Filter>graphics\texture_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\texture_2d_internal.h">
+      <Filter>graphics\texture_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_types.h">
+      <Filter>imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h">
+      <Filter>imaging\image_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\imaging.h">
+      <Filter>imaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_2d.h">
+      <Filter>imaging\image_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\imaging\image_2d_impl.h">
+      <Filter>imaging\image_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\imaging\image_2d_internal.h">
+      <Filter>imaging\image_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\imaging\image_factory_impl.h">
+      <Filter>imaging\image_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\geometry_factory_impl.h">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\geometry_factory_internal.h">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\parametrized_indexed_geometry.h">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\parametrized_indexed_geometry_impl.h">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\parametrized_indexed_geometry_internal.h">
+      <Filter>graphics\geometry\parametrized_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\position_indexed_geometry.h">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\position_indexed_geometry_impl.h">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\position_indexed_geometry_internal.h">
+      <Filter>graphics\geometry\position_indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\ranged_parametrized_geometry.h">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\ranged_parametrized_geometry_impl.h">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\ranged_parametrized_geometry_internal.h">
+      <Filter>graphics\geometry\ranged_parametrized_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\geometry\indexed_geometry.h">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\indexed_geometry_impl.h">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\indexed_geometry_internal.h">
+      <Filter>graphics\geometry\indexed_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\skinned_ranged_geometry.h">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\skinned_ranged_geometry_impl.h">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\skinned_ranged_geometry_internal.h">
+      <Filter>graphics\geometry\skinned_ranged_geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\geometry\geometry_factory.h">
+      <Filter>graphics\geometry\geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_dev\private\gx\dx12\upload_queue_impl.h">
+      <Filter>graphics\upload_queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\buffer.h">
+      <Filter>graphics\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\buffer_impl.h">
+      <Filter>graphics\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\buffer_internal.h">
+      <Filter>graphics\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\geometry\geometry.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\geometry\skinned_geometry_factory.h">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\skinned_geometry_factory_impl.h">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\skinned_geometry_factory_internal.h">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\graphics\geometry\skinned_geometry_allocation.h">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\indexed_geometry_factory_impl.h">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\indexed_geometry_allocation.h">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\graphics\geometry\indexed_geometry_factory.h">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\indexed_geometry_allocation_impl.h">
+      <Filter>graphics\geometry\indexed_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\graphics\geometry\skinned_geometry_allocation_impl.h">
+      <Filter>graphics\geometry\skinned_geometry_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\graphics\graphics.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\assets\graphics\skinned_model.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\graphics\texture_2d.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\assets\graphics\texture_2d_impl.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\graphics\texture_2d_factory.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\graphics\texture_2d_factory_impl.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\graphics\skinned_model_impl.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\assets\graphics\skinned_model_factory.h">
+      <Filter>assets\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\animations\animations.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\assets\animations\skeleton.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\assets\animations\skeleton_factory.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\animations\skeleton_factory_impl.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\animations\skeleton_impl.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\animations\joint_animation.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\animations\joint_animation_impl.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\assets\animations\joint_animations_factory_impl.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\assets\animations\joint_animations_impl.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\assets\animations\joint_animations.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\assets\animations\joint_animations_factory.h">
+      <Filter>assets\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\math\math.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\math\matrix4x4.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\math\memory.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\math\defines.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\math\vector4.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\animations\joint_animation_instance_impl.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\animations\joint_animation_instance_factory.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\animations\joint_animation_instance_factory_impl.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\animations\skeleton_instance_factory.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\animations\skeleton_instance_factory_impl.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\animations\joint_animation_instance.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\animations\skeleton_instance.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\animations\skeleton_instance_impl.h">
+      <Filter>animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\system\timer.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\system\timer_factory.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\system\timer_factory_impl.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\system\timer_impl.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\render\skinned_render_object.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\render\skinned_render_object_factory.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\render\skinned_render_object_factory_impl.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uc_engine\render\skinned_render_object_impl.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\src\uc_engine\render\pinhole_camera_impl.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\render\pinhole_camera.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\math\graphics.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\math\quaternion.h">
+      <Filter>assets\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\imaging\image_factory.h" />
+    <ClInclude Include="..\include\uc_public\render\view_transform_3d.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_public\render\perspective_transform_3d.h">
+      <Filter>render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="io">
+      <UniqueIdentifier>{8250fa2f-ab80-4e39-8b0f-4414d20e2894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\uwp">
+      <UniqueIdentifier>{68e437fa-6d6a-47bc-9b78-08b672ca31e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\base">
+      <UniqueIdentifier>{16cf2870-f1b5-4a74-a836-e72c2f78bbe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{516d1d45-757f-42bf-b3b7-a9d8a48b6ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\public">
+      <UniqueIdentifier>{23552c45-5dd1-4551-a74b-dfa1fe12a5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\resource_create_context">
+      <UniqueIdentifier>{250f8806-d925-40ad-9d61-5f8a1c3e387e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\device_resources">
+      <UniqueIdentifier>{2491e1ef-0282-45f4-964d-43d717b059f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\upload_queue">
+      <UniqueIdentifier>{a77ad4bc-9775-46f7-894b-24fd9a93743a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\swap_chain_resources">
+      <UniqueIdentifier>{cd508ae0-463b-4e09-8136-7beb4110dbeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{31ad48c9-54be-4ec5-9aab-8c5eeb3a0434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\direct_queue">
+      <UniqueIdentifier>{9e26a3ae-6ba7-4269-8114-14cc4f252cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\fence_handle">
+      <UniqueIdentifier>{660aee43-94d0-48fc-adea-43907e9c41a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\direct_command_context">
+      <UniqueIdentifier>{7ac3f7b2-a86b-42fb-9420-1c164fd5a0da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\depth_buffer">
+      <UniqueIdentifier>{463bc074-2245-42dc-a934-9b00e14ca259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\color_buffer">
+      <UniqueIdentifier>{6ff18ce7-d5e8-44cd-8f03-6db6fc8f8ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\gpu_virtual_resource">
+      <UniqueIdentifier>{d508f7c2-317f-4858-9ff4-be0deee99286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\pixel_buffer">
+      <UniqueIdentifier>{1d6ff6ae-353e-4f8c-bd6e-f9377209cc06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\compute_queue">
+      <UniqueIdentifier>{f912d6b9-2888-4fb6-a42c-3ff2709c7e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\copy_queue">
+      <UniqueIdentifier>{b7af01b9-c255-4931-b2c4-32141ceebd2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\gpu_command_context">
+      <UniqueIdentifier>{ba70b446-733e-4a1f-9766-3b9610c70b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\compute_command_context">
+      <UniqueIdentifier>{84cc52b7-869c-42ac-b4ca-977d9a791100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\copy_command_context">
+      <UniqueIdentifier>{ffed45e3-86f4-49b3-a052-4bef1fb3b5aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\graphics_pipeline_state">
+      <UniqueIdentifier>{52a94693-a258-456a-aeee-639c35e94d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\compute_pipeline_state">
+      <UniqueIdentifier>{545ec16b-6d17-4a5c-8685-e893b1f47af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\root_signature">
+      <UniqueIdentifier>{5943f566-2a48-4c0a-be16-40a46f205f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\depth_stencil_buffer">
+      <UniqueIdentifier>{8d11b412-b009-4b54-ad93-4dacecd684db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\descriptor_handle">
+      <UniqueIdentifier>{6f206b5c-2807-4c97-958e-757eee7355a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\shader_resource_view">
+      <UniqueIdentifier>{059df073-42ba-4cee-a60d-2552d64e1d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\render_target_view">
+      <UniqueIdentifier>{4a4d19ed-d5a4-4b0d-bfe0-d29ccfcbd8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\unordered_access_view">
+      <UniqueIdentifier>{4ee5a404-0d5f-42cf-bc06-1452b4989ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\back_buffer">
+      <UniqueIdentifier>{faed32b6-772c-4f46-8d87-03a69ba32e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\texture_2d">
+      <UniqueIdentifier>{b4315c90-4f2c-4921-8881-9cde462bf216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imaging">
+      <UniqueIdentifier>{8b952069-496f-4235-8ed1-08b6e69b8c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imaging\image_2d">
+      <UniqueIdentifier>{23587aab-cc8c-48a3-b65d-ad28254fc7b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imaging\image_factory">
+      <UniqueIdentifier>{3c18152f-fba1-427f-913a-fde9768e948b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry">
+      <UniqueIdentifier>{ac6aa727-0447-4073-935a-d771d8f5d29f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\geometry_factory">
+      <UniqueIdentifier>{42078098-a64d-41ac-a8a1-49e7a75d036b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\parametrized_indexed_geometry">
+      <UniqueIdentifier>{8c0af984-4300-4d1d-9d7d-eadcf0516da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\position_indexed_geometry">
+      <UniqueIdentifier>{4db6955a-f99b-476d-90aa-de69563f40bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\ranged_parametrized_geometry">
+      <UniqueIdentifier>{50cc4a15-f33b-450a-861a-fd34355580e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\indexed_geometry">
+      <UniqueIdentifier>{dad54225-70a6-4aaa-853c-62b87364eafd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\skinned_ranged_geometry">
+      <UniqueIdentifier>{f14109e9-48ba-4deb-b80a-69477232cf4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\skinned_geometry_factory">
+      <UniqueIdentifier>{118627d5-8d5d-41ac-b1cd-529194200cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\geometry\indexed_geometry_factory">
+      <UniqueIdentifier>{bf83f39b-e551-4b7f-9085-90472218c080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{ef4b017d-bc9d-4649-909c-ce799cae4c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\animations">
+      <UniqueIdentifier>{5a6dfbe4-25ce-44c7-aebd-c9132c958818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\graphics">
+      <UniqueIdentifier>{a08a79de-7a0c-4571-9944-fbb21a00161f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\buffer">
+      <UniqueIdentifier>{bafa1a83-a7d1-4a49-8b82-ec4d77df46db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\math">
+      <UniqueIdentifier>{aa675d95-8861-4ed7-970c-d85d24c3d234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations">
+      <UniqueIdentifier>{f704f9b5-05fb-4026-95ae-a68cef9fda77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{1aa591d0-9617-4857-a551-a6c742d780b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\default_signature.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

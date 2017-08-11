@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="msbuild\ucdev_render_shaders.xml" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\default_signature.hlsl">
+      <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\textures\generate_mip_map_cs.hlsl">
+      <ShaderPipelineStage>Compute</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\textures\convert_rgb_rgba_cs.hlsl">
+      <ShaderPipelineStage>Compute</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex_skinned.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex_skinned.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\imgui\imgui_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\imgui\imgui_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\librocket\librocket_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\librocket\librocket_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_color_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+
+   <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <GpuCodeIncludeDirectory>$(MSBuildThisFileDirectory)..\include</GpuCodeIncludeDirectory>
+  </PropertyGroup>
+
+   <ItemDefinitionGroup>
+    <Shader>
+      <AdditionalIncludeDirectories>$(GpuCodeIncludeDirectory)\</AdditionalIncludeDirectories>
+    </Shader>
+   </ItemDefinitionGroup>
+
+  <ItemGroup>
+
+    <PropertyPageSchema Include="msbuild\ucdev_render_shaders.xml" />
+
+    <Shader Include="..\src\uc_engine_textured_quad\shaders\full_screen_vertex.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorPublic</Backend>
+    </Shader>
+
+    <Shader Include="..\src\uc_engine_textured_quad\shaders\full_screen_color_pixel.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorPublic</Backend>
+    </Shader>
+
+    <Shader Include="..\include\uc_public\gpu\default_signature.hlsl">
+      <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
+      <InProject>true</InProject>
+      <Backend>UniqueCreatorPublic</Backend>
+    </Shader>
+
+
+  </ItemGroup>
+
+</Project>

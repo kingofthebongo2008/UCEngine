@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Image Include="assets\splashscreen.scale-200.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\square44x44logo.scale-200.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\square44x44logo.targetsize-24_altform-unplated.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\square150x150logo.scale-200.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\storelogo.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\wide310x150logo.scale-200.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\lockscreenlogo.scale-200.png">
+      <Filter>assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ucdev_app.vcxproj" />
+    <None Include="ucdev_app_key.pfx">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="../data/images/image_0.png" />
+    <None Include="../data/images/image_1.jpg" />
+    <None Include="../data/images/deer.png" />
+    <None Include="../data/images/bear.png" />
+    <None Include="../data/images/bear.jpg" />
+    <None Include="../data/ui/invader.png" />
+    <None Include="../data/ui/invader.rcss" />
+    <None Include="../data/ui/fonts/Delicious-Bold.otf">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/fonts/Delicious-BoldItalic.otf">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/fonts/Delicious-Italic.otf">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/fonts/Delicious-Roman.otf">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/demo.rml">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/rkt.rcss">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="../data/ui/window.rml">
+      <Filter>installed\librocket</Filter>
+    </None>
+    <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt-d.dll" />
+    <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt.dll" />
+    <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt-d.dll" />
+    <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\debug\RocketControls.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\debug\RocketCore.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\debug\RocketDebugger.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\release\RocketControls.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\release\RocketCore.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x64\release\RocketDebugger.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\debug\RocketControls.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\debug\RocketCore.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\debug\RocketDebugger.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\release/RocketControls.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\release\RocketCore.dll" />
+    <None Include="$(LibRocketDirectory)\bin\x86\release\RocketDebugger.dll" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="assets">
+      <UniqueIdentifier>{deb676a4-242e-4a9e-b13e-7cfbaf2bd46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="installed">
+      <UniqueIdentifier>{fb51df09-9016-4869-baf6-945ca077cdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="installed\librocket">
+      <UniqueIdentifier>{03d16e1d-1c69-4e9a-bec4-5c043e9b7a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{0e37ac34-90ae-499d-89b5-5a6f7cefc963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gx">
+      <UniqueIdentifier>{308b441b-8f7f-4732-b2e6-c4509cc43618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gx\geo">
+      <UniqueIdentifier>{55c619e5-68c7-4621-b5c8-6a5d54d71e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gx\dx12">
+      <UniqueIdentifier>{1f76014c-3254-4c92-b94f-e181fd0bbfb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gx\dx12\gpu">
+      <UniqueIdentifier>{fa672b22-02ae-4acc-b8b5-9e607c9a99e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <Filter>assets</Filter>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\default_signature.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\textures\generate_mip_map_cs.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\textures\convert_rgb_rgba_cs.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex_skinned.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex_skinned.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\imgui\imgui_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\imgui\imgui_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\librocket\librocket_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\librocket\librocket_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_color_pixel.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(ImGuiDirectory)\imgui.cpp" />
+    <ClCompile Include="$(ImGuiDirectory)\imgui_draw.cpp" />
+    <ClCompile Include="..\src\app\private\main.cpp" />
+    <ClCompile Include="..\src\app\private\pch.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\dll_main.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\object_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\vertex_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\buddy_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\command_queue.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\placement_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\post_effect.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\resource_create_context.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\coalesceable_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\texture_2d.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\compute_upload_queue.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\upload_queue_impl.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\upload_queue.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\math\functions.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\math\half.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\mem\streamflow_utils_glue.cpp" />
+    <ClCompile Include="..\src\uc_dev\public\uc_referenced_object.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_device_resources.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_context.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_object.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_object_factory.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_1.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_2.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_3.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_4.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_5.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_6.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_7.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_manager.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_hud_page.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_impl.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_console.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_log.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_page.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_statistics.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page_factory.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page_manager.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\math.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\model.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\structs.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\io\console.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\io\platforms\pc\native_keyboard.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\io\platforms\pc\native_mouse.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\io\platforms\pc\native_pad.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\geometry_allocators.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_meshes_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\lip\animation.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\animation_instance.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_instance.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_animation_map.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\anm\transforms.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_mesh_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\geometry_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\gpu\managed_buffer.cpp">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\dx12\gpu\managed_texture_2d.cpp">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_geometry.cpp">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_geometry_factory.cpp">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_geometry_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_geometry_factory.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\indexed_geometry_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\static_geometry_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_dev\private\gx\geo\static_meshes_allocator.cpp">
+      <Filter>src\gx\geo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(ImGuiDirectory)\imgui.h" />
+    <ClInclude Include="$(ImGuiDirectory)\imgui_internal.h" />
+    <ClInclude Include="..\include\uc_dev\error\error.h" />
+    <ClInclude Include="..\include\uc_dev\fnd\string_hash.h" />
+    <ClInclude Include="..\include\uc_dev\gxu\camera_command.h" />
+    <ClInclude Include="..\include\uc_dev\gxu\pinhole_camera_dispatcher.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\api\error.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\api\helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\api\dwrite_error.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\api\dwrite_helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\d2d.h" />
+    <ClInclude Include="..\include\uc_dev\gx\d2d\dwrite.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx11\api\helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx11\api\error.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx11\dx11.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\api\helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\api\resource_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\api\dxgi_helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\api\error.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\api\api.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\copy_command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\base_command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_context_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_context_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_descriptor_cache.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_manager.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\command_queue.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\compute_command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\compute_command_context_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\descriptor_handle_cache.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_command_context_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\memcpy.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\root_signature_meta_data.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\upload_queue.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\upload_buffer_handle.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\compute_upload_queue.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\dx12.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\allocators\buddy_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\allocators\placement_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\allocators\coalesceable_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\allocators\upload_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\back_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\color_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\commands.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\depth_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\depth_stencil_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\descriptions.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\descriptor_heap.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\fence_value.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\info.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\map_guard.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pipeline_state.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pipeline_state_util.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pixel_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pixel_format.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\read_back_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\resource.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\resource_create_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\resource_util.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\root_signature_blob.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\shaders.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\texture_2d.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\upload_buffer.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\upload_buffer_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\virtual_resource.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geo\object_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geo\vertex_allocator.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geo\vertex_strides.h" />
+    <ClInclude Include="..\include\uc_dev\gx\error.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geometry_helpers.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\pinhole_camera.h" />
+    <ClInclude Include="..\include\uc_dev\gx\structs.h" />
+    <ClInclude Include="..\include\uc_dev\gx\view.h" />
+    <ClInclude Include="..\include\uc_dev\gx\view_port.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\img.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\cpu_default_textures.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\cpu_imaging.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\cpu_imaging_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\cpu_imaging_utils_base.h" />
+    <ClInclude Include="..\include\uc_dev\gx\img\cpu_imaging_utils_cpu.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\base.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\file.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\geo.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\math.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\model.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\structs.h" />
+    <ClInclude Include="..\include\uc_dev\gx\gx_lip_utils.h" />
+    <ClInclude Include="..\include\uc_dev\io\console.h" />
+    <ClInclude Include="..\include\uc_dev\io\error.h" />
+    <ClInclude Include="..\include\uc_dev\io\keyboard.h" />
+    <ClInclude Include="..\include\uc_dev\io\keyboard_state.h" />
+    <ClInclude Include="..\include\uc_dev\io\mouse.h" />
+    <ClInclude Include="..\include\uc_dev\io\mouse_state.h" />
+    <ClInclude Include="..\include\uc_dev\io\pad.h" />
+    <ClInclude Include="..\include\uc_dev\io\pad_state.h" />
+    <ClInclude Include="..\include\uc_dev\io\platforms\pc\native_keyboard.h" />
+    <ClInclude Include="..\include\uc_dev\io\platforms\pc\native_mouse.h" />
+    <ClInclude Include="..\include\uc_dev\io\platforms\pc\native_pad.h" />
+    <ClInclude Include="..\include\uc_dev\io\platforms\pc\native_registration_token.h" />
+    <ClInclude Include="..\include\uc_dev\lip\lip.h" />
+    <ClInclude Include="..\include\uc_dev\lip\base_class_info.h" />
+    <ClInclude Include="..\include\uc_dev\lip\base_class_info_base.h" />
+    <ClInclude Include="..\include\uc_dev\lip\context.h" />
+    <ClInclude Include="..\include\uc_dev\lip\introspector.h" />
+    <ClInclude Include="..\include\uc_dev\lip\introspector_manager.h" />
+    <ClInclude Include="..\include\uc_dev\lip\introspector_version.h" />
+    <ClInclude Include="..\include\uc_dev\lip\item_pointers.h" />
+    <ClInclude Include="..\include\uc_dev\lip\member_info.h" />
+    <ClInclude Include="..\include\uc_dev\lip\member_info_base.h" />
+    <ClInclude Include="..\include\uc_dev\lip\pointers.h" />
+    <ClInclude Include="..\include\uc_dev\lip\pointers_reloc_array.h" />
+    <ClInclude Include="..\include\uc_dev\lip\rtti_macros.h" />
+    <ClInclude Include="..\include\uc_dev\lip\tools_time_writer.h" />
+    <ClInclude Include="..\include\uc_dev\lip\type_factory.h" />
+    <ClInclude Include="..\include\uc_dev\lip\type_id.h" />
+    <ClInclude Include="..\include\uc_dev\lip\type_info.h" />
+    <ClInclude Include="..\include\uc_dev\lip\type_traits.h" />
+    <ClInclude Include="..\include\uc_dev\lip\writer.h" />
+    <ClInclude Include="..\include\uc_dev\lip\writers.h" />
+    <ClInclude Include="..\include\uc_dev\lip\writers_pointers.h" />
+    <ClInclude Include="..\include\uc_dev\lip\writer_memory.h" />
+    <ClInclude Include="..\include\uc_dev\lzham\lzham.h" />
+    <ClInclude Include="..\include\uc_dev\lzham\loader.h" />
+    <ClInclude Include="..\include\uc_dev\math\math.h" />
+    <ClInclude Include="..\include\uc_dev\math\functions.h" />
+    <ClInclude Include="..\include\uc_dev\math\geometry.h" />
+    <ClInclude Include="..\include\uc_dev\math\graphics.h" />
+    <ClInclude Include="..\include\uc_dev\math\half.h" />
+    <ClInclude Include="..\include\uc_dev\math\matrix.h" />
+    <ClInclude Include="..\include\uc_dev\math\memory.h" />
+    <ClInclude Include="..\include\uc_dev\math\quaternion.h" />
+    <ClInclude Include="..\include\uc_dev\math\vector.h" />
+    <ClInclude Include="..\include\uc_dev\mem\align.h" />
+    <ClInclude Include="..\include\uc_dev\mem\alloc.h" />
+    <ClInclude Include="..\include\uc_dev\mem\defines.h" />
+    <ClInclude Include="..\include\uc_dev\mem\intrusive_ptr.h" />
+    <ClInclude Include="..\include\uc_dev\mem\ref_counter.h" />
+    <ClInclude Include="..\include\uc_dev\mem\streamflow.h" />
+    <ClInclude Include="..\include\uc_dev\sys\memcpy.h" />
+    <ClInclude Include="..\include\uc_dev\sys\profile_timer.h" />
+    <ClInclude Include="..\include\uc_dev\sys\spin_lock.h" />
+    <ClInclude Include="..\include\uc_dev\util\bits.h" />
+    <ClInclude Include="..\include\uc_dev\util\iterator.h" />
+    <ClInclude Include="..\include\uc_dev\util\noncopyable.h" />
+    <ClInclude Include="..\include\uc_dev\util\unique_resource.h" />
+    <ClInclude Include="..\include\uc_dev\util\utf8_conv.h" />
+    <ClInclude Include="..\include\uc_dev\util\pipmpl.h" />
+    <ClInclude Include="..\include\uc_dev\util\pipmpl_impl.h" />
+    <ClInclude Include="..\include\uc_dev\util\propagate_const.h" />
+    <ClInclude Include="..\include\uc_public\ucpublic.h" />
+    <ClInclude Include="..\include\uc_public\uc_intrusive_ptr.h" />
+    <ClInclude Include="..\include\uc_public\uc_non_copyable.h" />
+    <ClInclude Include="..\include\uc_public\uc_referenced_object.h" />
+    <ClInclude Include="..\src\uc_dev\private\gx\dx12\upload_queue_impl.h" />
+    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.h" />
+    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.h" />
+    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_intrusive_ptr.h" />
+    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.h" />
+    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_device_resources.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_context.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_object.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_object_factory.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_1.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_2.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_3.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_4.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_5.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_6.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_7.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_id.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_manager.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_hud_page.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_impl.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_impl_command.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_impl_window.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_console.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_log.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_page.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_options_overlay_statistics.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_pageid.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page_factory.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_page_manager.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_overlay_render_context.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_ui_helper.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geo\geometry_allocators.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\skinned_meshes_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\anm\animation_instance.h" />
+    <ClInclude Include="..\include\uc_dev\gx\anm\skeleton_instance.h" />
+    <ClInclude Include="..\include\uc_dev\gx\anm\skeleton_animation_map.h" />
+    <ClInclude Include="..\include\uc_dev\gx\anm\transforms.h" />
+    <ClInclude Include="..\include\uc_dev\gx\lip\animation.h" />
+    <ClInclude Include="..\include\uc_dev\gx\geo\indexed_mesh_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\geometry_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\managed_buffer.h">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\managed_texture_2d.h">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\indexed_geometry.h">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\indexed_geometry_factory.h">
+      <Filter>src\gx\dx12\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\skinned_geometry_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\skinned_geometry_factory.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\indexed_geometry_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\static_geometry_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uc_dev\gx\geo\static_meshes_allocator.h">
+      <Filter>src\gx\geo</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

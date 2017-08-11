@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|Win32">
+      <Configuration>debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|Win32">
+      <Configuration>release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\animation.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\math.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\model.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\structs.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
+    <ClCompile Include="..\src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\uc_model_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_geometry.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_helpers.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_mesh.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_mesh_assimp.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_mesh_import.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_mesh_lip.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_mesh_noff.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_multi_material_mesh.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_multi_material_mesh_assimp.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_skinned_mesh.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_skinned_mesh_assimp.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\animation.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\base.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\geo.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\math.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\model.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\structs.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\lip.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\base_class_info.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\base_class_info_base.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\context.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\introspector.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\introspector_manager.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\introspector_version.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\item_pointers.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\member_info.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\member_info_base.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\pointers.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\pointers_reloc_array.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\rtti_macros.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\tools_time_writer.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\type_factory.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\type_id.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\type_info.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\type_traits.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\writer.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\writers.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\writers_pointers.h" />
+    <ClInclude Include="..\..\..\..\include\uc_dev\lip\writer_memory.h" />
+    <ClInclude Include="..\src\pch.h" />
+    <ClInclude Include="..\src\targetver.h" />
+    <ClInclude Include="..\src\uc_model_command_line.h" />
+    <ClInclude Include="..\src\uc_model_compressonator.h" />
+    <ClInclude Include="..\src\uc_model_exception.h" />
+    <ClInclude Include="..\src\uc_model_swizzle.h" />
+    <ClInclude Include="..\src\uc_model_texture.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7BFD660B-EC2B-4E59-8AE2-B6C3697029A6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ucdev_include_parser</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputBinDirectory Condition="'$(OutputBinDirectory)'==''">$(ProjectDir)..\..\bin</OutputBinDirectory>
+    <OutputLibDirectory Condition="'$(OutputLibDirectory)'==''">$(ProjectDir)..\..\lib</OutputLibDirectory>
+    <OutputTmpDirectory Condition="'$(OutputTempDirectory)'==''">$(ProjectDir)..\..\tmp</OutputTmpDirectory>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="../../../../msbuild/vs_default.props" />
+  <Import Project="../../../../msbuild/cpp_default.props" />
+  <Import Project="../../../../msbuild/boost.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x64;../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Compressonator_MDd_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x86;../../../../3rdparty/compressonator/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Compressonator_MDd_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x64;../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Compressonator_MD_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x86;../../../../3rdparty/compressonator/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Compressonator_MD_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

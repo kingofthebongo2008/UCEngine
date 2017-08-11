@@ -1,0 +1,9 @@
+PipelineStateObject compute_mip_map =
+{
+    .RootSignature 	   		= default_signature
+    .ComputeShader			= generate_mip_map_cs
+}
+
+
+
+
