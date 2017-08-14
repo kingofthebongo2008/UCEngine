@@ -167,7 +167,7 @@ namespace uc
 
                 g.run([this]()
                 {
-                    m_render_world_manager->show_world(gxu::world_id::scene0);
+                    m_render_world_manager->show_world(gxu::world_id::scene2);
                 });
 
                 io::console::get_updater()->register_notifier( this );
@@ -196,7 +196,7 @@ namespace uc
                     *ctx->m_window_close = true;
                 }
             }
-
+            /*
             static const char* menu_names[] =
             {
                 "Robot",
@@ -222,6 +222,21 @@ namespace uc
                 gxu::world_id::scene6,
                 gxu::world_id::scene7,
                 gxu::world_id::scene8
+            };
+            */
+
+            static const char* menu_names[] =
+            {
+                "Bear",
+                "Deer",
+                "Full Screen Color"
+            };
+
+            static gxu::world_id scene_id[] =
+            {
+                gxu::world_id::scene2,
+                gxu::world_id::scene3,
+                gxu::world_id::scene6
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);
