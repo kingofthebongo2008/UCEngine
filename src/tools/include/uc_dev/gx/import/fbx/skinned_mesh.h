@@ -5,6 +5,8 @@
 #include <uc_dev/gx/import/fbx/fbx_common.h>
 #include <uc_dev/gx/import/fbx/fbx_common_multi_material_mesh.h>
 
+#include <uc_dev/gx/import/fbx/fbx_helpers.h>
+
 namespace uc
 {
     namespace gx
@@ -109,7 +111,7 @@ namespace uc
                     return math::load44u(reinterpret_cast<const float*>(&r[0]));
                 }
 
-                inline geo::joint_transform joint_transform(fbxsdk::FbxAMatrix& m)
+                inline geo::joint_transform joint_transform(const fbxsdk::FbxAMatrix& m)
                 {
                     geo::joint_transform r;
 
@@ -118,6 +120,7 @@ namespace uc
 
                     return r;
                 }
+
 
                 inline geo::joint_transform_matrix joint_transform_matrix(const fbxsdk::FbxAMatrix& m)
                 {
@@ -140,7 +143,7 @@ namespace uc
 
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
-                        FbxSkin* skin = (FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
+                        fbxsdk::FbxSkin* skin = (fbxsdk::FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
                         fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
 
                         int jointsCount = skin->GetClusterCount();
@@ -161,22 +164,80 @@ namespace uc
 
                     geo::skeleton_pose skeleton;
 
-                    skeleton.m_joint_local_pose.resize(joints.size());
-
-                    auto&& sjoints = skeleton.m_joint_local_pose;
-
-                    for (auto&& i = 0U; i < joints.size(); ++i)
                     {
-                        fbxsdk::FbxAMatrix bind_pose;
-                        joints[i]->GetTransformLinkMatrix(bind_pose);
+                        skeleton.m_joint_local_pose.resize(joints.size());
 
-                        sjoints[i].m_transform          = joint_transform(bind_pose);
-                        sjoints[i].m_transform_matrix   = joint_transform_matrix(bind_pose);
+                        auto&& sjoints = skeleton.m_joint_local_pose;
+
+                        for (auto&& i = 0U; i < joints.size(); ++i)
+                        {
+                            auto t0 = joints[i]->GetLink()->EvaluateGlobalTransform();
+                            fbxsdk::FbxAMatrix t1;
+                            t1.SetIdentity();
+
+                            if (joints[i]->GetLink()->GetParent())
+                            {
+                                t1 = joints[i]->GetLink()->GetParent()->EvaluateGlobalTransform();
+                            }
+                            auto t3 = t1.Inverse() * t0;
+
+                            sjoints[i].m_transform = joint_transform(t3);
+                            sjoints[i].m_transform_matrix = joint_transform_matrix(t3);
+                        }
                     }
 
-                   // sjoints[i].m_name = joints[i]->GetLink()->GetName();
+                    {
+                        skeleton.m_skeleton.m_joints.resize(joints.size());
+                        auto&& sjoints = skeleton.m_skeleton.m_joints;
 
-                    //__debugbreak();
+                        for (auto&& i = 0U; i < joints.size(); ++i)
+                        {
+                            fbxsdk::FbxAMatrix matXBindPose;
+                            joints[i]->GetTransformLinkMatrix(matXBindPose);
+                            fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
+                            joints[i]->GetTransformMatrix(matReferenceGlobalInitPosition);
+
+                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose;
+
+                            sjoints[i].m_name = joints[i]->GetLink()->GetName();
+                            sjoints[i].m_inverse_bind_pose  = joint_transform(matBindPose.Inverse());
+                            sjoints[i].m_inverse_bind_pose2 = joint_transform_matrix(matBindPose.Inverse());
+                        }
+                    }
+
+                    std::map< std::string, int32_t>     joint2index;
+                    std::map< std::string, std::string> joint2parent;
+                    {
+                        skeleton.m_joint_local_pose.resize(joints.size());
+                        auto&& sjoints = skeleton.m_joint_local_pose;
+
+                        for (auto&& i = 0U; i < joints.size(); ++i)
+                        {
+                            auto&& joint = joints[i];
+
+                            joint2index.insert(std::make_pair(joint->GetLink()->GetName(), i));
+
+                            if (joint->GetLink()->GetParent())
+                            {
+                                joint2parent.insert(std::make_pair(joint->GetLink()->GetName(), joint->GetLink()->GetParent()->GetName() ));
+                            }
+                        }
+                    }
+
+                    for (auto&& i : skeleton.m_skeleton.m_joints)
+                    {
+                        const auto&& parent = joint2parent.find(i.m_name);
+                        const auto&& parent_index = joint2index.find(parent->second);
+                        if ( parent_index  != joint2index.end())
+                        {
+                            i.m_parent_index = parent_index->second;
+                        }
+                        else
+                        {
+                            i.m_parent_index = 0xFFFF;
+                        }
+                        
+                    }
                 }
 
 
@@ -304,6 +365,11 @@ namespace uc
                     }
 
                     return blend_indices;
+                }
+
+                inline bool is_skinned_mesh(const fbxsdk::FbxMesh* mesh)
+                {
+                    return mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin) > 0;
                 }
 
                 //////////////////////
@@ -478,7 +544,11 @@ namespace uc
                     std::vector<  std::shared_ptr<geo::skinned_mesh> > multimeshes;
                     for (auto& m : meshes)
                     {
-                        multimeshes.push_back(create_skinned_mesh_internal(m));
+                        //skip meshes without skin
+                        if (is_skinned_mesh(m))
+                        {
+                            multimeshes.push_back(create_skinned_mesh_internal(m));
+                        }
                     }
 
                     //merge all multimaterial meshes into one
