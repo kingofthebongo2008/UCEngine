@@ -199,7 +199,8 @@ template <> struct type_id<type>\
 #endif
 
 #if !defined(LIP_OFFSET_OF)
-    #define LIP_OFFSET_OF offsetof
+//    #define LIP_OFFSET_OF offsetof
+    #define LIP_OFFSET_OF(s,m) ((size_t)&(((s*)0)->m))
 #endif
 
 #if !defined(LIP_OFFSET_OF_BASE)
