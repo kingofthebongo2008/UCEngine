@@ -6,6 +6,7 @@
 #include <uc_dev/gx/import/fbx/fbx_common_multi_material_mesh.h>
 
 #include <uc_dev/gx/import/fbx/fbx_helpers.h>
+#include <map>
 
 namespace uc
 {
