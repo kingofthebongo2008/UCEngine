@@ -25,10 +25,10 @@ namespace uc
 
                 inline math::float4x4 skeleton_transform(double frame_time )
                 {
-					frame_time;
-					return math::identity_matrix();
+                    frame_time;
+                    return math::identity_matrix();
 
-					/*
+                    /*
                     //todo: move this into the update phase
                     const float total = 3.14159265358979323846f * 2.0f;
                     const  uint32_t steps = 144*2;
@@ -40,7 +40,7 @@ namespace uc
                     const float rotation_angle = static_cast<float>(angle + 100.0f * frame_time * step_rotation);
                     angle = rotation_angle;
                     return math::rotation_y(rotation_angle);
-					*/
+                    */
                 }
 
                 
@@ -65,28 +65,28 @@ namespace uc
                 //load preprocessed textured model
                 g.run([this]()
                 {
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/breathing_idle.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/climbing.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing_a_lid.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/crouch_death.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/drawing_gun.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/gunplay.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hanging_idle.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hit_reaction.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/inspecting.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jump_away.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jumping.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/picking_up_object.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_jump.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_run.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running_jump.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/shooting.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/smash.animation"));
-					m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/swagger_walk.animation"));
-					
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/breathing_idle.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/climbing.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing_a_lid.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/crouch_death.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/drawing_gun.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/gunplay.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hanging_idle.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hit_reaction.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/inspecting.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jump_away.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jumping.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/picking_up_object.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_jump.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_run.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running_jump.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/shooting.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/smash.animation"));
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/swagger_walk.animation"));
+                    
                 });
 
                 g.run([this, c]
@@ -100,14 +100,14 @@ namespace uc
 
                 g.wait();
 
-				m_skeleton_positions.resize(m_animations.size());
+                m_skeleton_positions.resize(m_animations.size());
 
-				for (auto i = 0U; i < m_animations.size(); ++i  )
-				{
-					m_skeleton_instance.push_back(std::make_unique<gx::anm::skeleton_instance>(m_skeleton.get()));
-					m_animation_instance.push_back(std::make_unique<gx::anm::animation_instance>(m_animations[i].get(), m_skeleton.get() ) );
-					m_skeleton_positions[i].resize(3);
-				}
+                for (auto i = 0U; i < m_animations.size(); ++i  )
+                {
+                    m_skeleton_instance.push_back(std::make_unique<gx::anm::skeleton_instance>(m_skeleton.get()));
+                    m_animation_instance.push_back(std::make_unique<gx::anm::animation_instance>(m_animations[i].get(), m_skeleton.get() ) );
+                    m_skeleton_positions[i].resize(3);
+                }
             }
 
             render_world_5::~render_world_5()
@@ -117,15 +117,15 @@ namespace uc
 
             void render_world_5::do_update( update_context* ctx )
             {
-				concurrency::parallel_for(size_t(0), m_animations.size(), [this, ctx](size_t i) -> void
-				{
-					m_animation_instance[i]->accumulate(m_skeleton_instance[i].get(), ctx->m_frame_time);
-					math::float4x4 t = math::translation_x(1.5f * i);
-					m_skeleton_positions[i] = gx::anm::skeleton_positions(m_skeleton.get(), m_skeleton_instance[i]->local_transforms(), t);
-				});
+                concurrency::parallel_for(size_t(0), m_animations.size(), [this, ctx](size_t i) -> void
+                {
+                    m_animation_instance[i]->accumulate(m_skeleton_instance[i].get(), ctx->m_frame_time);
+                    math::float4x4 t = math::translation_x(1.5f * i);
+                    m_skeleton_positions[i] = gx::anm::skeleton_positions(m_skeleton.get(), m_skeleton_instance[i]->local_transforms(), t);
+                });
 
 
-				*m_skeleton_positions_transform  = details::skeleton_transform( ctx->m_frame_time );
+                *m_skeleton_positions_transform  = details::skeleton_transform( ctx->m_frame_time );
              }
 
             gx::dx12::managed_graphics_command_context render_world_5::do_render(render_context* ctx)
@@ -153,7 +153,7 @@ namespace uc
                     graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
                 }
 
-				for ( auto i = 0U; i < m_animations.size(); ++i )
+                for ( auto i = 0U; i < m_animations.size(); ++i )
                 {
                     //draw
                     draw_constants draw;
@@ -163,7 +163,7 @@ namespace uc
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
 
-					auto&& positions = m_skeleton_positions[i];
+                    auto&& positions = m_skeleton_positions[i];
 
                     graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&positions[0], positions.size() * sizeof(gx::position_3d)));
                     graphics->draw(static_cast<uint32_t>(positions.size()));
@@ -181,7 +181,7 @@ namespace uc
                 auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
                 begin_render_depth(ctx, graphics.get());
 
-				/*
+                /*
 
                 {
                     set_view_port(ctx, graphics.get());
@@ -200,21 +200,21 @@ namespace uc
                 }
 
                 {
-					for (auto i = 0; i < m_animations.size(); ++i)
-					{
-						//draw
-						draw_constants draw;
-						draw.m_world = uc::math::translation_x( 1.5f * i );
+                    for (auto i = 0; i < m_animations.size(); ++i)
+                    {
+                        //draw
+                        draw_constants draw;
+                        draw.m_world = uc::math::translation_x( 1.5f * i );
 
-						auto&& positions = m_skeleton_positions[i];
+                        auto&& positions = m_skeleton_positions[i];
 
-						//todo: move this into a big buffer for the whole scene
-						graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-						graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&positions[0], positions.size() * sizeof(gx::position_3d)));
-						graphics->draw(static_cast<uint32_t>(positions.size()));
-					}
+                        //todo: move this into a big buffer for the whole scene
+                        graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                        graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&positions[0], positions.size() * sizeof(gx::position_3d)));
+                        graphics->draw(static_cast<uint32_t>(positions.size()));
+                    }
                 }
-				*/
+                */
                 end_render_depth(ctx, graphics.get());
                 return graphics;
             }
