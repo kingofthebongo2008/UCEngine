@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <uc_dev/gx/import/assimp/skinned_mesh.h>
+#include <uc_dev/gx/import/fbx/skinned_mesh.h>
 #include <uc_dev/gx/import/assimp/assimp_options.h>
 
 #include "uc_skeleton_command_line.h"
@@ -66,9 +67,19 @@ int32_t main(int32_t argc, const char* argv[])
         std::cout << "building skeleton (" << get_environment() << ") " << input_skeleton << std::endl;
         std::cout << "assimp options:" << uc::gx::import::assimp::assimp_postprocess_option_to_string(ai_o) << std::endl;
 
-        auto mesh                               = uc::gx::import::assimp::create_skinned_mesh(input_skeleton, ai_o);
+        std::experimental::filesystem::path path(input_skeleton);
+        auto e = path.extension().wstring();
 
-        uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose) , output_skeleton);
+        if (e == L".fbx" && false)
+        {
+            auto mesh = uc::gx::import::fbx::create_skinned_mesh(input_skeleton);
+            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton);
+        }
+        else
+        {
+            auto mesh = uc::gx::import::assimp::create_skinned_mesh(input_skeleton, ai_o);
+            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton);
+        }
     }
     
     catch (const std::exception& e)
