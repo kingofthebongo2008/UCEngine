@@ -24,7 +24,7 @@ namespace uc
                 }
 
                 // Get the matrix of the given pose
-                FbxAMatrix get_pose_matrix(const FbxPose* pose, int32_t node)
+                fbxsdk::FbxAMatrix get_pose_matrix(const fbxsdk::FbxPose* pose, int32_t node)
                 {
                     FbxAMatrix lPoseMatrix;
                     FbxMatrix lMatrix = pose->GetMatrix(node);
@@ -37,7 +37,7 @@ namespace uc
                 // Get the global position of the node for the current pose.
                 // If the specified node is not part of the pose or no pose is specified, get its
                 // global position at the current time.
-                FbxAMatrix get_global_position(const FbxNode* node, const FbxTime& pTime, const FbxPose* pose = nullptr, const FbxAMatrix* parent_global_position = nullptr)
+                fbxsdk::FbxAMatrix get_global_position(const fbxsdk::FbxNode* node, const fbxsdk::FbxTime& pTime, const fbxsdk::FbxPose* pose = nullptr, const fbxsdk::FbxAMatrix* parent_global_position = nullptr)
                 {
                     FbxAMatrix lGlobalPosition;
                     bool        lPositionFound = false;
