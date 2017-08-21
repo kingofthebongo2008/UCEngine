@@ -60,24 +60,6 @@ namespace uc
                     return r;
                 }
 
-                // Get the geometry deformation local to a node. It is never inherited by the
-                // children.
-                inline fbxsdk::FbxAMatrix get_geometry(FbxNode* pNode)
-                {
-                    fbxsdk::FbxVector4 lT, lR, lS;
-                    fbxsdk::FbxAMatrix lGeometry;
-
-                    lT = pNode->GetGeometricTranslation(FbxNode::eSourcePivot);
-                    lR = pNode->GetGeometricRotation(FbxNode::eSourcePivot);
-                    lS = pNode->GetGeometricScaling(FbxNode::eSourcePivot);
-
-                    lGeometry.SetT(lT);
-                    lGeometry.SetR(lR);
-                    lGeometry.SetS(lS);
-
-                    return lGeometry;
-                }
-
                 inline math::float4 convert_to_float4(fbxsdk::FbxVector4 v)
                 {
                     float r[4];
@@ -122,14 +104,34 @@ namespace uc
                     return r;
                 }
 
-
                 inline geo::joint_transform_matrix joint_transform_matrix(const fbxsdk::FbxAMatrix& m)
                 {
                     geo::joint_transform_matrix r;
 
-                   
                     //move to row major
                     r.m_transform = convert_to_float4x4(m);
+                    return r;
+                }
+
+
+                inline fbxsdk::FbxAMatrix convert_transform_to_lhs(const fbxsdk::FbxAMatrix& m)
+                {
+                    fbxsdk::FbxAMatrix r = m;
+
+                    auto rot = r.GetR();
+                    auto tr = r.GetT();
+                    auto s = r.GetS();
+
+                    r.SetT(fbxsdk::FbxVector4(0, 0, 0, 1));
+
+                    fbxsdk::FbxAMatrix sy;
+
+                    sy.SetRow(0, fbxsdk::FbxVector4(1, 0, 0, 1));
+                    sy.SetRow(1, fbxsdk::FbxVector4(0,-1, 0, 1));
+                    sy.SetRow(2, fbxsdk::FbxVector4(0, 0, 1, 1));
+                    sy.SetRow(3, fbxsdk::FbxVector4(0, 0, 0, 1));
+
+                    r = sy * m * sy;
                     return r;
                 }
 
@@ -138,6 +140,7 @@ namespace uc
                     std::vector<int32_t>               parents;
                     std::vector<fbxsdk::FbxCluster*>   joints;
                     std::vector<fbxsdk::FbxAMatrix>    joints_matrices;
+
 
                     int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
 
@@ -167,23 +170,29 @@ namespace uc
 
                     {
                         skeleton.m_joint_local_pose.resize(joints.size());
+                        auto pose_count = mesh->GetScene()->GetPoseCount();
+                        auto pose = mesh->GetScene()->GetPose(0);
 
                         auto&& sjoints = skeleton.m_joint_local_pose;
+                        fbxsdk::FbxTime time;
 
                         for (auto&& i = 0U; i < joints.size(); ++i)
                         {
-                            auto t0 = joints[i]->GetLink()->EvaluateGlobalTransform();
+                            auto t0 = get_global_position(joints[i]->GetLink(), time, pose);
                             fbxsdk::FbxAMatrix t1;
                             t1.SetIdentity();
 
                             if (joints[i]->GetLink()->GetParent())
                             {
-                                t1 = joints[i]->GetLink()->GetParent()->EvaluateGlobalTransform();
+                                t1 = get_global_position(joints[i]->GetLink()->GetParent(), time, pose);
                             }
-                            auto t3 = t1.Inverse() * t0 * geometry;
 
-                            sjoints[i].m_transform = joint_transform(t3);
-                            sjoints[i].m_transform_matrix = joint_transform_matrix(t3);
+                            auto t3 = t1.Inverse() * t0 * geometry;
+                            //auto t4 = convert_transform_to_lhs(t3);
+                            auto t4 = t3;
+
+                            sjoints[i].m_transform = joint_transform(t4);
+                            sjoints[i].m_transform_matrix = joint_transform_matrix(t4);
                         }
                     }
 
@@ -194,7 +203,7 @@ namespace uc
                         for (auto&& i = 0U; i < joints.size(); ++i)
                         {
                             fbxsdk::FbxAMatrix matXBindPose;
-                            joints[i]->GetTransformLinkMatrix(matXBindPose);                 // The transformation of the cluster(joint) at binding time from joint space to world space
+                            joints[i]->GetTransformLinkMatrix(matXBindPose);               // The transformation of the cluster(joint) at binding time from joint space to world space
                             fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
                             joints[i]->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
 
@@ -523,7 +532,7 @@ namespace uc
 
                     if (scene_axis_system != our_axis_system)
                     {
-                        our_axis_system.ConvertScene(scene.get());
+                       our_axis_system.ConvertScene(scene.get());
                     }
 
                     FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
