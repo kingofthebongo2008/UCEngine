@@ -74,10 +74,10 @@ namespace uc
 
         struct skeleton
         {
-            reloc_array < joint_transform >    m_joint_inverse_bind_pose;
+            reloc_array < joint_transform >    m_joint_inverse_bind_pose;   //bind pose is when the pose of the skeleton when you bind the vertices
             reloc_array < matrix4x4 >          m_joint_inverse_bind_pose2;
 
-            reloc_array < joint_transform >    m_joint_local_transforms;
+            reloc_array < joint_transform >    m_joint_local_transforms;    //this is the rest or local pose, this is what is changed from the animations
 
             reloc_array < joint_name >         m_joint_names;              //joint names are sorted, for faster search by name
             reloc_array < uint16_t >           m_joint_name_indices;       //and point to indices 
@@ -85,7 +85,7 @@ namespace uc
             reloc_array < joint_linkage >      m_joint_linkage;            //( joint, parent ) sorted by depth
             reloc_array < uint16_t >           m_joint_linkage_indices;    //( points to the joint liknage struct for given joint
 
-            reloc_array < matrix4x4 >          m_joint_local_transforms2;
+            reloc_array < matrix4x4 >          m_joint_local_transforms2;  //this is the rest or local pose, this is what is changed from the animations
             reloc_array < uint16_t>            m_joint_linkage2;
             
             uint16_t                           m_locomotion_joint_index;  
