@@ -127,14 +127,13 @@ namespace uc
                 {
                     geo::joint_transform_matrix r;
 
-                    auto t = convert_to_float4(m.GetT());
-                    
+                   
                     //move to row major
                     r.m_transform = convert_to_float4x4(m);
                     return r;
                 }
 
-                inline void get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
+                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
                 {
                     std::vector<int32_t>               parents;
                     std::vector<fbxsdk::FbxCluster*>   joints;
@@ -164,6 +163,7 @@ namespace uc
                     }
 
                     geo::skeleton_pose skeleton;
+                    fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
 
                     {
                         skeleton.m_joint_local_pose.resize(joints.size());
@@ -180,7 +180,7 @@ namespace uc
                             {
                                 t1 = joints[i]->GetLink()->GetParent()->EvaluateGlobalTransform();
                             }
-                            auto t3 = t1.Inverse() * t0;
+                            auto t3 = t1.Inverse() * t0 * geometry;
 
                             sjoints[i].m_transform = joint_transform(t3);
                             sjoints[i].m_transform_matrix = joint_transform_matrix(t3);
@@ -194,12 +194,13 @@ namespace uc
                         for (auto&& i = 0U; i < joints.size(); ++i)
                         {
                             fbxsdk::FbxAMatrix matXBindPose;
-                            joints[i]->GetTransformLinkMatrix(matXBindPose);
+                            joints[i]->GetTransformLinkMatrix(matXBindPose);                 // The transformation of the cluster(joint) at binding time from joint space to world space
                             fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
-                            joints[i]->GetTransformMatrix(matReferenceGlobalInitPosition);
+                            joints[i]->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
 
-                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose;
+                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose * geometry;
 
+                            //add geometry here
                             sjoints[i].m_name = joints[i]->GetLink()->GetName();
                             sjoints[i].m_inverse_bind_pose  = joint_transform(matBindPose.Inverse());
                             sjoints[i].m_inverse_bind_pose2 = joint_transform_matrix(matBindPose.Inverse());
@@ -239,6 +240,8 @@ namespace uc
                         }
                         
                     }
+
+                    return skeleton;
                 }
 
 
@@ -472,9 +475,7 @@ namespace uc
                         }
                     }
 
-                    geo::skinned_mesh::skeleton_pose_t pose;
-
-                    get_skeleton_pose(mesh);
+                    geo::skinned_mesh::skeleton_pose_t pose = get_skeleton_pose(mesh);
 
                     return std::make_shared<geo::skinned_mesh>(
 
@@ -545,10 +546,11 @@ namespace uc
                     std::vector<  std::shared_ptr<geo::skinned_mesh> > multimeshes;
                     for (auto& m : meshes)
                     {
-                        //skip meshes without skin
-                        if (is_skinned_mesh(m))
+                        //skip meshes without skin and import only the first one
+                        if (is_skinned_mesh(m) && multimeshes.empty())
                         {
                             multimeshes.push_back(create_skinned_mesh_internal(m));
+                            break;
                         }
                     }
 
@@ -560,6 +562,8 @@ namespace uc
                     std::vector< geo::skinned_mesh::blend_weights_t >    blend_weights;
                     std::vector< geo::skinned_mesh::blend_indices_t >    blend_indices;
 
+                    geo::skeleton_pose pose;
+
                     for (auto&& m : multimeshes)
                     {
                         pos.insert(pos.end(), m->m_positions.begin(), m->m_positions.end());
@@ -568,9 +572,8 @@ namespace uc
                         mat.insert(mat.end(), m->m_materials.begin(), m->m_materials.end());
                         blend_weights.insert(blend_weights.end(), m->m_blend_weights.begin(), m->m_blend_weights.end());
                         blend_indices.insert(blend_indices.end(), m->m_blend_indices.begin(), m->m_blend_indices.end());
+                        pose = m->m_skeleton_pose;
                     }
-
-                    geo::skinned_mesh::skeleton_pose_t pose;
 
                     return std::make_shared<geo::skinned_mesh>(
                         std::move(pos), 
