@@ -110,6 +110,7 @@
   <Import Project="../../../../msbuild/gsl.props" />
   <Import Project="../../../../msbuild/lzham.props" />
   <Import Project="../../../../msbuild/assimp.props" />
+  <Import Project="../../../../msbuild/fbxsdk.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
