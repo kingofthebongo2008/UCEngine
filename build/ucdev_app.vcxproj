@@ -284,11 +284,11 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets')" />
   </ImportGroup>
-  <!--Import Project="asset/robot.msbuild" /-->
+  <Import Project="asset/robot.msbuild" />
   <!--Import Project="asset/robot_mid_poly.msbuild" /-->
   <Import Project="asset/deer.msbuild" />
   <Import Project="asset/bear.msbuild" />
-  <!--Import Project="asset/military_mechanic.msbuild" /-->
+  <Import Project="asset/military_mechanic.msbuild" />
   <!--Import Project="asset/military_mechanic_indexed.msbuild" /-->
   <!--Import Project="asset/military_mechanic_multi_textured.msbuild" /-->
   <Import Project="msbuild/ucdev_render.targets" />
