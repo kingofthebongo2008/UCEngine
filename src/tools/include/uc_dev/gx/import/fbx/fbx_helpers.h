@@ -16,11 +16,11 @@ namespace uc
             {
                 inline fbxsdk::FbxAMatrix get_geometry(const fbxsdk::FbxNode* node)
                 {
-                    const FbxVector4 lT = node->GetGeometricTranslation(FbxNode::eSourcePivot);
-                    const FbxVector4 lR = node->GetGeometricRotation(FbxNode::eSourcePivot);
-                    const FbxVector4 lS = node->GetGeometricScaling(FbxNode::eSourcePivot);
+                    const fbxsdk::FbxVector4 lT = node->GetGeometricTranslation(fbxsdk::FbxNode::eSourcePivot);
+                    const fbxsdk::FbxVector4 lR = node->GetGeometricRotation(fbxsdk::FbxNode::eSourcePivot);
+                    const fbxsdk::FbxVector4 lS = node->GetGeometricScaling(fbxsdk::FbxNode::eSourcePivot);
 
-                    return FbxAMatrix(lT, lR, lS);
+                    return fbxsdk::FbxAMatrix(lT, lR, lS);
                 }
 
                 // Get the matrix of the given pose
