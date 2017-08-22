@@ -15,6 +15,8 @@
 #include "uc_animation_lip.h"
 #include "uc_animation_animation.h"
 
+#include <uc_dev/gx/import/fbx/animation.h>
+
 
 namespace uc
 {
@@ -52,6 +54,13 @@ int32_t main(int32_t argc, const char* argv[])
         auto&& vm = std::get<0>(om);
         auto&& desc = std::get<1>(om);
 
+        std::cout << "Command line:" << std::endl;
+        for (auto i = 0; i < argc; ++i)
+        {
+            std::cout << argv[i] << " ";
+        }
+        std::cout << std::endl;
+
         if (vm.count("help"))
         {
             std::cout << desc << std::endl;
@@ -69,7 +78,19 @@ int32_t main(int32_t argc, const char* argv[])
         ai_o |= make_left_handed ? aiProcess_MakeLeftHanded : 0;
         std::cout << "assimp options:" << uc::gx::import::assimp::assimp_postprocess_option_to_string(ai_o) << std::endl;
 
-        auto animations = uc::gx::import::assimp::create_animations_from_assimp(input_animation, ai_o);
+        std::experimental::filesystem::path path(input_animation);
+        auto e = path.extension().wstring();
+
+        std::vector<uc::gx::import::anm::joint_animations> animations;
+
+        if (e == L".fbx" && false)
+        {
+            animations = uc::gx::import::fbx::create_animations(input_animation);
+        }
+        else
+        {
+            animations = uc::gx::import::assimp::create_animations_from_assimp(input_animation, ai_o);
+        }
 
         {
             auto&& a = animations.front();
