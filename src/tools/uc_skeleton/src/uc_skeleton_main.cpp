@@ -70,7 +70,7 @@ int32_t main(int32_t argc, const char* argv[])
         std::experimental::filesystem::path path(input_skeleton);
         auto e = path.extension().wstring();
 
-        if (e == L".fbx" && false)
+        if (e == L".fbx")//  && false)
         {
             auto mesh = uc::gx::import::fbx::create_skinned_mesh(input_skeleton);
             uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton);
