@@ -168,31 +168,21 @@ namespace uc
                     geo::skeleton_pose skeleton;
                     fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
 
+                    std::vector<fbxsdk::FbxAMatrix> links;
+
                     {
                         skeleton.m_joint_local_pose.resize(joints.size());
-                        auto pose_count = mesh->GetScene()->GetPoseCount();
-                        auto pose = mesh->GetScene()->GetPose(0);
-
-                        auto&& sjoints = skeleton.m_joint_local_pose;
                         fbxsdk::FbxTime time;
 
                         for (auto&& i = 0U; i < joints.size(); ++i)
                         {
-                            auto t0 = get_global_position(joints[i]->GetLink(), time, pose);
-                            fbxsdk::FbxAMatrix t1;
-                            t1.SetIdentity();
+                            fbxsdk::FbxCluster* joint = joints[i];
 
-                            if (joints[i]->GetLink()->GetParent())
-                            {
-                                t1 = get_global_position(joints[i]->GetLink()->GetParent(), time, pose);
-                            }
+                            fbxsdk::FbxAMatrix link_m;
+                            joint->GetTransformLinkMatrix(link_m);
 
-                            auto t3 = t1.Inverse() * t0 * geometry;
-                            //auto t4 = convert_transform_to_lhs(t3);
-                            auto t4 = t3;
-
-                            sjoints[i].m_transform = joint_transform(t4);
-                            sjoints[i].m_transform_matrix = joint_transform_matrix(t4);
+                            fbxsdk::FbxAMatrix t4 = link_m;
+                            links.push_back(t4);
                         }
                     }
 
@@ -216,12 +206,10 @@ namespace uc
                         }
                     }
 
-                    std::map< std::string, int32_t>     joint2index;
+                    std::map< std::string, uint16_t>    joint2index;
                     std::map< std::string, std::string> joint2parent;
                     {
                         skeleton.m_joint_local_pose.resize(joints.size());
-                        auto&& sjoints = skeleton.m_joint_local_pose;
-
                         for (auto&& i = 0U; i < joints.size(); ++i)
                         {
                             auto&& joint = joints[i];
@@ -235,6 +223,7 @@ namespace uc
                         }
                     }
 
+                    //build up joint hierarchy, root node has parent 0xffff
                     for (auto&& i : skeleton.m_skeleton.m_joints)
                     {
                         const auto&& parent = joint2parent.find(i.m_name);
@@ -248,6 +237,24 @@ namespace uc
                             i.m_parent_index = 0xFFFF;
                         }
                         
+                    }
+
+                    //transform global matrices to parent relative
+                    for (auto i = 0U; i < skeleton.m_skeleton.m_joints.size(); ++i)
+                    {
+                        fbxsdk::FbxAMatrix parent;
+                        fbxsdk::FbxAMatrix this_;
+                        parent.SetIdentity();
+
+                        if (skeleton.m_skeleton.m_joints[i].m_parent_index != 0xffff)
+                        {
+                            parent = links[skeleton.m_skeleton.m_joints[i].m_parent_index];
+                        }
+
+                        this_ = links[i];
+                        auto t4 = parent.Inverse() * this_;
+                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t4);
+                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t4);
                     }
 
                     return skeleton;
