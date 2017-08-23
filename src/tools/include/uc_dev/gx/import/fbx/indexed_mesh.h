@@ -14,9 +14,9 @@ namespace uc
 
                 inline std::shared_ptr<geo::indexed_mesh> create_mesh(const std::string& file_name)
                 {
-                    std::unique_ptr<FbxManager, fbxmanager_deleter>     manager(FbxManager::Create(), fbxmanager_deleter() );
-                    std::unique_ptr<FbxScene, fbxscene_deleter>         scene(FbxScene::Create(manager.get(),""), fbxscene_deleter() );
-                    std::unique_ptr<FbxImporter, fbximporter_deleter>   importer(FbxImporter::Create(manager.get(), ""), fbximporter_deleter());
+                    std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     manager(fbxsdk::FbxManager::Create(), fbxmanager_deleter() );
+                    std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         scene(fbxsdk::FbxScene::Create(manager.get(),""), fbxscene_deleter() );
+                    std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   importer(fbxsdk::FbxImporter::Create(manager.get(), ""), fbximporter_deleter());
 
                     auto f = file_name;
 
