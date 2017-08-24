@@ -78,7 +78,7 @@ namespace uc
                     node->SetQuaternionInterpolation(fbxsdk::FbxNode::eDestinationPivot, fbxsdk::eQuatInterpSlerp);
                 }
 
-                template <typename f> inline void transform_node_recursive(fbxsdk::FbxNode* root, f op)
+                template <typename f> inline void transform_node_recursive(const fbxsdk::FbxNode* root, f op)
                 {
                     if (root)
                     {
