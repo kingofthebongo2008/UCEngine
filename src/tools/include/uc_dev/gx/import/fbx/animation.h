@@ -308,6 +308,7 @@ namespace uc
 
                             if (joint_animations_relative[i].m_conjugate_quaternion[j])
                             {
+                                //todo: check if this is working
                                 //rot.Conjugate();
                             }
 
@@ -316,7 +317,6 @@ namespace uc
 
                             a.m_rotation_keys.push_back(rot_key);
                             a.m_translation_keys.push_back(trans_key);
-
                         }
                     }
 
