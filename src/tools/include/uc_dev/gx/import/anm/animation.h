@@ -16,13 +16,13 @@ namespace uc
                 struct joint_rotation_key
                 {
                     math::float4 m_transform;
-                    double       m_time;
+                    double       m_time;        //in ticks
                 };
 
                 struct joint_translation_key
                 {
                     math::float4 m_transform;
-                    double       m_time;
+                    double       m_time;        //in ticks
                 };
 
                 struct joint_animation
@@ -34,10 +34,10 @@ namespace uc
 
                 struct joint_animations
                 {
-                    std::vector< joint_animation >  m_joint_animations;
-                    double                          m_duration;
-                    double                          m_ticks_per_second;
-                    std::string                     m_name;
+                    std::vector< joint_animation >          m_joint_animations;
+                    double                                  m_duration; //in ticks
+                    double                                  m_ticks_per_second;
+                    std::string                             m_name;
                 };
             }
         }
