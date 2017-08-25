@@ -182,14 +182,14 @@ namespace uc
 
                     anm::joint_animations m;
                     m.m_name = take_info->mName;
+                    double frame_rate;
 
                     {
                         fbxsdk::FbxTime duration    = take_info->mLocalTimeSpan.GetDuration();
-                        m.m_duration                = duration.GetSecondDouble();
-
                         auto        mode            = duration.GetGlobalTimeMode();
-                        double frame_rate           = duration.GetFrameRate(mode);
+                        frame_rate                  = duration.GetFrameRate(mode);
                         m.m_ticks_per_second        = frame_rate;
+                        m.m_duration                = duration.GetSecondDouble() * frame_rate;
                     }
 
                     auto stack = get_anim_stack(scene.get());
@@ -206,9 +206,10 @@ namespace uc
                         auto evaluator = scene->GetAnimationEvaluator();
                         joint_animations.resize(joints.size());
 
-                        const double delta_time = m.m_duration / m.m_ticks_per_second;
+                        const auto   duration   = take_info->mLocalTimeSpan.GetDuration();
+                        const double delta_time = duration.GetSecondDouble() / m.m_ticks_per_second;
                         const double start_time = take_info->mLocalTimeSpan.GetStart().GetSecondDouble();
-                        const double end_time = take_info->mLocalTimeSpan.GetStop().GetSecondDouble();
+                        const double end_time   = take_info->mLocalTimeSpan.GetStop().GetSecondDouble();
 
                         for (auto i = 0U; i < joints.size(); ++i)
                         {
@@ -219,9 +220,11 @@ namespace uc
                             double   current_time = start_time;
                             while (current_time <= end_time)
                             {
-                                auto transform = evaluator->GetNodeGlobalTransform(n, current_time);
+                                fbxsdk::FbxTime t;
+                                t.SetSecondDouble(current_time);
+                                auto transform = evaluator->GetNodeGlobalTransform(n, t);
                                 joint_animations[i].m_transforms.push_back(transform);
-                                joint_animations[i].m_transforms_time.push_back(current_time);
+                                joint_animations[i].m_transforms_time.push_back(current_time * m.m_ticks_per_second);
                                 current_time += delta_time;
                             }
                         }
