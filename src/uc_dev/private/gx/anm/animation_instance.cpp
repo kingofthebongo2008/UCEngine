@@ -146,6 +146,8 @@ namespace uc {
                     auto m = math::quaternion_2_matrix(r);
 
                     m.r[3] = m.r[3] = math::select(t, math::identity_r3(), math::set_uint32(0, 0, 0, 0xffffffff));
+
+                    assert(m_skeleton_map.m_data[i] != 0xffff);
                     res[m_skeleton_map.m_data[i]] = m;
                 }
             }
