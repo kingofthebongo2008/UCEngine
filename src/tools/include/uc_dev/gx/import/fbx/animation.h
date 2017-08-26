@@ -127,6 +127,26 @@ namespace uc
                     return r;
                 }
 
+                inline std::vector<fbxsdk::FbxNode*> get_meshes(const fbxsdk::FbxNode* n)
+                {
+                    std::vector<fbxsdk::FbxNode*> r;
+
+                    transform_node_recursive(n, [&r](const fbxsdk::FbxNode* n)
+                    {
+                        if (n->GetNodeAttribute() && n->GetNodeAttribute()->GetAttributeType() == fbxsdk::FbxNodeAttribute::eMesh)
+                        {
+                            r.push_back(const_cast<fbxsdk::FbxNode*>(n));
+                        }
+                    });
+
+                    return r;
+                }
+
+                inline bool is_skinned_mesh(const fbxsdk::FbxMesh* mesh)
+                {
+                    return mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin) > 0;
+                }
+
                 inline std::vector<anm::joint_animations> create_animations(const std::string& file_name)
                 {
                     std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     manager(fbxsdk::FbxManager::Create(), fbxmanager_deleter());
@@ -160,7 +180,7 @@ namespace uc
 
                     if (scene_axis_system != our_axis_system)
                     {
-                        our_axis_system.ConvertScene(scene.get());
+                        //our_axis_system.ConvertScene(scene.get());
                     }
 
                     FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
@@ -192,12 +212,9 @@ namespace uc
                         m.m_duration                = duration.GetSecondDouble() * frame_rate;
                     }
 
-                    auto stack = get_anim_stack(scene.get());
-                    auto layer = get_anim_layer(stack, 0);
-
-                    scene->SetCurrentAnimationStack(stack);
-
                     auto joints = get_skeleton_nodes(scene->GetRootNode());
+                    auto meshes = get_meshes(scene->GetRootNode());
+                    auto is_skinned = is_skinned_mesh(meshes[0]->GetMesh());
 
                     std::vector< fbx_joint_animation > joint_animations;
 
@@ -222,7 +239,17 @@ namespace uc
                             {
                                 fbxsdk::FbxTime t;
                                 t.SetSecondDouble(current_time);
-                                auto transform = evaluator->GetNodeGlobalTransform(n, t);
+
+                                auto rot = n->GetGeometricRotation(fbxsdk::FbxNode::eSourcePivot);
+                                auto tr  = n->GetGeometricTranslation(fbxsdk::FbxNode::eSourcePivot);
+                                auto sc  = n->GetGeometricScaling(fbxsdk::FbxNode::eSourcePivot);
+
+                                
+                                fbxsdk::FbxAMatrix geometric_transform;
+                                geometric_transform.SetTRS(tr, rot, sc);
+
+                                auto transform = evaluator->GetNodeGlobalTransform(n, t) * geometric_transform;
+
                                 joint_animations[i].m_transforms.push_back(transform);
                                 joint_animations[i].m_transforms_time.push_back(current_time * m.m_ticks_per_second);
                                 current_time += delta_time;

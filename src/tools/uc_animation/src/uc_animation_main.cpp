@@ -83,7 +83,7 @@ int32_t main(int32_t argc, const char* argv[])
 
         std::vector<uc::gx::import::anm::joint_animations> animations;
 
-        if (e == L".fbx" && false)
+        if (e == L".fbx")
         {
             animations = uc::gx::import::fbx::create_animations(input_animation);
         }

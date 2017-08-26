@@ -142,7 +142,7 @@ namespace uc
 
                     if (scene_axis_system != our_axis_system)
                     {
-                        our_axis_system.ConvertScene(scene.get());
+                        //our_axis_system.ConvertScene(scene.get());
                     }
 
                     FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();

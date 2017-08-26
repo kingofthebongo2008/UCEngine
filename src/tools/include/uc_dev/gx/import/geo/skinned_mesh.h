@@ -32,7 +32,7 @@ namespace uc
 
                 struct skeleton
                 {
-                    std::vector< joint > m_joints;
+                    std::vector< joint >    m_joints;
                 };
 
                 struct local_joint_pose

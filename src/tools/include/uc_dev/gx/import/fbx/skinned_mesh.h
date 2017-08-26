@@ -135,12 +135,109 @@ namespace uc
                     return r;
                 }
 
+                inline std::vector<fbxsdk::FbxNode*> get_skeleton_nodes(const fbxsdk::FbxNode* n)
+                {
+                    std::vector<fbxsdk::FbxNode*> r;
+
+                    transform_node_recursive(n, [&r](const fbxsdk::FbxNode* n)
+                    {
+                        if (n->GetNodeAttribute() && n->GetNodeAttribute()->GetAttributeType() == fbxsdk::FbxNodeAttribute::eSkeleton)
+                        {
+                            r.push_back(const_cast<fbxsdk::FbxNode*>(n));
+                        }
+                    });
+
+                    return r;
+                }
+
+                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
+                {
+                    std::vector<int32_t>                 parents;
+                    std::map<fbxsdk::FbxNode*, uint32_t> joint2index;
+
+                    geo::skeleton_pose skeleton;
+                    fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
+
+                    auto evaluator              = mesh->GetScene()->GetAnimationEvaluator();
+                    auto skeletal_nodes         = get_skeleton_nodes(mesh->GetScene()->GetRootNode());
+
+                    std::vector<fbxsdk::FbxAMatrix> links;
+                    {
+                        skeleton.m_joint_local_pose.resize(skeletal_nodes.size());
+                        fbxsdk::FbxTime time;
+
+                        for (auto&& i = 0U; i < skeletal_nodes.size(); ++i)
+                        {
+                            auto n = skeletal_nodes[i];
+                            fbxsdk::FbxAMatrix t3 = evaluator->GetNodeGlobalTransform(n);
+                            links.push_back(t3);
+
+                            joint2index.insert(std::make_pair(n, i));
+                        }
+                    }
+
+                    parents.resize(skeletal_nodes.size());
+
+                    //build up joint hierarchy, root node has parent 0xffff
+                    for (auto i =0U; i <skeletal_nodes.size(); ++i)
+                    {
+                        const auto&& parent_index = joint2index.find(skeletal_nodes[i]->GetParent());
+                        if (parent_index != joint2index.end())
+                        {
+                            parents[i] = parent_index->second;
+                        }
+                        else
+                        {
+                            parents[i] = 0xFFFF;
+                        }
+                    }
+
+                    skeleton.m_joint_local_pose.resize(skeletal_nodes.size());
+
+                    //transform global matrices to parent relative
+                    for (auto i = 0U; i < skeletal_nodes.size(); ++i)
+                    {
+                        fbxsdk::FbxAMatrix parent;
+                        fbxsdk::FbxAMatrix this_;
+                        parent.SetIdentity();
+
+                        if (parents[i] != 0xffff)
+                        {
+                            parent = links[parents[i]];
+                        }
+
+                        this_ = links[i];
+                        auto t4 = parent.Inverse() * this_;
+                        
+                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t4);
+                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t4);
+                    }
+
+                    skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
+
+                    for (auto i = 0U; i < skeletal_nodes.size(); ++i)
+                    {
+                        fbxsdk::FbxAMatrix parent;
+
+                        fbxsdk::FbxAMatrix this_;
+                        this_.SetIdentity();
+
+                        skeleton.m_skeleton.m_joints[i].m_name = skeletal_nodes[i]->GetName();
+                        skeleton.m_skeleton.m_joints[i].m_parent_index = parents[i];
+                        skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose     = joint_transform(this_);
+                        skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2    = joint_transform_matrix(this_);
+                    }
+
+                    return skeleton;
+                }
+
+
+                /*
                 inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
                 {
                     std::vector<int32_t>               parents;
                     std::vector<fbxsdk::FbxCluster*>   joints;
                     std::vector<fbxsdk::FbxAMatrix>    joints_matrices;
-
 
                     int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
 
@@ -168,8 +265,11 @@ namespace uc
                     geo::skeleton_pose skeleton;
                     fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
 
-                    std::vector<fbxsdk::FbxAMatrix> links;
+                    auto evaluator = mesh->GetScene()->GetAnimationEvaluator();
 
+                    auto scene_skeletal_nodes = get_skeleton_nodes(mesh->GetScene()->GetRootNode());
+
+                    std::vector<fbxsdk::FbxAMatrix> links;
                     {
                         skeleton.m_joint_local_pose.resize(joints.size());
                         fbxsdk::FbxTime time;
@@ -181,7 +281,15 @@ namespace uc
                             fbxsdk::FbxAMatrix link_m;
                             joint->GetTransformLinkMatrix(link_m);
 
+                            fbxsdk::FbxAMatrix transform_m;
+                            joint->GetTransformMatrix(transform_m);
+
+                            fbxsdk::FbxAMatrix t3 = evaluator->GetNodeGlobalTransform(joint->GetLink());
+
+                            //assert(link_m == t3);
+
                             fbxsdk::FbxAMatrix t4 = link_m;
+                            
                             links.push_back(t4);
                         }
                     }
@@ -200,7 +308,7 @@ namespace uc
                             fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose * geometry;
 
                             //add geometry here
-                            sjoints[i].m_name = joints[i]->GetLink()->GetName();
+                            sjoints[i].m_name               = joints[i]->GetLink()->GetName();
                             sjoints[i].m_inverse_bind_pose  = joint_transform(matBindPose.Inverse());
                             sjoints[i].m_inverse_bind_pose2 = joint_transform_matrix(matBindPose.Inverse());
                         }
@@ -259,7 +367,7 @@ namespace uc
 
                     return skeleton;
                 }
-
+                */
 
                 //////////////////////
                 inline geo::skinned_mesh::blend_weights_t get_blend_weights(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
@@ -539,7 +647,7 @@ namespace uc
 
                     if (scene_axis_system != our_axis_system)
                     {
-                       our_axis_system.ConvertScene(scene.get());
+                       //our_axis_system.ConvertScene(scene.get());
                     }
 
                     FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
