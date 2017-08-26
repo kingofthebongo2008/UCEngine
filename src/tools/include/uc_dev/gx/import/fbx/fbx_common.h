@@ -42,7 +42,8 @@ namespace uc
 
                 inline math::float4 to_float4(const fbxsdk::FbxVector4 v)
                 {
-                    return math::set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]), 0.0f);
+                    const double* d = v;
+                    return math::set(static_cast<float>(d[0]), static_cast<float>(d[1]), static_cast<float>(d[2]), static_cast<float>(d[3]));
                 }
 
                 /// Do this setup for each node(FbxNode).
@@ -200,7 +201,6 @@ namespace uc
                     return meshes;
                 }
 
-
                 struct get_uv_element
                 {
                     virtual fbxsdk::FbxVector2 get_element(uint32_t index) const = 0;
@@ -275,7 +275,7 @@ namespace uc
 
                     virtual uint32_t get_element(uint32_t triangle_index, uint32_t triangle_vertex) const override
                     {
-                        auto m = const_cast<fbxsdk::FbxMesh*>( m_mesh );
+                        auto m = const_cast<fbxsdk::FbxMesh*>(m_mesh);
                         return m->GetTextureUVIndex(triangle_index, triangle_vertex);
                     }
                 };
@@ -347,9 +347,9 @@ namespace uc
                 }
 
                 //returns all positions, which match triangle_indices;
-                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices )
+                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
-                    auto points  = mesh->GetControlPoints();
+                    auto points = mesh->GetControlPoints();
                     auto indices = mesh->GetPolygonVertices();
 
                     auto triangle_count = triangle_indices.size();
@@ -526,6 +526,64 @@ namespace uc
                         }
                     }
                     return uvs;
+                }
+            
+                struct fbx_context
+                {
+                    std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     m_manager;
+                    std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         m_scene;
+                    std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   m_importer;
+                };
+
+                inline std::unique_ptr<fbx_context> load_fbx_file(const std::string& file_name)
+                {
+                    std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     manager(fbxsdk::FbxManager::Create(), fbxmanager_deleter());
+                    std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         scene(fbxsdk::FbxScene::Create(manager.get(), ""), fbxscene_deleter());
+                    std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   importer(fbxsdk::FbxImporter::Create(manager.get(), ""), fbximporter_deleter());
+
+                    auto f = file_name;
+
+                    auto import_status = importer->Initialize(f.c_str(), -1, manager->GetIOSettings());
+
+                    if (import_status == false)
+                    {
+                        auto status = importer->GetStatus();
+                        auto error = status.GetErrorString();
+                        ::uc::gx::throw_exception<uc::gx::fbx_exception>(error);
+                    }
+
+                    import_status = importer->Import(scene.get());
+                    if (import_status == false)
+                    {
+                        auto status = importer->GetStatus();
+                        auto error = status.GetErrorString();
+                        ::uc::gx::throw_exception<uc::gx::fbx_exception>(error);
+                    }
+
+                    FbxGeometryConverter geometryConverter(manager.get());
+                    geometryConverter.Triangulate(scene.get(), true);
+
+                    fbxsdk::FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
+                    fbxsdk::FbxAxisSystem our_axis_system = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
+
+                    if (scene_axis_system != our_axis_system)
+                    {
+                        //our_axis_system.ConvertScene(scene.get());
+                    }
+
+                    fbxsdk::FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
+                    fbxsdk::FbxSystemUnit meters = fbxsdk::FbxSystemUnit::m;
+
+                    if (units != fbxsdk::FbxSystemUnit::m)
+                    {
+                        //FbxSystemUnit::m.ConvertScene(scene.get());
+                    }
+
+                    auto r = std::make_unique<fbx_context>();
+                    r->m_manager = std::move(manager);
+                    r->m_scene = std::move(scene);
+                    r->m_importer = std::move(importer);
+                    return r;
                 }
             }
         }
