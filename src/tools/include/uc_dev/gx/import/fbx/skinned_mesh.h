@@ -642,18 +642,18 @@ namespace uc
                     FbxGeometryConverter geometryConverter(manager.get());
                     geometryConverter.Triangulate(scene.get(), true);
 
-                    FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
-                    FbxAxisSystem our_axis_system = FbxAxisSystem(FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
+                    fbxsdk::FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
+                    fbxsdk::FbxAxisSystem our_axis_system = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
 
                     if (scene_axis_system != our_axis_system)
                     {
                        //our_axis_system.ConvertScene(scene.get());
                     }
 
-                    FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
-                    FbxSystemUnit meters = FbxSystemUnit::m;
+                    fbxsdk::FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
+                    fbxsdk::FbxSystemUnit meters = fbxsdk::FbxSystemUnit::m;
 
-                    if (units != FbxSystemUnit::m)
+                    if (units != fbxsdk::FbxSystemUnit::m)
                     {
                         //FbxSystemUnit::m.ConvertScene(scene.get());
                     }
