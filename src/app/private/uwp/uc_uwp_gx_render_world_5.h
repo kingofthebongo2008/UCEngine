@@ -37,17 +37,17 @@ namespace uc
                 gx::dx12::graphics_pipeline_state*                              m_skeleton_pso;
                 gx::dx12::graphics_pipeline_state*                              m_depth_prepass_pso;
                 
-				lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
+                lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
 
                 std::vector< lip::unique_lip_pointer<lip::joint_animations> >	m_animations;
 
                 std::vector < std::unique_ptr< gx::anm::skeleton_instance > >   m_skeleton_instance;
                 std::vector < std::unique_ptr< gx::anm::animation_instance> >   m_animation_instance;
 
-                std::vector< std::vector<gx::position_3d> >						m_skeleton_positions;
+                std::vector< std::vector<gx::position_3d> >                     m_skeleton_positions;
 
-				math::managed_float4x4											m_skeleton_positions_transform = math::make_float4x4();
-				//mem::aligned_unique_ptr<math::float4x4>                         m_skeleton_positions_transform = mem::make_aligned_unique_ptr<math::float4x4>();
+                math::managed_float4x4                                          m_skeleton_positions_transform = math::make_float4x4();
+                //mem::aligned_unique_ptr<math::float4x4>                         m_skeleton_positions_transform = mem::make_aligned_unique_ptr<math::float4x4>();
 
             };
         }

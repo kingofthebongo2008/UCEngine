@@ -56,13 +56,13 @@ namespace uc
                     m_skeleton_pso = gx::dx12::create_pso( resources->device_d2d12(), resources->resource_create_context(), gx::dx12::skeleton::create_pso );
                 });
 
-                //load preprocessed textured model
+                /*
                 g.run([this]()
                 {
                     m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
                 });
 
-                //load preprocessed textured model
+                
                 g.run([this]()
                 {
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/breathing_idle.animation"));
@@ -86,8 +86,31 @@ namespace uc
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/shooting.animation"));
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/smash.animation"));
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/swagger_walk.animation"));
-                    
                 });
+                */
+                
+                g.run([this]()
+                {
+                    m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/military_mechanic.skeleton");
+                });
+
+                g.run([this]()
+                {
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/military_mechanic.animation"));
+                });
+                
+                /*
+                g.run([this]()
+                {
+                m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
+                });
+
+
+                g.run([this]()
+                {
+                m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
+                });
+                */
 
                 g.run([this, c]
                 {
@@ -95,7 +118,8 @@ namespace uc
                     m_depth_prepass_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_lines::create_pso);
                 });
 
-                m_camera->set_view_position(math::set(15.0, 0.0f, -25.5f, 0.0f));
+                m_camera->set_view_position(math::set(0.0, 0.0f, -25.5f, 0.0f));
+                //m_camera->set_up(math::set(0.0f, -1.0f, 0.0f, 0.0f));
                 m_camera->set_far(1200.0f);
 
                 g.wait();
@@ -106,7 +130,6 @@ namespace uc
                 {
                     m_skeleton_instance.push_back(std::make_unique<gx::anm::skeleton_instance>(m_skeleton.get()));
                     m_animation_instance.push_back(std::make_unique<gx::anm::animation_instance>(m_animations[i].get(), m_skeleton.get() ) );
-                    m_skeleton_positions[i].resize(3);
                 }
             }
 
@@ -164,6 +187,9 @@ namespace uc
                     graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
 
                     auto&& positions = m_skeleton_positions[i];
+
+                    //gx::anm::skeleton_instance instance(m_skeleton.get());
+                    //auto&& positions =gx::anm::skeleton_positions(m_skeleton.get(), instance.local_transforms());
 
                     graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&positions[0], positions.size() * sizeof(gx::position_3d)));
                     graphics->draw(static_cast<uint32_t>(positions.size()));
