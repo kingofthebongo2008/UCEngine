@@ -229,14 +229,16 @@ namespace uc
             {
                 "Bear",
                 "Deer",
-                "Full Screen Color"
+                "Full Screen Color",
+                "Skeleton",
             };
 
             static gxu::world_id scene_id[] =
             {
                 gxu::world_id::scene2,
                 gxu::world_id::scene3,
-                gxu::world_id::scene6
+                gxu::world_id::scene6,
+                gxu::world_id::scene4
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

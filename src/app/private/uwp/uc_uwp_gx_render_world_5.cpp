@@ -100,16 +100,17 @@ namespace uc
                 });
                 
                 /*
-                g.run([this]()
-                {
-                m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
-                });
-
 
                 g.run([this]()
                 {
-                m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
+                    m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
                 });
+
+                g.run([this]()
+                {
+                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
+                });
+
                 */
 
                 g.run([this, c]
@@ -119,7 +120,6 @@ namespace uc
                 });
 
                 m_camera->set_view_position(math::set(0.0, 0.0f, -25.5f, 0.0f));
-                //m_camera->set_up(math::set(0.0f, -1.0f, 0.0f, 0.0f));
                 m_camera->set_far(1200.0f);
 
                 g.wait();
