@@ -111,7 +111,7 @@ template <class T>
 inline bool is_nan_helper(T t, const boost::true_type&)
 {
 #ifdef isnan
-   return isnan(t);
+    return isnan(static_cast<double>(t));
 #elif defined(BOOST_MATH_DISABLE_STD_FPCLASSIFY) || !defined(BOOST_HAS_FPCLASSIFY)
    (void)t;
    return false;
