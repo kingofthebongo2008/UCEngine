@@ -558,11 +558,11 @@ namespace uc
                     geometryConverter.Triangulate(scene.get(), true);
 
                     fbxsdk::FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
-                    fbxsdk::FbxAxisSystem our_axis_system = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
+                    fbxsdk::FbxAxisSystem our_axis_system   = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eMayaYUp);
 
                     if (scene_axis_system != our_axis_system)
                     {
-                        //our_axis_system.ConvertScene(scene.get());
+                        our_axis_system.ConvertScene(scene.get());
                     }
 
                     fbxsdk::FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
