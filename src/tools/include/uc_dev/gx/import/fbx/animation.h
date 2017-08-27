@@ -149,47 +149,9 @@ namespace uc
 
                 inline std::vector<anm::joint_animations> create_animations(const std::string& file_name)
                 {
-                    std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     manager(fbxsdk::FbxManager::Create(), fbxmanager_deleter());
-                    std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         scene(fbxsdk::FbxScene::Create(manager.get(), ""), fbxscene_deleter());
-                    std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   importer(fbxsdk::FbxImporter::Create(manager.get(), ""), fbximporter_deleter());
-
-                    auto f = file_name;
-
-                    auto import_status = importer->Initialize(f.c_str(), -1, manager->GetIOSettings());
-
-                    if (import_status == false)
-                    {
-                        auto status = importer->GetStatus();
-                        auto error = status.GetErrorString();
-                        ::uc::gx::throw_exception<uc::gx::fbx_exception>(error);
-                    }
-
-                    import_status = importer->Import(scene.get());
-                    if (import_status == false)
-                    {
-                        auto status = importer->GetStatus();
-                        auto error = status.GetErrorString();
-                        ::uc::gx::throw_exception<uc::gx::fbx_exception>(error);
-                    }
-
-                    FbxGeometryConverter geometryConverter(manager.get());
-                    geometryConverter.Triangulate(scene.get(), true);
-
-                    FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
-                    FbxAxisSystem our_axis_system = FbxAxisSystem(FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
-
-                    if (scene_axis_system != our_axis_system)
-                    {
-                        //our_axis_system.ConvertScene(scene.get());
-                    }
-
-                    FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
-                    FbxSystemUnit meters = FbxSystemUnit::m;
-
-                    if (units != FbxSystemUnit::m)
-                    {
-                        //FbxSystemUnit::m.ConvertScene(scene.get());
-                    }
+                    auto context    = load_fbx_file(file_name);
+                    auto scene      = context->m_scene.get();
+                    auto importer   = context->m_importer.get();
 
                     auto anim_stack_count = importer->GetAnimStackCount();
 
@@ -214,8 +176,6 @@ namespace uc
 
                     auto joints = get_skeleton_nodes(scene->GetRootNode());
                     auto meshes = get_meshes(scene->GetRootNode());
-                    auto is_skinned = is_skinned_mesh(meshes[0]->GetMesh());
-
                     std::vector< fbx_joint_animation > joint_animations;
 
                     //sample the bones
@@ -244,7 +204,6 @@ namespace uc
                                 auto tr  = n->GetGeometricTranslation(fbxsdk::FbxNode::eSourcePivot);
                                 auto sc  = n->GetGeometricScaling(fbxsdk::FbxNode::eSourcePivot);
 
-                                
                                 fbxsdk::FbxAMatrix geometric_transform;
                                 geometric_transform.SetTRS(tr, rot, sc);
 
@@ -317,8 +276,6 @@ namespace uc
                     }
 
                     m.m_joint_animations.resize(joint_animations_relative.size());
-
-
                     for (auto i = 0U; i < joint_animations_relative.size(); ++i)
                     {
                         auto&& a = m.m_joint_animations[i];

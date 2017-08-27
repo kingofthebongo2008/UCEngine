@@ -183,7 +183,7 @@ namespace uc
                 {
                     using namespace gx::import::assimp;
                     auto scene = load_assimp_scene(file_name, import_flags);
-                    validate_scene<validation_option::meshes>(scene.get());
+                    validate_scene(scene.get(), validation_option::meshes);
 
                     auto meshes = gsl::make_span(scene->mMeshes, scene->mNumMeshes);
                     auto v      = vertices(meshes);
@@ -198,7 +198,7 @@ namespace uc
                 {
                     using namespace gx::import::assimp;
                     auto scene = load_assimp_scene(file_name, import_flags);
-                    validate_scene<validation_option::meshes>(scene.get());
+                    validate_scene(scene.get(), validation_option::meshes );
 
                     auto meshes = gsl::make_span(scene->mMeshes, scene->mNumMeshes);
                     return faces(meshes);

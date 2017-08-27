@@ -40,12 +40,6 @@ namespace uc
                 using fbxscene_deleter = fbxsdk_object_deleter < FbxScene >;
                 using fbximporter_deleter = fbxsdk_object_deleter < FbxImporter >;
 
-                inline math::float4 to_float4(const fbxsdk::FbxVector4 v)
-                {
-                    const double* d = v;
-                    return math::set(static_cast<float>(d[0]), static_cast<float>(d[1]), static_cast<float>(d[2]), static_cast<float>(d[3]));
-                }
-
                 /// Do this setup for each node(FbxNode).
                 // We set up what we want to bake via ConvertPivotAnimationRecursive.
                 // When the destination is set to 0, baking will occur.
@@ -86,7 +80,7 @@ namespace uc
                         op(root);
                         auto children = root->GetChildCount();
 
-                        for (auto i = 0U; i < children; ++i)
+                        for (auto i = 0; i < children; ++i)
                         {
                             auto child = root->GetChild(i);
                             transform_node_recursive(child, op);

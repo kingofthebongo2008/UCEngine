@@ -24,8 +24,7 @@ namespace uc
                     animation = 2
                 };
 
-                template <uint32_t validation_mask>
-                inline void validate_scene(const aiScene* s)
+                inline void validate_scene(const aiScene* s, uint32_t validation_mask)
                 {
                     if ((validation_mask & validation_option::meshes) && !s->HasMeshes())
                     {

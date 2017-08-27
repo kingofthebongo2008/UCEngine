@@ -60,7 +60,7 @@ namespace uc
                     return r;
                 }
 
-                inline math::float4 convert_to_float4(fbxsdk::FbxVector4 v)
+                inline math::float4 to_float4(fbxsdk::FbxVector4 v)
                 {
                     float r[4];
                     const double* d = v;
@@ -71,7 +71,7 @@ namespace uc
                     return math::load4u(&r[0]);
                 }
 
-                inline math::float4 convert_to_float4(fbxsdk::FbxQuaternion v)
+                inline math::float4 to_float4(fbxsdk::FbxQuaternion v)
                 {
                     float r[4];
                     const double* d = v;
@@ -82,14 +82,14 @@ namespace uc
                     return math::load4u(&r[0]);
                 }
 
-                inline math::float4x4 convert_to_float4x4(const fbxsdk::FbxAMatrix v)
+                inline math::float4x4 to_float4x4(const fbxsdk::FbxAMatrix v)
                 {
                     math::float4 r[4];
 
-                    r[0] = convert_to_float4(v.GetRow(0));
-                    r[1] = convert_to_float4(v.GetRow(1));
-                    r[2] = convert_to_float4(v.GetRow(2));
-                    r[3] = convert_to_float4(v.GetRow(3));
+                    r[0] = to_float4(v.GetRow(0));
+                    r[1] = to_float4(v.GetRow(1));
+                    r[2] = to_float4(v.GetRow(2));
+                    r[3] = to_float4(v.GetRow(3));
 
                     return math::load44u(reinterpret_cast<const float*>(&r[0]));
                 }
@@ -98,29 +98,27 @@ namespace uc
                 {
                     geo::joint_transform r;
 
-                    r.m_rotation    = math::quaternion_normalize(convert_to_float4(m.GetUnnormalizedQ()));
-                    r.m_translation = convert_to_float4(m.GetT());
+                    r.m_rotation    = to_float4(m.GetQ());
+                    r.m_translation = to_float4(m.GetT());
 
                     return r;
                 }
-
                 inline geo::joint_transform_matrix joint_transform_matrix(const fbxsdk::FbxAMatrix& m)
                 {
                     geo::joint_transform_matrix r;
 
                     //move to row major
-                    r.m_transform = convert_to_float4x4(m);
+                    r.m_transform = to_float4x4(m);
                     return r;
                 }
 
-
-                inline fbxsdk::FbxAMatrix convert_transform_to_lhs(const fbxsdk::FbxAMatrix& m)
+                inline fbxsdk::FbxAMatrix transform_to_lhs(const fbxsdk::FbxAMatrix& m)
                 {
                     fbxsdk::FbxAMatrix r = m;
 
-                    auto rot = r.GetR();
-                    auto tr = r.GetT();
-                    auto s = r.GetS();
+                    auto rot    = r.GetR();
+                    auto tr     = r.GetT();
+                    auto s      = r.GetS();
 
                     r.SetT(fbxsdk::FbxVector4(0, 0, 0, 1));
 
@@ -152,8 +150,8 @@ namespace uc
 
                 inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
                 {
-                    std::vector<int32_t>                 parents;
-                    std::map<fbxsdk::FbxNode*, uint32_t> joint2index;
+                    std::vector<uint16_t>                parents;
+                    std::map<fbxsdk::FbxNode*, uint16_t> joint2index;
 
                     geo::skeleton_pose skeleton;
                     fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
@@ -172,7 +170,7 @@ namespace uc
                             fbxsdk::FbxAMatrix t3 = evaluator->GetNodeGlobalTransform(n);
                             links.push_back(t3);
 
-                            joint2index.insert(std::make_pair(n, i));
+                            joint2index.insert(std::make_pair(n, static_cast<uint16_t>(i)));
                         }
                     }
 
@@ -606,7 +604,7 @@ namespace uc
                         std::move(positions), 
                         std::move(uvs),
                         std::move(faces),
-                        get_materials(mesh_node, materials_indices.size()),
+                        get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())),
                         std::move(blend_weights),
                         std::move(blend_indices),
                         std::move(pose)

@@ -442,7 +442,7 @@ namespace uc
                 inline std::unique_ptr< gx::import::geo::skinned_mesh > create_skinned_mesh(const std::string& file_name, uint32_t import_flags = aiProcess_ImproveCacheLocality | aiProcess_ValidateDataStructure | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_FindInvalidData)
                 {
                     auto scene = load_assimp_scene(file_name, import_flags);
-                    validate_scene<validation_option::meshes>(scene.get());
+                    validate_scene(scene.get(), validation_option::meshes);
 
                     auto meshes = gsl::make_span(scene->mMeshes, scene->mNumMeshes);
                     auto v = vertices(meshes);

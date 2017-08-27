@@ -88,7 +88,7 @@ namespace uc
                 {
                     using namespace anm;
                     auto scene = load_assimp_scene(file_name, import_flags);
-                    validate_scene<validation_option::animation>(scene.get());
+                    validate_scene(scene.get(), validation_option::animation );
                     std::vector<joint_animations> r;
 
                     for (auto i = 0U; i < scene->mNumAnimations; ++i)
