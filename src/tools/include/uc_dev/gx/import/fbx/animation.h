@@ -6,6 +6,7 @@
 
 #include <uc_dev/gx/import/anm/animation.h>
 #include <uc_dev/gx/import/fbx/fbx_common.h>
+#include <uc_dev/gx/import/fbx/fbx_transform_helper.h>
 
 namespace uc
 {
@@ -241,7 +242,7 @@ namespace uc
                             fbxsdk::FbxAMatrix this_ = a.m_transforms[j];
                             fbxsdk::FbxAMatrix relative = parent.Inverse() * this_;
 
-                            joint_animations_relative[i].m_transforms.push_back(relative);
+                            joint_animations_relative[i].m_transforms.push_back(swap_y_z_matrix(relative, context.get()));
                             joint_animations_relative[i].m_transforms_time.push_back(a.m_transforms_time[j]);
                             joint_animations_relative[i].m_conjugate_quaternion.push_back(false);
                         }

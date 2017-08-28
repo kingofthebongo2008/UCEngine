@@ -6,6 +6,7 @@
 #include <uc_dev/gx/import/fbx/fbx_common_multi_material_mesh.h>
 
 #include <uc_dev/gx/import/fbx/fbx_helpers.h>
+#include <uc_dev/gx/import/fbx/fbx_transform_helper.h>
 #include <map>
 
 namespace uc
@@ -148,7 +149,7 @@ namespace uc
                     return r;
                 }
 
-                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
+                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh, const fbx_context* ctx)
                 {
                     std::vector<uint16_t>                parents;
                     std::map<fbxsdk::FbxNode*, uint16_t> joint2index;
@@ -206,9 +207,11 @@ namespace uc
 
                         this_ = links[i];
                         auto t4 = parent.Inverse() * this_;
+
+                        auto t5 = swap_y_z_matrix(t4, ctx );
                         
-                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t4);
-                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t4);
+                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t5);
+                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t5);
                     }
 
                     skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
@@ -499,7 +502,7 @@ namespace uc
                 }
 
                 //////////////////////
-                inline std::shared_ptr<geo::skinned_mesh> create_skinned_mesh_internal(const fbxsdk::FbxMesh* mesh)
+                inline std::shared_ptr<geo::skinned_mesh> create_skinned_mesh_internal(const fbxsdk::FbxMesh* mesh, const fbx_context* context)
                 {
                     const fbxsdk::FbxNode* mesh_node = mesh->GetNode();
 
@@ -597,7 +600,7 @@ namespace uc
                         }
                     }
 
-                    geo::skinned_mesh::skeleton_pose_t pose = get_skeleton_pose(mesh);
+                    geo::skinned_mesh::skeleton_pose_t pose = get_skeleton_pose(mesh, context);
 
                     return std::make_shared<geo::skinned_mesh>(
 
@@ -632,7 +635,7 @@ namespace uc
                         //skip meshes without skin and import only the first one
                         if (is_skinned_mesh(m) && multimeshes.empty())
                         {
-                            multimeshes.push_back(create_skinned_mesh_internal(m));
+                            multimeshes.push_back(create_skinned_mesh_internal(m, context.get()));
                             break;
                         }
                     }

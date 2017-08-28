@@ -527,6 +527,7 @@ namespace uc
                     std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     m_manager;
                     std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         m_scene;
                     std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   m_importer;
+                    bool                                                        m_swap_y_z;
                 };
 
                 inline std::unique_ptr<fbx_context> load_fbx_file(const std::string& file_name)
@@ -562,7 +563,7 @@ namespace uc
 
                     if (scene_axis_system != our_axis_system)
                     {
-                        our_axis_system.ConvertScene(scene.get());
+                       our_axis_system.ConvertScene(scene.get());
                     }
 
                     fbxsdk::FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
@@ -577,6 +578,10 @@ namespace uc
                     r->m_manager = std::move(manager);
                     r->m_scene = std::move(scene);
                     r->m_importer = std::move(importer);
+                    {
+                        int32_t sign;
+                        r->m_swap_y_z = scene_axis_system.GetUpVector(sign) == fbxsdk::FbxAxisSystem::eZAxis;
+                    }
                     return r;
                 }
             }
