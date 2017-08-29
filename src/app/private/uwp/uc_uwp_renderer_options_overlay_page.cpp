@@ -231,6 +231,8 @@ namespace uc
                 "Deer",
                 "Full Screen Color",
                 "Skeleton",
+                "Robot",
+                "Military Mechanic",
             };
 
             static gxu::world_id scene_id[] =
@@ -238,7 +240,9 @@ namespace uc
                 gxu::world_id::scene2,
                 gxu::world_id::scene3,
                 gxu::world_id::scene6,
-                gxu::world_id::scene4
+                gxu::world_id::scene4,
+                gxu::world_id::scene0,
+                gxu::world_id::scene1,
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

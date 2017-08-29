@@ -295,6 +295,7 @@ namespace uc
                             {
                                 //todo: check if this is working
                                 //rot.Conjugate();
+                                //rot = rot * -1.0;
                             }
 
                             anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(rot, transform_time);

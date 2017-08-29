@@ -2,6 +2,7 @@
 
 #include <uc_dev/gx/import/geo/indexed_mesh.h>
 #include <uc_dev/gx/import/fbx/fbx_common.h>
+#include <uc_dev/gx/import/fbx/fbx_common_transform.h>
 
 namespace uc
 {
@@ -34,7 +35,7 @@ namespace uc
 
                     assert(mesh->GetPolygonSize(0));
 
-                    return std::make_shared<geo::indexed_mesh>(get_positions(mesh), get_uvs(mesh), get_faces(mesh));
+                    return std::make_shared<geo::indexed_mesh>(get_positions(mesh, context.get()), get_uvs(mesh), get_faces(mesh));
                 }
             }
          }

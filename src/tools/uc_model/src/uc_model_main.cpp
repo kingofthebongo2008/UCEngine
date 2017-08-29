@@ -546,7 +546,7 @@ int32_t main(int32_t argc, const char* argv[])
                 std::experimental::filesystem::path path(input_model);
                 auto e = path.extension().wstring();
 
-                if (e == L".fbx" && false)
+                if (e == L".fbx")
                 {
                     convert_skinned_mesh_fbx(input_model, output_model, assimp_options, textures, texture_formats);
                 }

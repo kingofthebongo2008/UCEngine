@@ -7,6 +7,7 @@
 
 #include <uc_dev/gx/import/fbx/fbx_helpers.h>
 #include <uc_dev/gx/import/fbx/fbx_transform_helper.h>
+#include <uc_dev/gx/import/fbx/fbx_common_transform.h>
 #include <map>
 
 namespace uc
@@ -149,6 +150,64 @@ namespace uc
                     return r;
                 }
 
+                inline std::map<fbxsdk::FbxNode*, uint16_t> get_joint_indices(const fbxsdk::FbxNode* root)
+                {
+                    auto skeletal_nodes = get_skeleton_nodes(root);
+
+                    std::map<fbxsdk::FbxNode*, uint16_t> joint2index;
+
+                    {
+                        for (auto&& i = 0U; i < skeletal_nodes.size(); ++i)
+                        {
+                            auto n = skeletal_nodes[i];
+                            joint2index.insert(std::make_pair(n, static_cast<uint16_t>(i)));
+                        }
+                    }
+                    return joint2index;
+                }
+
+                inline std::vector<fbxsdk::FbxCluster*> get_joints_skinned(const fbxsdk::FbxMesh* mesh)
+                {
+                    std::vector<fbxsdk::FbxCluster*> joints;
+
+                    int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
+
+                    for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
+                    {
+                        fbxsdk::FbxSkin* skin = (fbxsdk::FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
+                        fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
+
+                        int jointsCount = skin->GetClusterCount();
+
+                        joints.resize(jointsCount);
+
+                        for (int jointIndex = 0; jointIndex < jointsCount; jointIndex++)
+                        {
+                            fbxsdk::FbxCluster* joint = skin->GetCluster(jointIndex);
+
+                            fbxsdk::FbxCluster::ELinkMode clusterMode = joint->GetLinkMode();
+                            assert(clusterMode == clusterMode0);// "Different cluster modes in different joints";
+                            joints[jointIndex] = joint;
+                        }
+
+                        assert((clusterMode0 == fbxsdk::FbxCluster::eNormalize || clusterMode0 == fbxsdk::FbxCluster::eTotalOne));// , "Unsupported cluster mode");
+                    }
+
+                    return joints;
+                }
+
+                inline std::map<fbxsdk::FbxNode*, fbxsdk::FbxCluster*> get_cluster_nodes(std::vector<fbxsdk::FbxCluster*> clusters)
+                {
+                    std::map<fbxsdk::FbxNode*, fbxsdk::FbxCluster*> r;
+
+                    for (auto&& i : clusters)
+                    {
+                        r.insert(std::make_pair(i->GetLink(), i));
+                    }
+
+                    return r;
+                }
+
                 inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh, const fbx_context* ctx)
                 {
                     std::vector<uint16_t>                parents;
@@ -163,8 +222,6 @@ namespace uc
                     std::vector<fbxsdk::FbxAMatrix> links;
                     {
                         skeleton.m_joint_local_pose.resize(skeletal_nodes.size());
-                        fbxsdk::FbxTime time;
-
                         for (auto&& i = 0U; i < skeletal_nodes.size(); ++i)
                         {
                             auto n = skeletal_nodes[i];
@@ -207,15 +264,17 @@ namespace uc
 
                         this_ = links[i];
                         auto t4 = parent.Inverse() * this_;
-
                         auto t5 = swap_y_z_matrix(t4, ctx );
-                        
                         skeleton.m_joint_local_pose[i].m_transform = joint_transform(t5);
                         skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t5);
                     }
 
                     skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
 
+                    auto clusters = get_joints_skinned(mesh);
+                    auto skinned_joints = get_cluster_nodes(clusters);
+
+                    //fill up the inverse bind pose
                     for (auto i = 0U; i < skeletal_nodes.size(); ++i)
                     {
                         fbxsdk::FbxAMatrix parent;
@@ -225,8 +284,30 @@ namespace uc
 
                         skeleton.m_skeleton.m_joints[i].m_name = skeletal_nodes[i]->GetName();
                         skeleton.m_skeleton.m_joints[i].m_parent_index = parents[i];
-                        skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose     = joint_transform(this_);
-                        skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2    = joint_transform_matrix(this_);
+
+                        auto skinned_joint = skinned_joints.find(skeletal_nodes[i]);
+
+                        //if the joint participates in the skinning
+                        if (skinned_joint != skinned_joints.end())
+                        {
+                            fbxsdk::FbxAMatrix matXBindPose;
+                            skinned_joint->second->GetTransformLinkMatrix(matXBindPose);               // The transformation of the cluster(joint) at binding time from joint space to world space
+                            fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
+                            skinned_joint->second->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
+
+                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose *geometry;
+
+                            auto t5 = swap_y_z_matrix(matBindPose, ctx);
+
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5);
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5);
+                        }
+                        else
+                        {
+                            auto t5 = swap_y_z_matrix(this_, ctx);
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5);
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5);
+                        }
                     }
 
                     return skeleton;
@@ -376,6 +457,8 @@ namespace uc
                     std::vector<joint_influence> influences;
                     influences.resize(mesh->GetControlPointsCount());
 
+                    auto joint_indices = get_joint_indices(mesh->GetScene()->GetRootNode());
+
                     int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
@@ -399,7 +482,7 @@ namespace uc
                             {
                                 int controlPointIndex = influenceIndices[influenceIndex];
                                 assert(controlPointIndex < (int)influences.size());//"Invalid skin control point index"
-                                influences[controlPointIndex].m_index.push_back(jointIndex);
+                                influences[controlPointIndex].m_index.push_back(joint_indices.find(joint->GetLink())->second);
                                 influences[controlPointIndex].m_weight.push_back((float)influenceWeights[influenceIndex]);
                             }
                         }
@@ -437,6 +520,8 @@ namespace uc
                     std::vector<joint_influence> influences;
                     influences.resize(mesh->GetControlPointsCount());
 
+                    auto joint_indices = get_joint_indices(mesh->GetScene()->GetRootNode());
+
                     int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
@@ -463,7 +548,7 @@ namespace uc
                             {
                                 int controlPointIndex = influenceIndices[influenceIndex];
                                 assert(controlPointIndex < (int)influences.size());//"Invalid skin control point index"
-                                influences[controlPointIndex].m_index.push_back(jointIndex);
+                                influences[controlPointIndex].m_index.push_back(joint_indices.find(joint->GetLink())->second);
                                 influences[controlPointIndex].m_weight.push_back((float)influenceWeights[influenceIndex]);
                             }
                         }
@@ -575,7 +660,7 @@ namespace uc
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
-                        positions[i] = get_positions(mesh, materials_indices[i]);
+                        positions[i] = get_positions(mesh, materials_indices[i], context);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
                         blend_weights[i] = get_blend_weights(mesh, materials_indices[i]);
                         blend_indices[i] = get_blend_indices(mesh, materials_indices[i]);

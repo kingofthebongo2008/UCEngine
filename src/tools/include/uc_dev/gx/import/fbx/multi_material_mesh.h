@@ -13,7 +13,7 @@ namespace uc
             namespace fbx
             {
                 //////////////////////
-                inline std::shared_ptr<geo::multi_material_mesh> create_multi_material_mesh_internal(const fbxsdk::FbxMesh* mesh)
+                inline std::shared_ptr<geo::multi_material_mesh> create_multi_material_mesh_internal(const fbxsdk::FbxMesh* mesh, const fbx_context* context)
                 {
                     const fbxsdk::FbxNode* mesh_node = mesh->GetNode();
 
@@ -82,7 +82,7 @@ namespace uc
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
-                        positions[i] = get_positions(mesh, materials_indices[i]);
+                        positions[i] = get_positions(mesh, materials_indices[i], context);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
                     }
 
@@ -126,7 +126,7 @@ namespace uc
                     std::vector<  std::shared_ptr<geo::multi_material_mesh> > multimeshes;
                     for (auto& m : meshes)
                     {
-                        multimeshes.push_back(create_multi_material_mesh_internal(m));
+                        multimeshes.push_back(create_multi_material_mesh_internal(m, context.get()));
                     }
 
                     //merge all multimaterial meshes into one
