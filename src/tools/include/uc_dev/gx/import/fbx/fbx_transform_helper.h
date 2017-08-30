@@ -27,6 +27,18 @@ namespace uc
                     }
                 }
 
+                inline math::float4 swap_y_z_vector(math::afloat4 v, const fbx_context* c)
+                {
+                    if (c->m_swap_y_z)
+                    {
+                        return swap_y_z_vector(v);
+                    }
+                    else
+                    {
+                        return v;
+                    }
+                }
+
                 inline fbxsdk::FbxVector4 swap_y_z_point(fbxsdk::FbxVector4 v, const fbx_context* c)
                 {
                     if (c->m_swap_y_z)
@@ -39,7 +51,31 @@ namespace uc
                     }
                 }
 
+                inline math::float4 swap_y_z_point(math::afloat4 v, const fbx_context* c)
+                {
+                    if (c->m_swap_y_z)
+                    {
+                        return swap_y_z_point(v);
+                    }
+                    else
+                    {
+                        return v;
+                    }
+                }
+
                 inline fbxsdk::FbxAMatrix swap_y_z_matrix( const fbxsdk::FbxAMatrix v, const fbx_context* c )
+                {
+                    if (c->m_swap_y_z)
+                    {
+                        return swap_y_z_matrix(v);
+                    }
+                    else
+                    {
+                        return v;
+                    }
+                }
+
+                inline math::float4x4 swap_y_z_matrix(math::afloat4x4 v, const fbx_context* c)
                 {
                     if (c->m_swap_y_z)
                     {

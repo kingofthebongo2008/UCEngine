@@ -76,6 +76,10 @@
     <ClInclude Include="..\..\include\uc_dev\gx\import\geo\merge_attributes_skinned_mesh.h" />
     <ClInclude Include="..\..\include\uc_dev\gx\import\geo\multi_material_mesh.h" />
     <ClInclude Include="..\..\include\uc_dev\gx\import\geo\skinned_mesh.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_common.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_common_transform.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_transform.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_transform_helper.h" />
     <ClInclude Include="..\src\pch.h" />
     <ClInclude Include="..\src\targetver.h" />
     <ClInclude Include="..\src\uc_model_command_line.h" />

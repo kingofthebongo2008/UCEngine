@@ -295,12 +295,12 @@ namespace uc
                             fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
                             skinned_joint->second->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
 
-                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose *geometry;
+                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose;// *geometry;
 
                             auto t5 = swap_y_z_matrix(matBindPose, ctx);
 
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5);
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5);
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5.Inverse());
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5.Inverse());
                         }
                         else
                         {

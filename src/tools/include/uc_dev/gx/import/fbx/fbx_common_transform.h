@@ -7,6 +7,7 @@
 
 #include <uc_dev/gx/import/fbx/fbx_common.h>
 #include <uc_dev/gx/import/fbx/fbx_transform.h>
+#include <uc_dev/gx/import/fbx/fbx_transform_helper.h>
 
 namespace uc
 {
@@ -190,9 +191,9 @@ namespace uc
                             math::float4  vr1 = math::set(static_cast<float>(v1[0]), static_cast<float>(v1[1]), static_cast<float>(v1[2]), 1.0f);
                             math::float4  vr2 = math::set(static_cast<float>(v2[0]), static_cast<float>(v2[1]), static_cast<float>(v2[2]), 1.0f);
 
-                            math::float4  vq0 = math::mul(vr0, node_transform);
-                            math::float4  vq1 = math::mul(vr1, node_transform);
-                            math::float4  vq2 = math::mul(vr2, node_transform);
+                            math::float4  vq0 = swap_y_z_point(math::mul(vr0, node_transform), ctx);
+                            math::float4  vq1 = swap_y_z_point(math::mul(vr1, node_transform), ctx);
+                            math::float4  vq2 = swap_y_z_point(math::mul(vr2, node_transform), ctx);
 
                             geo::indexed_mesh::position_t vp0;
                             geo::indexed_mesh::position_t vp1;
