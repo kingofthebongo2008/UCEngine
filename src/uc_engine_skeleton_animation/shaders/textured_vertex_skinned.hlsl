@@ -66,7 +66,7 @@ interpolants main(input i)
     float4     skinned_position = skin_position(position, i.weights, i.indices, m_joints_palette);
     
     r.uv       = i.uv;
-    r.position = project_vertex( float4(skinned_position.xzy, 1 ), m_world, m_view, m_perspective );
+    r.position = project_vertex( float4(skinned_position.xyz, 1 ), m_world, m_view, m_perspective );
 
     return r;
 }
