@@ -37,7 +37,7 @@ namespace uc
                         auto m3 = negate_z();
                         auto m4 = math::identity_matrix();
 
-                        return transform_transform(transform_transform(transform_transform(m, m3), m2), m1);
+                        return transform_transform(transform_transform(transform_transform(m, m0), m3), m4);
                     }
                 }
 
@@ -59,7 +59,7 @@ namespace uc
                         auto m2 = negate_y();
                         auto m3 = negate_z();
                         auto m4 = math::identity_matrix();
-                        return transform_vector(transform_vector(transform_vector(m, m3), m2), m1);
+                        return transform_vector(transform_vector(transform_vector(m, m0), m3), m4);
                     }
                 }
 
@@ -72,7 +72,7 @@ namespace uc
                     }
                     else
                     {
-                        std::array<int32_t, 3> r = { 0, 1, 2 };
+                        std::array<int32_t, 3> r = { 0, 2, 1 };
                         return r;
                     }
                 }
