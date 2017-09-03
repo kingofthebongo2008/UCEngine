@@ -658,3 +658,15 @@ namespace uc
     }
 }
 
+inline bool operator == (uc::math::afloat4 a, uc::math::afloat4 b)
+{
+    using namespace uc::math;
+    return get_x(compare_eq(a, b)) != 0;
+}
+
+inline bool operator != (uc::math::afloat4 a, uc::math::afloat4 b)
+{
+    using namespace uc::math;
+    return get_x(compare_eq(a, b)) == 0;
+}
+
