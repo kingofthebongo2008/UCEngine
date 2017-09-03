@@ -44,6 +44,13 @@ namespace uc
             return select( m.r[3], zero(), mask_w() );
         }
 
+        inline float4x4 UC_MATH_CALL rotation(afloat4x4 m)
+        {
+            float4x4 r = m;
+            r.r[3] = identity_r3();
+            return r;
+        }
+
         inline float4x4 UC_MATH_CALL translation_x(float v)
         {
             return translation(v, 0.0f, 0.0f);
@@ -919,7 +926,6 @@ namespace uc
         {
             store3u(address, point);
         }
-
     }
 }
 
