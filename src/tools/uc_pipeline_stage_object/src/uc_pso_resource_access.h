@@ -20,7 +20,6 @@ namespace uc
                 if (!r)
                 {
                     raise_error();
-                    return nullptr;
                 }
                 else
                 {
@@ -30,7 +29,6 @@ namespace uc
             else
             {
                 raise_error();
-                return nullptr;
             }
         }
 
