@@ -81,27 +81,6 @@ namespace uc
                     return r;
                 }
 
-                inline fbxsdk::FbxAMatrix transform_to_lhs(const fbxsdk::FbxAMatrix& m)
-                {
-                    fbxsdk::FbxAMatrix r = m;
-
-                    auto rot    = r.GetR();
-                    auto tr     = r.GetT();
-                    auto s      = r.GetS();
-
-                    r.SetT(fbxsdk::FbxVector4(0, 0, 0, 1));
-
-                    fbxsdk::FbxAMatrix sy;
-
-                    sy.SetRow(0, fbxsdk::FbxVector4(1, 0, 0, 1));
-                    sy.SetRow(1, fbxsdk::FbxVector4(0,-1, 0, 1));
-                    sy.SetRow(2, fbxsdk::FbxVector4(0, 0, 1, 1));
-                    sy.SetRow(3, fbxsdk::FbxVector4(0, 0, 0, 1));
-
-                    r = sy * m * sy;
-                    return r;
-                }
-
                 inline std::vector<fbxsdk::FbxNode*> get_skeleton_nodes(const fbxsdk::FbxNode* n)
                 {
                     std::vector<fbxsdk::FbxNode*> r;
