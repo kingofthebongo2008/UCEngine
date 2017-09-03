@@ -199,7 +199,8 @@ namespace uc
                     std::unique_ptr<fbxsdk::FbxManager, fbxmanager_deleter>     m_manager;
                     std::unique_ptr<fbxsdk::FbxScene, fbxscene_deleter>         m_scene;
                     std::unique_ptr<fbxsdk::FbxImporter, fbximporter_deleter>   m_importer;
-                    bool                                                        m_swap_y_z;
+                    bool                                                        m_coordinate_system_swap_y_z;
+                    bool                                                        m_invert_handness;
                 };
 
                 inline std::unique_ptr<fbx_context> load_fbx_file(const std::string& file_name)
@@ -231,11 +232,11 @@ namespace uc
                     geometryConverter.Triangulate(scene.get(), true);
 
                     fbxsdk::FbxAxisSystem scene_axis_system = scene->GetGlobalSettings().GetAxisSystem();
-                    fbxsdk::FbxAxisSystem our_axis_system   = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eMayaYUp);
+                    fbxsdk::FbxAxisSystem our_axis_system   = fbxsdk::FbxAxisSystem(fbxsdk::FbxAxisSystem::EPreDefinedAxisSystem::eDirectX);
 
                     if (scene_axis_system != our_axis_system)
                     {
-                      // our_axis_system.ConvertScene(scene.get());
+                       //our_axis_system.ConvertScene(scene.get());
                     }
 
                     fbxsdk::FbxSystemUnit units = scene->GetGlobalSettings().GetSystemUnit();
@@ -252,7 +253,8 @@ namespace uc
                     r->m_importer = std::move(importer);
                     {
                         int32_t sign;
-                        r->m_swap_y_z = false;// scene_axis_system.GetUpVector(sign) == fbxsdk::FbxAxisSystem::eZAxis;
+                        r->m_coordinate_system_swap_y_z = scene_axis_system.GetUpVector(sign) == fbxsdk::FbxAxisSystem::eZAxis;
+                        r->m_invert_handness            = true; //todo: from maya, always transform
                     }
                     return r;
                 }

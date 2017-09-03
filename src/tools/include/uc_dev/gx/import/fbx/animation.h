@@ -94,7 +94,7 @@ namespace uc
                     return r;
                 }
 
-                anm::joint_rotation_key convert_to_joint_rotation_key(const fbxsdk::FbxQuaternion q, double time)
+                inline anm::joint_rotation_key convert_to_joint_rotation_key(const fbxsdk::FbxQuaternion q, double time)
                 {
                     anm::joint_rotation_key r;
                     r.m_time = time;
@@ -111,7 +111,15 @@ namespace uc
                     return r;
                 }
 
-                anm::joint_translation_key convert_to_joint_translation_key(const fbxsdk::FbxVector4 q, double time)
+                inline anm::joint_rotation_key convert_to_joint_rotation_key(math::afloat4 q, double time)
+                {
+                    anm::joint_rotation_key r;
+                    r.m_time = time;
+                    r.m_transform = q;
+                    return r;
+                }
+
+                inline anm::joint_translation_key convert_to_joint_translation_key(const fbxsdk::FbxVector4 q, double time)
                 {
                     anm::joint_translation_key r;
                     r.m_time = time;
@@ -127,6 +135,15 @@ namespace uc
                     r.m_transform = math::load4u(&temp[0]);
                     return r;
                 }
+
+                inline anm::joint_translation_key convert_to_joint_translation_key(math::afloat4 q, double time)
+                {
+                    anm::joint_translation_key r;
+                    r.m_time = time;
+                    r.m_transform = q;
+                    return r;
+                }
+
 
                 inline std::vector<fbxsdk::FbxNode*> get_meshes(const fbxsdk::FbxNode* n)
                 {
@@ -242,7 +259,7 @@ namespace uc
                             fbxsdk::FbxAMatrix this_ = a.m_transforms[j];
                             fbxsdk::FbxAMatrix relative = parent.Inverse() * this_;
 
-                            joint_animations_relative[i].m_transforms.push_back(swap_y_z_matrix(relative, context.get()));
+                            joint_animations_relative[i].m_transforms.push_back(relative);
                             joint_animations_relative[i].m_transforms_time.push_back(a.m_transforms_time[j]);
                             joint_animations_relative[i].m_conjugate_quaternion.push_back(false);
                         }
@@ -291,6 +308,13 @@ namespace uc
                             auto trans                      = transform.GetT();
                             auto rot                        = transform.GetQ();
 
+                            auto t                          = to_float4x4(transform);
+                            
+                            auto t0                         = transform_from_dcc(t, context.get());
+                            auto rot0                       = math::rotation(t0);
+                            auto trans0                     = math::translation(t0);
+                            
+
                             if (joint_animations_relative[i].m_conjugate_quaternion[j])
                             {
                                 //todo: check if this is working
@@ -298,8 +322,11 @@ namespace uc
                                 //rot = rot * -1.0;
                             }
 
-                            anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(rot, transform_time);
-                            anm::joint_translation_key  trans_key   = convert_to_joint_translation_key(trans, transform_time);
+                            //anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(rot, transform_time);
+                            //anm::joint_translation_key  trans_key   = convert_to_joint_translation_key(trans, transform_time);
+
+                            anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(math::quaternion_normalize(math::matrix_2_quaternion(rot0)), transform_time);
+                            anm::joint_translation_key  trans_key   = convert_to_joint_translation_key(trans0, transform_time);
 
                             a.m_rotation_keys.push_back(rot_key);
                             a.m_translation_keys.push_back(trans_key);

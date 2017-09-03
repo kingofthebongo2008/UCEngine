@@ -96,7 +96,7 @@ namespace uc
                     }
                 };
 
-                inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh)
+                inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh, const std::array<int32_t, 3> & p)
                 {
                     auto triangle_count = mesh->GetPolygonCount();
                     geo::indexed_mesh::faces_t faces;
@@ -107,7 +107,7 @@ namespace uc
                     for (auto triangle = 0U; triangle < static_cast<uint32_t>(triangle_count); ++triangle)
                     {
                         //reorient triangles ccw, since they come cw from fbx
-                        geo::indexed_mesh::face_t face = { triangle * 3, triangle * 3 + 2, triangle * 3 + 1 };
+                        geo::indexed_mesh::face_t face = { triangle * 3 + p[0] , triangle * 3 + p[1], triangle * 3 + p[2] };
                         faces.push_back(face);
                     }
 
@@ -115,7 +115,7 @@ namespace uc
                 }
 
                 //returns all positions of an fbx sdk mesh
-                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh, const fbx_context* ctx)
+                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh)
                 {
                     auto points = mesh->GetControlPoints();
                     auto indices = mesh->GetPolygonVertices();
@@ -163,7 +163,7 @@ namespace uc
                 }
 
                 //returns all positions, which match triangle_indices;
-                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices,const fbx_context* ctx)
+                inline geo::indexed_mesh::positions_t get_positions(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
                     auto points = mesh->GetControlPoints();
                     auto indices = mesh->GetPolygonVertices();
@@ -191,9 +191,9 @@ namespace uc
                             math::float4  vr1 = math::set(static_cast<float>(v1[0]), static_cast<float>(v1[1]), static_cast<float>(v1[2]), 1.0f);
                             math::float4  vr2 = math::set(static_cast<float>(v2[0]), static_cast<float>(v2[1]), static_cast<float>(v2[2]), 1.0f);
 
-                            math::float4  vq0 = swap_y_z_point(math::mul(vr0, node_transform), ctx);
-                            math::float4  vq1 = swap_y_z_point(math::mul(vr1, node_transform), ctx);
-                            math::float4  vq2 = swap_y_z_point(math::mul(vr2, node_transform), ctx);
+                            math::float4  vq0 = math::mul(vr0, node_transform);
+                            math::float4  vq1 = math::mul(vr1, node_transform);
+                            math::float4  vq2 = math::mul(vr2, node_transform);
 
                             geo::indexed_mesh::position_t vp0;
                             geo::indexed_mesh::position_t vp1;

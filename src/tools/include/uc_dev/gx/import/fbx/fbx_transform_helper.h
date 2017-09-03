@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include <array>
 #include <uc_dev/gx/error.h>
 #include <uc_dev/math/math.h>
 
@@ -15,77 +16,45 @@ namespace uc
         {
             namespace fbx
             {
-                inline fbxsdk::FbxVector4 swap_y_z_vector(fbxsdk::FbxVector4 v, const fbx_context* c )
+                math::float4x4 transform_from_maya(math::afloat4x4 m)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_vector(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    return m;
                 }
 
-                inline math::float4 swap_y_z_vector(math::afloat4 v, const fbx_context* c)
+                math::float4 transform_from_maya(math::afloat4 m)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_vector(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    return m;
                 }
 
-                inline fbxsdk::FbxVector4 swap_y_z_point(fbxsdk::FbxVector4 v, const fbx_context* c)
+                math::float4x4 transform_from_max(math::afloat4x4 m)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_point(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    return m;
                 }
 
-                inline math::float4 swap_y_z_point(math::afloat4 v, const fbx_context* c)
+                math::float4 transform_from_max(math::afloat4 m)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_point(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    return m;
                 }
 
-                inline fbxsdk::FbxAMatrix swap_y_z_matrix( const fbxsdk::FbxAMatrix v, const fbx_context* c )
+                math::float4x4 transform_from_dcc(math::afloat4x4 m, const fbx_context* ctx)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_matrix(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    ctx;
+                    return m;
                 }
 
-                inline math::float4x4 swap_y_z_matrix(math::afloat4x4 v, const fbx_context* c)
+                math::float4 transform_from_dcc(math::afloat4 m, const fbx_context* ctx)
                 {
-                    if (c->m_swap_y_z)
-                    {
-                        return swap_y_z_matrix(v);
-                    }
-                    else
-                    {
-                        return v;
-                    }
+                    ctx;
+                    return m;
                 }
+
+                std::array<int32_t, 3> triangle_permuation(const fbx_context* ctx)
+                {
+                    ctx;
+                    std::array<int32_t, 3> r = { 0,1,2 };
+                    return r;
+                }
+
             }
         }
     }

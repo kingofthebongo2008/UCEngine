@@ -3,6 +3,9 @@
 #include <uc_dev/gx/import/geo/indexed_mesh.h>
 #include <uc_dev/gx/import/fbx/fbx_common.h>
 #include <uc_dev/gx/import/fbx/fbx_common_transform.h>
+#include <uc_dev/gx/import/fbx/fbx_common_transform_dcc.h>
+
+
 
 namespace uc
 {
@@ -12,6 +15,12 @@ namespace uc
         {
             namespace fbx
             {
+                //////////////////////
+                inline  geo::indexed_mesh::positions_t  transform_dcc_positions(const geo::indexed_mesh::positions_t& positions, const fbx_context* ctx)
+                {
+                    ctx;
+                    return positions;
+                }
 
                 inline std::shared_ptr<geo::indexed_mesh> create_mesh(const std::string& file_name)
                 {
@@ -35,7 +44,9 @@ namespace uc
 
                     assert(mesh->GetPolygonSize(0));
 
-                    return std::make_shared<geo::indexed_mesh>(get_positions(mesh, context.get()), get_uvs(mesh), get_faces(mesh));
+                    auto p = triangle_permuation(context.get());
+
+                    return std::make_shared<geo::indexed_mesh>(transform_dcc_positions(get_positions(mesh), context.get()), get_uvs(mesh), get_faces(mesh, p));
                 }
             }
          }

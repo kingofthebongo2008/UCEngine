@@ -8,6 +8,7 @@
 #include <uc_dev/gx/import/fbx/fbx_helpers.h>
 #include <uc_dev/gx/import/fbx/fbx_transform_helper.h>
 #include <uc_dev/gx/import/fbx/fbx_common_transform.h>
+#include <uc_dev/gx/import/fbx/fbx_common_transform_dcc.h>
 #include <map>
 
 namespace uc
@@ -60,40 +61,6 @@ namespace uc
                     }
 
                     return r;
-                }
-
-                inline math::float4 to_float4(fbxsdk::FbxVector4 v)
-                {
-                    float r[4];
-                    const double* d = v;
-                    r[0] = static_cast<float>(d[0]);
-                    r[1] = static_cast<float>(d[1]);
-                    r[2] = static_cast<float>(d[2]);
-                    r[3] = static_cast<float>(d[3]);
-                    return math::load4u(&r[0]);
-                }
-
-                inline math::float4 to_float4(fbxsdk::FbxQuaternion v)
-                {
-                    float r[4];
-                    const double* d = v;
-                    r[0] = static_cast<float>(d[0]);
-                    r[1] = static_cast<float>(d[1]);
-                    r[2] = static_cast<float>(d[2]);
-                    r[3] = static_cast<float>(d[3]);
-                    return math::load4u(&r[0]);
-                }
-
-                inline math::float4x4 to_float4x4(const fbxsdk::FbxAMatrix v)
-                {
-                    math::float4 r[4];
-
-                    r[0] = to_float4(v.GetRow(0));
-                    r[1] = to_float4(v.GetRow(1));
-                    r[2] = to_float4(v.GetRow(2));
-                    r[3] = to_float4(v.GetRow(3));
-
-                    return math::load44u(reinterpret_cast<const float*>(&r[0]));
                 }
 
                 inline geo::joint_transform joint_transform(const fbxsdk::FbxAMatrix& m)
@@ -175,7 +142,6 @@ namespace uc
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
                         fbxsdk::FbxSkin* skin = (fbxsdk::FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
-                        fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
 
                         int jointsCount = skin->GetClusterCount();
 
@@ -184,13 +150,8 @@ namespace uc
                         for (int jointIndex = 0; jointIndex < jointsCount; jointIndex++)
                         {
                             fbxsdk::FbxCluster* joint = skin->GetCluster(jointIndex);
-
-                            fbxsdk::FbxCluster::ELinkMode clusterMode = joint->GetLinkMode();
-                            assert(clusterMode == clusterMode0);// "Different cluster modes in different joints";
                             joints[jointIndex] = joint;
                         }
-
-                        assert((clusterMode0 == fbxsdk::FbxCluster::eNormalize || clusterMode0 == fbxsdk::FbxCluster::eTotalOne));// , "Unsupported cluster mode");
                     }
 
                     return joints;
@@ -208,13 +169,12 @@ namespace uc
                     return r;
                 }
 
-                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh, const fbx_context* ctx)
+                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
                 {
                     std::vector<uint16_t>                parents;
                     std::map<fbxsdk::FbxNode*, uint16_t> joint2index;
 
                     geo::skeleton_pose skeleton;
-                    fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
 
                     auto evaluator              = mesh->GetScene()->GetAnimationEvaluator();
                     auto skeletal_nodes         = get_skeleton_nodes(mesh->GetScene()->GetRootNode());
@@ -264,15 +224,16 @@ namespace uc
 
                         this_ = links[i];
                         auto t4 = parent.Inverse() * this_;
-                        auto t5 = swap_y_z_matrix(t4, ctx );
+                        auto t5 = t4;
                         skeleton.m_joint_local_pose[i].m_transform = joint_transform(t5);
                         skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t5);
                     }
 
                     skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
 
-                    auto clusters = get_joints_skinned(mesh);
+                    auto clusters       = get_joints_skinned(mesh);
                     auto skinned_joints = get_cluster_nodes(clusters);
+                    auto geometry       = get_geometry(mesh->GetNode());
 
                     //fill up the inverse bind pose
                     for (auto i = 0U; i < skeletal_nodes.size(); ++i)
@@ -290,21 +251,21 @@ namespace uc
                         //if the joint participates in the skinning
                         if (skinned_joint != skinned_joints.end())
                         {
-                            fbxsdk::FbxAMatrix matXBindPose;
-                            skinned_joint->second->GetTransformLinkMatrix(matXBindPose);               // The transformation of the cluster(joint) at binding time from joint space to world space
-                            fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
-                            skinned_joint->second->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
+                            fbxsdk::FbxAMatrix init_bind_pose_joint;
+                            skinned_joint->second->GetTransformLinkMatrix(init_bind_pose_joint);               // The transformation of the cluster(joint) at binding time from joint space to world space
+                            fbxsdk::FbxAMatrix init_reference_global_position;
+                            skinned_joint->second->GetTransformMatrix(init_reference_global_position);          // The transformation of the mesh at binding time
 
-                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose;// *geometry;
+                            fbxsdk::FbxAMatrix mat_bind_pose_init = init_reference_global_position.Inverse() * init_bind_pose_joint * geometry;
 
-                            auto t5 = swap_y_z_matrix(matBindPose, ctx);
+                            auto t5 = mat_bind_pose_init;
 
                             skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5.Inverse());
                             skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5.Inverse());
                         }
                         else
                         {
-                            auto t5 = swap_y_z_matrix(this_, ctx);
+                            auto t5 = this_;
                             skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5);
                             skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5);
                         }
@@ -312,144 +273,6 @@ namespace uc
 
                     return skeleton;
                 }
-
-
-                /*
-                inline geo::skeleton_pose get_skeleton_pose(const fbxsdk::FbxMesh* mesh)
-                {
-                    std::vector<int32_t>               parents;
-                    std::vector<fbxsdk::FbxCluster*>   joints;
-                    std::vector<fbxsdk::FbxAMatrix>    joints_matrices;
-
-                    int skinCount = mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin);
-
-                    for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
-                    {
-                        fbxsdk::FbxSkin* skin = (fbxsdk::FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
-                        fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
-
-                        int jointsCount = skin->GetClusterCount();
-
-                        joints.resize(jointsCount);
-
-                        for (int jointIndex = 0; jointIndex < jointsCount; jointIndex++)
-                        {
-                            fbxsdk::FbxCluster* joint = skin->GetCluster(jointIndex);
-
-                            fbxsdk::FbxCluster::ELinkMode clusterMode = joint->GetLinkMode();
-                            assert(clusterMode == clusterMode0);// "Different cluster modes in different joints";
-                            joints[jointIndex] = joint;
-                        }
-
-                        assert((clusterMode0 == fbxsdk::FbxCluster::eNormalize || clusterMode0 == fbxsdk::FbxCluster::eTotalOne));// , "Unsupported cluster mode");
-                    }
-
-                    geo::skeleton_pose skeleton;
-                    fbxsdk::FbxAMatrix geometry = get_geometry(mesh->GetNode());
-
-                    auto evaluator = mesh->GetScene()->GetAnimationEvaluator();
-
-                    auto scene_skeletal_nodes = get_skeleton_nodes(mesh->GetScene()->GetRootNode());
-
-                    std::vector<fbxsdk::FbxAMatrix> links;
-                    {
-                        skeleton.m_joint_local_pose.resize(joints.size());
-                        fbxsdk::FbxTime time;
-
-                        for (auto&& i = 0U; i < joints.size(); ++i)
-                        {
-                            fbxsdk::FbxCluster* joint = joints[i];
-
-                            fbxsdk::FbxAMatrix link_m;
-                            joint->GetTransformLinkMatrix(link_m);
-
-                            fbxsdk::FbxAMatrix transform_m;
-                            joint->GetTransformMatrix(transform_m);
-
-                            fbxsdk::FbxAMatrix t3 = evaluator->GetNodeGlobalTransform(joint->GetLink());
-
-                            //assert(link_m == t3);
-
-                            fbxsdk::FbxAMatrix t4 = link_m;
-                            
-                            links.push_back(t4);
-                        }
-                    }
-
-                    {
-                        skeleton.m_skeleton.m_joints.resize(joints.size());
-                        auto&& sjoints = skeleton.m_skeleton.m_joints;
-
-                        for (auto&& i = 0U; i < joints.size(); ++i)
-                        {
-                            fbxsdk::FbxAMatrix matXBindPose;
-                            joints[i]->GetTransformLinkMatrix(matXBindPose);               // The transformation of the cluster(joint) at binding time from joint space to world space
-                            fbxsdk::FbxAMatrix matReferenceGlobalInitPosition;
-                            joints[i]->GetTransformMatrix(matReferenceGlobalInitPosition); // The transformation of the mesh at binding time
-
-                            fbxsdk::FbxAMatrix matBindPose = matReferenceGlobalInitPosition.Inverse() * matXBindPose * geometry;
-
-                            //add geometry here
-                            sjoints[i].m_name               = joints[i]->GetLink()->GetName();
-                            sjoints[i].m_inverse_bind_pose  = joint_transform(matBindPose.Inverse());
-                            sjoints[i].m_inverse_bind_pose2 = joint_transform_matrix(matBindPose.Inverse());
-                        }
-                    }
-
-                    std::map< std::string, uint16_t>    joint2index;
-                    std::map< std::string, std::string> joint2parent;
-                    {
-                        skeleton.m_joint_local_pose.resize(joints.size());
-                        for (auto&& i = 0U; i < joints.size(); ++i)
-                        {
-                            auto&& joint = joints[i];
-
-                            joint2index.insert(std::make_pair(joint->GetLink()->GetName(), i));
-
-                            if (joint->GetLink()->GetParent())
-                            {
-                                joint2parent.insert(std::make_pair(joint->GetLink()->GetName(), joint->GetLink()->GetParent()->GetName() ));
-                            }
-                        }
-                    }
-
-                    //build up joint hierarchy, root node has parent 0xffff
-                    for (auto&& i : skeleton.m_skeleton.m_joints)
-                    {
-                        const auto&& parent = joint2parent.find(i.m_name);
-                        const auto&& parent_index = joint2index.find(parent->second);
-                        if ( parent_index  != joint2index.end())
-                        {
-                            i.m_parent_index = parent_index->second;
-                        }
-                        else
-                        {
-                            i.m_parent_index = 0xFFFF;
-                        }
-                        
-                    }
-
-                    //transform global matrices to parent relative
-                    for (auto i = 0U; i < skeleton.m_skeleton.m_joints.size(); ++i)
-                    {
-                        fbxsdk::FbxAMatrix parent;
-                        fbxsdk::FbxAMatrix this_;
-                        parent.SetIdentity();
-
-                        if (skeleton.m_skeleton.m_joints[i].m_parent_index != 0xffff)
-                        {
-                            parent = links[skeleton.m_skeleton.m_joints[i].m_parent_index];
-                        }
-
-                        this_ = links[i];
-                        auto t4 = parent.Inverse() * this_;
-                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t4);
-                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t4);
-                    }
-
-                    return skeleton;
-                }
-                */
 
                 //////////////////////
                 inline geo::skinned_mesh::blend_weights_t get_blend_weights(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
@@ -463,15 +286,11 @@ namespace uc
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
                         FbxSkin* skin = (FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
-                        fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
 
                         int jointsCount = skin->GetClusterCount();
                         for (int jointIndex = 0; jointIndex < jointsCount; jointIndex++)
                         {
                             fbxsdk::FbxCluster* joint = skin->GetCluster(jointIndex);
-
-                            fbxsdk::FbxCluster::ELinkMode clusterMode = joint->GetLinkMode();
-                            assert(clusterMode == clusterMode0);// "Different cluster modes in different joints";
 
                             int influencedCount = joint->GetControlPointIndicesCount();
 
@@ -486,8 +305,6 @@ namespace uc
                                 influences[controlPointIndex].m_weight.push_back((float)influenceWeights[influenceIndex]);
                             }
                         }
-
-                        assert((clusterMode0 == fbxsdk::FbxCluster::eNormalize || clusterMode0 == fbxsdk::FbxCluster::eTotalOne));// , "Unsupported cluster mode");
                     }
 
                     auto indices = mesh->GetPolygonVertices();
@@ -526,18 +343,10 @@ namespace uc
                     for (int skinIndex = 0; skinIndex < skinCount; skinIndex++)
                     {
                         FbxSkin* skin = (FbxSkin *)mesh->GetDeformer(skinIndex, fbxsdk::FbxDeformer::eSkin);
-                        fbxsdk::FbxCluster::ELinkMode clusterMode0 = skin->GetCluster(0)->GetLinkMode();
-
                         int jointsCount = skin->GetClusterCount();
                         for (int jointIndex = 0; jointIndex < jointsCount; jointIndex++)
                         {
                             fbxsdk::FbxCluster* joint = skin->GetCluster(jointIndex);
-
-                            fbxsdk::FbxCluster::ELinkMode clusterMode = joint->GetLinkMode();
-                            assert(clusterMode == clusterMode0);// "Different cluster modes in different joints";
-
-                            FbxAMatrix lMatrix;
-                            lMatrix = joint->GetTransformMatrix(lMatrix);
 
                             int influencedCount = joint->GetControlPointIndicesCount();
 
@@ -552,8 +361,6 @@ namespace uc
                                 influences[controlPointIndex].m_weight.push_back((float)influenceWeights[influenceIndex]);
                             }
                         }
-
-                        assert((clusterMode0 == fbxsdk::FbxCluster::eNormalize || clusterMode0 == fbxsdk::FbxCluster::eTotalOne));// , "Unsupported cluster mode");
                     }
 
                     auto indices = mesh->GetPolygonVertices();
@@ -586,21 +393,9 @@ namespace uc
                     return mesh->GetDeformerCount(fbxsdk::FbxDeformer::eSkin) > 0;
                 }
 
-                //////////////////////
-                inline std::shared_ptr<geo::skinned_mesh> create_skinned_mesh_internal(const fbxsdk::FbxMesh* mesh, const fbx_context* context)
+                //returns which materials, which polygons affect
+                inline std::vector< std::vector<int32_t> > get_material_indices(const fbxsdk::FbxMesh* mesh)
                 {
-                    const fbxsdk::FbxNode* mesh_node = mesh->GetNode();
-
-                    //check
-                    if (mesh == nullptr || !mesh->IsTriangleMesh())
-                    {
-                        ::uc::gx::throw_exception<uc::gx::fbx_exception>("file does not contain a triangle mesh");
-                    }
-
-                    assert(mesh_node);
-                    assert(mesh->GetPolygonSize(0));
-
-
                     auto material_count = mesh->GetElementMaterialCount();
 
                     if (material_count == 0)
@@ -647,6 +442,91 @@ namespace uc
                         }
                     }
 
+                    return materials_indices;
+                }
+
+                
+                //////////////////////
+                inline  std::vector<geo::skinned_mesh::positions_t> transform_dcc_positions(const std::vector<geo::skinned_mesh::positions_t>& positions, const fbx_context* ctx)
+                {
+                    std::vector<geo::skinned_mesh::positions_t> r;
+                    ctx;
+
+                    auto m0 = negate_z();
+                    
+                    r.reserve(positions.size());
+
+                    for (auto&& p : positions)
+                    {
+                        std::vector<geo::skinned_mesh::position_t > pos;
+                        pos.reserve(p.size());
+
+                        for(auto&& p0: p)
+                        {
+                            auto v = transform_from_dcc(math::load3_point(&p0), ctx);
+                            geo::skinned_mesh::position_t s;
+                            math::store3u_point(&s, v);
+                            pos.push_back(s);
+                        }
+
+                        r.push_back(pos);
+                    }
+
+                    return positions;
+                }
+
+                inline geo::skinned_mesh::skeleton_pose_t transform_dcc_pose(const geo::skinned_mesh::skeleton_pose_t& p, const fbx_context* ctx)
+                {
+                    geo::skinned_mesh::skeleton_pose_t r;
+
+                    for (auto && pos : p.m_joint_local_pose)
+                    {
+                        auto p0 = pos;
+
+                        auto m                              = p0.m_transform_matrix.m_transform;
+                        auto m0                             = transform_from_dcc(m, ctx);
+
+                        p0.m_transform_matrix.m_transform   = m0;
+                        p0.m_transform.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion(math::rotation(m0)));
+                        p0.m_transform.m_translation = math::translation(m0);
+
+                        r.m_joint_local_pose.push_back(p0);
+                    }
+
+                    for (auto && pos : p.m_skeleton.m_joints)
+                    {
+                        auto p0 = pos;
+
+                        auto m          = p0.m_inverse_bind_pose2.m_transform;
+                        auto m0         = transform_from_dcc(m, ctx);
+
+                        p0.m_inverse_bind_pose2.m_transform = m0;
+                        p0.m_inverse_bind_pose.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion(math::rotation(m0)));
+                        p0.m_inverse_bind_pose.m_translation = math::translation(m0);
+
+                        r.m_skeleton.m_joints.push_back(p0);
+                    }
+
+                    return p;
+                }
+                
+
+                //////////////////////
+                inline std::shared_ptr<geo::skinned_mesh> create_skinned_mesh_internal(const fbxsdk::FbxMesh* mesh, const fbx_context* context)
+                {
+                    context;
+                    const fbxsdk::FbxNode* mesh_node = mesh->GetNode();
+
+                    //check
+                    if (mesh == nullptr || !mesh->IsTriangleMesh())
+                    {
+                        ::uc::gx::throw_exception<uc::gx::fbx_exception>("file does not contain a triangle mesh");
+                    }
+
+                    assert(mesh_node);
+                    assert(mesh->GetPolygonSize(0));
+
+                    auto materials_indices = get_material_indices(mesh);
                     std::vector<geo::skinned_mesh::positions_t> positions;                  //positions used by every material
                     std::vector<geo::skinned_mesh::uvs_t>       uvs;                        //uvs used by every material
                     std::vector<geo::skinned_mesh::blend_weights_t>   blend_weights;        //blend_weights used by every material
@@ -660,7 +540,7 @@ namespace uc
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
-                        positions[i] = get_positions(mesh, materials_indices[i], context);
+                        positions[i] = get_positions(mesh, materials_indices[i]);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
                         blend_weights[i] = get_blend_weights(mesh, materials_indices[i]);
                         blend_indices[i] = get_blend_indices(mesh, materials_indices[i]);
@@ -670,32 +550,34 @@ namespace uc
                     std::vector<geo::skinned_mesh::faces_t>  faces; //uvs used by every material
                     faces.resize(materials_indices.size());
 
+                    auto p = triangle_permuation(context);
+
                     for (auto i = 0; i < faces.size(); ++i)
                     {
-                        //reorient triangles ccw, since they come cw from fbx
+                        //reorient triangles ccw, since they come cw from fbx, if needed
                         for (auto j = 0; j < materials_indices[i].size(); ++j)
                         {
                             auto triangle = j;
                             geo::skinned_mesh::face_t face;
-                            face.v0 = triangle * 3;
-                            face.v1 = triangle * 3 + 2;
-                            face.v2 = triangle * 3 + 1;
+                            face.v0 = triangle * 3 + p[0];
+                            face.v1 = triangle * 3 + p[1];
+                            face.v2 = triangle * 3 + p[2];
 
                             faces[i].push_back(face);
                         }
                     }
 
-                    geo::skinned_mesh::skeleton_pose_t pose = get_skeleton_pose(mesh, context);
+                    geo::skinned_mesh::skeleton_pose_t pose = get_skeleton_pose(mesh);
 
                     return std::make_shared<geo::skinned_mesh>(
 
-                        std::move(positions), 
+                        transform_dcc_positions(positions, context),
                         std::move(uvs),
                         std::move(faces),
                         get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())),
                         std::move(blend_weights),
                         std::move(blend_indices),
-                        std::move(pose)
+                        transform_dcc_pose(pose, context)
                         );
                 }
 

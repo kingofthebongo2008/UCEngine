@@ -3,6 +3,7 @@
 #include <uc_dev/gx/import/geo/multi_material_mesh.h>
 #include <uc_dev/gx/import/fbx/fbx_common.h>
 #include <uc_dev/gx/import/fbx/fbx_common_multi_material_mesh.h>
+#include <uc_dev/gx/import/fbx/fbx_common_transform_dcc.h>
 
 namespace uc
 {
@@ -15,6 +16,7 @@ namespace uc
                 //////////////////////
                 inline std::shared_ptr<geo::multi_material_mesh> create_multi_material_mesh_internal(const fbxsdk::FbxMesh* mesh, const fbx_context* context)
                 {
+                    context;
                     const fbxsdk::FbxNode* mesh_node = mesh->GetNode();
 
                     //check
@@ -82,7 +84,7 @@ namespace uc
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
-                        positions[i] = get_positions(mesh, materials_indices[i], context);
+                        positions[i] = get_positions(mesh, materials_indices[i]);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
                     }
 
@@ -90,6 +92,7 @@ namespace uc
                     std::vector<geo::multi_material_mesh::faces_t>  faces; //uvs used by every material
                     faces.resize(materials_indices.size());
 
+                    auto p = triangle_permuation(context);
                     for (auto i = 0; i < faces.size(); ++i)
                     {
                         //reorient triangles ccw, since they come cw from fbx
@@ -97,9 +100,9 @@ namespace uc
                         {
                             auto triangle = j;
                             geo::multi_material_mesh::face_t face;
-                            face.v0 = triangle * 3;
-                            face.v1 = triangle * 3 + 2;
-                            face.v2 = triangle * 3 + 1;
+                            face.v0 = triangle * 3 + p[0];
+                            face.v1 = triangle * 3 + p[1];
+                            face.v2 = triangle * 3 + p[2];
 
                             faces[i].push_back(face);
                         }
