@@ -286,7 +286,7 @@ namespace uc
                     auto t0     = transform_vector(trans, transfo);
 
                     auto res    = r0;
-                    res.r[3]    = t0;
+                    res.r[3] = math::select(t0, math::identity_r3(), math::mask_w());
                     return res;
                 }
             }
