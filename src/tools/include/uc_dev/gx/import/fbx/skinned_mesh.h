@@ -472,42 +472,35 @@ namespace uc
                         r.push_back(pos);
                     }
 
-                    return positions;
+                    return r;
                 }
 
                 inline geo::skinned_mesh::skeleton_pose_t transform_dcc_pose(const geo::skinned_mesh::skeleton_pose_t& p, const fbx_context* ctx)
                 {
-                    geo::skinned_mesh::skeleton_pose_t r;
+                    geo::skinned_mesh::skeleton_pose_t r = p;
 
-                    for (auto && pos : p.m_joint_local_pose)
+                    for (auto && r : r.m_joint_local_pose)
                     {
-                        auto p0 = pos;
-
-                        auto m                              = p0.m_transform_matrix.m_transform;
+                        auto m                              = r.m_transform_matrix.m_transform;
                         auto m0                             = transform_from_dcc(m, ctx);
+                        auto test = r.m_transform.m_rotation;
+                        r.m_transform_matrix.m_transform    = m0;
+                        r.m_transform.m_rotation            = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
+                        r.m_transform.m_translation         = math::translation(m0);
 
-                        p0.m_transform_matrix.m_transform   = m0;
-                        p0.m_transform.m_rotation           = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
-                        p0.m_transform.m_translation        = math::translation(m0);
-
-                        r.m_joint_local_pose.push_back(p0);
                     }
 
-                    for (auto && pos : p.m_skeleton.m_joints)
+                    for (auto && r  : r.m_skeleton.m_joints)
                     {
-                        auto p0 = pos;
-
-                        auto m          = p0.m_inverse_bind_pose2.m_transform;
+                        auto m          = r.m_inverse_bind_pose2.m_transform;
                         auto m0         = transform_from_dcc(m, ctx);
 
-                        p0.m_inverse_bind_pose2.m_transform = m0;
-                        p0.m_inverse_bind_pose.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
-                        p0.m_inverse_bind_pose.m_translation = math::translation(m0);
-
-                        r.m_skeleton.m_joints.push_back(p0);
+                        r.m_inverse_bind_pose2.m_transform = m0;
+                        r.m_inverse_bind_pose.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
+                        r.m_inverse_bind_pose.m_translation = math::translation(m0);
                     }
 
-                    return p;
+                    return r;
                 }
                 
 
