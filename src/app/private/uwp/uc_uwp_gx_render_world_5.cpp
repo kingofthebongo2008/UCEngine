@@ -87,7 +87,7 @@ namespace uc
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/smash.animation"));
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/swagger_walk.animation"));
                 });
-                */
+                
                 
                 g.run([this]()
                 {
@@ -98,9 +98,9 @@ namespace uc
                 {
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/military_mechanic.animation"));
                 });
+                */
                 
                 
-                /*
                 g.run([this]()
                 {
                     m_skeleton = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
@@ -110,7 +110,7 @@ namespace uc
                 {
                     m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
                 });
-                */
+                
                 
 
                 g.run([this, c]

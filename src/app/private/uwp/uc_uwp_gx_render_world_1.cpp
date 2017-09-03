@@ -143,11 +143,15 @@ namespace uc
 
             void render_world_1::do_update(update_context* ctx)
             {
+                for (auto&& s : m_skeleton_instance)
+                {
+                    s->reset();
+                }
+
                 concurrency::parallel_for(size_t(0), m_animations.size(), [this, ctx](size_t i) -> void
                 {
                     m_animation_instance[i]->accumulate(m_skeleton_instance[i].get(), ctx->m_frame_time);
                 });
-
 
                 concurrency::parallel_for(size_t(0), m_animations.size(), [this](size_t i) ->void
                 {
