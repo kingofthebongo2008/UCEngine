@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <FbxSdkImpDirectory>$(MSBuildThisFileDirectory)..\3rdparty\fbxsdk\2017.1</FbxSdkImpDirectory>
+    <FbxSdkImpDirectory>$(MSBuildThisFileDirectory)..\3rdparty\fbxsdk\2018.1.1</FbxSdkImpDirectory>
     <FbxSdkX86LibDirectory>$(FbxSdkImpDirectory)\lib\vs2015\x86\</FbxSdkX86LibDirectory>
     <FbxSdkX64LibDirectory>$(FbxSdkImpDirectory)\lib\vs2015\x64\</FbxSdkX64LibDirectory>
   </PropertyGroup>
