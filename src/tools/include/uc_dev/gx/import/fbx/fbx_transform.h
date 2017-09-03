@@ -229,6 +229,28 @@ namespace uc
                     return m;
                 }
 
+                inline math::float4x4 negate_y()
+                {
+                    math::float4x4 m;
+
+                    m.r[0] = math::identity_r0();
+                    m.r[1] = math::negate(math::identity_r1());
+                    m.r[2] = math::identity_r2();
+                    m.r[3] = math::identity_r3();
+                    return m;
+                }
+
+                inline math::float4x4 negate_x()
+                {
+                    math::float4x4 m;
+
+                    m.r[0] = math::negate(math::identity_r0());
+                    m.r[1] = math::identity_r1();
+                    m.r[2] = math::identity_r2();
+                    m.r[3] = math::identity_r3();
+                    return m;
+                }
+
                 inline math::float4x4 swap_y_z()
                 {
                     math::float4x4 m;
@@ -242,7 +264,7 @@ namespace uc
 
                 inline math::float4x4 transform_rotation(math::afloat4x4 rot, math::afloat4x4 t)
                 {
-                    return math::mul(math::mul(math::transpose(t), rot), t);
+                    return math::mul(t, math::mul(rot, math::transpose(t) ) );
                 }
 
                 inline math::float4 transform_vector(math::afloat4 v, math::afloat4x4 t)
@@ -257,14 +279,14 @@ namespace uc
 
                 inline math::float4x4 transform_transform(math::afloat4x4 r, math::afloat4x4 transfo)
                 {
-                    auto trans  = math::translation(r);
                     auto rot    = math::rotation(r);
+                    auto trans  = math::translation(r);
 
                     auto r0     = transform_rotation(rot, transfo);
                     auto t0     = transform_vector(trans, transfo);
 
                     auto res    = r0;
-                    r0.r[3]     = t0;
+                    res.r[3]    = t0;
                     return res;
                 }
             }

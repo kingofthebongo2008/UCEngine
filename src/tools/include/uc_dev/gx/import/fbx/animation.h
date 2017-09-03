@@ -325,7 +325,7 @@ namespace uc
                             //anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(rot, transform_time);
                             //anm::joint_translation_key  trans_key   = convert_to_joint_translation_key(trans, transform_time);
 
-                            anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(math::quaternion_normalize(math::matrix_2_quaternion(rot0)), transform_time);
+                            anm::joint_rotation_key     rot_key     = convert_to_joint_rotation_key(math::quaternion_normalize(math::matrix_2_quaternion_simd(rot0)), transform_time);
                             anm::joint_translation_key  trans_key   = convert_to_joint_translation_key(trans0, transform_time);
 
                             a.m_rotation_keys.push_back(rot_key);

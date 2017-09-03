@@ -16,42 +16,33 @@ namespace uc
         {
             namespace fbx
             {
-                math::float4x4 transform_from_maya(math::afloat4x4 m)
-                {
-                    return m;
-                }
-
-                math::float4 transform_from_maya(math::afloat4 m)
-                {
-                    return m;
-                }
-
-                math::float4x4 transform_from_max(math::afloat4x4 m)
-                {
-                    return m;
-                }
-
-                math::float4 transform_from_max(math::afloat4 m)
-                {
-                    return m;
-                }
 
                 math::float4x4 transform_from_dcc(math::afloat4x4 m, const fbx_context* ctx)
                 {
-                    ctx;
-                    return m;
+                    auto m0 = swap_y_z();
+                    auto m1 = negate_x();
+                    auto m2 = negate_y();
+                    auto m3 = negate_z();
+                    auto m4 = math::identity_matrix();
+
+                    return transform_transform(transform_transform(transform_transform(m, m4), m4), m4);
+                    
                 }
 
                 math::float4 transform_from_dcc(math::afloat4 m, const fbx_context* ctx)
                 {
-                    ctx;
-                    return m;
+                    auto m0 = swap_y_z();
+                    auto m1 = negate_x();
+                    auto m2 = negate_y();
+                    auto m3 = negate_z();
+                    auto m4 = math::identity_matrix();
+                    return transform_vector(transform_vector(transform_vector(m, m4), m4), m4);
                 }
 
                 std::array<int32_t, 3> triangle_permuation(const fbx_context* ctx)
                 {
                     ctx;
-                    std::array<int32_t, 3> r = { 0,1,2 };
+                    std::array<int32_t, 3> r = { 0, 2, 1 };
                     return r;
                 }
 

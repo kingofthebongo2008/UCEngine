@@ -487,8 +487,8 @@ namespace uc
                         auto m0                             = transform_from_dcc(m, ctx);
 
                         p0.m_transform_matrix.m_transform   = m0;
-                        p0.m_transform.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion(math::rotation(m0)));
-                        p0.m_transform.m_translation = math::translation(m0);
+                        p0.m_transform.m_rotation           = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
+                        p0.m_transform.m_translation        = math::translation(m0);
 
                         r.m_joint_local_pose.push_back(p0);
                     }
@@ -501,7 +501,7 @@ namespace uc
                         auto m0         = transform_from_dcc(m, ctx);
 
                         p0.m_inverse_bind_pose2.m_transform = m0;
-                        p0.m_inverse_bind_pose.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion(math::rotation(m0)));
+                        p0.m_inverse_bind_pose.m_rotation = math::quaternion_normalize(math::matrix_2_quaternion_simd(math::rotation(m0)));
                         p0.m_inverse_bind_pose.m_translation = math::translation(m0);
 
                         r.m_skeleton.m_joints.push_back(p0);
