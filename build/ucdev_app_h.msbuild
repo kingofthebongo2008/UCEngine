@@ -195,6 +195,8 @@
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_6.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_7.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_10.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_id.h" />

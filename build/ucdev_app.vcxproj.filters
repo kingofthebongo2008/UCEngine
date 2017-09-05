@@ -124,6 +124,8 @@
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\librocket\librocket_vertex.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_vertex.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_color_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_pixel.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(ImGuiDirectory)\imgui.cpp" />
@@ -166,6 +168,7 @@
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_7.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_10.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_manager.cpp" />

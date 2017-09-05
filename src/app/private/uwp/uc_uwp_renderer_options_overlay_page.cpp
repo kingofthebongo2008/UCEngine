@@ -233,6 +233,7 @@ namespace uc
                 "Skeleton",
                 "Robot",
                 "Military Mechanic",
+		"Shadows"
             };
 
             static gxu::world_id scene_id[] =
@@ -243,6 +244,7 @@ namespace uc
                 gxu::world_id::scene4,
                 gxu::world_id::scene0,
                 gxu::world_id::scene1,
+                gxu::world_id::scene9,
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

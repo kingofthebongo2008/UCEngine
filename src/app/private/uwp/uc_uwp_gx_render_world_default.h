@@ -17,17 +17,17 @@ namespace uc
         {
             class render_world_default : public render_world
             {
-				using base = render_world;
+                using base = render_world;
 
                 public:
 
-				render_world_default(initialize_context* ctx);
+                render_world_default(initialize_context* ctx);
                 virtual ~render_world_default();
 
                 private:
-				void do_update(update_context* ctx) override;
-				gx::dx12::managed_graphics_command_context do_render(render_context* ctx) override;
-				gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx) override;
+                void do_update(update_context* ctx) override;
+                gx::dx12::managed_graphics_command_context do_render(render_context* ctx) override;
+                gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx) override;
             };
         }
     }

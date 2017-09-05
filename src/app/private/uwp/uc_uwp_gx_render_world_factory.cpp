@@ -10,6 +10,7 @@
 #include "uc_uwp_gx_render_world_7.h"
 #include "uc_uwp_gx_render_world_8.h"
 #include "uc_uwp_gx_render_world_9.h"
+#include "uc_uwp_gx_render_world_10.h"
 
 namespace uc
 {
@@ -26,10 +27,11 @@ namespace uc
                     case world_id::scene2 : return std::unique_ptr<render_world>(new render_world_3(ctx));
                     case world_id::scene3 : return std::unique_ptr<render_world>(new render_world_4(ctx));
                     case world_id::scene4 : return std::unique_ptr<render_world>(new render_world_5(ctx));
-					case world_id::scene5 : return std::unique_ptr<render_world>(new render_world_6(ctx));
-					case world_id::scene6 : return std::unique_ptr<render_world>(new render_world_7(ctx));
-					case world_id::scene7 : return std::unique_ptr<render_world>(new render_world_8(ctx));
-					case world_id::scene8 : return std::unique_ptr<render_world>(new render_world_9(ctx));
+		    case world_id::scene5 : return std::unique_ptr<render_world>(new render_world_6(ctx));
+		    case world_id::scene6 : return std::unique_ptr<render_world>(new render_world_7(ctx));
+		    case world_id::scene7 : return std::unique_ptr<render_world>(new render_world_8(ctx));
+		    case world_id::scene8 : return std::unique_ptr<render_world>(new render_world_9(ctx));
+		    case world_id::scene9 : return std::unique_ptr<render_world>(new render_world_10(ctx));
                     default: return nullptr;
                 }
             }

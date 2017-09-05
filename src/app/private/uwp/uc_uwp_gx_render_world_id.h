@@ -15,10 +15,11 @@ namespace uc
                 scene2          = 2,
                 scene3          = 3,
                 scene4          = 4,
-				scene5			= 5,
-				scene6			= 6,
-				scene7			= 7,
-				scene8			= 8,
+		scene5		= 5,
+		scene6		= 6,
+		scene7		= 7,
+		scene8		= 8,
+		scene9		= 9
             };
         }
     }
