@@ -12,7 +12,7 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned.h>
+#include <autogen/shaders/textured_skinned_lit.h>
 #include <autogen/shaders/depth_prepass.h>
 #include <autogen/shaders/skeleton.h>
 
@@ -79,7 +79,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned::create_pso);
+                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit::create_pso);
                 });
 
                 g.run([this, c]
@@ -156,7 +156,7 @@ namespace uc
                     graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
                 }
 
-                //robot
+                //mechanic
                 {
                     //draw
                     details::skinned_draw_constants draw;

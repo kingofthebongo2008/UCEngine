@@ -17,6 +17,11 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit.pso">
+      <EntryPointName>textured_skinned_lit</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass.pso">
       <EntryPointName>depth_prepass</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>

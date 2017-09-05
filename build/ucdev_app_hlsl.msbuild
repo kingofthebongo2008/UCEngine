@@ -42,6 +42,10 @@
       <ShaderPipelineStage>Pixel</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel_lit.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
