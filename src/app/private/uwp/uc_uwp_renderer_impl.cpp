@@ -322,6 +322,8 @@ namespace uc
             m_resources.direct_queue( device_resources::swap_chains::overlay)->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
 
+
+
             gx::dx12::managed_graphics_command_context pending_depth;
             gx::dx12::managed_graphics_command_context pending_main;
             gx::dx12::managed_graphics_command_context pending_overlay;

@@ -59,37 +59,38 @@ namespace uc
 
         private:
 
-            device_resources																	m_resources;
+            device_resources                                                                    m_resources;
 
             std::unique_ptr<gx::geo::geometry_allocator>                                        m_geometry_allocator;
 
-            std::unique_ptr<gxu::render_world_manager>											m_render_world_manager;
-            std::unique_ptr<overlay::page_manager>												m_overlay_page_manager;
+            std::unique_ptr<gxu::render_world_manager>                                          m_render_world_manager;
+            std::unique_ptr<overlay::page_manager>                                              m_overlay_page_manager;
 
-            window_environment																	m_window_enviroment;
-            winrt::Windows::UI::Core::CoreWindow												m_window = nullptr;
-            winrt::Windows::Graphics::Display::DisplayInformation								m_display_information = nullptr;
+            window_environment                                                                  m_window_enviroment;
+            winrt::Windows::UI::Core::CoreWindow                                                m_window = nullptr;
+            winrt::Windows::Graphics::Display::DisplayInformation                               m_display_information = nullptr;
 
-            std::unique_ptr<gx::dx12::gpu_depth_buffer>											m_view_depth_buffer;
+            std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_view_depth_buffer;
+            std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_shadowview_depth_buffer;
 
-            io::pad																                m_pad;
-            io::pad_state																		m_pad_state;
-
-
-            io::mouse																            m_mouse;
-            io::mouse_state																		m_mouse_state;
-            io::keyboard																		m_keyboard;
-            io::keyboard_state																	m_keyboard_state;
+            io::pad                                                                             m_pad;
+            io::pad_state                                                                       m_pad_state;
 
 
-            float																				m_scale_render = 1.0f;
+            io::mouse                                                                           m_mouse;
+            io::mouse_state                                                                     m_mouse_state;
+            io::keyboard                                                                        m_keyboard;
+            io::keyboard_state                                                                  m_keyboard_state;
 
-            sys::profile_timer																	m_frame_timer;
-            double																				m_frame_time;
 
-            bool*																				m_main_window;
-            Concurrency::concurrent_queue < resize_window_command >								m_prerender_queue;
-            void																				flush_prerender_queue();
+            float                                                                               m_scale_render = 1.0f;
+
+            sys::profile_timer                                                                  m_frame_timer;
+            double                                                                              m_frame_time;
+
+            bool*                                                                               m_main_window;
+            Concurrency::concurrent_queue < resize_window_command >                             m_prerender_queue;
+            void                                                                                flush_prerender_queue();
         };
     }
 

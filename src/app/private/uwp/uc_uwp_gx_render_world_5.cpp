@@ -199,51 +199,6 @@ namespace uc
 
                 return graphics;
             }
-
-            gx::dx12::managed_graphics_command_context render_world_5::do_render_depth(render_context* ctx)
-            {                
-                auto resources = ctx->m_resources;
-                //now start new ones
-                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
-                begin_render_depth(ctx, graphics.get());
-
-                /*
-
-                {
-                    set_view_port(ctx, graphics.get());
-                    graphics->set_descriptor_heaps();
-                }
-
-                //Per many draw calls  -> frequency 1
-                graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-                graphics->set_pso(m_depth_prepass_pso);
-
-                {
-                    frame_constants frame;
-                    frame.m_view = uc::math::transpose(uc::gx::view_matrix(m_camera));
-                    frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_camera));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                }
-
-                {
-                    for (auto i = 0; i < m_animations.size(); ++i)
-                    {
-                        //draw
-                        draw_constants draw;
-                        draw.m_world = uc::math::translation_x( 1.5f * i );
-
-                        auto&& positions = m_skeleton_positions[i];
-
-                        //todo: move this into a big buffer for the whole scene
-                        graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-                        graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&positions[0], positions.size() * sizeof(gx::position_3d)));
-                        graphics->draw(static_cast<uint32_t>(positions.size()));
-                    }
-                }
-                */
-                end_render_depth(ctx, graphics.get());
-                return graphics;
-            }
         }
     }
 }

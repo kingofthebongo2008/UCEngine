@@ -134,16 +134,6 @@ namespace uc
 
                 return graphics;
             }
-
-            gx::dx12::managed_graphics_command_context render_world_9::do_render_depth(render_context* ctx)
-            {
-                auto resources = ctx->m_resources;
-                //now start new ones
-                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
-                begin_render_depth(ctx, graphics.get());
-                end_render_depth(ctx, graphics.get());
-                return graphics;
-            }
         }
     }
 }

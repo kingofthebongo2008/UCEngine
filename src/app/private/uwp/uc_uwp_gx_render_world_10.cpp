@@ -73,7 +73,7 @@ namespace uc
 
                 g.run([this, c]
                 {
-                    m_military_mechanic = gxu::make_render_object_from_file<gxu::skinned_multi_material_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources);
+                    m_military_mechanic = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -146,6 +146,7 @@ namespace uc
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
                 graphics->set_pso(m_textured_skinned);
+                graphics->set_descriptor_heaps();
 
                 {
                     frame_constants frame;
@@ -159,7 +160,7 @@ namespace uc
                 {
                     //draw
                     details::skinned_draw_constants draw;
-                    draw.m_world = math::identity_matrix(); //uc::math::transpose(m_military_mechanic_transform); //// 
+                    draw.m_world = uc::math::transpose(*m_military_mechanic_transform); //// 
 
                     {
                         auto skeleton = m_military_mechanic_skeleton.get();
@@ -168,30 +169,24 @@ namespace uc
                         for (auto i = 0U; i < joints.size(); ++i )
                         {
                             math::float4x4 bind_pose = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);
-                            math::float4x4 palette   = math::mul(bind_pose, joints[i]  ); // math::mul(bind_pose, joints[i]);
+                            math::float4x4 palette   = math::mul(bind_pose, joints[i]  );
 
-                           
                             draw.m_joints_palette[i] = math::transpose(palette);
-                            //draw.m_joints_palette[i] = math::transpose(math::mul(math::swap_y_z(), palette));
                         }
                     }
 
-                    graphics->set_pso(m_textured_skinned);
-                    graphics->set_descriptor_heaps();
-
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-                    graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
                     //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(1, gx::geo::make_uv_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(2, gx::geo::make_blend_weights_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(3, gx::geo::make_blend_indices_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_military_mechanic->m_geometry));
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_uv_view());
+                    graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                    graphics->set_vertex_buffer(3, ctx->m_geometry->skinned_mesh_blend_index_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
                     size_t start = 0;
-                    size_t size = m_military_mechanic->m_geometry.m_ranges.size();
+                    size_t size = m_military_mechanic->m_primitive_ranges.size();
 
                     for (auto i = start; i < start + size; ++i)
                     {
@@ -202,36 +197,13 @@ namespace uc
                         }
 
                         {
-                            auto& r = m_military_mechanic->m_geometry.m_ranges[i];
+                            auto& r = m_military_mechanic->m_primitive_ranges[i];
+                            auto  base_index_offset = m_military_mechanic->m_indices->index_offset();
+                            auto  base_vertex_offset = m_military_mechanic->m_geometry->draw_offset();
+
                             //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                            graphics->draw_indexed(r.size(), r.m_begin);
+                            graphics->draw_indexed(r.size(), r.m_begin + base_index_offset, base_vertex_offset);
                         }
-                    }
-                }
-
-
-                {
-                    //Per many draw calls  -> frequency 1
-                    graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-                    graphics->set_pso(m_skeleton_pso);
-
-                    {
-                        frame_constants frame;
-                        frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
-                        frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
-                        graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                    }
-
-                    {
-                        //draw
-                        draw_constants draw;
-                        draw.m_world = uc::math::identity_matrix();// uc::math::transpose(m_skeleton_positions_transform);
-
-                        //todo: move this into a big buffer for the whole scene
-                        graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-
-                        graphics->set_dynamic_vertex_buffer(0, sizeof(gx::position_3d), resources->upload_queue()->upload_buffer(&m_skeleton_positions[0], m_skeleton_positions.size() * sizeof(gx::position_3d)));
-                        graphics->draw(static_cast<uint32_t>(m_skeleton_positions.size()));
                     }
                 }
 
@@ -239,54 +211,7 @@ namespace uc
 
                 return graphics;
             }
-
-            gx::dx12::managed_graphics_command_context render_world_10::do_render_depth(render_context* ctx)
-            {
-
-                auto resources = ctx->m_resources;
-                //now start new ones
-                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
-                begin_render_depth(ctx, graphics.get());
-
-                /*
-                {
-                    set_view_port(ctx, graphics.get());
-                    graphics->set_descriptor_heaps();
-                }
-
-                //Per many draw calls  -> frequency 1
-                graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
-
-                {
-                    frame_constants frame;
-                    frame.m_view = uc::math::transpose(uc::gx::view_matrix(m_camera));
-                    frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_camera));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                }
-
-                //robot
-                {
-                    //draw
-                    draw_constants draw;
-                    draw.m_world = uc::math::transpose(m_military_mechanic_transform);
-
-                    //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-                    graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-                    //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::position_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_index_buffer(gx::geo::index_buffer_view(&m_military_mechanic->m_geometry));
-
-                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_military_mechanic->m_geometry.indexes().size());
-                }
-                */
-                end_render_depth(ctx, graphics.get());
-                return graphics;
-
-            }
+            
         }
     }
 }

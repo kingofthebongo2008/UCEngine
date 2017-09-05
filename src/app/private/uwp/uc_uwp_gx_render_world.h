@@ -86,7 +86,7 @@ namespace uc
 
                 virtual  void do_update(update_context* ctx) = 0;
                 virtual  gx::dx12::managed_graphics_command_context do_render(render_context* ctx) = 0;
-                virtual  gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx) = 0;
+                virtual  gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx);
 
                 protected:
 

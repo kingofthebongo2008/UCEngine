@@ -239,54 +239,6 @@ namespace uc
 
                 return graphics;
             }
-
-            gx::dx12::managed_graphics_command_context render_world_2::do_render_depth(render_context* ctx)
-            {
-
-                auto resources = ctx->m_resources;
-                //now start new ones
-                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
-                begin_render_depth(ctx, graphics.get());
-
-                /*
-                {
-                    set_view_port(ctx, graphics.get());
-                    graphics->set_descriptor_heaps();
-                }
-
-                //Per many draw calls  -> frequency 1
-                graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
-
-                {
-                    frame_constants frame;
-                    frame.m_view = uc::math::transpose(uc::gx::view_matrix(m_camera));
-                    frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_camera));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                }
-
-                //robot
-                {
-                    //draw
-                    draw_constants draw;
-                    draw.m_world = uc::math::transpose(m_military_mechanic_transform);
-
-                    //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-                    graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-                    //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::position_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_index_buffer(gx::geo::index_buffer_view(&m_military_mechanic->m_geometry));
-
-                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_military_mechanic->m_geometry.indexes().size());
-                }
-                */
-                end_render_depth(ctx, graphics.get());
-                return graphics;
-
-            }
         }
     }
 }

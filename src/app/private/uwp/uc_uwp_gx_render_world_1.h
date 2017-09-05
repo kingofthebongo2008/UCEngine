@@ -23,25 +23,25 @@ namespace uc
 
                 using base = render_world;
 
-				struct skinned_draw_constants
-				{
-					math::float4x4                  m_world;
-					std::array<math::float4x4, 127> m_joints_palette;
+                struct skinned_draw_constants
+                {
+                    math::float4x4                  m_world;
+                    std::array<math::float4x4, 127> m_joints_palette;
 
-					skinned_draw_constants()
-					{
-						reset();
-					}
+                    skinned_draw_constants()
+                    {
+                        reset();
+                    }
 
-					void reset()
-					{
-						m_world = math::identity_matrix();
-						for (auto&& i : m_joints_palette)
-						{
-							i = math::identity_matrix();
-						}
-					}
-				};
+                    void reset()
+                    {
+                        m_world = math::identity_matrix();
+                        for (auto&& i : m_joints_palette)
+                        {
+                            i = math::identity_matrix();
+                        }
+                    }
+                };
 
             public:
 
@@ -59,16 +59,16 @@ namespace uc
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
                 gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
 
-				lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
-				std::vector< lip::unique_lip_pointer<lip::joint_animations> >	m_animations;
+                lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
+                std::vector< lip::unique_lip_pointer<lip::joint_animations> >   m_animations;
 
-				std::vector < std::unique_ptr< gx::anm::skeleton_instance > >   m_skeleton_instance;
-				std::vector < std::unique_ptr< gx::anm::animation_instance> >   m_animation_instance;
+                std::vector < std::unique_ptr< gx::anm::skeleton_instance > >   m_skeleton_instance;
+                std::vector < std::unique_ptr< gx::anm::animation_instance> >   m_animation_instance;
 
-				std::vector < skinned_draw_constants >							m_draw_constants;
+                std::vector < skinned_draw_constants >                          m_draw_constants;
 
                 //update state
-				math::managed_float4x4                                          m_robot_transform = math::make_float4x4();
+                math::managed_float4x4                                          m_robot_transform = math::make_float4x4();
             };
         }
     }

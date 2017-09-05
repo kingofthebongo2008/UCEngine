@@ -27,13 +27,12 @@ namespace uc
 
                 void do_update(update_context* ctx) override;
                 gx::dx12::managed_graphics_command_context do_render(render_context* ctx) override;
-                gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx) override;
 
                 std::unique_ptr<gxu::static_render_object>                      m_deer;
                 gx::dx12::graphics_pipeline_state*                              m_textured;
                 gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
 
-				math::managed_float4x4                                          m_deer_transform = math::make_float4x4();
+                math::managed_float4x4                                          m_deer_transform = math::make_float4x4();
             };
         }
     }
