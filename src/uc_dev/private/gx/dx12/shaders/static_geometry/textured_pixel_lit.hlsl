@@ -2,8 +2,9 @@
 
 struct interpolants
 {
-    float4 position     : SV_POSITION0;
-    float2 uv           : texcoord0;
+    float4 position       : SV_POSITION0;
+    float2 uv             : texcoord0;
+    float3 position_ws    : position0;
 };
 
 float checker_board_pattern(float2 uv)
@@ -31,5 +32,11 @@ SamplerState g_linear       : register(s0)
 [RootSignature( MyRS1 ) ]
 float4 main( interpolants r ) : SV_Target0
 {
-    return float4(1.0f,1.0f, 1.0f, 1.0f);
+    float3 dudx             = ddx(r.position_ws);
+    float3 dudy             = ddy(r.position_ws);
+    float3 normal_ws        = normalize(cross(dudx, dudy));
+    float3 sun_light_ws     = normalize(float3(1.0, 0.5, 0.5));
+    float  k                = dot( normal_ws, sun_light_ws );
+    
+    return k * float4(1.0f,1.0f, 1.0f, 1.0f) + float4(0.5f, 0.5f, 0.5f, 0.0f);
 }

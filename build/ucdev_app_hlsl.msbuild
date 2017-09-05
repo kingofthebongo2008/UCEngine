@@ -30,6 +30,10 @@
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex_skinned_lit.hlsl">
+      <ShaderPipelineStage>Vertex</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
