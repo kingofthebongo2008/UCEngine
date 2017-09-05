@@ -19,9 +19,6 @@
 
 #include <windows.ui.xaml.media.dxinterop.h>
 
-//uncomment this to use the ucdev_app and process user input
-#define UC_APP
-
 namespace uc
 {
     namespace uwp
@@ -68,14 +65,14 @@ namespace uc
                 m_render_world_manager = std::make_unique<gxu::render_world_manager>(&c0);
                 m_render_world_manager->show_world(uc::uwp::gxu::world_id::scene2);
 
-                #if defined(UC_APP) //temporary workaround until we get the refactoring complete
-                if (true)
+                
                 {
                     overlay::initialize_context c1;
-                    c1.m_resources  = &m_resources;
+                    c1.m_resources = &m_resources;
                     m_overlay_page_manager = std::make_unique<overlay::page_manager>(&c1, m_render_world_manager.get());
                 }
-                #endif
+                
+                
             });
 
             g.wait();
@@ -135,7 +132,6 @@ namespace uc
 
             io::keyboard_state s = m_keyboard_state;
 
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             if ( io::button_was_pressed(s, io::keyboard_state::button_192))
             {
                 overlay::pageid pages[] =
@@ -230,7 +226,6 @@ namespace uc
                     }
                 }
             }
-            #endif
         }
 
         void renderer_impl::update()
@@ -249,10 +244,8 @@ namespace uc
                 ctx.m_back_buffer_size.m_width = static_cast<uint16_t>(static_cast<float>(back_buffer->width()) * m_scale_render);
                 ctx.m_back_buffer_size.m_height = static_cast<uint16_t>(static_cast<float>(back_buffer->height()) * m_scale_render);
 
-                #if defined(UC_APP) //temporary workaround until we get the refactoring complete
                 ctx.m_front_buffer_size.m_width = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
                 ctx.m_front_buffer_size.m_height = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
-                #endif
 
                 ctx.m_resources = &m_resources;
                 ctx.m_pad_state = m_pad_state;
@@ -264,7 +257,6 @@ namespace uc
                 m_render_world_manager->update(&ctx);
             });
 
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             if ( m_overlay_page_manager->get_active_page_id() != overlay::pageid::none )
             {
                 overlay::update_context ctx;
@@ -284,7 +276,6 @@ namespace uc
 
                 m_overlay_page_manager->update(&ctx);
             }
-            #endif
 
             g.wait();
         }
@@ -328,16 +319,13 @@ namespace uc
             m_resources.direct_queue( device_resources::swap_chains::background )->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
 
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             m_resources.direct_queue( device_resources::swap_chains::overlay)->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
-            #endif
 
             gx::dx12::managed_graphics_command_context pending_depth;
             gx::dx12::managed_graphics_command_context pending_main;
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             gx::dx12::managed_graphics_command_context pending_overlay;
-            #endif
+
             
             g.run([this,&pending_main]
             {
@@ -360,10 +348,8 @@ namespace uc
                 ctx.m_back_buffer_size.m_width          = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_size.m_height         = static_cast<uint16_t>(height);
 
-                #if defined(UC_APP) //temporary workaround until we get the refactoring complete
                 ctx.m_front_buffer_size.m_width         = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
                 ctx.m_front_buffer_size.m_height        = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
-                #endif
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
                 pending_main                            = m_render_world_manager->render(&ctx);
@@ -390,10 +376,8 @@ namespace uc
                 ctx.m_back_buffer_size.m_width          = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_size.m_height         = static_cast<uint16_t>(height);
 
-                #if defined(UC_APP) //temporary workaround until we get the refactoring complete
                 ctx.m_front_buffer_size.m_width       = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
                 ctx.m_front_buffer_size.m_height        =  static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
-                #endif
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
                 pending_depth = m_render_world_manager->render_depth(&ctx);
@@ -401,7 +385,6 @@ namespace uc
 
        
             //generate overalay
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             g.run([this, &pending_overlay]()
             {
                 uint32_t width = 0;
@@ -449,17 +432,14 @@ namespace uc
                     }
                 }
             });
-            #endif
             g.wait();
 
             //if we did upload through the pci bus, insert waits
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
 
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             m_resources.direct_queue(device_resources::swap_chains::overlay)->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
-            #endif
 
             if (pending_depth)
             {
@@ -471,13 +451,10 @@ namespace uc
                 pending_main->submit();
             }
 
-            #if defined(UC_APP) //temporary workaround until we get the refactoring complete
             if (pending_overlay)
             {
                 pending_overlay->submit();
             }
-            #endif
-
         }
 
         void renderer_impl::present()
