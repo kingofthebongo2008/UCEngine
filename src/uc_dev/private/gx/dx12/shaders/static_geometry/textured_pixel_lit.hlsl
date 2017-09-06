@@ -32,11 +32,14 @@ SamplerState g_linear       : register(s0)
 [RootSignature( MyRS1 ) ]
 float4 main( interpolants r ) : SV_Target0
 {
-    float3 dudx             = ddx(r.position_ws);
-    float3 dudy             = ddy(r.position_ws);
-    float3 normal_ws        = normalize(cross(dudx, dudy));
-    float3 sun_light_ws     = normalize(float3(1.0, 0.5, 0.5));
-    float  k                = dot( normal_ws, sun_light_ws );
+    float3 dudx                       = ddx(r.position_ws);
+    float3 dudy                       = ddy(r.position_ws);
+    float3 normal_ws                  = normalize(cross(dudx, dudy));
+    float3 sun_light_direction_ws     = normalize(float3(1.0, 0.5, 0.5));
+    float3 sun_light_intensity        = float3(0.5, 0.5, 0.5);
+    float3 albedo                     = float4(1.0f, 1.0f, 1.0f, 1.0f);
+    float  ndotl                      = saturate(dot(normal_ws, sun_light_direction_ws));
+    float3 ambient                    = float3(0.2f, 0.2f, 0.2f);
     
-    return k * float4(1.0f,1.0f, 1.0f, 1.0f) + float4(0.5f, 0.5f, 0.5f, 0.0f);
+    return float4 (ndotl * albedo * sun_light_intensity + ambient, 0.0);
 }
