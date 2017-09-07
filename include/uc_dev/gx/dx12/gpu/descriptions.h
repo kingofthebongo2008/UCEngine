@@ -69,6 +69,17 @@ namespace uc
                 return d;
             }
 
+            inline D3D12_HEAP_DESC render_target_heap(uint64_t size, D3D12_HEAP_FLAGS flags)
+            {
+                D3D12_HEAP_DESC d = {};
+                d.Properties = default_properties();
+                d.Alignment = D3D12_DEFAULT_MSAA_RESOURCE_PLACEMENT_ALIGNMENT;
+                d.SizeInBytes = mem::align(size, D3D12_DEFAULT_MSAA_RESOURCE_PLACEMENT_ALIGNMENT);
+                d.Flags = flags;
+
+                return d;
+            }
+
             inline D3D12_HEAP_DESC read_back_heap(uint64_t size, D3D12_HEAP_FLAGS flags)
             {
                 D3D12_HEAP_DESC d = {};
@@ -151,6 +162,13 @@ namespace uc
             inline D3D12_RESOURCE_DESC describe_depth_buffer(UINT width, UINT height, DXGI_FORMAT format)
             {
                 return describe_render_target(width, height, format, D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);
+            }
+
+            inline D3D12_RESOURCE_DESC describe_msaa_depth_buffer(UINT width, UINT height, DXGI_FORMAT format, uint32_t samples)
+            {
+                auto d = describe_depth_buffer(width, height, format);
+                d.SampleDesc.Count = samples;
+                return d;
             }
             
         }
