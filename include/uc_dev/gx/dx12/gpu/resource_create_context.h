@@ -14,6 +14,7 @@ namespace uc
             class gpu_buffer;
             class gpu_color_buffer;
             class gpu_depth_buffer;
+            class gpu_msaa_depth_buffer;
             class gpu_read_back_buffer;
             class gpu_texture_2d;
             class gpu_upload_buffer;
@@ -45,6 +46,7 @@ namespace uc
 
                 //Depth Buffer
                 gpu_depth_buffer*          create_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0 );
+                gpu_msaa_depth_buffer*     create_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0);
                 void                       free_depth_buffer(gpu_depth_buffer* d);
 
                 gpu_back_buffer*           create_back_buffer(ID3D12Resource* r);

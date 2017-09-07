@@ -51,6 +51,24 @@ namespace uc
                 descriptor_handle   m_DSV[2];
                 descriptor_handle   m_SRV;
             };
+
+
+            class gpu_msaa_depth_buffer : public gpu_depth_buffer
+            {
+                private:
+
+                using base = gpu_depth_buffer;
+
+                public:
+                gpu_msaa_depth_buffer() 
+                {
+                }
+
+                gpu_msaa_depth_buffer( ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                {
+
+                }
+            };
         }
     }
 }
