@@ -87,6 +87,7 @@ namespace uc
                 virtual  void do_update(update_context* ctx) = 0;
                 virtual  gx::dx12::managed_graphics_command_context do_render(render_context* ctx) = 0;
                 virtual  gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx);
+                virtual  gx::dx12::managed_graphics_command_context do_render_shadows(render_context* ctx);
 
                 protected:
 
@@ -97,6 +98,9 @@ namespace uc
 
                 static void begin_render_depth(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
                 static void end_render_depth(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
+
+                static void begin_render_shadows(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
+                static void end_render_shadows(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
 
                 static void set_view_port(const render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
             };

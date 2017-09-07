@@ -100,6 +100,19 @@ namespace uc
                 graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_COMMON);
             }
 
+            void render_world::begin_render_shadows(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
+            {
+                graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+                graphics->set_render_target(ctx->m_view_depth_buffer);
+                graphics->clear_depth(ctx->m_view_depth_buffer, 1.0f);
+            }
+
+            void render_world::end_render_shadows(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
+            {
+                //todo: remove this,
+                graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_COMMON);
+            }
+
             void render_world::set_view_port( const render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
             {
                 auto width = ctx->m_back_buffer_scaled_size.m_width;
@@ -111,6 +124,16 @@ namespace uc
             }
 
             gx::dx12::managed_graphics_command_context render_world::do_render_depth(render_context* ctx)
+            {
+                auto resources = ctx->m_resources;
+                //now start new ones
+                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
+                begin_render_depth(ctx, graphics.get());
+                end_render_depth(ctx, graphics.get());
+                return graphics;
+            }
+
+            gx::dx12::managed_graphics_command_context render_world::do_render_shadows(render_context* ctx)
             {
                 auto resources = ctx->m_resources;
                 //now start new ones

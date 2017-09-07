@@ -71,7 +71,7 @@ namespace uc
             winrt::Windows::Graphics::Display::DisplayInformation                               m_display_information = nullptr;
 
             std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_view_depth_buffer;
-            std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_shadowview_depth_buffer;
+            std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>                                    m_view_sun_shadow_depth_buffer;
 
             io::pad                                                                             m_pad;
             io::pad_state                                                                       m_pad_state;

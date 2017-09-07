@@ -47,7 +47,8 @@ namespace uc
             o.m_skinned_mesh_vertex_count = 1000000;
             o.m_static_mesh_vertex_count = 1000000;
 
-            m_geometry_allocator = std::make_unique<gx::geo::geometry_allocator>(m_resources.resource_create_context(), o);
+            m_geometry_allocator            = std::make_unique<gx::geo::geometry_allocator>(m_resources.resource_create_context(), o);
+            m_view_sun_shadow_depth_buffer  = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT));
 
         }
 

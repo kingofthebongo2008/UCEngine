@@ -136,6 +136,8 @@ namespace uc
                 auto resources = ctx->m_resources;
                 auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
+                graphics->pix_begin_event(L"MainPass");
+
                 begin_render(ctx, graphics.get());
 
                 {
@@ -208,6 +210,8 @@ namespace uc
                 }
 
                 end_render(ctx, graphics.get());
+
+                graphics->pix_end_event();
 
                 return graphics;
             }
