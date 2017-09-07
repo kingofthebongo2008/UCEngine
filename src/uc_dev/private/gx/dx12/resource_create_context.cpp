@@ -69,6 +69,16 @@ namespace uc
                     return result;
                 }
 
+                static inline Microsoft::WRL::ComPtr<ID3D12Heap> create_render_target_heap(ID3D12Device* device, uint64_t size, D3D12_HEAP_FLAGS flags)
+                {
+                    D3D12_HEAP_DESC d = render_target_heap(size, flags);
+                    Microsoft::WRL::ComPtr<ID3D12Heap> result;
+
+                    throw_if_failed(device->CreateHeap(&d, IID_PPV_ARGS(&result)));
+                    return result;
+                }
+
+
                 static inline auto create_upload_buffers_allocator(ID3D12Device* d, uint64_t size)
                 {
                     return new placement_heap_allocator<locking_policy_mutex>(d, create_upload_heap(d, size, D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS), size);
@@ -86,7 +96,7 @@ namespace uc
 
                 static inline auto create_default_render_target_allocator(ID3D12Device* d, uint64_t size)
                 {
-                    return new placement_heap_allocator<locking_policy_mutex>(d, create_default_heap(d, size, D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES), size);
+                    return new placement_heap_allocator<locking_policy_mutex>(d, create_render_target_heap(d, size, D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES), size);
                 }
 
                 static inline auto create_default_heap_textures_allocator(ID3D12Device* d, uint64_t size)
@@ -539,6 +549,52 @@ namespace uc
                 descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
 
                 return new gpu_depth_buffer(resource.Get(), srv, dsv);
+            }
+
+            //Depth Buffer
+            gpu_msaa_depth_buffer*  gpu_resource_create_context::create_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil)
+            {
+                D3D12_CLEAR_VALUE v = {};
+                v.Format = format;
+                v.DepthStencil.Depth = clear_value;
+                v.DepthStencil.Stencil = stencil;
+
+                auto desc = describe_msaa_depth_buffer(width, height, format,4);
+
+                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+
+                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON, &v);
+                resource->SetName(L"MSAA Depth Buffer");
+
+                // Create the shader resource view
+                D3D12_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
+                viewDesc.Format = get_depth_format(format);
+                viewDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2DMS;
+                viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+
+                descriptor_handle srvDepth = m_impl->m_view_dependent_srv_heap.allocate();
+
+                m_impl->m_device->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
+
+                descriptor_handle srv = srvDepth;
+
+                //Create depth stencil view
+                descriptor_handle dsvReadWrite = m_impl->m_view_dependent_dsv_heap.allocate(2);
+                descriptor_handle dsvReadDepth = m_impl->m_view_dependent_dsv_heap.increment(dsvReadWrite);
+
+                D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
+                desc2.Format = format;
+                desc2.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2DMS;
+                desc2.Texture2D.MipSlice = 0;
+                desc2.Flags = D3D12_DSV_FLAG_NONE;
+
+                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
+
+                desc2.Flags = D3D12_DSV_FLAG_READ_ONLY_DEPTH;
+                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadDepth);
+
+                descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
+                return new gpu_msaa_depth_buffer(resource.Get(), srv, dsv);
             }
 
             gpu_back_buffer* gpu_resource_create_context::create_back_buffer(ID3D12Resource* resource)
