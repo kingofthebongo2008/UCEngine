@@ -98,22 +98,37 @@ vector_os make_vector_os(float3 v)
     return r;
 }
 
-point_ps project_p_os(point_os v_os, float4x4 world, float4x4 view, float4x4 perspective)
+/////////////////////////////////////////////////////////////////
+struct euclidean_transform_3d
+{
+    float4x4 m_value;
+};
+struct affine_transform_3d
+{
+    float4x4 m_value;
+};
+struct projective_transform_3d
+{
+    float4x4 m_value;
+};
+/////////////////////////////////////////////////////////////////
+
+point_ps project_p_os(point_os v_os, euclidean_transform_3d world, euclidean_transform_3d view, projective_transform_3d perspective)
 {
     //three muls for greater accuracy
-    float4 result = mul(mul(mul(float4(v_os.m_value, 1.0f), world), view), perspective);
+    float4 result = mul(mul(mul(float4(v_os.m_value, 1.0f), world.m_value), view.m_value), perspective.m_value);
     return make_point_ps(result);
 }
 
-point_ws transform_p_os(point_os v_os, float4x4 world)
+point_ws transform_p_os(point_os v_os, euclidean_transform_3d world)
 {
-    float4 result = mul(float4(v_os.m_value, 1.0f), world);
+    float4 result = mul(float4(v_os.m_value, 1.0f), world.m_value);
     return make_point_ws(result.xyz);
 }
 
-vector_ws transform_v_os(vector_os v_os, float4x4 world)
+vector_ws transform_v_os(vector_os v_os, euclidean_transform_3d world)
 {
-    float4 result = mul(float4(v_os.m_value, 0.0f), world);
+    float4 result = mul(float4(v_os.m_value, 0.0f), world.m_value);
     return make_point_ws(result.xyz);
 }
 

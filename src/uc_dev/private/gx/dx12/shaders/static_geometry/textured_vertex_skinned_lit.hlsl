@@ -1,7 +1,7 @@
 #include "../default_signature.hlsli"
 
+#include "vector_space.hlsli"
 #include "frame.hlsli"
-#include "transform.hlsli"
 #include "transform_skinned.hlsli"
 
 struct interpolants
@@ -21,7 +21,7 @@ struct input
 
 cbuffer per_draw_call : register(b1)
 {
-    float4x4 m_world;
+    euclidean_transform_3d m_world;
     float4x4 m_joints_palette[127];
 };
 

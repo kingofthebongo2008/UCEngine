@@ -2,7 +2,7 @@
 #define __per_frame_hlsli__
 cbuffer per_frame   : register(b0)
 {
-    float4x4 m_view;
-    float4x4 m_perspective;
+    euclidean_transform_3d   m_view;
+    projective_transform_3d  m_perspective;
 };
 #endif
