@@ -29,11 +29,11 @@ interpolants main(input i)
 {
     interpolants r;
 
-    float4     position         = float4(i.position, 1.0f);
-    float4     skinned_position = skin_position(position, i.weights, i.indices, m_joints_palette);
-    
+    float4     position = float4(i.position, 1.0f);
+    point_os   skinned_position = make_point_os(skin_position(position, i.weights, i.indices, m_joints_palette).xyz);
+       
     r.uv       = i.uv;
-    r.position = project_vertex( float4(skinned_position.xyz, 1 ), m_world, m_view, m_perspective );
+    r.position = project_p_os(skinned_position, m_world, m_view, m_perspective ).m_value;
 
     return r;
 }

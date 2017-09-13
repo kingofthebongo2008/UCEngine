@@ -28,7 +28,7 @@ interpolants main(input i)
     point_os position_os    = make_point_os(i.position);
     
     r.uv                    = i.uv;
-    r.position              = project_vertex(position_os, m_world, m_view, m_perspective).m_value;
+    r.position              = project_p_os(position_os, m_world, m_view, m_perspective).m_value;
 
     return r;
 }

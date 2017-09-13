@@ -33,10 +33,10 @@ interpolants main(input i)
 
     float4     position         = float4(i.position, 1.0f);
     point_os   skinned_position = make_point_os(skin_position(position, i.weights, i.indices, m_joints_palette).xyz);
-    point_ws   skinned_world    = transform_world( skinned_position, m_world );
+    point_ws   skinned_world    = transform_p_os( skinned_position, m_world );
     
     r.uv                        = i.uv;
-    r.position                  = project_vertex( skinned_position, m_world, m_view, m_perspective ).m_value;
+    r.position                  = project_p_os( skinned_position, m_world, m_view, m_perspective ).m_value;
     r.position_ws               = skinned_world.m_value.xyz;
 
     return r;
