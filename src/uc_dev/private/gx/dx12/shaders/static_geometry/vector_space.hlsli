@@ -1,9 +1,23 @@
 #ifndef __transform_hlsli__
 #define __transform_hlsli__
 
-struct point_ws
+/////////////////////////////////////////////////////////////////
+struct point_3d
 {
     float3 m_value;
+};
+
+struct point_ws : point_3d
+{
+    
+};
+
+struct point_vs : point_3d
+{
+};
+
+struct point_os : point_3d
+{
 };
 
 struct point_ps
@@ -11,15 +25,53 @@ struct point_ps
     float4 m_value;
 };
 
-struct point_vs
+/////////////////////////////////////////////////////////////////
+struct vector_3d
 {
     float3 m_value;
 };
 
-struct point_os
+struct vector_ws : vector_3d
 {
-    float3 m_value;
 };
+
+struct vector_vs : vector_3d
+{
+};
+
+struct vector_os : vector_3d
+{
+};
+
+struct vector_ps
+{
+    float4 m_value;
+};
+/////////////////////////////////////////////////////////////////
+
+struct euclidean_transform_3d
+{
+    float4x4 m_value;
+};
+
+struct affine_transform_3d
+{
+    float4x4 m_value;
+};
+
+struct projective_transform_3d
+{
+    float4x4 m_value;
+};
+
+/////////////////////////////////////////////////////////////////
+
+point_3d make_point_3d(float3 v)
+{
+    point_3d r;
+    r.m_value = v;
+    return r;
+}
 
 point_ws make_point_ws(float3 v)
 {
@@ -49,26 +101,13 @@ point_os make_point_os(float3 v)
     return r;
 }
 
-/////////////////////////////////////////////////////////////////
-struct vector_ws
-{
-    float3 m_value;
-};
 
-struct vector_ps
+vector_3d make_vector_3d(float3 v)
 {
-    float4 m_value;
-};
-
-struct vector_vs
-{
-    float3 m_value;
-};
-
-struct vector_os
-{
-    float3 m_value;
-};
+    vector_3d r;
+    r.m_value = v;
+    return r;
+}
 
 vector_ws make_vector_ws(float3 v)
 {
@@ -98,21 +137,6 @@ vector_os make_vector_os(float3 v)
     return r;
 }
 
-/////////////////////////////////////////////////////////////////
-struct euclidean_transform_3d
-{
-    float4x4 m_value;
-};
-struct affine_transform_3d
-{
-    float4x4 m_value;
-};
-struct projective_transform_3d
-{
-    float4x4 m_value;
-};
-/////////////////////////////////////////////////////////////////
-
 point_ps project_p_os(point_os v_os, euclidean_transform_3d world, euclidean_transform_3d view, projective_transform_3d perspective)
 {
     //three muls for greater accuracy
@@ -120,16 +144,28 @@ point_ps project_p_os(point_os v_os, euclidean_transform_3d world, euclidean_tra
     return make_point_ps(result);
 }
 
+point_3d transform_p_3d(point_3d p, euclidean_transform_3d t)
+{
+    float4 result = mul(float4(p.m_value, 1.0f), t.m_value);
+    return make_point_3d(result.xyz);
+}
+
+vector_3d transform_v_3d(vector_3d v, euclidean_transform_3d world)
+{
+    float4 result = mul(float4(v.m_value, 0.0f), world.m_value);
+    return make_vector_3d(result.xyz);
+}
+
 point_ws transform_p_os(point_os v_os, euclidean_transform_3d world)
 {
-    float4 result = mul(float4(v_os.m_value, 1.0f), world.m_value);
-    return make_point_ws(result.xyz);
+    point_3d r0 = transform_p_3d(v_os, world);
+    return make_point_ws(r0.m_value);
 }
 
 vector_ws transform_v_os(vector_os v_os, euclidean_transform_3d world)
 {
-    float4 result = mul(float4(v_os.m_value, 0.0f), world.m_value);
-    return make_point_ws(result.xyz);
+    vector_3d r0 = transform_v_3d(v_os, world);
+    return make_vector_ws(r0.m_value);
 }
 
 
