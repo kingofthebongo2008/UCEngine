@@ -147,8 +147,10 @@ namespace uc
                 auto resources = ctx->m_resources;
                 //now start new ones
                 auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
+                graphics->pix_begin_event(L"do_render_shadows");
                 begin_render_shadows(ctx, graphics.get());
                 end_render_shadows(ctx, graphics.get());
+                graphics->pix_end_event();
                 return graphics;
             }
         }
