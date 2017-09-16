@@ -317,6 +317,11 @@ namespace uc
                     set_dynamic_descriptors(root_index, &Handle, 1, offset);
                 }
 
+                void set_name(const wchar_t* name)
+                {
+                    list()->SetName(name);
+                }
+
                 private:
 
                 void commit_root_descriptor_tables()
