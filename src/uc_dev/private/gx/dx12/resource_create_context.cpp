@@ -515,7 +515,7 @@ namespace uc
 
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
 
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON, &v);
+                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
                 resource->SetName(L"Depth Buffer");
 
                 // Create the shader resource view
@@ -563,7 +563,7 @@ namespace uc
 
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
 
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON, &v);
+                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
                 resource->SetName(L"MSAA Depth Buffer");
 
                 // Create the shader resource view

@@ -84,13 +84,13 @@ namespace uc
                         resources->swap_chain(device_resources::swap_chains::background)->set_source_size(width, height);
 
                         graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
-                        graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+                        //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
                         graphics->set_render_target(back_buffer, ctx->m_view_depth_buffer);
                         graphics->clear(back_buffer);
 
                         //Per pass
-                        graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_COMMON);
+                        //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
                         graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
                         return graphics;
@@ -109,6 +109,20 @@ namespace uc
                 if (world)
                 {
                     return world->render_depth(ctx);
+                }
+                else
+                {
+                    //todo: use optional here
+                    return gx::dx12::managed_graphics_command_context();
+                }
+            }
+
+            gx::dx12::managed_graphics_command_context render_world_manager::render_shadows(shadow_render_context* ctx)
+            {
+                std::shared_ptr< render_world > world = m_world;
+                if (world)
+                {
+                    return world->render_shadows(ctx);
                 }
                 else
                 {
