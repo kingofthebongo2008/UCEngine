@@ -48,8 +48,6 @@ namespace uc
             o.m_static_mesh_vertex_count = 1000000;
 
             m_geometry_allocator            = std::make_unique<gx::geo::geometry_allocator>(m_resources.resource_create_context(), o);
-            m_shadow_depth_buffer           = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT));
-
         }
 
         void renderer_impl::initialize_resources()
@@ -295,13 +293,15 @@ namespace uc
             m_resources.wait_for_gpu();
             m_resources.set_window(environment);
             m_view_depth_buffer.reset();
+            m_shadow_depth_buffer.reset();
             m_window = environment->m_window;
 
             auto width = static_cast<uint32_t> (environment->m_back_buffer_size.Width);
             auto height = static_cast<uint32_t> (environment->m_back_buffer_size.Height);
 
-            //Recreate view depth buffer
+            //Recreate view depth buffer and the msaa shadows depth buffer
             m_view_depth_buffer = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
+            m_shadow_depth_buffer = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT));
         }
 
         void renderer_impl::render()
@@ -411,7 +411,7 @@ namespace uc
                 ctx.m_front_buffer_size.m_height = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
                 ctx.m_back_buffer_scaled_size.m_width = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height = static_cast<uint16_t>(height);
-                //pending_shadows = m_render_world_manager->render_shadows(&ctx);
+                pending_shadows = m_render_world_manager->render_shadows(&ctx);
             });
 
        
