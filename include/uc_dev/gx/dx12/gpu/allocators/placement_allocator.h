@@ -87,8 +87,8 @@ namespace uc
                     if (align(m_heap_offset, info.Alignment) + info.SizeInBytes <= m_size)
                     {
                         Microsoft::WRL::ComPtr<ID3D12Resource> resource;
-                        throw_if_failed(m_device->CreatePlacedResource(m_heap.Get(), m_heap_offset, desc, initialState, optimizedClearValue, IID_PPV_ARGS(&resource)));
                         m_heap_offset = align(m_heap_offset, info.Alignment);
+                        throw_if_failed(m_device->CreatePlacedResource(m_heap.Get(), m_heap_offset, desc, initialState, optimizedClearValue, IID_PPV_ARGS(&resource)));
                         m_heap_offset += info.SizeInBytes;
                         return resource;
                     }
