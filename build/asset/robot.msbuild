@@ -2,9 +2,9 @@
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-    <robot-textures Include="..\data\meshes_animated\robot\low_poly\gun_lowpoly_color.png">
+    <!--robot-textures Include="..\data\meshes_animated\robot\low_poly\gun_lowpoly_color.png">
       <format>bc1_unorm_srgb</format>
-    </robot-textures>
+    </robot-textures-->
     <robot-textures Include="..\data\meshes_animated\robot\low_poly\robot_lowpoly_color.png">
       <format>bc1_unorm_srgb</format>
     </robot-textures>
