@@ -167,7 +167,7 @@ namespace uc
 
                 g.run([this]()
                 {
-                    m_render_world_manager->show_world(gxu::world_id::scene2);
+                    m_render_world_manager->show_world(gxu::world_id::scene9);
                 });
 
                 io::console::get_updater()->register_notifier( this );
@@ -233,7 +233,7 @@ namespace uc
                 "Skeleton",
                 "Robot",
                 "Military Mechanic",
-		"Shadows"
+                "Shadows"
             };
 
             static gxu::world_id scene_id[] =
