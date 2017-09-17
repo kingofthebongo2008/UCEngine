@@ -104,6 +104,7 @@ namespace uc
                 static void end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
 
                 static void set_view_port(const render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
+                static void set_view_port(const shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
             };
         }
     }

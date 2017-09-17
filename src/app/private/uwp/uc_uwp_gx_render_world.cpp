@@ -133,6 +133,16 @@ namespace uc
                 graphics->set_scissor_rectangle(scissor(width, height));
             }
 
+            void render_world::set_view_port(const shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
+            {
+                auto width  = ctx->m_shadow_buffer_size.m_width;
+                auto height = ctx->m_shadow_buffer_size.m_height;
+
+                //Per pass  -> frequency 0
+                graphics->set_view_port(viewport(width, height));
+                graphics->set_scissor_rectangle(scissor(width, height));
+            }
+
             gx::dx12::managed_graphics_command_context render_world::do_render_depth(render_context* ctx)
             {
                 auto resources = ctx->m_resources;
