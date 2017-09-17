@@ -32,6 +32,7 @@ namespace uc
                 void do_update(update_context* ctx) override;
                 gx::dx12::managed_graphics_command_context do_render(render_context* ctx) override;
                 gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx) override;
+                gx::dx12::managed_graphics_command_context do_render_shadows(shadow_render_context* ctx) override;
 
 
                 std::unique_ptr<gxu::skinned_render_object>                     m_military_mechanic;
@@ -51,6 +52,7 @@ namespace uc
                 gx::dx12::graphics_pipeline_state*                              m_skeleton_pso;
                 std::vector<gx::position_3d>                                    m_skeleton_positions;
 
+                mem::aligned_unique_ptr<gx::pinhole_camera>	m_shadow_camera     = mem::make_aligned_unique_ptr<gx::pinhole_camera>();
 
                 struct skinned_draw_constants
                 {
@@ -71,6 +73,7 @@ namespace uc
 
                 //per frame and per pass constants
                 frame_constants        m_constants_frame;
+                frame_constants        m_constants_frame_shadows;
                 skinned_draw_constants m_constants_pass;
 
             };

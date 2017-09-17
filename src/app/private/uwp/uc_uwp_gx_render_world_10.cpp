@@ -95,6 +95,10 @@ namespace uc
                 m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));
                 m_camera->set_far(1200.0f);
 
+                *m_shadow_camera = *m_camera;
+
+                m_shadow_camera->set_aspect_ratio(1.0f);
+
                 g.wait();
 
                 m_animation_instance = std::make_unique<gx::anm::animation_instance>(m_military_mechanic_animations.get(), m_military_mechanic_skeleton.get());
@@ -116,6 +120,9 @@ namespace uc
 
                 m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                 m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
+
+                m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
+                m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
 
 
                 {
@@ -235,6 +242,48 @@ namespace uc
                 }
 
                 end_render_depth(ctx, graphics.get());
+
+                return graphics;
+            }
+
+            gx::dx12::managed_graphics_command_context render_world_10::do_render_shadows(shadow_render_context* ctx)
+            {
+                //now start new ones
+                auto resources      = ctx->m_resources;
+                auto graphics       = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
+
+                auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Pass");
+
+                begin_render_shadows(ctx, graphics.get());
+
+                {
+                    set_view_port(ctx, graphics.get());
+                    graphics->set_descriptor_heaps();
+                }
+
+                //Per many draw calls  -> frequency 1
+                graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                graphics->set_pso(m_depth_prepass);
+                graphics->set_descriptor_heaps();
+
+                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);
+
+                //mechanic
+                {
+                    //todo: move this into a big buffer for the whole scene
+                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
+
+                    //geometry
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                    graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_index_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
+
+                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
+                    graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
+                }
+
+                end_render_shadows(ctx, graphics.get());
 
                 return graphics;
             }
