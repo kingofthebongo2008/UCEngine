@@ -51,6 +51,7 @@ namespace uc
             struct shadow_render_context : public render_context
             {
                 gx::dx12::gpu_msaa_depth_buffer* m_shadow_depth_buffer;
+                size                             m_shadow_buffer_size;
             };
 
             struct update_context
