@@ -2,6 +2,7 @@
 #include "uc_uwp_gx_render_world.h"
 
 #include <uc_dev/gx/dx12/gpu/pixel_buffer.h>
+#include <uc_dev/gx/dx12/cmd/profiler.h>
 
 #include "uc_uwp_device_resources.h"
 
@@ -147,10 +148,12 @@ namespace uc
                 auto resources = ctx->m_resources;
                 //now start new ones
                 auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
-                graphics->pix_begin_event(L"do_render_shadows");
-                begin_render_shadows(ctx, graphics.get());
-                end_render_shadows(ctx, graphics.get());
-                graphics->pix_end_event();
+
+                {
+                    auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"do_render_shadows");
+                    begin_render_shadows(ctx, graphics.get());
+                    end_render_shadows(ctx, graphics.get());
+                }
                 return graphics;
             }
         }
