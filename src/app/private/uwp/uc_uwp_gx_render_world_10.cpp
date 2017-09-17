@@ -6,6 +6,7 @@
 #include <array>
 
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
+#include <uc_dev/gx/dx12/cmd/profiler.h>
 
 #include <uc_dev/gx/lip/file.h>
 #include <uc_dev/gx/lip_utils.h>
@@ -136,7 +137,7 @@ namespace uc
                 auto resources = ctx->m_resources;
                 auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
-                graphics->pix_begin_event(L"MainPass");
+                auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Main Pass");
 
                 begin_render(ctx, graphics.get());
 
@@ -210,8 +211,6 @@ namespace uc
                 }
 
                 end_render(ctx, graphics.get());
-
-                graphics->pix_end_event();
 
                 return graphics;
             }
