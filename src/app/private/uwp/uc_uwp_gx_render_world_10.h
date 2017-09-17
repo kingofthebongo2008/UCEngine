@@ -50,6 +50,29 @@ namespace uc
 
                 gx::dx12::graphics_pipeline_state*                              m_skeleton_pso;
                 std::vector<gx::position_3d>                                    m_skeleton_positions;
+
+
+                struct skinned_draw_constants
+                {
+                    math::float4x4                  m_world;
+                    std::array<math::float4x4, 127> m_joints_palette;
+
+                    skinned_draw_constants()
+                    {
+                        m_world = math::identity_matrix();
+
+                        for (auto&& i : m_joints_palette)
+                        {
+                            i = math::identity_matrix();
+                        }
+                    }
+                };
+
+
+                //per frame and per pass constants
+                frame_constants        m_constants_frame;
+                skinned_draw_constants m_constants_pass;
+
             };
         }
     }

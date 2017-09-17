@@ -28,22 +28,6 @@ namespace uc
         {
             namespace details
             {
-                struct skinned_draw_constants
-                {
-                    math::float4x4                  m_world;
-                    std::array<math::float4x4, 127> m_joints_palette;
-
-                    skinned_draw_constants()
-                    {
-                        m_world = math::identity_matrix();
-
-                        for (auto&& i : m_joints_palette)
-                        {
-                            i = math::identity_matrix();
-                        }
-                    }
-                };
-
                 inline math::float4x4 military_mechanic_world_transform(double frame_time)
                 {
                     //todo: move this in the update pahse
@@ -129,6 +113,27 @@ namespace uc
                 m_skeleton_instance->reset();
                 m_animation_instance->accumulate(   m_skeleton_instance.get(), ctx->m_frame_time    );
                 m_skeleton_positions = gx::anm::skeleton_positions(m_military_mechanic_skeleton.get(), m_skeleton_instance->local_transforms());
+
+                m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
+                m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
+
+
+                {
+                    skinned_draw_constants& draw = m_constants_pass;
+                    draw.m_world = uc::math::transpose(*m_military_mechanic_transform);
+
+                    {
+                        auto skeleton = m_military_mechanic_skeleton.get();
+                        auto joints = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
+
+                        for (auto i = 0U; i < joints.size(); ++i)
+                        {
+                            math::float4x4 bind_pose    = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);
+                            math::float4x4 palette      = math::mul(bind_pose, joints[i]);
+                            draw.m_joints_palette[i]    = math::transpose(palette);
+                        }
+                    }
+                }
             }
 
             gx::dx12::managed_graphics_command_context render_world_10::do_render(render_context* ctx)
@@ -151,35 +156,12 @@ namespace uc
                 graphics->set_pso(m_textured_skinned);
                 graphics->set_descriptor_heaps();
 
-                {
-                    frame_constants frame;
-
-                    frame.m_view        = uc::math::transpose(uc::gx::view_matrix(camera()));
-                    frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                }
+                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
 
                 //mechanic
                 {
-                    //draw
-                    details::skinned_draw_constants draw;
-                    draw.m_world = uc::math::transpose(*m_military_mechanic_transform); //// 
-
-                    {
-                        auto skeleton = m_military_mechanic_skeleton.get();
-                        auto joints   = gx::anm::local_to_world_joints2( skeleton, m_skeleton_instance->local_transforms() );
-                        
-                        for (auto i = 0U; i < joints.size(); ++i )
-                        {
-                            math::float4x4 bind_pose = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);
-                            math::float4x4 palette   = math::mul(bind_pose, joints[i]  );
-
-                            draw.m_joints_palette[i] = math::transpose(palette);
-                        }
-                    }
-
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
@@ -235,34 +217,12 @@ namespace uc
                 graphics->set_pso(m_depth_prepass);
                 graphics->set_descriptor_heaps();
 
-                {
-                    frame_constants frame;
-
-                    frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
-                    frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                }
+                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
 
                 //mechanic
                 {
-                    //draw
-                    details::skinned_draw_constants draw;
-                    draw.m_world = uc::math::transpose(*m_military_mechanic_transform); //// 
-
-                    {
-                        auto skeleton = m_military_mechanic_skeleton.get();
-                        auto joints = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
-
-                        for (auto i = 0U; i < joints.size(); ++i)
-                        {
-                            math::float4x4 bind_pose    = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);
-                            math::float4x4 palette      = math::mul(bind_pose, joints[i]);
-                            draw.m_joints_palette[i]    = math::transpose(palette);
-                        }
-                    }
-
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
@@ -270,7 +230,6 @@ namespace uc
                     graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_index_view());
                     graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
                     //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
                     graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
                 }
