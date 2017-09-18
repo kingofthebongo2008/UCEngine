@@ -190,12 +190,10 @@ namespace uc
             math::float4 m_up_ws = math::set(0.0f, 1.0f, 0.0f, 0.0f);
 
             //perspective parameters
-            float   m_fov       = 3.1415f / 4.0f;
-            float   m_width     = 128.0f;
-            float   m_height    = 128.0f;
-            float   m_near      = 0.1f;      //meters
-            float   m_far       = 100.0f;	//meters;
-
+            float   m_width     = 128.0f; //meters
+            float   m_height    = 128.0f; //meters
+            float   m_near      = 0.1f;   //meters
+            float   m_far       = 100.0f; //meters
         };
 
         inline math::float4x4 view_matrix(const pinhole_camera * camera)
