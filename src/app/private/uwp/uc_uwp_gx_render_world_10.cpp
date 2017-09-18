@@ -95,12 +95,23 @@ namespace uc
                 m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));
                 m_camera->set_far(1200.0f);
 
-                *m_shadow_camera = *m_camera;
+                math::float4 light_direction    = math::normalize4(math::vector3(0.0, 1.0, 0.0));
+                math::float4 view_forward       = m_camera->forward();
+                math::float4 shadows_forward    = math::negate(light_direction);
+                math::float4 shadows_up         = math::cross3(shadows_forward, view_forward);
+                //math::float4 shadows_right      = math::cross3( shadows_up, shadows_forward);
 
-                m_shadow_camera->set_aspect_ratio(1.0f);
+                //float4(normalize(float3(1.0, 0.5, 0.5)), 0.0f), m_view.m_value).xyz;
+
+                m_shadow_camera->set_view_position(math::mul(light_direction, math::set(5.0f, 5.0f, 5.0f, 1.0f)));
+                m_shadow_camera->set_forward(shadows_forward);
+                m_shadow_camera->set_up(shadows_up);
+                m_shadow_camera->set_far(10.0f);
+                m_shadow_camera->set_width(5.0f);
+                m_shadow_camera->set_height(5.0f);
+
 
                 g.wait();
-
                 m_animation_instance = std::make_unique<gx::anm::animation_instance>(m_military_mechanic_animations.get(), m_military_mechanic_skeleton.get());
                 m_skeleton_positions.resize(3);
             }

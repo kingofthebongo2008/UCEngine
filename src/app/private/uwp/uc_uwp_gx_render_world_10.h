@@ -52,7 +52,7 @@ namespace uc
                 gx::dx12::graphics_pipeline_state*                              m_skeleton_pso;
                 std::vector<gx::position_3d>                                    m_skeleton_positions;
 
-                mem::aligned_unique_ptr<gx::pinhole_camera>	m_shadow_camera     = mem::make_aligned_unique_ptr<gx::pinhole_camera>();
+                mem::aligned_unique_ptr<gx::orthographic_camera>    m_shadow_camera = mem::make_aligned_unique_ptr<gx::orthographic_camera>();
 
                 struct skinned_draw_constants
                 {
@@ -76,6 +76,7 @@ namespace uc
                 frame_constants        m_constants_frame_shadows;
                 skinned_draw_constants m_constants_pass;
 
+                //light
             };
         }
     }
