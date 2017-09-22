@@ -358,6 +358,104 @@ namespace uc
             return compare_gt(v, z);
         }
 
+        namespace details
+        {
+            // Slow path fallback for permutes that do not map to a single SSE shuffle opcode.
+            template <uint32_t shuffle, bool which_x, bool which_y, bool which_z, bool which_w> struct permute_helper
+            {
+                static inline float4 UC_MATH_CALL permute(afloat4 a, afloat4 b)
+                {
+                    float4 select_mask = set_uint32(which_x ? 0xFFFFFFFF : 0, which_y ? 0xFFFFFFFF : 0, which_z ? 0xFFFFFFFF : 0, which_w ? 0xFFFFFFFF : 0);
+
+                    float4 shuffled1 = _mm_permute_ps(v1, shuffle);
+                    float4 shuffled2 = _mm_permute_ps(v2, shuffle);
+
+                    float4 masked1 = _mm_andnot_ps(select_mask, shuffled1);
+                    float4 masked2 = _mm_and_ps(select_mask, shuffled2);
+
+                    return _mm_or_ps(masked1, masked2);
+                }
+            };
+
+            // Fast path for permutes that only read from the first vector.
+            template<uint32_t shuffle> struct permute_helper<shuffle, false, false, false, false>
+            {
+                static inline float4 UC_MATH_CALL permute(afloat4 v1, afloat4) { return _mm_permute_ps(v1, shuffle); }
+            };
+
+            // Fast path for permutes that only read from the second vector.
+            template<uint32_t shuffle> struct permute_helper<shuffle, true, true, true, true>
+            {
+                static inline float4 UC_MATH_CALL permute(afloat4, afloat4 v2) { return _mm_permute_ps(v2, shuffle); }
+            };
+
+            // Fast path for permutes that read XY from the first vector, ZW from the second.
+            template<uint32_t shuffle> struct permute_helper<shuffle, false, false, true, true>
+            {
+                static inline float4 UC_MATH_CALL permute(afloat4 v1, afloat4 v2) { return _mm_shuffle_ps(v1, v2, shuffle); }
+            };
+
+            // Fast path for permutes that read XY from the second vector, ZW from the first.
+            template<uint32_t shuffle> struct permute_helper<shuffle, true, true, false, false>
+            {
+                static inline float4 UC_MATH_CALL permute(afloat4 v1, afloat4 v2) { return _mm_shuffle_ps(v2, v1, shuffle); }
+            };
+        }
+
+        enum permute_component : uint32_t
+        {
+            permute_0x = 0,
+            permute_0y = 1,
+            permute_0z = 2,
+            permute_0w = 3,
+            permute_1x = 4,
+            permute_1y = 5,
+            permute_1z = 6,
+            permute_1w = 7
+        };
+
+        template <uint32_t v1, uint32_t v2, uint32_t v3, uint32_t v4> inline float4 UC_MATH_CALL permute(afloat4 value1, afloat4 value2)
+        {
+            static_assert(v1 <= 7, "template parameter out of range");
+            static_assert(v2 <= 7, "template parameter out of range");
+            static_assert(v3 <= 7, "template parameter out of range");
+            static_assert(v4 <= 7, "template parameter out of range");
+
+            const uint32_t shuffle = _MM_SHUFFLE(v4 & 3, v3 & 3, v2 & 3, v1 & 3);
+
+            const bool which_x = v1 > 3;
+            const bool which_y = v2 > 3;
+            const bool which_z = v3 > 3;
+            const bool which_w = v4 > 3;
+
+            return details::permute_helper<shuffle, which_x, which_y, which_z, which_w>::permute(value1, value2);
+        }
+
+        // Special-case permute templates
+        template<> inline float4      UC_MATH_CALL     permute<0, 1, 2, 3>(afloat4 v1, afloat4 v2) { (v2); return v1; }
+        template<> inline float4      UC_MATH_CALL     permute<4, 5, 6, 7>(afloat4 v1, afloat4 v2) { (v1); return v2; }
+
+        template<> inline float4      UC_MATH_CALL     permute<0, 1, 4, 5>(afloat4 v1, afloat4 v2) { return _mm_movelh_ps(v1, v2); }
+        template<> inline float4      UC_MATH_CALL     permute<6, 7, 2, 3>(afloat4 v1, afloat4 v2) { return _mm_movehl_ps(v1, v2); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 4, 1, 5>(afloat4 v1, afloat4 v2) { return _mm_unpacklo_ps(v1, v2); }
+        template<> inline float4      UC_MATH_CALL     permute<2, 6, 3, 7>(afloat4 v1, afloat4 v2) { return _mm_unpackhi_ps(v1, v2); }
+        template<> inline float4      UC_MATH_CALL     permute<2, 3, 6, 7>(afloat4 v1, afloat4 v2) { return _mm_castpd_ps(_mm_unpackhi_pd(_mm_castps_pd(v1), _mm_castps_pd(v2))); }
+
+        template<> inline float4      UC_MATH_CALL     permute<4, 1, 2, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x1); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 5, 2, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x2); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 5, 2, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x3); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 1, 6, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x4); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 1, 6, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x5); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 5, 6, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x6); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 5, 6, 3>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x7); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 1, 2, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x8); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 1, 2, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0x9); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 5, 2, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0xA); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 5, 2, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0xB); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 1, 6, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0xC); }
+        template<> inline float4      UC_MATH_CALL     permute<4, 1, 6, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0xD); }
+        template<> inline float4      UC_MATH_CALL     permute<0, 5, 6, 7>(afloat4 v1, afloat4 v2) { return _mm_blend_ps(v1, v2, 0xE); }
+
 
         //simple math operations
         inline float4 UC_MATH_CALL add(afloat4 v1, afloat4 v2)
