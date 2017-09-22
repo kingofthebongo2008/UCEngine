@@ -18,7 +18,7 @@ PipelineStateObject static_geometry =
 
 PipelineStateObject static_geometry_shadows : static_geometry =
 {
-    .SampleDescription      = { .Count = 1 .Quality = 0 }
+    .SampleDescription      = { .Count = 4 .Quality = 0 }
 }
 
 InputLayout position = 
@@ -54,13 +54,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject depth_prepass_skinned : static_geometry =
-{
-    .VertexShader           = depth_prepass_vertex_skinned
-    .InputLayout            = position
-}
-
-PipelineStateObject depth_prepass_skinned_shadows : static_geometry_shadows =
+PipelineStateObject shadows_skinned: static_geometry_shadows =
 {
     .VertexShader           = depth_prepass_vertex_skinned
     .InputLayout            = position

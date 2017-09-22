@@ -15,6 +15,7 @@
 
 #include <autogen/shaders/textured_skinned_lit.h>
 #include <autogen/shaders/depth_prepass_skinned.h>
+#include <autogen/shaders/shadows_skinned.h>
 #include <autogen/shaders/skeleton.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
@@ -64,7 +65,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit::create_pso);
+                    m_skinned_textured_lit = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit::create_pso);
                 });
 
                 g.run([this, c]
@@ -76,7 +77,13 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_depth_prepass = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_skinned::create_pso);
+                    m_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_skinned::create_pso);
+                });
+
+                g.run([this, c]
+                {
+                    auto resources = c->m_resources;
+                    m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::shadows_skinned::create_pso);
                 });
 
                 //load preprocessed textured model
@@ -95,21 +102,18 @@ namespace uc
                 m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));
                 m_camera->set_far(1200.0f);
 
-                math::float4 light_direction    = math::normalize4(math::vector3(0.0, 1.0, 0.0));
+                math::float4 light_direction    = math::normalize3(math::vector3(0.0, 1.0, 0.0));
                 math::float4 view_forward       = m_camera->forward();
                 math::float4 shadows_forward    = math::negate(light_direction);
                 math::float4 shadows_up         = math::cross3(shadows_forward, view_forward);
-                //math::float4 shadows_right      = math::cross3( shadows_up, shadows_forward);
 
-                //float4(normalize(float3(1.0, 0.5, 0.5)), 0.0f), m_view.m_value).xyz;
-
-                m_shadow_camera->set_view_position(math::mul(light_direction, math::set(5.0f, 5.0f, 5.0f, 1.0f)));
+                m_shadow_camera->set_view_position(math::add( math::point3(0,0,0) , math::mul(light_direction, 5)));
                 m_shadow_camera->set_forward(shadows_forward);
                 m_shadow_camera->set_up(shadows_up);
-                m_shadow_camera->set_far(10.0f);
-                m_shadow_camera->set_width(5.0f);
-                m_shadow_camera->set_height(5.0f);
-
+                m_shadow_camera->set_near(1.0f);
+                m_shadow_camera->set_far(2.0f);
+                m_shadow_camera->set_width(0.5f);
+                m_shadow_camera->set_height(0.5f);
 
                 g.wait();
                 m_animation_instance = std::make_unique<gx::anm::animation_instance>(m_military_mechanic_animations.get(), m_military_mechanic_skeleton.get());
@@ -171,7 +175,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_textured_skinned);
+                graphics->set_pso(m_skinned_textured_lit);
                 graphics->set_descriptor_heaps();
 
                 graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
@@ -232,7 +236,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
+                graphics->set_pso(m_skinned_depth);
                 graphics->set_descriptor_heaps();
 
                 graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
@@ -274,7 +278,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
+                graphics->set_pso(m_skinned_shadows);
                 graphics->set_descriptor_heaps();
 
                 graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);

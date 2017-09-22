@@ -27,6 +27,13 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows_skinned.pso">
+      <EntryPointName>shadows_skinned</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_skinned.pso">
       <EntryPointName>depth_prepass_skinned</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
