@@ -105,9 +105,15 @@ namespace uc
             return _mm_shuffle_ps(value1, value2, shuffle_k);
         }
 
+        template <uint32_t v1, uint32_t v2, uint32_t v3, uint32_t v4> inline float4 UC_MATH_CALL permute(afloat4 value1)
+        {
+            const uint32_t shuffle_k = _MM_SHUFFLE(v4, v3, v2, v1);
+            return _mm_permute_ps(value1, shuffle_k);
+        }
+
         template <uint32_t v1, uint32_t v2, uint32_t v3, uint32_t v4> inline float4 UC_MATH_CALL swizzle(afloat4 value)
         {
-            return shuffle<v1, v2, v3, v4>(value, value);
+            return permute<v1, v2, v3, v4>(value);
         }
 
         inline float4 UC_MATH_CALL merge_xy(afloat4 v1, afloat4 v2)
@@ -605,10 +611,9 @@ namespace uc
         {
             template <uint32_t c> inline float UC_MATH_CALL get_component(afloat4 v)
             {
+
                 float4 v1 = swizzle<c, c, c, c>(v);
-                float __declspec(align(16)) f;
-                store1(&f, v1);
-                return f;
+                return _mm_cvtss_f32(v1);
             }
         }
 
