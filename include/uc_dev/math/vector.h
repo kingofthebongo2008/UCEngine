@@ -311,6 +311,12 @@ namespace uc
             return _mm_cmpeq_ps(v1, v2);
         }
 
+        inline float4 UC_MATH_CALL compare_eq_int(afloat4 v1, afloat4 v2)
+        {
+            __m128i V = _mm_cmpeq_epi32(_mm_castps_si128(v1), _mm_castps_si128(v2));
+            return _mm_castsi128_ps(V);
+        }
+
         inline float4 UC_MATH_CALL compare_lt(afloat4 v1, afloat4 v2)
         {
             return _mm_cmplt_ps(v1, v2);
@@ -375,7 +381,7 @@ namespace uc
             // Slow path fallback for permutes that do not map to a single SSE shuffle opcode.
             template <uint32_t shuffle, bool which_x, bool which_y, bool which_z, bool which_w> struct permute_helper
             {
-                static inline float4 UC_MATH_CALL permute(afloat4 a, afloat4 b)
+                static inline float4 UC_MATH_CALL permute(afloat4 v1, afloat4 v2)
                 {
                     float4 select_mask = set_uint32(which_x ? 0xFFFFFFFF : 0, which_y ? 0xFFFFFFFF : 0, which_z ? 0xFFFFFFFF : 0, which_w ? 0xFFFFFFFF : 0);
 
