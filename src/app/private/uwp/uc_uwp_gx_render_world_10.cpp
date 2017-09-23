@@ -103,20 +103,15 @@ namespace uc
                 m_camera->set_far(1200.0f);
 
 
-                //do a scene bounding volume.
-                math::float4 p0 = math::point3(0.0f,0.0f,0.0f);
-                math::float4 p1 = math::vector3( 10,10,10 );
-                math::aabb r    = { p0, p1 };
-
-
-                math::float4 light_direction    = math::normalize3(math::vector3(0.0, 1.0, 0.0));
-                math::float4 view_forward       = m_camera->forward();
-                math::float4 shadows_forward    = math::negate(light_direction);
-                math::float4 shadows_up         = math::orthogonal3_vector(light_direction);
+                math::float4 light_direction        = math::normalize3(math::vector3(0.0, 1.0, 0.0));
+                math::float4 view_forward           = m_camera->forward();
+                math::float4 shadows_forward        = math::negate(light_direction);
+                math::float4 shadows_up             = math::orthogonal3_vector(light_direction);
 
                 m_shadow_camera->set_view_position(math::add( math::point3(0,0,0) , math::mul(light_direction, 5)));
                 m_shadow_camera->set_forward(shadows_forward);
                 m_shadow_camera->set_up(shadows_up);
+
                 m_shadow_camera->set_near(1.0f);
                 m_shadow_camera->set_far(2.0f);
                 m_shadow_camera->set_width(0.5f);
@@ -143,8 +138,28 @@ namespace uc
                 m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                 m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
 
-                m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
-                m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
+
+                {
+
+                    //do a scene bounding volume.
+                    math::float4 p0 = math::point3(0.0f, 0.0f, 0.0f);
+                    math::float4 p1 = math::vector3(3, 3, 3);
+                    math::aabb1 scene = { p0, p1 };
+
+                    math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
+                    math::aabb1 scene_bounds_vs = math::transform(scene, view);
+
+                    math::float4 aabb_min = math::bounds_min(scene_bounds_vs);
+                    math::float4 aabb_max = math::bounds_max(scene_bounds_vs);
+
+                    math::float4x4 perspective = math::orthographic_offset_center_lh(math::get_x(aabb_min), math::get_x(aabb_max), math::get_y(aabb_min), math::get_y(aabb_max), math::get_z(aabb_min), math::get_z(aabb_max));
+
+
+                    m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
+                    //m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
+                    m_constants_frame_shadows.m_perspective = uc::math::transpose(perspective);
+
+                }
 
 
                 {
