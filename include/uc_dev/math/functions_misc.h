@@ -17,7 +17,8 @@ namespace uc
             const float b = n.x * n.y * a;
             b1 = Vec3f(1.0f + sign * n.x * n.x * a, sign * b, -sign * n.x);
             b2 = Vec3f(b, sign + n.y * n.y * a, -n.y);
-        }        */
+        }
+        */
         
         inline float4 UC_MATH_CALL orthogonal3(afloat4 v)
         {
