@@ -768,6 +768,13 @@ namespace uc
             return math::set(x, y, z, 0.0f);
         }
 
+        //creates a vector in 3d
+        inline float4 UC_MATH_CALL vector3(float4 v)
+        {
+            static const uint32_t __declspec(align(16))   mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
+            return select(zero(), v, load4(mask_xyz));
+        }
+
         // see ken shoemake in graphic gems 4
         // http://www.talisman.org/~erlkonig/misc/shoemake92-arcball.pdf
         // x, y : screen coordinates (2d)
