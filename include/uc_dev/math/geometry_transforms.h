@@ -33,6 +33,13 @@ namespace uc
             r.m_value = load44(address);
         }
 
+        inline euclidean_transform_3d UC_MATH_CALL make_euclidean_transform_3d(afloat4x4 m)
+        {
+            euclidean_transform_3d r;
+            r.m_value = m;
+            return r;
+        }
+
         inline euclidean_transform_3d UC_MATH_CALL loadu_euclidean_transform_3d(const float* __restrict address)
         {
             euclidean_transform_3d r;

@@ -481,6 +481,23 @@ namespace uc
         }
 
         //creates left handed orthographic projection matrix
+        inline float4x4 UC_MATH_CALL orthographic_offset_center_lh(float min_x_vs, float max_x_vs, float min_y_vs, float max_y_vs, float z_near, float z_far)
+        {
+            float4 r  = set( (max_x_vs - min_x_vs), (max_y_vs - min_y_vs ), (z_far - z_near), 1.0f);
+            float4 rp = div(one(), r);
+            float4 r3 = set( -(max_x_vs + min_x_vs), -(max_y_vs + min_y_vs), -z_near, 1.0f);
+
+            float4x4 m;
+
+            m.r[0]    = simd_and( add(rp, rp), mask_x());
+            m.r[1]    = simd_and( add(rp, rp), mask_y());
+            m.r[2]    = simd_and( rp, mask_z());
+            m.r[3]    = mul(rp, r3);
+
+            return m;
+        }
+
+        //creates left handed orthographic projection matrix
         inline float4x4 UC_MATH_CALL inverse_orthographic_lh(float view_width, float view_height, float z_near, float z_far)
         {
             static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
@@ -510,6 +527,8 @@ namespace uc
 
             return m;
         }
+
+
 
         //extracts view frusutm from world view projection matrix
         inline void UC_MATH_CALL extract_view_frustum(afloat4x4 wvp, float frustum[24])
