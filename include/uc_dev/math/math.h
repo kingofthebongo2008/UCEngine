@@ -8,3 +8,4 @@
 #include <uc_dev/math/half.h>
 #include <uc_dev/math/geometry.h>
 #include <uc_dev/math/memory.h>
+#include <uc_dev/math/functions_misc.h>
