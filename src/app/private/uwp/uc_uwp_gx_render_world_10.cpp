@@ -102,10 +102,17 @@ namespace uc
                 m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));
                 m_camera->set_far(1200.0f);
 
+
+                //do a scene bounding volume.
+                math::float4 p0 = math::point3(0.0f,0.0f,0.0f);
+                math::float4 p1 = math::vector3( 10,10,10 );
+                math::aabb r    = { p0, p1 };
+
+
                 math::float4 light_direction    = math::normalize3(math::vector3(0.0, 1.0, 0.0));
                 math::float4 view_forward       = m_camera->forward();
                 math::float4 shadows_forward    = math::negate(light_direction);
-                math::float4 shadows_up         = math::cross3(shadows_forward, view_forward);
+                math::float4 shadows_up         = math::orthogonal3_vector(light_direction);
 
                 m_shadow_camera->set_view_position(math::add( math::point3(0,0,0) , math::mul(light_direction, 5)));
                 m_shadow_camera->set_forward(shadows_forward);
@@ -299,7 +306,6 @@ namespace uc
                 }
 
                 end_render_shadows(ctx, graphics.get());
-
                 return graphics;
             }
             
