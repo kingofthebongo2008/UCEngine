@@ -147,7 +147,10 @@
     <ClInclude Include="..\include\uc_dev\lzham\loader.h" />
     <ClInclude Include="..\include\uc_dev\math\math.h" />
     <ClInclude Include="..\include\uc_dev\math\functions.h" />
+    <ClInclude Include="..\include\uc_dev\math\functions_misc.h" />
     <ClInclude Include="..\include\uc_dev\math\geometry.h" />
+    <ClInclude Include="..\include\uc_dev\math\geometry_transforms.h" />
+    <ClInclude Include="..\include\uc_dev\math\geometry_functions.h" />
     <ClInclude Include="..\include\uc_dev\math\graphics.h" />
     <ClInclude Include="..\include\uc_dev\math\half.h" />
     <ClInclude Include="..\include\uc_dev\math\matrix.h" />
