@@ -50,31 +50,3 @@ namespace uc
     }
 }
 
-    /*
-
-inline XMVECTOR XM_CALLCONV XMVector3Orthogonal
-(
-    FXMVECTOR V
-)
-{
-    XMVECTOR Zero = XMVectorZero();
-    XMVECTOR Z = XMVectorSplatZ(V);
-    XMVECTOR YZYY = XMVectorSwizzle<XM_SWIZZLE_Y, XM_SWIZZLE_Z, XM_SWIZZLE_Y, XM_SWIZZLE_Y>(V);
-
-    XMVECTOR NegativeV = XMVectorSubtract(Zero, V);
-
-    XMVECTOR ZIsNegative = XMVectorLess(Z, Zero);
-    XMVECTOR YZYYIsNegative = XMVectorLess(YZYY, Zero);
-
-    XMVECTOR S = XMVectorAdd(YZYY, Z);
-    XMVECTOR D = XMVectorSubtract(YZYY, Z);
-
-    XMVECTOR Select = XMVectorEqualInt(ZIsNegative, YZYYIsNegative);
-
-    XMVECTOR R0 = XMVectorPermute<XM_PERMUTE_1X, XM_PERMUTE_0X, XM_PERMUTE_0X, XM_PERMUTE_0X>(NegativeV, S);
-    XMVECTOR R1 = XMVectorPermute<XM_PERMUTE_1X, XM_PERMUTE_0X, XM_PERMUTE_0X, XM_PERMUTE_0X>(V, D);
-
-    return XMVectorSelect(R1, R0, Select);
-}
-*/
-
