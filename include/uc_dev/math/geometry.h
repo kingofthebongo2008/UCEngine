@@ -218,11 +218,13 @@ namespace uc
             float4 m_z34;   // zmin,  zmax, zmin, zmax
         };
 
-        struct aabb
+        struct aabb_center_diagonal
         {
             float4 m_center;
-            float4 m_diagonal;  //must be positive
+            float4 m_diagonal;  //must be positive, connects the min-max vertex
         };
+
+        using aabb = aabb_center_diagonal;
 
         struct frustum
         {
