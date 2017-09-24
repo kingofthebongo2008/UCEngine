@@ -125,14 +125,34 @@ namespace uc
             }
 
             //perspective parameters
-            float width() const
+            float x_min() const
             {
-                return m_width;
+                return m_x_min;
             }
 
-            float height() const
+            float x_max() const
             {
-                return m_height;
+                return m_x_max;
+            }
+
+            float y_min() const
+            {
+                return m_y_min;
+            }
+
+            float y_max() const
+            {
+                return m_y_max;
+            }
+
+            float z_min() const
+            {
+                return m_near;
+            }
+
+            float z_max() const
+            {
+                return m_far;
             }
 
             float get_near() const
@@ -162,22 +182,32 @@ namespace uc
             }
 
             //perspective parameters
-            void set_width(float width)
+            void set_x_min(float value)
             {
-                m_width = width;
+                m_x_min = value;
             }
 
-            void set_height(float height)
+            void set_x_max(float value)
             {
-                m_height = height;
+                m_x_max = value;
             }
 
-            void set_near(float	value)
+            void set_y_min(float	value)
+            {
+                m_y_min = value;
+            }
+
+            void set_y_max(float	value)
+            {
+                m_y_max = value;
+            }
+
+            void set_z_min(float	value)
             {
                 m_near = value;
             }
 
-            void set_far(float	value)
+            void set_z_max(float	value)
             {
                 m_far = value;
             }
@@ -190,10 +220,14 @@ namespace uc
             math::float4 m_up_ws = math::set(0.0f, 1.0f, 0.0f, 0.0f);
 
             //perspective parameters
-            float   m_width     = 128.0f; //meters
-            float   m_height    = 128.0f; //meters
-            float   m_near      = 0.1f;   //meters
-            float   m_far       = 100.0f; //meters
+            float   m_x_min         = -1.0f;    //meters
+            float   m_x_max         =  1.0f;    //meters
+
+            float   m_y_min         = -1.0f;    //meters
+            float   m_y_max         = 1.0f;     //meters
+            
+            float   m_near          = 1.0f;     //meters
+            float   m_far           = 100.0f;   //meters
         };
 
         inline math::float4x4 view_matrix(const pinhole_camera * camera)
@@ -266,22 +300,24 @@ namespace uc
 
         inline math::float4x4 perspective_matrix(const orthographic_camera * camera)
         {
-            return math::orthographic_lh(camera->width(), camera->height(), camera->get_near(), camera->get_far());
+            return math::orthographic_offset_center_lh(camera->x_min(), camera->x_max(), camera->y_min(), camera->y_max(), camera->get_near(), camera->get_far());
         }
 
         inline math::float4x4 perspective_matrix(const orthographic_camera & camera)
         {
-            return math::orthographic_lh(camera.width(), camera.height(), camera.get_near(), camera.get_far());
+            return math::orthographic_offset_center_lh(camera.x_min(), camera.x_max(), camera.y_min(), camera.y_max(), camera.get_near(), camera.get_far());
         }
 
         inline math::float4x4 inverse_perspective_matrix(const orthographic_camera * camera)
         {
-            return math::inverse_orthographic_lh(camera->width(), camera->height(), camera->get_near(), camera->get_far());
+            assert(false); //not implemented
+            return math::orthographic_offset_center_lh(camera->x_min(), camera->x_max(), camera->y_min(), camera->y_max(), camera->get_near(), camera->get_far());
         }
 
         inline math::float4x4 inverse_perspective_matrix(const orthographic_camera& camera)
         {
-            return math::inverse_orthographic_lh(camera.width(), camera.height(), camera.get_near(), camera.get_far());
+            assert(false); //not implemented
+            return math::orthographic_offset_center_lh(camera.x_min(), camera.x_max(), camera.y_min(), camera.y_max(), camera.get_near(), camera.get_far());
         }
 
         inline math::float4x4 vp_matrix(const pinhole_camera * camera)

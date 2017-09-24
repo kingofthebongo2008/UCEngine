@@ -112,11 +112,6 @@ namespace uc
                 m_shadow_camera->set_forward(shadows_forward);
                 m_shadow_camera->set_up(shadows_up);
 
-                m_shadow_camera->set_near(1.0f);
-                m_shadow_camera->set_far(2.0f);
-                m_shadow_camera->set_width(0.5f);
-                m_shadow_camera->set_height(0.5f);
-
                 g.wait();
                 m_animation_instance = std::make_unique<gx::anm::animation_instance>(m_military_mechanic_animations.get(), m_military_mechanic_skeleton.get());
                 m_skeleton_positions.resize(3);
@@ -141,23 +136,29 @@ namespace uc
 
                 {
 
-                    //do a scene bounding volume.
+                    //do a scene bounding volume, something that encompasses all meshes, should be as tight as possible. transform it to view space and make the orthogonal projection
                     math::float4 p0 = math::point3(0.0f, 0.0f, 0.0f);
-                    math::float4 p1 = math::vector3(3, 3, 3);
+                    math::float4 p1 = math::vector3(1.0f, 2.5f, 1.0f);
                     math::aabb1 scene = { p0, p1 };
 
                     math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
                     math::aabb1 scene_bounds_vs = math::transform(scene, view);
 
+
                     math::float4 aabb_min = math::bounds_min(scene_bounds_vs);
                     math::float4 aabb_max = math::bounds_max(scene_bounds_vs);
 
-                    math::float4x4 perspective = math::orthographic_offset_center_lh(math::get_x(aabb_min), math::get_x(aabb_max), math::get_y(aabb_min), math::get_y(aabb_max), math::get_z(aabb_min), math::get_z(aabb_max));
+                    m_shadow_camera->set_x_min(math::get_x(aabb_min));
+                    m_shadow_camera->set_x_max(math::get_x(aabb_max));
 
+                    m_shadow_camera->set_y_min(math::get_y(aabb_min));
+                    m_shadow_camera->set_y_max(math::get_y(aabb_max));
+
+                    m_shadow_camera->set_z_min(math::get_z(aabb_min));
+                    m_shadow_camera->set_z_max(math::get_z(aabb_max));
 
                     m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
-                    //m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
-                    m_constants_frame_shadows.m_perspective = uc::math::transpose(perspective);
+                    m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
 
                 }
 
