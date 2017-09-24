@@ -72,6 +72,7 @@ namespace uc
 
             std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_view_depth_buffer;
             std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>                                    m_shadow_depth_buffer;
+            std::unique_ptr<gx::dx12::gpu_texture_2d>                                           m_shadow_map;
 
             io::pad                                                                             m_pad;
             io::pad_state                                                                       m_pad_state;

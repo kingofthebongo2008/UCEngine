@@ -294,14 +294,16 @@ namespace uc
             m_resources.set_window(environment);
             m_view_depth_buffer.reset();
             m_shadow_depth_buffer.reset();
+            m_shadow_map.reset();
             m_window = environment->m_window;
 
             auto width = static_cast<uint32_t> (environment->m_back_buffer_size.Width);
             auto height = static_cast<uint32_t> (environment->m_back_buffer_size.Height);
 
             //Recreate view depth buffer and the msaa shadows depth buffer
-            m_view_depth_buffer = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
-            m_shadow_depth_buffer = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT));
+            m_view_depth_buffer     = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
+            m_shadow_depth_buffer   = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
+            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_texture_2d>(m_resources.resource_create_context()->create_texture_2d(2048, 2048, DXGI_FORMAT_R32G32B32A32_FLOAT));
         }
 
         void renderer_impl::render()
