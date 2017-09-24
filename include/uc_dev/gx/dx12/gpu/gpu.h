@@ -3,6 +3,7 @@
 #include <uc_dev/gx/dx12/gpu/resource.h>
 #include <uc_dev/gx/dx12/gpu/depth_buffer.h>
 #include <uc_dev/gx/dx12/gpu/pixel_buffer.h>
+#include <uc_dev/gx/dx12/gpu/texture_2d.h>
 
 #include <uc_dev/gx/dx12/gpu/allocators/allocators.h>
 
