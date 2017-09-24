@@ -78,3 +78,30 @@ DepthStencilDescription depth_prepass_opaque =
         .StencilFunction    = Less
     }
 }
+
+DepthStencilDescription depth_prepass_inverted_z_opaque =
+{
+    .DepthEnable            = true
+    .DepthWriteMask         = All
+    .DepthFunction          = Greater
+    .StencilEnable          = false
+
+    .StencilReadMask        = 255
+    .StencilWriteMask       = 255
+
+    .FrontFace = 
+    {
+        .StencilFailOp      = Zero
+        .StencilDepthFailOp = Zero
+        .StencilPassOp      = Zero
+        .StencilFunction    = Less
+    }
+
+    .BackFace =
+    {
+        .StencilFailOp      = Zero
+        .StencilDepthFailOp = Zero
+        .StencilPassOp      = Zero
+        .StencilFunction    = Less
+    }
+}

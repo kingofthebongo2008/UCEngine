@@ -112,7 +112,7 @@ namespace uc
             {
                 //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_RESOLVE_SOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
                 graphics->set_render_target(ctx->m_shadow_depth_buffer);
-                graphics->clear_depth(ctx->m_shadow_depth_buffer, 1.0f);
+                graphics->clear_depth(ctx->m_shadow_depth_buffer, 0.0f);
             }
 
             void render_world::end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)

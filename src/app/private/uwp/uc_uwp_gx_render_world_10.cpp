@@ -154,8 +154,8 @@ namespace uc
                     m_shadow_camera->set_y_min(math::get_y(aabb_min));
                     m_shadow_camera->set_y_max(math::get_y(aabb_max));
 
-                    m_shadow_camera->set_z_min(math::get_z(aabb_min));
-                    m_shadow_camera->set_z_max(math::get_z(aabb_max));
+                    m_shadow_camera->set_z_min(math::get_z(aabb_max));
+                    m_shadow_camera->set_z_max(math::get_z(aabb_min));
 
                     m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
                     m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));

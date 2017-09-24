@@ -18,6 +18,7 @@ PipelineStateObject static_geometry =
 
 PipelineStateObject static_geometry_shadows : static_geometry =
 {
+    .DepthStencilState      = depth_prepass_inverted_z_opaque
     .SampleDescription      = { .Count = 4 .Quality = 0 }
 }
 
@@ -33,7 +34,7 @@ InputLayout position =
         .Classification = PER_VERTEX_DATA
     }
 
-	InputLayoutElement = 
+    InputLayoutElement = 
     {
         .SemanticName = "blend_weights"
         .SemanticIndex = 0
@@ -43,7 +44,7 @@ InputLayout position =
         .Classification = PER_VERTEX_DATA
     }
 
-	InputLayoutElement = 
+    InputLayoutElement = 
     {
         .SemanticName	= "blend_indices"
         .SemanticIndex	= 0
