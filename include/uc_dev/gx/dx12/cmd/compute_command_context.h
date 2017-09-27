@@ -25,9 +25,9 @@ namespace uc
                 void set_pso(const compute_pipeline_state* p )
                 {
                     //upload and reset cache for the descriptor tables
-                    m_descriptor_handle_cache.reset();
-                    m_descriptor_handle_cache.m_data = *p->m_root_signature_meta_data;
-                    m_descriptor_handle_cache.mark_all_dirty();
+                    m_descriptor_handle_cache0.reset();
+                    m_descriptor_handle_cache0.m_data = *p->m_root_signature_meta_data;
+                    m_descriptor_handle_cache0.mark_all_dirty();
 
                     list()->SetComputeRootSignature(p->m_root_signature);
                     list()->SetPipelineState(p->m_state);
@@ -110,7 +110,7 @@ namespace uc
 
                 void set_dynamic_descriptors( uint32_t root_index, const D3D12_CPU_DESCRIPTOR_HANDLE handles[], uint32_t count , uint32_t offset = 0 )
                 {
-                    m_descriptor_handle_cache.set_descriptor_handles(root_index, offset, handles, count);
+                    m_descriptor_handle_cache0.set_descriptor_handles(root_index, offset, handles, count);
                 }
 
                 void set_dynamic_descriptor( uint32_t root_index, D3D12_CPU_DESCRIPTOR_HANDLE Handle, uint32_t offset = 0 )
@@ -122,11 +122,11 @@ namespace uc
 
                 void commit_root_descriptor_tables()
                 {
-                    if (m_descriptor_handle_cache.dirty())
+                    if (m_descriptor_handle_cache0.dirty())
                     {
-                        auto size    = m_descriptor_handle_cache.size();
+                        auto size    = m_descriptor_handle_cache0.size();
                         auto handles = this->m_rc->frame_gpu_srv_heap()->allocate_incrementable(size);
-                        m_descriptor_handle_cache.flush(handles, [this](uint32_t root_index, D3D12_GPU_DESCRIPTOR_HANDLE h )
+                        m_descriptor_handle_cache0.flush(handles, [this](uint32_t root_index, D3D12_GPU_DESCRIPTOR_HANDLE h )
                         {
                             set_compute_root_descriptor_table(root_index, h);
                         }
