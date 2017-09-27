@@ -126,6 +126,8 @@
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\common\full_screen_color_pixel.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_vertex.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\indexed_mesh_pixel.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_vertex_skinned_lit.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel_lit.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(ImGuiDirectory)\imgui.cpp" />
@@ -479,5 +481,10 @@
     <ClInclude Include="..\include\uc_dev\gx\geo\static_meshes_allocator.h">
       <Filter>src\gx\geo</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\uc_dev\math\functions_misc.h" />
+    <ClInclude Include="..\include\uc_dev\math\geometry_transforms.h" />
+    <ClInclude Include="..\include\uc_dev\math\geometry_functions.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_10.h" />
   </ItemGroup>
 </Project>

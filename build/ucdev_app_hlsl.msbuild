@@ -93,5 +93,11 @@
       <ShaderPipelineStage>Pixel</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
+
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\shadow_resolve.hlsl">
+      <ShaderPipelineStage>Compute</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+
   </ItemGroup>
 </Project>

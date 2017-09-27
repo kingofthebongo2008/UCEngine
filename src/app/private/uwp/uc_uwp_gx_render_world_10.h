@@ -50,8 +50,7 @@ namespace uc
                 //update state
                 math::managed_float4x4                                          m_military_mechanic_transform = math::make_float4x4();
 
-                gx::dx12::graphics_pipeline_state*                              m_skeleton_pso;
-                std::vector<gx::position_3d>                                    m_skeleton_positions;
+                gx::dx12::compute_pipeline_state*                               m_shadows_resolve;
 
                 mem::aligned_unique_ptr<gx::orthographic_camera>    m_shadow_camera = mem::make_aligned_unique_ptr<gx::orthographic_camera>();
 

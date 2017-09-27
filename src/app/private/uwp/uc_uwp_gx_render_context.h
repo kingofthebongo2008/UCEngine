@@ -14,6 +14,7 @@ namespace uc
         {
             class gpu_depth_buffer;
             class gpu_msaa_depth_buffer;
+            class gpu_color_buffer;
         }
 
         namespace geo
@@ -51,6 +52,7 @@ namespace uc
             struct shadow_render_context : public render_context
             {
                 gx::dx12::gpu_msaa_depth_buffer* m_shadow_depth_buffer;
+                gx::dx12::gpu_color_buffer*      m_shadow_map;
                 size                             m_shadow_buffer_size;
             };
 

@@ -303,7 +303,7 @@ namespace uc
             //Recreate view depth buffer and the msaa shadows depth buffer
             m_view_depth_buffer     = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
             m_shadow_depth_buffer   = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
-            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_texture_2d>(m_resources.resource_create_context()->create_texture_2d(2048, 2048, DXGI_FORMAT_R32G32B32A32_FLOAT));
+            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_color_buffer>(m_resources.resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R32G32B32A32_FLOAT));
         }
 
         void renderer_impl::render()
@@ -402,6 +402,7 @@ namespace uc
                 gxu::shadow_render_context ctx;
                 ctx.m_view_depth_buffer = m_view_depth_buffer.get();
                 ctx.m_shadow_depth_buffer = m_shadow_depth_buffer.get();
+                ctx.m_shadow_map = m_shadow_map.get();
                 ctx.m_shadow_buffer_size.m_width = static_cast<uint16_t>(m_shadow_depth_buffer->width());
                 ctx.m_shadow_buffer_size.m_height = static_cast<uint16_t>(m_shadow_depth_buffer->height());
                 ctx.m_geometry = m_geometry_allocator.get();

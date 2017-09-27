@@ -1,0 +1,9 @@
+PipelineStateObject shadows_resolve =
+{
+    .RootSignature 	   		= default_signature
+    .ComputeShader			= shadow_resolve
+}
+
+
+
+

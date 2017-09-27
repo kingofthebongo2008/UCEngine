@@ -16,7 +16,7 @@
 #include <autogen/shaders/textured_skinned_lit.h>
 #include <autogen/shaders/depth_prepass_skinned.h>
 #include <autogen/shaders/shadows_skinned.h>
-#include <autogen/shaders/skeleton.h>
+#include <autogen/shaders/shadows_resolve.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -71,7 +71,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skeleton_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::skeleton::create_pso);
+                    m_shadows_resolve = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::shadows_resolve::create_pso);
                 });
 
                 g.run([this, c]
@@ -114,7 +114,6 @@ namespace uc
 
                 g.wait();
                 m_animation_instance = std::make_unique<gx::anm::animation_instance>(m_military_mechanic_animations.get(), m_military_mechanic_skeleton.get());
-                m_skeleton_positions.resize(3);
             }
 
             render_world_10::~render_world_10()
@@ -128,7 +127,6 @@ namespace uc
 
                 m_skeleton_instance->reset();
                 m_animation_instance->accumulate(   m_skeleton_instance.get(), ctx->m_frame_time    );
-                m_skeleton_positions = gx::anm::skeleton_positions(m_military_mechanic_skeleton.get(), m_skeleton_instance->local_transforms());
 
                 m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                 m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
@@ -322,6 +320,17 @@ namespace uc
                 }
 
                 end_render_shadows(ctx, graphics.get());
+
+                //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
+                //graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+
+                //dda
+                //graphics->set_pso(m_shadows_resolve);
+                
+
+                //graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
+                //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+
                 return graphics;
             }
             

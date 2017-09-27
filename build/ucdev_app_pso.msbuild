@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
@@ -54,6 +54,13 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </ComputePipelineStateObject>
+
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\shadows_resolve.pso">
+      <EntryPointName>shadows_resolve</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </ComputePipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\imgui.pso">
       <EntryPointName>imgui_main</EntryPointName>
       <InProject>true</InProject>
