@@ -416,7 +416,7 @@ namespace uc
                 }
             }
 
-            gx::dx12::managed_graphics_command_context options_page::do_render( render_context* ctx )
+            std::unique_ptr< submitable >  options_page::do_render( render_context* ctx )
             {
                 ImGui::Render();
 
@@ -511,7 +511,7 @@ namespace uc
 
                 graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
                 //now we submit the graphics work also
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
             void options_page::do_handle_messages(const io::console::message* message_begin, const io::console::message* message_end)

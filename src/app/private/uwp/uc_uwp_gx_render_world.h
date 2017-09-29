@@ -9,6 +9,7 @@
 #include <uc_dev/util/noncopyable.h>
 #include <uc_dev/gx/pinhole_camera.h>
 
+#include "uc_uwp_gx_submitable.h"
 #include "uc_uwp_gx_render_object.h"
 #include "uc_uwp_gx_render_context.h"
 
@@ -69,9 +70,9 @@ namespace uc
 
                 void update( update_context* ctx );
 
-                gx::dx12::managed_graphics_command_context render(render_context* ctx);
-                gx::dx12::managed_graphics_command_context render_depth(render_context* ctx);
-                gx::dx12::managed_graphics_command_context render_shadows(shadow_render_context* ctx);
+                std::unique_ptr< submitable >render(render_context* ctx);
+                std::unique_ptr< submitable >render_depth(render_context* ctx);
+                std::unique_ptr< submitable >render_shadows(shadow_render_context* ctx);
 
                 gx::pinhole_camera* camera()
                 {
@@ -86,9 +87,9 @@ namespace uc
                 private:
 
                 virtual  void do_update(update_context* ctx) = 0;
-                virtual  gx::dx12::managed_graphics_command_context do_render(render_context* ctx) = 0;
-                virtual  gx::dx12::managed_graphics_command_context do_render_depth(render_context* ctx);
-                virtual  gx::dx12::managed_graphics_command_context do_render_shadows(shadow_render_context* ctx);
+                virtual  std::unique_ptr< submitable > do_render(render_context* ctx) = 0;
+                virtual  std::unique_ptr< submitable > do_render_depth(render_context* ctx);
+                virtual  std::unique_ptr< submitable > do_render_shadows(shadow_render_context* ctx);
 
                 protected:
 

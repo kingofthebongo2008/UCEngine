@@ -12,8 +12,6 @@ namespace uc
     {
         namespace dx12
         {
-            
-
             namespace details
             {
                 struct gpu_command_context_deleter

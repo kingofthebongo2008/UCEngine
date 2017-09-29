@@ -22,7 +22,7 @@ namespace uc
                 do_update(ctx);
             }
             
-            gx::dx12::managed_graphics_command_context page::render( render_context* ctx )
+            std::unique_ptr< submitable >  page::render( render_context* ctx )
             {
                 return do_render(ctx);
             }

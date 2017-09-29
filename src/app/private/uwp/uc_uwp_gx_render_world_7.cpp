@@ -40,7 +40,7 @@ namespace uc
 
             }
 
-            gx::dx12::managed_graphics_command_context render_world_7::do_render( render_context* ctx )
+            std::unique_ptr< submitable >render_world_7::do_render( render_context* ctx )
             {
                 //now start new ones
                 auto resources      = ctx->m_resources;
@@ -56,12 +56,12 @@ namespace uc
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
                 graphics->set_pso(m_full_screen_color);
-				graphics->draw(3);
+                graphics->draw(3);
 
 
                 end_render(ctx, graphics.get());
 
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
       
         }

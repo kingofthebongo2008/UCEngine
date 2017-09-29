@@ -179,7 +179,7 @@ namespace uc
 
             }
 
-            gx::dx12::managed_graphics_command_context render_world_1::do_render(render_context* ctx)
+            std::unique_ptr< submitable > render_world_1::do_render(render_context* ctx)
             {
                 //now start new ones
                 auto resources = ctx->m_resources;
@@ -253,10 +253,10 @@ namespace uc
                 }
 
                 end_render(ctx, graphics.get());
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
-            gx::dx12::managed_graphics_command_context render_world_1::do_render_depth(render_context* ctx)
+            std::unique_ptr< submitable >render_world_1::do_render_depth(render_context* ctx)
             {
 
                 auto resources = ctx->m_resources;
@@ -300,7 +300,7 @@ namespace uc
                 end_render_depth(ctx, graphics.get());
 
                 graphics->pix_end_event();
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
 
             }
         }

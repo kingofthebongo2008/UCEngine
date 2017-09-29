@@ -47,7 +47,7 @@ namespace uc
              
             }
 
-            gx::dx12::managed_graphics_command_context debug_page::do_render( render_context* ctx )
+            std::unique_ptr< submitable >  debug_page::do_render( render_context* ctx )
             {
                 //todo refactor this, get out of the details and simplify code, see win2d
                 {
@@ -139,8 +139,7 @@ namespace uc
 
                     m_profile_timer.reset();
 
-                    return graphics;
-
+                    return std::make_unique<graphics_submitable>(std::move(graphics));
                 }
             }
         }

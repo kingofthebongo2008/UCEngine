@@ -24,7 +24,7 @@ namespace uc
             private:
 
                 void do_update(update_context* ctx) override;
-                gx::dx12::managed_graphics_command_context do_render( render_context* ctx) override;
+                std::unique_ptr< submitable > do_render( render_context* ctx) override;
 
 
                 sys::profile_timer  m_profile_timer;

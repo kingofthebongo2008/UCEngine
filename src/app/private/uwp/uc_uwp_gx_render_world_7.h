@@ -26,7 +26,7 @@ namespace uc
 
                 void do_update(update_context* ctx) override;
 
-                gx::dx12::managed_graphics_command_context do_render(render_context* ctx) override;
+                std::unique_ptr< submitable >do_render(render_context* ctx) override;
 
                 gx::dx12::graphics_pipeline_state*	m_full_screen_color;
             };

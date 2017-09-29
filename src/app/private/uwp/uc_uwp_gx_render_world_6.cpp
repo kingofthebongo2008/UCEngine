@@ -107,7 +107,7 @@ namespace uc
                 *m_robot_transform = details::robot_world_transform(ctx->m_frame_time);
             }
 
-            gx::dx12::managed_graphics_command_context render_world_6::do_render( render_context* ctx )
+            std::unique_ptr< submitable >render_world_6::do_render( render_context* ctx )
             {
                 //now start new ones
                 auto resources      = ctx->m_resources;
@@ -171,10 +171,10 @@ namespace uc
 
                 end_render(ctx, graphics.get());
 
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
-            gx::dx12::managed_graphics_command_context render_world_6::do_render_depth(render_context* ctx)
+            std::unique_ptr< submitable >render_world_6::do_render_depth(render_context* ctx)
             {
                 auto resources = ctx->m_resources;
                 //now start new ones
@@ -216,7 +216,7 @@ namespace uc
                 }
 
                 end_render_depth(ctx, graphics.get());
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
         }
     }

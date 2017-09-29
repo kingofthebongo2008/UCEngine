@@ -30,7 +30,7 @@ namespace uc
 
                 void update(update_context* ctx);
                 
-                gx::dx12::managed_graphics_command_context render( render_context* ctx );
+                std::unique_ptr< submitable > render( render_context* ctx );
 
                 pageid get_active_page_id() const;
 
@@ -40,7 +40,7 @@ namespace uc
                 uint16_t                               m_active_page_index = 0xffff;
 
                 virtual void do_update(update_context* ctx);
-                virtual gx::dx12::managed_graphics_command_context do_render(render_context* ctx);
+                virtual std::unique_ptr< submitable >  do_render(render_context* ctx);
             };
         }
     }

@@ -53,7 +53,7 @@ namespace uc
 
             }
 
-            gx::dx12::managed_graphics_command_context render_world_manager::render( render_context* ctx )
+            std::unique_ptr< submitable >render_world_manager::render( render_context* ctx )
             {
                 std::shared_ptr< render_world > world = m_world;
                 if ( world )
@@ -93,17 +93,17 @@ namespace uc
                         //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
                         graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
-                        return graphics;
+                        return std::make_unique<graphics_submitable>(std::move(graphics));
                     }
                     else
                     {
                         //todo: use optional here
-                        return gx::dx12::managed_graphics_command_context();
+                        return nullptr;
                     }
                 }
             }
 
-            gx::dx12::managed_graphics_command_context render_world_manager::render_depth(render_context* ctx)
+            std::unique_ptr< submitable >render_world_manager::render_depth(render_context* ctx)
             {
                 std::shared_ptr< render_world > world = m_world;
                 if (world)
@@ -113,11 +113,11 @@ namespace uc
                 else
                 {
                     //todo: use optional here
-                    return gx::dx12::managed_graphics_command_context();
+                    return nullptr;
                 }
             }
 
-            gx::dx12::managed_graphics_command_context render_world_manager::render_shadows(shadow_render_context* ctx)
+            std::unique_ptr< submitable >render_world_manager::render_shadows(shadow_render_context* ctx)
             {
                 std::shared_ptr< render_world > world = m_world;
                 if (world)
@@ -127,7 +127,7 @@ namespace uc
                 else
                 {
                     //todo: use optional here
-                    return gx::dx12::managed_graphics_command_context();
+                    return nullptr;
                 }
             }
         }

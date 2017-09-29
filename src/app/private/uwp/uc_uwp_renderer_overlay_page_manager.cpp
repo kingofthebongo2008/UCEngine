@@ -52,7 +52,7 @@ namespace uc
                 do_update(ctx);
             }
 
-            gx::dx12::managed_graphics_command_context page_manager::render( render_context* ctx )
+            std::unique_ptr< submitable >  page_manager::render( render_context* ctx )
             {
                 return do_render(ctx);
             }
@@ -72,14 +72,14 @@ namespace uc
                 return static_cast<pageid>(m_active_page_index);
             }
 
-            gx::dx12::managed_graphics_command_context page_manager::do_render(render_context* ctx)
+            std::unique_ptr< submitable >  page_manager::do_render(render_context* ctx)
             {
                 if (m_active_page_index != 0xffff)
                 {
                     return m_pages[m_active_page_index]->render(ctx);
                 }
 
-                return gx::dx12::managed_graphics_command_context();
+                return nullptr;
             }
 
             void page_manager::do_update(update_context* ctx)

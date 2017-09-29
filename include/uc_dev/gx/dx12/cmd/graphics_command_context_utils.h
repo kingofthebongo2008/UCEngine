@@ -19,7 +19,6 @@ namespace uc
                 std::unique_ptr<gpu_base_command_context> base(rc->create_base_command_context(std::forward<args>(a)...));
                 return managed_graphics_command_context(static_cast< gpu_graphics_command_context* > ( base.release() ), details::gpu_command_context_deleter(rc));
             }
-
         }
     }
 }

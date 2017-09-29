@@ -10,6 +10,7 @@
 
 
 
+
 namespace uc
 {
     namespace uwp
@@ -29,9 +30,9 @@ namespace uc
 
                 void update( update_context* ctx );
                 
-                gx::dx12::managed_graphics_command_context render( render_context* ctx );
-                gx::dx12::managed_graphics_command_context render_depth(render_context* ctx);
-                gx::dx12::managed_graphics_command_context render_shadows(shadow_render_context* ctx);
+                std::unique_ptr< submitable >render( render_context* ctx );
+                std::unique_ptr< submitable >render_depth(render_context* ctx);
+                std::unique_ptr< submitable >render_shadows(shadow_render_context* ctx);
 
                 gx::pinhole_camera* camera()
                 {

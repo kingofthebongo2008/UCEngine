@@ -404,7 +404,7 @@ namespace uc
                 m_context->Update();
             }
 
-            gx::dx12::managed_graphics_command_context hud_page::do_render( render_context* ctx )
+            std::unique_ptr< submitable >  hud_page::do_render( render_context* ctx )
             {
                 m_context->Render();
 
@@ -461,7 +461,7 @@ namespace uc
                 graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
                 m_render_interface.reset();
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
         }
     }

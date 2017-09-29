@@ -326,10 +326,10 @@ namespace uc
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
 
 
-            gx::dx12::managed_graphics_command_context pending_depth;
-            gx::dx12::managed_graphics_command_context pending_main;
-            gx::dx12::managed_graphics_command_context pending_overlay;
-            gx::dx12::managed_graphics_command_context pending_shadows;
+            std::unique_ptr<submitable> pending_depth;
+            std::unique_ptr<submitable> pending_main;
+            std::unique_ptr<submitable> pending_overlay;
+            std::unique_ptr<submitable> pending_shadows;
 
             g.run([this,&pending_main]
             {
@@ -464,7 +464,7 @@ namespace uc
                         //now we submit the graphics work also
                         //graphics->submit(gx::dx12::gpu_command_context::flush_operation::do_not_wait_to_execute);
 
-                        pending_overlay = std::move(graphics);
+                        pending_overlay = std::make_unique<graphics_submitable>(std::move(graphics));
                     }
                 }
             });
@@ -479,25 +479,21 @@ namespace uc
 
             if (pending_depth)
             {
-                pending_depth->set_name(L"pending_depth");
                 pending_depth->submit();
             }
 
             if (pending_shadows)
             {
-                pending_shadows->set_name(L"pending_shadows");
                 pending_shadows->submit();
             }
 
             if (pending_main)
             {
-                pending_main->set_name(L"pending_main");
                 pending_main->submit();
             }
 
             if (pending_overlay)
             {
-                pending_overlay->set_name(L"pending_overlay");
                 pending_overlay->submit();
             }
 

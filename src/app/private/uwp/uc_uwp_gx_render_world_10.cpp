@@ -179,7 +179,7 @@ namespace uc
                 }
             }
 
-            gx::dx12::managed_graphics_command_context render_world_10::do_render(render_context* ctx)
+            std::unique_ptr< submitable >render_world_10::do_render(render_context* ctx)
             {
                 //now start new ones
                 auto resources = ctx->m_resources;
@@ -237,10 +237,10 @@ namespace uc
 
                 end_render(ctx, graphics.get());
 
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
-            gx::dx12::managed_graphics_command_context render_world_10::do_render_depth(render_context* ctx)
+            std::unique_ptr< submitable >render_world_10::do_render_depth(render_context* ctx)
             {
                 //now start new ones
                 auto resources = ctx->m_resources;
@@ -279,10 +279,10 @@ namespace uc
 
                 end_render_depth(ctx, graphics.get());
 
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
-            gx::dx12::managed_graphics_command_context render_world_10::do_render_shadows(shadow_render_context* ctx)
+            std::unique_ptr< submitable >render_world_10::do_render_shadows(shadow_render_context* ctx)
             {
                 //now start new ones
                 auto resources      = ctx->m_resources;
@@ -331,7 +331,7 @@ namespace uc
                 //graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
                 //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
-                return graphics;
+                return std::make_unique<graphics_submitable>(std::move(graphics));
             }
             
         }
