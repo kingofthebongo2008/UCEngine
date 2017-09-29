@@ -37,6 +37,8 @@
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\descriptor_handle_cache.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_command_context.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_command_context_utils.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_compute_command_context.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_compute_command_context_utils.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\memcpy.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\root_signature_meta_data.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\upload_queue.h" />

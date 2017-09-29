@@ -12,6 +12,7 @@
 
 #include <uc_dev/gx/dx12/cmd/command_context_utils.h>
 #include <uc_dev/gx/dx12/cmd/graphics_command_context_utils.h>
+#include <uc_dev/gx/dx12/cmd/graphics_compute_command_context_utils.h>
 #include <uc_dev/gx/dx12/cmd/compute_command_context_utils.h>
 #include <uc_dev/gx/dx12/cmd/copy_command_context_utils.h>
 
