@@ -29,27 +29,32 @@ namespace uc
             virtual void on_submit() = 0;
         };
 
-        class graphics_submitable : public submitable
+
+        template <typename sub > class context_submitable : public submitable
         {
 
             public:
-
-            graphics_submitable(gx::dx12::managed_graphics_command_context&& ctx) : m_ctx(std::move(ctx))
+            context_submitable(sub&& ctx) : m_ctx(std::move(ctx))
             {
 
             }
 
             private:
-            graphics_submitable(const graphics_submitable&) = delete;
-            graphics_submitable& operator=(const submitable&) = delete;
-
-            gx::dx12::managed_graphics_command_context m_ctx;
+            context_submitable(const context_submitable&) = delete;
+            context_submitable& operator=(const submitable&) = delete;
+            sub m_ctx;
 
             void on_submit()
             {
                 m_ctx->submit();
             }
         };
+
+
+        using graphics_submitable           = context_submitable<gx::dx12::managed_graphics_command_context>;
+        using compute_submitable            = context_submitable<gx::dx12::managed_compute_command_context>;
+        using graphics_compute_submitable   = context_submitable<gx::dx12::managed_graphics_compute_command_context>;
+
     }
 }
 
