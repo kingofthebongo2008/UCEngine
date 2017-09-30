@@ -302,12 +302,12 @@ namespace uc
                 graphics->set_pso(m_skinned_shadows);
                 graphics->set_descriptor_heaps();
 
-                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);
+                graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);
 
                 //mechanic
                 {
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());

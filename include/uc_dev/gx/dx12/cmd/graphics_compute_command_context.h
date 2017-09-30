@@ -129,7 +129,7 @@ namespace uc
                 void draw_instanced(uint32_t vertex_count_per_instance, uint32_t instance_count, uint32_t start_vertex_location = 0, uint32_t start_instance_location = 0)
                 {
                     flush_resource_barriers();
-                    commit_root_descriptor_tables();
+                    commit_graphics_root_descriptor_tables();
                     list()->DrawInstanced(vertex_count_per_instance, instance_count, start_vertex_location, start_instance_location);
                 }
 
@@ -141,7 +141,7 @@ namespace uc
                 void draw_indexed_instanced(uint32_t index_count_per_instance, uint32_t instance_count, uint32_t start_index_location, int32_t base_vertex_location, uint32_t start_instance_location)
                 {
                     flush_resource_barriers();
-                    commit_root_descriptor_tables();
+                    commit_graphics_root_descriptor_tables();
                     list()->DrawIndexedInstanced(index_count_per_instance, instance_count, start_index_location, base_vertex_location, start_instance_location);
                 }
 
@@ -197,32 +197,32 @@ namespace uc
                     list()->IASetVertexBuffers(slot, count, views);
                 }
 
-                void set_srv_buffer(uint32_t root_index, gpu_virtual_resource* r)
+                void set_graphics_srv_buffer(uint32_t root_index, gpu_virtual_resource* r)
                 {
                     list()->SetGraphicsRootShaderResourceView(root_index, r->virtual_address());
                 }
 
-                void set_srv_buffer(uint32_t root_index, nullptr_t )
+                void set_graphics_srv_buffer(uint32_t root_index, nullptr_t )
                 {
                     list()->SetGraphicsRootShaderResourceView(root_index, 0);
                 }
 
-                void set_uav_buffer(uint32_t root_index, gpu_virtual_resource* r)
+                void set_graphics_uav_buffer(uint32_t root_index, gpu_virtual_resource* r)
                 {
                     list()->SetGraphicsRootUnorderedAccessView(root_index, r->virtual_address());
                 }
 
-                void set_uav_buffer(uint32_t root_index, nullptr_t)
+                void set_graphics_uav_buffer(uint32_t root_index, nullptr_t)
                 {
                     list()->SetGraphicsRootUnorderedAccessView(root_index, 0);
                 }
 
-                void set_constant_buffer(uint32_t root_index, D3D12_GPU_VIRTUAL_ADDRESS address)
+                void set_graphics_constant_buffer(uint32_t root_index, D3D12_GPU_VIRTUAL_ADDRESS address)
                 {
                     list()->SetGraphicsRootConstantBufferView(root_index, address);
                 }
 
-                void set_constant_buffer(uint32_t root_index, const void* buffer, size_t byte_count )
+                void set_graphics_constant_buffer(uint32_t root_index, const void* buffer, size_t byte_count )
                 {
                     auto allocation = m_upload_allocator.allocate(byte_count, 256);
                     mem_copy(allocation.cpu_address(), buffer, byte_count);
@@ -230,18 +230,18 @@ namespace uc
                 }
 
                 template< typename t >
-                void set_constant_buffer(uint32_t root_index, const t* buffer)
+                void set_graphics_constant_buffer(uint32_t root_index, const t* buffer)
                 {
-                    set_constant_buffer(root_index, &buffer, sizeof(t));
+                    set_graphics_constant_buffer(root_index, &buffer, sizeof(t));
                 }
 
                 template<typename t>
-                void set_constant_buffer(uint32_t root_index, const t& buffer)
+                void set_graphics_constant_buffer(uint32_t root_index, const t& buffer)
                 {
-                    set_constant_buffer(root_index, &buffer, sizeof(t));
+                    set_graphics_constant_buffer(root_index, &buffer, sizeof(t));
                 }
 
-                void set_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const void* buffer, size_t byte_count)
+                void set_graphics_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const void* buffer, size_t byte_count)
                 {
                     auto allocation = m_upload_allocator.allocate(byte_count, 256);
                     mem_copy(allocation.cpu_address(), buffer, byte_count);
@@ -253,7 +253,7 @@ namespace uc
 
                     m_command_manager->device()->CreateConstantBufferView(&cbv_desc, h2);
 
-                    set_dynamic_descriptor(root_index, h2, offset);
+                    set_graphics_dynamic_descriptor(root_index, h2, offset);
                 }
 
                 //use for small buffers, generated every frame
@@ -291,15 +291,15 @@ namespace uc
 
 
                 template <typename t>
-                void set_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t* buffer)
+                void set_graphics_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t* buffer)
                 {
-                    set_dynamic_constant_buffer(root_index, offset, buffer, sizeof(t));
+                    set_graphics_dynamic_constant_buffer(root_index, offset, buffer, sizeof(t));
                 }
 
                 template <typename t>
-                void set_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t& buffer)
+                void set_graphics_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t& buffer)
                 {
-                    set_dynamic_constant_buffer(root_index, offset, &buffer, sizeof(t));
+                    set_graphics_dynamic_constant_buffer(root_index, offset, &buffer, sizeof(t));
                 }
 
                 void set_graphics_root_descriptor_table(uint32_t root_index, D3D12_GPU_DESCRIPTOR_HANDLE h)
@@ -307,14 +307,14 @@ namespace uc
                     list()->SetGraphicsRootDescriptorTable(root_index, h);
                 }
 
-                void set_dynamic_descriptors( uint32_t root_index, const D3D12_CPU_DESCRIPTOR_HANDLE handles[], uint32_t count , uint32_t offset = 0 )
+                void set_graphics_dynamic_descriptors( uint32_t root_index, const D3D12_CPU_DESCRIPTOR_HANDLE handles[], uint32_t count , uint32_t offset = 0 )
                 {
                     m_descriptor_handle_cache0.set_descriptor_handles(root_index, offset, handles, count);
                 }
 
-                void set_dynamic_descriptor( uint32_t root_index, D3D12_CPU_DESCRIPTOR_HANDLE Handle, uint32_t offset = 0 )
+                void set_graphics_dynamic_descriptor( uint32_t root_index, D3D12_CPU_DESCRIPTOR_HANDLE Handle, uint32_t offset = 0 )
                 {
-                    set_dynamic_descriptors(root_index, &Handle, 1, offset);
+                    set_graphics_dynamic_descriptors(root_index, &Handle, 1, offset);
                 }
 
                 void set_name(const wchar_t* name)
@@ -324,7 +324,7 @@ namespace uc
 
                 private:
 
-                void commit_root_descriptor_tables()
+                void commit_graphics_root_descriptor_tables()
                 {
                     if (m_descriptor_handle_cache0.dirty())
                     {
