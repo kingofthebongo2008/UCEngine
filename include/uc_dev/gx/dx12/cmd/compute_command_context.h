@@ -18,7 +18,7 @@ namespace uc
                 void dispatch( uint32_t thread_group_count_x, uint32_t thread_group_count_y = 1, uint32_t thread_group_count_z = 1)
                 {
                     flush_resource_barriers();
-                    commit_root_descriptor_tables();
+                    commit_compute_root_descriptor_tables();
                     list()->Dispatch(thread_group_count_x, thread_group_count_y, thread_group_count_z);
                 }
 
@@ -44,32 +44,32 @@ namespace uc
                     set_descriptor_heaps(sizeof(heaps) / sizeof(heaps[0]), heaps);
                 }
 
-                void set_srv_buffer(uint32_t root_index, gpu_virtual_resource* r)
+                void set_compute_srv_buffer(uint32_t root_index, gpu_virtual_resource* r)
                 {
                     list()->SetComputeRootShaderResourceView(root_index, r->virtual_address());
                 }
 
-                void set_srv_buffer(uint32_t root_index, nullptr_t )
+                void set_compute_srv_buffer(uint32_t root_index, nullptr_t )
                 {
                     list()->SetComputeRootShaderResourceView(root_index, 0);
                 }
 
-                void set_uav_buffer(uint32_t root_index, gpu_virtual_resource* r)
+                void set_compute_uav_buffer(uint32_t root_index, gpu_virtual_resource* r)
                 {
                     list()->SetComputeRootUnorderedAccessView(root_index, r->virtual_address());
                 }
 
-                void set_uav_buffer(uint32_t root_index, nullptr_t)
+                void set_compute_uav_buffer(uint32_t root_index, nullptr_t)
                 {
                     list()->SetComputeRootUnorderedAccessView(root_index, 0);
                 }
 
-                void set_constant_buffer(uint32_t root_index, D3D12_GPU_VIRTUAL_ADDRESS address)
+                void set_compute_constant_buffer(uint32_t root_index, D3D12_GPU_VIRTUAL_ADDRESS address)
                 {
                     list()->SetComputeRootConstantBufferView(root_index, address);
                 }
 
-                void set_constant_buffer(uint32_t root_index, const void* buffer, size_t byte_count )
+                void set_compute_constant_buffer(uint32_t root_index, const void* buffer, size_t byte_count )
                 {
                     auto allocation = m_upload_allocator.allocate(byte_count, 256);
                     mem_copy(allocation.cpu_address(), buffer, byte_count);
@@ -77,12 +77,12 @@ namespace uc
                 }
 
                 template <typename t>
-                void set_constant_buffer(uint32_t root_index, const t* buffer)
+                void set_compute_constant_buffer(uint32_t root_index, const t* buffer)
                 {
-                    set_constant_buffer(root_index, buffer, sizeof(t));
+                    set_compute_constant_buffer(root_index, buffer, sizeof(t));
                 }
 
-                void set_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const void* buffer, size_t byte_count)
+                void set_compute_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const void* buffer, size_t byte_count)
                 {
                     auto allocation = m_upload_allocator.allocate(byte_count, 256);
                     mem_copy(allocation.cpu_address(), buffer, byte_count);
@@ -94,11 +94,11 @@ namespace uc
 
                     m_command_manager->device()->CreateConstantBufferView(&cbv_desc, h2);
 
-                    set_dynamic_descriptor(root_index, h2, offset);
+                    set_compute_dynamic_descriptor(root_index, h2, offset);
                 }
 
                 template <typename t>
-                void set_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t* buffer)
+                void set_compute_dynamic_constant_buffer(uint32_t root_index, uint32_t offset, const t* buffer)
                 {
                     set_dynamic_constant_buffer(root_index, offset, buffer, sizeof(t));
                 }
@@ -108,19 +108,19 @@ namespace uc
                     list()->SetComputeRootDescriptorTable(root_index, h);
                 }
 
-                void set_dynamic_descriptors( uint32_t root_index, const D3D12_CPU_DESCRIPTOR_HANDLE handles[], uint32_t count , uint32_t offset = 0 )
+                void set_compute_dynamic_descriptors( uint32_t root_index, const D3D12_CPU_DESCRIPTOR_HANDLE handles[], uint32_t count , uint32_t offset = 0 )
                 {
                     m_descriptor_handle_cache0.set_descriptor_handles(root_index, offset, handles, count);
                 }
 
-                void set_dynamic_descriptor( uint32_t root_index, D3D12_CPU_DESCRIPTOR_HANDLE Handle, uint32_t offset = 0 )
+                void set_compute_dynamic_descriptor( uint32_t root_index, D3D12_CPU_DESCRIPTOR_HANDLE Handle, uint32_t offset = 0 )
                 {
-                    set_dynamic_descriptors(root_index, &Handle, 1, offset);
+                    set_compute_dynamic_descriptors(root_index, &Handle, 1, offset);
                 }
 
                 private:
 
-                void commit_root_descriptor_tables()
+                void commit_compute_root_descriptor_tables()
                 {
                     if (m_descriptor_handle_cache0.dirty())
                     {
