@@ -446,11 +446,11 @@ namespace uc
                         draw_constants draw;
                         draw.m_world = math::transpose(math::translation(command->m_translation[0], command->m_translation[1], 0.0f));
 
-                        graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                        graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                        graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
+                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
 
                         gx::dx12::gpu_texture_2d* texture = reinterpret_cast<gx::dx12::gpu_texture_2d*> (command->m_texture);
-                        graphics->set_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, texture->srv());
+                        graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, texture->srv());
 
 
                        graphics->draw_indexed(command->m_index_count);

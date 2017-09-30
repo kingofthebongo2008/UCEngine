@@ -199,12 +199,12 @@ namespace uc
                 graphics->set_pso(m_skinned_textured_lit);
                 graphics->set_descriptor_heaps();
 
-                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
+                graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
 
                 //mechanic
                 {
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
@@ -221,7 +221,7 @@ namespace uc
                         {
                             auto& t = m_military_mechanic->m_opaque_textures[i];
                             //material
-                            graphics->set_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
+                            graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
                         }
 
                         {
@@ -260,12 +260,12 @@ namespace uc
                 graphics->set_pso(m_skinned_depth);
                 graphics->set_descriptor_heaps();
 
-                graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
+                graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
 
                 //mechanic
                 {
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());

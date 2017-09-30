@@ -480,8 +480,8 @@ namespace uc
                     draw_constants draw;
                     draw.m_world = math::identity_matrix();
 
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                    graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
 
                     // Render command lists
                     int vtx_offset = 0;
@@ -500,7 +500,7 @@ namespace uc
                             {
                                 graphics->set_scissor_rectangle(scissor(pcmd->ClipRect));
                                 gx::dx12::gpu_texture_2d* texture = reinterpret_cast<gx::dx12::gpu_texture_2d*> (pcmd->TextureId);
-                                graphics->set_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, texture->srv());
+                                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, texture->srv());
                                 graphics->draw_indexed(pcmd->ElemCount, idx_offset, vtx_offset);
                             }
                             idx_offset += pcmd->ElemCount;

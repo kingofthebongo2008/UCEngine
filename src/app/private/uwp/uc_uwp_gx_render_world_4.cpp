@@ -104,7 +104,7 @@ namespace uc
                     frame_constants frame;
                     frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                     frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
-                    graphics->set_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
+                    graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, frame);
                 }
 
                 //robot
@@ -114,7 +114,7 @@ namespace uc
                     draw.m_world = uc::math::transpose(*m_deer_transform);
 
                     //todo: move this into a big buffer for the whole scene
-                    graphics->set_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
 
                     //primitives
                     graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -130,7 +130,7 @@ namespace uc
                         {
                             auto& t = m_deer->m_opaque_textures[i];
                             //material
-                            graphics->set_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
+                            graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
                         }
 
                         {
