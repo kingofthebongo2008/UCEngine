@@ -156,7 +156,7 @@ namespace uc
 
             inline D3D12_RESOURCE_DESC describe_color_buffer(UINT width, UINT height, DXGI_FORMAT format)
             {
-                return describe_render_target(width, height, format, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+                return describe_render_target(width, height, format, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET | D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS);
             }
 
             inline D3D12_RESOURCE_DESC describe_depth_buffer(UINT width, UINT height, DXGI_FORMAT format)
