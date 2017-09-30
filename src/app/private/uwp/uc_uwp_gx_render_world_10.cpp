@@ -286,7 +286,7 @@ namespace uc
             {
                 //now start new ones
                 auto resources      = ctx->m_resources;
-                auto graphics       = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
+                auto graphics       = create_graphics_compute_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
                 auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Pass");
 
@@ -331,7 +331,7 @@ namespace uc
                 //graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
                 //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
-                return std::make_unique<graphics_submitable>(std::move(graphics));
+                return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
             
         }

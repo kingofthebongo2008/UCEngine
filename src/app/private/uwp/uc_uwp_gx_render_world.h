@@ -101,11 +101,13 @@ namespace uc
                 static void begin_render_depth(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
                 static void end_render_depth(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
 
-                static void begin_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
-                static void end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
+                static void begin_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics);
+                static void end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics);
 
                 static void set_view_port(const render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
                 static void set_view_port(const shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics);
+                static void set_view_port(const render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics);
+                static void set_view_port(const shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics);
             };
         }
     }

@@ -108,14 +108,14 @@ namespace uc
                 //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
             }
 
-            void render_world::begin_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
+            void render_world::begin_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
             {
                 //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_RESOLVE_SOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
                 graphics->set_render_target(ctx->m_shadow_depth_buffer);
                 graphics->clear_depth(ctx->m_shadow_depth_buffer, 0.0f);
             }
 
-            void render_world::end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
+            void render_world::end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
             {
                 ctx;
                 graphics;
@@ -143,6 +143,27 @@ namespace uc
                 graphics->set_scissor_rectangle(scissor(width, height));
             }
 
+            void render_world::set_view_port(const render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
+            {
+                auto width = ctx->m_back_buffer_scaled_size.m_width;
+                auto height = ctx->m_back_buffer_scaled_size.m_height;
+
+                //Per pass  -> frequency 0
+                graphics->set_view_port(viewport(width, height));
+                graphics->set_scissor_rectangle(scissor(width, height));
+            }
+
+            void render_world::set_view_port(const shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
+            {
+                auto width = ctx->m_shadow_buffer_size.m_width;
+                auto height = ctx->m_shadow_buffer_size.m_height;
+
+                //Per pass  -> frequency 0
+                graphics->set_view_port(viewport(width, height));
+                graphics->set_scissor_rectangle(scissor(width, height));
+            }
+
+
             std::unique_ptr< submitable >render_world::do_render_depth(render_context* ctx)
             {
                 auto resources = ctx->m_resources;
@@ -157,14 +178,14 @@ namespace uc
             {
                 auto resources = ctx->m_resources;
                 //now start new ones
-                auto graphics = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
+                auto graphics = create_graphics_compute_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
                 {
                     auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"do_render_shadows");
                     begin_render_shadows(ctx, graphics.get());
                     end_render_shadows(ctx, graphics.get());
                 }
-                return std::make_unique<graphics_submitable>(std::move(graphics));
+                return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
         }
     }
