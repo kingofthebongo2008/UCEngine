@@ -118,6 +118,8 @@ namespace uc
 
                 void transition_resource(const gpu_virtual_resource* r, D3D12_RESOURCE_STATES old_state, D3D12_RESOURCE_STATES new_state)
                 {
+                    //todo: check the same states, before flush
+
                     if (m_resource_bariers_count == barrier_count)
                     {
                         flush_resource_barriers();
