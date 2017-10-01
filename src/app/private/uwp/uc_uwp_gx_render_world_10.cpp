@@ -133,7 +133,6 @@ namespace uc
 
 
                 {
-
                     //do a scene bounding volume, something that encompasses all meshes, should be as tight as possible. transform it to view space and make the orthogonal projection
                     math::float4 p0 = math::point3(0.0f, 0.0f, 0.0f);
                     math::float4 p1 = math::vector3(1.0f, 2.5f, 1.0f);
@@ -155,11 +154,9 @@ namespace uc
                     m_shadow_camera->set_z_min(math::get_z(aabb_max));
                     m_shadow_camera->set_z_max(math::get_z(aabb_min));
 
-                    m_constants_frame_shadows.m_view = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
+                    m_constants_frame_shadows.m_view        = uc::math::transpose(uc::gx::view_matrix(m_shadow_camera.get()));
                     m_constants_frame_shadows.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(m_shadow_camera.get()));
-
                 }
-
 
                 {
                     skinned_draw_constants& draw = m_constants_pass;
@@ -321,15 +318,18 @@ namespace uc
 
                 end_render_shadows(ctx, graphics.get());
 
-                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
+                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
                 graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 
                 graphics->set_pso(m_shadows_resolve);
-                graphics->dispatch(1, 1, 1);
-                
+
+                graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
+                graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
+
+                graphics->dispatch(2048/16, 2048/ 16, 1);
 
                 graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
-                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
