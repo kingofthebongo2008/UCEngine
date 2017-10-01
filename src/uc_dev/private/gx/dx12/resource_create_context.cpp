@@ -571,9 +571,29 @@ namespace uc
                 m_impl->m_device->CreateRenderTargetView(resource.Get(), &rtv, handle);
 
                 auto heap       = &m_impl->m_view_dependent_srv_heap;
-                auto handles    = heap->allocate(2);
 
-                return new gpu_color_buffer(resource.Get(), handle, handles, heap->increment(handles)  );
+                auto srv        = heap->allocate(1);
+                auto uav        = heap->allocate(1);
+
+                D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
+                D3D12_UNORDERED_ACCESS_VIEW_DESC descUAV = {};
+
+                descSRV.Format = format;
+                descSRV.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+                descSRV.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+                descSRV.Texture2D.MipLevels = 1;
+                descSRV.Texture2D.MostDetailedMip = 0;
+                descSRV.Texture2D.PlaneSlice = 0;
+
+                descUAV.Format = get_uav_format(format);
+                descUAV.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
+                descUAV.Texture2D.MipSlice = 0;
+                descUAV.Texture2D.PlaneSlice = 0;
+
+                m_impl->m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav);
+                m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv);
+
+                return new gpu_color_buffer(resource.Get(), handle, srv, uav  );
             }
 
             //Depth Buffer
@@ -646,9 +666,7 @@ namespace uc
                 viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
                 descriptor_handle srvDepth = m_impl->m_view_dependent_srv_heap.allocate();
-
                 m_impl->m_device->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
-
                 descriptor_handle srv = srvDepth;
 
                 //Create depth stencil view
@@ -658,7 +676,6 @@ namespace uc
                 D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
                 desc2.Format = format;
                 desc2.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2DMS;
-                desc2.Texture2D.MipSlice = 0;
                 desc2.Flags = D3D12_DSV_FLAG_NONE;
 
                 m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
