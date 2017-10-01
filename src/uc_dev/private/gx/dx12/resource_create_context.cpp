@@ -199,8 +199,9 @@ namespace uc
 
                 //textures
                 //todo: add concurrent queues
-                std::mutex                                          m_delete_textures_mutex;
-                concurrency::concurrent_vector< gpu_texture_2d* >   m_frame_delete_textures[3];
+                std::mutex                                                      m_delete_textures_mutex;
+                concurrency::concurrent_vector< gpu_texture_2d* >               m_frame_delete_textures[3];
+                concurrency::concurrent_vector< gpu_read_write_texture_2d* >    m_frame_delete_read_write_textures[3];
 
                 //buffers
                 //todo: add concurrent queues
@@ -214,6 +215,10 @@ namespace uc
 
                 void    free_texture_2d_internal(gpu_texture_2d* texture);
                 void    flush_deleted_textures(uint32_t frame_index);
+
+                void    free_read_write_texture_2d_internal(gpu_read_write_texture_2d* texture);
+                void    flush_deleted_read_write_textures(uint32_t frame_index);
+                
 
                 void    free_buffer_internal(gpu_buffer* buffer);
                 void    flush_deleted_buffers(uint32_t frame_index);
@@ -412,10 +417,51 @@ namespace uc
                 descUAV.Texture2D.MipSlice = 0;
                 descUAV.Texture2D.PlaneSlice = 0;
 
-                //m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav.handle());
+                //m_impl->m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav.handle());
                 m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv.handle());
 
-                return new gpu_texture_2d(resource.Get(), std::move(uav), std::move(srv));
+                return new gpu_texture_2d(resource.Get(), std::move(srv));
+            }
+
+            gpu_read_write_texture_2d* gpu_resource_create_context::create_read_write_texture_2d(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t mip_count)
+            {
+                auto desc = describe_texture_2d(width, height, format, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS);
+
+                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+                auto allocator = m_impl->textures_allocator();
+
+                persistent_gpu_srv_descriptor_heap_handle uav;
+                persistent_gpu_srv_descriptor_heap_handle srv;
+
+                {
+                    std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
+                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON);
+
+                    resource->SetName(L"Texture 2D");
+
+                    uav = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                    srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                }
+
+                D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
+                D3D12_UNORDERED_ACCESS_VIEW_DESC descUAV = {};
+
+                descSRV.Format = format;
+                descSRV.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+                descSRV.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+                descSRV.Texture2D.MipLevels = mip_count;
+                descSRV.Texture2D.MostDetailedMip = 0;
+                descSRV.Texture2D.PlaneSlice = 0;
+
+                descUAV.Format = get_uav_format(format);
+                descUAV.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
+                descUAV.Texture2D.MipSlice = 0;
+                descUAV.Texture2D.PlaneSlice = 0;
+
+                m_impl->m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav.handle());
+                m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv.handle());
+
+                return new gpu_read_write_texture_2d(resource.Get(), std::move(uav), std::move(srv));
             }
 
             //texture2d
@@ -433,10 +479,17 @@ namespace uc
                 return allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_GENERIC_READ);
             }
 
-            void gpu_resource_create_context::free_texture_2d( gpu_texture_2d* texture )
+            void gpu_resource_create_context::free_texture_2d(gpu_texture_2d* texture)
             {
                 std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
                 auto& textures = m_impl->m_frame_delete_textures[m_impl->m_frame_index];
+                textures.push_back(texture);
+            }
+
+            void gpu_resource_create_context::free_read_write_texture_2d( gpu_read_write_texture_2d* texture )
+            {
+                std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
+                auto& textures = m_impl->m_frame_delete_read_write_textures[m_impl->m_frame_index];
                 textures.push_back(texture);
             }
 
@@ -444,6 +497,13 @@ namespace uc
             {
                 auto allocator = textures_allocator();
                 allocator->free_placed_resource( texture->resource() );
+                delete texture;
+            }
+
+            void gpu_resource_create_context::gpu_resource_create_context_impl::free_read_write_texture_2d_internal(gpu_read_write_texture_2d* texture)
+            {
+                auto allocator = textures_allocator();
+                allocator->free_placed_resource(texture->resource());
                 delete texture;
             }
 
@@ -455,6 +515,19 @@ namespace uc
                 for (auto&& t : textures)
                 {
                     free_texture_2d_internal(t);
+                }
+
+                textures.clear();
+            }
+
+            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_read_write_textures(uint32_t frame_index)
+            {
+                std::lock_guard< std::mutex  > lock(m_delete_textures_mutex);
+                auto& textures = m_frame_delete_read_write_textures[frame_index];
+
+                for (auto&& t : textures)
+                {
+                    free_read_write_texture_2d_internal(t);
                 }
 
                 textures.clear();
@@ -660,6 +733,7 @@ namespace uc
                 m_impl->m_frame_index %= 3;
 
                 m_impl->flush_deleted_textures(m_impl->m_frame_index);
+                m_impl->flush_deleted_read_write_textures(m_impl->m_frame_index);
                 m_impl->flush_deleted_buffers(m_impl->m_frame_index);
 
                 frame_gpu_srv_heap()->reset();

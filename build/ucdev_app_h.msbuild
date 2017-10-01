@@ -61,6 +61,7 @@
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\info.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\managed_buffer.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\managed_texture_2d.h" />
+    <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\managed_read_write_texture_2d.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\map_guard.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pipeline_state.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\gpu\pipeline_state_util.h" />
