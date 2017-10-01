@@ -42,6 +42,7 @@ namespace uc
 #endif
 
             std::vector< Microsoft::WRL::ComPtr<IDXGIAdapter1> > adapters;
+            adapters = get_warp_adapters();
             adapters = get_adapters();
             m_device = create_device_always(adapters[0].Get());                    //put here if you have other adapters to test
 
