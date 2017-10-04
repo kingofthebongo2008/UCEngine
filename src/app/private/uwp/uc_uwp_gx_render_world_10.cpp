@@ -285,51 +285,62 @@ namespace uc
                 auto resources      = ctx->m_resources;
                 auto graphics       = create_graphics_compute_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
-                auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Pass");
-
-                begin_render_shadows(ctx, graphics.get());
-
+                /*
                 {
-                    set_view_port(ctx, graphics.get());
+                    auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Pass");
+
+                    begin_render_shadows(ctx, graphics.get());
+
+                    {
+                        set_view_port(ctx, graphics.get());
+                        graphics->set_descriptor_heaps();
+                    }
+
+                    //Per many draw calls  -> frequency 1
+                    graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                    graphics->set_pso(m_skinned_shadows);
                     graphics->set_descriptor_heaps();
+
+                    graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);
+
+                    //mechanic
+                    {
+                        //todo: move this into a big buffer for the whole scene
+                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
+
+                        //geometry
+                        graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                        graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                        graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_index_view());
+                        graphics->set_index_buffer(ctx->m_geometry->indices_view());
+
+                        //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
+                        graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
+                    }
+
+                    end_render_shadows(ctx, graphics.get());
                 }
+                */
 
-                //Per many draw calls  -> frequency 1
-                graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_skinned_shadows);
-                graphics->set_descriptor_heaps();
-
-                graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame_shadows);
-
-                //mechanic
                 {
-                    //todo: move this into a big buffer for the whole scene
-                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
-                    //geometry
-                    graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
-                    graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_blend_weight_view());
-                    graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_index_view());
-                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
+                    auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Resolve Pass");
 
-                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
+                    graphics->set_descriptor_heaps();
+                    graphics->set_pso(m_shadows_resolve);
+
+                    graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
+                    graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+
+                    graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
+                    graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
+
+                    graphics->dispatch(16 / 16, 16 / 16, 1);
+
+                    graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
+                    graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+
                 }
-
-                end_render_shadows(ctx, graphics.get());
-
-                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
-                graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-
-                graphics->set_pso(m_shadows_resolve);
-
-                graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
-                graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
-
-                graphics->dispatch(2048/16, 2048/ 16, 1);
-
-                graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
-                graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }

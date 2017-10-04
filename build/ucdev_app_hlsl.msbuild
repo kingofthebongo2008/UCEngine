@@ -6,6 +6,10 @@
       <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\default_signature_1.hlsl">
+      <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
