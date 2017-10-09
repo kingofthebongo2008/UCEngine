@@ -15,12 +15,14 @@ namespace uc
             struct descriptor_handle_cache
             {
                 root_signature_meta_data             m_data;
+                root_signature_meta_data             m_initial;
                 Microsoft::WRL::ComPtr<ID3D12Device> m_device;
                 uint32_t                             m_dirty_tables = 0;
 
                 descriptor_handle_cache( ID3D12Device* d, const root_signature_meta_data& data) :
                     m_device(d)
                     , m_data(data)
+                    , m_initial(data)
                 {
                     reset();
                     clear();
@@ -41,6 +43,7 @@ namespace uc
 
                 void reset()
                 {
+                    m_data = m_initial;
                     mark_all_dirty();
                     clear();
                 }
