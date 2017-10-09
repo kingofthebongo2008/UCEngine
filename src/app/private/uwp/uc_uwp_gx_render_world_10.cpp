@@ -285,7 +285,7 @@ namespace uc
                 auto resources      = ctx->m_resources;
                 auto graphics       = create_graphics_compute_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
-                /*
+                
                 {
                     auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Pass");
 
@@ -293,7 +293,6 @@ namespace uc
 
                     {
                         set_view_port(ctx, graphics.get());
-                        graphics->set_descriptor_heaps();
                     }
 
                     //Per many draw calls  -> frequency 1
@@ -320,26 +319,26 @@ namespace uc
 
                     end_render_shadows(ctx, graphics.get());
                 }
-                */
+                
 
                 {
-
-                    auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Resolve Pass");
-
-                    graphics->set_descriptor_heaps();
-                    graphics->set_pso(m_shadows_resolve);
 
                     graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
                     graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 
-                    graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
-                    graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
+                    {
+                        auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"Shadows Resolve Pass");
 
-                    graphics->dispatch(16 / 16, 16 / 16, 1);
+                        graphics->set_pso(m_shadows_resolve);
+
+                        graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
+                        graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
+
+                        graphics->dispatch(2048 / 16, 2048 / 16, 1);
+                    }
 
                     graphics->transition_resource(ctx->m_shadow_map, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON);
                     graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
-
                 }
 
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
