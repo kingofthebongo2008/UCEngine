@@ -10,27 +10,14 @@ struct interpolants
     float3 position_ws    : position0;
 };
 
-float checker_board_pattern(float2 uv)
-{
-    float2 c = floor(uv) / 2;
-    return frac(c.x + c.y) * 2;
-}
 
-float4 checker_board(float2 uv)
+cbuffer per_draw_call : register(b1)
 {
-    float2 uv_scaled = uv * float2(32.0f, 32.0f);
-    float checker = checker_board_pattern(uv_scaled);
-    return float4(checker, checker, checker, 1.0f);
-}
-
-Texture2D<float4> t         : register(t1);
-SamplerState g_linear       : register(s0)
-{
-    Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Clamp;
-    AddressV = Clamp;
+    euclidean_transform_3d   m_shadow_view;
+    projective_transform_3d  m_shadow_perspective;
 };
 
+Texture2D<float4> g_shadow_moments         : register(t1);
 
 [RootSignature( MyRS1 ) ]
 float4 main( interpolants r ) : SV_Target0
