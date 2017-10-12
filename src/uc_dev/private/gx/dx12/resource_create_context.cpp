@@ -551,7 +551,7 @@ namespace uc
             }
 
             //render target
-            gpu_color_buffer*  gpu_resource_create_context::create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format)
+            gpu_color_buffer*  gpu_resource_create_context::create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state)
             {
                 D3D12_CLEAR_VALUE v = {};
                 v.Format = format;
@@ -564,7 +564,7 @@ namespace uc
                 rtv.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
                 rtv.Texture2D.MipSlice = 0;
 
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON, &v);
+                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, initial_state, &v);
                 resource->SetName(L"Color Buffer");
 
                 auto handle     = m_impl->m_view_dependent_rtv_heap.allocate();

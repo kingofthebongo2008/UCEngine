@@ -44,7 +44,7 @@ namespace uc
                 gpu_read_back_buffer*      create_read_back_buffer(uint64_t size);
 
                 //Render Targets
-                gpu_color_buffer*          create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format);
+                gpu_color_buffer*          create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state = D3D12_RESOURCE_STATE_COMMON);
                 void                       free_color_buffer(gpu_color_buffer* b);
 
                 //Depth Buffer
