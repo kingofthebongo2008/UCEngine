@@ -1,4 +1,5 @@
 #include "../default_signature.hlsli"
+#include "../default_samplers.hlsli"
 
 struct interpolants
 {
@@ -20,12 +21,7 @@ float4 checker_board(float2 uv)
 }
 
 Texture2D<float4> t         : register(t1);
-SamplerState g_linear       : register(s0)
-{
-    Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Clamp;
-    AddressV = Clamp;
-};
+
 
 
 [RootSignature( MyRS1 ) ]
@@ -34,7 +30,7 @@ float4 main( interpolants r ) : SV_Target0
     //return checker_board(r.uv);
     //float2 te = float2(r.uv.x, 1- r.uv.y);
     float2 te = float2(r.uv.x, r.uv.y);
-    return t.Sample(g_linear, te);
+    return t.Sample(g_linear_clamp , te);
 
     //return float4(1.0f, 0.0f, 0.0f, 1.0f);
 }
