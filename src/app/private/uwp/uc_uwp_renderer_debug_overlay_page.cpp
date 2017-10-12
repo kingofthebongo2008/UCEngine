@@ -54,7 +54,6 @@ namespace uc
                     auto resources = ctx->m_resources;
 
                     auto graphics = gx::dx12::create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::overlay));
-                    auto&& back_buffer = resources->back_buffer(device_resources::swap_chains::overlay);
 
                     D2D1_SIZE_F rtSize = resources->back_buffer_d2d(device_resources::swap_chains::overlay)->GetSize();
 
@@ -131,11 +130,6 @@ namespace uc
 
                     // Flush to submit the 11 command list to the shared command queue.
                     resources->device_context_d3d11(device_resources::swap_chains::overlay)->Flush();
-
-                    graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
-
-                    //now we submit the graphics work also
-                    //graphics->submit(gx::dx12::gpu_command_context::flush_operation::do_not_wait_to_execute);
 
                     m_profile_timer.reset();
 
