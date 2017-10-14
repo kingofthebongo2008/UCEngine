@@ -373,6 +373,10 @@ namespace uc
 
                 gxu::render_context ctx;
                 ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
+                ctx.m_shadow_depth_buffer               = m_shadow_depth_buffer.get();
+                ctx.m_shadow_map                        = m_shadow_map.get();
+                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(m_shadow_depth_buffer->width());
+                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(m_shadow_depth_buffer->height());
                 ctx.m_resources                         = &m_resources;
                 ctx.m_geometry                          = m_geometry_allocator.get();
                 ctx.m_frame_time                        = m_frame_time;
@@ -380,7 +384,7 @@ namespace uc
                 ctx.m_back_buffer_size.m_width          = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_size.m_height         = static_cast<uint16_t>(height);
 
-                ctx.m_front_buffer_size.m_width       = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
+                ctx.m_front_buffer_size.m_width         = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
                 ctx.m_front_buffer_size.m_height        =  static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
