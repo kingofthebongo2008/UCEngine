@@ -144,6 +144,15 @@ point_ps project_p_os(point_os v_os, euclidean_transform_3d world, euclidean_tra
     return make_point_ps(result);
 }
 
+point_ps project_p_ws(point_ws v_os, euclidean_transform_3d view, projective_transform_3d perspective)
+{
+    //three muls for greater accuracy
+    float4 result = mul(mul(float4(v_os.m_value, 1.0f), view.m_value), perspective.m_value);
+    return make_point_ps(result);
+}
+
+
+
 point_3d transform_p_3d(point_3d p, euclidean_transform_3d t)
 {
     float4 result = mul(float4(p.m_value, 1.0f), t.m_value);
