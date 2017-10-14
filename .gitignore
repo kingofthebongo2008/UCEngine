@@ -67,3 +67,4 @@ src/uc_engine_xaml_hello_world/autogen/
 src/uc_engine_xaml_hello_world/BundleArtifacts/
 lib/
 build/Generated
+data/meshes_animated/robot/
