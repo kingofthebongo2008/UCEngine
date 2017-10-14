@@ -64,10 +64,6 @@ namespace uc
                 {
                     if (!m_loading_world.is_done())
                     {
-                        //progress loading
-                        //todo: use optional here
-                        //now start new ones
-
                         auto resources  = ctx->m_resources;
                         auto graphics   = create_graphics_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
@@ -84,13 +80,11 @@ namespace uc
                         resources->swap_chain(device_resources::swap_chains::background)->set_source_size(width, height);
 
                         graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
-                        //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
                         graphics->set_render_target(back_buffer, ctx->m_view_depth_buffer);
                         graphics->clear(back_buffer);
 
                         //Per pass
-                        //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
                         graphics->transition_resource(back_buffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 
                         return std::make_unique<graphics_submitable>(std::move(graphics));
