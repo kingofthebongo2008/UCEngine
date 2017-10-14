@@ -1,4 +1,5 @@
 #ifndef __default_samplers_hlsli__
+#define __default_samplers_hlsli__
 
 SamplerState g_point_clamp         : register(s2);
 SamplerState g_linear_clamp        : register(s3);
