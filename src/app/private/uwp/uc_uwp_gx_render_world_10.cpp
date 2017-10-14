@@ -203,6 +203,8 @@ namespace uc
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
+                    graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
+
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
                     graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_uv_view());
@@ -216,9 +218,9 @@ namespace uc
                     for (auto i = start; i < start + size; ++i)
                     {
                         {
-                            auto& t = m_military_mechanic->m_opaque_textures[i];
+                            //auto& t = m_military_mechanic->m_opaque_textures[i];
                             //material
-                            graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
+
                         }
 
                         {

@@ -345,6 +345,10 @@ namespace uc
 
                 gxu::render_context ctx;
                 ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
+                ctx.m_shadow_depth_buffer               = m_shadow_depth_buffer.get();
+                ctx.m_shadow_map                        = m_shadow_map.get();
+                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(m_shadow_depth_buffer->width());
+                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(m_shadow_depth_buffer->height());
                 ctx.m_geometry                          = m_geometry_allocator.get();
                 ctx.m_resources                         = &m_resources;
                 ctx.m_frame_time                        = m_frame_time;
