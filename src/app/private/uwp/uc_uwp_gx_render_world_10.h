@@ -17,6 +17,15 @@ namespace uc
     {
         namespace gxu
         {
+            struct render_object_frame_constants
+            {
+
+                math::float4x4 m_shadow_view;
+                math::float4x4 m_shadow_perspective;
+                math::float4   m_directional_light;
+
+            };
+
             class render_world_10 : public render_world
             {
 
