@@ -277,28 +277,36 @@ namespace UniqueCreator
                         std::string("g_main")
                     };
 
-                    std::array< std::string, 7  >  options_additional1 =
+                    std::array< std::string, 4  >  options_additional1 =
                     {
-                        "/Qstrip_reflect",
-                        "/Qstrip_debug",
                         "/Qstrip_priv",
                         "/Qstrip_rootsignature",
                         "/O3",
                         "/Zi",
                     };
 
-                    std::array< std::string, 7  >  options_additional2 =
+                    std::array< std::string, 6  >  options_additional2 =
                     {
                         "/Qstrip_reflect",
                         "/Qstrip_debug",
                         "/Qstrip_priv",
                         "/E MyRS1",
                         "/O3",
-                        "/Zi",
+                        "/Zi"
                     };
 
                     auto&& r0 = merge_options(options_prefix, options_data);
-                    auto&& r1 = concatenate_options( stage == shader_pipeline_stage::root_signature ? options_additional2 : options_additional1 );
+                    std::string r1;
+
+                    if (stage == shader_pipeline_stage::root_signature)
+                    {
+                        r1 = concatenate_options(options_additional2);
+                    }
+                    else
+                    {
+                        r1 = concatenate_options(options_additional1);
+                    }
+
                     auto&& r2 = make_includes(includes);
                     auto&& r3 = make_macros(macros);
                     auto&& r4 = stage_to_command_line(stage);
