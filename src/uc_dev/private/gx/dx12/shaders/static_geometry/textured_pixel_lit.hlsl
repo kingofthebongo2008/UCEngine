@@ -12,7 +12,7 @@ struct interpolants
     float3 position_ws    : position0;
 };
 
-cbuffer per_draw_call : register(b2)
+cbuffer shadow_parameters : register(b2)
 {
     euclidean_transform_3d   m_shadow_view;
     projective_transform_3d  m_shadow_perspective;
