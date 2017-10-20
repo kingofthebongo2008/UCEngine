@@ -24,13 +24,27 @@ namespace uc
 
                 void set_pso(const compute_pipeline_state* p )
                 {
-                    //upload and reset cache for the descriptor tables
-                    m_descriptor_handle_cache0.reset();
-                    m_descriptor_handle_cache0.m_data = *p->m_root_signature_meta_data;
-                    m_descriptor_handle_cache0.mark_all_dirty();
+                    if (m_compute_pipeline_state != p)
+                    {
+                        //upload and reset cache for the descriptor tables
+                        if (m_compute_pipeline_state)
+                        {
+                            if (m_compute_pipeline_state->m_root_signature != p->m_root_signature)
+                            {
+                                m_descriptor_handle_cache0.set_root_signature_meta_data(*p->m_root_signature_meta_data);
+                                list()->SetComputeRootSignature(p->m_root_signature);
+                                m_compute_pipeline_state = p;
+                            }
+                        }
+                        else
+                        {
+                            m_descriptor_handle_cache0.set_root_signature_meta_data(*p->m_root_signature_meta_data);
+                            list()->SetComputeRootSignature(p->m_root_signature);
+                            m_compute_pipeline_state = p;
+                        }
 
-                    list()->SetComputeRootSignature(p->m_root_signature);
-                    list()->SetPipelineState(p->m_state);
+                        list()->SetPipelineState(p->m_state);
+                    }
                 }
 
                 void set_descriptor_heaps( uint32_t heap_count, ID3D12DescriptorHeap* heaps[] )

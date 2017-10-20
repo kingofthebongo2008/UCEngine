@@ -14,15 +14,15 @@ namespace uc
         {
             struct descriptor_handle_cache
             {
-                root_signature_meta_data             m_data;
-                root_signature_meta_data             m_initial;
                 Microsoft::WRL::ComPtr<ID3D12Device> m_device;
+                root_signature_meta_data             m_data;
+                const root_signature_meta_data*      m_initial;
                 uint32_t                             m_dirty_tables = 0;
 
                 descriptor_handle_cache( ID3D12Device* d, const root_signature_meta_data& data) :
                     m_device(d)
                     , m_data(data)
-                    , m_initial(data)
+                    , m_initial(&data)
                 {
                     reset();
                     clear();
@@ -43,9 +43,22 @@ namespace uc
 
                 void reset()
                 {
-                    m_data = m_initial;
                     mark_all_dirty();
                     clear();
+                }
+
+                void set_root_signature_meta_data(const root_signature_meta_data& data)
+                {
+                    if (&data != m_initial)
+                    {
+                        m_data = data;
+                        m_initial = &data;
+                        reset();
+                    }
+                    else
+                    {
+                        mark_all_dirty();
+                    }
                 }
 
                 void set_descriptor_handles(uint32_t root_index, uint32_t offset, const D3D12_CPU_DESCRIPTOR_HANDLE h[], uint32_t count)

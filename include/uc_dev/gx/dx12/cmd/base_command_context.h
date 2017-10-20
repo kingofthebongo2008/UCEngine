@@ -19,6 +19,9 @@ namespace uc
     {
         namespace dx12
         {
+            struct graphics_pipeline_state;
+            struct compute_pipeline_state;
+
             struct gpu_base_command_context : public util::noncopyable
             {
                 gpu_command_manager*                    m_command_manager;	        //allocate command lists here
@@ -30,7 +33,8 @@ namespace uc
                 gpu_command_descriptor_cache            m_descriptor_cache;             //allocate handles per frame
                 descriptor_handle_cache                 m_descriptor_handle_cache0;     //descriptor tables for the dynamic tables, if you have only graphics or compute goes here
                 descriptor_handle_cache                 m_descriptor_handle_cache1;     //descriptor tables for the dynamic tables  if you have graphics and compute, compute goes here
-
+                const graphics_pipeline_state*          m_graphics_pipeline_state = nullptr;
+                const compute_pipeline_state*           m_compute_pipeline_state  = nullptr;
 
                 static const uint32_t                   barrier_count = 16;
                 D3D12_RESOURCE_BARRIER                  m_resource_bariers[barrier_count];
@@ -56,6 +60,8 @@ namespace uc
                     m_descriptor_handle_cache0.reset();
                     m_descriptor_handle_cache1.reset();
                     m_resource_bariers_count = 0;
+                    m_compute_pipeline_state = nullptr;
+                    m_graphics_pipeline_state = nullptr;
                 }
 
                 ~gpu_base_command_context()
