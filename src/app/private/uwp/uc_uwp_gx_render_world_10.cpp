@@ -109,19 +109,18 @@ namespace uc
                 });
 
                 gx::pinhole_camera_helper::set_up(m_camera.get(), 0.0f, 1.0f, 0.0f);
-                gx::pinhole_camera_helper::set_forward(m_camera.get(), 0.0f, 0.0f, 1.0f );
-                gx::pinhole_camera_helper::set_view_position(m_camera.get(), 0.0, 1.0f, -10.5f);
+                gx::pinhole_camera_helper::set_forward(m_camera.get(), 0.0f, 0.0f, -1.0f );
+                gx::pinhole_camera_helper::set_view_position(m_camera.get(), 0.0, 1.0f, 5.5f);
 
                 m_camera->set_far(1200.0f);
 
                 m_light_direction = math::normalize3(math::vector3(1.0, 1.0, 0.0));
 
                 math::float4 light_direction        = m_light_direction;
-                math::float4 view_forward           = m_camera->forward();
                 math::float4 shadows_forward        = math::negate(light_direction);
                 math::float4 shadows_up             = math::orthogonal3_vector(light_direction);
 
-                m_shadow_camera->set_view_position(math::add( math::point3(0,0,0) , math::mul(light_direction, 5)));
+                m_shadow_camera->set_view_position(math::point3(6, 6, 0));
                 m_shadow_camera->set_forward(shadows_forward);
                 m_shadow_camera->set_up(shadows_up);
 
@@ -136,10 +135,11 @@ namespace uc
 
             void render_world_10::do_update(update_context* ctx)
             {
+                ctx;
                 *m_military_mechanic_transform = math::identity_matrix();// details::military_mechanic_world_transform(ctx->m_frame_time);
 
                 m_skeleton_instance->reset();
-                m_animation_instance->accumulate(   m_skeleton_instance.get(), ctx->m_frame_time    );
+                m_animation_instance->accumulate(m_skeleton_instance.get(), ctx->m_frame_time );
 
                 m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                 m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
@@ -147,7 +147,7 @@ namespace uc
                 {
                     //do a scene bounding volume, something that encompasses all meshes, should be as tight as possible. transform it to view space and make the orthogonal projection
                     math::float4 p0 = math::point3(0.0f, 0.0f, 0.0f);
-                    math::float4 p1 = math::vector3(1.0f, 2.5f, 1.0f);
+                    math::float4 p1 = math::vector3(2.0f, 2.0f, 2.0f);
                     math::aabb1 scene = { p0, p1 };
 
                     math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
@@ -362,6 +362,21 @@ namespace uc
                         graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
                     }
 
+                    /*
+                    //plane
+                    {
+                        math::float4x4 m = math::identity_matrix();
+
+                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
+
+                        D3D12_VERTEX_BUFFER_VIEW v0 = {};
+                        graphics->set_vertex_buffer(0, v0);
+
+                        D3D12_INDEX_BUFFER_VIEW v = {};
+                        graphics->set_index_buffer(v);
+                        graphics->draw(6);
+                    }
+                    */
                     end_render_shadows(ctx, graphics.get());
                 }
                 
