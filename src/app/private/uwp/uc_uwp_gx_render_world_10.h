@@ -50,6 +50,8 @@ namespace uc
                 gx::dx12::graphics_pipeline_state*                              m_skinned_depth;
                 gx::dx12::graphics_pipeline_state*                              m_skinned_shadows;
 
+                gx::dx12::graphics_pipeline_state*                              m_plane;
+
                 lip::unique_lip_pointer<lip::skeleton>                          m_military_mechanic_skeleton;
                 lip::unique_lip_pointer<lip::joint_animations>                  m_military_mechanic_animations;
 
@@ -84,6 +86,8 @@ namespace uc
                 frame_constants        m_constants_frame;
                 frame_constants        m_constants_frame_shadows;
                 skinned_draw_constants m_constants_pass;
+
+                math::float4           m_light_direction;
 
                 //light
             };

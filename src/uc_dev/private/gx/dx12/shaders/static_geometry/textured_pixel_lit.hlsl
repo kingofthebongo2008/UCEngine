@@ -16,6 +16,7 @@ cbuffer shadow_parameters : register(b2)
 {
     euclidean_transform_3d   m_shadow_view;
     projective_transform_3d  m_shadow_perspective;
+    float4                   m_light_direction;
 };
 
 Texture2D<float4> g_shadow_moments         : register(t1);
@@ -26,7 +27,7 @@ float4 main( interpolants r ) : SV_Target0
     float3 dudx                       = ddx(r.position_ws);
     float3 dudy                       = ddy(r.position_ws);
     float3 normal_vs                  = mul(float4(normalize(cross(dudx, dudy)), 0.0f), m_view.m_value).xyz;
-    float3 sun_light_direction_vs     = mul(float4(0.0,1.0,0.0, 0.0f), m_view.m_value).xyz;
+    float3 sun_light_direction_vs     = mul(m_light_direction, m_view.m_value).xyz;
     float3 sun_light_intensity        = float3(0.5, 0.5, 0.5);
     float3 albedo                     = float4(1.0f, 1.0f, 1.0f, 1.0f);
     float4 light_ps                   = project_p_ws(make_point_ws(r.position_ws), m_shadow_view, m_shadow_perspective).m_value;

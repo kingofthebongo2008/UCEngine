@@ -17,6 +17,7 @@
 #include <autogen/shaders/depth_prepass_skinned.h>
 #include <autogen/shaders/shadows_skinned.h>
 #include <autogen/shaders/shadows_resolve.h>
+#include <autogen/shaders/plane_pso.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -86,6 +87,14 @@ namespace uc
                     m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::shadows_skinned::create_pso);
                 });
 
+                g.run([this, c]
+                {
+                    auto resources = c->m_resources;
+                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_pso::create_pso);
+                });
+
+                
+
                 //load preprocessed textured model
                 g.run([this]()
                 {
@@ -99,11 +108,15 @@ namespace uc
                     m_military_mechanic_animations = lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/military_mechanic.animation");
                 });
 
-                m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));
+                gx::pinhole_camera_helper::set_up(m_camera.get(), 0.0f, 1.0f, 0.0f);
+                gx::pinhole_camera_helper::set_forward(m_camera.get(), 0.0f, 0.0f, 1.0f );
+                gx::pinhole_camera_helper::set_view_position(m_camera.get(), 0.0, 1.0f, -10.5f);
+
                 m_camera->set_far(1200.0f);
 
+                m_light_direction = math::normalize3(math::vector3(1.0, 1.0, 0.0));
 
-                math::float4 light_direction        = math::normalize3(math::vector3(0.0, 1.0, 0.0));
+                math::float4 light_direction        = m_light_direction;
                 math::float4 view_forward           = m_camera->forward();
                 math::float4 shadows_forward        = math::negate(light_direction);
                 math::float4 shadows_up             = math::orthogonal3_vector(light_direction);
@@ -123,14 +136,13 @@ namespace uc
 
             void render_world_10::do_update(update_context* ctx)
             {
-                *m_military_mechanic_transform = details::military_mechanic_world_transform(ctx->m_frame_time);
+                *m_military_mechanic_transform = math::identity_matrix();// details::military_mechanic_world_transform(ctx->m_frame_time);
 
                 m_skeleton_instance->reset();
                 m_animation_instance->accumulate(   m_skeleton_instance.get(), ctx->m_frame_time    );
 
                 m_constants_frame.m_view = uc::math::transpose(uc::gx::view_matrix(camera()));
                 m_constants_frame.m_perspective = uc::math::transpose(uc::gx::perspective_matrix(camera()));
-
 
                 {
                     //do a scene bounding volume, something that encompasses all meshes, should be as tight as possible. transform it to view space and make the orthogonal projection
@@ -198,13 +210,22 @@ namespace uc
 
                 graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);
 
+                //shadows and light
+                {
+                    render_object_frame_constants r;
+
+                    r.m_shadow_view = m_constants_frame_shadows.m_view;
+                    r.m_shadow_perspective = m_constants_frame_shadows.m_perspective;
+                    r.m_directional_light = m_light_direction;
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
+                }
+                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
+
                 //mechanic
                 {
+                    auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Mechanic"); 
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
-                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, m_constants_frame_shadows);
-
-                    graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
 
                     //geometry
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
@@ -233,6 +254,37 @@ namespace uc
                             graphics->draw_indexed(r.size(), r.m_begin + base_index_offset, base_vertex_offset);
                         }
                     }
+                }
+
+
+                //plane
+                {
+                    auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Plane");
+
+                    math::float4x4 m = math::identity_matrix();
+
+                    graphics->set_pso(m_plane);
+
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
+
+                    {
+                        render_object_frame_constants r;
+
+                        r.m_shadow_view = m_constants_frame_shadows.m_view;
+                        r.m_shadow_perspective = m_constants_frame_shadows.m_perspective;
+                        r.m_directional_light = m_light_direction;
+                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
+                    }
+
+                    graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
+
+
+                    D3D12_VERTEX_BUFFER_VIEW v0 = {};
+                    graphics->set_vertex_buffer(0, v0);
+
+                    D3D12_INDEX_BUFFER_VIEW v = {};
+                    graphics->set_index_buffer(v);
+                    graphics->draw(6);
                 }
 
                 end_render(ctx, graphics.get());
