@@ -219,6 +219,7 @@ namespace uc
                     r.m_directional_light = m_light_direction;
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
                 }
+
                 graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
 
                 //mechanic
@@ -266,17 +267,6 @@ namespace uc
                     graphics->set_pso(m_plane);
 
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
-
-                    {
-                        render_object_frame_constants r;
-
-                        r.m_shadow_view = m_constants_frame_shadows.m_view;
-                        r.m_shadow_perspective = m_constants_frame_shadows.m_perspective;
-                        r.m_directional_light = m_light_direction;
-                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
-                    }
-
-                    graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
 
 
                     D3D12_VERTEX_BUFFER_VIEW v0 = {};
