@@ -1,0 +1,10 @@
+import staticgeometry
+
+PipelineStateObject plane_pso : static_geometry =
+{
+    .VertexShader           = plane_vertex
+    .PixelShader            = textured_pixel_lit
+}
+
+
+
