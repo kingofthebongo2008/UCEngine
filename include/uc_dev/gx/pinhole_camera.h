@@ -100,8 +100,25 @@ namespace uc
             float   m_aspect_ratio = 16.0f / 9.0f;
             float   m_near         = 0.1f;      //meters
             float   m_far          = 100.0f;	//meters;
-
         };
+
+        namespace pinhole_camera_helper
+        {
+            inline void set_view_position(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_view_position(math::set(x, y, z, 1.0f));
+            }
+
+            inline void set_forward(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_forward(math::normalize3(math::set(x, y, z, 0.0f)));
+            }
+
+            inline void set_up(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_up(math::normalize3(math::set(x, y, z, 0.0f)));
+            }
+        }
 
         struct orthographic_camera
         {
