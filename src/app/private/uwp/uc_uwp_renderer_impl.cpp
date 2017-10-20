@@ -219,7 +219,7 @@ namespace uc
                     {
                         auto camera_position = camera->position();
                         auto camera_min = math::set(-100.0f, -100.0f, -125.0f, 1.0f);
-                        auto camera_max = math::set(+100.0f, +100.0f, -5.0f, 1.0f);
+                        auto camera_max = math::set(+100.0f, +100.0f, +125.0f, 1.0f);
                         camera_position = math::clamp(camera_position, camera_min, camera_max);
                         camera->set_view_position(camera_position);
                     }
