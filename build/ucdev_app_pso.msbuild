@@ -81,10 +81,18 @@
       <InProject>true</InProject>
       <Backend>UniqueCreatorDev</Backend>
     </GraphicsPipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\indexed_mesh.pso">
       <EntryPointName>indexed_mesh_main</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane.pso">
+      <EntryPointName>plane_pso</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
   </ItemGroup>
 </Project>
