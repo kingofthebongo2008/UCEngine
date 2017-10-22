@@ -1,26 +1,7 @@
 import depthstencil
 import rasterizer
 import blend
-
-PipelineStateObject static_geometry =
-{
-    .RootSignature          = default_signature
-    .BlendState             = blend_disabled
-    .SampleMask             = FFFFFFFF
-    .RasterizerState        = solid
-    .DepthStencilState      = depth_prepass_opaque
-    .StripCutValue          = Disabled
-    .PrimitiveTopology      = Triangle
-    .RTVFormats             = { }
-    .DSVFormat              = D32_FLOAT
-    .SampleDescription      = { .Count = 1 .Quality = 0 }
-}
-
-PipelineStateObject static_geometry_shadows : static_geometry =
-{
-    .DepthStencilState      = depth_prepass_inverted_z_opaque
-    .SampleDescription      = { .Count = 4 .Quality = 0 }
-}
+import staticgeometry
 
 InputLayout position = 
 {
@@ -55,7 +36,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject shadows_skinned: static_geometry_shadows =
+PipelineStateObject shadows_skinned: shadows_geometry =
 {
     .VertexShader           = depth_prepass_vertex_skinned
     .InputLayout            = position

@@ -13,11 +13,13 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned_lit.h>
-#include <autogen/shaders/depth_prepass_skinned.h>
-#include <autogen/shaders/shadows_skinned.h>
+#include <autogen/shaders/textured_skinned_lit_solid.h>
+#include <autogen/shaders/textured_skinned_lit_depth_only.h>
+#include <autogen/shaders/textured_skinned_lit_shadows.h>
 #include <autogen/shaders/shadows_resolve.h>
-#include <autogen/shaders/plane_pso.h>
+#include <autogen/shaders/plane_solid.h>
+#include <autogen/shaders/plane_depth_only.h>
+#include <autogen/shaders/plane_shadows.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -66,7 +68,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned_textured_lit = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit::create_pso);
+                    m_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_solid::create_pso);
                 });
 
                 g.run([this, c]
@@ -78,19 +80,19 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_skinned::create_pso);
+                    m_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_depth_only::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::shadows_skinned::create_pso);
+                    m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_shadows::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_pso::create_pso);
+                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid::create_pso);
                 });
 
                 
@@ -205,7 +207,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_skinned_textured_lit);
+                graphics->set_pso(m_skinned);
                 graphics->set_descriptor_heaps();
 
                 graphics->set_graphics_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_0, m_constants_frame);

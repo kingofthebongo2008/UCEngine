@@ -1,0 +1,7 @@
+import staticgeometry
+
+
+PipelineStateObject plane_shadows : shadows_geometry =
+{
+    .VertexShader           = depth_prepass_plane_vertex
+}

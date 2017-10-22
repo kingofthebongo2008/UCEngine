@@ -52,7 +52,7 @@ DepthStencilDescription opaque =
     }
 }
 
-DepthStencilDescription depth_prepass_opaque =
+DepthStencilDescription depth_only =
 {
     .DepthEnable            = true
     .DepthWriteMask         = All
@@ -79,7 +79,7 @@ DepthStencilDescription depth_prepass_opaque =
     }
 }
 
-DepthStencilDescription depth_prepass_inverted_z_opaque =
+DepthStencilDescription depth_only_inverted =
 {
     .DepthEnable            = true
     .DepthWriteMask         = All

@@ -28,3 +28,18 @@ RasterizerDescription solid =
     .ConservativeRasterizationMode = Off
 }
 
+RasterizerDescription solid_msaa = 
+{
+    .FillMode               = Solid
+    .CullMode               = Back
+    .FrontCounterClockwise  = true
+    .DepthBias              = 0
+    .DepthBiasClamp         = 0.0
+    .SlopeScaledDepthBias   = 0.0
+    .DepthClipEnable        = true
+    .MultisampleEnable      = true
+    .AntialiasedLineEnable  = false
+    .ForcedSampleCount      = 0
+    .ConservativeRasterizationMode = Off
+}
+

@@ -13,7 +13,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject skeleton : static_geometry =
+PipelineStateObject skeleton : solid_geometry =
 {
     .VertexShader           = skeleton_vertex
     .PixelShader            = skeleton_pixel

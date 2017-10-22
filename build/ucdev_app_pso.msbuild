@@ -17,19 +17,15 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit.pso">
-      <EntryPointName>textured_skinned_lit</EntryPointName>
-      <Backend>UniqueCreatorDev</Backend>
-      <InProject>true</InProject>
-    </GraphicsPipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass.pso">
       <EntryPointName>depth_prepass</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows_skinned.pso">
-      <EntryPointName>shadows_skinned</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines.pso">
+      <EntryPointName>depth_prepass_lines</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
@@ -39,11 +35,7 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines.pso">
-      <EntryPointName>depth_prepass_lines</EntryPointName>
-      <Backend>UniqueCreatorDev</Backend>
-      <InProject>true</InProject>
-    </GraphicsPipelineStateObject>
+
     <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\mipmap.pso">
       <EntryPointName>compute_mip_map</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
@@ -88,11 +80,42 @@
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane.pso">
-      <EntryPointName>plane_pso</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid.pso">
+      <EntryPointName>plane_solid</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_depth_only.pso">
+      <EntryPointName>plane_depth_only</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_shadows.pso">
+      <EntryPointName>plane_shadows</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid.pso">
+      <EntryPointName>textured_skinned_lit_solid</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_depth_only.pso">
+      <EntryPointName>textured_skinned_lit_depth_only</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_shadows.pso">
+      <EntryPointName>textured_skinned_lit_shadows</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
 
   </ItemGroup>
 </Project>

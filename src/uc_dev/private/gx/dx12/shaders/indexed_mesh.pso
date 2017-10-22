@@ -13,7 +13,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject indexed_mesh_main : static_geometry =
+PipelineStateObject indexed_mesh_main : solid_geometry =
 {
     .VertexShader           = indexed_mesh_vertex
     .PixelShader            = indexed_mesh_pixel
