@@ -30,7 +30,7 @@ namespace uc
 
                 std::unique_ptr<gxu::static_render_object>                      m_deer;
                 gx::dx12::graphics_pipeline_state*                              m_textured;
-                gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
+                gx::dx12::graphics_pipeline_state*                              m_textured_depth;
 
                 math::managed_float4x4                                          m_deer_transform = math::make_float4x4();
             };

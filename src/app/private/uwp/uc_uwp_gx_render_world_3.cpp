@@ -12,8 +12,8 @@
 
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
 
-#include <autogen/shaders/textured.h>
-#include <autogen/shaders/depth_prepass.h>
+#include <autogen/shaders/textured_solid.h>
+#include <autogen/shaders/textured_depth_only.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -80,13 +80,13 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured::create_pso);
+                    m_textured = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_solid::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_depth_prepass = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass::create_pso);
+                    m_textured_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_depth_only::create_pso);
                 });
 
                 m_camera->set_view_position(math::set(0.0, 0.0f, -25.5f, 0.0f));
@@ -175,7 +175,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
+                graphics->set_pso(m_textured_depth);
 
                 {
                     frame_constants frame;

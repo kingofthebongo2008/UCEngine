@@ -2,24 +2,27 @@
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\building.pso">
       <EntryPointName>building</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured.pso">
-      <EntryPointName>textured</EntryPointName>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_solid.pso">
+      <EntryPointName>textured_solid</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_solid.pso">
       <EntryPointName>textured_skinned_solid</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass.pso">
-      <EntryPointName>depth_prepass</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_depth_only.pso">
+      <EntryPointName>textured_depth_only</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>

@@ -34,7 +34,7 @@ namespace uc
                 gx::dx12::managed_gpu_texture_2d                                m_texture_bear;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured;
-                gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
+                gx::dx12::graphics_pipeline_state*                              m_textured_depth;
 
 
 				math::managed_float4x4                                          m_bear_transform = math::make_float4x4();

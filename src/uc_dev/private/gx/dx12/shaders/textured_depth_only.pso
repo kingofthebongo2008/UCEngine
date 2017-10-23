@@ -17,7 +17,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject depth_prepass : depth_only_geometry =
+PipelineStateObject textured_depth_only : depth_only_geometry =
 {
     .VertexShader           = depth_prepass_vertex
     .InputLayout            = position
