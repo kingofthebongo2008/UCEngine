@@ -95,7 +95,18 @@ namespace uc
                     m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid::create_pso);
                 });
 
-                
+                g.run([this, c]
+                {
+                    auto resources = c->m_resources;
+                    m_plane_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_depth_only::create_pso);
+                });
+
+                g.run([this, c]
+                {
+                    auto resources = c->m_resources;
+                    m_plane_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_shadows::create_pso);
+                });
+
 
                 //load preprocessed textured model
                 g.run([this]()
@@ -308,6 +319,8 @@ namespace uc
 
                 //mechanic
                 {
+                    auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Mechanic");
+
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
@@ -319,6 +332,24 @@ namespace uc
 
                     //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
                     graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
+                }
+
+                //plane
+                {
+                    auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Plane");
+
+                    math::float4x4 m = math::identity_matrix();
+
+                    graphics->set_pso(m_plane_depth);
+
+                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
+
+                    D3D12_VERTEX_BUFFER_VIEW v0 = {};
+                    graphics->set_vertex_buffer(0, v0);
+
+                    D3D12_INDEX_BUFFER_VIEW v = {};
+                    graphics->set_index_buffer(v);
+                    graphics->draw(6);
                 }
 
                 end_render_depth(ctx, graphics.get());
@@ -351,6 +382,8 @@ namespace uc
 
                     //mechanic
                     {
+                        auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Mechanic");
+
                         //todo: move this into a big buffer for the whole scene
                         graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m_constants_pass);
 
@@ -364,10 +397,13 @@ namespace uc
                         graphics->draw_indexed(m_military_mechanic->m_indices->index_count(), m_military_mechanic->m_indices->index_offset(), m_military_mechanic->m_geometry->draw_offset());
                     }
 
-                    /*
                     //plane
                     {
+                        auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Plane");
+
                         math::float4x4 m = math::identity_matrix();
+
+                        graphics->set_pso(m_plane_shadows);
 
                         graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
 
@@ -378,7 +414,7 @@ namespace uc
                         graphics->set_index_buffer(v);
                         graphics->draw(6);
                     }
-                    */
+
                     end_render_shadows(ctx, graphics.get());
                 }
                 
