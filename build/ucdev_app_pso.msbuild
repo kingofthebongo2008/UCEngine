@@ -12,8 +12,8 @@
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned.pso">
-      <EntryPointName>textured_skinned</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_solid.pso">
+      <EntryPointName>textured_skinned_solid</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
@@ -30,8 +30,8 @@
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_skinned.pso">
-      <EntryPointName>depth_prepass_skinned</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_depth_only.pso">
+      <EntryPointName>textured_skinned_depth_only</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>

@@ -12,8 +12,8 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned.h>
-#include <autogen/shaders/depth_prepass_skinned.h>
+#include <autogen/shaders/textured_skinned_solid.h>
+#include <autogen/shaders/textured_skinned_depth_only.h>
 #include <autogen/shaders/skeleton.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
@@ -61,13 +61,13 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned::create_pso);
+                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_solid::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_depth_prepass = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_skinned::create_pso);
+                    m_textured_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_depth_only::create_pso);
                 });
 
                 //load preprocessed textured model
@@ -254,7 +254,7 @@ namespace uc
 
                 //Per many draw calls  -> frequency 1
                 graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                graphics->set_pso(m_depth_prepass);
+                graphics->set_pso(m_textured_skinned_depth);
 
                 {
                     frame_constants frame;

@@ -57,7 +57,7 @@ namespace uc
                 std::unique_ptr<gxu::skinned_render_object>      m_robot;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
-                gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
+                gx::dx12::graphics_pipeline_state*                              m_textured_skinned_depth;
 
                 lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
                 std::vector< lip::unique_lip_pointer<lip::joint_animations> >   m_animations;

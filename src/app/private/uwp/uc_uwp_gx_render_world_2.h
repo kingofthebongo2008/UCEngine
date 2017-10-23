@@ -36,7 +36,7 @@ namespace uc
                 std::unique_ptr<gxu::skinned_multi_material_render_object>      m_military_mechanic;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
-                gx::dx12::graphics_pipeline_state*                              m_depth_prepass;
+                gx::dx12::graphics_pipeline_state*                              m_textured_skinned_depth;
 
                 lip::unique_lip_pointer<lip::skeleton>                          m_military_mechanic_skeleton;
                 lip::unique_lip_pointer<lip::joint_animations>                  m_military_mechanic_animations;
