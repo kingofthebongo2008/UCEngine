@@ -33,12 +33,12 @@ float4 compute_moment_vector4_moments_optimized(float moment_0, float moment_1, 
             39.3703274134f, -35.364903257f,     -6.6543490743f, -23.9728048165f
         );
 
-    float4 moments_optimized = moments;// mul(moments, transform);
+    float4 moments_optimized = mul(moments, transform);
 
     //add bias
     moments_optimized[0] += 0.035955884801f;
 
-    return moments;
+    return moments_optimized;
 }
 
 [numthreads( 16, 16, 1 )]

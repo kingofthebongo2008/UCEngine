@@ -131,6 +131,23 @@ void Compute4MomentUnboundedShadowIntensity(out float OutShadowIntensity,
     OutShadowIntensity = saturate(OutShadowIntensity);
 }
 
+/*! This function takes a sample from the four-moment optimized shadow map in the
+given sampler using the given texture coordinate converts to moments and outputs
+it. The shadow map dimensions and reciproque dimensions are needed to correct
+off-by-one errors.*/
+float4 deoptimize_moments(float4 optimized_moments)
+{
+    float4 OptimizedSample = optimized_moments;
+    OptimizedSample[0] -= 0.035955884801f;
+    float4 Out4Moments = mul(OptimizedSample, float4x4(
+        0.2227744146f, 0.1549679261f, 0.1451988946f, 0.163127443f,
+        0.0771972861f, 0.1394629426f, 0.2120202157f, 0.2591432266f,
+        0.7926986636f, 0.7963415838f, 0.7258694464f, 0.6539092497f,
+        0.0319417555f, -0.1722823173f, -0.2758014811f, -0.3376131734f));
+
+    return Out4Moments;
+}
+
 Texture2D<float4> g_shadow_moments         : register(t1);
 
 [RootSignature( MyRS1 ) ]
@@ -148,10 +165,11 @@ float4 main( interpolants r ) : SV_Target0
     light_ps.xy                       = light_ps.xy * 0.5f + 0.5f;
     light_ps.y                        = 1.0f - light_ps.y;
 
-    float4 moments4                   = g_shadow_moments.Sample(g_linear_clamp, light_ps.xy).xyzw;
+    float4 optimized_moments4         = g_shadow_moments.Sample(g_linear_clamp, light_ps.xy).xyzw;
+    float4 moments4                   = deoptimize_moments(optimized_moments4);
     float  fragment_depth             = 1.0f - light_ps.z;
     float  depth_bias                 = 0.00000f;
-    float  moment_bias                = 0.035955884801f;
+    float  moment_bias              = 0.00003f;
 
     float  shadow_intensity           = 0.0f;
 
