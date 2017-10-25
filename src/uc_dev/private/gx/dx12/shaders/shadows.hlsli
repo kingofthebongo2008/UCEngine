@@ -28,50 +28,126 @@ float4 compute_moment_vector4_moments_optimized(float moment_0, float moment_1, 
 /*! Given a sampled value from a four-moment shadow map and a computed shadow map
 depth for a point at the same location this function outputs 1.0, if the fragment
 is in shadow 0.0f, if the fragment is lit and an intermediate value for partial
+shadow. The returned value is an optimal lower bound except for the fact that it
+does not exploit the knowledge that the original distribution has support in
+[0,1].*/
+
+float compute4_moment_shadow_intensity1( float4 Biased4Moments, float FragmentDepth, float DepthBias = 0.0f)
+{
+    float OutShadowIntensity;
+    float4 b = Biased4Moments;
+    float3 z;
+    z[0] = FragmentDepth - DepthBias;
+
+    float L21D11 = mad(-b[0], b[1], b[2]);
+    float D11 = mad(-b[0], b[0], b[1]);
+    float InvD11 = 1.0f / D11;
+    float L21 = L21D11*InvD11;
+    float SquaredDepthVariance = mad(-b[1], b[1], b[3]);
+    float D22 = mad(-L21D11, L21, SquaredDepthVariance);
+
+    float3 c = float3(1.0f, z[0], z[0] * z[0]);
+    c[1] -= b.x;
+    c[2] -= b.y + L21*c[1];
+    c[1] *= InvD11;
+    c[2] /= D22;
+    c[1] -= L21*c[2];
+    c[0] -= dot(c.yz, b.xy);
+    float InvC2 = 1.0f / c[2];
+    float p = c[1] * InvC2;
+    float q = c[0] * InvC2;
+    float D = (p*p*0.25f) - q;
+    float r = sqrt(D);
+    z[1] = -p*0.5f - r;
+    z[2] = -p*0.5f + r;
+    float4 Switch =
+        (z[2]<z[0]) ? float4(z[1], z[0], 1.0f, 1.0f) : (
+        (z[1]<z[0]) ? float4(z[0], z[1], 0.0f, 1.0f) :
+            float4(0.0f, 0.0f, 0.0f, 0.0f));
+    float Quotient = (Switch[0] * z[2] - b[0] * (Switch[0] + z[2]) + b[1]) / ((z[2] - Switch[1])*(z[0] - z[1]));
+    OutShadowIntensity = Switch[2] + Switch[3] * Quotient;
+    OutShadowIntensity = saturate(OutShadowIntensity);
+
+    return OutShadowIntensity;
+}
+
+/*! Given a sampled value from a four-moment shadow map and a computed shadow map
+depth for a point at the same location this function outputs 1.0, if the fragment
+is in shadow 0.0f, if the fragment is lit and an intermediate value for partial
 shadow. The returned value is an optimal lower bound.*/
 float4 compute4_moment_shadow_intensity(float4 _4Moments, float FragmentDepth, float DepthBias = 0.0f, float MomentBias = 0.00003f)
 {
     float OutShadowIntensity;
     // Bias input data to avoid artifacts
-    float4 b = lerp(_4Moments, float4(0.5f, 0.5f, 0.5f, 0.5f), MomentBias);
+    float4 b;
+    
+    b.x = lerp(_4Moments.x, 0.5f, MomentBias);
+    b.y = lerp(_4Moments.y, 0.5f, MomentBias);
+    b.z = lerp(_4Moments.z, 0.5f, MomentBias);
+    b.w = lerp(_4Moments.w, 0.5f, MomentBias);
+    
+//    float4 b = lerp(_4Moments, float4(0.5f, 0.5f, 0.5f, 0.5f), MomentBias);
+
+    // Use short-hands for the many formulae to come
+    //float4 b = Biased4Moments;
     float3 z;
     z[0] = FragmentDepth - DepthBias;
 
     // Compute a Cholesky factorization of the Hankel matrix B storing only non-
     // trivial entries or related products
-    float L32D22 = mad(-b[0], b[1], b[2]);
-    float D22 = mad(-b[0], b[0], b[1]);
+    float L21D11 = mad(-b[0], b[1], b[2]);
+    float D11 = mad(-b[0], b[0], b[1]);
+    float InvD11 = rcp(D11);
+    float L21 = L21D11*InvD11;
     float SquaredDepthVariance = mad(-b[1], b[1], b[3]);
-    float D33D22 = dot(float2(SquaredDepthVariance, -L32D22), float2(D22, L32D22));
-    float InvD22 = 1.0f / D22;
-    float L32 = L32D22*InvD22;
+    float D22 = mad(-L21D11, L21, SquaredDepthVariance);
 
     // Obtain a scaled inverse image of bz=(1,z[0],z[0]*z[0])^T
     float3 c = float3(1.0f, z[0], z[0] * z[0]);
     // Forward substitution to solve L*c1=bz
     c[1] -= b.x;
-    c[2] -= b.y + L32*c[1];
+    c[2] -= b.y + L21*c[1];
     // Scaling to solve D*c2=c1
-    c[1] *= InvD22;
-    c[2] *= D22 / D33D22;
+    c[1] *= InvD11;
+    c[2] /= D22;
     // Backward substitution to solve L^T*c3=c2
-    c[1] -= L32*c[2];
+    c[1] -= L21*c[2];
     c[0] -= dot(c.yz, b.xy);
     // Solve the quadratic equation c[0]+c[1]*z+c[2]*z^2 to obtain solutions z[1] 
     // and z[2]
-    float p = c[1] / c[2];
-    float q = c[0] / c[2];
+    float InvC2 = rcp(c[2]);
+    float p = c[1] * InvC2;
+    float q = c[0] * InvC2;
     float D = ((p*p) / 4.0f) - q;
     float r = sqrt(D);
     z[1] = -(p / 2.0f) - r;
     z[2] = -(p / 2.0f) + r;
 
-    // Use a solution made of four deltas if the solution with three deltas is invalid
-    if (z[1]<0.0f || z[2]>1.0f) {
-        float zFree = ((b[2] - b[1])*z[0] + b[2] - b[3]) / ((b[1] - b[0])*z[0] + b[1] - b[2]);
+    // Use a solution made of four deltas if the solution with three deltas is 
+    // invalid
+    [branch] if (z[1]<-1.0f || z[2]>1.0f) {
+        float zFree = ((b[0] - b[2])*z[0] + b[3] - b[1]) / (z[0] + b[2] - b[0] - b[1] * z[0]);
         float w1Factor = (z[0]>zFree) ? 1.0f : 0.0f;
-        OutShadowIntensity = (b[1] - b[0] + (b[2] - b[0] - (zFree + 1.0f)*(b[1] - b[0]))*(zFree - w1Factor - z[0])
-            / (z[0] * (z[0] - zFree))) / (zFree - w1Factor) + 1.0f - b[0];
+        // Construct a polynomial taking value zero at z[0] and 1, value 1 at -1 and 
+        // value w1Factor at zFree. Start with a linear part and then multiply by 
+        // linear factors to get the roots.
+        float2 Normalizers;
+        Normalizers.x = w1Factor / ((zFree - z[0])*mad(zFree, zFree, -1.0f));
+        Normalizers.y = 0.5f / ((zFree + 1.0f)*(z[0] + 1.0f));
+        float4 Polynomial;
+        Polynomial[0] = mad(zFree, Normalizers.y, Normalizers.x);
+        Polynomial[1] = Normalizers.x - Normalizers.y;
+        // Multiply the polynomial by (z-z[0])
+        Polynomial[2] = Polynomial[1];
+        Polynomial[1] = mad(Polynomial[1], -z[0], Polynomial[0]);
+        Polynomial[0] *= -z[0];
+        // Multiply the polynomial by (z-1)
+        Polynomial[3] = Polynomial[2];
+        Polynomial.yz = Polynomial.xy - Polynomial.yz;
+        Polynomial[0] *= -1.0f;
+        // The shadow intensity is the dot product of the coefficients of this 
+        // polynomial and the power moments for the respective powers
+        OutShadowIntensity = dot(Polynomial, float4(1.0f, b.xyz));
     }
     // Use the solution with three deltas
     else {
@@ -83,6 +159,7 @@ float4 compute4_moment_shadow_intensity(float4 _4Moments, float FragmentDepth, f
         OutShadowIntensity = Switch[2] + Switch[3] * Quotient;
     }
     OutShadowIntensity = saturate(OutShadowIntensity);
+
     return OutShadowIntensity;
 }
 
@@ -101,6 +178,11 @@ float4 compute_deoptimized_moments(float4 optimized_moments)
         0.0319417555f, -0.1722823173f, -0.2758014811f, -0.3376131734f));
 
     return Out4Moments;
+}
+
+float compute_shadow_intensity()
+{
+    return 0.0f;
 }
 
 

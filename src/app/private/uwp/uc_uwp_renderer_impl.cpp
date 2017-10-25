@@ -303,7 +303,7 @@ namespace uc
             //Recreate view depth buffer and the msaa shadows depth buffer
             m_view_depth_buffer     = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
             m_shadow_depth_buffer   = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
-            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_color_buffer>(m_resources.resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE ));
+            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_color_buffer>(m_resources.resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R16G16B16A16_UNORM, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE ));
         }
 
         void renderer_impl::render()
