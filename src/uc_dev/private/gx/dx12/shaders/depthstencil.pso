@@ -28,7 +28,7 @@ DepthStencilDescription user_interface =
 DepthStencilDescription opaque =
 {
     .DepthEnable            = true
-    .DepthWriteMask         = All
+    .DepthWriteMask         = Zero
     .DepthFunction          = LessEqual
     .StencilEnable          = false
 
