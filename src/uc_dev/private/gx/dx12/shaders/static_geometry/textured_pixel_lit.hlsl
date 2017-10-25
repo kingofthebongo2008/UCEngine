@@ -113,7 +113,7 @@ float4 main( interpolants r ) : SV_Target0
     float4 light_ps                   = project_p_ws(make_point_ws(r.position_ws), m_shadow_view, m_shadow_perspective).m_value;
 
     light_ps                          = light_ps / light_ps.w;
-    light_ps.xy                       = light_ps.xy * 0.5f + 0.5f;
+    light_ps.xy                       = light_ps.xy * (0.5f, 0.5f) + (0.5f, 0.5f);
     light_ps.y                        = 1.0f - light_ps.y;
 
     float4 optimized_moments4         = g_shadow_moments.Sample(g_linear_clamp, light_ps.xy).xyzw;
@@ -131,6 +131,6 @@ float4 main( interpolants r ) : SV_Target0
     float  ndotl                      = saturate(dot(normal_ws, sun_light_direction_ws));
     float3 ambient                    = float3(0.2f, 0.2f, 0.2f);
     
-    //return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
-    return float4 (shadow_intensity, shadow_intensity, shadow_intensity, 0.0);
+    return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
+    //return float4 (shadow_intensity, shadow_intensity, shadow_intensity, 0.0);
 }
