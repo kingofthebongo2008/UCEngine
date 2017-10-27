@@ -1,7 +1,7 @@
 PipelineStateObject shadows_resolve =
 {
     .RootSignature 	   		= default_signature_1
-    .ComputeShader			= shadow_resolve
+    .ComputeShader			= moment_shadow_maps_resolve
 }
 
 

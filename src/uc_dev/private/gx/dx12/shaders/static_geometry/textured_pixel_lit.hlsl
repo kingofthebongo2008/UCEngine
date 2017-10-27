@@ -33,22 +33,7 @@ float4 main( interpolants r ) : SV_Target0
     float3 sun_light_intensity        = float3(0.5, 0.5, 0.5);
     float3 albedo                     = float4(1.0f, 1.0f, 1.0f, 1.0f);
 
-
-    float4 light_ps                   = project_p_ws(make_point_ws(r.position_ws), m_shadow_view, m_shadow_perspective).m_value;
-    light_ps                          = light_ps / light_ps.w;
-    float2 shadow_map_uv              = light_ps.xy * float2(0.5f, -0.5f ) + float2(0.5f, 0.5f);
-
-    float4 optimized_moments4         = g_shadow_moments.Sample(g_linear_clamp, shadow_map_uv ).xyzw;
-    float4 moments4                   = compute_deoptimized_moments(optimized_moments4);
-    float  fragment_depth             = 1.0f - light_ps.z;
-
-    float  shadow_intensity           = compute4_moment_shadow_intensity( moments4, fragment_depth);
-    shadow_intensity                  = 1.0f - shadow_intensity;
-
-    /*
-    float  shadow                     = g_shadow_moments.Sample(g_linear_clamp,  light_ps.xy ).x;
-    float  shadow_intensity           = shadow > light_ps.z ? 0.0f : 1.0f; 
-    */
+    float  shadow_intensity           = compute_moment4_shadow_maps( make_sampler_2d( g_shadow_moments, g_linear_clamp ), r.position_ws, make_shadow_transforms( m_shadow_view, m_shadow_perspective ) );
 
     float  ndotl                      = saturate(dot(normal_ws, sun_light_direction_ws));
     float3 ambient                    = float3(0.2f, 0.2f, 0.2f);
