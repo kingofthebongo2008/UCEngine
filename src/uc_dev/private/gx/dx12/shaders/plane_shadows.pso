@@ -3,5 +3,5 @@ import staticgeometry
 
 PipelineStateObject plane_shadows : shadows_geometry =
 {
-    .VertexShader           = depth_prepass_plane_vertex
+    .VertexShader           = depth_only_plane_vertex
 }

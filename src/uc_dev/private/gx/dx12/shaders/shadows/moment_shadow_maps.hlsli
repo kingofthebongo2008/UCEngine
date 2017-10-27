@@ -59,33 +59,40 @@ void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
     uint iRow = GroupThreadID.x;
     uint RowOffset = iRow*RABInputBlockWidth + iRow / RABSpacerStride + MomentOffset;
     uint iMomentInMemory = RightHalf ? (RABOutputBlockWidth + RowOffset) : RowOffset;
-    for (uint i = 0; i != RABGuardBandSize / 2; ++i) {
+    for (uint i = 0; i != RABGuardBandSize / 2; ++i)
+    {
         pRowMoment[i] = pRABMoment[iMomentInMemory + 2 * i];
     }
     // Now the threads for the right half have to transition from the left half 
     // to the right half while the other threads just move on
     iMomentInMemory = RightHalf ? (iMomentInMemory + 1 - 2 * (RABOutputBlockWidth / 2)) : (iMomentInMemory + 2 * (RABGuardBandSize / 2));
-    for (uint i = RABGuardBandSize / 2; i != RABInputBlockWidth / 2; ++i) {
+    for (uint i = RABGuardBandSize / 2; i != RABInputBlockWidth / 2; ++i)
+    {
         pRowMoment[i] = pRABMoment[iMomentInMemory + 2 * (i - RABGuardBandSize / 2)];
     }
     // Finally the threads for the left half may need to transition to the right 
     // half while the other threads just move on
     iMomentInMemory = RightHalf ? (iMomentInMemory + 2 * (RABHalfInputBlockWidth - RABGuardBandSize / 2)) : (iMomentInMemory + 1 - RABGuardBandSize);
-    for (uint i = RABHalfInputBlockWidth; i != RABOutputBlockWidth / 2 + RABGuardBandSize; ++i) {
+    for (uint i = RABHalfInputBlockWidth; i != RABOutputBlockWidth / 2 + RABGuardBandSize; ++i)
+    {
         pRowMoment[i] = pRABMoment[iMomentInMemory + 2 * (i - RABHalfInputBlockWidth)];
     }
     // Now we compute blurred moments
     float pRowBlurredMoment[RABOutputBlockWidth / 2];
-    for (uint i = 0; i != RABOutputBlockWidth / 2; ++i) {
+    
+    for (uint i = 0; i != RABOutputBlockWidth / 2; ++i)
+    {
         pRowBlurredMoment[i] = 0.0f;
-        for (uint j = 0; j != 9; ++j) {
+        for (uint j = 0; j != 9; ++j)
+        {
             pRowBlurredMoment[i] += pRABGaussianWeight[j] * pRowMoment[i + j];
         }
     }
     // And write them back to shared memory without overwriting the read-only 
     // region
     iMomentInMemory = RightHalf ? (RABGuardBandSize + 1 + RowOffset) : RowOffset;
-    for (uint i = 0; i != RABOutputBlockWidth / 2; ++i) {
+    for (uint i = 0; i != RABOutputBlockWidth / 2; ++i)
+    {
         pRABMoment[iMomentInMemory + 2 * i] = pRowBlurredMoment[i];
     }
     // If the warp size on the target platform is not a multiple of 32, this 
@@ -102,7 +109,8 @@ void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
     uint iFirstRow = LowerHalf ? (RABOutputBlockHeight / 2) : 0;
     uint iFirstMomentInMemory = iColumn * 2 + iFirstRow*RABInputBlockWidth + iFirstRow / RABSpacerStride + MomentOffset;
     iFirstMomentInMemory = (RightHalf ? (iFirstMomentInMemory + 1 - RABHalfInputBlockWidth * 2) : iFirstMomentInMemory);
-    for (uint i = 0; i != RABOutputBlockHeight / 2 + RABGuardBandSize; ++i) {
+    for (uint i = 0; i != RABOutputBlockHeight / 2 + RABGuardBandSize; ++i)
+    {
         // This index arithmetic may look expensive but it deals with nothing 
         // but compile-time constants, so it is free
         uint iMemoryOffset = i*RABInputBlockWidth + i / RABSpacerStride;
@@ -110,9 +118,11 @@ void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
     }
     // Now we compute blurred moments
     float pColumnBlurredMoment[RABOutputBlockHeight / 2];
-    for (uint i = 0; i != RABOutputBlockHeight / 2; ++i) {
+    for (uint i = 0; i != RABOutputBlockHeight / 2; ++i)
+    {
         pColumnBlurredMoment[i] = 0.0f;
-        for (uint j = 0; j != 9; ++j) {
+        for (uint j = 0; j != 9; ++j)
+        {
             pColumnBlurredMoment[i] += pRABGaussianWeight[j] * pColumnMoment[i + j];
         }
     }
@@ -120,7 +130,8 @@ void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
     // synchronization has to be uncommented to avoid malicious race conditions
     //GroupMemoryBarrierWithGroupSync();
     // And write them back to shared memory
-    for (uint i = 0; i != RABOutputBlockHeight / 2; ++i) {
+    for (uint i = 0; i != RABOutputBlockHeight / 2; ++i)
+    {
         uint iMemoryOffset = i*RABInputBlockWidth + i / RABSpacerStride;
         pRABMoment[iFirstMomentInMemory + iMemoryOffset] = pColumnBlurredMoment[i];
     }

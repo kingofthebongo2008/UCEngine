@@ -36,7 +36,7 @@ float compute_moment4_shadow_maps( sampler_2d moments, float3 position_ws, shado
 
     float4 optimized_moments4         = moments.m_texture.Sample(moments.m_sampler, shadow_map_uv ).xyzw;
     float4 moments4                   = compute_deoptimized_moments(optimized_moments4);
-    float  fragment_depth             = 1.0f - light_ps.z;
+    float  fragment_depth             = 1.0f - light_ps.z; //shadows are stored in 1-0, not 0-1
 
     float  shadow_intensity           = compute4_moment_shadow_intensity( moments4, fragment_depth);
     shadow_intensity                  = 1.0f - shadow_intensity;

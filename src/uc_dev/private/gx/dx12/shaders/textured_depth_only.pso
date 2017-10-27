@@ -19,7 +19,7 @@ InputLayout position =
 
 PipelineStateObject textured_depth_only : depth_only_geometry =
 {
-    .VertexShader           = depth_prepass_vertex
+    .VertexShader           = depth_only_vertex
     .InputLayout            = position
 }
 

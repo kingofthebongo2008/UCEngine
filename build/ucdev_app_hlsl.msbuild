@@ -38,11 +38,11 @@
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
-    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex.hlsl">
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_only_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
-    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_vertex_skinned.hlsl">
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_only_vertex_skinned.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
@@ -113,7 +113,7 @@
       <InProject>true</InProject>
     </Shader>
 
-    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_prepass_plane_vertex.hlsl">
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_only_plane_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>

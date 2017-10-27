@@ -2,6 +2,6 @@ import staticgeometry
 
 PipelineStateObject plane_depth_only : depth_only_geometry =
 {
-    .VertexShader           = depth_prepass_plane_vertex
+    .VertexShader           = depth_only_plane_vertex
 }
 
