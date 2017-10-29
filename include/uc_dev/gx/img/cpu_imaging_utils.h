@@ -289,7 +289,7 @@ namespace uc
                 throw_if_failed(encoder0->Commit());
             }
 
-            cpu_texture make_image(uint32_t width, uint32_t height, image_type t)
+            inline cpu_texture make_image(uint32_t width, uint32_t height, image_type t)
             {
                 auto pitch           = get_row_pitch(t, width);
                 auto size            = height * pitch;
