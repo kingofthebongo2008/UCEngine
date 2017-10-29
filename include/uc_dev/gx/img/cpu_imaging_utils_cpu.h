@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 namespace uc
 {
@@ -34,35 +35,59 @@ namespace uc
                     uint8_t* m_pixels;
                 };
 
-                cpu_texture_storage( uint8_t pixels[], size_t ) :
+                class read_only_storage_proxy
+                {
+
+                public:
+
+                    read_only_storage_proxy(const uint8_t* pixels) : m_pixels(pixels)
+                    {
+
+                    }
+
+                    const uint8_t* get_pixels_cpu() const
+                    {
+                        return m_pixels;
+                    }
+
+                private:
+
+                    const uint8_t* m_pixels;
+                };
+
+                cpu_texture_storage( const std::vector< uint8_t >& pixels ) :
                     m_pixels(pixels)
                 {
 
                 }
 
-                cpu_texture_storage(cpu_texture_storage&& o ) :
-                    m_pixels(std::move(o.m_pixels))
+                cpu_texture_storage(std::vector< uint8_t >&& pixels) :
+                    m_pixels(std::move(pixels) )
                 {
 
                 }
 
-                cpu_texture_storage& operator=(cpu_texture_storage&& o)
+                cpu_texture_storage() = default;
+                cpu_texture_storage(cpu_texture_storage&& o) = default;
+                cpu_texture_storage(const cpu_texture_storage& o) = default;
+                ~cpu_texture_storage() = default;
+
+                cpu_texture_storage& operator=(cpu_texture_storage&&) = default;
+                cpu_texture_storage& operator=(const cpu_texture_storage&) = default;
+    
+                storage_proxy  pixels()
                 {
-                    m_pixels = std::move(o.m_pixels);
-                    return *this;
+                    return storage_proxy(&m_pixels[0]);
                 }
 
-                storage_proxy  pixels() const
+                read_only_storage_proxy  pixels() const
                 {
-                    return storage_proxy(m_pixels.get());
+                    return read_only_storage_proxy(&m_pixels[0]);
                 }
 
             private:
-                cpu_texture_storage(const cpu_texture_storage&);
-                cpu_texture_storage& operator=(const cpu_texture_storage&);
-                std::unique_ptr< uint8_t[] > m_pixels;
 
-
+                std::vector< uint8_t > m_pixels;
             };
         }
     }

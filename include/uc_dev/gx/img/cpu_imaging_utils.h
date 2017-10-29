@@ -19,7 +19,10 @@ namespace uc
         {
             using cpu_texture =  texture < cpu_texture_storage >;
 
-            inline image_type wic_to_image_type(const WICPixelFormatGUID& guid)
+            template <typename image_t> image_t             wic_to_image_type(const WICPixelFormatGUID guid);
+            template <typename image_t> WICPixelFormatGUID  image_type_to_wic(image_t image);
+
+            inline image_type wic_to_image_type(const WICPixelFormatGUID guid)
             {
                 struct WICTranslate
                 {
@@ -62,6 +65,51 @@ namespace uc
                 }
 
                 return image_type::unknown;
+            }
+
+            inline WICPixelFormatGUID image_type_to_wic(image_type image)
+            {
+                struct WICTranslate
+                {
+                    GUID                wic;
+                    image_type          format;
+                };
+
+                const WICTranslate g_WICFormats[] =
+                {
+                    { GUID_WICPixelFormat128bppRGBAFloat,       image_type::r32_g32_b32_a32_float },
+
+                    { GUID_WICPixelFormat64bppRGBAHalf,         image_type::r16_g16_b16_a16_float },
+                    { GUID_WICPixelFormat64bppRGBA,             image_type::r16_g16_b16_a16_unorm },
+
+                    { GUID_WICPixelFormat32bppRGBA,             image_type::r8_g8_b8_a8_unorm },
+                    { GUID_WICPixelFormat32bppBGRA,             image_type::b8_g8_r8_a8_unorm }, // DXGI 1.1
+                    { GUID_WICPixelFormat32bppBGR,              image_type::b8_g8_r8_x8_unorm }, // DXGI 1.1
+
+                    { GUID_WICPixelFormat32bppRGBA1010102XR,    image_type::r10_g10_b10_xr_bias_a2_unorm }, // DXGI 1.1
+                    { GUID_WICPixelFormat32bppRGBA1010102,      image_type::r10_g10_b10_a2_unorm },
+
+                    { GUID_WICPixelFormat16bppBGRA5551,         image_type::b5_g5_r5_a1_unorm },
+                    { GUID_WICPixelFormat16bppBGR565,           image_type::b5_g6_r5_unorm },
+
+                    { GUID_WICPixelFormat32bppGrayFloat,        image_type::r32_float },
+                    { GUID_WICPixelFormat16bppGrayHalf,         image_type::r16_float },
+                    { GUID_WICPixelFormat16bppGray,             image_type::r16_unorm },
+                    { GUID_WICPixelFormat8bppGray,              image_type::r8_unorm },
+
+                    { GUID_WICPixelFormat8bppAlpha,             image_type::a8_unorm },
+                    { GUID_WICPixelFormat96bppRGBFloat,         image_type::r32_g32_b32_float },
+                };
+
+                for (size_t i = 0; i < _countof(g_WICFormats); ++i)
+                {
+                    if (g_WICFormats[i].format == image)
+                    {
+                        return g_WICFormats[i].wic;
+                    }
+                }
+
+                return GUID_WICPixelFormatUndefined;
             }
 
             inline WICPixelFormatGUID wic_to_wic(const WICPixelFormatGUID& guid)
@@ -162,7 +210,7 @@ namespace uc
                 WICPixelFormatGUID convert_pixel_format = pixel_format;
 
 
-                std::unique_ptr<uint8_t[]> temp;
+                std::vector<uint8_t> temp;
 
                 auto type = wic_to_image_type(pixel_format);
 
@@ -188,10 +236,8 @@ namespace uc
                         row_pitch = (bpp * std::get<0>(size) + 7) / 8;
                         row_height = std::get<1>(size);
                         image_size = row_pitch * row_height;
-                        std::unique_ptr<uint8_t[]> temp2(new (std::nothrow) uint8_t[image_size]);
-                        throw_if_failed(scaler->CopyPixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), temp2.get()));
-                        temp = std::move(temp2);
-
+                        temp.resize(image_size);
+                        throw_if_failed(scaler->CopyPixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), &temp[0]));
                     }
                     else
                     {
@@ -202,19 +248,17 @@ namespace uc
 
 
                         auto converter = create_format_converter(factory, scaler, pixel_format, convert_pixel_format);
-                        std::unique_ptr<uint8_t[]> temp2(new (std::nothrow) uint8_t[image_size]);
-                        throw_if_failed(converter->CopyPixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), temp2.get()));
-                        temp = std::move(temp2);
+
+                        temp.resize(image_size);
+                        throw_if_failed(converter->CopyPixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), &temp[0]));
                     }
                 }
                 else
                 {
-                    std::unique_ptr<uint8_t[]> temp2 (new (std::nothrow) uint8_t[image_size]);
-                    bitmap.copy_pixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), temp2.get());
-                    temp = std::move(temp2);
+                    temp.resize(image_size);
+                    bitmap.copy_pixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), &temp[0]);
                 }
-
-                return cpu_texture(std::get<0>(size), std::get<1>(size), type, temp.release());
+                return cpu_texture(std::get<0>(size), std::get<1>(size), type, std::move(temp));
             }
 
             inline cpu_texture read_image(const char* url_path)
@@ -232,40 +276,26 @@ namespace uc
                 auto encoder0 = imaging::create_encoder_writing(factory, stream0);
                 auto frame0 = imaging::create_encode_frame(encoder0);
 
-                throw_if_failed(frame0->SetSize(t.get_width(), t.get_height()));
+                throw_if_failed(frame0->SetSize(t.width(), t.height()));
 
-                WICPixelFormatGUID formatGUID;
-                WICPixelFormatGUID formatGUID_required;
-
-                switch (t.get_image_type())
-                {
-                    case rgb:
-                    {
-                        formatGUID = formatGUID_required = GUID_WICPixelFormat24bppBGR;
-                    }
-                    break;
-
-                    case grayscale:
-                    {
-                        formatGUID = formatGUID_required = GUID_WICPixelFormat8bppGray;
-                    }
-                    break;
-
-                    case float32:
-                    {
-                        formatGUID = formatGUID_required = GUID_WICPixelFormat32bppGrayFloat;
-                    }
-                    break;
-                }
+                WICPixelFormatGUID formatGUID = image_type_to_wic( t.type() );
 
                 throw_if_failed(frame0->SetPixelFormat(&formatGUID));
-                throw_if_failed(IsEqualGUID(formatGUID, formatGUID_required));
 
-                auto proxy = t.get_pixels();
+                auto proxy = t.pixels();
 
-                throw_if_failed(frame0->WritePixels(t.get_height(), t.get_pitch(), t.get_size(), proxy.get_pixels_cpu()));
+                throw_if_failed(frame0->WritePixels(t.height(), t.row_pitch(), static_cast<uint32_t>(t.size()), const_cast<uint8_t*>(proxy.get_pixels_cpu())));
                 throw_if_failed(frame0->Commit());
                 throw_if_failed(encoder0->Commit());
+            }
+
+            cpu_texture make_image(uint32_t width, uint32_t height, image_type t)
+            {
+                auto pitch           = get_row_pitch(t, width);
+                auto size            = height * pitch;
+                std::vector<uint8_t> pixels(size);
+
+                return cpu_texture(width, height, t, std::move(pixels));
             }
         }
     }

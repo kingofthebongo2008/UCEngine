@@ -2,7 +2,9 @@
 
 #include <cstdint>
 #include <memory>
+#include <vector>
 #include <dxgi1_5.h>
+
 
 namespace uc
 {
@@ -143,6 +145,7 @@ namespace uc
                     case image_type::b5_g6_r5_unorm:        return 16;
                     case image_type::r32_float:             return 32;
                     case image_type::r16_float:             return 16;
+                    case image_type::r16_unorm:             return 16;
                     case image_type::r8_unorm:              return 8;
                     case image_type::a8_unorm:              return 8;
                     case image_type::r32_g32_b32_float:     return 96;
@@ -165,8 +168,8 @@ namespace uc
             {
                 public:
 
-                texture(uint32_t width, uint32_t height, image_type type, uint8_t pixels[]) :
-                      pixels_storage(pixels, get_size(type, width, height))
+                texture(uint32_t width, uint32_t height, image_type type, std::vector<uint8_t>&& pixels) :
+                      pixels_storage(std::move(pixels))
                     , m_image_type(type)
                     , m_width(width)
                     , m_height(height)
@@ -174,6 +177,24 @@ namespace uc
                 {
 
                 }
+
+                texture(uint32_t width, uint32_t height, image_type type, const std::vector<uint8_t>& pixels) :
+                    pixels_storage(pixels)
+                    , m_image_type(type)
+                    , m_width(width)
+                    , m_height(height)
+
+                {
+
+                }
+
+                texture() = default;
+                texture(texture&& o) = default;
+                texture(const texture& o) = default;
+                ~texture() = default;
+
+                texture& operator=(texture&&) = default;
+                texture& operator=(const texture&) = default;
 
                 uint32_t width() const
                 {
