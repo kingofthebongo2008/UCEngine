@@ -13,6 +13,7 @@
 #include <uc_dev/gx/dx12/gpu/descriptions.h>
 #include <uc_dev/gx/dx12/api/resource_utils.h>
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
+#include <uc_dev/gx/dx12/gpu/texture_2d_array.h>
 
 #include <iterator>
 #include <ppltasks.h>
@@ -309,6 +310,39 @@ namespace uc
                     task.m_d = this->m_d;
                     task.m_first_sub_resource = first_sub_resource;
                     task.m_sub_resource_count = sub_resource_count;
+                    task.m_base_offset = 0;
+                    m_tasks.push_back(std::move(task));
+                }
+            }
+
+            void gpu_upload_queue_impl::upload_texture_2d_array(gpu_texture_2d_array* r, uint32_t first_slice, uint32_t slice_count, D3D12_SUBRESOURCE_DATA slice_data[])
+            {
+                uint64_t upload_size = 0;
+
+                auto sb = slice_count - first_slice;
+
+                std::vector<uint32_t>                               row_count(sb);
+                std::vector<uint64_t>                               row_sizes_in_bytes(sb);
+                std::vector<D3D12_PLACED_SUBRESOURCE_FOOTPRINT>     layouts(sb);
+                auto d = r->desc();
+                m_d->GetCopyableFootprints(&d, first_slice, slice_count, 0, &layouts[0], &row_count[0], &row_sizes_in_bytes[0], &upload_size);
+
+                upload_buffer_handle buffer = create_upload_buffer(upload_size);
+                gpu_map_guard< gpu_upload_buffer> guard(buffer.get());
+
+                for (auto i = 0U; i < slice_count; ++i)
+                {
+                    D3D12_MEMCPY_DEST dest = { details::offset_pointer(guard.cpu_address(), layouts[i].Offset) , layouts[i].Footprint.RowPitch, layouts[i].Footprint.RowPitch * row_count[i] };
+                    dx12::memcpy_subresource(&dest, &slice_data[i], row_sizes_in_bytes[i], row_count[i], layouts[i].Footprint.Depth);
+                }
+
+                {
+                    upload_queue::copy_texture_region_task task;
+                    task.m_destination = r;
+                    task.m_upload_buffer = std::move(buffer);
+                    task.m_d = this->m_d;
+                    task.m_first_sub_resource = first_slice;
+                    task.m_sub_resource_count = slice_count;
                     task.m_base_offset = 0;
                     m_tasks.push_back(std::move(task));
                 }
