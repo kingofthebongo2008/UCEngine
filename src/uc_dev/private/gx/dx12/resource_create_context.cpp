@@ -391,7 +391,6 @@ namespace uc
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
                 auto allocator = m_impl->textures_allocator();
 
-                persistent_gpu_srv_descriptor_heap_handle uav;
                 persistent_gpu_srv_descriptor_heap_handle srv;
 
                 {
@@ -400,7 +399,6 @@ namespace uc
 
                     resource->SetName(L"Texture 2D");
 
-                    uav = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
                     srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
                 }
 
@@ -414,12 +412,6 @@ namespace uc
                 descSRV.Texture2D.MostDetailedMip = 0;
                 descSRV.Texture2D.PlaneSlice = 0;
 
-                descUAV.Format = get_uav_format(format);
-                descUAV.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
-                descUAV.Texture2D.MipSlice = 0;
-                descUAV.Texture2D.PlaneSlice = 0;
-
-                //m_impl->m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav.handle());
                 m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv.handle());
 
                 return new gpu_texture_2d(resource.Get(), std::move(srv));
@@ -470,6 +462,40 @@ namespace uc
             gpu_texture_2d* gpu_resource_create_context::create_texture_2d( uint32_t width, uint32_t height, DXGI_FORMAT format )
             {
                 return create_texture_2d(width, height, format, 1);
+            }
+
+            gpu_texture_2d_array* gpu_resource_create_context::create_texture_2d_array(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t elements)
+            {
+                auto desc = describe_texture(width, height, elements, 1, format, 0);
+
+                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+                auto allocator = m_impl->textures_allocator();
+
+                persistent_gpu_srv_descriptor_heap_handle srv;
+
+                {
+                    std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
+                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_COMMON);
+
+                    resource->SetName(L"Texture 2D Array");
+
+                    srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                }
+
+                D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
+                D3D12_UNORDERED_ACCESS_VIEW_DESC descUAV = {};
+
+                descSRV.Format                          = format;
+                descSRV.ViewDimension                   = D3D12_SRV_DIMENSION_TEXTURE2DARRAY;
+                descSRV.Shader4ComponentMapping         = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+                descSRV.Texture2DArray.ArraySize        = elements;
+                descSRV.Texture2DArray.FirstArraySlice  = 0;
+                descSRV.Texture2DArray.MipLevels        = 1;
+                descSRV.Texture2DArray.MostDetailedMip  = 0;
+                descSRV.Texture2DArray.PlaneSlice       = 0;
+                
+                m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv.handle());
+                return new gpu_texture_2d_array(resource.Get(), std::move(srv));
             }
 
             Microsoft::WRL::ComPtr<ID3D12Resource> gpu_resource_create_context::create_upload_buffer_resource(uint64_t size)

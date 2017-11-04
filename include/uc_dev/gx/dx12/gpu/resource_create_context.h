@@ -36,6 +36,7 @@ namespace uc
                 gpu_texture_2d*            create_texture_2d(uint32_t width, uint32_t height, DXGI_FORMAT format);
                 gpu_texture_2d*            create_texture_2d(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t mip_count);
                 gpu_read_write_texture_2d* create_read_write_texture_2d(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t mip_count);
+                gpu_texture_2d_array*      create_texture_2d_array(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t elements);
 
                 void                       free_texture_2d( gpu_texture_2d* texture );
                 void                       free_texture_2d_array(gpu_texture_2d_array* texture);
