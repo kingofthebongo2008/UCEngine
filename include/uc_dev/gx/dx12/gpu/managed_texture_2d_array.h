@@ -28,7 +28,7 @@ namespace uc
             template <typename ...args>
             inline managed_gpu_texture_2d_array create_texture_2d_array(gpu_resource_create_context* rc, args&&... a)
             {
-                return managed_gpu_texture_2d(rc->create_texture_2d_array(std::forward<args>(a)...), details::gpu_texture_2d_array_deleter(rc));
+                return managed_gpu_texture_2d_array(rc->create_texture_2d_array(std::forward<args>(a)...), details::gpu_texture_2d_array_deleter(rc));
             }
         }
     }

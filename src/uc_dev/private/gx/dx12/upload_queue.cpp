@@ -43,6 +43,11 @@ namespace uc
                 m_impl->upload_texture_2d(r, first_sub_resource, sub_resource_count, sub_resource_data);
             }
 
+            void gpu_upload_queue::upload_texture_2d_array(gpu_texture_2d_array* r, uint32_t first_slice, uint32_t slice_count, D3D12_SUBRESOURCE_DATA slice_data[])
+            {
+                m_impl->upload_texture_2d_array(r, first_slice, slice_count, slice_data );
+            }
+
             void gpu_upload_queue::upload_buffer_gather(gpu_virtual_resource* destination, const void* __restrict initial_data0, uint64_t size0_aligned, uint64_t size0, const void* __restrict initial_data1, uint64_t size1_aligned, uint64_t size1, uint64_t offset)
             {
                 m_impl->upload_buffer_gather(destination, initial_data0, size0_aligned, size0, initial_data1, size1_aligned, size1, offset);

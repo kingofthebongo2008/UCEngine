@@ -21,6 +21,7 @@ namespace uc
             class gpu_resource_create_context;
             class gpu_virtual_resource;
             class gpu_texture_2d;
+            class gpu_texture_2d_array;
 
             class gpu_upload_queue_impl;
 
@@ -36,6 +37,7 @@ namespace uc
                 void upload_buffer(gpu_virtual_resource* destination, const void* initial_data, uint64_t size, uint64_t offset = 0);
                 void upload_buffer(gpu_virtual_resource* destination, upload_buffer_handle&& source, uint64_t offset = 0);
                 void upload_texture_2d(gpu_texture_2d* r, uint32_t first_sub_resource, uint32_t sub_resource_count, D3D12_SUBRESOURCE_DATA sub_resource_data[]);
+                void upload_texture_2d_array(gpu_texture_2d_array* r, uint32_t first_slice, uint32_t slice_count, D3D12_SUBRESOURCE_DATA slice_data[]);
 
                 void upload_buffer_gather(gpu_virtual_resource* destination, const void* __restrict initial_data0, uint64_t size0_aligned, uint64_t size0, const void* __restrict initial_data1, uint64_t size1_aligned, uint64_t size1, uint64_t offset = 0);
                 void upload_buffer_gather(gpu_virtual_resource* destination, const void* __restrict initial_data0, uint64_t size0_aligned, uint64_t size0, const void* __restrict initial_data1, uint64_t size1_aligned, uint64_t size1, const void* __restrict initial_data2, uint64_t size2_aligned, uint64_t size2, uint64_t offset = 0);
