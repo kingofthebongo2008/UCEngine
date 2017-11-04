@@ -39,7 +39,7 @@ namespace uc
 
                     r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
                     D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                    resources->upload_queue()->upload_texture(r->m_opaque_textures[i].get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 
                 return r;
@@ -72,7 +72,7 @@ namespace uc
                     r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
 
                     D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                    resources->upload_queue()->upload_texture(r->m_opaque_textures[i].get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 
                 resources->compute_queue()->insert_wait_on(resources->upload_queue()->flush());
@@ -107,7 +107,7 @@ namespace uc
                     r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
 
                     D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                    resources->upload_queue()->upload_texture(r->m_opaque_textures[i].get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 
                 r->m_primitive_ranges.reserve(mesh->m_primitive_ranges.size());
@@ -148,7 +148,7 @@ namespace uc
                     r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
 
                     D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                    resources->upload_queue()->upload_texture(r->m_opaque_textures[i].get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 
                 r->m_primitive_ranges.reserve(mesh->m_primitive_ranges.size());

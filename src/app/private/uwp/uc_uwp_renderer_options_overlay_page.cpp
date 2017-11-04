@@ -128,7 +128,7 @@ namespace uc
 
                     m_font = gx::dx12::create_texture_2d(resources->resource_create_context(), width, height, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
                     D3D12_SUBRESOURCE_DATA s = sub_resource_data(width, height, pixels);
-                    resources->upload_queue()->upload_texture(m_font.get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(m_font.get(), 0, 1, &s);
 
                     io.Fonts->TexID = (void *)m_font.get();
 

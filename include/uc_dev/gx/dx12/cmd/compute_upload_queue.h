@@ -17,8 +17,6 @@ namespace uc
                 gpu_compute_upload_queue( ID3D12Device* d, gpu_resource_create_context* rc, gpu_command_context_allocator* allocator, gpu_command_queue* queue);
                 ~gpu_compute_upload_queue();
 
-                void upload_texture( gpu_texture_2d* r, D3D12_SUBRESOURCE_DATA mip_level_zero[] );
-
                 protected:
             };
         }

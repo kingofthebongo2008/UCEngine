@@ -72,7 +72,7 @@ namespace uc
                 s.RowPitch = (w * r0.bpp() + 7) / 8;
                 s.SlicePitch = s.RowPitch * h;
 
-                m_upload_queue->upload_texture(texture, 0, 1, &s);
+                m_upload_queue->upload_texture_2d(texture, 0, 1, &s);
 
                 texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(texture);
                 texture_dimensions.x = w;
@@ -93,7 +93,7 @@ namespace uc
                 s.RowPitch               = ( w * bpp + 7) / 8;
                 s.SlicePitch             = s.RowPitch * h;
 
-                m_upload_queue->upload_texture(texture, 0, 1, &s);
+                m_upload_queue->upload_texture_2d(texture, 0, 1, &s);
 
                 texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(texture);
                 return true;

@@ -281,7 +281,7 @@ namespace uc
                 }
             }
 
-            void gpu_upload_queue_impl::upload_texture(gpu_texture_2d* r, uint32_t first_sub_resource, uint32_t sub_resource_count, D3D12_SUBRESOURCE_DATA sub_resource_data[] )
+            void gpu_upload_queue_impl::upload_texture_2d(gpu_texture_2d* r, uint32_t first_sub_resource, uint32_t sub_resource_count, D3D12_SUBRESOURCE_DATA sub_resource_data[] )
             {
                 uint64_t upload_size = 0;
 

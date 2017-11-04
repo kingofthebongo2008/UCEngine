@@ -66,7 +66,7 @@ namespace uc
                     auto resources = c->m_resources;
                     m_texture_bear = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, DXGI_FORMAT_R8G8B8A8_UNORM);
                     D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(r0);
-                    resources->upload_queue()->upload_texture(m_texture_bear.get(), 0, 1, &s);
+                    resources->upload_queue()->upload_texture_2d(m_texture_bear.get(), 0, 1, &s);
                 });
 
                 //load bear mesh

@@ -75,7 +75,7 @@ namespace uc
 
                         m_textures_robot[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
                         D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                        resources->upload_queue()->upload_texture(m_textures_robot[i].get(), 0, 1, &s);
+                        resources->upload_queue()->upload_texture_2d(m_textures_robot[i].get(), 0, 1, &s);
                     }
                 });
 
