@@ -17,6 +17,7 @@ namespace uc
             class gpu_msaa_depth_buffer;
             class gpu_read_back_buffer;
             class gpu_texture_2d;
+            class gpu_texture_2d_array;
             class gpu_read_write_texture_2d;
             class gpu_upload_buffer;
 
@@ -37,7 +38,9 @@ namespace uc
                 gpu_read_write_texture_2d* create_read_write_texture_2d(uint32_t width, uint32_t height, DXGI_FORMAT format, uint32_t mip_count);
 
                 void                       free_texture_2d( gpu_texture_2d* texture );
+                void                       free_texture_2d_array(gpu_texture_2d_array* texture);
                 void                       free_read_write_texture_2d(gpu_read_write_texture_2d* texture);
+
 
                 //Transfer accross the pci bus
                 gpu_upload_buffer*         create_upload_buffer(uint64_t size);

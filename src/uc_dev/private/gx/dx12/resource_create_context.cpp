@@ -21,6 +21,7 @@
 #include <uc_dev/gx/dx12/gpu/depth_buffer.h>
 #include <uc_dev/gx/dx12/gpu/read_back_buffer.h>
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
+#include <uc_dev/gx/dx12/gpu/texture_2d_array.h>
 #include <uc_dev/gx/dx12/gpu/upload_buffer.h>
 
 
@@ -199,9 +200,10 @@ namespace uc
 
                 //textures
                 //todo: add concurrent queues
-                std::mutex                                                      m_delete_textures_mutex;
-                concurrency::concurrent_vector< gpu_texture_2d* >               m_frame_delete_textures[3];
-                concurrency::concurrent_vector< gpu_read_write_texture_2d* >    m_frame_delete_read_write_textures[3];
+                std::mutex                                                              m_delete_textures_mutex;
+                concurrency::concurrent_vector< gpu_texture_2d* >                       m_frame_delete_texture_2d[3];
+                concurrency::concurrent_vector< gpu_read_write_texture_2d* >            m_frame_delete_read_write_texture_2d[3];
+                concurrency::concurrent_vector< gpu_texture_2d_array* >                 m_frame_delete_texture_2d_array[3];
 
                 //buffers
                 //todo: add concurrent queues
@@ -210,15 +212,15 @@ namespace uc
 
                 gpu_resource_create_context_impl(ID3D12Device* d);
 
-                concurrency::concurrent_vector< gpu_texture_2d* >& delete_textures();
-                concurrency::concurrent_vector< gpu_buffer* >& delete_buffers();
-
                 void    free_texture_2d_internal(gpu_texture_2d* texture);
-                void    flush_deleted_textures(uint32_t frame_index);
+                void    flush_deleted_texture_2d(uint32_t frame_index);
+
+                void    free_texture_2d_array_internal(gpu_texture_2d_array* texture);
+                void    flush_deleted_texture_2d_array(uint32_t frame_index);
 
                 void    free_read_write_texture_2d_internal(gpu_read_write_texture_2d* texture);
-                void    flush_deleted_read_write_textures(uint32_t frame_index);
-                
+                void    flush_deleted_read_write_texture_2d(uint32_t frame_index);
+
 
                 void    free_buffer_internal(gpu_buffer* buffer);
                 void    flush_deleted_buffers(uint32_t frame_index);
@@ -482,14 +484,21 @@ namespace uc
             void gpu_resource_create_context::free_texture_2d(gpu_texture_2d* texture)
             {
                 std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
-                auto& textures = m_impl->m_frame_delete_textures[m_impl->m_frame_index];
+                auto& textures = m_impl->m_frame_delete_texture_2d[m_impl->m_frame_index];
                 textures.push_back(texture);
             }
 
             void gpu_resource_create_context::free_read_write_texture_2d( gpu_read_write_texture_2d* texture )
             {
                 std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
-                auto& textures = m_impl->m_frame_delete_read_write_textures[m_impl->m_frame_index];
+                auto& textures = m_impl->m_frame_delete_read_write_texture_2d[m_impl->m_frame_index];
+                textures.push_back(texture);
+            }
+
+            void gpu_resource_create_context::free_texture_2d_array(gpu_texture_2d_array* texture)
+            {
+                std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
+                auto& textures = m_impl->m_frame_delete_texture_2d_array[m_impl->m_frame_index];
                 textures.push_back(texture);
             }
 
@@ -507,10 +516,17 @@ namespace uc
                 delete texture;
             }
 
-            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_textures(uint32_t frame_index)
+            void gpu_resource_create_context::gpu_resource_create_context_impl::free_texture_2d_array_internal(gpu_texture_2d_array* texture)
+            {
+                auto allocator = textures_allocator();
+                allocator->free_placed_resource(texture->resource());
+                delete texture;
+            }
+
+            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_texture_2d(uint32_t frame_index)
             {
                 std::lock_guard< std::mutex  > lock(m_delete_textures_mutex);
-                auto& textures = m_frame_delete_textures[frame_index];
+                auto& textures = m_frame_delete_texture_2d[frame_index];
 
                 for (auto&& t : textures)
                 {
@@ -520,14 +536,27 @@ namespace uc
                 textures.clear();
             }
 
-            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_read_write_textures(uint32_t frame_index)
+            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_read_write_texture_2d(uint32_t frame_index)
             {
                 std::lock_guard< std::mutex  > lock(m_delete_textures_mutex);
-                auto& textures = m_frame_delete_read_write_textures[frame_index];
+                auto& textures = m_frame_delete_read_write_texture_2d[frame_index];
 
                 for (auto&& t : textures)
                 {
                     free_read_write_texture_2d_internal(t);
+                }
+
+                textures.clear();
+            }
+
+            void gpu_resource_create_context::gpu_resource_create_context_impl::flush_deleted_texture_2d_array(uint32_t frame_index)
+            {
+                std::lock_guard< std::mutex  > lock(m_delete_textures_mutex);
+                auto& textures = m_frame_delete_texture_2d_array[frame_index];
+
+                for (auto&& t : textures)
+                {
+                    free_texture_2d_array_internal(t);
                 }
 
                 textures.clear();
@@ -749,8 +778,9 @@ namespace uc
                 m_impl->m_frame_index++;
                 m_impl->m_frame_index %= 3;
 
-                m_impl->flush_deleted_textures(m_impl->m_frame_index);
-                m_impl->flush_deleted_read_write_textures(m_impl->m_frame_index);
+                m_impl->flush_deleted_texture_2d(m_impl->m_frame_index);
+                m_impl->flush_deleted_texture_2d_array(m_impl->m_frame_index);
+                m_impl->flush_deleted_read_write_texture_2d(m_impl->m_frame_index);
                 m_impl->flush_deleted_buffers(m_impl->m_frame_index);
 
                 frame_gpu_srv_heap()->reset();
@@ -790,16 +820,6 @@ namespace uc
             coalesceable_heap_allocator*   gpu_resource_create_context::gpu_resource_create_context_impl::geometry_allocator() const
             {
                 return m_geometry_heap.get();
-            }
-
-            concurrency::concurrent_vector< gpu_texture_2d* >& gpu_resource_create_context::gpu_resource_create_context_impl::delete_textures()
-            {
-                return m_frame_delete_textures[m_frame_index];
-            }
-
-            concurrency::concurrent_vector< gpu_buffer* >& gpu_resource_create_context::gpu_resource_create_context_impl::delete_buffers()
-            {
-                return m_frame_delete_buffers[m_frame_index];
             }
 
             gpu_srv_descriptor_heap* gpu_resource_create_context::frame_gpu_srv_heap()
