@@ -147,7 +147,7 @@ static auto make_file_name(blue_noise_type type)
     return bluenoise_types[static_cast<uint32_t>(type)] + extentsion;
 }
 
-static auto bake_images(const std::vector< uc::gx::imaging::cpu_texture  >& images)
+static auto bake_images_8x8(const std::vector< uc::gx::imaging::cpu_texture  >& images)
 {
     auto composite = uc::gx::imaging::make_image(8 * 64, static_cast<uint32_t>( ((images.size() + 7) / 8) * 64), images[0].type());
 
@@ -165,6 +165,38 @@ static auto bake_images(const std::vector< uc::gx::imaging::cpu_texture  >& imag
             auto destination = composite_lock + i * composite.row_pitch();
 
             for (auto j = imgc; j < std::min(static_cast<size_t>(imgc + 8), images.size()); ++j)
+            {
+                auto&&      img = images[j];
+                auto img_pixels = img.pixels();
+                auto img_lock = img_pixels.get_pixels_cpu();
+                auto row = img_lock + i * img.row_pitch();
+                memcpy_s(destination, img.row_pitch(), row, img.row_pitch());
+                destination += img.row_pitch();
+            }
+        }
+    }
+
+    return composite;
+}
+
+static auto bake_images(const std::vector< uc::gx::imaging::cpu_texture  >& images)
+{
+    auto composite = uc::gx::imaging::make_image(static_cast<uint32_t>(images.size()) * 64, static_cast<uint32_t>(((1 + 7) / 8) * 64), images[0].type());
+
+    auto composite_pixels = composite.pixels();
+    auto composite_lock_initial = composite_pixels.get_pixels_cpu();
+
+    auto composite_row = 0;
+    for (auto imgc = 0U; imgc < 1; imgc += 1)
+    {
+        auto composite_lock = composite_lock_initial + (composite_row++) * 64 * composite.row_pitch();
+
+        //fill row by row
+        for (auto i = 0; i < 64; ++i)
+        {
+            auto destination = composite_lock + i * composite.row_pitch();
+
+            for (auto j = imgc; j < images.size(); ++j)
             {
                 auto&&      img = images[j];
                 auto img_pixels = img.pixels();
