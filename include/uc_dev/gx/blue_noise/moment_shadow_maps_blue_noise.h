@@ -3,7 +3,7 @@
 #include <memory>
 #include <uc_dev/util/noncopyable.h>
 #include <uc_dev/gx/dx12/dx12.h>
-
+#include <random>
 
 namespace uc
 {
@@ -20,8 +20,8 @@ namespace uc
         {
             class ldr_rg01_64x64 : private util::noncopyable
             {
-
                 public:
+
                 ldr_rg01_64x64(dx12::managed_gpu_texture_2d_array&& textures);
 
                 ldr_rg01_64x64(ldr_rg01_64x64&& o)              = default;
@@ -37,9 +37,25 @@ namespace uc
                     return m_textures.get();
                 }
 
-                private:
+                dx12::descriptor_handle srv() const
+                {
+                    return m_textures->srv();
+                }
 
+                uint32_t randomized_index() const
+                {
+                    return m_index;
+                }
+
+                uint32_t random_index();
+
+                private:
                 dx12::managed_gpu_texture_2d_array m_textures;
+                uint32_t                           m_index;
+
+                std::random_device                 m_device;
+                std::mt19937                       m_generator;         //Standard mersenne_twister_engine seeded with rd()
+                std::uniform_int_distribution<>    m_distribution;
             };
 
             std::unique_ptr<ldr_rg01_64x64> make_blue_noise(dx12::gpu_resource_create_context*  rc, dx12::gpu_upload_queue* upload );

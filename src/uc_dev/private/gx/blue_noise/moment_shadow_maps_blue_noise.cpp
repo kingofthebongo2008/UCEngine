@@ -24,6 +24,12 @@ namespace uc
                 return r;
             }
 
+            std::random_device& get_random_device()
+            {
+                static std::random_device d;
+                return d;
+            }
+
             std::unique_ptr<ldr_rg01_64x64> make_blue_noise( dx12::gpu_resource_create_context*  rc, dx12::gpu_upload_queue* upload )
             {
                 noise_create_info r = get_baked_noise();
@@ -48,9 +54,27 @@ namespace uc
                 return std::make_unique<ldr_rg01_64x64>(std::move(blue_noise));
             }
 
-            ldr_rg01_64x64::ldr_rg01_64x64(dx12::managed_gpu_texture_2d_array&& textures) : m_textures( std::move(textures) )
+            ldr_rg01_64x64::ldr_rg01_64x64(dx12::managed_gpu_texture_2d_array&& textures)
+                : m_textures( std::move(textures) )
+                , m_generator( m_device() )
+                , m_distribution(0, 1)
             {
+                random_index();
+            }
 
+            uint32_t ldr_rg01_64x64::random_index()
+            {
+                auto bit_0 = m_distribution(m_generator);
+                auto bit_1 = m_distribution(m_generator);
+                auto bit_2 = m_distribution(m_generator);
+                auto bit_3 = m_distribution(m_generator);
+
+                auto bit_4 = m_distribution(m_generator);
+                auto bit_5 = m_distribution(m_generator);
+
+                m_index = (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
+
+                return m_index;
             }
         }
     }
