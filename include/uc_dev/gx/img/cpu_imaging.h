@@ -51,6 +51,16 @@ namespace uc
                 return stream;
             }
 
+            inline wic_stream create_stream_reading(wic_imaging_factory f, const uint8_t* memory, size_t memory_size)
+            {
+                wic_stream stream;
+
+                throw_if_failed(f->CreateStream(&stream));
+                throw_if_failed(stream->InitializeFromMemory(const_cast<BYTE*>(memory), static_cast<DWORD>(memory_size)));
+                return stream;
+            }
+
+
             inline wic_stream create_stream_writing(wic_imaging_factory f, const wchar_t* path)
             {
                 wic_stream stream;

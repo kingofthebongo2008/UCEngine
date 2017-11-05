@@ -186,26 +186,48 @@ namespace uc
                 return GUID_WICPixelFormat32bppRGBA;
             }
 
-
-            inline cpu_texture read_image(const wchar_t* url_path)
+            struct bitmap_source_tuple
             {
-                auto factory    = imaging::create_factory();
+                imaging::bitmap_source      m_source;
+                imaging::wic_frame_decode   m_frame;
+            };
+
+            inline bitmap_source_tuple create_bitmap_source(const wchar_t* url_path, imaging::wic_imaging_factory factory)
+            {
                 auto stream0    = imaging::create_stream_reading(factory, url_path);
                 auto decoder0   = imaging::create_decoder_reading(factory, stream0);
                 auto frame0     = imaging::create_decode_frame(decoder0);
 
                 imaging::bitmap_source bitmap(frame0);
 
-                auto format     = bitmap.get_pixel_format();
-                auto size       = bitmap.get_size();
+                bitmap_source_tuple r = { bitmap, frame0 };
+                return r;
+            }
 
-                auto bpp        = imaging::wic_bits_per_pixel(factory, bitmap.get_pixel_format() );
+            inline bitmap_source_tuple create_bitmap_source(const uint8_t* memory, size_t memory_size, imaging::wic_imaging_factory factory)
+            {
+                auto stream0    = imaging::create_stream_reading(factory, memory, memory_size);
+                auto decoder0   = imaging::create_decoder_reading(factory, stream0);
+                auto frame0     = imaging::create_decode_frame(decoder0);
+
+                imaging::bitmap_source bitmap(frame0);
+
+                bitmap_source_tuple r = { bitmap, frame0 };
+                return r;
+            }
+
+            inline cpu_texture read_image( bitmap_source_tuple bitmap, imaging::wic_imaging_factory factory)
+            {
+                auto format     = bitmap.m_source.get_pixel_format();
+                auto size       = bitmap.m_source.get_size();
+
+                auto bpp        = imaging::wic_bits_per_pixel(factory, bitmap.m_source.get_pixel_format() );
                 auto row_pitch  = (bpp * std::get<0>(size) + 7) / 8;
                 auto row_height = std::get<1>(size);
                 auto image_size = row_pitch * row_height;
 
                 WICPixelFormatGUID pixel_format;
-                throw_if_failed(frame0->GetPixelFormat(&pixel_format));
+                throw_if_failed(bitmap.m_frame->GetPixelFormat(&pixel_format));
 
                 WICPixelFormatGUID convert_pixel_format = pixel_format;
 
@@ -228,7 +250,7 @@ namespace uc
 
                 if (convert_pixel_format != pixel_format)
                 {
-                    auto scaler = create_bitmap_scaler(factory, frame0, std::get<0>(size), std::get<1>(size));
+                    auto scaler = create_bitmap_scaler(factory, bitmap.m_frame, std::get<0>(size), std::get<1>(size));
 
                     if ( false)
                     {
@@ -256,9 +278,21 @@ namespace uc
                 else
                 {
                     temp.resize(image_size);
-                    bitmap.copy_pixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), &temp[0]);
+                    bitmap.m_source.copy_pixels(nullptr, static_cast<uint32_t>(row_pitch), static_cast<uint32_t>(image_size), &temp[0]);
                 }
                 return cpu_texture(std::get<0>(size), std::get<1>(size), type, std::move(temp));
+            }
+
+            inline cpu_texture read_image(const wchar_t* url_path)
+            {
+                auto factory = imaging::create_factory();
+                return read_image(create_bitmap_source(url_path, factory), factory);
+            }
+
+            inline cpu_texture read_image(const uint8_t* memory, size_t memory_size)
+            {
+                auto factory = imaging::create_factory();
+                return read_image(create_bitmap_source(memory, memory_size, factory), factory);
             }
 
             inline cpu_texture read_image(const char* url_path)
