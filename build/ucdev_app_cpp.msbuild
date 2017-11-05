@@ -20,6 +20,7 @@
     <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_instance.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\anm\skeleton_animation_map.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\anm\transforms.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\blue_noise\moment_shadow_maps_blue_noise.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\geo\geometry_allocators.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\geo\geometry_allocator.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\geo\skinned_meshes_allocator.cpp" />

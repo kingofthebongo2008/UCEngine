@@ -9,6 +9,7 @@
     <ClInclude Include="..\include\uc_dev\gx\anm\skeleton_instance.h" />
     <ClInclude Include="..\include\uc_dev\gx\anm\skeleton_animation_map.h" />
     <ClInclude Include="..\include\uc_dev\gx\anm\transforms.h" />
+    <ClInclude Include="..\include\uc_dev\gx\blue_noise\moment_shadow_maps_blue_noise.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\error.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\helpers.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\dwrite_error.h" />

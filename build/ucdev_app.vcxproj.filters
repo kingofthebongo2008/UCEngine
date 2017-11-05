@@ -137,6 +137,7 @@
     <ClCompile Include="..\src\uc_dev\private\dll_main.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\geo\object_allocator.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\geo\vertex_allocator.cpp" />
+    <ClCompile Include="..\src\uc_dev\private\gx\blue_noise\moment_shadow_maps_blue_noise.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\dx12\buddy_allocator.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\dx12\command_queue.cpp" />
     <ClCompile Include="..\src\uc_dev\private\gx\dx12\placement_allocator.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="..\include\uc_dev\fnd\string_hash.h" />
     <ClInclude Include="..\include\uc_dev\gxu\camera_command.h" />
     <ClInclude Include="..\include\uc_dev\gxu\pinhole_camera_dispatcher.h" />
+    <ClInclude Include="..\include\uc_dev\gx\blue_noise\moment_shadow_maps_blue_noise.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\error.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\helpers.h" />
     <ClInclude Include="..\include\uc_dev\gx\d2d\api\dwrite_error.h" />
