@@ -133,7 +133,7 @@ static auto make_file_name(blue_noise_type type)
     static const std::wstring bluenoise_types[] =
     {
         L"hdr_l_64x64",
-        L"hdr_LA_64x64",
+        L"hdr_la_64x64",
         L"hdr_rgb_64x64",
         L"hdr_rgba_64x64",
         L"ldr_lll1_64x64",
@@ -211,6 +211,49 @@ static auto bake_images(const std::vector< uc::gx::imaging::cpu_texture  >& imag
     return composite;
 }
 
+static auto bake_images_bgra(const std::vector< uc::gx::imaging::cpu_texture  >& images)
+{
+    auto composite = uc::gx::imaging::make_image(static_cast<uint32_t>(images.size()) * 64, static_cast<uint32_t>(((1 + 7) / 8) * 64), uc::gx::imaging::image_type::r16_unorm);
+
+    auto composite_pixels       = composite.pixels();
+    auto composite_lock_initial = composite_pixels.get_pixels_cpu();
+
+    auto composite_row = 0;
+    for (auto imgc = 0U; imgc < 1; imgc += 1)
+    {
+        auto composite_lock = composite_lock_initial + (composite_row++) * 64 * composite.row_pitch();
+
+        //fill row by row
+        for (auto i = 0; i < 64; ++i)
+        {
+            auto destination = composite_lock + i * composite.row_pitch();
+
+            for (auto j = imgc; j < images.size(); ++j)
+            {
+                auto&&      img = images[j];
+                auto img_pixels = img.pixels();
+                auto img_lock   = img_pixels.get_pixels_cpu();
+                auto row        = img_lock + i * img.row_pitch();
+
+                //bgra
+                //auto write_pixels = destination;
+                for (auto pixels = 0U; pixels < img.row_pitch() / 4; ++pixels)
+                {
+                    row++;                      //skip b
+                    *destination++ = *row++;    //copy g
+                    *destination++ = *row++;    //copy r
+                    row++;                      //skip a
+                }
+
+                //memcpy_s(destination, img.row_pitch(), row, img.row_pitch());
+                //destination += composite.row_pitch();
+            }
+        }
+    }
+
+    return composite;
+}
+
 
 static auto read_images(const media_source& source, blue_noise_type type)
 {
@@ -247,11 +290,9 @@ int32_t main(int32_t argc, const char* argv[])
         uc::gx::imaging::write_image(bake_images(read_images(source, blue_noise_type::HDR_RGBA)), make_file_name(blue_noise_type::HDR_RGBA).c_str());
 
         uc::gx::imaging::write_image(bake_images(read_images(source, blue_noise_type::LDR_LLL1)), make_file_name(blue_noise_type::LDR_LLL1).c_str());
-        uc::gx::imaging::write_image(bake_images(read_images(source, blue_noise_type::LDR_RG01)), make_file_name(blue_noise_type::LDR_RG01).c_str());
+        uc::gx::imaging::write_image(bake_images_bgra(read_images(source, blue_noise_type::LDR_RG01)), make_file_name(blue_noise_type::LDR_RG01).c_str());
         uc::gx::imaging::write_image(bake_images(read_images(source, blue_noise_type::LDR_RGB1)), make_file_name(blue_noise_type::LDR_RGB1).c_str());
         uc::gx::imaging::write_image(bake_images(read_images(source, blue_noise_type::LDR_RGBA)), make_file_name(blue_noise_type::LDR_RGBA).c_str());
-
-
     }
     
     catch (const std::exception& e)
