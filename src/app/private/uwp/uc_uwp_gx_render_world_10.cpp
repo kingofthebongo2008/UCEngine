@@ -121,6 +121,14 @@ namespace uc
                     m_military_mechanic_animations = lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/military_mechanic.animation");
                 });
 
+
+                //load blue noise
+                g.run([this, c]
+                {
+                    m_blue_noise = gx::blue_noise::make_blue_noise(c->m_resources->resource_create_context(), c->m_resources->upload_queue());
+                });
+
+
                 gx::pinhole_camera_helper::set_up(m_camera.get(), 0.0f, 1.0f, 0.0f);
                 gx::pinhole_camera_helper::set_forward(m_camera.get(), 0.0f, 0.0f, -1.0f );
                 gx::pinhole_camera_helper::set_view_position(m_camera.get(), 0.0, 1.0f, 5.5f);
@@ -233,7 +241,9 @@ namespace uc
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
                 }
 
-                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv());
+                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv(), 0);
+                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, m_blue_noise->srv(),1);
+
 
                 //mechanic
                 {

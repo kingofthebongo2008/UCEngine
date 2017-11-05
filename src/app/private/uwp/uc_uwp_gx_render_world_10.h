@@ -5,6 +5,7 @@
 
 #include <uc_dev/mem/align.h>
 #include <uc_dev/gx/dx12/dx12.h>
+#include <uc_dev/gx/blue_noise/moment_shadow_maps_blue_noise.h>
 #include <uc_dev/gx/geo/indexed_geometry.h>
 #include <uc_dev/gx/anm/animation_instance.h>
 #include <uc_dev/gx/structs.h>
@@ -23,7 +24,6 @@ namespace uc
                 math::float4x4 m_shadow_view;
                 math::float4x4 m_shadow_perspective;
                 math::float4   m_directional_light;
-
             };
 
             class render_world_10 : public render_world
@@ -64,8 +64,9 @@ namespace uc
                 math::managed_float4x4                                          m_military_mechanic_transform = math::make_float4x4();
 
                 gx::dx12::compute_pipeline_state*                               m_shadows_resolve;
+                mem::aligned_unique_ptr<gx::orthographic_camera>                m_shadow_camera = mem::make_aligned_unique_ptr<gx::orthographic_camera>();
 
-                mem::aligned_unique_ptr<gx::orthographic_camera>    m_shadow_camera = mem::make_aligned_unique_ptr<gx::orthographic_camera>();
+                std::unique_ptr<gx::blue_noise::ldr_rg01_64x64>                 m_blue_noise;
 
                 struct skinned_draw_constants
                 {
