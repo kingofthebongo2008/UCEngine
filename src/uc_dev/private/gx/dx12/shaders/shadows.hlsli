@@ -4,17 +4,17 @@
 #include "shadows/moment_shadow_maps_compute.hlsli"
 #include "static_geometry/vector_space.hlsli"
 
-struct sampler_2d
+struct sampler_moments_64
 {
-Texture2D<float4>  m_texture;
-SamplerState	   m_sampler;
+    Texture2D<float4>  m_texture;
+    SamplerState	   m_sampler;
 };
 
-sampler_2d make_sampler_2d( Texture2D<float4> t, SamplerState s )
+struct sampler_non_linear_moments_64
 {
-   sampler_2d r = { t, s };
-   return r;
-}
+    Texture2D<uint>    m_texture;
+    SamplerState	   m_sampler;
+};
 
 struct shadow_transforms
 {
@@ -22,13 +22,20 @@ struct shadow_transforms
     projective_transform_3d  m_shadow_perspective;
 };
 
+
+sampler_moments_64 make_sampler_moments_64( Texture2D<float4> t, SamplerState s )
+{
+   sampler_moments_64 r = { t, s };
+   return r;
+}
+
 shadow_transforms make_shadow_transforms( euclidean_transform_3d v, projective_transform_3d p )
 {
     shadow_transforms r = { v, p };
     return r;
 }
 
-float compute_moment4_shadow_maps( sampler_2d moments, float3 position_ws, shadow_transforms t ) 
+float compute_moment4_shadow_maps(sampler_moments_64 moments, float3 position_ws, shadow_transforms t )
 {
     float4 light_ps                   = project_p_ws(make_point_ws(position_ws), t.m_shadow_view, t.m_shadow_perspective).m_value;
     light_ps                          = light_ps / light_ps.w;

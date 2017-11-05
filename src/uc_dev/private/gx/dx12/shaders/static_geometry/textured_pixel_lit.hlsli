@@ -37,7 +37,7 @@ float4 main( interpolants r ) : SV_Target0
     float3 albedo                     = float4(1.0f, 1.0f, 1.0f, 1.0f);
     uint   noise                      = g_blue_noise.Load( int4(0, 0, 63, 0 ) );
 
-    float  shadow_intensity           = compute_moment4_shadow_maps( make_sampler_2d( g_shadow_moments, g_linear_clamp ), r.position_ws, make_shadow_transforms( m_shadow_view, m_shadow_perspective ) );
+    float  shadow_intensity           = compute_moment4_shadow_maps( make_sampler_moments_64( g_shadow_moments, g_linear_clamp ), r.position_ws, make_shadow_transforms( m_shadow_view, m_shadow_perspective ) );
 
     float  ndotl                      = saturate(dot(normal_ws, sun_light_direction_ws));
     float3 ambient                    = 0.2f; //float3(noise / 255.0f, noise / 255.0f, noise / 255.0f);
