@@ -16,9 +16,8 @@ namespace uc
                 struct gpu_texture_2d_deleter
                 {
                     gpu_resource_create_context* m_rc = nullptr;
-
-                    gpu_texture_2d_deleter() = default;
-                    gpu_texture_2d_deleter(gpu_resource_create_context* rc) : m_rc(rc) {}
+                    gpu_texture_2d_deleter() noexcept = default;
+                    gpu_texture_2d_deleter(gpu_resource_create_context* rc) noexcept : m_rc(rc) {}
                     void operator () (gpu_texture_2d* d);
                 };
             }
