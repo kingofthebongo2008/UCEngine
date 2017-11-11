@@ -25,9 +25,24 @@ namespace uc
             wait_for_gpu();
         }
 
+        namespace
+        {
+            static inline bool IsNvidia(IDXGIAdapter* a )
+            {
+                DXGI_ADAPTER_DESC desc;
+                gx::dx12::throw_if_failed(a->GetDesc(&desc));
+                return desc.VendorId == 4318;
+            }
+        }
+
         void device_resources::create_d3d_12()
         {
             using namespace gx::dx12;
+
+            std::vector< Microsoft::WRL::ComPtr<IDXGIAdapter1> > adapters;
+
+            adapters = get_warp_adapters();
+            adapters = get_adapters();
 
 #if defined(_DEBUG)
             {
@@ -35,16 +50,18 @@ namespace uc
 
                 if (hresult == S_OK)
                 {
-                    m_debug->EnableDebugLayer();
+                    if (!IsNvidia(adapters[0].Get()))
+                    {
+                        m_debug->EnableDebugLayer();
+                    }
+
                     m_debug->SetEnableGPUBasedValidation(TRUE);
                 }
             }
 #endif
-
-            std::vector< Microsoft::WRL::ComPtr<IDXGIAdapter1> > adapters;
-            adapters = get_warp_adapters();
-            adapters = get_adapters();
             m_device = create_device_always(adapters[0].Get());                    //put here if you have other adapters to test
+      
+            
 
             /*
             //test here to check for support of overlays
