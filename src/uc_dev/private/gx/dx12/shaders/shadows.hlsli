@@ -10,16 +10,19 @@ struct sampler_moments_64
     SamplerState	   m_sampler;
 };
 
-struct sampler_non_linear_moments_64
+struct sampler_non_linear_moments
 {
-    Texture2D<float4>       m_shadow_moments_buffer;
     Texture2DArray<float2>  m_blue_noise;
 };
 
-struct sampler_non_linear_moments_32
+struct sampler_non_linear_moments_64 : sampler_non_linear_moments
+{
+    Texture2D<float4>       m_shadow_moments_buffer;
+};
+
+struct sampler_non_linear_moments_32 : sampler_non_linear_moments
 {
     Texture2D<uint>         m_shadow_moments_buffer;
-    Texture2DArray<float2>  m_blue_noise;
 };
 
 struct view_transforms
@@ -54,8 +57,8 @@ struct size_2d_uint
     uint m_width;
     uint m_height;
 
-    uint width()  { return m_width; }
-    uint height() { return m_height;  }
+    uint width()  { return m_width;  }
+    uint height() { return m_height; }
 };
 
 struct non_linear_moments_64_context
@@ -64,12 +67,12 @@ struct non_linear_moments_64_context
     main_view_transforms    m_main_view_transforms;
 
     uint3                   m_randomness;
-    size_2d_uint            m_shadow_buffer_size;
+    uint2                   m_shadow_buffer_size;
 
     uint2                   blue_noise_xy()         { return m_randomness.xy;}
     uint                    blue_noise_z()          { return m_randomness.z; }
 
-    size_2d_uint            shadow_buffer_size()    { return m_shadow_buffer_size; }
+    uint2                   shadow_buffer_size()    { return m_shadow_buffer_size; }
 
     euclidean_transform_3d  shadow_view()           { return m_shadow_transforms.view(); }
     projective_transform_3d shadow_perspective()    { return m_shadow_transforms.perspective(); }
@@ -156,7 +159,7 @@ float compute_nonlinear_moment4_shadow_maps_64(sampler_non_linear_moments_64 mom
 
     uint4  view_port_pixel_index    = uint4(0, 0, 0, 0);
     float2 blue_noise               = moments.m_blue_noise.Load(uint4( ( view_port_pixel_index.xy + ctx.blue_noise_xy() ) & 0x3F, ctx.blue_noise_z() & 0x3F, 0));
-    float4 optimized_moments4       = moments.m_shadow_moments_buffer.Load(uint4(blue_noise.xy * view_port_pixel_index.zw, 0, 0));
+    float4 optimized_moments4       = moments.m_shadow_moments_buffer.Load( uint3( s.shadow_buffer_uv() * ctx.shadow_buffer_size() + blue_noise.xy - 0.5f, 0 ) );
     float4 moments4                 = compute_deoptimized_moments(optimized_moments4);
 
     float  shadow_intensity         = compute4_moment_shadow_intensity(moments4, s.fragment_depth());

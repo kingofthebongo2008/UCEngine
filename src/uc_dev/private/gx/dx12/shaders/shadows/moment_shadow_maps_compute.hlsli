@@ -5,7 +5,7 @@
 depth for a point at the same location this function outputs 1.0, if the fragment
 is in shadow 0.0f, if the fragment is lit and an intermediate value for partial
 shadow. The returned value is an optimal lower bound.*/
-float4 compute4_moment_shadow_intensity(float4 _4Moments, float FragmentDepth, float DepthBias = 0.0f, float MomentBias = 0.00003f)
+float compute4_moment_shadow_intensity(float4 _4Moments, float FragmentDepth, float DepthBias = 0.0f, float MomentBias = 0.00003f)
 {
     float OutShadowIntensity;
     // Bias input data to avoid artifacts
