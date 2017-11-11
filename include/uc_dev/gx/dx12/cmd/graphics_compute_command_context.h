@@ -485,6 +485,16 @@ namespace uc
                     list()->OMSetRenderTargets(0, nullptr, FALSE, &dsv);
                 }
             };
+
+            inline void graphics_reset_vertex_buffer(gpu_graphics_compute_command_context* ctx, uint32_t slot)
+            {
+                ctx->set_vertex_buffer(slot, {});
+            }
+
+            inline void graphics_reset_index_buffer(gpu_graphics_compute_command_context* ctx)
+            {
+                ctx->set_index_buffer({});
+            }
         }
     }
 }
