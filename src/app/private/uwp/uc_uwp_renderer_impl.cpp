@@ -293,8 +293,6 @@ namespace uc
             m_resources.wait_for_gpu();
             m_resources.set_window(environment);
             m_view_depth_buffer.reset();
-            m_shadow_depth_buffer.reset();
-            m_shadow_map.reset();
             m_window = environment->m_window;
 
             auto width = static_cast<uint32_t> (environment->m_back_buffer_size.Width);
@@ -302,8 +300,7 @@ namespace uc
 
             //Recreate view depth buffer and the msaa shadows depth buffer
             m_view_depth_buffer     = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
-            m_shadow_depth_buffer   = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(m_resources.resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
-            m_shadow_map            = std::unique_ptr<gx::dx12::gpu_color_buffer>(m_resources.resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R16G16B16A16_UNORM, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE ));
+            m_render_world_manager->resize_buffers(&m_resources);
         }
 
         void renderer_impl::render()
@@ -345,10 +342,10 @@ namespace uc
 
                 gxu::render_context ctx;
                 ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer               = m_shadow_depth_buffer.get();
-                ctx.m_shadow_map                        = m_shadow_map.get();
-                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(m_shadow_depth_buffer->width());
-                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(m_shadow_depth_buffer->height());
+                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
+                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0);
+                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height() : 0);
                 ctx.m_geometry                          = m_geometry_allocator.get();
                 ctx.m_resources                         = &m_resources;
                 ctx.m_frame_time                        = m_frame_time;
@@ -377,10 +374,10 @@ namespace uc
 
                 gxu::render_context ctx;
                 ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer               = m_shadow_depth_buffer.get();
-                ctx.m_shadow_map                        = m_shadow_map.get();
-                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(m_shadow_depth_buffer->width());
-                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(m_shadow_depth_buffer->height());
+                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
+                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0);
+                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height() : 0);
                 ctx.m_resources                         = &m_resources;
                 ctx.m_geometry                          = m_geometry_allocator.get();
                 ctx.m_frame_time                        = m_frame_time;
@@ -408,23 +405,23 @@ namespace uc
                 height = std::max(height, 8U);
 
                 gxu::shadow_render_context ctx;
-                ctx.m_view_depth_buffer = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer = m_shadow_depth_buffer.get();
-                ctx.m_shadow_map = m_shadow_map.get();
-                ctx.m_shadow_buffer_size.m_width = static_cast<uint16_t>(m_shadow_depth_buffer->width());
-                ctx.m_shadow_buffer_size.m_height = static_cast<uint16_t>(m_shadow_depth_buffer->height());
-                ctx.m_geometry = m_geometry_allocator.get();
-                ctx.m_resources = &m_resources;
-                ctx.m_frame_time = m_frame_time;
-                ctx.m_scale_render = m_scale_render;
-                ctx.m_back_buffer_size.m_width  = static_cast<uint16_t>(width);
-                ctx.m_back_buffer_size.m_height = static_cast<uint16_t>(height);
+                ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
+                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
+                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0 );
+                ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height(): 0 );
+                ctx.m_geometry                          = m_geometry_allocator.get();
+                ctx.m_resources                         = &m_resources;
+                ctx.m_frame_time                        = m_frame_time;
+                ctx.m_scale_render                      = m_scale_render;
+                ctx.m_back_buffer_size.m_width          = static_cast<uint16_t>(width);
+                ctx.m_back_buffer_size.m_height         = static_cast<uint16_t>(height);
 
-                ctx.m_front_buffer_size.m_width = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
-                ctx.m_front_buffer_size.m_height = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
-                ctx.m_back_buffer_scaled_size.m_width = static_cast<uint16_t>(width);
-                ctx.m_back_buffer_scaled_size.m_height = static_cast<uint16_t>(height);
-                pending_shadows = m_render_world_manager->render_shadows(&ctx);
+                ctx.m_front_buffer_size.m_width         = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
+                ctx.m_front_buffer_size.m_height        = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
+                ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
+                ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
+                pending_shadows                         = m_render_world_manager->render_shadows(&ctx);
             });
 
        

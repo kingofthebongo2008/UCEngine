@@ -31,6 +31,13 @@ namespace uc
 
                 void do_update(update_context* ctx) override;
                 std::unique_ptr< submitable > do_render_depth(render_context* ctx) override;
+                void on_resize_buffers(device_resources* resources) override;
+
+                gx::dx12::gpu_msaa_depth_buffer*    on_get_shadow_depth_buffer() override;
+                gx::dx12::gpu_color_buffer*         on_get_shadow_map() override;
+
+                std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>                m_shadow_depth_buffer;
+                std::unique_ptr<gx::dx12::gpu_color_buffer>                     m_shadow_map;
 
                 std::unique_ptr<gxu::skinned_render_object>                     m_military_mechanic;
 

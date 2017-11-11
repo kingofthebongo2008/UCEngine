@@ -124,6 +124,43 @@ namespace uc
                     return nullptr;
                 }
             }
+
+            gx::dx12::gpu_msaa_depth_buffer* render_world_manager::get_shadow_depth_buffer()
+            {
+                std::shared_ptr< render_world > world = m_world;
+                if (world)
+                {
+                    return world->get_shadow_depth_buffer();
+                }
+                else
+                {
+                    //todo: use optional here
+                    return nullptr;
+                }
+            }
+
+            gx::dx12::gpu_color_buffer* render_world_manager::get_shadow_map()
+            {
+                std::shared_ptr< render_world > world = m_world;
+                if (world)
+                {
+                    return world->get_shadow_map();
+                }
+                else
+                {
+                    //todo: use optional here
+                    return nullptr;
+                }
+            }
+
+            VOID render_world_manager::resize_buffers(device_resources* resources)
+            {
+                std::shared_ptr< render_world > world = m_world;
+                if (world)
+                {
+                    return world->resize_buffers(resources);
+                }
+            }
         }
     }
 }

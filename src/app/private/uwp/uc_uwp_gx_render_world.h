@@ -21,6 +21,8 @@ namespace uc
         namespace dx12
         {
             class gpu_pixel_buffer;
+            class gpu_msaa_depth_buffer;
+            class gpu_color_buffer;
         }
     }
 
@@ -84,12 +86,21 @@ namespace uc
                     return m_camera.get();
                 }
 
+                gx::dx12::gpu_msaa_depth_buffer*    get_shadow_depth_buffer();
+                gx::dx12::gpu_color_buffer*         get_shadow_map();
+
+                void resize_buffers(device_resources*   resources);
+
                 private:
 
                 virtual  void do_update(update_context* ctx) = 0;
                 virtual  std::unique_ptr< submitable > do_render(render_context* ctx) = 0;
                 virtual  std::unique_ptr< submitable > do_render_depth(render_context* ctx);
                 virtual  std::unique_ptr< submitable > do_render_shadows(shadow_render_context* ctx);
+
+                virtual gx::dx12::gpu_msaa_depth_buffer*    on_get_shadow_depth_buffer();
+                virtual gx::dx12::gpu_color_buffer*         on_get_shadow_map();
+                virtual void on_resize_buffers(device_resources*   resources);
 
                 protected:
 

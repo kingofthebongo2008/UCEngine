@@ -187,6 +187,36 @@ namespace uc
                 }
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
+
+            gx::dx12::gpu_msaa_depth_buffer* render_world::get_shadow_depth_buffer()
+            {
+                return on_get_shadow_depth_buffer();
+            }
+
+            gx::dx12::gpu_color_buffer* render_world::get_shadow_map()
+            {
+                return on_get_shadow_map();
+            }
+
+            gx::dx12::gpu_msaa_depth_buffer* render_world::on_get_shadow_depth_buffer()
+            {
+                return nullptr;
+            }
+
+            gx::dx12::gpu_color_buffer* render_world::on_get_shadow_map()
+            {
+                return nullptr;
+            }
+
+            void render_world::resize_buffers(device_resources* resources)
+            {
+                on_resize_buffers(resources);
+            }
+
+            void render_world::on_resize_buffers( device_resources* resources)
+            {
+                resources;
+            }
         }
     }
 }

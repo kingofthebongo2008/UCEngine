@@ -9,8 +9,6 @@
 #include "uc_uwp_gx_render_world_id.h"
 
 
-
-
 namespace uc
 {
     namespace uwp
@@ -33,6 +31,11 @@ namespace uc
                 std::unique_ptr< submitable >render( render_context* ctx );
                 std::unique_ptr< submitable >render_depth(render_context* ctx);
                 std::unique_ptr< submitable >render_shadows(shadow_render_context* ctx);
+
+                gx::dx12::gpu_msaa_depth_buffer*    get_shadow_depth_buffer();
+                gx::dx12::gpu_color_buffer*         get_shadow_map();
+                void resize_buffers(device_resources* resources);
+                
 
                 gx::pinhole_camera* camera()
                 {
