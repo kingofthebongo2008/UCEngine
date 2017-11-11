@@ -111,7 +111,7 @@ moments_64_context make_moments_64_context(shadow_view_transforms t)
     return r;
 }
 
-struct shadow_info
+struct shadow_fragment_depth
 {
     float2 m_shadow_buffer_uv;
     float  m_fragment_depth;
@@ -120,19 +120,19 @@ struct shadow_info
     float2 shadow_buffer_uv() { return m_shadow_buffer_uv; }
 };
 
-shadow_info compute_fragment_depth(float3 position_ws, euclidean_transform_3d shadow_view, projective_transform_3d shadow_perspective)
+shadow_fragment_depth compute_fragment_depth(float3 position_ws, euclidean_transform_3d shadow_view, projective_transform_3d shadow_perspective)
 {
     float4 light_ps         = project_p_ws(make_point_ws(position_ws), shadow_view, shadow_perspective).m_value;
     light_ps                = light_ps / light_ps.w;
     float2 shadow_map_uv    = mad(light_ps.xy, float2(0.5f, -0.5f), float2(0.5f, 0.5f));
     float  fragment_depth   = 1.0f - light_ps.z; //shadows are stored in 1-0, not 0-1
-    shadow_info r           = { shadow_map_uv, fragment_depth };
+    shadow_fragment_depth r = { shadow_map_uv, fragment_depth };
     return r;
 }
 
 float compute_moment4_shadow_maps(sampler_moments_64 moments, float3 position_ws, moments_64_context ctx )
 {
-    shadow_info s                     = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
+    shadow_fragment_depth s           = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
     float4 optimized_moments4         = moments.m_shadow_moments_buffer.Sample( moments.m_sampler, s.shadow_buffer_uv() ) .xyzw;
     float4 moments4                   = compute_deoptimized_moments(optimized_moments4);
 
@@ -155,7 +155,7 @@ uint2 compute_view_port_pixel_index( float3 position_ws )
 
 float compute_nonlinear_moment4_shadow_maps_64(sampler_non_linear_moments_64 moments, float3 position_ws, non_linear_moments_64_context ctx)
 {
-    shadow_info s                   = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
+    shadow_fragment_depth s         = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
 
     uint4  view_port_pixel_index    = uint4(0, 0, 0, 0);
     float2 blue_noise               = moments.m_blue_noise.Load(uint4( ( view_port_pixel_index.xy + ctx.blue_noise_xy() ) & 0x3F, ctx.blue_noise_z() & 0x3F, 0));
