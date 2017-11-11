@@ -6,34 +6,47 @@
 
 struct sampler_moments_64
 {
-    Texture2D<float4>  m_texture;
+    Texture2D<float4>  m_shadow_moments_buffer;
     SamplerState	   m_sampler;
 };
 
 struct sampler_non_linear_moments_64
 {
-    Texture2D<float4>       m_texture;
+    Texture2D<float4>       m_shadow_moments_buffer;
     Texture2DArray<float2>  m_blue_noise;
 };
 
 struct sampler_non_linear_moments_32
 {
-    Texture2D<uint>         m_texture;
+    Texture2D<uint>         m_shadow_moments_buffer;
     Texture2DArray<float2>  m_blue_noise;
 };
 
-struct shadow_transforms
+struct view_transforms
 {
-    euclidean_transform_3d   m_shadow_view;
-    projective_transform_3d  m_shadow_perspective;
+    euclidean_transform_3d   m_view;
+    projective_transform_3d  m_perspective;
+
+    euclidean_transform_3d view()           { return m_view; }
+    projective_transform_3d perspective()   { return m_perspective; }
+};
+
+struct shadow_view_transforms : view_transforms
+{
+
+};
+
+struct main_view_transforms : view_transforms
+{
+
 };
 
 struct moments_64_context
 {
-    shadow_transforms m_transforms;
+    shadow_view_transforms  m_shadow_transforms;
 
-    euclidean_transform_3d  shadow_view()        { return m_transforms.m_shadow_view;}
-    projective_transform_3d shadow_perspective() { return m_transforms.m_shadow_perspective;}
+    euclidean_transform_3d  shadow_view()        { return m_shadow_transforms.view();}
+    projective_transform_3d shadow_perspective() { return m_shadow_transforms.perspective();}
 };
 
 struct size_2d_uint
@@ -47,15 +60,22 @@ struct size_2d_uint
 
 struct non_linear_moments_64_context
 {
-    shadow_transforms       m_transforms;
-    uint2                   m_randomness;
+    shadow_view_transforms  m_shadow_transforms;
+    main_view_transforms    m_main_view_transforms;
+
+    uint3                   m_randomness;
     size_2d_uint            m_shadow_buffer_size;
 
-    euclidean_transform_3d  shadow_view()           { return m_transforms.m_shadow_view; }
-    projective_transform_3d shadow_perspective()    { return m_transforms.m_shadow_perspective; }
+    uint2                   blue_noise_xy()         { return m_randomness.xy;}
+    uint                    blue_noise_z()          { return m_randomness.z; }
 
-    uint2                   randomness()            { return m_randomness; }
     size_2d_uint            shadow_buffer_size()    { return m_shadow_buffer_size; }
+
+    euclidean_transform_3d  shadow_view()           { return m_shadow_transforms.view(); }
+    projective_transform_3d shadow_perspective()    { return m_shadow_transforms.perspective(); }
+
+    euclidean_transform_3d  main_view()             { return m_main_view_transforms.view(); }
+    projective_transform_3d main_perspective()      { return m_main_view_transforms.perspective(); }
 };
 
 sampler_moments_64 make_sampler_moments_64( Texture2D<float4> t, SamplerState s )
@@ -76,13 +96,13 @@ sampler_non_linear_moments_32 make_sampler_non_linear_moments_32(Texture2D<uint>
     return r;
 }
 
-shadow_transforms make_shadow_transforms( euclidean_transform_3d v, projective_transform_3d p )
+shadow_view_transforms make_shadow_transforms( euclidean_transform_3d v, projective_transform_3d p )
 {
-    shadow_transforms r = { v, p };
+    shadow_view_transforms r = { v, p };
     return r;
 }
 
-moments_64_context make_moments_64_context(shadow_transforms t)
+moments_64_context make_moments_64_context(shadow_view_transforms t)
 {
     moments_64_context r = {t};
     return r;
@@ -110,7 +130,7 @@ shadow_info compute_fragment_depth(float3 position_ws, euclidean_transform_3d sh
 float compute_moment4_shadow_maps(sampler_moments_64 moments, float3 position_ws, moments_64_context ctx )
 {
     shadow_info s                     = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
-    float4 optimized_moments4         = moments.m_texture.Sample( moments.m_sampler, s.shadow_buffer_uv() ) .xyzw;
+    float4 optimized_moments4         = moments.m_shadow_moments_buffer.Sample( moments.m_sampler, s.shadow_buffer_uv() ) .xyzw;
     float4 moments4                   = compute_deoptimized_moments(optimized_moments4);
 
     float  shadow_intensity           = compute4_moment_shadow_intensity( moments4, s.fragment_depth());
@@ -118,15 +138,29 @@ float compute_moment4_shadow_maps(sampler_moments_64 moments, float3 position_ws
     return shadow_intensity;
 }
 
-float compute_nonlinear_moment4_shadow_maps_64(sampler_moments_64 moments, float3 position_ws, non_linear_moments_64_context ctx)
+
+void ComputeViewportPixelIndex(out int2 OutViewportPixelIndex, float4 ProjectionSpacePosition, float4 ViewportTransform )
 {
-    shadow_info s               = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
+    ProjectionSpacePosition.xy /= ProjectionSpacePosition.w;
+    OutViewportPixelIndex = int2(mad(ProjectionSpacePosition.xy, ViewportTransform.xy, ViewportTransform.zw));
+}
 
-    float4 optimized_moments4   = moments.m_texture.Sample(moments.m_sampler, s.shadow_buffer_uv() ).xyzw;
-    float4 moments4             = compute_deoptimized_moments(optimized_moments4);
+uint2 compute_view_port_pixel_index( float3 position_ws )
+{
+    euclidean_transform_3d  main_view;
+}
 
-    float  shadow_intensity     = compute4_moment_shadow_intensity(moments4, s.fragment_depth());
-    shadow_intensity            = 1.0f - shadow_intensity;
+float compute_nonlinear_moment4_shadow_maps_64(sampler_non_linear_moments_64 moments, float3 position_ws, non_linear_moments_64_context ctx)
+{
+    shadow_info s                   = compute_fragment_depth(position_ws, ctx.shadow_view(), ctx.shadow_perspective());
+
+    uint4  view_port_pixel_index    = uint4(0, 0, 0, 0);
+    float2 blue_noise               = moments.m_blue_noise.Load(uint4( ( view_port_pixel_index.xy + ctx.blue_noise_xy() ) & 0x3F, ctx.blue_noise_z() & 0x3F, 0));
+    float4 optimized_moments4       = moments.m_shadow_moments_buffer.Load(uint4(blue_noise.xy * view_port_pixel_index.zw, 0, 0));
+    float4 moments4                 = compute_deoptimized_moments(optimized_moments4);
+
+    float  shadow_intensity         = compute4_moment_shadow_intensity(moments4, s.fragment_depth());
+    shadow_intensity                = 1.0f - shadow_intensity;
 
     return shadow_intensity;
 }
