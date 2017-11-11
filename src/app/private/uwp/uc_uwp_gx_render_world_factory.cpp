@@ -10,7 +10,7 @@
 #include "uc_uwp_gx_render_world_7.h"
 #include "uc_uwp_gx_render_world_8.h"
 #include "uc_uwp_gx_render_world_9.h"
-#include "uc_uwp_gx_render_world_10.h"
+#include "uc_uwp_gx_render_world_moment_shadow_maps.h"
 
 namespace uc
 {

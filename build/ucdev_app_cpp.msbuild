@@ -69,7 +69,7 @@
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_7.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_10.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadow_maps.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_manager.cpp" />

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "uc_uwp_gx_render_world_10.h"
+#include "uc_uwp_gx_render_world_moment_shadow_maps.h"
 
 #include <gsl/gsl>
 #include <ppl.h>
