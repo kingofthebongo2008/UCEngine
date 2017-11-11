@@ -27,8 +27,8 @@
     <ProjectGuid>{17005CC8-BD5C-4719-9176-FAFB4FEFF137}</ProjectGuid>
     <Keyword>uc_engine_winrt</Keyword>
     <RootNamespace>UniqueCreatorEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
