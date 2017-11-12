@@ -112,10 +112,10 @@ namespace uc
 
 
             private:
-                ID3D12Device*					   m_device = nullptr;
+                ID3D12Device*                      m_device = nullptr;
                 Microsoft::WRL::ComPtr<ID3D12Heap> m_heap;
-                uint64_t    					   m_heap_offset = 0;
-                uint64_t		        		   m_size = 0;
+                uint64_t                           m_heap_offset = 0;
+                uint64_t                           m_size = 0;
             };
 
         }
