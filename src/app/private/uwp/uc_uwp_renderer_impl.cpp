@@ -292,14 +292,9 @@ namespace uc
         {
             m_resources.wait_for_gpu();
             m_resources.set_window(environment);
-            m_view_depth_buffer.reset();
             m_window = environment->m_window;
 
-            auto width = static_cast<uint32_t> (environment->m_back_buffer_size.Width);
-            auto height = static_cast<uint32_t> (environment->m_back_buffer_size.Height);
-
             //Recreate view depth buffer and the msaa shadows depth buffer
-            m_view_depth_buffer     = std::unique_ptr<gx::dx12::gpu_depth_buffer>(m_resources.resource_create_context()->create_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
             m_render_world_manager->resize_buffers(&m_resources);
         }
 
@@ -328,6 +323,54 @@ namespace uc
             std::unique_ptr<submitable> pending_overlay;
             std::unique_ptr<submitable> pending_shadows;
 
+
+            //std::unique_ptr<gx::dx12::gpu_frame_depth_buffer> frame_depth_buffer;
+
+            m_frame_index += 1;
+            m_frame_index %= 3;
+            
+            //create depth buffer for this frame
+            {
+                uint32_t width = 0;
+                uint32_t height = 0;
+                auto&& back_buffer = m_resources.back_buffer(device_resources::swap_chains::background);
+
+                width = static_cast<uint32_t>(static_cast<float>(back_buffer->width()) * m_scale_render);
+                height = static_cast<uint32_t>(static_cast<float>(back_buffer->height()) * m_scale_render);
+
+                m_frame_depth_buffer[m_frame_index] = std::unique_ptr<gx::dx12::gpu_frame_depth_buffer>(m_resources.resource_create_context()->create_frame_depth_buffer(width, height, DXGI_FORMAT_D32_FLOAT));
+            }
+
+
+            //create shadow buffers for this frame
+            {
+
+                using namespace gx::dx12;
+
+                auto shadow_d = m_render_world_manager->shadow_map_descriptor();
+
+                auto rc = m_resources.resource_create_context();
+
+                if ((shadow_d.m_shadow_flags & gxu::shadow_buffers_descriptor::shadow_buffer_used) !=0)
+                {
+                    m_frame_shadow_buffer[m_frame_index] = std::unique_ptr<gpu_frame_msaa_depth_buffer>(rc->create_frame_msaa_depth_buffer(shadow_d.m_shadow_buffer.m_width, shadow_d.m_shadow_buffer.m_height, shadow_d.m_shadow_buffer.m_format, shadow_d.m_shadow_buffer.m_initial_value));
+                }
+                else
+                {
+                    m_frame_shadow_buffer[m_frame_index].reset();
+                }
+
+                if ((shadow_d.m_shadow_flags & gxu::shadow_buffers_descriptor::shadow_map_used) != 0)
+                {
+                    auto& m = shadow_d.m_shadow_map;
+                    m_frame_shadow_map[m_frame_index] = std::unique_ptr < gpu_frame_color_buffer>(rc->create_frame_color_buffer(m.m_width, m.m_height, m.m_format, m.m_initial_state));
+                }
+                else
+                {
+                    m_frame_shadow_map[m_frame_index].reset();
+                }
+            }
+
             g.run([this,&pending_main]
             {
                 uint32_t width      = 0;
@@ -341,9 +384,9 @@ namespace uc
                 height              = std::max(height, 8U);
 
                 gxu::render_context ctx;
-                ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
-                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_view_depth_buffer                 = m_frame_depth_buffer[m_frame_index].get();
+                ctx.m_shadow_depth_buffer               = m_frame_shadow_buffer[m_frame_index].get();
+                ctx.m_shadow_map                        = m_frame_shadow_map[m_frame_index].get();
                 ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0);
                 ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height() : 0);
                 ctx.m_geometry                          = m_geometry_allocator.get();
@@ -357,7 +400,7 @@ namespace uc
                 ctx.m_front_buffer_size.m_height        = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
-                pending_main                            = m_render_world_manager->render(&ctx);
+                pending_main                            = std::move(m_render_world_manager->render(&ctx));
             });
 
             g.run([this, &pending_depth]
@@ -373,9 +416,9 @@ namespace uc
                 height = std::max(height, 8U);
 
                 gxu::render_context ctx;
-                ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
-                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_view_depth_buffer                 = m_frame_depth_buffer[m_frame_index].get();
+                ctx.m_shadow_depth_buffer               = m_frame_shadow_buffer[m_frame_index].get();
+                ctx.m_shadow_map                        = m_frame_shadow_map[m_frame_index].get();
                 ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0);
                 ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height() : 0);
                 ctx.m_resources                         = &m_resources;
@@ -389,7 +432,7 @@ namespace uc
                 ctx.m_front_buffer_size.m_height        =  static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
-                pending_depth = m_render_world_manager->render_depth(&ctx);
+                pending_depth = std::move(m_render_world_manager->render_depth(&ctx));
             });
 
             g.run([this, &pending_shadows]
@@ -405,9 +448,9 @@ namespace uc
                 height = std::max(height, 8U);
 
                 gxu::shadow_render_context ctx;
-                ctx.m_view_depth_buffer                 = m_view_depth_buffer.get();
-                ctx.m_shadow_depth_buffer               = m_render_world_manager->get_shadow_depth_buffer();
-                ctx.m_shadow_map                        = m_render_world_manager->get_shadow_map();
+                ctx.m_view_depth_buffer                 = m_frame_depth_buffer[m_frame_index].get();
+                ctx.m_shadow_depth_buffer               = m_frame_shadow_buffer[m_frame_index].get();
+                ctx.m_shadow_map                        = m_frame_shadow_map[m_frame_index].get();
                 ctx.m_shadow_buffer_size.m_width        = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->width() : 0 );
                 ctx.m_shadow_buffer_size.m_height       = static_cast<uint16_t>(ctx.m_shadow_depth_buffer ? ctx.m_shadow_depth_buffer->height(): 0 );
                 ctx.m_geometry                          = m_geometry_allocator.get();
@@ -421,7 +464,7 @@ namespace uc
                 ctx.m_front_buffer_size.m_height        = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
                 ctx.m_back_buffer_scaled_size.m_width   = static_cast<uint16_t>(width);
                 ctx.m_back_buffer_scaled_size.m_height  = static_cast<uint16_t>(height);
-                pending_shadows                         = m_render_world_manager->render_shadows(&ctx);
+                pending_shadows                         = std::move(m_render_world_manager->render_shadows(&ctx));
             });
 
        
@@ -452,7 +495,7 @@ namespace uc
                         ctx.m_front_buffer_size.m_width     = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->width());
                         ctx.m_front_buffer_size.m_height    = static_cast<uint16_t>(m_resources.back_buffer(device_resources::swap_chains::overlay)->height());
 
-                        pending_overlay = m_overlay_page_manager->render(&ctx);
+                        pending_overlay = std::move(m_overlay_page_manager->render(&ctx));
                     }
                     else
                     {
@@ -482,14 +525,14 @@ namespace uc
             m_resources.direct_queue(device_resources::swap_chains::overlay)->insert_wait_on(m_resources.upload_queue()->flush());
             m_resources.direct_queue(device_resources::swap_chains::background)->insert_wait_on(m_resources.compute_queue()->signal_fence());
 
-            if (pending_depth)
-            {
-                pending_depth->submit();
-            }
-
             if (pending_shadows)
             {
                 pending_shadows->submit();
+            }
+
+            if (pending_depth)
+            {
+                pending_depth->submit();
             }
 
             if (pending_main)

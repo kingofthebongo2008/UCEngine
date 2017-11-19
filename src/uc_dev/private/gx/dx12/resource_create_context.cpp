@@ -160,7 +160,7 @@ namespace uc
 
                 gpu_sampler_descriptor_heap                       m_frame_gpu_sampler_heap[3];
                 cpu_sampler_descriptor_heap                       m_frame_cpu_sampler_heap[3];
-
+                std::unique_ptr< placement_heap_allocator>        m_frame_render_target_allocator;
 
                 std::unique_ptr< placement_heap_allocator >       m_upload_allocator[3];       //holds only buffers
                 std::unique_ptr< placement_heap_allocator>        m_read_back_allocator[3];
@@ -172,12 +172,11 @@ namespace uc
                 gpu_dsv_descriptor_heap                           m_view_dependent_dsv_heap;
                 cpu_srv_descriptor_heap                           m_view_dependent_srv_heap;
                 gpu_rtv_descriptor_heap                           m_view_dependent_rtv_heap;
-                std::unique_ptr< placement_heap_allocator >       m_render_target_allocator;
+                std::unique_ptr< placement_heap_allocator >       m_view_dependent_render_target_allocator;
 
-                persistent_gpu_srv_descriptor_heap                m_textures_descriptor_heap;  //textures descriptor heap
+                persistent_cpu_srv_descriptor_heap                m_textures_descriptor_heap;  //textures descriptor heap
                 std::unique_ptr<buddy_heap_allocator>             m_textures_allocator;        //textures heap
 
-                persistent_gpu_srv_descriptor_heap                m_geometry_descriptor_heap;  //geometry descriptor heap
                 std::unique_ptr<coalesceable_heap_allocator>      m_geometry_heap;             //textures heap
 
                 cpu_sampler_descriptor_heap                       m_sampler_descriptor_heap;   //samplers for the whole application,
@@ -240,7 +239,6 @@ namespace uc
                 , m_view_dependent_rtv_heap(device, 256)
 
                 , m_textures_descriptor_heap(device, 256)
-                , m_geometry_descriptor_heap(device, 256)
                 , m_sampler_descriptor_heap(device, 16)
                 , m_null_resource_srv_heap(device, 16)
                 , m_null_sampler_heap(device, 16)
@@ -259,19 +257,20 @@ namespace uc
                 m_impl->m_upload_allocator[1]       = std::unique_ptr< placement_heap_allocator >(details::create_upload_buffers_allocator(device, mb(32)));         //allocators for uploading resources
                 m_impl->m_upload_allocator[2]       = std::unique_ptr< placement_heap_allocator >(details::create_upload_buffers_allocator(device, mb(32)));         //allocators for uploading resources
 
-                m_impl->m_read_back_allocator[0]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloadubg resources
-                m_impl->m_read_back_allocator[1]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloadubg resources
-                m_impl->m_read_back_allocator[2]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloadubg resources
+                m_impl->m_read_back_allocator[0]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloading resources
+                m_impl->m_read_back_allocator[1]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloading resources
+                m_impl->m_read_back_allocator[2]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloading resources
 
-                m_impl->m_render_target_allocator   = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(256)));    //per view render targets and depth buffers
-                m_impl->m_textures_allocator        = std::unique_ptr< buddy_heap_allocator>     (details::create_default_heap_textures_allocator(device, mb(256)));    //static data, default textures go here for example, that live for the entire application
+                m_impl->m_view_dependent_render_target_allocator   = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(1)));    //per view render targets and depth buffers, their lifetime depends on the view
+                m_impl->m_frame_render_target_allocator            = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(192)));   //per frame render targets and depth buffers, their lifetime depends on the frame
+                m_impl->m_textures_allocator                       = std::unique_ptr< buddy_heap_allocator>     (details::create_default_heap_textures_allocator(device, mb(128)));   //static data, default textures go here for example, that live for the entire application
 
                 m_impl->m_geometry_heap             = std::unique_ptr< coalesceable_heap_allocator>(details::create_default_heap_geometry_allocator(device, mb(128)));  //static data, geometry and index buffers go here
                 m_impl->m_null_resource             = std::unique_ptr< gpu_virtual_resource>(details::create_null_resource(device));
 
-                m_impl->m_null_srv                  = m_impl->m_null_resource_srv_heap.allocate(3);
-                m_impl->m_null_uav                  = m_impl->m_null_resource_srv_heap.increment(m_impl->m_null_srv);
-                m_impl->m_null_cbv                  = m_impl->m_null_resource_srv_heap.increment(m_impl->m_null_uav);
+                m_impl->m_null_srv                  = m_impl->m_null_resource_srv_heap.allocate(1);
+                m_impl->m_null_uav                  = m_impl->m_null_resource_srv_heap.allocate(1);
+                m_impl->m_null_cbv                  = m_impl->m_null_resource_srv_heap.allocate(1);
                 m_impl->m_null_sampler              = m_impl->m_null_sampler_heap.allocate();
 
                 D3D12_CPU_DESCRIPTOR_HANDLE h0 = m_impl->m_null_srv;
@@ -316,10 +315,10 @@ namespace uc
                     device->CreateSampler(&s, h3);
                 }
 
-                m_impl->m_point_clamp_sampler   = m_impl->m_sampler_descriptor_heap.allocate(4);
-                m_impl->m_point_wrap_sampler    = m_impl->m_sampler_descriptor_heap.increment(m_impl->m_point_clamp_sampler);
-                m_impl->m_linear_clamp_sampler  = m_impl->m_sampler_descriptor_heap.increment(m_impl->m_point_wrap_sampler);
-                m_impl->m_linear_wrap_sampler   = m_impl->m_sampler_descriptor_heap.increment(m_impl->m_linear_clamp_sampler);
+                m_impl->m_point_clamp_sampler   = m_impl->m_sampler_descriptor_heap.allocate(1);
+                m_impl->m_point_wrap_sampler    = m_impl->m_sampler_descriptor_heap.allocate(1);
+                m_impl->m_linear_clamp_sampler  = m_impl->m_sampler_descriptor_heap.allocate(1);
+                m_impl->m_linear_wrap_sampler   = m_impl->m_sampler_descriptor_heap.allocate(1);
 
                 {
                     D3D12_SAMPLER_DESC s = details::create_sampler(D3D12_TEXTURE_ADDRESS_MODE_CLAMP, D3D12_FILTER_MIN_MAG_MIP_POINT);
@@ -391,7 +390,7 @@ namespace uc
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
                 auto allocator = m_impl->textures_allocator();
 
-                persistent_gpu_srv_descriptor_heap_handle srv;
+                persistent_cpu_srv_descriptor_heap_handle srv;
 
                 {
                     std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
@@ -399,7 +398,7 @@ namespace uc
 
                     resource->SetName(L"Texture 2D");
 
-                    srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                    srv = persistent_cpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
                 }
 
                 D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
@@ -424,8 +423,8 @@ namespace uc
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
                 auto allocator = m_impl->textures_allocator();
 
-                persistent_gpu_srv_descriptor_heap_handle uav;
-                persistent_gpu_srv_descriptor_heap_handle srv;
+                persistent_cpu_srv_descriptor_heap_handle uav;
+                persistent_cpu_srv_descriptor_heap_handle srv;
 
                 {
                     std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
@@ -433,8 +432,8 @@ namespace uc
 
                     resource->SetName(L"Texture 2D");
 
-                    uav = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
-                    srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                    uav = persistent_cpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                    srv = persistent_cpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
                 }
 
                 D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
@@ -471,7 +470,7 @@ namespace uc
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
                 auto allocator = m_impl->textures_allocator();
 
-                persistent_gpu_srv_descriptor_heap_handle srv;
+                persistent_cpu_srv_descriptor_heap_handle srv;
 
                 {
                     std::lock_guard< std::mutex  > lock(m_impl->m_delete_textures_mutex);
@@ -479,7 +478,7 @@ namespace uc
 
                     resource->SetName(L"Texture 2D Array");
 
-                    srv = persistent_gpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
+                    srv = persistent_cpu_srv_descriptor_heap_handle::make(&m_impl->m_textures_descriptor_heap);
                 }
 
                 D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
@@ -605,141 +604,192 @@ namespace uc
                 return new gpu_read_back_buffer(resource.Get());
             }
 
-            //render target
-            gpu_color_buffer*  gpu_resource_create_context::create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state)
+            namespace details
             {
-                D3D12_CLEAR_VALUE v = {};
-                v.Format = format;
+                template <typename t, typename allocator, typename srv_heap_t> t* create_color_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state, allocator* allocator, gpu_rtv_descriptor_heap* rtv_heap, srv_heap_t* srv_heap)
+                {
+                    D3D12_CLEAR_VALUE v = {};
+                    v.Format = format;
 
-                auto desc = describe_color_buffer(width, height, format);
+                    auto desc = describe_color_buffer(width, height, format);
 
-                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+                    Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
 
-                D3D12_RENDER_TARGET_VIEW_DESC rtv = {};
-                rtv.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-                rtv.Texture2D.MipSlice = 0;
+                    D3D12_RENDER_TARGET_VIEW_DESC rtv = {};
+                    rtv.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
+                    rtv.Texture2D.MipSlice = 0;
 
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, initial_state, &v);
-                resource->SetName(L"Color Buffer");
+                    resource = allocator->create_placed_resource(&desc, initial_state, &v);
+                    resource->SetName(L"Color Buffer");
 
-                auto handle     = m_impl->m_view_dependent_rtv_heap.allocate();
-                m_impl->m_device->CreateRenderTargetView(resource.Get(), &rtv, handle);
+                    auto handle = rtv_heap->allocate();
+                    d->CreateRenderTargetView(resource.Get(), &rtv, handle);
 
-                auto heap       = &m_impl->m_view_dependent_srv_heap;
+                    auto srv = srv_heap->allocate(1);
+                    auto uav = srv_heap->allocate(1);
 
-                auto srv        = heap->allocate(1);
-                auto uav        = heap->allocate(1);
+                    D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
+                    D3D12_UNORDERED_ACCESS_VIEW_DESC descUAV = {};
 
-                D3D12_SHADER_RESOURCE_VIEW_DESC  descSRV = {};
-                D3D12_UNORDERED_ACCESS_VIEW_DESC descUAV = {};
+                    descSRV.Format = format;
+                    descSRV.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+                    descSRV.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+                    descSRV.Texture2D.MipLevels = 1;
+                    descSRV.Texture2D.MostDetailedMip = 0;
+                    descSRV.Texture2D.PlaneSlice = 0;
 
-                descSRV.Format = format;
-                descSRV.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-                descSRV.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-                descSRV.Texture2D.MipLevels = 1;
-                descSRV.Texture2D.MostDetailedMip = 0;
-                descSRV.Texture2D.PlaneSlice = 0;
+                    descUAV.Format = get_uav_format(format);
+                    descUAV.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
+                    descUAV.Texture2D.MipSlice = 0;
+                    descUAV.Texture2D.PlaneSlice = 0;
 
-                descUAV.Format = get_uav_format(format);
-                descUAV.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
-                descUAV.Texture2D.MipSlice = 0;
-                descUAV.Texture2D.PlaneSlice = 0;
+                    d->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav);
+                    d->CreateShaderResourceView(resource.Get(), &descSRV, srv);
 
-                m_impl->m_device->CreateUnorderedAccessView(resource.Get(), nullptr, &descUAV, uav);
-                m_impl->m_device->CreateShaderResourceView(resource.Get(), &descSRV, srv);
+                    return new t(resource.Get(), handle, srv, uav);
+                }
+                template <typename t, typename allocator, typename srv_heap_t> t* create_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
+                {
+                    D3D12_CLEAR_VALUE v = {};
+                    v.Format = format;
+                    v.DepthStencil.Depth = clear_value;
+                    v.DepthStencil.Stencil = stencil;
 
-                return new gpu_color_buffer(resource.Get(), handle, srv, uav  );
+                    auto desc = describe_depth_buffer(width, height, format);
+
+                    Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+
+                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
+                    resource->SetName(L"Depth Buffer");
+
+                    // Create the shader resource view
+                    D3D12_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
+                    viewDesc.Format = get_depth_format(format);
+                    viewDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+                    viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+                    viewDesc.Texture2D.MipLevels = 1;
+
+                    auto srvDepth = srv_heap->allocate();
+
+                    d->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
+
+                    auto srv = srvDepth;
+
+                    //Create depth stencil view
+                    auto dsvReadWrite = dsv_heap->allocate(1);
+                    auto dsvReadDepth = dsv_heap->allocate(1);
+
+                    D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
+                    desc2.Format = format;
+                    desc2.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+                    desc2.Texture2D.MipSlice = 0;
+                    desc2.Flags = D3D12_DSV_FLAG_NONE;
+
+                    d->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
+
+                    desc2.Flags = D3D12_DSV_FLAG_READ_ONLY_DEPTH;
+                    d->CreateDepthStencilView(resource.Get(), &desc2, dsvReadDepth);
+
+                    typename gpu_dsv_descriptor_heap::descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
+
+                    return new t(resource.Get(), srv, dsv );
+                }
+                template <typename t, typename allocator, typename srv_heap_t> t* create_msaa_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
+                {
+                    D3D12_CLEAR_VALUE v = {};
+                    v.Format = format;
+                    v.DepthStencil.Depth = clear_value;
+                    v.DepthStencil.Stencil = stencil;
+
+                    auto desc = describe_msaa_depth_buffer(width, height, format, 4);
+
+                    Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+
+                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
+                    resource->SetName(L"MSAA Depth Buffer");
+
+                    // Create the shader resource view
+                    D3D12_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
+                    viewDesc.Format = get_depth_format(format);
+                    viewDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2DMS;
+                    viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+
+                    descriptor_handle srvDepth = srv_heap->allocate();
+                    d->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
+                    descriptor_handle srv = srvDepth;
+
+                    //Create depth stencil view
+                    descriptor_handle dsvReadWrite = dsv_heap->allocate(1);
+                    descriptor_handle dsvReadDepth = dsv_heap->allocate(1);
+
+                    D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
+                    desc2.Format = format;
+                    desc2.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2DMS;
+                    desc2.Flags = D3D12_DSV_FLAG_NONE;
+
+                    d->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
+
+                    desc2.Flags = D3D12_DSV_FLAG_READ_ONLY_DEPTH;
+                    d->CreateDepthStencilView(resource.Get(), &desc2, dsvReadDepth);
+
+                    descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
+                    return new t(resource.Get(), srv, dsv);
+                }
+            }
+            
+
+            gpu_view_color_buffer*  gpu_resource_create_context::create_view_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state)
+            {
+                return details::create_color_buffer<gpu_view_color_buffer>(m_impl->m_device.Get(), width, height, format, initial_state,
+                    m_impl->m_view_dependent_render_target_allocator.get(),
+                    &m_impl->m_view_dependent_rtv_heap,
+                    &m_impl->m_view_dependent_srv_heap
+                    );
             }
 
-            //Depth Buffer
-            gpu_depth_buffer*  gpu_resource_create_context::create_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil )
+            gpu_frame_color_buffer*  gpu_resource_create_context::create_frame_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state)
             {
-                D3D12_CLEAR_VALUE v = {};
-                v.Format = format;
-                v.DepthStencil.Depth = clear_value;
-                v.DepthStencil.Stencil = stencil;
-
-                auto desc = describe_depth_buffer(width, height, format);
-
-                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
-
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
-                resource->SetName(L"Depth Buffer");
-
-                // Create the shader resource view
-                D3D12_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
-                viewDesc.Format = get_depth_format(format);
-                viewDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-                viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-                viewDesc.Texture2D.MipLevels = 1;
-
-                descriptor_handle srvDepth = m_impl->m_view_dependent_srv_heap.allocate();
-
-                m_impl->m_device->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
-
-                descriptor_handle srv = srvDepth;
-
-                //Create depth stencil view
-                descriptor_handle dsvReadWrite          = m_impl->m_view_dependent_dsv_heap.allocate(2);
-                descriptor_handle dsvReadDepth          = m_impl->m_view_dependent_dsv_heap.increment(dsvReadWrite);
-
-                D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
-                desc2.Format                        = format;
-                desc2.ViewDimension                 = D3D12_DSV_DIMENSION_TEXTURE2D;
-                desc2.Texture2D.MipSlice            = 0;
-                desc2.Flags                         = D3D12_DSV_FLAG_NONE;
-
-                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
-
-                desc2.Flags                         = D3D12_DSV_FLAG_READ_ONLY_DEPTH;
-                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadDepth);
-
-                descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
-
-                return new gpu_depth_buffer(resource.Get(), srv, dsv);
+                return details::create_color_buffer<gpu_frame_color_buffer>(m_impl->m_device.Get(), width, height, format, initial_state,
+                    m_impl->m_frame_render_target_allocator.get(),
+                    frame_rtv_heap(),
+                    frame_cpu_srv_heap()
+                    );
             }
 
-            //Depth Buffer
-            gpu_msaa_depth_buffer*  gpu_resource_create_context::create_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil)
+            gpu_view_depth_buffer*  gpu_resource_create_context::create_view_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil )
             {
-                D3D12_CLEAR_VALUE v = {};
-                v.Format = format;
-                v.DepthStencil.Depth = clear_value;
-                v.DepthStencil.Stencil = stencil;
+                return details::create_depth_buffer<gpu_view_depth_buffer>(m_impl->m_device.Get(), width, height, format, clear_value, stencil,
+                    m_impl->m_view_dependent_render_target_allocator.get(),
+                    &m_impl->m_view_dependent_dsv_heap,
+                    &m_impl->m_view_dependent_srv_heap
+                    );
+            }
 
-                auto desc = describe_msaa_depth_buffer(width, height, format,4);
+            gpu_frame_depth_buffer*  gpu_resource_create_context::create_frame_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil)
+            {
+                return details::create_depth_buffer<gpu_frame_depth_buffer>(m_impl->m_device.Get(), width, height, format, clear_value, stencil,
+                    m_impl->m_frame_render_target_allocator.get(),
+                    frame_dsv_heap(),
+                    frame_cpu_srv_heap()
+                    );
+            }
 
-                Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
+            gpu_view_msaa_depth_buffer*  gpu_resource_create_context::create_view_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil)
+            {
+                return details::create_msaa_depth_buffer<gpu_view_msaa_depth_buffer>(m_impl->m_device.Get(), width, height, format, clear_value, stencil,
+                    m_impl->m_view_dependent_render_target_allocator.get(),
+                    &m_impl->m_view_dependent_dsv_heap,
+                    &m_impl->m_view_dependent_srv_heap
+                    );
+            }
 
-                resource = m_impl->m_render_target_allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
-                resource->SetName(L"MSAA Depth Buffer");
-
-                // Create the shader resource view
-                D3D12_SHADER_RESOURCE_VIEW_DESC viewDesc = {};
-                viewDesc.Format = get_depth_format(format);
-                viewDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2DMS;
-                viewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-
-                descriptor_handle srvDepth = m_impl->m_view_dependent_srv_heap.allocate();
-                m_impl->m_device->CreateShaderResourceView(resource.Get(), &viewDesc, srvDepth);
-                descriptor_handle srv = srvDepth;
-
-                //Create depth stencil view
-                descriptor_handle dsvReadWrite = m_impl->m_view_dependent_dsv_heap.allocate(2);
-                descriptor_handle dsvReadDepth = m_impl->m_view_dependent_dsv_heap.increment(dsvReadWrite);
-
-                D3D12_DEPTH_STENCIL_VIEW_DESC desc2 = {};
-                desc2.Format = format;
-                desc2.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2DMS;
-                desc2.Flags = D3D12_DSV_FLAG_NONE;
-
-                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadWrite);
-
-                desc2.Flags = D3D12_DSV_FLAG_READ_ONLY_DEPTH;
-                m_impl->m_device->CreateDepthStencilView(resource.Get(), &desc2, dsvReadDepth);
-
-                descriptor_handle dsv[] = { dsvReadWrite, dsvReadDepth };
-                return new gpu_msaa_depth_buffer(resource.Get(), srv, dsv);
+            gpu_frame_msaa_depth_buffer*  gpu_resource_create_context::create_frame_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil)
+            {
+                return details::create_msaa_depth_buffer<gpu_frame_msaa_depth_buffer>(m_impl->m_device.Get(), width, height, format, clear_value, stencil,
+                    m_impl->m_frame_render_target_allocator.get(),
+                    frame_dsv_heap(),
+                    frame_cpu_srv_heap()
+                    );
             }
 
             gpu_back_buffer* gpu_resource_create_context::create_back_buffer(ID3D12Resource* resource)
@@ -748,7 +798,7 @@ namespace uc
                 rtv.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
                 rtv.Texture2D.MipSlice = 0;
 
-                auto handle = frame_rtv_heap()->allocate();
+                auto handle = m_impl->m_view_dependent_rtv_heap.allocate();
                 m_impl->m_device->CreateRenderTargetView(resource, &rtv, handle);
 
                 return new gpu_back_buffer(resource, handle);
@@ -761,8 +811,8 @@ namespace uc
                 Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
                 auto allocator = m_impl->geometry_allocator();
 
-                persistent_gpu_srv_descriptor_heap_handle uav;
-                persistent_gpu_srv_descriptor_heap_handle srv;
+                persistent_cpu_srv_descriptor_heap_handle uav;
+                persistent_cpu_srv_descriptor_heap_handle srv;
 
                 {
                     std::lock_guard< std::mutex  > lock(m_impl->m_delete_buffers_mutex);
@@ -814,14 +864,15 @@ namespace uc
                 frame_dsv_heap()->reset();
                 frame_rtv_heap()->reset();
 
+                m_impl->m_frame_render_target_allocator->reset();
                 m_impl->upload_allocator()->reset();
                 m_impl->read_back_allocator()->reset();
             }
 
-            void gpu_resource_create_context::reset_transient_heaps()
+            void gpu_resource_create_context::reset_view_dependent_resources()
             {
                 //reset all allocators that can hold view dependent surfaces.
-                m_impl->m_render_target_allocator->reset();
+                m_impl->m_view_dependent_render_target_allocator->reset();
 
                 m_impl->m_view_dependent_rtv_heap.reset();
                 m_impl->m_view_dependent_srv_heap.reset();

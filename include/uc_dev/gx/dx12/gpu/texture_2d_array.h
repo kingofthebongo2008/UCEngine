@@ -22,7 +22,7 @@ namespace uc
 
                     }
 
-                    gpu_texture_2d_array(ID3D12Resource* resource, persistent_gpu_srv_descriptor_heap_handle srv ) : 
+                    gpu_texture_2d_array(ID3D12Resource* resource, persistent_cpu_srv_descriptor_heap_handle srv ) : 
                         base(resource)
                         , m_srv(srv)
                     {
@@ -43,7 +43,7 @@ namespace uc
                     }
 
                 private:
-                    persistent_gpu_srv_descriptor_heap_handle    m_srv;
+                    persistent_cpu_srv_descriptor_heap_handle    m_srv;
 
             };
         }

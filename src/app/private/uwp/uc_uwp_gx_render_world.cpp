@@ -95,32 +95,29 @@ namespace uc
 
             void render_world::begin_render_depth(render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
             {
-                //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
-                graphics->set_render_target(ctx->m_view_depth_buffer);
-                graphics->clear_depth(ctx->m_view_depth_buffer, 1.0f);
+                if (ctx->m_view_depth_buffer)
+                {
+                    graphics->set_render_target(ctx->m_view_depth_buffer);
+                    graphics->clear_depth(ctx->m_view_depth_buffer, 1.0f);
+                }
             }
 
             void render_world::end_render_depth( render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics )
             {
                 ctx;
                 graphics;
-                //todo: remove this,
-                //graphics->transition_resource(ctx->m_view_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_DEPTH_READ);
             }
 
             void render_world::begin_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
             {
-                //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_RESOLVE_SOURCE, D3D12_RESOURCE_STATE_DEPTH_WRITE);
-                graphics->set_render_target(ctx->m_shadow_depth_buffer);
-                graphics->clear_depth(ctx->m_shadow_depth_buffer, 0.0f);
+                ctx;
+                graphics;
             }
 
             void render_world::end_render_shadows(shadow_render_context* ctx, gx::dx12::gpu_graphics_compute_command_context* graphics)
             {
                 ctx;
                 graphics;
-                //todo: remove this,
-                //graphics->transition_resource(ctx->m_shadow_depth_buffer, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
             }
 
             void render_world::set_view_port( const render_context* ctx, gx::dx12::gpu_graphics_command_context* graphics)
@@ -181,31 +178,21 @@ namespace uc
                 auto graphics = create_graphics_compute_command_context(resources->direct_command_context_allocator(device_resources::swap_chains::background));
 
                 {
-                    auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"do_render_shadows");
-                    begin_render_shadows(ctx, graphics.get());
-                    end_render_shadows(ctx, graphics.get());
+                    //auto profile_event = uc::gx::dx12::make_profile_event(graphics.get(), L"do_render_shadows");
+                    //begin_render_shadows(ctx, graphics.get());
+                    //end_render_shadows(ctx, graphics.get());
                 }
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
 
-            gx::dx12::gpu_msaa_depth_buffer* render_world::get_shadow_depth_buffer()
+            shadow_buffers_descriptor render_world::shadow_map_descriptor()
             {
-                return on_get_shadow_depth_buffer();
+                return on_shadow_map_descriptor();
             }
 
-            gx::dx12::gpu_color_buffer* render_world::get_shadow_map()
+            shadow_buffers_descriptor render_world::on_shadow_map_descriptor()
             {
-                return on_get_shadow_map();
-            }
-
-            gx::dx12::gpu_msaa_depth_buffer* render_world::on_get_shadow_depth_buffer()
-            {
-                return nullptr;
-            }
-
-            gx::dx12::gpu_color_buffer* render_world::on_get_shadow_map()
-            {
-                return nullptr;
+                return {};
             }
 
             void render_world::resize_buffers(device_resources* resources)

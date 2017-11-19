@@ -12,16 +12,16 @@ namespace uc
         {
             class gpu_color_buffer : public gpu_pixel_buffer
             {
-
-            private:
+                private:
 
                 using base = gpu_pixel_buffer;
 
-            public:
-                gpu_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav) : base(resource)
+                public:
+                gpu_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav, bool is_shader_visible) : base(resource)
                     , m_RTV(rtv)
                     , m_SRV(srv)
                     , m_UAV(uav)
+                    , m_is_shader_visible(is_shader_visible)
                 {
 
                 }
@@ -41,12 +41,42 @@ namespace uc
                     return m_UAV;
                 }
 
-            private:
+                bool is_shader_visible() const
+                {
+                    return m_is_shader_visible;
+                }
 
+                private:
                 descriptor_handle   m_RTV;
                 descriptor_handle   m_SRV;
                 descriptor_handle   m_UAV;
+                bool                m_is_shader_visible;
+            };
 
+            class gpu_frame_color_buffer : public gpu_color_buffer
+            {
+                private:
+
+                using base = gpu_color_buffer;
+
+                public:
+                gpu_frame_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav) : base(resource, rtv, srv, uav, false)
+                {
+
+                }
+            };
+
+            class gpu_view_color_buffer : public gpu_color_buffer
+            {
+                private:
+
+                using base = gpu_color_buffer;
+
+                public:
+                gpu_view_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav) : base(resource, rtv, srv, uav, false)
+                {
+
+                }
             };
         }
     }

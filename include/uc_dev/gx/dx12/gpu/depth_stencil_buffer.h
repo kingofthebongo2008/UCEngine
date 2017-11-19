@@ -46,6 +46,8 @@ namespace uc
                     return m_SRV;
                 }
 
+                bool is_shader_visible() const { return false; }
+
             private:
 
                 descriptor_handle   m_DSV[2];

@@ -167,7 +167,8 @@ namespace uc
 
                 g.run([this]()
                 {
-                    m_render_world_manager->show_world(gxu::world_id::scene9);
+                    m_render_world_manager->show_world(gxu::world_id::moment_shadow_maps);
+                    //m_render_world_manager->show_world(gxu::world_id::scene2);
                 });
 
                 io::console::get_updater()->register_notifier( this );
@@ -233,7 +234,9 @@ namespace uc
                 "Skeleton",
                 "Robot",
                 "Military Mechanic",
-                "Shadows"
+                "Shadows - Moment Shadow Maps",
+                "Shadows - Non Linear Moment Shadow Maps 64",
+                "Shadows - Non Linear Moment Shadow Maps 32"
             };
 
             static gxu::world_id scene_id[] =
@@ -244,7 +247,9 @@ namespace uc
                 gxu::world_id::scene4,
                 gxu::world_id::scene0,
                 gxu::world_id::scene1,
-                gxu::world_id::scene9,
+                gxu::world_id::moment_shadow_maps,
+                gxu::world_id::non_linear_moment_shadow_maps_64,
+                gxu::world_id::non_linear_moment_shadow_maps_64
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

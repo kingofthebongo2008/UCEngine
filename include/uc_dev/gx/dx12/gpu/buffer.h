@@ -35,8 +35,8 @@ namespace uc
 
                     private:
 
-                    persistent_gpu_srv_descriptor_heap_handle    m_uav;
-                    persistent_gpu_srv_descriptor_heap_handle    m_srv;
+                    persistent_cpu_srv_descriptor_heap_handle    m_uav;
+                    persistent_cpu_srv_descriptor_heap_handle    m_srv;
             };
 
             inline uint64_t size( const gpu_buffer* r )

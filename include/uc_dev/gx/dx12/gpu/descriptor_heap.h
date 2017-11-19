@@ -29,45 +29,44 @@ namespace uc
 
             struct descriptor_handle
             {
+                public:
 
-            public:
+                    descriptor_handle(  )
+                    {
+                        m_h0.ptr = 0U;
+                        m_h1.ptr = 0U;
+                    }
 
-                descriptor_handle(  )
-                {
-                    m_h0.ptr = 0U;
-                    m_h1.ptr = 0U;
-                }
+                    descriptor_handle(D3D12_CPU_DESCRIPTOR_HANDLE h0, D3D12_GPU_DESCRIPTOR_HANDLE h1) :
+                        m_h0(h0)
+                        , m_h1(h1)
+                    {
 
-                descriptor_handle(D3D12_CPU_DESCRIPTOR_HANDLE h0, D3D12_GPU_DESCRIPTOR_HANDLE h1) :
-                    m_h0(h0)
-                    , m_h1(h1)
-                {
+                    }
 
-                }
+                    operator D3D12_GPU_DESCRIPTOR_HANDLE() const
+                    {
+                        return m_h1;
+                    }
 
-                operator D3D12_GPU_DESCRIPTOR_HANDLE() const
-                {
-                    return m_h1;
-                }
+                    operator D3D12_CPU_DESCRIPTOR_HANDLE() const
+                    {
+                        return m_h0;
+                    }
 
-                operator D3D12_CPU_DESCRIPTOR_HANDLE() const
-                {
-                    return m_h0;
-                }
+                    descriptor_handle increment(uint64_t offset) const
+                    {
+                        return descriptor_handle({ m_h0.ptr + static_cast<size_t>(offset) }, { m_h1.ptr + offset });
+                    }
 
-                descriptor_handle increment(uint64_t offset) const
-                {
-                    return descriptor_handle({ m_h0.ptr + static_cast<size_t>(offset) }, { m_h1.ptr + offset });
-                }
+                private:
 
-            private:
-                D3D12_CPU_DESCRIPTOR_HANDLE m_h0;
-                D3D12_GPU_DESCRIPTOR_HANDLE m_h1;
+                    D3D12_CPU_DESCRIPTOR_HANDLE m_h0;
+                    D3D12_GPU_DESCRIPTOR_HANDLE m_h1;
             };
 
             struct incrementable_descriptor_handle
             {
-
                 incrementable_descriptor_handle( descriptor_handle handle ,uint64_t increment_size ) : m_handle(handle), m_increment_size( increment_size )
                 {
 
@@ -98,6 +97,19 @@ namespace uc
                 uint64_t          m_increment_size;
             };
 
+            template <typename heap> struct heap_handle : public descriptor_handle
+            {
+                private:
+
+                using base = descriptor_handle;
+
+                public:
+
+                using is_shader_visible = typename heap::is_shader_visible;
+
+                using base::base;
+            };
+
             struct default_increment_policy
             {
                 protected:
@@ -116,17 +128,21 @@ namespace uc
 
             struct fenced_increment_policy
             {
-            protected:
+                protected:
 
-                uint64_t increment_offset(uint32_t count)
-                {
-                    return std::atomic_fetch_add(&m_offset, count);
-                }
+                    uint64_t increment_offset(uint32_t count)
+                    {
+                        return std::atomic_fetch_add(&m_offset, count);
+                    }
 
-            protected:
+                protected:
 
-                std::atomic<uint64_t>  m_offset = 0;
+                    std::atomic<uint64_t>  m_offset = 0;
             };
+
+            template <bool> struct shader_visible_type;
+            template <> struct shader_visible_type<true>{};
+            template <> struct shader_visible_type<false> {};
 
             //=================================================================================================================================
             //descriptor heap, which allocates up to a maximum. suitable for static data
@@ -134,8 +150,12 @@ namespace uc
             class gpu_descriptor_heap : protected increment_policy
             {
                 using increment_policy::increment_offset;
+                using this_type = gpu_descriptor_heap<heap, flags, increment_policy>;
                 
-            public:
+                public:
+                using is_shader_visible = typename shader_visible_type < (flags & D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE ) != 0 > ;
+
+                using descriptor_handle = heap_handle<this_type>;
 
                 gpu_descriptor_heap(ID3D12Device* device, UINT descriptorCount, UINT NodeMask = 0)
                 {
@@ -238,8 +258,11 @@ namespace uc
 
                 using heap             = Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>;
                 using handle_container = std::vector< descriptor_handle >;
+                using this_type        = managed_gpu_descriptor_heap<descriptor_heap_type, descriptor_heap_flags>;
 
             public:
+                using is_shader_visible = typename shader_visible_type < (descriptor_heap_flags & D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE) != 0 >;
+                using descriptor_handle = heap_handle<this_type>;
 
                 managed_gpu_descriptor_heap(ID3D12Device* device, uint32_t descriptor_count, UINT NodeMask = 0)
                 {
@@ -328,6 +351,7 @@ namespace uc
             struct descriptor_heap_handle 
             {
                 using this_type = descriptor_heap_handle < persistent_heap >;
+                using descriptor_handle = typename persistent_heap::descriptor_handle;
 
                 persistent_heap*  m_heap = nullptr;
                 descriptor_handle m_handle;
@@ -354,23 +378,24 @@ namespace uc
             };
 
             //=================================================================================================================================
-            using persistent_gpu_srv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE >;
-            using persistent_gpu_rtv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE>;
-            using persistent_gpu_dsv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE>;
+            using persistent_cpu_srv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE >;
+            using persistent_cpu_rtv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE>;
+            using persistent_cpu_dsv_descriptor_heap = managed_gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE>;
 
-            using persistent_gpu_srv_descriptor_heap_handle = descriptor_heap_handle< persistent_gpu_srv_descriptor_heap >;
-            using persistent_gpu_rtv_descriptor_heap_handle = descriptor_heap_handle< persistent_gpu_rtv_descriptor_heap >;
-            using persistent_gpu_dsv_descriptor_heap_handle = descriptor_heap_handle< persistent_gpu_dsv_descriptor_heap >;
+            using persistent_cpu_srv_descriptor_heap_handle = descriptor_heap_handle< persistent_cpu_srv_descriptor_heap >;
+            using persistent_cpu_rtv_descriptor_heap_handle = descriptor_heap_handle< persistent_cpu_rtv_descriptor_heap >;
+            using persistent_cpu_dsv_descriptor_heap_handle = descriptor_heap_handle< persistent_cpu_dsv_descriptor_heap >;
 
-            using gpu_srv_descriptor_heap 		= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, fenced_increment_policy >;
-            using gpu_rtv_descriptor_heap 		= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
-            using gpu_dsv_descriptor_heap 		= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
-            using gpu_sampler_descriptor_heap 	= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, fenced_increment_policy >;
+            using gpu_srv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, fenced_increment_policy >;
+            using gpu_rtv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
+            using gpu_dsv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
+            using gpu_sampler_descriptor_heap               = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, fenced_increment_policy >;
 
 
-            using cpu_srv_descriptor_heap 		= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy >;
-            using cpu_sampler_descriptor_heap 	= gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy >;
-            
+            using cpu_srv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy >;
+            using cpu_rtv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_RTV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
+            using cpu_dsv_descriptor_heap                   = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_DSV, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, fenced_increment_policy>;
+            using cpu_sampler_descriptor_heap               = gpu_descriptor_heap< D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE, fenced_increment_policy >;
 
         }
     }

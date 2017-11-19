@@ -61,6 +61,11 @@ namespace uc
 
             device_resources                                                                    m_resources;
 
+            uint32_t                                                                            m_frame_index = 2;
+            std::unique_ptr<gx::dx12::gpu_frame_depth_buffer>                                   m_frame_depth_buffer[3];
+            std::unique_ptr<gx::dx12::gpu_frame_msaa_depth_buffer>                              m_frame_shadow_buffer[3];
+            std::unique_ptr<gx::dx12::gpu_frame_color_buffer>                                   m_frame_shadow_map[3];
+
             std::unique_ptr<gx::geo::geometry_allocator>                                        m_geometry_allocator;
 
             std::unique_ptr<gxu::render_world_manager>                                          m_render_world_manager;
@@ -69,8 +74,6 @@ namespace uc
             window_environment                                                                  m_window_enviroment;
             winrt::Windows::UI::Core::CoreWindow                                                m_window = nullptr;
             winrt::Windows::Graphics::Display::DisplayInformation                               m_display_information = nullptr;
-
-            std::unique_ptr<gx::dx12::gpu_depth_buffer>                                         m_view_depth_buffer;
 
             io::pad                                                                             m_pad;
             io::pad_state                                                                       m_pad_state;

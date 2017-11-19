@@ -28,14 +28,41 @@ namespace uc
                 {
                     flush_resource_barriers();
                     float c[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-                    list()->ClearRenderTargetView(r->rtv(), c, 0, nullptr);
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->rtv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_rtv();
+                        m_device->CopyDescriptorsSimple(1, h, r->rtv(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+                    }
+
+                    list()->ClearRenderTargetView(h, c, 0, nullptr);
                 }
+
 
                 void clear(gpu_color_buffer* r)
                 {
                     flush_resource_barriers();
                     float c[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-                    list()->ClearRenderTargetView(r->rtv(), c, 0, nullptr);
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->rtv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_rtv();
+                        m_device->CopyDescriptorsSimple(1, h, r->rtv(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+                    }
+
+                    list()->ClearRenderTargetView(h, c, 0, nullptr);
                 }
 
                 void clear(gpu_depth_buffer* r)
@@ -53,7 +80,20 @@ namespace uc
                     flush_resource_barriers();
 
                     uint32_t stencil = 0;
-                    list()->ClearDepthStencilView(r->dsv(), D3D12_CLEAR_FLAG_DEPTH, depth, static_cast<uint8_t>(stencil), 0, nullptr);
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->dsv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h, r->dsv(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+
+                    list()->ClearDepthStencilView(h, D3D12_CLEAR_FLAG_DEPTH, depth, static_cast<uint8_t>(stencil), 0, nullptr);
                 }
 
                 void clear_depth(gpu_depth_stencil_buffer* r, float depth)
@@ -61,64 +101,123 @@ namespace uc
                     flush_resource_barriers();
 
                     uint32_t stencil = 0;
-                    list()->ClearDepthStencilView(r->dsv(), D3D12_CLEAR_FLAG_DEPTH, depth, static_cast<uint8_t>(stencil), 0, nullptr);
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->dsv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h, r->dsv(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+
+                    list()->ClearDepthStencilView(h, D3D12_CLEAR_FLAG_DEPTH, depth, static_cast<uint8_t>(stencil), 0, nullptr);
                 }
 
                 void clear_stencil(gpu_depth_stencil_buffer* r, uint32_t stencil )
                 {
                     float depth = 1.0f;
                     flush_resource_barriers();
-                    list()->ClearDepthStencilView(r->dsv(), D3D12_CLEAR_FLAG_STENCIL, depth, static_cast<uint8_t>(stencil), 0, nullptr);
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->dsv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h, r->dsv(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+
+                    list()->ClearDepthStencilView(h, D3D12_CLEAR_FLAG_STENCIL, depth, static_cast<uint8_t>(stencil), 0, nullptr);
                 }
 
                 void clear_depth_stencil(gpu_depth_stencil_buffer* r, float depth = 1.0f, uint32_t stencil = 0)
                 {
                     flush_resource_barriers();
-                    list()->ClearDepthStencilView(r->dsv(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, depth, static_cast<uint8_t>(stencil), 0, nullptr);
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+                    if (r->is_shader_visible())
+                    {
+                        h = r->dsv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h, r->dsv(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+
+                    list()->ClearDepthStencilView(h, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, depth, static_cast<uint8_t>(stencil), 0, nullptr);
                 }
 
-                void set_render_target( gpu_back_buffer* p )
+                void set_render_target( gpu_back_buffer* r )
                 {
-                    auto rtv = p->rtv();
-                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { rtv };
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->rtv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_rtv();
+                        m_device->CopyDescriptorsSimple(1, h, r->rtv(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+                    }
+
+                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { h };
+
                     list()->OMSetRenderTargets(1, handles, FALSE, nullptr);
                 }
 
-                void set_render_target(gpu_color_buffer* p)
+                void set_render_target(gpu_color_buffer* r)
                 {
-                    auto rtv = p->rtv();
-                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { rtv };
+                    D3D12_CPU_DESCRIPTOR_HANDLE h;
+
+                    if (r->is_shader_visible())
+                    {
+                        h = r->rtv();
+                    }
+                    else
+                    {
+                        h = m_descriptor_cache.allocate_rtv();
+                        m_device->CopyDescriptorsSimple(1, h, r->rtv(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+                    }
+                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { h };
                     list()->OMSetRenderTargets(1, handles, FALSE, nullptr);
                 }
 
-                void set_render_target( gpu_back_buffer* p, gpu_depth_buffer* b )
+                void set_render_target( gpu_back_buffer* r, gpu_depth_buffer* b )
                 {
-                    set_render_target(p->rtv(), b->dsv());
+                    set_render_target(r->rtv(), b->dsv(), r->is_shader_visible(), b->is_shader_visible());
                 }
 
-                void set_render_target(gpu_back_buffer* p, gpu_depth_stencil_buffer* b)
+                void set_render_target(gpu_back_buffer* r, gpu_depth_stencil_buffer* b)
                 {
-                    set_render_target(p->rtv(), b->dsv());
+                    set_render_target(r->rtv(), b->dsv(), r->is_shader_visible(), b->is_shader_visible());
                 }
 
                 void set_render_target(gpu_depth_buffer* b)
                 {
-                    set_render_target_dsv(b->dsv());
+                    set_render_target_dsv(b->dsv(), b->is_shader_visible());
                 }
 
                 void set_render_target(gpu_depth_stencil_buffer* b)
                 {
-                    set_render_target_dsv(b->dsv());
+                    set_render_target_dsv(b->dsv(), b->is_shader_visible());
                 }
 
-                void set_render_target( gpu_color_buffer* p, gpu_depth_buffer* b )
+                void set_render_target( gpu_color_buffer* r, gpu_depth_buffer* b )
                 {
-                    set_render_target(p->rtv(), b->dsv());
+                    set_render_target(r->rtv(), b->dsv(), r->is_shader_visible(), b->is_shader_visible());
                 }
 
-                void set_render_target(gpu_color_buffer* p, gpu_depth_stencil_buffer* b)
+                void set_render_target(gpu_color_buffer* r, gpu_depth_stencil_buffer* b)
                 {
-                    set_render_target(p->rtv(), b->dsv());
+                    set_render_target(r->rtv(), b->dsv(), r->is_shader_visible(), b->is_shader_visible());
                 }
 
                 void draw(uint32_t vertex_count, uint32_t vertex_start_offset = 0)
@@ -352,15 +451,38 @@ namespace uc
                     }
                 }
 
-                void set_render_target(D3D12_CPU_DESCRIPTOR_HANDLE rtv, D3D12_CPU_DESCRIPTOR_HANDLE dsv)
+                void set_render_target(D3D12_CPU_DESCRIPTOR_HANDLE rtv, D3D12_CPU_DESCRIPTOR_HANDLE dsv, bool copy_rtv, bool copy_dsv)
                 {
-                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { rtv };
-                    list()->OMSetRenderTargets(1, handles, FALSE, &dsv);
+                    D3D12_CPU_DESCRIPTOR_HANDLE h0 = rtv;
+                    D3D12_CPU_DESCRIPTOR_HANDLE h1 = dsv;
+
+                    if (copy_rtv)
+                    {
+                        h0 = m_descriptor_cache.allocate_rtv();
+                        m_device->CopyDescriptorsSimple(1, h0, rtv, D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+                    }
+
+                    if (copy_dsv)
+                    {
+                        h1 = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h1, dsv, D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+                    
+                    D3D12_CPU_DESCRIPTOR_HANDLE handles[] = { h0 };
+                    list()->OMSetRenderTargets(1, handles, FALSE, &h1);
                 }
 
-                void set_render_target_dsv(D3D12_CPU_DESCRIPTOR_HANDLE dsv )
+                void set_render_target_dsv(D3D12_CPU_DESCRIPTOR_HANDLE dsv, bool copy_dsv )
                 {
-                    list()->OMSetRenderTargets(0, nullptr, FALSE, &dsv);
+                    D3D12_CPU_DESCRIPTOR_HANDLE h1 = dsv;
+
+                    if (copy_dsv)
+                    {
+                        h1 = m_descriptor_cache.allocate_dsv();
+                        m_device->CopyDescriptorsSimple(1, h1, dsv, D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+                    }
+
+                    list()->OMSetRenderTargets(0, nullptr, FALSE, &h1);
                 }
             };
 

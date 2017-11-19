@@ -41,7 +41,7 @@ namespace uc
 
             std::vector< Microsoft::WRL::ComPtr<IDXGIAdapter1> > adapters;
 
-            adapters = get_warp_adapters();
+            //adapters = get_warp_adapters();
             adapters = get_adapters();
 
 #if defined(_DEBUG)
@@ -50,12 +50,11 @@ namespace uc
 
                 if (hresult == S_OK)
                 {
+                    m_debug->EnableDebugLayer();
                     if (!IsNvidia(adapters[0].Get()))
                     {
-                        m_debug->EnableDebugLayer();
+                        m_debug->SetEnableGPUBasedValidation(TRUE);
                     }
-
-                    m_debug->SetEnableGPUBasedValidation(TRUE);
                 }
             }
 #endif
@@ -108,7 +107,7 @@ namespace uc
             //calling of this functions must happen before the render process in the frame
             wait_for_gpu();
 
-            m_resource_creator->reset_transient_heaps();
+            m_resource_creator->reset_view_dependent_resources();
             for(auto i = 0U; i < m_swap_chain_count; i++)
                 m_swap_chains[i]->set_window(environment, m_resource_creator.get());
         }

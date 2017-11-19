@@ -22,7 +22,7 @@ namespace uc
 
                     }
 
-                    gpu_texture_2d(ID3D12Resource* resource, persistent_gpu_srv_descriptor_heap_handle srv ) : 
+                    gpu_texture_2d(ID3D12Resource* resource, persistent_cpu_srv_descriptor_heap_handle srv ) : 
                         base(resource)
                         , m_srv(srv)
                     {
@@ -43,45 +43,45 @@ namespace uc
                     }
 
                 private:
-                    persistent_gpu_srv_descriptor_heap_handle    m_srv;
+                    persistent_cpu_srv_descriptor_heap_handle    m_srv;
 
             };
 
             class gpu_read_write_texture_2d : public gpu_texture_2d
             {
-            private:
+                private:
 
-                using base = gpu_texture_2d;
+                    using base = gpu_texture_2d;
 
-            public:
+                public:
 
-                gpu_read_write_texture_2d() 
-                {
-
-                }
-
-                gpu_read_write_texture_2d(ID3D12Resource* resource, persistent_gpu_srv_descriptor_heap_handle uav, persistent_gpu_srv_descriptor_heap_handle srv) :
-                    base(resource, srv)
-                    , m_uav(uav)
-                {
-
-                }
-
-                ~gpu_read_write_texture_2d()
-                {
-                    if (m_uav.m_heap)
+                    gpu_read_write_texture_2d() 
                     {
-                        m_uav.m_heap->free(m_uav.m_handle);
+
                     }
-                }
 
-                descriptor_handle uav() const
-                {
-                    return m_uav.m_handle;
-                }
+                    gpu_read_write_texture_2d(ID3D12Resource* resource, persistent_cpu_srv_descriptor_heap_handle uav, persistent_cpu_srv_descriptor_heap_handle srv) :
+                        base(resource, srv)
+                        , m_uav(uav)
+                    {
 
-            private:
-                persistent_gpu_srv_descriptor_heap_handle    m_uav;
+                    }
+
+                    ~gpu_read_write_texture_2d()
+                    {
+                        if (m_uav.m_heap)
+                        {
+                            m_uav.m_heap->free(m_uav.m_handle);
+                        }
+                    }
+
+                    descriptor_handle uav() const
+                    {
+                        return m_uav.m_handle;
+                    }
+
+                private:
+                    persistent_cpu_srv_descriptor_heap_handle    m_uav;
 
             };
         }

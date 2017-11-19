@@ -12,17 +12,20 @@ namespace uc
         {
             class gpu_back_buffer;
             class gpu_buffer;
-            class gpu_color_buffer;
-            class gpu_depth_buffer;
-            class gpu_msaa_depth_buffer;
+
+            class gpu_frame_color_buffer;
+            class gpu_frame_depth_buffer;
+            class gpu_frame_msaa_depth_buffer;
+
             class gpu_read_back_buffer;
             class gpu_texture_2d;
             class gpu_texture_2d_array;
             class gpu_read_write_texture_2d;
             class gpu_upload_buffer;
 
-
-
+            class gpu_view_color_buffer;
+            class gpu_view_depth_buffer;
+            class gpu_view_msaa_depth_buffer;
 
             class gpu_resource_create_context final : private util::noncopyable
             {
@@ -42,21 +45,22 @@ namespace uc
                 void                       free_texture_2d_array(gpu_texture_2d_array* texture);
                 void                       free_read_write_texture_2d(gpu_read_write_texture_2d* texture);
 
-
                 //Transfer accross the pci bus
                 gpu_upload_buffer*         create_upload_buffer(uint64_t size);
                 gpu_read_back_buffer*      create_read_back_buffer(uint64_t size);
 
                 //Render Targets
-                gpu_color_buffer*          create_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state = D3D12_RESOURCE_STATE_COMMON);
-                void                       free_color_buffer(gpu_color_buffer* b);
+                gpu_frame_color_buffer*    create_frame_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state = D3D12_RESOURCE_STATE_COMMON);
+                gpu_view_color_buffer*     create_view_color_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state = D3D12_RESOURCE_STATE_COMMON);
 
-                //Depth Buffer
-                gpu_depth_buffer*          create_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0 );
-                gpu_msaa_depth_buffer*     create_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0);
-                void                       free_depth_buffer(gpu_depth_buffer* d);
+                //Depth Buffers
+                gpu_frame_depth_buffer*         create_frame_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0 );
+                gpu_frame_msaa_depth_buffer*    create_frame_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0);
+                
+                gpu_view_depth_buffer*          create_view_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0);
+                gpu_view_msaa_depth_buffer*     create_view_msaa_depth_buffer(uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value = 1.0f, uint8_t stencil = 0);
 
-                gpu_back_buffer*           create_back_buffer(ID3D12Resource* r);
+                gpu_back_buffer*                create_back_buffer(ID3D12Resource* r);
 
                 gpu_buffer*                create_buffer(uint32_t elements, uint32_t element_size = 1);
                 void                       free_buffer(gpu_buffer* buffer);
@@ -64,7 +68,7 @@ namespace uc
                 //called on present to swap the allocators
                 void sync();
 
-                void reset_transient_heaps();
+                void reset_view_dependent_resources();
 
                 gpu_srv_descriptor_heap* frame_gpu_srv_heap();
                 cpu_srv_descriptor_heap* frame_cpu_srv_heap();

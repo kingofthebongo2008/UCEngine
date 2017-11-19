@@ -18,20 +18,20 @@ namespace uc
     {
         namespace gxu
         {
-            class render_world_moment_shadow_maps : public render_world_moment_shadows_data
+            class render_world_non_linear_moment_shadow_maps_64 : public render_world_moment_shadows_data
             {
 
                 using base = render_world_moment_shadows_data;
 
             public:
 
-                render_world_moment_shadow_maps(initialize_context* ctx);
-                virtual ~render_world_moment_shadow_maps();
+                render_world_non_linear_moment_shadow_maps_64(initialize_context* ctx);
+                virtual ~render_world_non_linear_moment_shadow_maps_64();
 
             private:
 
-                std::unique_ptr< submitable > do_render(render_context* ctx) override;
-                std::unique_ptr< submitable > do_render_shadows(shadow_render_context* ctx) override;
+                std::unique_ptr< submitable >do_render(render_context* ctx) override;
+                std::unique_ptr< submitable >do_render_shadows(shadow_render_context* ctx) override;
 
                 std::unique_ptr<gx::blue_noise::ldr_rg01_64x64> m_blue_noise;
             };

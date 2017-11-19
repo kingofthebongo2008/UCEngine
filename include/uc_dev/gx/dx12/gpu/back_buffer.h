@@ -39,6 +39,8 @@ namespace uc
                     return m_RTV;
                 }
 
+                bool is_shader_visible() const { return false; }
+
                 private:
 
                 descriptor_handle   m_RTV;

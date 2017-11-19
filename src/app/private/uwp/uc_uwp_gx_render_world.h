@@ -62,6 +62,37 @@ namespace uc
             D3D12_VIEWPORT viewport(const gx::dx12::gpu_pixel_buffer* b);
             D3D12_RECT scissor(const gx::dx12::gpu_pixel_buffer* b);
 
+            struct shadow_buffers_descriptor
+            {
+                enum shadow_flags
+                {
+                    shadow_buffer_used = 0x1,
+                    shadow_map_used    = 0x2
+                };
+
+                struct shadow_depth_buffer
+                {
+                    float       m_initial_value;
+                    uint16_t    m_width;
+                    uint16_t    m_height;
+                    uint16_t    m_msaa;
+                    DXGI_FORMAT m_format;
+                };
+
+                struct shadow_map
+                {
+                    uint16_t                m_width;
+                    uint16_t                m_height;
+                    DXGI_FORMAT             m_format;
+                    D3D12_RESOURCE_STATES   m_initial_state;
+                };
+
+                shadow_depth_buffer m_shadow_buffer;
+                shadow_map          m_shadow_map;
+
+                uint32_t            m_shadow_flags;
+            };
+
             class render_world : public util::noncopyable
             {
                 public:
@@ -86,8 +117,7 @@ namespace uc
                     return m_camera.get();
                 }
 
-                gx::dx12::gpu_msaa_depth_buffer*    get_shadow_depth_buffer();
-                gx::dx12::gpu_color_buffer*         get_shadow_map();
+                shadow_buffers_descriptor shadow_map_descriptor();
 
                 void resize_buffers(device_resources*   resources);
 
@@ -98,8 +128,8 @@ namespace uc
                 virtual  std::unique_ptr< submitable > do_render_depth(render_context* ctx);
                 virtual  std::unique_ptr< submitable > do_render_shadows(shadow_render_context* ctx);
 
-                virtual gx::dx12::gpu_msaa_depth_buffer*    on_get_shadow_depth_buffer();
-                virtual gx::dx12::gpu_color_buffer*         on_get_shadow_map();
+                virtual shadow_buffers_descriptor on_shadow_map_descriptor();
+
                 virtual void on_resize_buffers(device_resources*   resources);
 
                 protected:

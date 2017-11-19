@@ -32,10 +32,9 @@ namespace uc
                 std::unique_ptr< submitable >render_depth(render_context* ctx);
                 std::unique_ptr< submitable >render_shadows(shadow_render_context* ctx);
 
-                gx::dx12::gpu_msaa_depth_buffer*    get_shadow_depth_buffer();
-                gx::dx12::gpu_color_buffer*         get_shadow_map();
+                shadow_buffers_descriptor shadow_map_descriptor();
+
                 void resize_buffers(device_resources* resources);
-                
 
                 gx::pinhole_camera* camera()
                 {

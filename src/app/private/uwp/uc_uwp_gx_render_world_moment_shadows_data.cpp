@@ -60,9 +60,6 @@ namespace uc
             {
                 concurrency::task_group g;
 
-                m_shadow_depth_buffer = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(c->m_resources->resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
-                m_shadow_map          = std::unique_ptr<gx::dx12::gpu_color_buffer>(c->m_resources->resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R16G16B16A16_UNORM, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE));
-
                 g.run([this, c]
                 {
                     m_military_mechanic = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources, c->m_geometry);
@@ -233,14 +230,10 @@ namespace uc
                     math::float4x4 m = math::identity_matrix();
 
                     graphics->set_pso(m_plane_depth);
-
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, m);
 
-                    D3D12_VERTEX_BUFFER_VIEW v0 = {};
-                    graphics->set_vertex_buffer(0, v0);
-
-                    D3D12_INDEX_BUFFER_VIEW v = {};
-                    graphics->set_index_buffer(v);
+                    gx::dx12::graphics_reset_vertex_buffer(graphics,0);
+                    gx::dx12::graphics_reset_index_buffer(graphics);
                     graphics->draw(6);
                 }
 
@@ -249,23 +242,24 @@ namespace uc
                 return std::make_unique<graphics_submitable>(std::move(graphics));
             }
 
-            void render_world_moment_shadows_data::on_resize_buffers(device_resources* resources)
+            shadow_buffers_descriptor render_world_moment_shadows_data::on_shadow_map_descriptor()
             {
-                m_shadow_depth_buffer.reset();
-                m_shadow_map.reset();
+                shadow_buffers_descriptor r = {};
 
-                m_shadow_depth_buffer = std::unique_ptr<gx::dx12::gpu_msaa_depth_buffer>(resources->resource_create_context()->create_msaa_depth_buffer(2048, 2048, DXGI_FORMAT_D32_FLOAT, 0.0f));
-                m_shadow_map = std::unique_ptr<gx::dx12::gpu_color_buffer>(resources->resource_create_context()->create_color_buffer(2048, 2048, DXGI_FORMAT_R16G16B16A16_UNORM, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE));
-            }
+                r.m_shadow_flags                    = shadow_buffers_descriptor::shadow_flags::shadow_buffer_used | shadow_buffers_descriptor::shadow_flags::shadow_map_used;
+                r.m_shadow_buffer.m_width           = 2048;
+                r.m_shadow_buffer.m_height          = 2048;
+                r.m_shadow_buffer.m_initial_value   = 0.0f;
+                r.m_shadow_buffer.m_msaa            = 4;
+                r.m_shadow_buffer.m_format          = DXGI_FORMAT_D32_FLOAT;
 
-            gx::dx12::gpu_msaa_depth_buffer* render_world_moment_shadows_data::on_get_shadow_depth_buffer()
-            {
-                return m_shadow_depth_buffer.get();
-            }
 
-            gx::dx12::gpu_color_buffer* render_world_moment_shadows_data::on_get_shadow_map()
-            {
-                return m_shadow_map.get();
+                r.m_shadow_map.m_width              = 2048;
+                r.m_shadow_map.m_height             = 2048;
+                r.m_shadow_map.m_format             = DXGI_FORMAT_R16G16B16A16_UNORM;
+                r.m_shadow_map.m_initial_state      = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;// D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+                return r;
             }
         }
     }
