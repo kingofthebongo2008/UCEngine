@@ -27,6 +27,7 @@ namespace uc
                 gpu_command_manager*                    m_command_manager;	        //allocate command lists here
                 gpu_command_queue*                      m_command_queue;	        //submit command lists here
                 gpu_resource_create_context*            m_rc;
+                Microsoft::WRL::ComPtr<ID3D12Device>    m_device;
 
                 gpu_upload_allocator                    m_upload_allocator;	            //allocate upload data
                 gpu_command_manager::command_list       m_command_list;		            //current command list
@@ -50,6 +51,7 @@ namespace uc
                 , m_descriptor_handle_cache1( m_command_manager->device(), root_signature_meta_data())
                 {
                     m_command_list = std::move(m_command_manager->create_command_list(gpu_command_manager::list_type(m_command_queue->type())));
+                    m_command_list.m_list->GetDevice( __uuidof(ID3D12Device), reinterpret_cast<void**>(m_device.GetAddressOf()));
                 }
 
                 void reset()
