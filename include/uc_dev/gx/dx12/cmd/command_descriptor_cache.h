@@ -114,7 +114,7 @@ namespace uc
 
                 void request_rtv_handles()
                 {
-                    m_handle_rtv = m_rc->frame_dsv_heap()->allocate(rtv_request_size);
+                    m_handle_rtv = m_rc->frame_rtv_heap()->allocate(rtv_request_size);
                     m_size_rtv = rtv_request_size;
                 }
 
