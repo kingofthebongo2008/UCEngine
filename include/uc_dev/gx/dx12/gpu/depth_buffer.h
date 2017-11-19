@@ -23,12 +23,14 @@ namespace uc
 
                 }
 
-                gpu_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource)
+                gpu_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2], bool is_shader_visible) : base(resource)
                 {
                     m_SRV = srv;
 
                     m_DSV[0] = dsv[0];
                     m_DSV[1] = dsv[1];
+
+                    m_is_shader_visible = is_shader_visible;
                 }
 
                 descriptor_handle dsv() const
@@ -46,12 +48,14 @@ namespace uc
                     return m_SRV;
                 }
 
-                bool is_shader_visible() const { return false; }
+                bool is_shader_visible() const { return m_is_shader_visible; }
 
             private:
 
                 descriptor_handle   m_DSV[2];
                 descriptor_handle   m_SRV;
+
+                bool m_is_shader_visible = false;
             };
 
 
@@ -66,7 +70,7 @@ namespace uc
                 {
                 }
 
-                gpu_msaa_depth_buffer( ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                gpu_msaa_depth_buffer( ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2], bool is_shader_visible) : base(resource, srv, dsv, is_shader_visible)
                 {
 
                 }
@@ -78,7 +82,7 @@ namespace uc
 
                 public:
                 gpu_view_depth_buffer() {}
-                gpu_view_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                gpu_view_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv, false)
                 {
 
                 }
@@ -90,7 +94,7 @@ namespace uc
 
                 public:
                 gpu_frame_depth_buffer() {}
-                gpu_frame_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                gpu_frame_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv, true)
                 {
 
                 }
@@ -104,7 +108,7 @@ namespace uc
 
                 public:
                 gpu_view_msaa_depth_buffer() {}
-                gpu_view_msaa_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                gpu_view_msaa_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv, false)
                 {
 
                 }
@@ -117,7 +121,7 @@ namespace uc
 
                 public:
                 gpu_frame_msaa_depth_buffer() {}
-                gpu_frame_msaa_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv)
+                gpu_frame_msaa_depth_buffer(ID3D12Resource* resource, descriptor_handle srv, descriptor_handle dsv[2]) : base(resource, srv, dsv, true)
                 {
 
                 }

@@ -60,7 +60,7 @@ namespace uc
                 using base = gpu_color_buffer;
 
                 public:
-                gpu_frame_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav) : base(resource, rtv, srv, uav, false)
+                gpu_frame_color_buffer(ID3D12Resource* resource, descriptor_handle rtv, descriptor_handle srv, descriptor_handle uav) : base(resource, rtv, srv, uav, true)
                 {
 
                 }
