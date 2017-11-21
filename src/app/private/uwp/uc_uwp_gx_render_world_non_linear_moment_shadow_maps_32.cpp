@@ -17,7 +17,7 @@
 #include <autogen/shaders/textured_skinned_lit_depth_only.h>
 #include <autogen/shaders/textured_skinned_lit_shadows.h>
 #include <autogen/shaders/non_linear_moment_shadow_maps_32_resolve.h>
-#include <autogen/shaders/plane_solid.h>
+#include <autogen/shaders/plane_solid_msm_32.h>
 #include <autogen/shaders/plane_depth_only.h>
 #include <autogen/shaders/plane_shadows.h>
 
@@ -43,7 +43,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid::create_pso);
+                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid_msm_32::create_pso);
                 });
 
 
@@ -127,8 +127,8 @@ namespace uc
                     r.m_shadow_buffer_size_y    = ctx->m_shadow_buffer_size.m_height;
 
                     r.m_randomness_x            = m_blue_noise->random_x();
-                    r.m_randomness_y            = m_blue_noise->random_index();
-                    r.m_randomness_z            = m_blue_noise->random_y();
+                    r.m_randomness_y            = m_blue_noise->random_y();
+                    r.m_randomness_z            = m_blue_noise->random_index();
 
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
                 }

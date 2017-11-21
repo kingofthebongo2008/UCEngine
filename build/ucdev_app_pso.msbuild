@@ -95,6 +95,12 @@
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid_msm_32.pso">
+      <EntryPointName>plane_solid_msm_32</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_depth_only.pso">
       <EntryPointName>plane_depth_only</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>

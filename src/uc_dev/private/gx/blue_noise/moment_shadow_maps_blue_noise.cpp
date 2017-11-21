@@ -78,24 +78,24 @@ namespace uc
 
             uint32_t ldr_rg01_64x64::random_x()
             {
-                auto bit_0 = m_distribution1(m_generator1);
-                auto bit_1 = m_distribution1(m_generator1);
-                auto bit_2 = m_distribution1(m_generator1);
-                auto bit_3 = m_distribution1(m_generator1);
-                auto bit_4 = m_distribution1(m_generator1);
-                auto bit_5 = m_distribution1(m_generator1);
+                auto bit_0 = m_distribution1(m_generator0);
+                auto bit_1 = m_distribution1(m_generator0);
+                auto bit_2 = m_distribution1(m_generator0);
+                auto bit_3 = m_distribution1(m_generator0);
+                auto bit_4 = m_distribution1(m_generator0);
+                auto bit_5 = m_distribution1(m_generator0);
 
                 return (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
             }
 
             uint32_t ldr_rg01_64x64::random_y()
             {
-                auto bit_0 = m_distribution2(m_generator2);
-                auto bit_1 = m_distribution2(m_generator2);
-                auto bit_2 = m_distribution2(m_generator2);
-                auto bit_3 = m_distribution2(m_generator2);
-                auto bit_4 = m_distribution2(m_generator2);
-                auto bit_5 = m_distribution2(m_generator2);
+                auto bit_0 = m_distribution2(m_generator0);
+                auto bit_1 = m_distribution2(m_generator0);
+                auto bit_2 = m_distribution2(m_generator0);
+                auto bit_3 = m_distribution2(m_generator0);
+                auto bit_4 = m_distribution2(m_generator0);
+                auto bit_5 = m_distribution2(m_generator0);
 
                 return (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
             }
