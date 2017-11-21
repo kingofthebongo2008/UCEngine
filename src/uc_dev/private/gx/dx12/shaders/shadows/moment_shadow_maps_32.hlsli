@@ -1,3 +1,6 @@
+#ifndef __moment_shadow_maps_32_hlsli__
+#define __moment_shadow_maps_32_hlsli__
+
 #include "../default_signature.hlsli"
 #include "../shadows.hlsli"
 #include "moment_shadow_maps_utils.hlsli"
@@ -135,3 +138,4 @@ void apply_resolve_32_bit(inout RWTexture2D<uint> shadow_moments, Texture2DMS<fl
 
     shadow_moments[location] = quantize_moments_non_linear_32_bit(unbiased_moments);
 }
+#endif

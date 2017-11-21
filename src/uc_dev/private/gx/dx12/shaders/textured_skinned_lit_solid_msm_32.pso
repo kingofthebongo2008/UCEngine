@@ -1,0 +1,11 @@
+import texturedskinnedlit
+
+PipelineStateObject textured_skinned_lit_solid_msm_32 : solid_geometry =
+{
+    .VertexShader           = textured_vertex_skinned_lit
+    .PixelShader            = textured_pixel_lit_msm_32
+    .InputLayout            = position_solid
+}
+
+
+

@@ -56,6 +56,12 @@
       <InProject>true</InProject>
     </ComputePipelineStateObject>
 
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_32_resolve.pso">
+      <EntryPointName>non_linear_moment_shadow_maps_32_resolve</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </ComputePipelineStateObject>
+
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\imgui.pso">
       <EntryPointName>imgui_main</EntryPointName>
       <InProject>true</InProject>
@@ -103,6 +109,12 @@
 
     <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid.pso">
       <EntryPointName>textured_skinned_lit_solid</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </GraphicsPipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid_msm_32.pso">
+      <EntryPointName>textured_skinned_lit_solid_msm_32</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>

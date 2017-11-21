@@ -54,6 +54,10 @@
       <ShaderPipelineStage>Pixel</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel_lit_msm_32.hlsl">
+      <ShaderPipelineStage>Pixel</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\skeleton_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
@@ -109,6 +113,11 @@
     </Shader>
 
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\moment_shadow_maps_resolve.hlsl">
+      <ShaderPipelineStage>Compute</ShaderPipelineStage>
+      <InProject>true</InProject>
+    </Shader>
+
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_32_resolve_cs.hlsl">
       <ShaderPipelineStage>Compute</ShaderPipelineStage>
       <InProject>true</InProject>
     </Shader>
