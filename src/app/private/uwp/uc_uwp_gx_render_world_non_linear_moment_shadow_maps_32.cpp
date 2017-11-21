@@ -30,33 +30,7 @@ namespace uc
     {
         namespace gxu
         {
-            namespace details
-            {
-                inline math::float4x4 military_mechanic_world_transform(double frame_time)
-                {
-                    //todo: move this in the update pahse
-                    const float total = 3.14159265358979323846f * 2.0f;
-                    const  uint32_t steps = 144;
-
-                    const float step_rotation = total / steps;
-                    static uint32_t step = 0;
-
-                    static float angle = 0.0f;
-
-                    //const float rotation_angle = (step)* step_rotation;
-
-                    const float rotation_angle = static_cast<float>(angle + 100.0f * frame_time * step_rotation);
-                    angle = rotation_angle;
-
-                    math::float4x4 t0 = math::translation(-8.0f, 15.0f, 0.0f);
-                    math::float4x4 t1 = math::rotation_y(rotation_angle);
-                    math::float4x4 t2 = math::translation(-30.0f, -15.0f, 0.0f);
-
-                    return t1;// math::mul(t1, t0);
-                }
-            }
-
-            render_world_non_linear_moment_shadow_maps_32::render_world_non_linear_moment_shadow_maps_32(initialize_context* c) : base(c)
+             render_world_non_linear_moment_shadow_maps_32::render_world_non_linear_moment_shadow_maps_32(initialize_context* c) : base(c)
             {
                 concurrency::task_group g;
 
