@@ -104,8 +104,8 @@ float4 main( interpolants r ) : SV_Target0
         float  ndotl                                = saturate(dot(normal_ws, sun_light_direction_ws));
         float3 ambient                              = 0.2f; //float3(noise / 255.0f, noise / 255.0f, noise / 255.0f);
 
-        //return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
-        return float4 (shadow_intensity, shadow_intensity, shadow_intensity, 0.0);
+        return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
+        //return float4 (shadow_intensity, shadow_intensity, shadow_intensity, 0.0);
         //return float4 (ambient, 0.0);
 }
 #endif
