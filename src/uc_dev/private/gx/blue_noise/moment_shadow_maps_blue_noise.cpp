@@ -56,25 +56,48 @@ namespace uc
 
             ldr_rg01_64x64::ldr_rg01_64x64(dx12::managed_gpu_texture_2d_array&& textures)
                 : m_textures( std::move(textures) )
-                , m_generator( m_device() )
-                , m_distribution(0, 1)
+                , m_generator0( m_device() )
+                , m_distribution0(0, 1)
+                , m_distribution1(0, 1)
+                , m_distribution2(0, 1)
             {
                 random_index();
             }
 
             uint32_t ldr_rg01_64x64::random_index()
             {
-                auto bit_0 = m_distribution(m_generator);
-                auto bit_1 = m_distribution(m_generator);
-                auto bit_2 = m_distribution(m_generator);
-                auto bit_3 = m_distribution(m_generator);
+                auto bit_0 = m_distribution0(m_generator0);
+                auto bit_1 = m_distribution0(m_generator0);
+                auto bit_2 = m_distribution0(m_generator0);
+                auto bit_3 = m_distribution0(m_generator0);
+                auto bit_4 = m_distribution0(m_generator0);
+                auto bit_5 = m_distribution0(m_generator0);
 
-                auto bit_4 = m_distribution(m_generator);
-                auto bit_5 = m_distribution(m_generator);
+                return (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
+            }
 
-                m_index = (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
+            uint32_t ldr_rg01_64x64::random_x()
+            {
+                auto bit_0 = m_distribution1(m_generator1);
+                auto bit_1 = m_distribution1(m_generator1);
+                auto bit_2 = m_distribution1(m_generator1);
+                auto bit_3 = m_distribution1(m_generator1);
+                auto bit_4 = m_distribution1(m_generator1);
+                auto bit_5 = m_distribution1(m_generator1);
 
-                return m_index;
+                return (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
+            }
+
+            uint32_t ldr_rg01_64x64::random_y()
+            {
+                auto bit_0 = m_distribution2(m_generator2);
+                auto bit_1 = m_distribution2(m_generator2);
+                auto bit_2 = m_distribution2(m_generator2);
+                auto bit_3 = m_distribution2(m_generator2);
+                auto bit_4 = m_distribution2(m_generator2);
+                auto bit_5 = m_distribution2(m_generator2);
+
+                return (bit_5 << 5) | (bit_4 << 4) | (bit_3 << 3) | (bit_2 << 2) | (bit_1 << 1) | (bit_0 << 0);
             }
         }
     }

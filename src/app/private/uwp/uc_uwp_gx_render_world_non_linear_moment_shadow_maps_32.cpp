@@ -13,10 +13,10 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned_lit_solid.h>
+#include <autogen/shaders/textured_skinned_lit_solid_msm_32.h>
 #include <autogen/shaders/textured_skinned_lit_depth_only.h>
 #include <autogen/shaders/textured_skinned_lit_shadows.h>
-#include <autogen/shaders/shadows_resolve.h>
+#include <autogen/shaders/non_linear_moment_shadow_maps_32_resolve.h>
 #include <autogen/shaders/plane_solid.h>
 #include <autogen/shaders/plane_depth_only.h>
 #include <autogen/shaders/plane_shadows.h>
@@ -37,7 +37,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_solid::create_pso);
+                    m_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_solid_msm_32::create_pso);
                 });
 
                 g.run([this, c]
@@ -50,7 +50,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_shadows_resolve = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::shadows_resolve::create_pso);
+                    m_shadows_resolve = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::non_linear_moment_shadow_maps_32_resolve::create_pso);
                 });
 
 
@@ -96,15 +96,40 @@ namespace uc
                     {
 
                         math::float4x4 m_shadow_view;
+                        math::float4x4 m_main_view;
                         math::float4x4 m_shadow_perspective;
+                        math::float4x4 m_main_perspective;
+                        math::float4   m_view_port_transform;
                         math::float4   m_directional_light;
+
+                        uint32_t       m_randomness_x;
+                        uint32_t       m_randomness_y;
+                        uint32_t       m_randomness_z;
+                        uint32_t       m_randomness_w;
+
+                        uint32_t       m_shadow_buffer_size_x;
+                        uint32_t       m_shadow_buffer_size_y;
+                        uint32_t       m_shadow_buffer_size_z;
+                        uint32_t       m_shadow_buffer_size_w;
                     };
 
                     render_object_frame_constants r;
 
-                    r.m_shadow_view = m_constants_frame_shadows.m_view;
-                    r.m_shadow_perspective = m_constants_frame_shadows.m_perspective;
-                    r.m_directional_light = m_light_direction;
+                    r.m_shadow_view             = m_constants_frame_shadows.m_view;
+                    r.m_shadow_perspective      = m_constants_frame_shadows.m_perspective;
+                    r.m_main_view               = m_constants_frame.m_view;
+                    r.m_main_perspective        = m_constants_frame.m_perspective;
+
+                    r.m_view_port_transform     = math::set(ctx->m_back_buffer_size.m_width, ctx->m_back_buffer_size.m_height, 0.0f, 0.0f);
+                    r.m_directional_light       = m_light_direction;
+
+                    r.m_shadow_buffer_size_x    = ctx->m_shadow_buffer_size.m_width;
+                    r.m_shadow_buffer_size_y    = ctx->m_shadow_buffer_size.m_height;
+
+                    r.m_randomness_x            = m_blue_noise->random_x();
+                    r.m_randomness_y            = m_blue_noise->random_index();
+                    r.m_randomness_z            = m_blue_noise->random_y();
+
                     graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 1, r);
                 }
 
@@ -240,7 +265,7 @@ namespace uc
                         graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_depth_buffer->srv_depth());
                         graphics->set_compute_dynamic_descriptor(gx::dx12::default_root_singature::slots::uav_1, ctx->m_shadow_map->uav());
 
-                        graphics->dispatch( 2048 / 32, 2048 / 8, 1);
+                        graphics->dispatch( 2048 / 8, 2048 / 8, 1);
 
                     }
 
@@ -264,7 +289,7 @@ namespace uc
 
                 r.m_shadow_map.m_width = 2048;
                 r.m_shadow_map.m_height = 2048;
-                r.m_shadow_map.m_format = DXGI_FORMAT_R16G16B16A16_UNORM;
+                r.m_shadow_map.m_format = DXGI_FORMAT_R32_UINT;
                 r.m_shadow_map.m_initial_state = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
 
                 return r;
