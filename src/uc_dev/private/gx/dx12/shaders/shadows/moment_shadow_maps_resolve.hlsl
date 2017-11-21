@@ -10,5 +10,5 @@ RWTexture2D<unorm float4>    g_shadow_moments:register(u1);
 [RootSignature( MyRS2 ) ]
 void main( uint3 dtid : SV_DispatchThreadID, uint3 GroupThreadID : SV_GroupThreadID, uint3 GroupID : SV_GroupID)
 {
-   ApplyResolveAndGaussian8_64Bit(g_shadow_moments, g_shadows_buffer, GroupThreadID, GroupID);
+   apply_resolve_gaussian8_64_bit(g_shadow_moments, g_shadows_buffer, GroupThreadID, GroupID);
 }

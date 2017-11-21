@@ -1,5 +1,6 @@
 #include "../default_signature.hlsli"
 #include "../shadows.hlsli"
+#include "moment_shadow_maps_32.hlsli"
 
 /*! @{
 These constant are meant to make the code in the compute shader for the resolve
@@ -42,7 +43,7 @@ a 9x9 Gaussian blur with standard deviation 2.4. The result for the left half is
 written back to the left top, the result for the right half is written to the
 right top.
 \param GroupThreadID The 3D index of the invoking thread within its group.*/
-void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
+void apply_gaussian_filter_9x9(const uint3 GroupThreadID)
 {
     // The left half is overwritten by the first half of the warps, the right half 
     // by the second half. Each thread only operates on one of the four moments. The 
@@ -138,21 +139,6 @@ void ApplyGaussianFilter9x9(const uint3 GroupThreadID)
 }
 
 
-float p2(float x)
-{
-    return x * x;
-}
-
-float p3(float x)
-{
-    return p2(x) * x;
-}
-
-float p4(float x)
-{
-    return p3(x) * x;
-}
-
 /*! Given a scalar this function outputs a vector consisting of the first, second,
 third and fourth power of this scalar linearly transformed using an optimized
 basis for optimal quantization.*/
@@ -175,7 +161,7 @@ float4 compute_moment_vector4_moments_optimized(float moment_0, float moment_1, 
     return moments_optimized;
 }
 
-void ApplyResolveAndGaussian8_64Bit(inout RWTexture2D<unorm float4> OutMomentShadowMap, Texture2DMS<float, 4> ShadowMap, uint3 GroupThreadID, uint3 GroupID)
+void apply_resolve_gaussian8_64_bit(inout RWTexture2D<unorm float4> OutMomentShadowMap, Texture2DMS<float, 4> ShadowMap, uint3 GroupThreadID, uint3 GroupID)
 {
 
     // In general the output block size is not a divisor of the shadow map 
@@ -217,7 +203,7 @@ void ApplyResolveAndGaussian8_64Bit(inout RWTexture2D<unorm float4> OutMomentSha
     // Now we perform the blur. Before all of this can start, we have to wait for 
     // writes to finish.
     GroupMemoryBarrierWithGroupSync();
-    ApplyGaussianFilter9x9(GroupThreadID);
+    apply_gaussian_filter_9x9(GroupThreadID);
     // Blurring is done and we are ready to write out the results but first we have 
     // to sync
     GroupMemoryBarrierWithGroupSync();
@@ -267,9 +253,8 @@ void ApplyResolveAndGaussian8_64Bit(inout RWTexture2D<unorm float4> OutMomentSha
     }
 }
 
-void ApplyResolve_64Bit(inout RWTexture2D<unorm float4> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
+void apply_resolve_64_bit(inout RWTexture2D<unorm float4> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
 {
-   
     const uint2 location = dtid.xy;
 
     float z0 = 1.0f - shadows_buffer.Load(location,0);
@@ -285,23 +270,7 @@ void ApplyResolve_64Bit(inout RWTexture2D<unorm float4> shadow_moments, Texture2
     shadow_moments[location] = compute_moment_vector4_moments_optimized( moment_0, moment_1, moment_2, moment_3);
 }
 
-void ApplyResolve_32Bit(inout RWTexture2D<unorm float4> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
-{
-   
-    const uint2 location = dtid.xy;
 
-    float z0 = 1.0f - shadows_buffer.Load(location,0);
-    float z1 = 1.0f - shadows_buffer.Load(location,1);
-    float z2 = 1.0f - shadows_buffer.Load(location,2);
-    float z3 = 1.0f - shadows_buffer.Load(location,3);
-
-    float moment_0 = (z0 + z1 + z2 + z3) / 4;
-    float moment_1 = (p2(z0) + p2(z1) + p2(z2) + p2(z3)) / 4;
-    float moment_2 = (p3(z0) + p3(z1) + p3(z2) + p3(z3)) / 4;
-    float moment_3 = (p4(z0) + p4(z1) + p4(z2) + p4(z3)) / 4;
-
-    shadow_moments[location] = compute_moment_vector4_moments_optimized( moment_0, moment_1, moment_2, moment_3);
-}
 
 
 
