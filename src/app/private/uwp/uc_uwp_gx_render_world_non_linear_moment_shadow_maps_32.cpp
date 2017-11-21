@@ -275,6 +275,26 @@ namespace uc
 
                 return std::make_unique<graphics_compute_submitable>(std::move(graphics));
             }
+
+            shadow_buffers_descriptor render_world_non_linear_moment_shadow_maps_32::on_shadow_map_descriptor()
+            {
+                shadow_buffers_descriptor r = {};
+
+                r.m_shadow_flags = shadow_buffers_descriptor::shadow_flags::shadow_buffer_used | shadow_buffers_descriptor::shadow_flags::shadow_map_used;
+                r.m_shadow_buffer.m_width = 2048;
+                r.m_shadow_buffer.m_height = 2048;
+                r.m_shadow_buffer.m_initial_value = 0.0f;
+                r.m_shadow_buffer.m_msaa = 4;
+                r.m_shadow_buffer.m_format = DXGI_FORMAT_D32_FLOAT;
+
+
+                r.m_shadow_map.m_width = 2048;
+                r.m_shadow_map.m_height = 2048;
+                r.m_shadow_map.m_format = DXGI_FORMAT_R16G16B16A16_UNORM;
+                r.m_shadow_map.m_initial_state = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+
+                return r;
+            }
             
         }
     }
