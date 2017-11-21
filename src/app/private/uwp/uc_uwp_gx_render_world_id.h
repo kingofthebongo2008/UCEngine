@@ -20,7 +20,8 @@ namespace uc
                 scene7                              = 7,
                 scene8                              = 8,
                 moment_shadow_maps                  = 9,
-                non_linear_moment_shadow_maps_64    = 10
+                non_linear_moment_shadow_maps_64    = 10,
+                non_linear_moment_shadow_maps_32    = 11
             };
         }
     }

@@ -249,7 +249,7 @@ namespace uc
                 gxu::world_id::scene1,
                 gxu::world_id::moment_shadow_maps,
                 gxu::world_id::non_linear_moment_shadow_maps_64,
-                gxu::world_id::non_linear_moment_shadow_maps_64
+                gxu::world_id::non_linear_moment_shadow_maps_32
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

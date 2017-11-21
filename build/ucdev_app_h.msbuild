@@ -204,6 +204,7 @@
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_8.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadow_maps.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadows_data.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.h" />

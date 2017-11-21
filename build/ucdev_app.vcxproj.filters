@@ -178,6 +178,7 @@
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadow_maps.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.cpp" />
+    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadows_data.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_default.cpp" />
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_factory.cpp" />
@@ -498,6 +499,7 @@
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_9.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadow_maps.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.h" />
+    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.h" />
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_moment_shadows_data.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_compute_command_context.h" />
     <ClInclude Include="..\include\uc_dev\gx\dx12\cmd\graphics_compute_command_context_utils.h" />
