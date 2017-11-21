@@ -257,7 +257,7 @@ namespace uc
                 r.m_shadow_map.m_width              = 2048;
                 r.m_shadow_map.m_height             = 2048;
                 r.m_shadow_map.m_format             = DXGI_FORMAT_R16G16B16A16_UNORM;
-                r.m_shadow_map.m_initial_state      = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;// D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+                r.m_shadow_map.m_initial_state      = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
 
                 return r;
             }
