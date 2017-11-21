@@ -22,6 +22,11 @@ namespace uc
             m_impl->update();
         }
 
+        void renderer::pre_render()
+        {
+            m_impl->pre_render();
+        }
+
         void renderer::render()
         {
             m_impl->render();

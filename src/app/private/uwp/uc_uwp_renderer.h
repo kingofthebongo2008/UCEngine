@@ -27,6 +27,7 @@ namespace uc
             concurrency::task<void> shutdown_async();
 
             void update();
+            void pre_render();
             void render();
             void present();
             void resize();

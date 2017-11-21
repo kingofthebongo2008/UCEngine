@@ -41,6 +41,7 @@ namespace uc
             ~renderer_impl();
 
             void update();
+            void pre_render();
             void render();
             void process_user_input();
 

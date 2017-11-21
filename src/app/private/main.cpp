@@ -117,21 +117,12 @@ public:
 
         if (!m_renderer_thread)
         {
-            //buffer 3 frames, so we can initialize the backbuffer
-            //fixes crashes, when we use the back buffer before it is created
-            m_renderer->render();
-            m_renderer->present();
-            m_renderer->render();
-            m_renderer->present();
-            m_renderer->render();
-            m_renderer->present();
-
-            Sleep(30);
             //split the event processing and the rendering
             m_renderer_thread = std::make_unique<std::thread>([this]()
             {
                 while (!m_windowClosed)
                 {
+                    m_renderer->pre_render();
                     m_renderer->update();
                     m_renderer->render();
                     m_renderer->present();

@@ -298,11 +298,14 @@ namespace uc
             m_render_world_manager->resize_buffers(&m_resources);
         }
 
-        void renderer_impl::render()
+        void renderer_impl::pre_render()
         {
             //skeleton of a render phases, which will get complicated over time
             flush_prerender_queue();
+        }
 
+        void renderer_impl::render()
+        {
             using namespace gx::dx12;
 
             concurrency::task_group g;
