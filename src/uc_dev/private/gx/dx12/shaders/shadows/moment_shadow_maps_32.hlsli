@@ -2,7 +2,7 @@
 #define __moment_shadow_maps_32_hlsli__
 
 #include "../default_signature.hlsli"
-#include "../shadows.hlsli"
+
 #include "moment_shadow_maps_utils.hlsli"
  
 
@@ -72,7 +72,8 @@ float warp_fourth_moment_offset(float FourthMomentOffset)
 /*! This is the inverse function of WarpFourthMomentOffset(). It fulfills
 UnwarpFourthMomentOffset(WarpFourthMomentOffset(x))==x for x>=1.2e-7.
 \sa WarpFourthMomentOffset() */
-float unwarp_fourth_moment_offset(float WarpedFourthMomentOffset) {
+float unwarp_fourth_moment_offset(float WarpedFourthMomentOffset)
+{
     // In the end, a linear transform has to map the value to the range from zero to 
     // one
     const float Summand = log(log(MinFourthMomentOffset / FourthMomentOffsetSingularity));
@@ -137,5 +138,56 @@ void apply_resolve_32_bit(inout RWTexture2D<uint> shadow_moments, Texture2DMS<fl
     float4 unbiased_moments = float4(moment_0, moment_1, moment_2, moment_3);
 
     shadow_moments[location] = quantize_moments_non_linear_32_bit(unbiased_moments);
+}
+
+
+/*! This function computes a lower bound to the cumulative distribution function on
+the reals from four non-linearly quantized moments. The moments of order j=0 to
+j=3 are given by lerp(pow(Support[0],j),pow(Support[1],j),Weight). The fourth
+moment is given by the same formula except that FourthMomentOffset has to be
+added. The lower bound is computed for the interval (-infinity,IntervalEnd].*/
+float compute_moment4_non_linear_lower_bound(float IntervalEnd, float2 Support, float Weight, float FourthMomentOffset)
+{
+    // Avoid zero variance
+    const float ClampingOffset = 5.0e-6f;
+    Weight = clamp(Weight, ClampingOffset, 1.0f - ClampingOffset);
+    Support.y = max(Support.x + ClampingOffset, Support.y);
+
+    // Is the fragment fully lit?
+    [branch] if (IntervalEnd <= Support.x)
+    {
+        return 0.0f;
+    }
+    // Normalize the interval end such that Support can be treated as 
+    // float2(0.0f,1.0f). The fourth moment offset needs to be scaled accordingly.
+    const float Scaling = rcp(Support[1] - Support[0]);
+    const float NormalizedIntervalEnd = (IntervalEnd - Support[0])*Scaling;
+    const float ScalingSquared = Scaling*Scaling;
+
+    FourthMomentOffset *= ScalingSquared*ScalingSquared;
+    // Prepare a few quantities that will be needed repeatedly
+    const float InvWeight0 = rcp(1.0f - Weight);
+    const float InvWeight1 = rcp(Weight);
+    const float InvFourthMomentOffset = rcp(FourthMomentOffset);
+    // Is the most complicated case present?
+    float Root          = NormalizedIntervalEnd;
+    float FlippedRoot   = 1.0f - Root;
+    float2 OutputTransform = float2(-1.0f, 1.0f);
+
+    [branch] if (NormalizedIntervalEnd<1.0f)
+    {
+        const float q = -FourthMomentOffset*InvWeight0 / NormalizedIntervalEnd;
+        const float pHalf = mad(-0.5f*q, mad(NormalizedIntervalEnd, -InvWeight1, 1.0f) / FlippedRoot, -0.5f);
+        Root = -pHalf - sqrt(mad(pHalf, pHalf, -q));
+        FlippedRoot = 1.0f - Root;
+        OutputTransform = float2(1.0f, 0.0f);
+    }
+
+    // Compute the weight
+    const float RootSquared = Root*Root;
+    const float FlippedRootSquared = FlippedRoot*FlippedRoot;
+    const float RootWeight = 1.0f / dot( float3(InvWeight0, InvWeight1, InvFourthMomentOffset), float3(FlippedRootSquared, RootSquared, RootSquared*FlippedRootSquared));
+
+    return mad(RootWeight, OutputTransform.x, OutputTransform.y);
 }
 #endif
