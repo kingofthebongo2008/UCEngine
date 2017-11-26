@@ -121,7 +121,7 @@ void unpack_moments_non_linear_32_bit(out float2 OutDepth, out float OutWeight, 
     OutFourthMomentOffset   = unwarp_fourth_moment_offset(mad(float(PackedDistribution & 0x0000003F), pow(0.5f, 6.0f), pow(0.5f, 6.0f)));
 }
 
-void apply_resolve_32_bit(inout RWTexture2D<uint> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
+void apply_resolve_non_linear_32_bit(inout RWTexture2D<uint> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
 {
     const uint2 location = dtid.xy;
 

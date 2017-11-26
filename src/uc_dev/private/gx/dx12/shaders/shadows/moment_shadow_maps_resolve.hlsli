@@ -27,7 +27,7 @@ RWTexture2D<uint>            g_shadow_moments:register(u1);
 [RootSignature(MyRS2)]
 void main(uint3 dtid : SV_DispatchThreadID, uint3 GroupThreadID : SV_GroupThreadID, uint3 GroupID : SV_GroupID)
 {
-    apply_resolve_32_bit(g_shadow_moments, g_shadows_buffer, dtid);
+    apply_resolve_non_linear_32_bit(g_shadow_moments, g_shadows_buffer, dtid);
 }
 
 #endif

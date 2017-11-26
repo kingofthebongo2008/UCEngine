@@ -140,16 +140,6 @@ float compute_moment4_shadow_maps(sampler_moments_64 moments, float3 position_ws
     return shadow_intensity;
 }
 
-void ComputeViewportPixelIndex(out int2 OutViewportPixelIndex, float4 ProjectionSpacePosition, float4 ViewportTransform )
-{
-    ProjectionSpacePosition.xy /= ProjectionSpacePosition.w;
-    OutViewportPixelIndex = int2(mad(ProjectionSpacePosition.xy, ViewportTransform.xy, ViewportTransform.zw));
-}
-
-uint2 compute_view_port_pixel_index( float3 position_ws )
-{
-    euclidean_transform_3d  main_view;
-}
 
 float compute_nonlinear_moment4_shadow_maps_64(sampler_non_linear_moments_64 moments, float3 position_ws, non_linear_moments_64_context ctx)
 {
