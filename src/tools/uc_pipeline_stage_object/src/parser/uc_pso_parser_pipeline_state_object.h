@@ -14,10 +14,10 @@ namespace uc
     {
         namespace parser
         {
-            template <typename iterator, typename ast>
-            struct optional_string : public qi::grammar< iterator, ast, ascii::space_type >
+            template <typename iterator, typename ast0>
+            struct optional_string : public qi::grammar< iterator, ast0, ascii::space_type >
             {
-                using base = qi::grammar< iterator, ast, ascii::space_type  >;
+                using base = qi::grammar< iterator, ast0, ascii::space_type  >;
 
                 optional_string(const std::string& named_value) : base(m_value, named_value)
                 {
@@ -34,7 +34,7 @@ namespace uc
                 }
 
                 qi::rule<iterator, std::string(), ascii::space_type  >          m_identifier;
-                qi::rule<iterator, ast, ascii::space_type  > m_value;
+                qi::rule<iterator, ast0, ascii::space_type  > m_value;
             };
 
             template <typename iterator>

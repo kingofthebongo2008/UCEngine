@@ -18,7 +18,7 @@ namespace uc
                 auto h = o.height();
                 //auto bpp = o.bpp();
                 auto pitch = o.row_pitch();
-                auto pixels_s = reinterpret_cast<swizzle_t*> (o.pixels().get_pixels_cpu());
+                auto pixels_s = reinterpret_cast<const swizzle_t*> (o.pixels().get_pixels_cpu());
                 //auto size = o.size();
 
                 auto pixels_d = reinterpret_cast<swizzle_t*> (pixels_out);
@@ -52,7 +52,7 @@ namespace uc
                 auto h = o.height();
                 //auto bpp = o.bpp();
                 auto pitch = o.row_pitch();
-                auto pixels_s = reinterpret_cast<swizzle_t*> (o.pixels().get_pixels_cpu());
+                auto pixels_s = reinterpret_cast<const swizzle_t*> (o.pixels().get_pixels_cpu());
                 //auto size = o.size();
 
                 auto pixels_d = reinterpret_cast<swizzle_t*> (pixels_out);
@@ -93,7 +93,7 @@ namespace uc
                 auto h = o.height();
                 //auto bpp = o.bpp();
                 auto pitch = o.row_pitch();
-                auto pixels_s = reinterpret_cast<uint32_t*> (o.pixels().get_pixels_cpu());
+                auto pixels_s = reinterpret_cast<const uint32_t*> (o.pixels().get_pixels_cpu());
 
                 auto pixels_d = reinterpret_cast<uint32_t*> (pixels_out);
 
