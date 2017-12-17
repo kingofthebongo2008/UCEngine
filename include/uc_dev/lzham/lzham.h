@@ -24,12 +24,14 @@ namespace uc
 
         inline std::shared_ptr<ilzham> make_compressor()
         {
-            return details::make_lzham();
+            static std::shared_ptr<ilzham> compressor = details::make_lzham();
+            return compressor;
         }
 
         inline std::shared_ptr<ilzham> make_decompressor()
         {
-            return details::make_lzham();
+            static std::shared_ptr<ilzham> decompressor = details::make_lzham();
+            return decompressor;
         }
 
         inline std::vector<uint8_t>  compress_buffer(const std::vector<uint8_t>& buffer)
