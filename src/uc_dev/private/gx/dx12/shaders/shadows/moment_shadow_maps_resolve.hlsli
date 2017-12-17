@@ -31,3 +31,18 @@ void main(uint3 dtid : SV_DispatchThreadID, uint3 GroupThreadID : SV_GroupThread
 }
 
 #endif
+
+#if defined(NON_LINEAR_MOMENT_SHADOW_MAPS_64)
+
+Texture2DMS<float, 4>        g_shadows_buffer:register(t1);
+RWTexture2D<unorm float4>    g_shadow_moments:register(u1);
+
+[numthreads(8, 8, 1)]
+[RootSignature(MyRS2)]
+void main(uint3 dtid : SV_DispatchThreadID, uint3 GroupThreadID : SV_GroupThreadID, uint3 GroupID : SV_GroupID)
+{
+    apply_resolve_non_linear_64_bit(g_shadow_moments, g_shadows_buffer, dtid);
+}
+
+#endif
+

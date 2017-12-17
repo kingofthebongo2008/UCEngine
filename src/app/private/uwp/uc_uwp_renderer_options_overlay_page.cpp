@@ -167,7 +167,7 @@ namespace uc
 
                 g.run([this]()
                 {
-                    m_render_world_manager->show_world(gxu::world_id::moment_shadow_maps);
+                    m_render_world_manager->show_world(gxu::world_id::non_linear_moment_shadow_maps_32);
                     //m_render_world_manager->show_world(gxu::world_id::scene2);
                 });
 
