@@ -12,7 +12,7 @@ struct interpolants
 struct input
 {
     float3 position : position;
-    float3 uv       : texcoord0;
+    float2 uv       : texcoord0;
 };
 
 cbuffer per_draw_call : register(b1)
