@@ -24,9 +24,6 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{100D75DD-F4CC-453E-BDFE-677C4750D732}</ProjectGuid>
     <Keyword>uc_engine_skeleton_animation</Keyword>
@@ -69,6 +66,7 @@
     <AppxManifest Include="package_uc_engine_skeleton_animation.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="ucdev_app_key.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -80,21 +78,26 @@
     <Image Include="assets\storelogo.png" />
     <Image Include="assets\wide310x150logo.scale-200.png" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="uc_engine.vcxproj">
       <Project>{47005cc8-bd5c-4719-9176-fafb4feff137}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="msbuild/ucdev_render_model.targets" />
   <Import Project="msbuild/ucdev_render_skeleton.targets" />
   <Import Project="msbuild/ucdev_render_animation.targets" />
   <Import Project="asset/military_mechanic.msbuild" />
-
   <Import Project="uc_engine_skeleton_animation.hlsl.msbuild" />
   <Import Project="uc_engine_skeleton_animation_pso.msbuild" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets'))" />
+  </Target>
 </Project>

@@ -46,9 +46,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{72559F42-4911-40E1-AA74-E073D4196843}</ProjectGuid>
     <Keyword>uc_engine_test</Keyword>
@@ -249,6 +246,7 @@
     <AppxManifest Include="package_uc_engine_xaml_hello_world.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="ucdev_app_key.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -275,5 +273,13 @@
   <Import Project="../../build/msbuild/ucdev_render.targets" />
   <Import Project="uc_engine_xaml_hello_world.hlsl.msbuild" />
   <Import Project="uc_engine_xaml_hello_world_pso.msbuild" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\build\packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('..\..\build\packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\build\packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\build\packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets'))" />
+  </Target>
 </Project>

@@ -95,7 +95,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;WINAPI_PARTITION_APP;UWP;UCDEV_RENDER_EXPORT;_PC;UC_ENGINE_API_EXPORT;UC_ENGINE;_WINDOWS;_USRDLL;MEM_STREAMFLOW_DLL_IMPORT;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WIN32;WINAPI_PARTITION_APP;UWP;UCDEV_RENDER_EXPORT;_PC;UC_ENGINE_API_EXPORT;UC_ENGINE;_WINDOWS;_USRDLL;MEM_STREAMFLOW_DLL_IMPORT;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>autogen/$(Platform)/$(ProjectName)/;../include;../src/streamflow/private/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -175,8 +175,7 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\WinPixEventRuntime.1.0.170126001\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170126001\build\WinPixEventRuntime.targets')" />
-    <Import Project="packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets')" />
+    <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
   </ImportGroup>
   <Import Project="msbuild\ucdev_render.targets" />
   <Import Project="uc_engine_h.msbuild" />
@@ -186,7 +185,6 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets'))" />
-    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170625002\build\WinPixEventRuntime.targets'))" />
+    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets'))" />
   </Target>
 </Project>

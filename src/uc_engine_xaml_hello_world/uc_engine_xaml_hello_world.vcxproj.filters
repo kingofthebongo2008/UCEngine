@@ -49,8 +49,8 @@
     <AppxManifest Include="package_uc_engine_xaml_hello_world.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="ucdev_app_key.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
