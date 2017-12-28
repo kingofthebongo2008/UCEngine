@@ -133,6 +133,8 @@
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\plane_vertex.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\moment_shadow_maps_resolve.hlsl" />
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\depth_only_plane_vertex.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\static_geometry\textured_pixel_lit_msm_32.hlsl" />
+    <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_32_resolve_cs.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(ImGuiDirectory)\imgui.cpp" />

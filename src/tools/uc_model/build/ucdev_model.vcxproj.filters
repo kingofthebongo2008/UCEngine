@@ -207,11 +207,19 @@
     <ClInclude Include="..\..\include\uc_dev\gx\import\geo\merge_attributes_skinned_mesh.h">
       <Filter>include\gx\import\geo</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_common.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_common_transform.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_transform.h" />
+    <ClInclude Include="..\..\include\uc_dev\gx\import\fbx\fbx_transform_helper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt-d.dll" />
     <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt.dll" />
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt-d.dll" />
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt.dll" />
+    <None Include="$(FbxSdkX64LibDirectory)\debug\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX64LibDirectory)\release\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX86LibDirectory)\debug\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX86LibDirectory)\release\libfbxsdk.dll" />
   </ItemGroup>
 </Project>

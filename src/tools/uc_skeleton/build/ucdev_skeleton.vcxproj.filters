@@ -24,22 +24,12 @@
     <ClCompile Include="..\src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\include\uc_dev\lip\introspector_intrinsics.cpp">
-      <Filter>include\lip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\include\uc_dev\gx\lip\model.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\include\uc_dev\gx\lip\structs.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\include\uc_dev\gx\lip\math.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\include\uc_dev\gx\lip\animation.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\uc_skeleton_main.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\animation.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\math.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\model.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\gx\lip\structs.cpp" />
+    <ClCompile Include="..\..\..\..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\pch.h">
@@ -206,5 +196,15 @@
     <ClInclude Include="..\..\..\..\include\uc_dev\lip\tools_time_utils.h">
       <Filter>include\lip</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt-d.dll" />
+    <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt.dll" />
+    <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt-d.dll" />
+    <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt.dll" />
+    <None Include="$(FbxSdkX64LibDirectory)\debug\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX64LibDirectory)\release\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX86LibDirectory)\debug\libfbxsdk.dll" />
+    <None Include="$(FbxSdkX86LibDirectory)\release\libfbxsdk.dll" />
   </ItemGroup>
 </Project>
