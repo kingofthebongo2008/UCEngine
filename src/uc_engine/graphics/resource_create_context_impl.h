@@ -60,7 +60,7 @@ namespace UniqueCreator
             std::unique_ptr<Buffer>                     CreateBuffer(uint64_t size);
 
             void Sync();
-            void ResetTransientHeaps();
+            void ResetViewDependentResources();
         };
     }
 }

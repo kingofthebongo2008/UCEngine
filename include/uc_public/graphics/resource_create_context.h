@@ -46,7 +46,7 @@ namespace UniqueCreator
             UC_ENGINE_API std::unique_ptr<Buffer>                   CreateBuffer(uint64_t size);
 
             UC_ENGINE_API void Sync();
-            UC_ENGINE_API void ResetTransientHeaps();
+            UC_ENGINE_API void ResetViewDependentResources();
 
             Impl*   GetImpl();
             const Impl*   GetImpl() const;

@@ -261,7 +261,7 @@ namespace uc
                 m_impl->m_read_back_allocator[1]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloading resources
                 m_impl->m_read_back_allocator[2]    = std::unique_ptr< placement_heap_allocator >(details::create_read_back_textures_allocator(device, mb(8)));        //allocators for downloading resources
 
-                m_impl->m_view_dependent_render_target_allocator   = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(1)));    //per view render targets and depth buffers, their lifetime depends on the view
+                m_impl->m_view_dependent_render_target_allocator   = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(32)));    //per view render targets and depth buffers, their lifetime depends on the view
                 m_impl->m_frame_render_target_allocator            = std::unique_ptr< placement_heap_allocator >(details::create_default_render_target_allocator(device, mb(192)));   //per frame render targets and depth buffers, their lifetime depends on the frame
                 m_impl->m_textures_allocator                       = std::unique_ptr< buddy_heap_allocator>     (details::create_default_heap_textures_allocator(device, mb(128)));   //static data, default textures go here for example, that live for the entire application
 

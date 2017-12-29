@@ -12,7 +12,7 @@ namespace UniqueCreator
         {
             public:
 
-            Image2D::Impl() : m_texture(0,0, uc::gx::imaging::image_type::r8_g8_b8_a8_unorm, nullptr){}
+            Image2D::Impl() {}
 
             Image2D::Impl(uc::gx::imaging::cpu_texture&& t) : m_texture(std::move(t)) {}
 

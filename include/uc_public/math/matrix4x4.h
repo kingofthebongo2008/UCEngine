@@ -16,7 +16,7 @@ namespace UniqueCreator
                     float m_10, m_11, m_12, m_13;
                     float m_20, m_21, m_22, m_23;
                     float m_30, m_31, m_32, m_33;
-                };
+                } m_values;
 
                 float m[4][4];
             };
@@ -53,37 +53,37 @@ namespace UniqueCreator
         inline Matrix4x4 Load(const Float4x4* address)
         {
             Matrix4x4 r;
-            r.r[0] = _mm_loadu_ps(&address->m_00);
-            r.r[1] = _mm_loadu_ps(&address->m_10);
-            r.r[2] = _mm_loadu_ps(&address->m_20);
-            r.r[3] = _mm_loadu_ps(&address->m_30);
+            r.r[0] = _mm_loadu_ps(&address->m_values.m_00);
+            r.r[1] = _mm_loadu_ps(&address->m_values.m_10);
+            r.r[2] = _mm_loadu_ps(&address->m_values.m_20);
+            r.r[3] = _mm_loadu_ps(&address->m_values.m_30);
             return r;
         }
 
         inline Matrix4x4 Load(const Float4x4A* address)
         {
             Matrix4x4 r;
-            r.r[0] = _mm_load_ps(&address->m_00);
-            r.r[1] = _mm_load_ps(&address->m_10);
-            r.r[2] = _mm_load_ps(&address->m_20);
-            r.r[3] = _mm_load_ps(&address->m_30);
+            r.r[0] = _mm_load_ps(&address->m_values.m_00);
+            r.r[1] = _mm_load_ps(&address->m_values.m_10);
+            r.r[2] = _mm_load_ps(&address->m_values.m_20);
+            r.r[3] = _mm_load_ps(&address->m_values.m_30);
             return r;
         }
 
         inline void Store(Float4x4* address, Matrix4x4::Param p)
         {
-            _mm_storeu_ps(&address->m_00, p.r[0]);
-            _mm_storeu_ps(&address->m_10, p.r[1]);
-            _mm_storeu_ps(&address->m_20, p.r[2]);
-            _mm_storeu_ps(&address->m_30, p.r[3]);
+            _mm_storeu_ps(&address->m_values.m_00, p.r[0]);
+            _mm_storeu_ps(&address->m_values.m_10, p.r[1]);
+            _mm_storeu_ps(&address->m_values.m_20, p.r[2]);
+            _mm_storeu_ps(&address->m_values.m_30, p.r[3]);
         }
 
         inline Matrix4x4 Load(Float4x4A* address, Matrix4x4::Param p)
         {
-            _mm_store_ps(&address->m_00, p.r[0]);
-            _mm_store_ps(&address->m_10, p.r[1]);
-            _mm_store_ps(&address->m_20, p.r[2]);
-            _mm_store_ps(&address->m_30, p.r[3]);
+            _mm_store_ps(&address->m_values.m_00, p.r[0]);
+            _mm_store_ps(&address->m_values.m_10, p.r[1]);
+            _mm_store_ps(&address->m_values.m_20, p.r[2]);
+            _mm_store_ps(&address->m_values.m_30, p.r[3]);
         }
 
         inline Vector4 Mul(Vector4::Param v, Matrix4x4::Param m)

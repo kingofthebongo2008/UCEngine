@@ -247,7 +247,7 @@ protected:
 
         //Reset view dependent heaps
         m_depth_buffer.reset();
-        m_device_resources->ResetTransientHeaps();
+        m_device_resources->ResetViewDependentResources();
 
         //Recreate the resources and buffers
         m_background_swap_chain->SetLogicalSize(size2d(args.Size()));
@@ -275,7 +275,7 @@ protected:
 
         //Reset view dependent heaps
         m_depth_buffer.reset();
-        m_device_resources->ResetTransientHeaps();
+        m_device_resources->ResetViewDependentResources();
 
         //Recreate the resources and buffers
         m_background_swap_chain->SetDisplayInformation(d);
@@ -292,7 +292,7 @@ protected:
 
         //Reset view dependent heaps
         m_depth_buffer.reset();
-        m_device_resources->ResetTransientHeaps();
+        m_device_resources->ResetViewDependentResources();
 
         //Recreate the resources and buffers
         m_background_swap_chain->SetDisplayInformation(d);

@@ -92,9 +92,9 @@ namespace UniqueCreator
             m_impl->Sync();
         }
 
-        void DeviceResources::ResetTransientHeaps()
+        void DeviceResources::ResetViewDependentResources()
         {
-            m_impl->m_resource_create_context->ResetTransientHeaps();
+            m_impl->m_resource_create_context->ResetViewDependentResources();
         }
 
         std::unique_ptr<CopyCommandContext>    DeviceResources::CreateCopyCommandContext()

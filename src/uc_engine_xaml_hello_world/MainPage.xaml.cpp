@@ -94,7 +94,7 @@ void MainPage::OnSwapChainPanelSizeChanged(Object^ sender, Windows::UI::Xaml::Si
 
     //Reset view dependent heaps
     m_depth_buffer.reset();
-    m_device_resources->ResetTransientHeaps();
+    m_device_resources->ResetViewDependentResources();
 
     //Recreate the resources and buffers
     UniqueCreator::Graphics::Size2D size = { args->NewSize.Width, args->NewSize.Height };
@@ -112,7 +112,7 @@ void MainPage::OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainP
 
     //Reset view dependent heaps
     m_depth_buffer.reset();
-    m_device_resources->ResetTransientHeaps();
+    m_device_resources->ResetViewDependentResources();
 
     //Recreate the resources and buffers
     m_background_swap_chain->SetCompositionScale(sender->CompositionScaleX, sender->CompositionScaleY);
@@ -128,7 +128,7 @@ void MainPage::OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ d, O
 
     //Reset view dependent heaps
     m_depth_buffer.reset();
-    m_device_resources->ResetTransientHeaps();
+    m_device_resources->ResetViewDependentResources();
 
     //Recreate the resources and buffers
     winrt::ABI::Windows::Graphics::Display::IDisplayInformation* inspectable = reinterpret_cast<winrt::ABI::Windows::Graphics::Display::IDisplayInformation*>(d);
@@ -148,7 +148,7 @@ void MainPage::OnOrientationChanged(Windows::Graphics::Display::DisplayInformati
 
     //Reset view dependent heaps
     m_depth_buffer.reset();
-    m_device_resources->ResetTransientHeaps();
+    m_device_resources->ResetViewDependentResources();
 
     //Recreate the resources and buffers
     winrt::ABI::Windows::Graphics::Display::IDisplayInformation* inspectable = reinterpret_cast<winrt::ABI::Windows::Graphics::Display::IDisplayInformation*>(d);

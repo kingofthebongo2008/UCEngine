@@ -53,7 +53,7 @@ namespace UniqueCreator
                 r[0].SlicePitch = static_cast<LONG_PTR>(subresoureData->m_slicePitch);
 
                 auto d          = texture->GetImpl()->texture();
-                m_impl->queue()->upload_texture(d, firstSubResource, subResourceCount, r);
+                m_impl->queue()->upload_texture_2d(d, firstSubResource, subResourceCount, r);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace UniqueCreator
                 }
 
                 auto d          = texture->GetImpl()->texture();
-                m_impl->queue()->upload_texture(d, firstSubResource, subResourceCount, &r[0]);
+                m_impl->queue()->upload_texture_2d(d, firstSubResource, subResourceCount, &r[0]);
                 
             }
         }

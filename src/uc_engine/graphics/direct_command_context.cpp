@@ -101,12 +101,12 @@ namespace UniqueCreator
 
         void DirectCommandContext::SetDynamicDescriptor(RootIndex rootIndex, const DescriptorHandle* h, uint32_t offset)
         {
-            m_impl->m_context->set_dynamic_descriptor(rootIndex, h->GetImpl()->handle(), offset);
+            m_impl->m_context->set_graphics_dynamic_descriptor(rootIndex, h->GetImpl()->handle(), offset);
         }
 
         void DirectCommandContext::SetDynamicConstantBuffer(RootIndex rootIndex, uint32_t offset, const void* buffer, size_t byte_count)
         {
-            m_impl->m_context->set_dynamic_constant_buffer(static_cast<uint32_t>(rootIndex), offset, buffer, byte_count);
+            m_impl->m_context->set_graphics_dynamic_constant_buffer(static_cast<uint32_t>(rootIndex), offset, buffer, byte_count);
         }
 
         void DirectCommandContext::SetPrimitiveTopology( PrimitiveTopology p )
@@ -184,24 +184,24 @@ namespace UniqueCreator
 
         void DirectCommandContext::SetConstantBufferView(RootIndex rootIndex, GpuVirtualAddress a)
         {
-            m_impl->m_context->set_constant_buffer(static_cast<uint32_t>(rootIndex), a);
+            m_impl->m_context->set_graphics_constant_buffer(static_cast<uint32_t>(rootIndex), a);
         }
 
         void DirectCommandContext::SetConstantBuffer(RootIndex rootIndex, const void* buffer, size_t buffer_size)
         {
-            m_impl->m_context->set_constant_buffer(static_cast<uint32_t>(rootIndex), buffer, buffer_size);
+            m_impl->m_context->set_graphics_constant_buffer(static_cast<uint32_t>(rootIndex), buffer, buffer_size);
         }
 
         void DirectCommandContext::SetShaderResourceViewBuffer(RootIndex rootIndex, const GpuVirtualResource* r)
         {
             auto impl0 = r->GetImpl()->resource();
-            m_impl->m_context->set_srv_buffer(static_cast<uint32_t>(rootIndex), impl0);
+            m_impl->m_context->set_graphics_srv_buffer(static_cast<uint32_t>(rootIndex), impl0);
         }
 
         void DirectCommandContext::SetUnorderedAccessViewBuffer(RootIndex rootIndex, const GpuVirtualResource* r)
         {
             auto impl0 = r->GetImpl()->resource();
-            m_impl->m_context->set_uav_buffer(static_cast<uint32_t>(rootIndex), impl0);
+            m_impl->m_context->set_graphics_uav_buffer(static_cast<uint32_t>(rootIndex), impl0);
         }
     }
 }

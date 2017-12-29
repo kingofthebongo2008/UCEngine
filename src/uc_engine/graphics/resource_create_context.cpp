@@ -85,9 +85,9 @@ namespace UniqueCreator
             m_impl->Sync();
         }
 
-        void ResourceCreateContext::ResetTransientHeaps()
+        void ResourceCreateContext::ResetViewDependentResources()
         {
-            m_impl->ResetTransientHeaps();
+            m_impl->ResetViewDependentResources();
         }
 
         std::unique_ptr<RootSignature> ResourceCreateContext::CreateRootSignature(const RootSignatureByteCode* code)

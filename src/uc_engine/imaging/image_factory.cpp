@@ -45,7 +45,7 @@ namespace UniqueCreator
         std::unique_ptr<Image2D> ImageFactory::CreateCheckerBoardImage(uint32_t width, uint32_t height)
         {
             using namespace uc::gx::imaging;
-            cpu_texture r( width, height, image_type::r8_g8_b8_a8_unorm, checker_board_texture_array(32, 32).release() );
+            cpu_texture r( width, height, image_type::r8_g8_b8_a8_unorm, checker_board_texture_vector(32, 32) );
             return std::make_unique<Image2DInternal>(std::move(r));
         }
     }
