@@ -13,8 +13,6 @@ namespace UniqueCreator
 
             class Impl;
 
-            UC_ENGINE_API ~GpuVirtualResource();
-
             UC_ENGINE_API GpuVirtualResource(GpuVirtualResource&&) = default;
             UC_ENGINE_API GpuVirtualResource& operator=(GpuVirtualResource&&);
 
@@ -25,6 +23,7 @@ namespace UniqueCreator
 
             protected:
             GpuVirtualResource();
+            ~GpuVirtualResource();
             details::pimpl<Impl> m_impl;
 
         };

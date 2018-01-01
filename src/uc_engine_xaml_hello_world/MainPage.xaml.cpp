@@ -62,7 +62,7 @@ MainPage::MainPage(Windows::UI::Core::CoreWindow^ win)
 
     m_device_resources = std::make_unique<UniqueCreator::Graphics::DeviceResources>(m_resource_create_context.get(), m_background_swap_chain.get());
 
-    m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+    m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 
     m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_main::Create(m_resource_create_context.get());
 
@@ -100,7 +100,7 @@ void MainPage::OnSwapChainPanelSizeChanged(Object^ sender, Windows::UI::Xaml::Si
     UniqueCreator::Graphics::Size2D size = { args->NewSize.Width, args->NewSize.Height };
 
     m_background_swap_chain->SetLogicalSize(size);
-    m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+    m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
 
 void MainPage::OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainPanel^ sender, Object^ args)
@@ -116,7 +116,7 @@ void MainPage::OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainP
 
     //Recreate the resources and buffers
     m_background_swap_chain->SetCompositionScale(sender->CompositionScaleX, sender->CompositionScaleY);
-    m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+    m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
 
 void MainPage::OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ d, Object^ args)
@@ -136,7 +136,7 @@ void MainPage::OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ d, O
     winrt::attach(d0, inspectable);
     m_background_swap_chain->SetDisplayInformation(d0);
 
-    m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+    m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
 
 void MainPage::OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ d, Object^ args)
@@ -155,7 +155,7 @@ void MainPage::OnOrientationChanged(Windows::Graphics::Display::DisplayInformati
     winrt::Windows::Graphics::Display::DisplayInformation d0(nullptr);
     winrt::attach(d0, inspectable);
 
-    m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+    m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
 
 void MainPage::OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args)

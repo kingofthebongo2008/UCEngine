@@ -17,7 +17,6 @@ namespace UniqueCreator
 
             class Impl;
 
-            UC_ENGINE_API ~PixelBuffer();
             UC_ENGINE_API PixelBuffer(PixelBuffer&&) = default;
             UC_ENGINE_API PixelBuffer& operator=(PixelBuffer&&);
 
@@ -26,6 +25,7 @@ namespace UniqueCreator
 
             protected:
             PixelBuffer();
+            ~PixelBuffer();
             details::pimpl<Impl> m_impl;
 
         };

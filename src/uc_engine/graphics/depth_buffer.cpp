@@ -28,6 +28,28 @@ namespace UniqueCreator
         {
             return m_impl.get();
         }
+
+
+        template details::pimpl<ViewDepthBuffer::Impl>;
+
+        ViewDepthBuffer::ViewDepthBuffer()
+        {
+
+        }
+
+        ViewDepthBuffer::~ViewDepthBuffer() = default;
+        ViewDepthBuffer& ViewDepthBuffer::operator=(ViewDepthBuffer&&) = default;
+
+        ViewDepthBuffer::Impl*   ViewDepthBuffer::GetImpl()
+        {
+            return m_impl.get();
+        }
+
+        const ViewDepthBuffer::Impl*   ViewDepthBuffer::GetImpl() const
+        {
+            return m_impl.get();
+        }
+
     }
 }
 

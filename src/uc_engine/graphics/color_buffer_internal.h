@@ -7,11 +7,11 @@ namespace UniqueCreator
 {
     namespace Graphics
     {
-        class ColorBufferInternal : public ColorBuffer
+	class ViewColorBufferInternal : public ViewColorBuffer
         {
             public:
 
-            ColorBufferInternal( std::unique_ptr<uc::gx::dx12::gpu_color_buffer>&& b );
+                ViewColorBufferInternal( std::unique_ptr<uc::gx::dx12::gpu_view_color_buffer>&& b );
         };
     }
 }

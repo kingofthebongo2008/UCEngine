@@ -17,18 +17,41 @@ namespace UniqueCreator
 
             }
 
-            ColorBuffer::Impl(std::unique_ptr<uc::gx::dx12::gpu_color_buffer>&& b ) : m_buffer(std::move(b))
+            ColorBuffer::Impl(uc::gx::dx12::gpu_color_buffer* b ) : m_buffer(b)
             {
 
             }
 
             uc::gx::dx12::gpu_color_buffer* buffer() const
             {
+                return m_buffer;
+            }
+
+            private:
+            uc::gx::dx12::gpu_color_buffer* m_buffer;
+        };
+
+       class ViewColorBuffer::Impl
+        {
+            public:
+
+            ViewColorBuffer::Impl()
+            {
+
+            }
+
+            ViewColorBuffer::Impl(std::unique_ptr<uc::gx::dx12::gpu_view_color_buffer>&& b ) : m_buffer(std::move(b))
+            {
+
+            }
+
+            uc::gx::dx12::gpu_view_color_buffer* buffer() const
+            {
                 return m_buffer.get();
             }
 
             private:
-            std::unique_ptr< uc::gx::dx12::gpu_color_buffer > m_buffer;
+            std::unique_ptr< uc::gx::dx12::gpu_view_color_buffer > m_buffer;
         };
     }
 }

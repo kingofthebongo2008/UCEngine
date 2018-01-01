@@ -40,7 +40,7 @@ namespace uc_engine_xaml_hello_world
         UniqueCreator::InputOutput::GamePadState                                        m_game_pad_state;
 
         //view dependent buffers
-        std::unique_ptr<UniqueCreator::Graphics::DepthBuffer>                           m_depth_buffer;
+        std::unique_ptr<UniqueCreator::Graphics::ViewDepthBuffer>                       m_depth_buffer;
 
         //Pipeline state objects
         std::unique_ptr<UniqueCreator::Graphics::GraphicsPipelineState>                 m_full_screen_main;

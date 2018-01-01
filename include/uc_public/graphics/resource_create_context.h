@@ -9,11 +9,11 @@ namespace UniqueCreator
     namespace Graphics
     {
         class Buffer;
-        class ColorBuffer;
         class ComputeQueue;
         class ComputePipelineState;
         class CopyQueue;
-        class DepthBuffer;
+        class ViewColorBuffer;
+        class ViewDepthBuffer;
         class DirectQueue;
         class GraphicsPipelineState;
         class RootSignature;
@@ -34,8 +34,8 @@ namespace UniqueCreator
             UC_ENGINE_API std::unique_ptr<CopyQueue>                CreateCopyQueue();
             UC_ENGINE_API std::unique_ptr<ComputeQueue>             CreateComputeQueue();
 
-            UC_ENGINE_API std::unique_ptr<ColorBuffer>              CreateColorBuffer(Size2D s, ColorBufferFormat format);
-            UC_ENGINE_API std::unique_ptr<DepthBuffer>              CreateDepthBuffer(Size2D s, DepthBufferFormat format);
+            UC_ENGINE_API std::unique_ptr<ViewColorBuffer>          CreateViewColorBuffer(Size2D s, ColorBufferFormat format);
+            UC_ENGINE_API std::unique_ptr<ViewDepthBuffer>          CreateViewDepthBuffer(Size2D s, DepthBufferFormat format);
 
             UC_ENGINE_API std::unique_ptr<GraphicsPipelineState>    CreateGraphicsPipelineState(const GraphicsPipelineStateDescription* desc);
             UC_ENGINE_API std::unique_ptr<ComputePipelineState>     CreateComputePipelineState(const ComputePipelineStateDescription* description);

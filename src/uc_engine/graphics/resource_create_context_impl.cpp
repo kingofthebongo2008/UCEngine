@@ -66,14 +66,14 @@ namespace UniqueCreator
             return std::make_unique<CopyQueueInternal>(create_command_queue(m_device.Get(), D3D12_COMMAND_LIST_TYPE_COPY));
         }
 
-        std::unique_ptr<ColorBuffer> ResourceCreateContext::Impl::CreateColorBuffer( Size2D s, ColorBufferFormat format )
+        std::unique_ptr<ViewColorBuffer> ResourceCreateContext::Impl::CreateViewColorBuffer( Size2D s, ColorBufferFormat format )
         {
-            return std::make_unique<ColorBufferInternal>(std::unique_ptr<uc::gx::dx12::gpu_color_buffer>(m_rc->create_view_color_buffer(static_cast<uint32_t>(s.m_width), static_cast<uint32_t>(s.m_height), static_cast<DXGI_FORMAT>(format))));
+            return std::make_unique<ViewColorBufferInternal>(std::unique_ptr<uc::gx::dx12::gpu_view_color_buffer>(m_rc->create_view_color_buffer(static_cast<uint32_t>(s.m_width), static_cast<uint32_t>(s.m_height), static_cast<DXGI_FORMAT>(format))));
         }
 
-        std::unique_ptr<DepthBuffer> ResourceCreateContext::Impl::CreateDepthBuffer(Size2D s, DepthBufferFormat format)
+        std::unique_ptr<ViewDepthBuffer> ResourceCreateContext::Impl::CreateViewDepthBuffer(Size2D s, DepthBufferFormat format)
         {
-            return std::make_unique<DepthBufferInternal>(std::unique_ptr<uc::gx::dx12::gpu_depth_buffer>(m_rc->create_view_depth_buffer(static_cast<uint32_t>(s.m_width), static_cast<uint32_t>(s.m_height), static_cast<DXGI_FORMAT>(format))));
+            return std::make_unique<ViewDepthBufferInternal>(std::unique_ptr<uc::gx::dx12::gpu_view_depth_buffer>(m_rc->create_view_depth_buffer(static_cast<uint32_t>(s.m_width), static_cast<uint32_t>(s.m_height), static_cast<DXGI_FORMAT>(format))));
         }
 
         namespace

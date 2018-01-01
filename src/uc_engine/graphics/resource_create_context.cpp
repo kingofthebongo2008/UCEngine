@@ -35,14 +35,14 @@ namespace UniqueCreator
             return m_impl->CreateComputeQueue();
         }
 
-        std::unique_ptr<ColorBuffer> ResourceCreateContext::CreateColorBuffer(Size2D s, ColorBufferFormat format)
+        std::unique_ptr<ViewColorBuffer> ResourceCreateContext::CreateViewColorBuffer(Size2D s, ColorBufferFormat format)
         {
-            return m_impl->CreateColorBuffer(s, format);
+            return m_impl->CreateViewColorBuffer(s, format);
         }
 
-        std::unique_ptr<DepthBuffer> ResourceCreateContext::CreateDepthBuffer(Size2D s, DepthBufferFormat format)
+        std::unique_ptr<ViewDepthBuffer> ResourceCreateContext::CreateViewDepthBuffer(Size2D s, DepthBufferFormat format)
         {
-            return m_impl->CreateDepthBuffer(s, format);
+            return m_impl->CreateViewDepthBuffer(s, format);
         }
 
         std::unique_ptr<GraphicsPipelineState> ResourceCreateContext::CreateGraphicsPipelineState(const GraphicsPipelineStateDescription* desc)

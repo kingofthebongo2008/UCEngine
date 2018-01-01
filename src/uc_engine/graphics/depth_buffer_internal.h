@@ -7,12 +7,12 @@ namespace UniqueCreator
 {
     namespace Graphics
     {
-        class DepthBufferInternal : public DepthBuffer
+        class ViewDepthBufferInternal : public ViewDepthBuffer
         {
             public:
-
-            DepthBufferInternal( std::unique_ptr<uc::gx::dx12::gpu_depth_buffer>&& b );
+            ViewDepthBufferInternal( std::unique_ptr<uc::gx::dx12::gpu_view_depth_buffer>&& b );
         };
+
     }
 }
 

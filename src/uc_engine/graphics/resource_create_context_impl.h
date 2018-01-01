@@ -50,8 +50,8 @@ namespace UniqueCreator
                 return m_rc.get();
             }
 
-            std::unique_ptr<ColorBuffer>                CreateColorBuffer(Size2D s, ColorBufferFormat format);
-            std::unique_ptr<DepthBuffer>                CreateDepthBuffer(Size2D s, DepthBufferFormat format);
+            std::unique_ptr<ViewColorBuffer>            CreateViewColorBuffer(Size2D s, ColorBufferFormat format);
+            std::unique_ptr<ViewDepthBuffer>            CreateViewDepthBuffer(Size2D s, DepthBufferFormat format);
             std::unique_ptr<GraphicsPipelineState>      CreateGraphicsPipelineState(const GraphicsPipelineStateDescription* descsription);
             std::unique_ptr<ComputePipelineState>       CreateComputePipelineState( const ComputePipelineStateDescription* description );
             std::unique_ptr<RootSignature>              CreateRootSignature(const RootSignatureByteCode* code);

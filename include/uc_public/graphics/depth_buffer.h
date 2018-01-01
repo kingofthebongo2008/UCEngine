@@ -13,8 +13,6 @@ namespace UniqueCreator
 
             class Impl;
 
-            UC_ENGINE_API ~DepthBuffer();
-
             UC_ENGINE_API DepthBuffer(DepthBuffer&&) = default;
             UC_ENGINE_API DepthBuffer& operator=(DepthBuffer&&);
 
@@ -23,11 +21,33 @@ namespace UniqueCreator
 
             protected:
             DepthBuffer();
+            ~DepthBuffer();
             details::pimpl<Impl> m_impl;
         };
 
+        class ViewDepthBuffer : public DepthBuffer
+        {
+            public:
+
+            class Impl;
+
+            UC_ENGINE_API ~ViewDepthBuffer();
+
+            UC_ENGINE_API ViewDepthBuffer(ViewDepthBuffer&&) = default;
+            UC_ENGINE_API ViewDepthBuffer& operator=(ViewDepthBuffer&&);
+
+            Impl*   GetImpl();
+            const Impl*   GetImpl() const;
+
+            protected:
+            ViewDepthBuffer();
+            details::pimpl<Impl> m_impl;
+        };
+
+
         //private data, todo: fix visual assist warning
         extern template details::pimpl<DepthBuffer::Impl>;
+        extern template details::pimpl<ViewDepthBuffer::Impl>;
     }
 }
 

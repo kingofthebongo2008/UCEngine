@@ -76,7 +76,7 @@ public:
         m_overlay_swap_chain = std::make_unique<UniqueCreator::Graphics::WindowOverlaySwapChainResources>(m_resource_create_context.get(), w, d);
         m_device_resources = std::make_unique<UniqueCreator::Graphics::DeviceResources>(m_resource_create_context.get(), m_background_swap_chain.get(), m_overlay_swap_chain.get());
 
-        m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+        m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 
         m_size_changed = window.SizeChanged(winrt::auto_revoke, { this, &ViewProvider::OnWindowSizeChanged });
         m_visibility_changed = window.VisibilityChanged(winrt::auto_revoke, { this, &ViewProvider::OnVisibilityChanged });
@@ -252,7 +252,7 @@ protected:
         //Recreate the resources and buffers
         m_background_swap_chain->SetLogicalSize(size2d(args.Size()));
         m_overlay_swap_chain->SetLogicalSize(size2d(args.Size()));
-        m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+        m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
     void OnWindowClosed(const CoreWindow&, const CoreWindowEventArgs&)
@@ -280,7 +280,7 @@ protected:
         //Recreate the resources and buffers
         m_background_swap_chain->SetDisplayInformation(d);
         m_overlay_swap_chain->SetDisplayInformation(d);
-        m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+        m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
     void OnOrientationChanged(const DisplayInformation& d, const winrt::Windows::IInspectable&)
@@ -297,7 +297,7 @@ protected:
         //Recreate the resources and buffers
         m_background_swap_chain->SetDisplayInformation(d);
         m_overlay_swap_chain->SetDisplayInformation(d);
-        m_depth_buffer = m_resource_create_context->CreateDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
+        m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
     void OnDisplayContentsInvalidated(const DisplayInformation&, const winrt::Windows::IInspectable&)
@@ -332,7 +332,7 @@ private:
     UniqueCreator::InputOutput::GamePadState                                        m_game_pad_state;
 
     //view dependent buffers
-    std::unique_ptr<UniqueCreator::Graphics::DepthBuffer>                           m_depth_buffer;
+    std::unique_ptr<UniqueCreator::Graphics::ViewDepthBuffer>                           m_depth_buffer;
 
     //Pipeline state objects
     std::unique_ptr<UniqueCreator::Graphics::PipelineStates::full_screen_main::GraphicsPipelineState>      m_full_screen_main;

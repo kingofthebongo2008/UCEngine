@@ -28,6 +28,28 @@ namespace UniqueCreator
         {
             return m_impl.get();
         }
+
+
+
+        template details::pimpl<ViewColorBuffer::Impl>;
+
+        ViewColorBuffer::ViewColorBuffer()
+        {
+
+        }
+
+        ViewColorBuffer::~ViewColorBuffer() = default;
+        ViewColorBuffer& ViewColorBuffer::operator=(ViewColorBuffer&&) = default;
+
+        ViewColorBuffer::Impl*   ViewColorBuffer::GetImpl()
+        {
+            return m_impl.get();
+        }
+
+        const ViewColorBuffer::Impl*   ViewColorBuffer::GetImpl() const
+        {
+            return m_impl.get();
+        }
     }
 }
 
