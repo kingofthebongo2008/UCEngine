@@ -44,7 +44,7 @@ InputLayout position =
 
 PipelineStateObject textured_skinned_solid : solid_geometry =
 {
-    .VertexShader           = textured_vertex_skinned
+    .VertexShader           = textured_skinned_vertex
     .PixelShader            = textured_pixel
     .InputLayout            = position
 }

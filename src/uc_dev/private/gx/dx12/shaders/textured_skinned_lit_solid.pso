@@ -2,8 +2,8 @@ import texturedskinnedlit
 
 PipelineStateObject textured_skinned_lit_solid : solid_geometry =
 {
-    .VertexShader           = textured_vertex_skinned_lit
-    .PixelShader            = textured_pixel_lit
+    .VertexShader           = textured_skinned_lit_vertex
+    .PixelShader            = textured_lit_pixel
     .InputLayout            = position_solid
 }
 

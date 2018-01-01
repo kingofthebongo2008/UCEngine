@@ -3,7 +3,7 @@ import staticgeometry
 PipelineStateObject plane_solid_msm_32   : solid_geometry =
 {
     .VertexShader           = plane_vertex
-    .PixelShader            = textured_pixel_lit_msm_32
+    .PixelShader            = textured_lit_msm_32_pixel
 }
 
 
