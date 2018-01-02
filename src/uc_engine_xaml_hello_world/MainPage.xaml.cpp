@@ -33,7 +33,7 @@ using namespace Windows::UI::Xaml::Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-#include <autogen/shaders/full_screen_main.h>
+#include <autogen/shaders/full_screen_graphics.h>
 
 MainPage::MainPage(Windows::UI::Core::CoreWindow^ win)
 {
@@ -64,7 +64,7 @@ MainPage::MainPage(Windows::UI::Core::CoreWindow^ win)
 
     m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 
-    m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_main::Create(m_resource_create_context.get());
+    m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
     auto currentDisplayInformation = Windows::Graphics::Display::DisplayInformation::GetForCurrentView();
 

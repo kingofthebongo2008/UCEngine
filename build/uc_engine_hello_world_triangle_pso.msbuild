@@ -3,13 +3,13 @@
   <ItemGroup>
     <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
 
-    <GraphicsPipelineStateObject Include="..\src\uc_engine_hello_world_triangle\shaders\full_screen.pso">
-      <EntryPointName>full_screen_main</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_engine_hello_world_triangle\shaders\full_screen_graphics.pso">
+      <EntryPointName>full_screen_graphics</EntryPointName>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_engine_hello_world_triangle\shaders\triangle.pso">
-      <EntryPointName>triangle</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_engine_hello_world_triangle\shaders\triangle_graphics.pso">
+      <EntryPointName>triangle_graphics</EntryPointName>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 

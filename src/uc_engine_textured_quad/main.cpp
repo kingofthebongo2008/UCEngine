@@ -17,7 +17,7 @@
 #include <uc_public/imaging/imaging.h>
 #include <uc_public/assets/assets.h>
 
-#include <autogen/shaders/full_screen_main.h>
+#include <autogen/shaders/full_screen_graphics.h>
 
 
 
@@ -97,7 +97,7 @@ public:
 
     virtual void Load( winrt::hstring_ref)
     {
-        m_full_screen_main = Graphics::PipelineStates::full_screen_main::Create(m_resource_create_context.get());
+        m_full_screen_main = Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
 
         // 1. create checkerboard procedural image
@@ -424,7 +424,7 @@ private:
     std::unique_ptr<Graphics::ViewDepthBuffer>                       m_depth_buffer;
 
     //Pipeline state objects
-    std::unique_ptr<Graphics::PipelineStates::full_screen_main::GraphicsPipelineState>      m_full_screen_main;
+    std::unique_ptr<Graphics::PipelineStates::full_screen_graphics::GraphicsPipelineState>      m_full_screen_main;
 
     std::unique_ptr<Graphics::Texture2D>                             m_texture0;
     std::unique_ptr<Graphics::Texture2D>                             m_texture1;

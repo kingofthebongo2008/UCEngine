@@ -16,8 +16,8 @@
 #include <uc_public/graphics/graphics.h>
 #include <uc_public/imaging/imaging.h>
 
-#include <autogen/shaders/full_screen_main.h>
-#include <autogen/shaders/triangle.h>
+#include <autogen/shaders/full_screen_graphics.h>
+#include <autogen/shaders/triangle_graphics.h>
 
 
 
@@ -95,8 +95,8 @@ public:
 
     virtual void Load( winrt::hstring_ref)
     {
-        m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_main::Create(m_resource_create_context.get());
-        m_triangle_pso = UniqueCreator::Graphics::PipelineStates::triangle::Create(m_resource_create_context.get());
+        m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
+        m_triangle_pso = UniqueCreator::Graphics::PipelineStates::triangle_graphics::Create(m_resource_create_context.get());
 
         {
             auto factory = std::make_unique<UniqueCreator::Imaging::ImageFactory>();
@@ -423,8 +423,8 @@ private:
     std::unique_ptr<UniqueCreator::Graphics::ViewDepthBuffer>                       m_depth_buffer;
 
     //Pipeline state objects
-    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::full_screen_main::GraphicsPipelineState>      m_full_screen_main;
-    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::triangle::GraphicsPipelineState>              m_triangle_pso;
+    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::full_screen_graphics::GraphicsPipelineState>      m_full_screen_main;
+    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::triangle_graphics::GraphicsPipelineState>              m_triangle_pso;
 
     std::unique_ptr<UniqueCreator::Graphics::Texture2D>                             m_texture0;
     std::unique_ptr<UniqueCreator::Graphics::Texture2D>                             m_texture1;

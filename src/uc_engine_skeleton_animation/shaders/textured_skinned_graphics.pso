@@ -42,9 +42,9 @@ InputLayout position =
     }
 }
 
-PipelineStateObject textured_skinned : static_geometry =
+PipelineStateObject textured_skinned_graphics : static_geometry =
 {
-    .VertexShader           = textured_vertex_skinned
+    .VertexShader           = textured_skinned_vertex
     .PixelShader            = textured_pixel
     .InputLayout            = position
 }

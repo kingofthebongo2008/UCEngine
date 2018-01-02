@@ -15,7 +15,7 @@
 #include <uc_public/io/io.h>
 #include <uc_public/graphics/graphics.h>
 
-#include <autogen/shaders/full_screen_main.h>
+#include <autogen/shaders/full_screen_graphics.h>
 
 
 
@@ -91,7 +91,7 @@ public:
 
     virtual void Load( winrt::hstring_ref)
     {
-        m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_main::Create(m_resource_create_context.get());
+        m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
     }
 
     virtual void Run()
@@ -335,7 +335,7 @@ private:
     std::unique_ptr<UniqueCreator::Graphics::ViewDepthBuffer>                           m_depth_buffer;
 
     //Pipeline state objects
-    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::full_screen_main::GraphicsPipelineState>      m_full_screen_main;
+    std::unique_ptr<UniqueCreator::Graphics::PipelineStates::full_screen_graphics::GraphicsPipelineState>      m_full_screen_main;
 };
 
 

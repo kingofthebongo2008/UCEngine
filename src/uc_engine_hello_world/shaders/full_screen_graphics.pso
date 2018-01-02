@@ -60,7 +60,7 @@ DepthStencilDescription full_screen_depth_stencil =
     }
 }
 
-PipelineStateObject full_screen_main  =
+PipelineStateObject full_screen_graphics =
 {
     .RootSignature          = default_graphics_signature
     .VertexShader           = full_screen_vertex

@@ -3,9 +3,8 @@
   <ItemGroup>
     <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
 
-    <GraphicsPipelineStateObject Include="..\src\uc_engine_skeleton_animation\shaders\textured_skinned.pso">
-      <EntryPointName>textured_skinned</EntryPointName>
-      <InProject>true</InProject>
+    <GraphicsPipelineStateObject Include="..\src\uc_engine_skeleton_animation\shaders\textured_skinned_graphics.pso">
+      <EntryPointName>textured_skinned_graphics</EntryPointName>
     </GraphicsPipelineStateObject>
 
   </ItemGroup>

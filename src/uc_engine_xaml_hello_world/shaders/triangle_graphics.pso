@@ -75,7 +75,7 @@ InputLayout position =
 
 PipelineStateObject static_geometry =
 {
-    .RootSignature          = default_graphgics_signature
+    .RootSignature          = default_graphics_signature
     .BlendState             = blend_disabled
     .SampleMask             = FFFFFFFF
     .RasterizerState        = solid
@@ -87,7 +87,7 @@ PipelineStateObject static_geometry =
     .SampleDescription      = { .Count = 1 .Quality = 0 }
 }
 
-PipelineStateObject triangle : static_geometry =
+PipelineStateObject triangle_graphics : static_geometry =
 {
     .RootSignature          = default_graphics_signature
     .VertexShader           = triangle_vertex

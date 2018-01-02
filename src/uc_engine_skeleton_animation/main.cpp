@@ -20,7 +20,7 @@
 #include <uc_public/assets/animations/animations.h>
 #include <uc_public/animations/animations.h>
 #include <uc_public/math/graphics.h>
-#include <uc_public/gpu/default_signature.h>
+#include <uc_public/gpu/default_graphics_signature.h>
 
 #include <uc_public/system/system.h>
 
@@ -28,7 +28,7 @@
 #include <uc_public/render/skinned_render_object.h>
 #include <uc_public/render/skinned_render_object_factory.h>
 
-#include <autogen/shaders/textured_skinned.h>
+#include <autogen/shaders/textured_skinned_graphics.h>
 
 
 
@@ -126,7 +126,7 @@ public:
 
         g.run([this]
         {
-            m_skinned_pso = Graphics::PipelineStates::textured_skinned::Create(m_resource_create_context.get());
+            m_skinned_pso = Graphics::PipelineStates::textured_skinned_graphics::Create(m_resource_create_context.get());
         });
 
         g.run([this]
@@ -575,7 +575,7 @@ private:
     std::unique_ptr<Graphics::ViewDepthBuffer>                       m_depth_buffer;
 
     //Pipeline state objects
-    std::unique_ptr<Graphics::PipelineStates::textured_skinned::GraphicsPipelineState>   m_skinned_pso;
+    std::unique_ptr<Graphics::PipelineStates::textured_skinned_graphics::GraphicsPipelineState>   m_skinned_pso;
 
     //Geometry and materials
 
