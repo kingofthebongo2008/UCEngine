@@ -15,7 +15,7 @@
 
     <PropertyPageSchema Include="msbuild\ucdev_render_shaders.xml" />
 
-    <Shader Include="..\src\uc_engine_skeleton_animation\shaders\textured_vertex_skinned.hlsl">
+    <Shader Include="..\src\uc_engine_skeleton_animation\shaders\textured_skinned_vertex.hlsl">
       <ShaderPipelineStage>Vertex</ShaderPipelineStage>
       <InProject>true</InProject>
       <Backend>UniqueCreatorPublic</Backend>
