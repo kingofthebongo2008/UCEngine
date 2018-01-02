@@ -16,7 +16,7 @@
       <Backend>UniqueCreatorPublic</Backend>
     </Shader>
 
-    <Shader Include="shaders\default_signature.hlsl">
+    <Shader Include="shaders\default_graphics_signature.hlsl">
       <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
       <InProject>true</InProject>
       <Backend>UniqueCreatorPublic</Backend>

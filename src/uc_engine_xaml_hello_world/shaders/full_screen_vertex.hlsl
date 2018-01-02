@@ -1,4 +1,4 @@
-#include "default_signature.hlsl"
+#include "default_graphics_signature.hlsl"
 
 struct interpolants
 {

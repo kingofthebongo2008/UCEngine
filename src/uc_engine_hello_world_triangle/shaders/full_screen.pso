@@ -62,7 +62,7 @@ DepthStencilDescription full_screen_depth_stencil =
 
 PipelineStateObject full_screen_main  =
 {
-    .RootSignature          = default_signature
+    .RootSignature          = default_graphics_signature
     .VertexShader           = full_screen_vertex
     .PixelShader            = full_screen_color_pixel
 

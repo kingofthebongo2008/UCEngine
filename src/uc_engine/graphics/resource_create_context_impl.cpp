@@ -2,7 +2,7 @@
 
 #include "resource_create_context_impl.h"
 
-#include <autogen/shaders/default_signature.h>
+#include <autogen/shaders/default_graphics_signature.h>
 
 
 namespace UniqueCreator
@@ -319,8 +319,8 @@ namespace UniqueCreator
 
             using namespace uc::gx::dx12;
 
-            auto sig = create_default_signature(d);
-            auto blob = default_signature();
+            auto sig = create_default_graphics_signature(d);
+            auto blob = default_graphics_signature();
             auto description = create_graphics_pipeline_state_internal(sig, desc);
 
             root_signature_meta_data                meta_data = parse_root_signature(blob.code(), blob.code_size(), r->null_cbv(), r->null_srv(), r->null_uav(), r->null_sampler());
@@ -336,8 +336,8 @@ namespace UniqueCreator
 
             using namespace uc::gx::dx12;
 
-            auto sig                                          = create_default_signature(d);
-            auto blob                                         = default_signature();
+            auto sig                                          = create_default_graphics_signature(d);
+            auto blob                                         = default_graphics_signature();
             auto description                                  = create_compute_pipeline_state_internal(sig, desc);
 
             root_signature_meta_data                meta_data = parse_root_signature(blob.code(), blob.code_size(), r->null_cbv(), r->null_srv(), r->null_uav(), r->null_sampler() );

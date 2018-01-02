@@ -27,7 +27,7 @@
       <Backend>UniqueCreatorPublic</Backend>
     </Shader>
 
-    <Shader Include="..\include\uc_public\gpu\default_signature.hlsl">
+    <Shader Include="..\include\uc_public\gpu\default_graphics_signature.hlsl">
       <ShaderPipelineStage>RootSignature</ShaderPipelineStage>
       <InProject>true</InProject>
       <Backend>UniqueCreatorPublic</Backend>

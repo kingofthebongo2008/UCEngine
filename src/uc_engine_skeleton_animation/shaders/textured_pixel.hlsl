@@ -1,4 +1,4 @@
-#include <uc_public/gpu/default_signature.hlsli>
+#include <uc_public/gpu/default_graphics_signature.hlsli>
 
 struct interpolants
 {
