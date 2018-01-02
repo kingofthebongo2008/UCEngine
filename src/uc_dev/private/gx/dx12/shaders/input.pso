@@ -36,7 +36,7 @@ PipelineStateObject static_geometry =
 
 PipelineStateObject static_geometry1 : static_geometry =
 {
-    .RootSignature          = default_signature
+    .RootSignature          = default_graphics_signature
     .VertexShader           = shader
     .PixelShader            = shader1
 }

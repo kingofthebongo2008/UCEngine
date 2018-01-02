@@ -64,7 +64,7 @@ InputLayout position =
 
 PipelineStateObject building : static_geometry =
 {
-    .RootSignature          = default_signature
+    .RootSignature          = default_graphics_signature
     .VertexShader           = building_vertex
     .PixelShader            = building_pixel
     .InputLayout            = position

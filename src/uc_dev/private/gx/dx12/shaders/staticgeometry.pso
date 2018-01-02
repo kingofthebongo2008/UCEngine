@@ -4,7 +4,7 @@ import blend
 
 PipelineStateObject solid_geometry =
 {
-    .RootSignature          = default_signature
+    .RootSignature          = default_graphics_signature
     .BlendState             = blend_disabled
     .SampleMask             = FFFFFFFF
     .RasterizerState        = solid

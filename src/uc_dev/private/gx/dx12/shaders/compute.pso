@@ -1,6 +1,6 @@
 PipelineStateObject compute_0 =
 {
-    .RootSignature          = default_signature
+    .RootSignature          = default_compute_signature
     .ComputeShader          = shader
 }
 
