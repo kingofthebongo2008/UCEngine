@@ -1,6 +1,6 @@
 import staticgeometry
 
-PipelineStateObject plane_depth_only : depth_only_geometry =
+PipelineStateObject plane_depth_only_graphics : depth_only_geometry =
 {
     .VertexShader           = depth_only_plane_vertex
 }

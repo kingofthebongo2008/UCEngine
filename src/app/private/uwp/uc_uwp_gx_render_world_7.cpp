@@ -4,7 +4,7 @@
 #include <gsl/gsl>
 #include <ppl.h>
 
-#include <autogen/shaders/full_screen_color.h>
+#include <autogen/shaders/full_screen_color_graphics.h>
 #include "uc_uwp_device_resources.h"
 
 namespace uc
@@ -21,7 +21,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-					m_full_screen_color = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::full_screen_color::create_pso);
+					m_full_screen_color = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::full_screen_color_graphics::create_pso);
                 });
 
 				m_camera->set_view_position(math::set(0.0, 0.0f, -25.5f, 0.0f));

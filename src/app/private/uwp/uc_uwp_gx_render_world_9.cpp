@@ -12,8 +12,8 @@
 
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
 
-#include <autogen/shaders/indexed_mesh_main.h>
-#include <autogen/shaders/textured_depth_only.h>
+#include <autogen/shaders/indexed_mesh_graphics.h>
+#include <autogen/shaders/textured_depth_only_graphics.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -64,13 +64,13 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_indexed_mesh = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::indexed_mesh_main::create_pso);
+                    m_indexed_mesh = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::indexed_mesh_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources          = c->m_resources;
-                    m_indexed_mesh_depth    = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_depth_only::create_pso);
+                    m_indexed_mesh_depth    = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_depth_only_graphics::create_pso);
                 });
 
                 m_camera->set_view_position(math::set(0.0, 0.0f, -5.5f, 0.0f));

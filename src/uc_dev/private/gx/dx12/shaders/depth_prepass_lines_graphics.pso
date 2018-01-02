@@ -3,7 +3,6 @@ import rasterizer
 import blend
 import staticgeometry
 
-
 InputLayout position = 
 {
     InputLayoutElement = 
@@ -17,7 +16,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject textured_depth_only : depth_only_geometry =
+PipelineStateObject depth_prepass_lines_graphics : depth_only_geometry =
 {
     .VertexShader           = depth_only_vertex
     .InputLayout            = position

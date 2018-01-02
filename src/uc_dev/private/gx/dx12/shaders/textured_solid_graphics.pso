@@ -22,7 +22,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject textured_solid : solid_geometry =
+PipelineStateObject textured_solid_graphics : solid_geometry =
 {
     .VertexShader           = textured_vertex
     .PixelShader            = textured_pixel

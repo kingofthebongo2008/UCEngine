@@ -1,6 +1,6 @@
 import staticgeometry
 
-PipelineStateObject full_screen_color : solid_geometry =
+PipelineStateObject full_screen_color_graphics : solid_geometry =
 {
     .VertexShader           = full_screen_vertex
     .PixelShader            = full_screen_color_pixel

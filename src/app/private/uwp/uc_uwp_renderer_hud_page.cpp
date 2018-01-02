@@ -8,7 +8,7 @@
 #include "librocket/uc_uwp_librocket_initializer.h"
 #include <ppl.h>
 
-#include <autogen/shaders/librocket_main.h>
+#include <autogen/shaders/librocket_graphics.h>
 
 namespace uc
 {
@@ -120,7 +120,7 @@ namespace uc
 
                 g.run([this, resources]
                 {
-                    m_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::librocket_main::create_pso);
+                    m_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::librocket_graphics::create_pso);
                 });
 
                 //must load after the fonts

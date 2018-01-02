@@ -1,4 +1,4 @@
-PipelineStateObject shadows_resolve =
+PipelineStateObject shadows_resolve_compute =
 {
     .RootSignature 	   		= default_compute_signature
     .ComputeShader			= moment_shadow_maps_resolve_compute

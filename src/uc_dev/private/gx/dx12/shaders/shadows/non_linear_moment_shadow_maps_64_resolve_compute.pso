@@ -1,4 +1,4 @@
-PipelineStateObject non_linear_moment_shadow_maps_32_resolve =
+PipelineStateObject non_linear_moment_shadow_maps_32_resolve_compute =
 {
     .RootSignature 	   		= default_signature_1
     .ComputeShader			= non_linear_moment_shadow_maps_64_resolve_cs

@@ -1,6 +1,3 @@
-import depthstencil
-import rasterizer
-import blend
 import staticgeometry
 
 InputLayout position = 
@@ -16,9 +13,10 @@ InputLayout position =
     }
 }
 
-PipelineStateObject depth_prepass_lines : depth_only_geometry =
+PipelineStateObject indexed_mesh_graphics : solid_geometry =
 {
-    .VertexShader           = depth_only_vertex
+    .VertexShader           = indexed_mesh_vertex
+    .PixelShader            = indexed_mesh_pixel
     .InputLayout            = position
 }
 

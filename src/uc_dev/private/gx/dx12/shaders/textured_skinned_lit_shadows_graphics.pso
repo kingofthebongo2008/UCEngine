@@ -1,6 +1,6 @@
 import texturedskinnedlit
 
-PipelineStateObject textured_skinned_lit_shadows : shadows_geometry =
+PipelineStateObject textured_skinned_lit_shadows_graphics : shadows_geometry =
 {
     .VertexShader           = depth_only_skinned_vertex
     .InputLayout            = position_depth_only

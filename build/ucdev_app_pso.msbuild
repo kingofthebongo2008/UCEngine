@@ -3,136 +3,136 @@
   <ItemGroup>
     <PropertyPageSchema Include="msbuild\ucdev_render_pipeline_state_object.xml" />
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\building.pso">
-      <EntryPointName>building</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\building_graphics.pso">
+      <EntryPointName>building_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_solid.pso">
-      <EntryPointName>textured_solid</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_solid_graphics.pso">
+      <EntryPointName>textured_solid_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_solid.pso">
-      <EntryPointName>textured_skinned_solid</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_solid_graphics.pso">
+      <EntryPointName>textured_skinned_solid_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_depth_only.pso">
-      <EntryPointName>textured_depth_only</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_depth_only_graphics.pso">
+      <EntryPointName>textured_depth_only_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines.pso">
-      <EntryPointName>depth_prepass_lines</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines_graphics.pso">
+      <EntryPointName>depth_prepass_lines_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_depth_only.pso">
-      <EntryPointName>textured_skinned_depth_only</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_depth_only_graphics.pso">
+      <EntryPointName>textured_skinned_depth_only_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\mipmap.pso">
-      <EntryPointName>compute_mip_map</EntryPointName>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\mipmap_compute.pso">
+      <EntryPointName>mip_map_compute</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </ComputePipelineStateObject>
-    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\convert_rgb_rgba.pso">
-      <EntryPointName>convert_rgb_rgba</EntryPointName>
-      <Backend>UniqueCreatorDev</Backend>
-      <InProject>true</InProject>
-    </ComputePipelineStateObject>
-
-    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\shadows_resolve.pso">
-      <EntryPointName>shadows_resolve</EntryPointName>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textures\convert_rgb_rgba_compute.pso">
+      <EntryPointName>convert_rgb_rgba_compute</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </ComputePipelineStateObject>
 
-    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_32_resolve.pso">
-      <EntryPointName>non_linear_moment_shadow_maps_32_resolve</EntryPointName>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\shadows_resolve_compute.pso">
+      <EntryPointName>shadows_resolve_compute</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </ComputePipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\imgui.pso">
-      <EntryPointName>imgui_main</EntryPointName>
+    <ComputePipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_32_resolve_compute.pso">
+      <EntryPointName>non_linear_moment_shadow_maps_32_resolve_compute</EntryPointName>
+      <Backend>UniqueCreatorDev</Backend>
+      <InProject>true</InProject>
+    </ComputePipelineStateObject>
+
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\imgui_graphics.pso">
+      <EntryPointName>imgui_graphics</EntryPointName>
       <InProject>true</InProject>
       <Backend>UniqueCreatorDev</Backend>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\librocket.pso">
-      <EntryPointName>librocket_main</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\librocket_graphics.pso">
+      <EntryPointName>librocket_graphics</EntryPointName>
       <InProject>true</InProject>
       <Backend>UniqueCreatorDev</Backend>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\skeleton.pso">
-      <EntryPointName>skeleton</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\skeleton_graphics.pso">
+      <EntryPointName>skeleton_graphics</EntryPointName>
       <InProject>true</InProject>
       <Backend>UniqueCreatorDev</Backend>
     </GraphicsPipelineStateObject>
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\full_screen_color.pso">
-      <EntryPointName>full_screen_color</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\full_screen_color_graphics.pso">
+      <EntryPointName>full_screen_color_graphics</EntryPointName>
       <InProject>true</InProject>
       <Backend>UniqueCreatorDev</Backend>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\indexed_mesh.pso">
-      <EntryPointName>indexed_mesh_main</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\indexed_mesh_graphics.pso">
+      <EntryPointName>indexed_mesh_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid.pso">
-      <EntryPointName>plane_solid</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid_graphics.pso">
+      <EntryPointName>plane_solid_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid_msm_32.pso">
-      <EntryPointName>plane_solid_msm_32</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_solid_msm_32_graphics.pso">
+      <EntryPointName>plane_solid_msm_32_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_depth_only.pso">
-      <EntryPointName>plane_depth_only</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_depth_only_graphics.pso">
+      <EntryPointName>plane_depth_only_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_shadows.pso">
-      <EntryPointName>plane_shadows</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\plane_shadows_graphics.pso">
+      <EntryPointName>plane_shadows_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid.pso">
-      <EntryPointName>textured_skinned_lit_solid</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid_graphics.pso">
+      <EntryPointName>textured_skinned_lit_solid_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid_msm_32.pso">
-      <EntryPointName>textured_skinned_lit_solid_msm_32</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_solid_msm_32_graphics.pso">
+      <EntryPointName>textured_skinned_lit_solid_msm_32_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_depth_only.pso">
-      <EntryPointName>textured_skinned_lit_depth_only</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_depth_only_graphics.pso">
+      <EntryPointName>textured_skinned_lit_depth_only_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>
 
-    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_shadows.pso">
-      <EntryPointName>textured_skinned_lit_shadows</EntryPointName>
+    <GraphicsPipelineStateObject Include="..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_shadows_graphics.pso">
+      <EntryPointName>textured_skinned_lit_shadows_graphics</EntryPointName>
       <Backend>UniqueCreatorDev</Backend>
       <InProject>true</InProject>
     </GraphicsPipelineStateObject>

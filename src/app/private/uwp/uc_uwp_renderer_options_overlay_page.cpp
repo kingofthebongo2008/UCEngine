@@ -9,7 +9,7 @@
 
 #include <imgui.h>
 
-#include <autogen/shaders/imgui_main.h>
+#include <autogen/shaders/imgui_graphics.h>
 
 #include <uc_dev/math/math.h>
 #include <uc_dev/sys/memcpy.h>
@@ -137,7 +137,7 @@ namespace uc
 
                 g.run([this, resources]
                 {
-                    m_imgui_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::imgui_main::create_pso);
+                    m_imgui_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::imgui_graphics::create_pso);
                 });
 
                 g.run([this]()

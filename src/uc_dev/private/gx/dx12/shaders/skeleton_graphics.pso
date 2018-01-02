@@ -13,11 +13,12 @@ InputLayout position =
     }
 }
 
-PipelineStateObject indexed_mesh_main : solid_geometry =
+PipelineStateObject skeleton_graphics : solid_geometry =
 {
-    .VertexShader           = indexed_mesh_vertex
-    .PixelShader            = indexed_mesh_pixel
+    .VertexShader           = skeleton_vertex
+    .PixelShader            = skeleton_pixel
     .InputLayout            = position
+    .PrimitiveTopology      = Line
 }
 
 

@@ -14,9 +14,9 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned_solid.h>
-#include <autogen/shaders/textured_skinned_depth_only.h>
-#include <autogen/shaders/skeleton.h>
+#include <autogen/shaders/textured_skinned_solid_graphics.h>
+#include <autogen/shaders/textured_skinned_depth_only_graphics.h>
+#include <autogen/shaders/skeleton_graphics.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -82,13 +82,13 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_solid::create_pso);
+                    m_textured_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_solid_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_textured_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_depth_only::create_pso);
+                    m_textured_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_depth_only_graphics::create_pso);
                 });
 
                 //load preprocessed textured model

@@ -9,8 +9,8 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/skeleton.h>
-#include <autogen/shaders/depth_prepass_lines.h>
+#include <autogen/shaders/skeleton_graphics.h>
+#include <autogen/shaders/depth_prepass_lines_graphics.h>
 
 #include "uc_uwp_device_resources.h"
 
@@ -53,7 +53,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skeleton_pso = gx::dx12::create_pso( resources->device_d2d12(), resources->resource_create_context(), gx::dx12::skeleton::create_pso );
+                    m_skeleton_pso = gx::dx12::create_pso( resources->device_d2d12(), resources->resource_create_context(), gx::dx12::skeleton_graphics::create_pso );
                 });
 
                 /*
@@ -116,7 +116,7 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources      = c->m_resources;
-                    m_depth_prepass_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_lines::create_pso);
+                    m_depth_prepass_pso = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::depth_prepass_lines_graphics::create_pso);
                 });
 
                 m_camera->set_view_position(math::set(0.0, 0.0f, -25.5f, 0.0f));

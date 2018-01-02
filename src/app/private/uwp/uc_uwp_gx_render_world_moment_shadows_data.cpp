@@ -13,13 +13,13 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned_lit_solid.h>
-#include <autogen/shaders/textured_skinned_lit_depth_only.h>
-#include <autogen/shaders/textured_skinned_lit_shadows.h>
-#include <autogen/shaders/shadows_resolve.h>
-#include <autogen/shaders/plane_solid.h>
-#include <autogen/shaders/plane_depth_only.h>
-#include <autogen/shaders/plane_shadows.h>
+#include <autogen/shaders/textured_skinned_lit_solid_graphics.h>
+#include <autogen/shaders/textured_skinned_lit_depth_only_graphics.h>
+#include <autogen/shaders/textured_skinned_lit_shadows_graphics.h>
+#include <autogen/shaders/shadows_resolve_compute.h>
+#include <autogen/shaders/plane_solid_graphics.h>
+#include <autogen/shaders/plane_depth_only_graphics.h>
+#include <autogen/shaders/plane_shadows_graphics.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -68,25 +68,25 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_depth_only::create_pso);
+                    m_skinned_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_depth_only_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_shadows::create_pso);
+                    m_skinned_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_shadows_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_plane_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_depth_only::create_pso);
+                    m_plane_depth = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_depth_only_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_plane_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_shadows::create_pso);
+                    m_plane_shadows = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_shadows_graphics::create_pso);
                 });
 
 

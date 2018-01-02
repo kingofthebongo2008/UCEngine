@@ -36,7 +36,7 @@ InputLayout position =
     }
 }
 
-PipelineStateObject textured_skinned_depth_only : depth_only_geometry =
+PipelineStateObject textured_skinned_depth_only_graphics : depth_only_geometry =
 {
     .VertexShader           = depth_only_skinned_vertex
     .InputLayout            = position

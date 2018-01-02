@@ -91,7 +91,7 @@ DepthStencilDescription librocket_depth_stencil =
     }
 }
 
-PipelineStateObject librocket_main  =
+PipelineStateObject librocket_graphics  =
 {
     .RootSignature          = default_graphics_signature
     .VertexShader           = librocket_vertex

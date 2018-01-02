@@ -1,7 +1,7 @@
 import staticgeometry
 
 
-PipelineStateObject plane_shadows : shadows_geometry =
+PipelineStateObject plane_shadows_graphics : shadows_geometry =
 {
     .VertexShader           = depth_only_plane_vertex
 }

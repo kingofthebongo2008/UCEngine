@@ -1,4 +1,8 @@
+import depthstencil
+import rasterizer
+import blend
 import staticgeometry
+
 
 InputLayout position = 
 {
@@ -13,12 +17,10 @@ InputLayout position =
     }
 }
 
-PipelineStateObject skeleton : solid_geometry =
+PipelineStateObject textured_depth_only_graphics : depth_only_geometry =
 {
-    .VertexShader           = skeleton_vertex
-    .PixelShader            = skeleton_pixel
+    .VertexShader           = depth_only_vertex
     .InputLayout            = position
-    .PrimitiveTopology      = Line
 }
 
 

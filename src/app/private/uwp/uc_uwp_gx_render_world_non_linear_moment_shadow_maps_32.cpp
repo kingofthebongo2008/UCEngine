@@ -13,13 +13,13 @@
 #include <uc_dev/gx/img_utils.h>
 #include <uc_dev/gx/anm/anm.h>
 
-#include <autogen/shaders/textured_skinned_lit_solid_msm_32.h>
-#include <autogen/shaders/textured_skinned_lit_depth_only.h>
-#include <autogen/shaders/textured_skinned_lit_shadows.h>
-#include <autogen/shaders/non_linear_moment_shadow_maps_32_resolve.h>
-#include <autogen/shaders/plane_solid_msm_32.h>
-#include <autogen/shaders/plane_depth_only.h>
-#include <autogen/shaders/plane_shadows.h>
+#include <autogen/shaders/textured_skinned_lit_solid_msm_32_graphics.h>
+#include <autogen/shaders/textured_skinned_lit_depth_only_graphics.h>
+#include <autogen/shaders/textured_skinned_lit_shadows_graphics.h>
+#include <autogen/shaders/non_linear_moment_shadow_maps_32_resolve_compute.h>
+#include <autogen/shaders/plane_solid_msm_32_graphics.h>
+#include <autogen/shaders/plane_depth_only_graphics.h>
+#include <autogen/shaders/plane_shadows_graphics.h>
 
 #include "uc_uwp_gx_render_object_factory.h"
 #include "uc_uwp_device_resources.h"
@@ -37,20 +37,20 @@ namespace uc
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_solid_msm_32::create_pso);
+                    m_skinned = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::textured_skinned_lit_solid_msm_32_graphics::create_pso);
                 });
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid_msm_32::create_pso);
+                    m_plane = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::plane_solid_msm_32_graphics::create_pso);
                 });
 
 
                 g.run([this, c]
                 {
                     auto resources = c->m_resources;
-                    m_shadows_resolve = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::non_linear_moment_shadow_maps_32_resolve::create_pso);
+                    m_shadows_resolve = gx::dx12::create_pso(resources->device_d2d12(), resources->resource_create_context(), gx::dx12::non_linear_moment_shadow_maps_32_resolve_compute::create_pso);
                 });
 
 
