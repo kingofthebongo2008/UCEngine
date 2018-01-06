@@ -15,12 +15,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\src\uc_model_main.cpp" />
+    <ClCompile Include="..\src\uc_build_file_generator_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\pch.h" />
     <ClInclude Include="..\src\targetver.h" />
-    <ClInclude Include="..\src\uc_model_command_line.h" />
+    <ClInclude Include="..\src\uc_build_file_generator_command_line.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7BFD660B-EC2B-4E59-8AE2-B6C3697029A5}</ProjectGuid>
@@ -52,23 +52,23 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/assimp/include;../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../3rdparty/gsl/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x64;../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt-d.lib;Compressonator_MDd_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/assimp/include;../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../3rdparty/gsl/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>../../../../3rdparty/assimp/lib/x64;../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt.lib;Compressonator_MD_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
