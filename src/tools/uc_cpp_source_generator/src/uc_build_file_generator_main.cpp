@@ -200,7 +200,7 @@ namespace cpp
 
     static std::string build_cpp_tag(const std::experimental::filesystem::path& shader)
     {
-        return std::string("<ClCompile Include = \"") + shader.string() + std::string(" />\r\n");
+        return std::string("<ClCompile Include = \"") + shader.string() + std::string("\" />\r\n");
     }
 
     static std::string build_pch_tag(const std::experimental::filesystem::path& shader)
