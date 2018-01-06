@@ -84,10 +84,10 @@
 <Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\shadows\compute_non_linear_moment_shadow_maps_32_resolve_compute.hlsl">
 	<ShaderPipelineStage>Compute</ShaderPipelineStage>
 </Shader>
-<Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\shadows\moment_shadow_maps_resolve_compute.hlsl">
+<Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\shadows\compute_non_linear_moment_shadow_maps_64_resolve_compute.hlsl">
 	<ShaderPipelineStage>Compute</ShaderPipelineStage>
 </Shader>
-<Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\shadows\non_linear_moment_shadow_maps_64_resolve_compute.hlsl">
+<Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\shadows\moment_shadow_maps_resolve_compute.hlsl">
 	<ShaderPipelineStage>Compute</ShaderPipelineStage>
 </Shader>
 <Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\textures\compute_rgb_rgba_compute.hlsl">
@@ -96,7 +96,6 @@
 <Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\textures\generate_mip_map_compute.hlsl">
 	<ShaderPipelineStage>Compute</ShaderPipelineStage>
 </Shader>
-
 
   </ItemGroup>
 </Project>

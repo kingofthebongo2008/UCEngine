@@ -1,4 +1,4 @@
-PipelineStateObject mip_map_compute =
+PipelineStateObject mipmap_compute =
 {
     .RootSignature 	   		= default_graphics_signature
     .ComputeShader			= generate_mip_map_compute
