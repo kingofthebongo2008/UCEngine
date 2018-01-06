@@ -28,7 +28,6 @@ namespace uc
                 ("help,?", "produce help message")
 
                 ("input,i", po::value< std::string>(),      "input directory, if missing the current directory is used")
-                ("relative,r", po::value< std::string>(),   "relative to this directory, if missing the current directory is used")
                 ("mode,t", po::value< std::string>(),       "mode:hlsl,pso,cpp,h")
                 ("backend,b", po::value< std::string>(),    "graphics backend, dev or unique")
                 ("build,b", po::value< std::string>(),      "buildsystem:msbuild,fastbuild")
