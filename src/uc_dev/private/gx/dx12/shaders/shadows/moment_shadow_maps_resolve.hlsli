@@ -3,6 +3,7 @@
 
 #include "moment_shadow_maps.hlsli"
 #include "moment_shadow_maps_32.hlsli"
+#include "moment_shadow_maps_64.hlsli"
 
 #if defined(MOMENT_SHADOW_MAPS)
 

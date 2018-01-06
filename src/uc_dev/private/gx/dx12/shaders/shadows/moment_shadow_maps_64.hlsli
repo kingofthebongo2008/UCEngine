@@ -1,5 +1,5 @@
-#ifndef __moment_shadow_maps_32_hlsli__
-#define __moment_shadow_maps_32_hlsli__
+#ifndef __moment_shadow_maps_64_hlsli__
+#define __moment_shadow_maps_64_hlsli__
 
 #include "../default_signature.hlsli"
 
@@ -15,17 +15,17 @@ float4 quantize_moments_non_linear_64_bit(float4 UnbiasedMoments)
 {
 	float2 Depth;
 	float Weight,FourthMomentOffset;
-	PrepareNonLinearMomentQuantization(Depth,Weight,FourthMomentOffset,UnbiasedMoments);
-	return float4(mad(Depth,0.5f,0.5f),Weight,WarpFourthMomentOffset(FourthMomentOffset));
+    prepare_non_linear_moment_quantization(Depth,Weight,FourthMomentOffset,UnbiasedMoments);
+	return float4(mad(Depth,0.5f,0.5f),Weight, warp_fourth_moment_offset(FourthMomentOffset));
 }
 
 /*! Takes the output of QuantizeMomentsNonLinear32Bit() and reconstructs the output
 of PrepareNonLinearMomentQuantization() except for quantization errors.*/
 void unpack_moments_non_linear_64_bit(out float2 OutDepth, out float OutWeight, out float OutFourthMomentOffset, float4 PackedDistribution)
 {
-    float2 OutDepth=mad(PackedDistribution.xy,2.0f,-1.0f);
-    float  OutWeight=PackedDistribution.z;
-    float  OutFourthMomentOffset=UnwarpFourthMomentOffset(PackedDistribution.w);
+    OutDepth=mad(PackedDistribution.xy,2.0f,-1.0f);
+    OutWeight=PackedDistribution.z;
+    OutFourthMomentOffset= unwarp_fourth_moment_offset(PackedDistribution.w);
 }
 
 void apply_resolve_non_linear_64_bit(inout RWTexture2D<unorm float4> shadow_moments, Texture2DMS<float, 4> shadows_buffer, uint3 dtid : SV_DispatchThreadID)
