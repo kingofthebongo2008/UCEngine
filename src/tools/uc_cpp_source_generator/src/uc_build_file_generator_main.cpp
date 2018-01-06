@@ -256,7 +256,7 @@ namespace header
 
     static std::string build_header_tag(const std::experimental::filesystem::path& shader)
     {
-        return std::string("<ClInclude Include = \"") + shader.string() + std::string(" />\r\n");
+        return std::string("<ClInclude Include = \"") + shader.string() + std::string("\"/>\r\n");
     }
 
     static void process_header(const std::vector< std::experimental::filesystem::path > & files)
