@@ -117,6 +117,68 @@ static void process_shaders(const std::vector< std::experimental::filesystem::pa
     }
 }
 
+static bool is_graphics_pso(const std::experimental::filesystem::path& p)
+{
+    return 	boost::algorithm::ends_with(p.filename().string(), "_graphics.pso");
+}
+
+static bool is_compute_pso(const std::experimental::filesystem::path& p)
+{
+    return 	boost::algorithm::ends_with(p.filename().string(), "_compute.pso");
+}
+
+static std::string build_graphics_pso_tag(const std::experimental::filesystem::path& shader)
+{
+    std::string backend = "UniqueCreatorDev";
+    std::string entry_point_name = shader.stem().string();
+    return std::string("<GraphicsPipelineStateObject Include = \"") + shader.string() + std::string("\">\r\n\t<Backend>") + backend + std::string("</Backend>\r\n") + std::string("\t<EntryPointName>") + entry_point_name + std::string("</EntryPointName>\r\n") + std::string("</GraphicsPipelineStateObject>\r\n");
+}
+
+static std::string build_compute_pso_tag(const std::experimental::filesystem::path& shader)
+{
+    std::string backend = "UniqueCreatorDev";
+    std::string entry_point_name = shader.stem().string();
+    return std::string("<ComputePipelineStateObject Include = \"") + shader.string() + std::string("\">\r\n\t<Backend>") + backend + std::string("</Backend>\r\n") + std::string("\t<EntryPointName>") + entry_point_name + std::string("</EntryPointName>\r\n") +  std::string("</ComputePipelineStateObject>\r\n");
+}
+
+static void process_pso(const std::vector< std::experimental::filesystem::path > & files)
+{
+    std::vector< std::experimental::filesystem::path > graphics;
+    std::vector< std::experimental::filesystem::path > compute;
+
+    for (auto&& p : files)
+    {
+        if (is_graphics_pso(p))
+        {
+            graphics.push_back(p);
+        }
+        else if (is_compute_pso(p))
+        {
+            compute.push_back(p);
+        }
+    }
+
+    std::sort(graphics.begin(), graphics.end());
+    std::sort(compute.begin(), compute.end());
+
+    std::vector<std::string> lines;
+
+    for (auto&& s : graphics)
+    {
+        lines.push_back(build_graphics_pso_tag(s));
+    }
+
+    for (auto&& s : compute)
+    {
+        lines.push_back(build_compute_pso_tag(s));
+    }
+
+    for (auto&& l : lines)
+    {
+        std::cout << l;
+    }
+}
+
 int32_t main(int32_t argc, const char* argv[])
 {
     using namespace uc::build_file_generator;
@@ -173,6 +235,11 @@ int32_t main(int32_t argc, const char* argv[])
             if ( mode == mode::hlsl )
             {
                 process_shaders(files);
+            }
+
+            if (mode == mode::pso)
+            {
+                process_pso(files);
             }
         }
         else
