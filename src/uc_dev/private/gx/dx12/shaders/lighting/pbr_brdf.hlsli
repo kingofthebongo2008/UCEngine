@@ -3,6 +3,40 @@
 
 #include "pbr_common.hlsli"
 
+
+//identities
+// | L + V | ^2 = 2 + 2L.V
+// 0.5 + 0.5 L.V = 1 / 4 |L + V|^2
+// N.H = ( N.L + N.V ) / | L + V |
+// L.H = V.H = 1 / 2 |L + V|
+
+void get_ndoth_vdoth( float ldotv, float ndotl, float ndotv, out float ndoth, out float ldoth )
+{
+    float lv     = 2 + 2 * ldotv;
+    float rcp_lv = rqsrt( lv );
+
+    ndoth = (ndotl + ndotv) * rcp_lv;
+    ldoth = rcp_lv + rcp_lv * ldotv;
+}
+
+float ndoth( float ldotv, float ndotl, float ndotv)
+{
+    float lv     = 2 + 2 * ldotv;
+    float rcp_lv = rqsrt( lv );
+
+    float ndoth = (ndotl + ndotv) * rcp_lv;
+    return ndoth;
+}
+
+float ldoth( float ldotv, float ndotl, float ndotv)
+{
+    float lv     = 2 + 2 * ldotv;
+    float rcp_lv = rqsrt( lv );
+
+    float ldoth = rcp_lv + rcp_lv * ldotv;
+    return ldoth;
+}
+
 // Microfacet specular = D*G*F / (4*NoL*NoV) = D*Vis*F
 // Vis = G / (4*NoL*NoV)
 
