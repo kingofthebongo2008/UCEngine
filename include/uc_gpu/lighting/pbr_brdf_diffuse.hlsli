@@ -8,7 +8,7 @@
  albedo 
 */
 //Hammon model
-float3 diffuse_brdf( float roughness, float3 albedo, float ldotv, float ndotl, float ndotv )
+float3 pbr_diffuse_brdf( float roughness, float3 albedo, float ldotv, float ndotl, float ndotv )
 {
     float ndoth;
     float ldoth;

@@ -10,7 +10,7 @@
  f0 = fresnel ( 0.04 for dielectrics, color for metals )
 */
 
-float3 specular_brdf( float roughness, float3 f0, float ldotv, float ndotl, float ndotv )
+float3 pbr_specular_brdf( float roughness, float3 f0, float ldotv, float ndotl, float ndotv )
 {
     float ndoth;
     float ldoth;

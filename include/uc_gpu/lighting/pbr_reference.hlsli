@@ -39,8 +39,6 @@ static float2 get_sample ( uint32_t sample, uint32_t sample_count )
 
 static const uint32_t g_sample_count = 1024;
 
-
-
 float3 pbr_reference_compute_specular_ibl_reference( in float3 n, in float3 v, in float roughness, in float3 f0 )
 {
     //build local referential
@@ -86,13 +84,9 @@ float3 pbr_reference_compute_specular_ibl_reference( in float3 n, in float3 v, i
         float g         = v_smith_ggx(roughness, ndotv, ndotl);
         float weight    = f * g * d;
         
-    
-
-        
- 
+   
+        //todo:        
     }
-
-
 }
 
 
