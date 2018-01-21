@@ -2,7 +2,7 @@
 #ifndef __color_xyz_hlsli__
 
 //reference functions, source wikipedia
-float3 color_srgb_to_XYZ(float3 v_srgb)
+color_XYZ color_rec_709_to_XYZ(color_rec_709 v_srgb)
 {
     float3 v    = v_srgb;
     float3 r0   = float3(0.4124, 0.3576, 0.1805);
@@ -13,10 +13,10 @@ float3 color_srgb_to_XYZ(float3 v_srgb)
     float y     = dot(r1, v.y);
     float z     = dot(r2, v.z);
 
-    return float3( x,y,z);
+    return color_XYZ( x,y,z);
 }
 
-float3 color_XYZ_to_srgb(float3 v_xyz)
+color_rec_709 color_XYZ_to_rec_709(color_XYZ v_xyz)
 {
     float3 v    = v_xyz;
     float3 r0   = float3(3.2406, -1.5372, -0.4986);
@@ -27,7 +27,7 @@ float3 color_XYZ_to_srgb(float3 v_xyz)
     float linear_c_ry     = dot(r1, v.y);
     float linear_c_rz     = dot(r2, v.z);
 
-    return float3( linear_c_rx, linear_c_ry, linear_c_rz );
+    return color_rec_709( linear_c_rx, linear_c_ry, linear_c_rz );
 }
 
 #endif
