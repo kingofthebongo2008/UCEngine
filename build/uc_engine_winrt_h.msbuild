@@ -3,6 +3,5 @@
   <ItemGroup>
     <ClInclude Include="..\src\uc_engine\pch.h" />
     <ClInclude Include="..\src\uc_engine_winrt\io\mouse.h"/>
-
   </ItemGroup>
 </Project>

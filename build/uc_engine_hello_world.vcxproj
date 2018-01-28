@@ -11,12 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\uc_engine_hello_world\main.cpp" />
-    <ClCompile Include="..\src\uc_engine_hello_world\pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,5 +69,7 @@
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="uc_engine_hello_world_hlsl.msbuild" />
   <Import Project="uc_engine_hello_world_pso.msbuild" />
+  <Import Project="uc_engine_hello_world_h.msbuild" />
+  <Import Project="uc_engine_hello_world_cpp.msbuild" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

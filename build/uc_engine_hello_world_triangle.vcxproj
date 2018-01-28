@@ -11,12 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\uc_engine_hello_world_triangle\main.cpp" />
-    <ClCompile Include="..\src\uc_engine_hello_world_triangle\pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -85,5 +79,7 @@
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="uc_engine_hello_world_triangle_hlsl.msbuild" />
   <Import Project="uc_engine_hello_world_triangle_pso.msbuild" />
+  <Import Project="uc_engine_hello_world_triangle_h.msbuild" />
+  <Import Project="uc_engine_hello_world_triangle_cpp.msbuild" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

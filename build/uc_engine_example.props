@@ -83,4 +83,14 @@
       <AdditionalDependencies>ucdev_system_x64_r.lib;uc_engine_x64_r.lib;%(AdditionalDependencies);xinput.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+
+  <PropertyGroup>
+    <GpuCodeIncludeDirectory>$(MSBuildThisFileDirectory)..\include</GpuCodeIncludeDirectory>
+  </PropertyGroup>
+   <ItemDefinitionGroup>
+    <Shader>
+      <AdditionalIncludeDirectories>$(GpuCodeIncludeDirectory)\</AdditionalIncludeDirectories>
+    </Shader>
+   </ItemDefinitionGroup>
+
 </Project>

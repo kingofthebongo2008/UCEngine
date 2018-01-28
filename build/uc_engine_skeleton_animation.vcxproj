@@ -10,12 +10,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\src\uc_engine_skeleton_animation\main.cpp" />
-    <ClCompile Include="..\src\uc_engine_skeleton_animation\pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{100D75DD-F4CC-453E-BDFE-677C4750D732}</ProjectGuid>
     <Keyword>uc_engine_skeleton_animation</Keyword>
@@ -77,6 +71,8 @@
   <Import Project="asset/military_mechanic.msbuild" />
   <Import Project="uc_engine_skeleton_animation_hlsl.msbuild" />
   <Import Project="uc_engine_skeleton_animation_pso.msbuild" />
+  <Import Project="uc_engine_skeleton_animation_h.msbuild" />
+  <Import Project="uc_engine_skeleton_animation_cpp.msbuild" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
   </ImportGroup>
