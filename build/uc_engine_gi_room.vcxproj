@@ -19,16 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\uc_engine_textured_quad\main.cpp" />
-    <ClCompile Include="..\src\uc_engine_textured_quad\pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DA00A99D-D70F-4DD9-9FA2-75FBEE9E87F2}</ProjectGuid>
+    <ProjectGuid>{FE7E0CA8-2D5A-4444-84A0-C6B073ECFA1D}</ProjectGuid>
     <Keyword>uc_engine_test</Keyword>
     <RootNamespace>uc_engine_test</RootNamespace>
     <AppContainerApplication>true</AppContainerApplication>
@@ -79,7 +73,6 @@
       <Project>{47005cc8-bd5c-4719-9176-fafb4feff137}</Project>
     </ProjectReference>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="../data/images/image_0.png">
       <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/image_0.png'))</Link>
@@ -90,18 +83,15 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <Texture Include="../data/images/bear.jpg">
-        <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
     </Texture>
   </ItemGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="msbuild/ucdev_render_texture.targets" />
-
   <Import Project="uc_engine_gi_room_h.msbuild" />
   <Import Project="uc_engine_gi_room_cpp.msbuild" />
   <Import Project="uc_engine_gi_room_hlsl.msbuild" />
   <Import Project="uc_engine_gi_room_pso.msbuild" />
-
   <ImportGroup Label="ExtensionTargets" />
 </Project>
