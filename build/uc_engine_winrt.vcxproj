@@ -125,28 +125,6 @@
       <AdditionalDependencies>ucdev_system_x64_d.lib;WindowsApp.lib;uc_engine_x64_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;WINAPI_PARTITION_APP;UWP;_PC;_X86;UC_ENGINE_API_IMPORT;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>../include;../src/streamflow/private/;$(IntermediateOutputPath)/autogen/shaders;../3rdparty/assimp/include;../3rdparty/gsl/include;../3rdparty/lzham/include;../3rdparty/imgui;../3rdparty/librocket/include;../3rdparty/winrt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4702</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <CompileAsWinRT>true</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)..\lib\x86\$(Configuration)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\x86\$(Configuration);$(SolutionDir)..\3rdparty\assimp\lib\x86\;$(SolutionDir)..\3rdparty\librocket\lib\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ucdev_system_x86_d.lib;WindowsApp.lib;uc_engine_x86_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
@@ -172,33 +150,6 @@
       <ImportLibrary>$(SolutionDir)..\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib\$(Platform)\$(Configuration);$(SolutionDir)..\3rdparty\assimp\lib\x64\;$(SolutionDir)..\3rdparty\librocket\lib\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ucdev_system_x64_r.lib;WindowsApp.lib;uc_engine_x64_r.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;WINAPI_PARTITION_APP;UWP;_PC;_X86;UC_ENGINE_API_IMPORT;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <EnablePREfast>false</EnablePREfast>
-      <AdditionalIncludeDirectories>../include;../src/streamflow/private/;$(IntermediateOutputPath)/autogen/shaders;../3rdparty/assimp/include;../3rdparty/gsl/include;../3rdparty/lzham/include;../3rdparty/imgui;../3rdparty/librocket/include;../3rdparty/winrt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4702</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <CompileAsWinRT>true</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <ImportLibrary>$(SolutionDir)..\lib\x86\$(Configuration)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\x86\$(Configuration);$(SolutionDir)..\3rdparty\assimp\lib\x86\;$(SolutionDir)..\3rdparty\librocket\lib\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ucdev_system_x86_r.lib;WindowsApp.lib;uc_engine_x86_r.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
