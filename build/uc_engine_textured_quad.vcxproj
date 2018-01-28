@@ -104,7 +104,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="msbuild/ucdev_render_texture.targets" />
-  <Import Project="uc_engine_textured_quad.hlsl.msbuild" />
+  <Import Project="uc_engine_textured_quad_hlsl.msbuild" />
   <Import Project="uc_engine_textured_quad_pso.msbuild" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

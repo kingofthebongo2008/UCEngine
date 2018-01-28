@@ -89,7 +89,7 @@
   <Import Project="msbuild/ucdev_render_skeleton.targets" />
   <Import Project="msbuild/ucdev_render_animation.targets" />
   <Import Project="asset/military_mechanic.msbuild" />
-  <Import Project="uc_engine_skeleton_animation.hlsl.msbuild" />
+  <Import Project="uc_engine_skeleton_animation_hlsl.msbuild" />
   <Import Project="uc_engine_skeleton_animation_pso.msbuild" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
