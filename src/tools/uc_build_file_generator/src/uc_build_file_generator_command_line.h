@@ -30,7 +30,7 @@ namespace uc
                 ("input,i", po::value< std::string>(),      "input directory, if missing the current directory is used")
                 ("mode,t", po::value< std::string>(),       "mode:hlsl,pso,cpp,h")
                 ("backend,b", po::value< std::string>(),    "graphics backend, dev or unique")
-                ("build,b", po::value< std::string>(),      "buildsystem:msbuild,fastbuild")
+                ("build,m", po::value< std::string>(),      "buildsystem:msbuild,fastbuild")
               ;
                 
             return desc;
@@ -99,6 +99,10 @@ namespace uc
             return get_input_value_optional< std::string >(map, "input", default_value);
         }
 
+        inline auto get_backend(const boost::program_options::variables_map & map, const std::string& default_value)
+        {
+            return get_input_value_optional< std::string >(map, "backend", default_value);
+        }
 
         inline auto get_mode(const boost::program_options::variables_map & map)
         {

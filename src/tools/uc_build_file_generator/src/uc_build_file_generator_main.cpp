@@ -49,18 +49,12 @@ namespace hlsl
         return 	boost::algorithm::ends_with(p.filename().string(), "_compute.hlsl");
     }
 
-    static std::string build_hlsl_tag(const std::string& shader, const std::string& shader_type)
+    static std::string build_hlsl_tag(const std::string& shader, const std::string& shader_type, const std::string& backend)
     {
-        /*
-        <Shader Include = "..\src\uc_dev\private\gx\dx12\shaders\static_geometry\building_vertex.hlsl">
-        <ShaderPipelineStage>Vertex< / ShaderPipelineStage>
-        <InProject>true< / InProject>
-        </Shader>
-        */
-        return std::string("<Shader Include = \"") + shader + std::string("\">\r\n\t<ShaderPipelineStage>") + shader_type + std::string("</ShaderPipelineStage>\r\n") + std::string("</Shader>\r\n");
+        return std::string("<Shader Include = \"") + shader + std::string("\">\r\n\t<ShaderPipelineStage>") + shader_type + std::string("</ShaderPipelineStage>\r\n") + std::string("\t<Backend>") + backend + std::string("</Backend>\r\n") + std::string("</Shader>\r\n");
     }
 
-    static void process_shaders(const std::vector< std::experimental::filesystem::path > & files)
+    static void process_shaders(const std::vector< std::experimental::filesystem::path > & files, const std::string& backend)
     {
         std::vector< std::experimental::filesystem::path > signatures;
         std::vector< std::experimental::filesystem::path > vertex;
@@ -96,22 +90,22 @@ namespace hlsl
 
         for (auto&& s : signatures)
         {
-            lines.push_back(build_hlsl_tag(s.string(), "RootSignature"));
+            lines.push_back(build_hlsl_tag(s.string(), "RootSignature", backend));
         }
 
         for (auto&& s : vertex)
         {
-            lines.push_back(build_hlsl_tag(s.string(), "Vertex"));
+            lines.push_back(build_hlsl_tag(s.string(), "Vertex", backend));
         }
 
         for (auto&& s : pixel)
         {
-            lines.push_back(build_hlsl_tag(s.string(), "Pixel"));
+            lines.push_back(build_hlsl_tag(s.string(), "Pixel", backend));
         }
 
         for (auto&& s : compute)
         {
-            lines.push_back(build_hlsl_tag(s.string(), "Compute"));
+            lines.push_back(build_hlsl_tag(s.string(), "Compute", backend));
         }
 
         for (auto&& l : lines)
@@ -133,21 +127,19 @@ namespace pso
         return 	boost::algorithm::ends_with(p.filename().string(), "_compute.pso");
     }
 
-    static std::string build_graphics_pso_tag(const std::experimental::filesystem::path& shader)
+    static std::string build_graphics_pso_tag(const std::experimental::filesystem::path& shader, const std::string& backend)
     {
-        std::string backend = "UniqueCreatorDev";
         std::string entry_point_name = shader.stem().string();
         return std::string("<GraphicsPipelineStateObject Include = \"") + shader.string() + std::string("\">\r\n\t<Backend>") + backend + std::string("</Backend>\r\n") + std::string("\t<EntryPointName>") + entry_point_name + std::string("</EntryPointName>\r\n") + std::string("</GraphicsPipelineStateObject>\r\n");
     }
 
-    static std::string build_compute_pso_tag(const std::experimental::filesystem::path& shader)
+    static std::string build_compute_pso_tag(const std::experimental::filesystem::path& shader, const std::string& backend)
     {
-        std::string backend = "UniqueCreatorDev";
         std::string entry_point_name = shader.stem().string();
         return std::string("<ComputePipelineStateObject Include = \"") + shader.string() + std::string("\">\r\n\t<Backend>") + backend + std::string("</Backend>\r\n") + std::string("\t<EntryPointName>") + entry_point_name + std::string("</EntryPointName>\r\n") + std::string("</ComputePipelineStateObject>\r\n");
     }
 
-    static void process_pso(const std::vector< std::experimental::filesystem::path > & files)
+    static void process_pso(const std::vector< std::experimental::filesystem::path > & files, const std::string& backend)
     {
         std::vector< std::experimental::filesystem::path > graphics;
         std::vector< std::experimental::filesystem::path > compute;
@@ -171,12 +163,12 @@ namespace pso
 
         for (auto&& s : graphics)
         {
-            lines.push_back(build_graphics_pso_tag(s));
+            lines.push_back(build_graphics_pso_tag(s, backend));
         }
 
         for (auto&& s : compute)
         {
-            lines.push_back(build_compute_pso_tag(s));
+            lines.push_back(build_compute_pso_tag(s, backend));
         }
 
         for (auto&& l : lines)
@@ -309,6 +301,17 @@ int32_t main(int32_t argc, const char* argv[])
         namespace fs = std::experimental::filesystem ;
 
         auto input_dir  = fs::path(get_input_directory(vm, fs::current_path().string()));
+        auto backend    = get_backend(vm, "dev");
+
+        if (backend == "dev")
+        {
+            backend = "UniqueCreatorDev";
+        }
+        else
+        {
+            backend = "UniqueCreatorPublic";
+        }
+
         auto mode       = get_mode(vm);
 
         std::string extension = "";
@@ -343,12 +346,12 @@ int32_t main(int32_t argc, const char* argv[])
         {
             if ( mode == mode::hlsl )
             {
-                hlsl::process_shaders(files);
+                hlsl::process_shaders(files, backend);
             }
 
             if (mode == mode::pso)
             {
-                pso::process_pso(files);
+                pso::process_pso(files, backend);
             }
 
             if (mode == mode::cpp)
