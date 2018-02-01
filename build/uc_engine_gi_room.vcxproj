@@ -74,17 +74,43 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="../data/images/image_0.png">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/image_0.png'))</Link>
+    <None Include="../src/uc_engine_gi_room/media/models/gi_room.am">
+      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/models/gi_room.am'))</Link>
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="../data/images/image_1.jpg">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/image_1.jpg'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <Texture Include="../data/images/bear.jpg">
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/ceiling_lm.png">
       <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
     </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/floor.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/globe.png">
+      <OutputTextureFormat>bc3_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/headpal.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/light_grad.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/lopal.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/picture.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
+    <Texture Include="../src/uc_engine_gi_room/media/images/wall_lm.png">
+      <OutputTextureFormat>bc1_unorm</OutputTextureFormat>
+    </Texture>
+
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="msbuild/ucdev_render.targets" />
