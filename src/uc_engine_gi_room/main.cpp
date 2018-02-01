@@ -100,44 +100,38 @@ public:
         m_full_screen_main = Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
 
-        // 1. create checkerboard procedural image
+        static const wchar_t* textures[] =
         {
-            auto factory = std::make_unique<Imaging::ImageFactory>();
-            auto checkerBoard = factory->CreateCheckerBoardImage(32, 32);
-            auto queue = m_device_resources->GetUploadQueue();
-            auto desc = checkerBoard->GetDescription();
-            Graphics::SubresourceData s = { checkerBoard->GetData(), desc.m_row_pitch, desc.m_slice_pitch };
-            m_texture0 = m_resource_create_context->CreateTexture2D({ static_cast<float>(desc.m_width), static_cast<float>(desc.m_height) }, Graphics::GraphicsFormat::R8G8B8A8_UNORM);
-            queue->UploadTexture(m_texture0.get(), &s, 0, 1);
-        }
+            L"appdata/textures/lopal.texture",
+            L"appdata/textures/headpal.texture",
+            L"appdata/textures/picture.texture",
+            L"appdata/textures/floor.texture",
+            L"appdata/textures/globe.texture",
+            L"appdata/textures/wall_lm.texture",
+            L"appdata/textures/ceiling_lm.texture"
+        };
 
-        // 2. Load image from a known file format like png or jpg
+        const auto textures_size = sizeof(textures) / sizeof(textures[0]);
+
+
+        for (auto i = 0; i < textures_size; ++i)
         {
-            auto factory = std::make_unique<Imaging::ImageFactory>();
-            auto checkerBoard = factory->CreateFromFile(L"appdata/images/image_0.png");
-            auto queue = m_device_resources->GetUploadQueue();
-            auto desc = checkerBoard->GetDescription();
-            Graphics::SubresourceData s = { checkerBoard->GetData(), desc.m_row_pitch, desc.m_slice_pitch };
-            m_texture1 = m_resource_create_context->CreateTexture2D({ static_cast<float>(desc.m_width), static_cast<float>(desc.m_height) }, Graphics::GraphicsFormat::R8G8B8A8_UNORM);
-            queue->UploadTexture(m_texture1.get(), &s, 0, 1);
+
+            // 3. Load packaged binarized compressed image 
+            {
+                auto factory = std::make_unique<Assets::Texture2DFactory>();
+                auto checkerBoard = factory->CreateFromFile(textures[i]);
+                auto queue = m_device_resources->GetUploadQueue();
+                auto desc = checkerBoard->GetDescription();
+                auto graphicsFormat = static_cast<Graphics::GraphicsFormat>(desc.m_view_format);
+                auto pitch = Graphics::TextureFormatUtils::GetRowSlicePitch(graphicsFormat, desc.m_width, desc.m_height);
+
+                Graphics::SubresourceData s = { checkerBoard->GetData(), pitch.m_RowPitch, pitch.m_SlicePitch };
+
+                m_textures[i] = m_resource_create_context->CreateTexture2D({ static_cast<float>(desc.m_width), static_cast<float>(desc.m_height) }, graphicsFormat);
+                queue->UploadTexture(m_textures[i].get(), &s, 0, 1);
+            }
         }
-
-        // 3. Load packaged binarized compressed image 
-        {
-            auto factory = std::make_unique<Assets::Texture2DFactory>();
-            auto checkerBoard = factory->CreateFromFile(L"appdata/textures/bear.texture");
-            auto queue = m_device_resources->GetUploadQueue();
-            auto desc = checkerBoard->GetDescription();
-            auto graphicsFormat = static_cast<Graphics::GraphicsFormat>(desc.m_view_format);
-            auto pitch = Graphics::TextureFormatUtils::GetRowSlicePitch(graphicsFormat, desc.m_width, desc.m_height);
-
-            Graphics::SubresourceData s = { checkerBoard->GetData(), pitch.m_RowPitch, pitch.m_SlicePitch };
-
-            m_texture2 = m_resource_create_context->CreateTexture2D({ static_cast<float>(desc.m_width), static_cast<float>(desc.m_height) }, graphicsFormat);
-            queue->UploadTexture(m_texture2.get(), &s, 0, 1);
-        }
-
-        m_texture = m_texture0.get();
 
     }
 
@@ -156,25 +150,6 @@ public:
                 if (MouseButtonStateHelper::ButtonWasPressed(m_mouse_state.m_Buttons, s.m_Buttons, MouseButton::Left))
                 {
                     //do code here with the mouse pressed
-
-                    Graphics::Texture2D* texture = nullptr;
-
-                    if (m_texture == m_texture0.get())
-                    {
-                        texture = m_texture1.get();
-                    }
-
-                    if (m_texture == m_texture1.get())
-                    {
-                        texture = m_texture2.get();
-                    }
-
-                    if (m_texture == m_texture2.get())
-                    {
-                        texture = m_texture0.get();
-                    }
-
-                    m_texture = texture;
                 }
 
                 if (MouseButtonStateHelper::ButtonWasReleased(m_mouse_state.m_Buttons, s.m_Buttons, MouseButton::Left))
@@ -255,7 +230,7 @@ public:
                 //Per many draw calls  -> frequency 1
                 ctx->SetPrimitiveTopology(Graphics::PrimitiveTopology::TriangleList);
                 ctx->SetPipelineStateObject(m_full_screen_main.get());
-                ctx->SetDynamicDescriptor(5, m_texture->GetShaderResourceView(), 0);
+                ctx->SetDynamicDescriptor(5, m_textures[0]->GetShaderResourceView(), 0);
                 ctx->Draw(3, 0);
 
                 ctx->TransitionResource(backBuffer, Graphics::ResourceState::RenderTarget, Graphics::ResourceState::Present);
@@ -426,11 +401,7 @@ private:
     //Pipeline state objects
     std::unique_ptr<Graphics::PipelineStates::full_screen_graphics::GraphicsPipelineState>      m_full_screen_main;
 
-    std::unique_ptr<Graphics::Texture2D>                             m_texture0;
-    std::unique_ptr<Graphics::Texture2D>                             m_texture1;
-    std::unique_ptr<Graphics::Texture2D>                             m_texture2;
-
-    Graphics::Texture2D*                                             m_texture;
+    std::unique_ptr<Graphics::Texture2D>                             m_textures[7];
 };
 
 #pragma warning( disable:4447 )
