@@ -34,6 +34,7 @@ namespace AdvancedMicroDevices
             UInt32                          m_base_triangle;
             UInt32                          m_num_triangles;
 
+            std::vector<UInt32>             m_bones;
             std::vector<Primitive>          m_primitives;
         };
     }
