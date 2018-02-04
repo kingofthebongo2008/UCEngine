@@ -10,9 +10,9 @@ namespace AdvancedMicroDevices
     {
         struct AnimationKey
         {
-            Int32   m_start_time;
-            Int32   m_end_time;
-            Float   m_value[4];
+            Int32       m_start_time;
+            Int32       m_end_time;
+            Float4      m_value;
         };
 
         struct AnimationKeys
