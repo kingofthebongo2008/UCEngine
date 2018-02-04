@@ -16,7 +16,6 @@ namespace AdvancedMicroDevices
             }
 
             m_handle = h;
-
         }
 
         SimpleReadFileStream::~SimpleReadFileStream()
@@ -26,8 +25,39 @@ namespace AdvancedMicroDevices
 
         void SimpleReadFileStream::ReadBuffer(void* buffer, size_t buffer_size)
         {
-            //ReadFile(m_handle)
+            DWORD read  = 0;
 
+            if (!ReadFile(m_handle, buffer, static_cast<DWORD>(buffer_size), &read, nullptr))
+            {
+                throw StreamReadException();
+            }
+
+            if (read != buffer_size)
+            {
+                throw StreamReadException();
+            }
+        }
+
+        void SimpleReadFileStream::Seek( size_t position )
+        {
+            auto r0 = static_cast<LONG>(position);
+            auto r1 = static_cast<LONG>(position >> 32);
+
+            if ( INVALID_SET_FILE_POINTER == SetFilePointer(m_handle, r0, &r1, FILE_BEGIN) )
+            {
+                throw StreamReadException();
+            }
+        }
+
+        void SimpleReadFileStream::SeekRelative(size_t position)
+        {
+            auto r0 = static_cast<LONG>(position);
+            auto r1 = static_cast<LONG>(position >> 32);
+
+            if ( INVALID_SET_FILE_POINTER == SetFilePointer(m_handle, r0, &r1, FILE_CURRENT) )
+            {
+                throw StreamReadException();
+            }
         }
     }
 }

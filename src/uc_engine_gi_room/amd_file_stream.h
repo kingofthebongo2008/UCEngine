@@ -21,6 +21,9 @@ namespace AdvancedMicroDevices
             ~SimpleReadFileStream();
             void ReadBuffer(void* buffer, size_t buffer_size);
 
+            void Seek(size_t offset);
+            void SeekRelative(size_t offset);
+
         private:
 
             SimpleReadFileStream(const SimpleReadFileStream &) = delete;
@@ -28,6 +31,11 @@ namespace AdvancedMicroDevices
 
             HANDLE m_handle;
         };
+
+        template <typename t> void Read( SimpleReadFileStream& r, t& b)
+        {
+            r.ReadBuffer(&b, sizeof(t));
+        }
 
     }
 }

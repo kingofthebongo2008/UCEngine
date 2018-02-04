@@ -19,8 +19,8 @@ namespace AdvancedMicroDevices
 
         struct Material
         {
-            std::array<char, 64> m_diffuse_map_file;
-            std::array<char, 64> m_bump_map_file;
+            std::array<wchar_t, 64> m_diffuse_map_file;
+            std::array<wchar_t, 64> m_bump_map_file;
         };
 
         struct BlendData
@@ -42,15 +42,6 @@ namespace AdvancedMicroDevices
             Float3   m_normal;
         };
 
-        struct OffsetTable
-        {
-            UInt32  m_material_chunk;
-            UInt32  m_vertex_chunk;
-            UInt32  m_triangle_chunk;
-            UInt32  m_mesh_chunk;
-            UInt32  m_bone_chunk;
-        };
-
         class Model : public Transform
         {
             public:
@@ -62,9 +53,8 @@ namespace AdvancedMicroDevices
             std::vector<Float2>             m_texture_coord;
             std::vector<Float4>             m_color;
 
-        protected:
 
-            std::array<char, 64>            m_texture_path;
+            std::array<wchar_t, 64>         m_texture_path;
             int32_t                         m_animation_type = 0;
             uint32_t                        m_num_vertices = 0;
 
