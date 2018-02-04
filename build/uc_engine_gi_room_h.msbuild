@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
 <ItemGroup> 
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_animation.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_base_types.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_bone.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_file_stream.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_mesh.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_model.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\amd_transform.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\pch.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\targetver.h"/>
 <ClInclude Include = "..\include\uc_public\animations\animations.h"/>

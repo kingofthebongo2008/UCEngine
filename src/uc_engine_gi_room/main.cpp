@@ -1,9 +1,10 @@
 #include "pch.h"
 
 #include <memory>
+#include <ppl.h>
 #include <ppltasks.h>
-#include <winrt/base.h>
 
+#include <winrt/base.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.ApplicationModel.h>
 #include <winrt/Windows.ApplicationModel.Core.h>
@@ -11,6 +12,7 @@
 #include <winrt/Windows.Graphics.Display.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.ViewManagement.h>
+
 
 #include <uc_public/io/io.h>
 #include <uc_public/graphics/graphics.h>
@@ -99,7 +101,6 @@ public:
     {
         m_full_screen_main = Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
-
         static const wchar_t* textures[] =
         {
             L"appdata/textures/lopal.texture",
@@ -113,11 +114,12 @@ public:
 
         const auto textures_size = sizeof(textures) / sizeof(textures[0]);
 
+        concurrency::task_group g;
 
         for (auto i = 0; i < textures_size; ++i)
         {
-
             // 3. Load packaged binarized compressed image 
+            g.run([this, i]
             {
                 auto factory = std::make_unique<Assets::Texture2DFactory>();
                 auto checkerBoard = factory->CreateFromFile(textures[i]);
@@ -127,12 +129,12 @@ public:
                 auto pitch = Graphics::TextureFormatUtils::GetRowSlicePitch(graphicsFormat, desc.m_width, desc.m_height);
 
                 Graphics::SubresourceData s = { checkerBoard->GetData(), pitch.m_RowPitch, pitch.m_SlicePitch };
-
                 m_textures[i] = m_resource_create_context->CreateTexture2D({ static_cast<float>(desc.m_width), static_cast<float>(desc.m_height) }, graphicsFormat);
                 queue->UploadTexture(m_textures[i].get(), &s, 0, 1);
-            }
+            });
         }
 
+        g.wait();
     }
 
     virtual void Run()
