@@ -32,8 +32,8 @@ namespace AdvancedMicroDevices
 
         struct SkinningData
         {
-            UInt32      m_num_bones;
-            BlendData*  m_blend_data;
+            UInt32                      m_num_bones     = 0;
+            std::unique_ptr<BlendData>  m_blend_data;
         };
 
         struct Triangle
@@ -49,16 +49,16 @@ namespace AdvancedMicroDevices
             std::vector<Float3>             m_positions;
             std::vector<Float3>             m_normal;
             std::vector<Float3>             m_tangent;
-            std::vector<Float3>             m_binormal;
+            std::vector<Float3>             m_bitangent;
             std::vector<Float2>             m_texture_coord;
             std::vector<Float4>             m_color;
 
 
             std::array<wchar_t, 64>         m_texture_path;
-            int32_t                         m_animation_type = 0;
-            uint32_t                        m_num_vertices = 0;
+            int32_t                         m_animation_type    = 0;
+            uint32_t                        m_num_vertices      = 0;
 
-            std::unique_ptr<SkinningData>   m_skinning_data;
+            std::vector<SkinningData>       m_skinning_data;
             std::vector<Triangle>           m_triangle;
             std::vector<Material>           m_material;
 
