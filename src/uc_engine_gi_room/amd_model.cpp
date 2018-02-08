@@ -176,8 +176,11 @@ namespace AdvancedMicroDevices
                         uint32_t num_bones;
                         Read(s, num_bones);
                         
-                        m.m_bones.resize(num_bones);
-                        s.ReadBuffer(&m.m_bones[0], num_bones * sizeof(UInt32));
+                        if (num_bones > 0)
+                        {
+                            m.m_bones.resize(num_bones);
+                            s.ReadBuffer(&m.m_bones[0], num_bones * sizeof(UInt32));
+                        }
                     }
 
 
@@ -186,45 +189,55 @@ namespace AdvancedMicroDevices
                         uint32_t num_children;
 
                         Read(s, num_children);
-                        m.m_children.resize(num_children);
-                        s.ReadBuffer(&m.m_children[0], num_children * sizeof(UInt32));
+
+                        if (num_children > 0)
+                        {
+                            m.m_children.resize(num_children);
+                            s.ReadBuffer(&m.m_children[0], num_children * sizeof(UInt32));
+                        }
                     }
 
 
                     {
                         uint32_t num_primitives;
 
-
                         Read(s, num_primitives);
-                        m.m_primitives.resize(num_primitives);
 
-                        for (auto i = 0U; i < num_primitives; i++)
+                        if (num_primitives)
                         {
-                            auto& p = m.m_primitives[i];
+                            m.m_primitives.resize(num_primitives);
 
-                            Read(s, p.m_type);
+                            for (auto i = 0U; i < num_primitives; i++)
+                            {
+                                auto& p = m.m_primitives[i];
 
-                            uint32_t num_indices;
+                                Read(s, p.m_type);
 
-                            Read(s, num_indices);
-                            p.m_indices.resize(num_indices);
-                            s.ReadBuffer(&p.m_indices[0], num_indices * sizeof(uint32_t));
+                                uint32_t num_indices;
+
+                                Read(s, num_indices);
+                                p.m_indices.resize(num_indices);
+                                s.ReadBuffer(&p.m_indices[0], num_indices * sizeof(uint32_t));
+                            }
                         }
-
                     }
 
                     {
                         uint32_t num_position_keys;
 
                         Read(s, num_position_keys);
-                        m.m_animation.m_position_keys.m_keys.resize(num_position_keys);
 
-                        for (auto i = 0U; i < num_position_keys; ++i)
+                        if (num_position_keys)
                         {
-                            auto& key = m.m_animation.m_position_keys.m_keys[i];
-                            Read(s, key.m_start_time);
-                            Read(s, key.m_end_time);
-                            Read(s, key.m_value);
+                            m.m_animation.m_position_keys.m_keys.resize(num_position_keys);
+
+                            for (auto i = 0U; i < num_position_keys; ++i)
+                            {
+                                auto& key = m.m_animation.m_position_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
                         }
                     }
 
@@ -233,14 +246,18 @@ namespace AdvancedMicroDevices
                         uint32_t num_rotation_keys;
 
                         Read(s, num_rotation_keys);
-                        m.m_animation.m_rotation_keys.m_keys.resize(num_rotation_keys);
 
-                        for (auto i = 0U; i < num_rotation_keys; ++i)
+                        if (num_rotation_keys)
                         {
-                            auto& key = m.m_animation.m_rotation_keys.m_keys[i];
-                            Read(s, key.m_start_time);
-                            Read(s, key.m_end_time);
-                            Read(s, key.m_value);
+                            m.m_animation.m_rotation_keys.m_keys.resize(num_rotation_keys);
+
+                            for (auto i = 0U; i < num_rotation_keys; ++i)
+                            {
+                                auto& key = m.m_animation.m_rotation_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
                         }
                     }
 
@@ -248,14 +265,18 @@ namespace AdvancedMicroDevices
                         uint32_t num_scale_keys;
 
                         Read(s, num_scale_keys);
-                        m.m_animation.m_scale_keys.m_keys.resize(num_scale_keys);
 
-                        for (auto i = 0U; i < num_scale_keys; ++i)
+                        if (num_scale_keys)
                         {
-                            auto& key = m.m_animation.m_scale_keys.m_keys[i];
-                            Read(s, key.m_start_time);
-                            Read(s, key.m_end_time);
-                            Read(s, key.m_value);
+                            m.m_animation.m_scale_keys.m_keys.resize(num_scale_keys);
+
+                            for (auto i = 0U; i < num_scale_keys; ++i)
+                            {
+                                auto& key = m.m_animation.m_scale_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
                         }
                     }
                 }
@@ -265,8 +286,94 @@ namespace AdvancedMicroDevices
         {
             s.Seek(offsetTable.m_bone_chunk);
             uint32_t num_bones;
+
             Read(s, num_bones);
 
+            if (num_bones)
+            {
+                r->m_bones.resize(num_bones);
+
+                for (auto i = 0U; i < num_bones; ++i)
+                {
+                    auto&& bone = r->m_bones[i];
+                    bone.m_id = i;
+
+                    //skip
+                    s.SeekRelative(64);
+
+                    Read(s, bone.m_parent);
+                    {
+
+                        uint32_t children;
+                        Read(s, children);
+
+                        if (children > 0)
+                        {
+                            bone.m_children.resize(children);
+
+                            s.ReadBuffer(&bone.m_children[0], children * sizeof(uint32_t));
+                        }
+                    }
+
+                    {
+                        uint32_t num_position_keys;
+
+                        Read(s, num_position_keys);
+
+                        if (num_position_keys)
+                        {
+                            bone.m_animation.m_position_keys.m_keys.resize(num_position_keys);
+
+                            for (auto i = 0U; i < num_position_keys; ++i)
+                            {
+                                auto& key = bone.m_animation.m_position_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
+                        }
+                    }
+
+
+                    {
+                        uint32_t num_rotation_keys;
+
+                        Read(s, num_rotation_keys);
+
+                        if (num_rotation_keys)
+                        {
+                            bone.m_animation.m_rotation_keys.m_keys.resize(num_rotation_keys);
+
+                            for (auto i = 0U; i < num_rotation_keys; ++i)
+                            {
+                                auto& key = bone.m_animation.m_rotation_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
+                        }
+                    }
+
+                    {
+                        uint32_t num_scale_keys;
+
+                        Read(s, num_scale_keys);
+
+                        if (num_scale_keys)
+                        {
+                            bone.m_animation.m_scale_keys.m_keys.resize(num_scale_keys);
+
+                            for (auto i = 0U; i < num_scale_keys; ++i)
+                            {
+                                auto& key = bone.m_animation.m_scale_keys.m_keys[i];
+                                Read(s, key.m_start_time);
+                                Read(s, key.m_end_time);
+                                Read(s, key.m_value);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
             return r;
