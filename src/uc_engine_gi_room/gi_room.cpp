@@ -101,7 +101,7 @@ namespace AdvancedMicroDevices
                 AddToMaterialRange(indices, index, 2, 26, 1, meshes, triangles, range); // Sci-Fi weirdo stand
                 AddToMaterialRange(indices, index, 2, 32, 1, meshes, triangles, range); // Globe stand
                 AddToMaterialRange(indices, index, 3, 3, 15, meshes, triangles, range); // Ceiling, Pillars, Stands, Wall lights
-                AddToMaterialRange(indices, index, 4, 0, 1, meshes, triangles, range); // Walls
+                AddToMaterialRange(indices, index, 4, 0, 1, meshes, triangles, range);  // Walls
                 AddToMaterialRange(indices, index, 5, 21, 1, meshes, triangles, range); // Teapot
 
                 // Masked materials
@@ -132,6 +132,33 @@ namespace AdvancedMicroDevices
                     pos[i].y -= 6.2f;
                 }
             }
+
+            {
+
+                r->m_albedos[0] = { 0.816f, 0.216f, 0.227f  };
+                r->m_albedos[1] = { 0.435f, 0.443f, 0.682f  };
+                r->m_albedos[2] = { 0.29f,  0.482f, 0.298f  };
+                r->m_albedos[3] = { 0.973f, 0.894f, 0.8f    };
+                r->m_albedos[4] = { 1.0f,   0.6f,   0.2f    };
+                r->m_albedos[5] = { 1.0f,   1.0f,   1.0f    };
+                r->m_albedos[6] = { 0.25f,  0.7f,   0.8f    };
+                r->m_albedos[7] = { 0.2f,   0.2f,   0.2f    };
+                r->m_albedos[8] = { 0.616f, 0.494f, 0.361f  };
+                r->m_albedos[9] = { 0.5f,   0.5f,   0.5f    };
+
+                r->m_speculars[0] = { 0.45f, 0.15f, 0.15f, 16.0f };
+                r->m_speculars[1] = { 0.3f,  0.3f,  0.6f,  16.0f };
+                r->m_speculars[2] = { 0.15f, 0.3f,  0.15f, 16.0f };
+                r->m_speculars[3] = { 0.5f,  0.5f,  0.5f,  16.0f };
+                r->m_speculars[4] = { 4.0f,  2.4f,  1.6f,  24.0f };
+                r->m_speculars[5] = { 0.3f,  0.4f,  0.6f,   4.0f };
+                r->m_speculars[6] = { 0.7f,  0.7f,  0.8f,   4.0f };
+                r->m_speculars[7] = { 0.7f,  0.7f,  0.7f,  16.0f };
+                r->m_speculars[8] = { 0.1f,  0.1f,  0.1f,  32.0f };
+                r->m_speculars[9] = { 0.7f,  0.7f,  0.7f,  16.0f };
+
+            }
+
 
             return r;
         }
