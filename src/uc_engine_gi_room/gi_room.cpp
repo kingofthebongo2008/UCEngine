@@ -44,34 +44,35 @@ namespace AdvancedMicroDevices
 
         std::unique_ptr<Room> CreateRoom()
         {
-            std::array<const wchar_t*, 7 > texture_file_names =
-            {
-                L"appdata/textures/lopal.texture",
-                L"appdata/textures/headpal.texture",
-                L"appdata/textures/picture.texture",
-                L"appdata/textures/floor.texture",
-                L"appdata/textures/globe.texture",
-                L"appdata/textures/wall_lm.texture",
-                L"appdata/textures/ceiling_lm.texture"
-            };
-
-            constexpr auto textures_size = sizeof(texture_file_names) / sizeof(texture_file_names[0]);
-
             concurrency::task_group g;
 
-            std::array< std::unique_ptr<UniqueCreator::Assets::Texture2D>, textures_size > textures;
+            std::array< std::unique_ptr<UniqueCreator::Assets::Texture2D>, 7 > textures;
 
-            for (auto i = 0; i < textures_size; ++i)
             {
-                // 3. Load packaged binarized compressed image 
-                g.run([&textures, &texture_file_names, i]
+                std::array<const wchar_t*, 7 > texture_file_names =
                 {
-                    auto factory = std::make_unique<UniqueCreator::Assets::Texture2DFactory>();
-                    textures[i] = factory->CreateFromFile(texture_file_names[i]);
-                });
+                    L"appdata/textures/lopal.texture",
+                    L"appdata/textures/headpal.texture",
+                    L"appdata/textures/picture.texture",
+                    L"appdata/textures/floor.texture",
+                    L"appdata/textures/globe.texture",
+                    L"appdata/textures/wall_lm.texture",
+                    L"appdata/textures/ceiling_lm.texture"
+                };
+
+                for (auto i = 0; i < 7; ++i)
+                {
+                    // 3. Load packaged binarized compressed image 
+                    g.run([&textures, &texture_file_names, i]
+                    {
+                        auto factory = std::make_unique<UniqueCreator::Assets::Texture2DFactory>();
+                        textures[i] = factory->CreateFromFile(texture_file_names[i]);
+                    });
+                }
             }
 
             std::unique_ptr<Model> m = CreateFromFile(L"appdata/models/gi_room.am");
+            
             g.wait();
 
             std::unique_ptr<Room> r = std::make_unique<Room>( std::move(m), std::move(textures));
@@ -115,9 +116,23 @@ namespace AdvancedMicroDevices
                 // Lightmapped materials
                 AddToMaterialRange(indices, index, 11, 2, 1, meshes, triangles, range); // Ceiling
                 AddToMaterialRange(indices, index, 12, 31, 1, meshes, triangles, range); // Wall light quads
-
-
             }
+
+            {
+                auto s      = model->GetVertexCount();
+                auto pos    = model->GetPositions();
+
+                //patch vertices for this example
+                for (auto i = 0U; i < s; ++i)
+                {
+                    pos[i].x *= 0.2f;
+                    pos[i].y *= 0.2f;
+                    pos[i].z *= 0.2f;
+
+                    pos[i].y -= 6.2f;
+                }
+            }
+
             return r;
         }
     }

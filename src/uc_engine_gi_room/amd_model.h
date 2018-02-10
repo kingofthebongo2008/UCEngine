@@ -72,6 +72,10 @@ namespace AdvancedMicroDevices
             uint32_t                        GetTriangleCount() const { return static_cast<uint32_t>(m_triangle.size()); }
             Triangle*                       GetTriangles() { return &m_triangle[0]; }
             const Triangle*                 GetTriangles() const { return &m_triangle[0]; }
+
+            uint32_t                        GetVertexCount() const { return static_cast<uint32_t>(m_positions.size()); } 
+            Float3*                         GetPositions() { return &m_positions[0]; }
+            const Float3*                   GetPositions() const { return &m_positions[0]; }
         };
 
         std::unique_ptr<Model> CreateFromFile( const wchar_t* file_name );
