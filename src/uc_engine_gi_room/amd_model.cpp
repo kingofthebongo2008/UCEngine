@@ -213,9 +213,9 @@ namespace AdvancedMicroDevices
 
                 for (auto i = 0U; i < num_triangles; ++i)
                 {
-                    Read(s, r->m_triangle[i].v[0]);
-                    Read(s, r->m_triangle[i].v[1]);
-                    Read(s, r->m_triangle[i].v[2]);
+                    Read(s, r->m_triangle[i].m_v[0]);
+                    Read(s, r->m_triangle[i].m_v[1]);
+                    Read(s, r->m_triangle[i].m_v[2]);
                     Read(s, r->m_triangle[i].m_normal);
                 }
             }

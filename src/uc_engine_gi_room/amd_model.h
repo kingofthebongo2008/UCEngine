@@ -38,7 +38,7 @@ namespace AdvancedMicroDevices
 
         struct Triangle
         {
-            uint32_t v[3];
+            uint32_t m_v[3];
             Float3   m_normal;
         };
 
@@ -68,9 +68,11 @@ namespace AdvancedMicroDevices
             
             std::vector< Transform*>        m_bone_hie;
             std::vector< Bone>              m_bones;
-        };
 
-        void AddToMaterialRange(uint32_t *indices, uint32_t &index, const int32_t mat, const uint32_t startMesh, const uint32_t meshCount, const Mesh* meshes, const Triangle* triangles, uint32_t* material_range);
+            uint32_t                        GetTriangleCount() const { return static_cast<uint32_t>(m_triangle.size()); }
+            Triangle*                       GetTriangles() { return &m_triangle[0]; }
+            const Triangle*                 GetTriangles() const { return &m_triangle[0]; }
+        };
 
         std::unique_ptr<Model> CreateFromFile( const wchar_t* file_name );
     }
