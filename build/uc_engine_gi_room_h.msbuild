@@ -8,6 +8,7 @@
 <ClInclude Include = "..\src\uc_engine_gi_room\amd_mesh.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\amd_model.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\amd_transform.h"/>
+<ClInclude Include = "..\src\uc_engine_gi_room\gi_room.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\pch.h"/>
 <ClInclude Include = "..\src\uc_engine_gi_room\targetver.h"/>
 <ClInclude Include = "..\include\uc_public\animations\animations.h"/>

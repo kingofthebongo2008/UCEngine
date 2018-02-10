@@ -10,6 +10,7 @@
 <ClCompile Include = "..\src\uc_engine_gi_room\amd_mesh.cpp" />
 <ClCompile Include = "..\src\uc_engine_gi_room\amd_model.cpp" />
 <ClCompile Include = "..\src\uc_engine_gi_room\amd_transform.cpp" />
+<ClCompile Include = "..\src\uc_engine_gi_room\gi_room.cpp" />
 <ClCompile Include = "..\src\uc_engine_gi_room\main.cpp" />
 </ItemGroup> 
 </Project> 

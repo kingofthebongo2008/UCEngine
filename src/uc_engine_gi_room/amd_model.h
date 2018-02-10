@@ -64,9 +64,9 @@ namespace AdvancedMicroDevices
 
             std::vector<Mesh>               m_mesh;
 
-            std::vector< Transform>         m_mesh_hie;
+            std::vector< Transform*>        m_mesh_hie;
             
-            std::vector< Transform>         m_bone_hie;
+            std::vector< Transform*>        m_bone_hie;
             std::vector< Bone>              m_bones;
         };
 

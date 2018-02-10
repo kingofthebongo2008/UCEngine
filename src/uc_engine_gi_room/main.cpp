@@ -21,7 +21,7 @@
 
 #include <autogen/shaders/full_screen_graphics.h>
 
-
+#include "gi_room.h"
 
 
 using namespace winrt::Windows::ApplicationModel;
@@ -101,6 +101,11 @@ public:
     {
         m_full_screen_main = Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
+        auto t = AdvancedMicroDevices::GraphicDemos::CreateRoom();
+
+
+        /*
+
         static const wchar_t* textures[] =
         {
             L"appdata/textures/lopal.texture",
@@ -135,6 +140,7 @@ public:
         }
 
         g.wait();
+        */
     }
 
     virtual void Run()
