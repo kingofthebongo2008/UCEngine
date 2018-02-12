@@ -206,9 +206,9 @@ public:
                 }
 
                 //Per many draw calls  -> frequency 1
-                ctx->SetPrimitiveTopology(Graphics::PrimitiveTopology::TriangleList);
-                ctx->SetPipelineStateObject(m_full_screen_main.get());
-                ctx->SetDynamicDescriptor(5, m_textures[0]->GetShaderResourceView(), 0);
+                //ctx->SetPrimitiveTopology(Graphics::PrimitiveTopology::TriangleList);
+                //ctx->SetPipelineStateObject(m_full_screen_main.get());
+                //ctx->SetDynamicDescriptor(5, m_textures[0]->GetShaderResourceView(), 0);
                 //ctx->Draw(3, 0);
 
                 ctx->TransitionResource(backBuffer, Graphics::ResourceState::RenderTarget, Graphics::ResourceState::Present);

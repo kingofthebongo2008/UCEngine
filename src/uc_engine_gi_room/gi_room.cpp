@@ -11,7 +11,6 @@ namespace AdvancedMicroDevices
     {
         namespace
         {
-
             void AddToMaterialRange(uint32_t *indices, uint32_t &index, const int32_t mat, const uint32_t startMesh, const uint32_t meshCount, const Mesh* meshes, const Triangle* triangles, uint32_t* material_range)
             {
                 for (uint32_t mesh = startMesh; mesh < startMesh + meshCount; mesh++)
@@ -101,7 +100,7 @@ namespace AdvancedMicroDevices
                 AddToMaterialRange(indices, index, 2, 26, 1, meshes, triangles, range); // Sci-Fi weirdo stand
                 AddToMaterialRange(indices, index, 2, 32, 1, meshes, triangles, range); // Globe stand
                 AddToMaterialRange(indices, index, 3, 3, 15, meshes, triangles, range); // Ceiling, Pillars, Stands, Wall lights
-                AddToMaterialRange(indices, index, 4, 0, 1, meshes, triangles, range);  // Walls
+                AddToMaterialRange(indices, index, 4, 0, 1,  meshes, triangles, range);  // Walls
                 AddToMaterialRange(indices, index, 5, 21, 1, meshes, triangles, range); // Teapot
 
                 // Masked materials
@@ -134,7 +133,6 @@ namespace AdvancedMicroDevices
             }
 
             {
-
                 r->m_albedos[0] = { 0.816f, 0.216f, 0.227f  };
                 r->m_albedos[1] = { 0.435f, 0.443f, 0.682f  };
                 r->m_albedos[2] = { 0.29f,  0.482f, 0.298f  };
@@ -156,9 +154,7 @@ namespace AdvancedMicroDevices
                 r->m_speculars[7] = { 0.7f,  0.7f,  0.7f,  16.0f };
                 r->m_speculars[8] = { 0.1f,  0.1f,  0.1f,  32.0f };
                 r->m_speculars[9] = { 0.7f,  0.7f,  0.7f,  16.0f };
-
             }
-
 
             return r;
         }
