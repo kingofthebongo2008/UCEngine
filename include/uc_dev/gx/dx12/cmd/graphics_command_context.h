@@ -67,12 +67,12 @@ namespace uc
 
                 void clear(gpu_depth_buffer* r)
                 {
-                    clear_depth(r, 0.0f);
+                    clear_depth(r, 1.0f);
                 }
 
                 void clear(gpu_depth_stencil_buffer* r)
                 {
-                    clear_depth_stencil(r, 0.0f, 0 );
+                    clear_depth_stencil(r, 1.0f, 0 );
                 }
 
                 void clear_depth( gpu_depth_buffer* r, float depth )
