@@ -65,6 +65,8 @@
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\indexed_geometry_allocator.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\indexed_geometry_factory.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\indexed_mesh_allocator.cpp" />
+<ClCompile Include = "..\src\uc_dev\private\gx\geo\normal_geometry_allocator.cpp" />
+<ClCompile Include = "..\src\uc_dev\private\gx\geo\normal_meshes_allocator.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\object_allocator.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\skinned_geometry_allocator.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\gx\geo\skinned_geometry_factory.cpp" />

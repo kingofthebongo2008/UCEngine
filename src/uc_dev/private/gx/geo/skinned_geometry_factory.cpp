@@ -49,6 +49,20 @@ namespace uc
 
                 return r;
             }
+
+            managed_normal_mesh_geometry create_normal_mesh(geometry_allocator* rc, gx::dx12::gpu_upload_queue* upload_queue, gsl::span<const gsl::byte> positions, gsl::span<const gsl::byte> uv, gsl::span<const gsl::byte> normal)
+            {
+                size_t vertex_count = positions.size() / 12;    //stride
+
+                managed_normal_mesh_geometry r = make_managed_normal_mesh_geometry(rc, vertex_count);
+
+                upload_queue->upload_buffer(rc->normal_mesh_position(), &positions[0], positions.size(), r->byte_offset(normal_meshes_allocator::component::position));
+                upload_queue->upload_buffer(rc->normal_mesh_uv(), &uv[0], uv.size(), r->byte_offset(normal_meshes_allocator::component::uv));
+                upload_queue->upload_buffer(rc->normal_mesh_normal(), &normal[0], normal.size(), r->byte_offset(normal_meshes_allocator::component::normal));
+                
+                return r;
+            }
+
         }
     }
 }

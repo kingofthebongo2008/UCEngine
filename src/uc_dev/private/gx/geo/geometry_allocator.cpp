@@ -14,7 +14,10 @@ namespace uc
               m_skinned_meshes(rc, options.m_skinned_mesh_vertex_count)
             , m_indices(rc, options.m_index_count)
             , m_static_meshes(rc, options.m_static_mesh_vertex_count)
+            , m_normal_meshes(rc, options.m_normal_mesh_vertex_count)
             {
+
+
 
             }
 
@@ -119,12 +122,54 @@ namespace uc
                 return m_static_meshes.static_mesh_uv_view();
             }
 
+            //--------------------------------------------------------------------------------------------------------
+            geometry_allocator::normal_allocation*  geometry_allocator::allocate_normal_geometry(size_t vertex_count)
+            {
+                return m_normal_meshes.allocate(static_cast<uint32_t>(vertex_count));
+            }
+
+            void geometry_allocator::free_normal_geometry(geometry_allocator::normal_allocation* free)
+            {
+                m_normal_meshes.free(free);
+            }
+
+            dx12::gpu_buffer* geometry_allocator::normal_mesh_position() const
+            {
+                return m_normal_meshes.normal_mesh_position();
+            }
+
+            dx12::gpu_buffer*  geometry_allocator::normal_mesh_uv() const
+            {
+                return m_normal_meshes.normal_mesh_uv();
+            }
+
+            dx12::gpu_buffer*  geometry_allocator::normal_mesh_normal() const
+            {
+                return m_normal_meshes.normal_mesh_normal();
+            }
+
+            vertex_buffer_view  geometry_allocator::normal_mesh_position_view() const
+            {
+                return m_normal_meshes.normal_mesh_position_view();
+            }
+
+            vertex_buffer_view  geometry_allocator::normal_mesh_uv_view() const
+            {
+                return m_normal_meshes.normal_mesh_uv_view();
+            }
+
+            vertex_buffer_view  geometry_allocator::normal_mesh_normal_view() const
+            {
+                return m_normal_meshes.normal_mesh_normal_view();
+            }
+
             void geometry_allocator::sync()
             {
                 //todo: parallel
                 m_skinned_meshes.sync();
                 m_indices.sync();
                 m_static_meshes.sync();
+                m_normal_meshes.sync();
             }
         }
     }
