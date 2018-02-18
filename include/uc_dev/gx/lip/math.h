@@ -60,6 +60,18 @@ namespace uc
 
         LIP_DECLARE_TYPE_ID(uc::lip::point3)
 
+        struct point4
+        {
+            float m_x;
+            float m_y;
+            float m_z;
+            float m_w;
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::point4)
+
         struct alignas(16) quaternion
         {
             float m_x;

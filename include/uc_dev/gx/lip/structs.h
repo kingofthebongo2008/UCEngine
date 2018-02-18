@@ -39,17 +39,17 @@ namespace uc
 
         LIP_DECLARE_TYPE_ID(uc::lip::float4)
 
-		struct alignas(16) float4a
-		{
-			float m_x;
-			float m_y;
-			float m_z;
-			float m_w;
+        struct alignas(16) float4a
+        {
+            float m_x;
+            float m_y;
+            float m_z;
+            float m_w;
 
-			LIP_DECLARE_RTTI()
-		};
+            LIP_DECLARE_RTTI()
+        };
 
-		LIP_DECLARE_TYPE_ID(uc::lip::float4a)
+        LIP_DECLARE_TYPE_ID(uc::lip::float4a)
 
         struct ubyte4
         {
@@ -72,5 +72,37 @@ namespace uc
         };
 
         LIP_DECLARE_TYPE_ID(uc::lip::uint4)
+
+        struct alignas(32) float8a
+        {
+            float m_x;
+            float m_y;
+            float m_z;
+            float m_w;
+
+            float m_a;
+            float m_b;
+            float m_c;
+            float m_d;
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::float8a)
+
+        struct float8
+        {
+            float m_x;
+            float m_y;
+            float m_z;
+            float m_w;
+
+            float m_a;
+            float m_b;
+            float m_c;
+            float m_d;
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::float8)
     }
 }
