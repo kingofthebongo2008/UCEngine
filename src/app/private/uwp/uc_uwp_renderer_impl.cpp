@@ -42,10 +42,11 @@ namespace uc
                 m_resources.add_swapchain(swap_chain::swap_chain_type::foreground_core_window);
             }
 
-            gx::geo::geometry_allocator_options o;
+            gx::geo::geometry_allocator_options o = {};
             o.m_index_count = 1000000;
             o.m_skinned_mesh_vertex_count = 1000000;
             o.m_static_mesh_vertex_count = 1000000;
+            o.m_normal_mesh_vertex_count = 1000000;
 
             m_geometry_allocator            = std::make_unique<gx::geo::geometry_allocator>(m_resources.resource_create_context(), o);
         }
