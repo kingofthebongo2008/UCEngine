@@ -456,9 +456,9 @@ namespace uc
 
                 inline geo::skinned_mesh::skeleton_pose_t transform_dcc_pose(const geo::skinned_mesh::skeleton_pose_t& p, const fbx_context* ctx)
                 {
-                    geo::skinned_mesh::skeleton_pose_t r = p;
+                    geo::skinned_mesh::skeleton_pose_t q = p;
 
-                    for (auto && r : r.m_joint_local_pose)
+                    for (auto && r : q.m_joint_local_pose)
                     {
                         auto m                              = r.m_transform_matrix.m_transform;
                         auto m0                             = transform_from_dcc(m, ctx);
@@ -469,7 +469,7 @@ namespace uc
 
                     }
 
-                    for (auto && r  : r.m_skeleton.m_joints)
+                    for (auto && r  : q.m_skeleton.m_joints)
                     {
                         auto m          = r.m_inverse_bind_pose2.m_transform;
                         auto m0         = transform_from_dcc(m, ctx);
@@ -479,7 +479,7 @@ namespace uc
                         r.m_inverse_bind_pose.m_translation = math::translation(m0);
                     }
 
-                    return r;
+                    return q;
                 }
                 
 
