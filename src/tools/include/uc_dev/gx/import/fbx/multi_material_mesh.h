@@ -28,8 +28,9 @@ namespace uc
                     assert(mesh_node);
                     assert(mesh->GetPolygonSize(0));
 
-                    std::vector<geo::multi_material_mesh::positions_t> positions;   //positions used by every material
-                    std::vector<geo::multi_material_mesh::uvs_t>       uvs;         //uvs used by every material
+                    std::vector<geo::multi_material_mesh::positions_t>      positions;   //positions used by every material
+                    std::vector<geo::multi_material_mesh::uvs_t>            uvs;         //uvs used by every material
+                    std::vector<geo::multi_material_mesh::normals_t>        normals;         //uvs used by every material
 
                     auto material_count = mesh->GetElementMaterialCount();
 
@@ -80,11 +81,13 @@ namespace uc
 
                     //get_positions
                     positions.resize(materials_indices.size());
+                    normals.resize(materials_indices.size());
                     uvs.resize(materials_indices.size());
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
                         positions[i] = get_positions(mesh, materials_indices[i]);
+                        normals[i] = get_normals(mesh, materials_indices[i]);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
                     }
 
@@ -108,7 +111,7 @@ namespace uc
                         }
                     }
 
-                    return std::make_shared<geo::multi_material_mesh>(std::move(positions), std::move(uvs), std::move(faces), get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())));
+                    return std::make_shared<geo::multi_material_mesh>(std::move(positions), std::move(normals), std::move(uvs), std::move(faces), get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())));
                 }
 
                 //////////////////////
@@ -134,6 +137,7 @@ namespace uc
 
                     //merge all multimaterial meshes into one
                     std::vector< geo::multi_material_mesh::positions_t > pos;
+                    std::vector< geo::multi_material_mesh::normals_t >   normals;
                     std::vector< geo::multi_material_mesh::uvs_t >       uv;
                     std::vector< geo::multi_material_mesh::faces_t >     faces;
                     std::vector< geo::multi_material_mesh::material >    mat;
@@ -141,13 +145,14 @@ namespace uc
                     for (auto&& m : multimeshes)
                     {
                         pos.insert(pos.end(), m->m_positions.begin(), m->m_positions.end());
+                        normals.insert(normals.end(), m->m_normals.begin(), m->m_normals.end());
                         uv.insert(uv.end(), m->m_uv.begin(), m->m_uv.end());
                         faces.insert(faces.end(), m->m_faces.begin(), m->m_faces.end());
                         mat.insert(mat.end(), m->m_materials.begin(), m->m_materials.end());
                         
                     }
 
-                    return std::make_shared<geo::multi_material_mesh>(std::move(pos), std::move(uv), std::move(faces), std::move(mat));
+                    return std::make_shared<geo::multi_material_mesh>(std::move(pos), std::move(normals), std::move(uv), std::move(faces), std::move(mat));
                 }
             }
         }

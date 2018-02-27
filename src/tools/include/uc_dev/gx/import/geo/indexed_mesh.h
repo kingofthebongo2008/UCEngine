@@ -171,9 +171,11 @@ namespace uc
 
                     using position_t    = position;
                     using uv_t          = uv;;
+                    using normal_t      = normal;
                     using positions_t   = std::vector<position>;
                     using faces_t       = std::vector<face>;
                     using uvs_t         = std::vector<uv>;
+                    using normals_t     = std::vector<normal>;
 
                     indexed_mesh(
                         const std::vector< position >&   positions,
@@ -200,6 +202,20 @@ namespace uc
                         std::vector< face >   &&     faces
                     ) :
                         m_positions(std::move(positions))
+                        , m_uv(std::move(uv))
+                        , m_faces(std::move(faces))
+                    {
+                        initialize();
+                    }
+
+                    indexed_mesh(
+                        std::vector< position > &&      positions,
+                        std::vector< normal >  &&       normals,
+                        std::vector< uv > &&            uv,
+                        std::vector< face >   &&        faces
+                    ) :
+                        m_positions(std::move(positions))
+                        , m_normals(std::move(normals))
                         , m_uv(std::move(uv))
                         , m_faces(std::move(faces))
                     {
@@ -350,7 +366,7 @@ namespace uc
 
                         std::transform(normals.begin(), normals.end(), normals.begin(), [=](normal& n0)
                         {
-                            math::float4 n = math::load3u_vector(&n0);
+                            math::float4 n  = math::load3u_vector(&n0);
                             math::float4 n1 = math::normalize3(n);
 
                             normal result;

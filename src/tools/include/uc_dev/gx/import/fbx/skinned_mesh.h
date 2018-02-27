@@ -500,20 +500,26 @@ namespace uc
 
                     auto materials_indices = get_material_indices(mesh);
                     std::vector<geo::skinned_mesh::positions_t> positions;                  //positions used by every material
+                    std::vector<geo::skinned_mesh::normals_t>   normals;                    //normals used by every material
                     std::vector<geo::skinned_mesh::uvs_t>       uvs;                        //uvs used by every material
                     std::vector<geo::skinned_mesh::blend_weights_t>   blend_weights;        //blend_weights used by every material
                     std::vector<geo::skinned_mesh::blend_indices_t>   blend_indices;        //blend_indices used by every material
 
+                    
+
                     //get_positions
                     positions.resize(materials_indices.size());
+                    normals.resize(materials_indices.size());
                     uvs.resize(materials_indices.size());
                     blend_weights.resize(materials_indices.size());
                     blend_indices.resize(materials_indices.size());
+
 
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
                         positions[i] = get_positions(mesh, materials_indices[i]);
                         uvs[i] = get_uvs(mesh, materials_indices[i]);
+                        normals[i] = get_normals(mesh, materials_indices[i]);
                         blend_weights[i] = get_blend_weights(mesh, materials_indices[i]);
                         blend_indices[i] = get_blend_indices(mesh, materials_indices[i]);
                     }
@@ -544,6 +550,7 @@ namespace uc
                     return std::make_shared<geo::skinned_mesh>(
 
                         transform_dcc_positions(positions, context),
+                        std::move(normals),
                         std::move(uvs),
                         std::move(faces),
                         get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())),
@@ -581,6 +588,7 @@ namespace uc
 
                     //merge all multimaterial meshes into one
                     std::vector< geo::skinned_mesh::positions_t > pos;
+                    std::vector< geo::skinned_mesh::normals_t >   normals;
                     std::vector< geo::skinned_mesh::uvs_t >       uv;
                     std::vector< geo::skinned_mesh::faces_t >     faces;
                     std::vector< geo::skinned_mesh::material >    mat;
@@ -592,6 +600,7 @@ namespace uc
                     for (auto&& m : multimeshes)
                     {
                         pos.insert(pos.end(), m->m_positions.begin(), m->m_positions.end());
+                        normals.insert(normals.end(), m->m_normals.begin(), m->m_normals.end());
                         uv.insert(uv.end(), m->m_uv.begin(), m->m_uv.end());
                         faces.insert(faces.end(), m->m_faces.begin(), m->m_faces.end());
                         mat.insert(mat.end(), m->m_materials.begin(), m->m_materials.end());
@@ -602,6 +611,7 @@ namespace uc
 
                     return std::make_shared<geo::skinned_mesh>(
                         std::move(pos), 
+                        std::move(normals),
                         std::move(uv),
                         std::move(faces),
                         std::move(mat),

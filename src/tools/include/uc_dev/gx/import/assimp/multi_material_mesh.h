@@ -72,6 +72,26 @@ namespace uc
                     return uv;
                 }
 
+                inline std::vector< geo::multi_material_mesh::normal_t > normal(const aiMesh* mesh)
+                {
+                    using normal_t = geo::multi_material_mesh::normal_t;
+                    std::vector< normal_t > normal;
+                    normal.reserve(mesh->mNumVertices);
+
+                    auto normal_span = gsl::make_span(mesh->mNormals, mesh->mNumVertices);
+
+                    for (auto&& i : normal_span)
+                    {
+                        normal_t p;
+                        p.x = i.x;
+                        p.y = i.y;
+                        p.z = i.z;
+                        normal.push_back(p);
+                    }
+
+                    return normal;
+                }
+
                 inline std::vector< geo::multi_material_mesh::uvs_t > uvs(const gsl::span<aiMesh*> meshes)
                 {
                     using uvs_t = geo::multi_material_mesh::uvs_t;
@@ -81,6 +101,19 @@ namespace uc
                     concurrency::parallel_for(0U, static_cast<uint32_t>(meshes.size()), [&vertices, &meshes](uint32_t i)
                     {
                         vertices[i] = uv(meshes[i]);
+                    });
+                    return vertices;
+                }
+
+                inline std::vector< geo::multi_material_mesh::normals_t > normals(const gsl::span<aiMesh*> meshes)
+                {
+                    using normals_t = geo::multi_material_mesh::normals_t;
+                    std::vector< normals_t > vertices;
+                    vertices.resize(meshes.size());
+
+                    concurrency::parallel_for(0U, static_cast<uint32_t>(meshes.size()), [&vertices, &meshes](uint32_t i)
+                    {
+                        vertices[i] = normal(meshes[i]);
                     });
                     return vertices;
                 }
@@ -190,8 +223,9 @@ namespace uc
                     auto uv     = uvs(meshes);
                     auto face   = faces(meshes);
                     auto mat    = materials(scene.get(), meshes);
+                    auto normal = normals(meshes);
 
-                    return std::make_unique<geo::multi_material_mesh>(std::move(v), std::move(uv), std::move(face), std::move(mat));
+                    return std::make_unique<geo::multi_material_mesh>(std::move(v), std::move(normal), std::move(uv), std::move(face), std::move(mat));
                 }
 
                 inline std::vector< geo::multi_material_mesh::faces_t > create_multi_material_mesh_faces(const std::string& file_name, uint32_t import_flags = aiProcess_ImproveCacheLocality | aiProcess_ValidateDataStructure | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_FindInvalidData)

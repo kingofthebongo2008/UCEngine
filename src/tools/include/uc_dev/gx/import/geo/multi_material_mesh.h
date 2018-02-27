@@ -19,7 +19,7 @@ namespace uc
 
                     using positions_t   = indexed_mesh::positions_t;
                     using uvs_t         = indexed_mesh::uvs_t;
-                    using normals_t     = std::vector<normal_t>;
+                    using normals_t     = indexed_mesh::normals_t;
                     using faces_t       = indexed_mesh::faces_t;
 
                     enum material_type : uint16_t
@@ -39,10 +39,15 @@ namespace uc
                     multi_material_mesh
                     (
                         std::vector<positions_t>&& positions,
+                        std::vector<normals_t>&& normals,
                         std::vector<uvs_t>&& uv,
                         std::vector<faces_t>&& faces,
                         std::vector<material>&& materials
-                    ) : m_positions(std::move(positions)), m_uv(std::move(uv)), m_faces(std::move(faces)), m_materials(std::move(materials))
+                    ) : m_positions(std::move(positions))
+                        , m_normals(std::move(normals))
+                        , m_uv(std::move(uv))
+                        , m_faces(std::move(faces))
+                        , m_materials(std::move(materials))
                     {
 
                     }
@@ -50,17 +55,20 @@ namespace uc
                     multi_material_mesh
                     (
                         positions_t&& positions,
+                        normals_t&& normals,
                         uvs_t&& uv,
                         faces_t&& faces,
                         std::vector<material>&& materials
                     ) : m_materials(std::move(materials))
                     {
                         m_positions.emplace_back(std::move(positions));
+                        m_normals.emplace_back(std::move(normals));
                         m_uv.emplace_back(std::move(uv));
                         m_faces.emplace_back(std::move(faces));
                     }
 
                     std::vector<positions_t> m_positions;
+                    std::vector<normals_t>   m_normals;
                     std::vector<uvs_t>       m_uv;
                     std::vector<faces_t>     m_faces;
                     std::vector<material>    m_materials;
@@ -69,22 +77,25 @@ namespace uc
                 template <typename mesh> struct mesh_view
                 {
                     mesh*                       m_mesh;
-                    using position_t = typename mesh::position_t;
-                    using uv_t = typename mesh::uv_t;
-                    using face_t = typename mesh::face_t;
+                    using position_t    = typename mesh::position_t;
+                    using uv_t          = typename mesh::uv_t;
+                    using normal_t      = typename mesh::normal_t;
+                    using face_t        = typename mesh::face_t;
                 };
 
                 template <typename mesh> struct material_view : public mesh_view<mesh>
                 {
-                    using base = mesh_view<mesh>;
-                    using positions_t = multi_material_mesh::positions_t;
-                    using uvs_t = multi_material_mesh::uvs_t;
-                    using faces_t = multi_material_mesh::faces_t;
-                    using material = multi_material_mesh::material;
+                    using base          = mesh_view<mesh>;
+                    using positions_t   = multi_material_mesh::positions_t;
+                    using uvs_t         = multi_material_mesh::uvs_t;
+                    using normals_t     = multi_material_mesh::normals_t;
+                    using faces_t       = multi_material_mesh::faces_t;
+                    using material      = multi_material_mesh::material;
 
-                    using position_t = typename base::position_t;
-                    using uv_t = typename base::uv_t;
-                    using face_t = typename base::face_t;
+                    using position_t    = typename base::position_t;
+                    using normal_t      = typename base::normal_t;
+                    using uv_t          = typename base::uv_t;
+                    using face_t        = typename base::face_t;
 
                     using material_index = uint32_t;
 
@@ -101,6 +112,16 @@ namespace uc
                     const positions_t& position(material_index idx) const
                     {
                         return m_mesh->m_positions[index(idx)];
+                    }
+
+                    normals_t& normals(material_index idx)
+                    {
+                        return m_mesh->m_normals[index(idx)];
+                    }
+
+                    const normals_t& normals(material_index idx) const
+                    {
+                        return m_mesh->m_normals[index(idx)];
                     }
 
                     uvs_t& uv(material_index idx)
@@ -172,6 +193,7 @@ namespace uc
 
                     using positions_t = base::positions_t;
                     using uvs = base::uvs_t;
+                    using normals = base::normals_t;
                     using faces = base::faces_t;
                     using material = base::material;
                     using position_t = base::position_t;
