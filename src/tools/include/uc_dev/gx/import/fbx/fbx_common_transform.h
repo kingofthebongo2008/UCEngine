@@ -57,12 +57,12 @@ namespace uc
                     }
                 };
 
-                struct get_uv_point_index
+                struct get_basic_point_index
                 {
                     virtual uint32_t get_element(uint32_t triangle_index, uint32_t triangle_vertex) const = 0;
                 };
 
-                struct get_uv_control_point_index : public get_uv_point_index
+                struct get_uv_control_point_index : public get_basic_point_index
                 {
                     int* m_control_points;
 
@@ -79,7 +79,7 @@ namespace uc
                     }
                 };
 
-                struct get_uv_texture_index : public get_uv_point_index
+                struct get_uv_texture_index : public get_basic_point_index
                 {
                     const fbxsdk::FbxMesh* m_mesh;
                 public:
@@ -139,12 +139,12 @@ namespace uc
                 };
 
 
-                struct get_normal_control_point_index : public get_uv_point_index
+                struct get_control_point_index : public get_basic_point_index
                 {
                     int* m_control_points;
 
                 public:
-                    get_normal_control_point_index(int* control_points) : m_control_points(control_points)
+                    get_control_point_index(int* control_points) : m_control_points(control_points)
                     {
 
                     }
@@ -156,12 +156,12 @@ namespace uc
                     }
                 };
 
-                struct get_normal_point_index : public get_uv_point_index
+                struct get_point_index : public get_basic_point_index
                 {
                     const fbxsdk::FbxMesh* m_mesh;
                 public:
 
-                    get_normal_point_index(const fbxsdk::FbxMesh* m) : m_mesh(m)
+                    get_point_index(const fbxsdk::FbxMesh* m) : m_mesh(m)
                     {
 
                     }
@@ -312,18 +312,18 @@ namespace uc
                         get_uv = &get_uv_1;
                     }
 
-                    get_uv_point_index* get_point_index = nullptr;
-                    get_uv_texture_index get_texture0(mesh);
-                    get_uv_control_point_index get_texture1(indices);
+                    get_basic_point_index*      gpi = nullptr;
+                    get_uv_texture_index        get_texture0(mesh);
+                    get_uv_control_point_index  get_texture1(indices);
 
                     if (uv->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
                     {
-                        get_point_index = &get_texture1;
+                        gpi = &get_texture1;
                     }
                     else
                     {
                         assert(uv->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
-                        get_point_index = &get_texture0;
+                        gpi = &get_texture0;
                         get_uv = &get_uv_0; //todo; check this, produces different uvs? the file data indicates otherwise
                     }
 
@@ -331,9 +331,9 @@ namespace uc
                     {
                         //uv
                         {
-                            auto uvi0 = get_point_index->get_element(triangle, 0);
-                            auto uvi1 = get_point_index->get_element(triangle, 1);
-                            auto uvi2 = get_point_index->get_element(triangle, 2);
+                            auto uvi0 = gpi->get_element(triangle, 0);
+                            auto uvi1 = gpi->get_element(triangle, 1);
+                            auto uvi2 = gpi->get_element(triangle, 2);
 
                             double* uv0 = get_uv->get_element(uvi0);
                             double* uv1 = get_uv->get_element(uvi1);
@@ -378,18 +378,18 @@ namespace uc
                         get_uv = &get_uv_1;
                     }
 
-                    get_uv_point_index* get_point_index = nullptr;
-                    get_uv_texture_index get_texture0(mesh);
-                    get_uv_control_point_index get_texture1(indices);
+                    get_basic_point_index*      gpi = nullptr;
+                    get_uv_texture_index        get_texture0(mesh);
+                    get_uv_control_point_index  get_texture1(indices);
 
                     if (uv->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
                     {
-                        get_point_index = &get_texture1;
+                        gpi = &get_texture1;
                     }
                     else
                     {
                         assert(uv->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
-                        get_point_index = &get_texture0;
+                        gpi = &get_texture0;
                         get_uv = &get_uv_0; //todo; check this, produces different uvs? the file data indicates otherwise
                     }
 
@@ -398,9 +398,9 @@ namespace uc
                         auto triangle_to_fetch = triangle_indices[triangle];
                         //uv
                         {
-                            auto uvi0 = get_point_index->get_element(triangle_to_fetch, 0);
-                            auto uvi1 = get_point_index->get_element(triangle_to_fetch, 1);
-                            auto uvi2 = get_point_index->get_element(triangle_to_fetch, 2);
+                            auto uvi0 = gpi->get_element(triangle_to_fetch, 0);
+                            auto uvi1 = gpi->get_element(triangle_to_fetch, 1);
+                            auto uvi2 = gpi->get_element(triangle_to_fetch, 2);
 
                             double* uv0 = get_uv->get_element(uvi0);
                             double* uv1 = get_uv->get_element(uvi1);
@@ -444,18 +444,18 @@ namespace uc
                         get_normal = &get_normal_1;
                     }
 
-                    get_uv_point_index*                  get_point_index = nullptr;
-                    get_normal_point_index               get_texture0(mesh);
-                    get_normal_control_point_index       get_texture1(indices);
+                    get_basic_point_index*                  gpi = nullptr;
+                    get_point_index                         get_texture0(mesh);
+                    get_control_point_index                 get_texture1(indices);
 
                     if (normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
                     {
-                        get_point_index = &get_texture1;
+                        gpi = &get_texture1;
                     }
                     else
                     {
                         assert(normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
-                        get_point_index = &get_texture0;
+                        gpi = &get_texture0;
                         get_normal = &get_normal_0; //todo; check this, produces different normals? the file data indicates otherwise
                     }
 
@@ -463,9 +463,9 @@ namespace uc
                     {
                         //normal
                         {
-                            auto normali0 = get_point_index->get_element(triangle, 0);
-                            auto normali1 = get_point_index->get_element(triangle, 1);
-                            auto normali2 = get_point_index->get_element(triangle, 2);
+                            auto normali0 = gpi->get_element(triangle, 0);
+                            auto normali1 = gpi->get_element(triangle, 1);
+                            auto normali2 = gpi->get_element(triangle, 2);
 
                             double* normal0 = get_normal->get_element(normali0);
                             double* normal1 = get_normal->get_element(normali1);
@@ -517,18 +517,18 @@ namespace uc
                         get_normal = &get_normal_1;
                     }
 
-                    get_uv_point_index*             get_point_index = nullptr;
-                    get_normal_point_index          get_texture0(mesh);
-                    get_normal_control_point_index  get_texture1(indices);
+                    get_basic_point_index*          gpi = nullptr;
+                    get_point_index                 get_texture0(mesh);
+                    get_control_point_index         get_texture1(indices);
 
                     if (normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
                     {
-                        get_point_index = &get_texture1;
+                        gpi = &get_texture1;
                     }
                     else
                     {
                         assert(normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
-                        get_point_index = &get_texture0;
+                        gpi = &get_texture0;
                         get_normal = &get_normal_0;
                     }
 
@@ -537,9 +537,9 @@ namespace uc
                         auto triangle_to_fetch = triangle_indices[triangle];
                         //normal
                         {
-                            auto normali0 = get_point_index->get_element(triangle_to_fetch, 0);
-                            auto normali1 = get_point_index->get_element(triangle_to_fetch, 1);
-                            auto normali2 = get_point_index->get_element(triangle_to_fetch, 2);
+                            auto normali0 = gpi->get_element(triangle_to_fetch, 0);
+                            auto normali1 = gpi->get_element(triangle_to_fetch, 1);
+                            auto normali2 = gpi->get_element(triangle_to_fetch, 2);
 
                             double* normal0 = get_normal->get_element(normali0);
                             double* normal1 = get_normal->get_element(normali1);
@@ -557,7 +557,6 @@ namespace uc
                             math::store3u(&normalp0, vr0);
                             math::store3u(&normalp1, vr1);
                             math::store3u(&normalp2, vr2);
-
 
                             normals.push_back(normalp0);
                             normals.push_back(normalp1);
