@@ -96,8 +96,6 @@ namespace uc
                     }
                 };
 
-
-
                 struct get_normal_element
                 {
                     virtual fbxsdk::FbxVector4 get_element(uint32_t index) const = 0;
@@ -138,6 +136,43 @@ namespace uc
                     }
                 };
 
+                
+                template <typename fbx_geometry_element_t>
+                struct get_typed_element_direct : public get_normal_element
+                {
+                    const fbx_geometry_element_t* m_element;
+
+                public:
+
+                    get_typed_element_direct(const fbx_geometry_element_t* element) : m_element(element)
+                    {
+
+                    }
+
+                    virtual fbxsdk::FbxVector4 get_element(uint32_t control_point_index) const override
+                    {
+                        return m_element->GetDirectArray().GetAt(control_point_index);
+                    }
+                };
+
+                template <typename fbx_geometry_element_t>
+                struct get_typed_element_index_to_direct : public get_normal_element
+                {
+                    const fbx_geometry_element_t* m_element;
+
+                public:
+
+                    get_typed_element_index_to_direct(const fbx_geometry_element_t* element) : m_element(element)
+                    {
+
+                    }
+
+                    virtual fbxsdk::FbxVector4 get_element(uint32_t control_point_index) const override
+                    {
+                        auto id = m_element->GetIndexArray().GetAt(control_point_index);
+                        return m_element->GetDirectArray().GetAt(id);
+                    }
+                };
 
                 struct get_control_point_index : public get_basic_point_index
                 {
@@ -172,8 +207,6 @@ namespace uc
                         return triangle_index;
                     }
                 };
-
-
 
                 inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh, const std::array<int32_t, 3> & p)
                 {
@@ -425,38 +458,40 @@ namespace uc
 
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh)
                 {
-                    auto indices = mesh->GetPolygonVertices();
+                    auto indices        = mesh->GetPolygonVertices();
                     auto triangle_count = mesh->GetPolygonCount();
-                    auto normal = mesh->GetElementNormal(0);
+                    auto element        = mesh->GetElementNormal(0);
 
-                    geo::indexed_mesh::normals_t            normals;
-                    get_normal_element*                 get_normal = nullptr;
-                    get_normal_element_direct           get_normal_0(normal);
-                    get_normal_element_index_to_direct  get_normal_1(normal);
+                    using vector_element_type = fbxsdk::FbxGeometryElementNormal;
 
-                    if (normal->GetReferenceMode() == fbxsdk::FbxGeometryElement::eDirect)
+                    geo::indexed_mesh::normals_t            vectors;
+                    get_normal_element*                                         gv = nullptr;
+                    get_typed_element_direct<vector_element_type>               gv_0(element);
+                    get_typed_element_index_to_direct<vector_element_type>      gv_1(element);
+
+                    if (element->GetReferenceMode() == fbxsdk::FbxGeometryElement::eDirect)
                     {
-                        get_normal = &get_normal_0;
+                        gv = &gv_0;
                     }
                     else
                     {
-                        assert(normal->GetReferenceMode() == fbxsdk::FbxGeometryElement::eIndexToDirect);
-                        get_normal = &get_normal_1;
+                        assert(element->GetReferenceMode() == fbxsdk::FbxGeometryElement::eIndexToDirect);
+                        gv = &gv_1;
                     }
 
                     get_basic_point_index*                  gpi = nullptr;
                     get_point_index                         get_texture0(mesh);
                     get_control_point_index                 get_texture1(indices);
 
-                    if (normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
+                    if (element->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
                     {
                         gpi = &get_texture1;
                     }
                     else
                     {
-                        assert(normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
+                        assert(element->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
                         gpi = &get_texture0;
-                        get_normal = &get_normal_0; //todo; check this, produces different normals? the file data indicates otherwise
+                        gv = &gv_0; //todo; check this, produces different normals? the file data indicates otherwise
                     }
 
                     for (auto triangle = 0; triangle < triangle_count; ++triangle)
@@ -467,9 +502,9 @@ namespace uc
                             auto normali1 = gpi->get_element(triangle, 1);
                             auto normali2 = gpi->get_element(triangle, 2);
 
-                            double* normal0 = get_normal->get_element(normali0);
-                            double* normal1 = get_normal->get_element(normali1);
-                            double* normal2 = get_normal->get_element(normali2);
+                            double* normal0 = gv->get_element(normali0);
+                            double* normal1 = gv->get_element(normali1);
+                            double* normal2 = gv->get_element(normali2);
 
                             geo::indexed_mesh::normal_t normalp0 = { static_cast<float>(normal0[0]), static_cast<float>(normal0[1]), static_cast<float>(normal0[2]) };
                             geo::indexed_mesh::normal_t normalp1 = { static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]) };
@@ -484,14 +519,13 @@ namespace uc
                             math::store3u(&normalp1, vr1);
                             math::store3u(&normalp2, vr2);
 
-
-                            normals.push_back(normalp0);
-                            normals.push_back(normalp1);
-                            normals.push_back(normalp2);
+                            vectors.push_back(normalp0);
+                            vectors.push_back(normalp1);
+                            vectors.push_back(normalp2);
                         }
                     }
 
-                    return normals;
+                    return vectors;
                 }
 
                 //returns all normals, which match triangle_indices
