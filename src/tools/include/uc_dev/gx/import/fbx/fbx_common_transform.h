@@ -96,12 +96,12 @@ namespace uc
                     }
                 };
 
-                struct get_normal_element
+                struct get_vector4_element
                 {
                     virtual fbxsdk::FbxVector4 get_element(uint32_t index) const = 0;
                 };
 
-                struct get_normal_element_direct : public get_normal_element
+                struct get_normal_element_direct : public get_vector4_element
                 {
                     const fbxsdk::FbxGeometryElementNormal* m_normal;
 
@@ -118,7 +118,7 @@ namespace uc
                     }
                 };
 
-                struct get_normal_element_index_to_direct : public get_normal_element
+                struct get_normal_element_index_to_direct : public get_vector4_element
                 {
                     const fbxsdk::FbxGeometryElementNormal* m_normal;
 
@@ -138,7 +138,7 @@ namespace uc
 
                 
                 template <typename fbx_geometry_element_t>
-                struct get_typed_element_direct : public get_normal_element
+                struct get_typed_element_direct : public get_vector4_element
                 {
                     const fbx_geometry_element_t* m_element;
 
@@ -156,7 +156,7 @@ namespace uc
                 };
 
                 template <typename fbx_geometry_element_t>
-                struct get_typed_element_index_to_direct : public get_normal_element
+                struct get_typed_element_index_to_direct : public get_vector4_element
                 {
                     const fbx_geometry_element_t* m_element;
 
@@ -456,7 +456,8 @@ namespace uc
                     return uvs;
                 }
 
-                inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh)
+                template <typename triangle_indices_functor_t>
+                inline geo::indexed_mesh::normals_t get_normals_typed(const fbxsdk::FbxMesh* mesh, triangle_indices_functor_t triangle_indices)
                 {
                     auto indices        = mesh->GetPolygonVertices();
                     auto triangle_count = mesh->GetPolygonCount();
@@ -465,7 +466,7 @@ namespace uc
                     using vector_element_type = fbxsdk::FbxGeometryElementNormal;
 
                     geo::indexed_mesh::normals_t            vectors;
-                    get_normal_element*                                         gv = nullptr;
+                    get_vector4_element*                                        gv = nullptr;
                     get_typed_element_direct<vector_element_type>               gv_0(element);
                     get_typed_element_index_to_direct<vector_element_type>      gv_1(element);
 
@@ -496,11 +497,12 @@ namespace uc
 
                     for (auto triangle = 0; triangle < triangle_count; ++triangle)
                     {
-                        //normal
+                        auto triangle_to_fetch = triangle_indices(triangle);
+                        //vector
                         {
-                            auto normali0 = gpi->get_element(triangle, 0);
-                            auto normali1 = gpi->get_element(triangle, 1);
-                            auto normali2 = gpi->get_element(triangle, 2);
+                            auto normali0 = gpi->get_element(triangle_to_fetch, 0);
+                            auto normali1 = gpi->get_element(triangle_to_fetch, 1);
+                            auto normali2 = gpi->get_element(triangle_to_fetch, 2);
 
                             double* normal0 = gv->get_element(normali0);
                             double* normal1 = gv->get_element(normali1);
@@ -528,76 +530,16 @@ namespace uc
                     return vectors;
                 }
 
+                inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh)
+                {
+                    return get_normals_typed(mesh, [](auto triangle_index) {return triangle_index;});
+                }
+
                 //returns all normals, which match triangle_indices
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
-                    auto indices = mesh->GetPolygonVertices();
-                    auto triangle_count = triangle_indices.size();
-                    auto normal = mesh->GetElementNormal(0);
-
-                    geo::indexed_mesh::normals_t        normals;
-
-                    get_normal_element*                 get_normal = nullptr;
-                    get_normal_element_direct           get_normal_0(normal);
-                    get_normal_element_index_to_direct  get_normal_1(normal);
-
-                    if (normal->GetReferenceMode() == fbxsdk::FbxGeometryElement::eDirect)
-                    {
-                        get_normal = &get_normal_0;
-                    }
-                    else
-                    {
-                        assert(normal->GetReferenceMode() == fbxsdk::FbxGeometryElement::eIndexToDirect);
-                        get_normal = &get_normal_1;
-                    }
-
-                    get_basic_point_index*          gpi = nullptr;
-                    get_point_index                 get_texture0(mesh);
-                    get_control_point_index         get_texture1(indices);
-
-                    if (normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByControlPoint)
-                    {
-                        gpi = &get_texture1;
-                    }
-                    else
-                    {
-                        assert(normal->GetMappingMode() == fbxsdk::FbxGeometryElement::eByPolygonVertex);
-                        gpi = &get_texture0;
-                        get_normal = &get_normal_0;
-                    }
-
-                    for (auto triangle = 0; triangle < triangle_count; ++triangle)
-                    {
-                        auto triangle_to_fetch = triangle_indices[triangle];
-                        //normal
-                        {
-                            auto normali0 = gpi->get_element(triangle_to_fetch, 0);
-                            auto normali1 = gpi->get_element(triangle_to_fetch, 1);
-                            auto normali2 = gpi->get_element(triangle_to_fetch, 2);
-
-                            double* normal0 = get_normal->get_element(normali0);
-                            double* normal1 = get_normal->get_element(normali1);
-                            double* normal2 = get_normal->get_element(normali2);
-
-                            geo::indexed_mesh::normal_t normalp0 = { static_cast<float>(normal0[0]), static_cast<float>(normal0[1]), static_cast<float>(normal0[2]) };
-                            geo::indexed_mesh::normal_t normalp1 = { static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]) };
-                            geo::indexed_mesh::normal_t normalp2 = { static_cast<float>(normal2[0]), static_cast<float>(normal2[1]), static_cast<float>(normal2[2]) };
-
-
-                            math::float4  vr0 = math::set(static_cast<float>(normal0[0]), static_cast<float>(normal0[1]), static_cast<float>(normal0[2]), 0.0f);
-                            math::float4  vr1 = math::set(static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]), 0.0f);
-                            math::float4  vr2 = math::set(static_cast<float>(normal2[0]), static_cast<float>(normal2[1]), static_cast<float>(normal2[2]), 0.0f);
-
-                            math::store3u(&normalp0, vr0);
-                            math::store3u(&normalp1, vr1);
-                            math::store3u(&normalp2, vr2);
-
-                            normals.push_back(normalp0);
-                            normals.push_back(normalp1);
-                            normals.push_back(normalp2);
-                        }
-                    }
-                    return normals;
+                    auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index];};
+                    return get_normals_typed(mesh, f);
                 }
             }
         }
