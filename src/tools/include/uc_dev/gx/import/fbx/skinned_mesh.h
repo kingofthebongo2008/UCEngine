@@ -514,12 +514,11 @@ namespace uc
                     blend_weights.resize(materials_indices.size());
                     blend_indices.resize(materials_indices.size());
 
-
                     for (auto i = 0U; i < materials_indices.size(); ++i)
                     {
-                        positions[i] = get_positions(mesh, materials_indices[i]);
-                        uvs[i] = get_uvs(mesh, materials_indices[i]);
-                        normals[i] = get_normals(mesh, materials_indices[i]);
+                        positions[i] = get_positions(mesh, materials_indices[i]);   //todo: positions may be shared
+                        uvs[i] = get_uvs(mesh, materials_indices[i]);               
+                        normals[i] = get_normals(mesh, materials_indices[i]);       
                         blend_weights[i] = get_blend_weights(mesh, materials_indices[i]);
                         blend_indices[i] = get_blend_indices(mesh, materials_indices[i]);
                     }
