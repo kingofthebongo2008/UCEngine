@@ -70,7 +70,7 @@ namespace uc
                         {
                             auto&& node = nodes[i];
 
-                            joint2index.insert(std::make_pair(node, i));
+                            joint2index.insert(std::make_pair(node, static_cast<uint16_t>(i)));
                         }
                     }
 
