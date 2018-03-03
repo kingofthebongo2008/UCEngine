@@ -56,6 +56,40 @@ namespace uc
                     return !(a.x == b.x && a.y == b.y && a.z == b.z);
                 }
 
+                struct storage_tangent
+                {
+                    float x = 0.0f;;
+                    float y = 0.0f;;
+                    float z = 0.0f;;
+                };
+
+                inline bool operator==(const storage_tangent& a, const storage_tangent& b)
+                {
+                    return a.x == b.x && a.y == b.y && a.z == b.z;
+                }
+
+                inline bool operator!=(const storage_normal& a, const storage_tangent& b)
+                {
+                    return !(a.x == b.x && a.y == b.y && a.z == b.z);
+                }
+
+                struct storage_bitangent
+                {
+                    float x = 0.0f;;
+                    float y = 0.0f;;
+                    float z = 0.0f;;
+                };
+
+                inline bool operator==(const storage_bitangent& a, const storage_bitangent& b)
+                {
+                    return a.x == b.x && a.y == b.y && a.z == b.z;
+                }
+
+                inline bool operator!=(const storage_bitangent& a, const storage_bitangent& b)
+                {
+                    return !(a.x == b.x && a.y == b.y && a.z == b.z);
+                }
+
                 struct storage_uv
                 {
                     float x = 0.0f;
@@ -164,6 +198,8 @@ namespace uc
 
                     using position      = storage_position;
                     using normal        = storage_normal;
+                    using tangent       = storage_tangent;
+                    using bitangent     = storage_bitangent;
                     using uv            = storage_uv;
                     using face          = gx::import::geo::face;
 
@@ -176,6 +212,8 @@ namespace uc
                     using faces_t       = std::vector<face>;
                     using uvs_t         = std::vector<uv>;
                     using normals_t     = std::vector<normal>;
+                    using tangents_t    = std::vector<tangent>;
+                    using bitangents_t  = std::vector<bitangent>;
 
                     indexed_mesh(
                         const std::vector< position >&   positions,
