@@ -55,7 +55,7 @@ namespace uc
 
                 g.run([this, c]
                 {
-                    m_robot = gxu::make_render_object_from_file<skinned_multi_material_render_object>(L"appdata/meshes/robot.skinned.model", c->m_resources);
+                    m_robot = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/robot.skinned.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -197,41 +197,36 @@ namespace uc
                     //todo: move this into a big buffer for the whole scene
                     graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+
                     //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_robot->m_geometry));
-                    graphics->set_vertex_buffer(1, gx::geo::make_uv_buffer_view(&m_robot->m_geometry));
-                    graphics->set_vertex_buffer(2, gx::geo::make_blend_weights_buffer_view(&m_robot->m_geometry));
-                    graphics->set_vertex_buffer(3, gx::geo::make_blend_indices_buffer_view(&m_robot->m_geometry));
-                    graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_robot->m_geometry));
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_uv_view());
+                    graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_normal_view());
+                    graphics->set_vertex_buffer(3, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                    graphics->set_vertex_buffer(4, ctx->m_geometry->skinned_mesh_blend_index_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
+                    size_t start = 0;
+                    size_t size = m_robot->m_primitive_ranges.size();
 
-                    /*for ( auto i = 0U; i < 1/*m_animations.size()* /; ++i)
-                    {*/
-                        //draw
-                        auto&& draw = m_draw_constants[(int)current_animation];
-
-                        graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-
-                        size_t start = 0;
-                        size_t size = m_robot->m_geometry.m_ranges.size();
-
-                        for (auto j = start; j < start + size; ++j)
+                    for (auto j = start; j < start + size; ++j)
+                    {
                         {
-                            {
-                                auto& t = m_robot->m_opaque_textures[j];
-                                //material
-                                graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
-                            }
-
-                            {
-                                auto& r = m_robot->m_geometry.m_ranges[j];
-                                //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                                graphics->draw_indexed(r.size(), r.m_begin);
-                            }
+                            auto& t = m_robot->m_opaque_textures[j];
+                            //material
+                            graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
                         }
-                    //}
-                }
 
+                        {
+                            auto& r = m_robot->m_primitive_ranges[j];
+                            auto  base_index_offset     = m_robot->m_indices->index_offset();
+                            auto  base_vertex_offset    = m_robot->m_geometry->draw_offset();
+
+                            //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
+                            graphics->draw_indexed(r.size(), r.m_begin + base_index_offset, base_vertex_offset);
+                        }
+                    }
+                }
 
                 end_render(ctx, graphics.get());
 
@@ -264,21 +259,17 @@ namespace uc
                 }
 
                 //geometry
-                graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_robot->m_geometry));
-                graphics->set_vertex_buffer(1, gx::geo::make_blend_weights_buffer_view(&m_robot->m_geometry));
-                graphics->set_vertex_buffer(2, gx::geo::make_blend_indices_buffer_view(&m_robot->m_geometry));
-                graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_robot->m_geometry));
+                graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_blend_index_view());
+                graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
-                /*for (auto i = 0U; i < 1/*m_animations.size()* /; ++i)
-                {*/
-                    //draw
-                    auto&& draw = m_draw_constants[(int)current_animation];
+                auto  base_index_offset = m_robot->m_indices->index_offset();
+                auto  base_vertex_offset = m_robot->m_geometry->draw_offset();
+                auto  index_count = m_robot->m_indices->index_count();
 
-                    graphics->set_graphics_dynamic_constant_buffer(gx::dx12::default_root_singature::slots::constant_buffer_1, 0, draw);
-                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_robot->m_geometry.indexes().size());
-                //}
-                
+                graphics->draw_indexed(index_count, base_index_offset, base_vertex_offset);
+
                 end_render_depth(ctx, graphics.get());
                 return std::make_unique<graphics_submitable>(std::move(graphics));
 

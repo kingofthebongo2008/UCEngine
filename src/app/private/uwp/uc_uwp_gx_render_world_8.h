@@ -83,7 +83,7 @@ namespace uc
                 std::unique_ptr< submitable >do_render(render_context* ctx) override;
                 std::unique_ptr< submitable >do_render_depth(render_context* ctx) override;
 
-                std::unique_ptr<gxu::skinned_multi_material_render_object>      m_robot;
+                std::unique_ptr<gxu::skinned_render_object>                     m_robot;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned_depth;

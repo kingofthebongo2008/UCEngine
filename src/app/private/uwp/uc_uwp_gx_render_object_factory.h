@@ -36,11 +36,6 @@ namespace uc
                 static std::unique_ptr< multi_material_render_object > make_render_object(const wchar_t* file_name, device_resources* resources);
             };
 
-            template<> struct render_object_factory< skinned_multi_material_render_object>
-            {
-                static std::unique_ptr< skinned_multi_material_render_object > make_render_object(const wchar_t* file_name, device_resources* resources);
-            };
-
             template<> struct render_object_factory< skinned_render_object>
             {
                 static std::unique_ptr< skinned_render_object > make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* r );

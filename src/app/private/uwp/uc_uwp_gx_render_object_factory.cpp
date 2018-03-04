@@ -45,6 +45,7 @@ namespace uc
                 return r;
             }
 
+            /*
             std::unique_ptr<skinned_multi_material_render_object> render_object_factory< skinned_multi_material_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources)
             {
                 std::unique_ptr< skinned_multi_material_render_object > r = std::make_unique< skinned_multi_material_render_object  >();
@@ -80,6 +81,7 @@ namespace uc
 
                 return r;
             }
+            */
 
             std::unique_ptr< skinned_render_object > render_object_factory< skinned_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* allocator)
             {
