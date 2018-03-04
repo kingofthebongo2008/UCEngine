@@ -99,24 +99,25 @@ namespace uc
 
                 struct skinned_mesh_view : material_view<skinned_mesh>
                 {
-                    using base = material_view<skinned_mesh>;
+                    using base              = material_view<skinned_mesh>;
 
-                    using positions_t = base::positions_t;
-                    using uvs_t = base::uvs_t;
-                    using normalss_t = base::normals_t;
-                    using faces_t = base::faces_t;
-                    using material_t = base::material;
-                    using blend_weights_t = skinned_mesh::blend_weights_t;
-                    using blend_indices_t = skinned_mesh::blend_indices_t;
-                    using material_index = base::material_index;
+                    using positions_t       = base::positions_t;
+                    using uvs_t             = base::uvs_t;
+                    using normals_t         = base::normals_t;
+                    using faces_t           = base::faces_t;
+                    using material_t        = base::material;
+                    using blend_weights_t   = skinned_mesh::blend_weights_t;
+                    using blend_indices_t   = skinned_mesh::blend_indices_t;
+                    using material_index    = base::material_index;
 
-                    using position_t = typename base::position_t;
-                    using uv_t = typename base::uv_t;
-                    using face_t = typename base::face_t;
-                    using blend_weight_t = typename skinned_mesh::blend_weight_t;
-                    using blend_index_t = typename skinned_mesh::blend_index_t;
+                    using position_t        = typename base::position_t;
+                    using uv_t              = typename base::uv_t;
+                    using normal_t          = base::normal_t;
+                    using face_t            = typename base::face_t;
+                    using blend_weight_t    = typename skinned_mesh::blend_weight_t;
+                    using blend_index_t     = typename skinned_mesh::blend_index_t;
 
-                    using skeleton_pose_t = skinned_mesh::skeleton_pose_t;
+                    using skeleton_pose_t   = skinned_mesh::skeleton_pose_t;
 
                     const blend_weights_t& blend_weight(material_index idx) const
                     {
