@@ -12,10 +12,10 @@ namespace uc
             {
                 struct multi_material_mesh
                 {
-                    using position_t    = storage_position;
-                    using normal_t      = storage_normal;
-                    using uv_t          = storage_uv;
-                    using face_t        = face;
+                    using position_t    = indexed_mesh::position;
+                    using normal_t      = indexed_mesh::normal;
+                    using uv_t          = indexed_mesh::uv;
+                    using face_t        = indexed_mesh::face;
 
                     using positions_t   = indexed_mesh::positions_t;
                     using uvs_t         = indexed_mesh::uvs_t;
@@ -114,12 +114,12 @@ namespace uc
                         return m_mesh->m_positions[index(idx)];
                     }
 
-                    normals_t& normals(material_index idx)
+                    normals_t& normal(material_index idx)
                     {
                         return m_mesh->m_normals[index(idx)];
                     }
 
-                    const normals_t& normals(material_index idx) const
+                    const normals_t& normal(material_index idx) const
                     {
                         return m_mesh->m_normals[index(idx)];
                     }
