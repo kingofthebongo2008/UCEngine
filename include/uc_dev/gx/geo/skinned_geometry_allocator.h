@@ -29,11 +29,13 @@ namespace uc
 
                 dx12::gpu_buffer*    skinned_mesh_position() const;
                 dx12::gpu_buffer*    skinned_mesh_uv() const;
+                dx12::gpu_buffer*    skinned_mesh_normal() const;
                 dx12::gpu_buffer*    skinned_mesh_blend_weight() const;
                 dx12::gpu_buffer*    skinned_mesh_blend_index() const;
 
                 vertex_buffer_view   skinned_mesh_position_view() const;
                 vertex_buffer_view   skinned_mesh_uv_view() const;
+                vertex_buffer_view   skinned_mesh_normal_view() const;
                 vertex_buffer_view   skinned_mesh_blend_weight_view() const;
                 vertex_buffer_view   skinned_mesh_blend_index_view() const;
 
@@ -45,6 +47,7 @@ namespace uc
 
                 dx12::managed_gpu_buffer           m_skinned_mesh_position;
                 dx12::managed_gpu_buffer           m_skinned_mesh_uv;
+                dx12::managed_gpu_buffer           m_skinned_mesh_normal;
                 dx12::managed_gpu_buffer           m_skinned_mesh_blend_weight;
                 dx12::managed_gpu_buffer           m_skinned_mesh_blend_index;
                 skinned_meshes_allocator           m_skinned_meshes;

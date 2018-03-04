@@ -51,6 +51,11 @@ namespace uc
                 return m_skinned_meshes.skinned_mesh_uv();
             }
 
+            dx12::gpu_buffer* geometry_allocator::skinned_mesh_normal() const
+            {
+                return m_skinned_meshes.skinned_mesh_normal();
+            }
+
             dx12::gpu_buffer* geometry_allocator::skinned_mesh_blend_weight() const
             {
                 return m_skinned_meshes.skinned_mesh_blend_weight();
@@ -74,6 +79,11 @@ namespace uc
             vertex_buffer_view   geometry_allocator::skinned_mesh_uv_view() const
             {
                 return m_skinned_meshes.skinned_mesh_uv_view();
+            }
+
+            vertex_buffer_view   geometry_allocator::skinned_mesh_normal_view() const
+            {
+                return m_skinned_meshes.skinned_mesh_normal_view();
             }
 
             vertex_buffer_view   geometry_allocator::skinned_mesh_blend_weight_view() const

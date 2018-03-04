@@ -22,6 +22,11 @@ namespace uc
                     return vertex_count * default_geometry_uv::stride::value;
                 }
 
+                static inline uint32_t make_normal_size(uint32_t vertex_count)
+                {
+                    return vertex_count * default_geometry_normal::stride::value;
+                }
+
                 static inline uint32_t make_blend_weight_size(uint32_t vertex_count)
                 {
                     return vertex_count * default_geometry_blend_weight::stride::value;
@@ -40,6 +45,7 @@ namespace uc
                 static inline skinned_meshes_allocator::allocator_addresses make_skinned_addresses(
                     const dx12::gpu_buffer* positions,
                     const dx12::gpu_buffer* uv,
+                    const dx12::gpu_buffer* normal,
                     const dx12::gpu_buffer* blend_weight,
                     const dx12::gpu_buffer* blend_index)
                 {
@@ -53,6 +59,11 @@ namespace uc
                     {
                         r.m_uv = uv->virtual_address();
                         r.m_uv_size = static_cast<uint32_t>(size(uv));
+                    }
+
+                    {
+                        r.m_normal = normal->virtual_address();
+                        r.m_normal_size = static_cast<uint32_t>(size(normal));
                     }
 
                     {
@@ -72,9 +83,10 @@ namespace uc
             skinned_geometry_allocator::skinned_geometry_allocator(dx12::gpu_resource_create_context* rc, uint32_t vertex_count) :
             m_skinned_mesh_position (dx12::create_buffer(rc, details::make_positions_size( vertex_count)))
             , m_skinned_mesh_uv(dx12::create_buffer(rc, details::make_uv_size(vertex_count)))
+            , m_skinned_mesh_normal(dx12::create_buffer(rc, details::make_normal_size(vertex_count)))
             , m_skinned_mesh_blend_weight(dx12::create_buffer(rc, details::make_blend_weight_size(vertex_count)))
             , m_skinned_mesh_blend_index(dx12::create_buffer(rc, details::make_blend_index_size(vertex_count)))
-            , m_skinned_meshes(details::make_skinned_addresses( m_skinned_mesh_position.get(), m_skinned_mesh_uv.get(), m_skinned_mesh_blend_weight.get(), m_skinned_mesh_blend_index.get()))
+            , m_skinned_meshes(details::make_skinned_addresses( m_skinned_mesh_position.get(), m_skinned_mesh_uv.get(), m_skinned_mesh_normal.get(), m_skinned_mesh_blend_weight.get(), m_skinned_mesh_blend_index.get()))
             {
 
             }
@@ -99,6 +111,11 @@ namespace uc
                 return m_skinned_mesh_uv.get();
             }
 
+            dx12::gpu_buffer* skinned_geometry_allocator::skinned_mesh_normal() const
+            {
+                return m_skinned_mesh_normal.get();
+            }
+
             dx12::gpu_buffer* skinned_geometry_allocator::skinned_mesh_blend_weight() const
             {
                 return m_skinned_mesh_blend_weight.get();
@@ -117,6 +134,11 @@ namespace uc
             vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_uv_view() const
             {
                 return m_skinned_meshes.view(gx::geo::skinned_meshes_allocator::component::uv);
+            }
+
+            vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_normal_view() const
+            {
+                return m_skinned_meshes.view(gx::geo::skinned_meshes_allocator::component::normal);
             }
 
             vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_blend_weight_view() const
