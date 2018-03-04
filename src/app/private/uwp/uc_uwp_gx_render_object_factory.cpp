@@ -94,7 +94,7 @@ namespace uc
                 auto span_blend_weights = gsl::make_span(mesh->m_blend_weights.data(), mesh->m_blend_weights.size());
                 auto span_blend_indices = gsl::make_span(mesh->m_blend_indices.data(), mesh->m_blend_indices.size());
 
-                r->m_geometry           = gx::geo::create_skinned_mesh(allocator, resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_uv), gsl::as_bytes(span_blend_weights), gsl::as_bytes(span_blend_indices));
+                r->m_geometry           = gx::geo::create_skinned_mesh(allocator, resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_uv), gsl::as_bytes(span_normals), gsl::as_bytes(span_blend_weights), gsl::as_bytes(span_blend_indices));
                 r->m_indices            = gx::geo::create_indexed_geometry(allocator, resources->upload_queue(), gsl::as_bytes(span_indices) );
 
                 r->m_opaque_textures.resize(mesh->m_textures.size());
