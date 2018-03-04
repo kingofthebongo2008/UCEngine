@@ -49,9 +49,10 @@ namespace uc
             {
                 std::unique_ptr< skinned_multi_material_render_object > r = std::make_unique< skinned_multi_material_render_object  >();
 
-                auto mesh = lip::create_from_compressed_lip_file<lip::skinned_model>(file_name);
+                auto mesh = lip::create_from_compressed_lip_file<lip::normal_skinned_model>(file_name);
 
                 auto span_uv            = gsl::make_span(mesh->m_uv.data(), mesh->m_uv.size());
+                auto span_normals       = gsl::make_span(mesh->m_normals.data(), mesh->m_normals.size());
                 auto span_indices       = gsl::make_span(mesh->m_indices.data(), mesh->m_indices.size());
                 auto span_positions     = gsl::make_span(mesh->m_positions.data(), mesh->m_positions.size());
                 auto span_blend_weights = gsl::make_span(mesh->m_blend_weights.data(), mesh->m_blend_weights.size());
@@ -84,9 +85,10 @@ namespace uc
             {
                 std::unique_ptr< skinned_render_object > r = std::make_unique< skinned_render_object >();
 
-                auto mesh = lip::create_from_compressed_lip_file<lip::skinned_model>(file_name);
+                auto mesh = lip::create_from_compressed_lip_file<lip::normal_skinned_model>(file_name);
 
                 auto span_uv            = gsl::make_span(mesh->m_uv.data(), mesh->m_uv.size());
+                auto span_normals       = gsl::make_span(mesh->m_normals.data(), mesh->m_normals.size());
                 auto span_indices       = gsl::make_span(mesh->m_indices.data(), mesh->m_indices.size());
                 auto span_positions     = gsl::make_span(mesh->m_positions.data(), mesh->m_positions.size());
                 auto span_blend_weights = gsl::make_span(mesh->m_blend_weights.data(), mesh->m_blend_weights.size());
