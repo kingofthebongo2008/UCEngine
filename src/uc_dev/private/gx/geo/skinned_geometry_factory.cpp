@@ -14,7 +14,7 @@ namespace uc
     {
         namespace geo
         {
-            managed_skinned_mesh_geometry create_skinned_mesh(geometry_allocator* rc, gx::dx12::gpu_upload_queue* upload_queue, gsl::span<const gsl::byte> positions, gsl::span<const gsl::byte> uv, gsl::span<const gsl::byte> blend_weight, gsl::span<const gsl::byte> blend_index)
+            managed_skinned_mesh_geometry create_skinned_mesh(geometry_allocator* rc, gx::dx12::gpu_upload_queue* upload_queue, gsl::span<const gsl::byte> positions, gsl::span<const gsl::byte> uv, gsl::span<const gsl::byte> normals, gsl::span<const gsl::byte> blend_weight, gsl::span<const gsl::byte> blend_index)
             {
                 size_t vertex_count = positions.size() / 12;    //stride
 
@@ -22,6 +22,7 @@ namespace uc
 
                 upload_queue->upload_buffer(rc->skinned_mesh_position(), &positions[0], positions.size(), r->byte_offset(skinned_meshes_allocator::component::position));
                 upload_queue->upload_buffer(rc->skinned_mesh_uv(), &uv[0], uv.size(), r->byte_offset(skinned_meshes_allocator::component::uv));
+                upload_queue->upload_buffer(rc->skinned_mesh_normal(), &normals[0], normals.size(), r->byte_offset(skinned_meshes_allocator::component::normal));
                 upload_queue->upload_buffer(rc->skinned_mesh_blend_weight(), &blend_weight[0], blend_weight.size(), r->byte_offset(skinned_meshes_allocator::component::blend_weight));
                 upload_queue->upload_buffer(rc->skinned_mesh_blend_index(), &blend_index[0], blend_index.size(), r->byte_offset(skinned_meshes_allocator::component::blend_index));
                 
