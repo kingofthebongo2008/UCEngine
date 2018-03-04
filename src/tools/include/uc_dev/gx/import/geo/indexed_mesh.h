@@ -16,8 +16,6 @@ namespace uc
         {
             namespace geo
             {
-                using position = math::float4;
-                using normal = math::float4;
                 using pointer = uint32_t;
 
                 static const uint32_t null_pointer = 0xFFFFFFFF;
