@@ -19,6 +19,10 @@ namespace uc
             LIP_RTTI_MEMBER(uvs, m_data)
         LIP_END_DEFINE_RTTI(uvs)
 
+        LIP_BEGIN_DEFINE_RTTI(normals)
+            LIP_RTTI_MEMBER(normals, m_data)
+        LIP_END_DEFINE_RTTI(normals)
+
         LIP_BEGIN_DEFINE_RTTI(model)
             LIP_RTTI_MEMBER(model, m_indices)
             LIP_RTTI_MEMBER(model, m_positions)
