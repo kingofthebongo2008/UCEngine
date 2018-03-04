@@ -8,13 +8,14 @@ struct interpolants
 {
     float4 position       : SV_POSITION0;
     float2 uv             : texcoord0;
-    float3 position_ws 	  : position0;
+    float3 position_ws    : position0;
 };
 
 struct input
 {
     float3 position : position;
     float2 uv       : texcoord0;
+    float3 normal   : normal0;
     float4 weights  : blend_weights0;
     uint4 indices   : blend_indices0;
 };
