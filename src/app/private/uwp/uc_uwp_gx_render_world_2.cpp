@@ -73,7 +73,7 @@ namespace uc
 
                 g.run([this, c]
                 {
-                    m_military_mechanic = gxu::make_render_object_from_file<gxu::skinned_multi_material_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources);
+                    m_military_mechanic = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -184,31 +184,34 @@ namespace uc
                     graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
                     //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(1, gx::geo::make_uv_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(2, gx::geo::make_blend_weights_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_vertex_buffer(3, gx::geo::make_blend_indices_buffer_view(&m_military_mechanic->m_geometry));
-                    graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_military_mechanic->m_geometry));
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_uv_view());
+                    graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_normal_view());
+                    graphics->set_vertex_buffer(3, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                    graphics->set_vertex_buffer(4, ctx->m_geometry->skinned_mesh_blend_index_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
-                    size_t start = 0;
-                    size_t size = m_military_mechanic->m_geometry.m_ranges.size();
+                    size_t start    = 0;
+                    size_t size     = m_military_mechanic->m_primitive_ranges.size();
 
-                    for (auto i = start; i < start + size; ++i)
+                    for (auto j = start; j < start + size; ++j)
                     {
                         {
-                            auto& t = m_military_mechanic->m_opaque_textures[i];
+                            auto& t = m_military_mechanic->m_opaque_textures[j];
                             //material
                             graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv());
                         }
 
                         {
-                            auto& r = m_military_mechanic->m_geometry.m_ranges[i];
+                            auto& r = m_military_mechanic->m_primitive_ranges[j];
+                            auto  base_index_offset = m_military_mechanic->m_indices->index_offset();
+                            auto  base_vertex_offset = m_military_mechanic->m_geometry->draw_offset();
+
                             //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                            graphics->draw_indexed(r.size(), r.m_begin);
+                            graphics->draw_indexed(r.size(), r.m_begin + base_index_offset, base_vertex_offset);
                         }
                     }
                 }
-
 
                 {
                     //Per many draw calls  -> frequency 1

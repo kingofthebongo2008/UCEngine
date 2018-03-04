@@ -32,8 +32,7 @@ namespace uc
                 void do_update(update_context* ctx) override;
                 std::unique_ptr< submitable > do_render(render_context* ctx) override;
                 
-
-                std::unique_ptr<gxu::skinned_multi_material_render_object>      m_military_mechanic;
+                std::unique_ptr<gxu::skinned_render_object>                     m_military_mechanic;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
                 gx::dx12::graphics_pipeline_state*                              m_textured_skinned_depth;
