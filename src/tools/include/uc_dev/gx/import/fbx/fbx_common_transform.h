@@ -456,11 +456,11 @@ namespace uc
                     return uvs;
                 }
 
-                template <typename triangle_indices_functor_t, typename vector_element_type_t, typename return_vectors_type_t >
-                void get_normals_typed(const fbxsdk::FbxMesh* mesh, triangle_indices_functor_t triangle_indices, const vector_element_type_t* vector_element, return_vectors_type_t& vectors)
+                template <typename triangle_indices_functor_t, typename triangle_count_functor_t, typename vector_element_type_t, typename return_vectors_type_t>
+                void get_normals_typed(const fbxsdk::FbxMesh* mesh, triangle_indices_functor_t triangle_indices, triangle_count_functor_t triangle_count_functor, const vector_element_type_t* vector_element, return_vectors_type_t& vectors)
                 {
                     auto indices        = mesh->GetPolygonVertices();
-                    auto triangle_count = mesh->GetPolygonCount();
+                    auto triangle_count = triangle_count_functor();
                     auto element        = vector_element;
 
                     get_vector4_element*                                        gv = nullptr;
@@ -527,10 +527,26 @@ namespace uc
                     }
                 }
 
+                static inline bool has_normals(const fbxsdk::FbxMesh* mesh)
+                {
+                    return mesh->GetElementNormal(0) != nullptr;
+                }
+
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh)
                 {
                     geo::indexed_mesh::normals_t                                vectors;
-                    get_normals_typed(mesh, [](auto triangle_index) {return triangle_index;}, mesh->GetElementNormal(0), vectors);
+
+                    if (has_normals(mesh))
+                    {
+                        get_normals_typed(mesh, 
+                                                [](auto triangle_index) {return triangle_index; }, 
+                                                [&mesh]() { return mesh->GetPolygonCount();}, mesh->GetElementNormal(0), vectors);
+                    }
+                    else
+                    {
+                        //todo: build normals here
+                    }
+                    
                     return vectors;
                 }
 
@@ -538,15 +554,27 @@ namespace uc
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
                     geo::indexed_mesh::normals_t                                vectors;
-                    auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index];};
-                    get_normals_typed(mesh, f, mesh->GetElementNormal(0), vectors);
+                    if (has_normals( mesh) )
+                    {
+                        auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index]; };
+                        auto f0 = [&triangle_indices]() { return triangle_indices.size(); };
+                        get_normals_typed(mesh, f, f0, mesh->GetElementNormal(0), vectors);
+                        return vectors;
+                    }
+                    else
+                    {
+                        //todo: build normals here
+                    }
                     return vectors;
                 }
 
                 inline geo::indexed_mesh::tangents_t get_tangents(const fbxsdk::FbxMesh* mesh)
                 {
                     geo::indexed_mesh::tangents_t                                vectors;
-                    get_normals_typed(mesh, [](auto triangle_index) {return triangle_index; }, mesh->GetElementTangent(0), vectors);
+                    get_normals_typed(mesh, 
+                        [](auto triangle_index) {return triangle_index; },
+                        [&mesh]() { return mesh->GetPolygonCount(); },
+                        mesh->GetElementTangent(0), vectors);
                     return vectors;
                 }
 
@@ -555,14 +583,18 @@ namespace uc
                 {
                     geo::indexed_mesh::tangents_t                                vectors;
                     auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index]; };
-                    get_normals_typed(mesh, f, mesh->GetElementTangent(0), vectors);
+                    auto f0 = [&triangle_indices]() { return triangle_indices.size(); };
+                    get_normals_typed(mesh, f, f0, mesh->GetElementTangent(0), vectors);
                     return vectors;
                 }
 
                 inline geo::indexed_mesh::bitangents_t get_bitangents(const fbxsdk::FbxMesh* mesh)
                 {
                     geo::indexed_mesh::bitangents_t                                vectors;
-                    get_normals_typed(mesh, [](auto triangle_index) {return triangle_index; }, mesh->GetElementBinormal(0), vectors);
+                    get_normals_typed(mesh, 
+                        [](auto triangle_index) {return triangle_index; },
+                        [&mesh]() { return mesh->GetPolygonCount(); },
+                        mesh->GetElementBinormal(0), vectors);
                     return vectors;
                 }
 
@@ -571,7 +603,8 @@ namespace uc
                 {
                     geo::indexed_mesh::bitangents_t                                vectors;
                     auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index]; };
-                    get_normals_typed(mesh, f, mesh->GetElementBinormal(0), vectors);
+                    auto f0 = [&triangle_indices]() { return triangle_indices.size();};
+                    get_normals_typed(mesh, f, f0, mesh->GetElementBinormal(0), vectors);
                     return vectors;
                 }
             }
