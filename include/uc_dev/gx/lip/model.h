@@ -263,13 +263,13 @@ namespace uc
             LIP_DECLARE_RTTI()
         };
 
+        LIP_DECLARE_TYPE_ID(uc::lip::normals)
+
         inline size_t size(const normals& p)
         {
             return p.size() * sizeof(float3);
         }
 
-        LIP_DECLARE_TYPE_ID(uc::lip::normals)
-       
         struct model
         {
             indices                         m_indices;
@@ -414,11 +414,6 @@ namespace uc
 
 #if defined(UC_TOOLS)
             normal_parametrized_model() {}
-
-            normal_parametrized_model(indices ind, positions pos, uvs uv, normals n) : base(ind, pos, uv), m_normals(n)
-            {
-
-            }
 #endif
 
             LIP_DECLARE_RTTI()
@@ -582,10 +577,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)
-            normal_textured_model()
-            {
-
-            }
+            normal_textured_model() {}
 #endif
 
             LIP_DECLARE_RTTI()
@@ -618,10 +610,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)
-            multi_textured_model()
-            {
-
-            }
+            multi_textured_model() {}
 #endif
             LIP_DECLARE_RTTI()
         };
@@ -646,10 +635,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)
-            normal_multi_textured_model()
-            {
-
-            }
+            normal_multi_textured_model() {}
 #endif
 
             LIP_DECLARE_RTTI()
@@ -672,10 +658,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)
-            skinned_model()
-            {
-
-            }
+            skinned_model() {}
 #endif
 
             LIP_DECLARE_RTTI()
@@ -698,10 +681,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)            
-            normal_skinned_model()
-            {
-
-            }
+            normal_skinned_model() {}
 #endif
             LIP_DECLARE_RTTI()
         };
