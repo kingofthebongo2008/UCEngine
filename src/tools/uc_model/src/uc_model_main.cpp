@@ -219,8 +219,8 @@ namespace uc
         template <typename mesh_create_functor>
         void convert_skinned_mesh(const file_name_t& input_file_name, const file_name_t& output_file_name, const mesh_create_functor& create_mesh, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
         {
-            std::unique_ptr< uc::lip::skinned_model > m = std::make_unique<uc::lip::skinned_model>();
-            std::shared_ptr<gx::import::geo::skinned_mesh> mesh;
+            std::unique_ptr< uc::lip::normal_skinned_model >    m = std::make_unique<uc::lip::normal_skinned_model>();
+            std::shared_ptr<gx::import::geo::skinned_mesh>      mesh;
 
             concurrency::task_group g;
 
@@ -244,6 +244,7 @@ namespace uc
                 
                 auto uvs        = gx::import::geo::merge_uvs(&view);
                 auto faces      = gx::import::geo::merge_faces(&view);
+                auto normals    = gx::import::geo::merge_normals(&view);
                 
                 auto weights    = gx::import::geo::merge_blend_weights(&view);
                 auto indices    = gx::import::geo::merge_blend_indices(&view);
@@ -251,12 +252,14 @@ namespace uc
 
                 m->m_indices.m_data.resize(faces.size() * 3);
                 m->m_positions.m_data.resize(positions.size());
+                m->m_normals.m_data.resize(normals.size());
                 m->m_uv.m_data.resize(uvs.size());
                 m->m_blend_weights.resize(weights.size());
                 m->m_blend_indices.resize(indices.size());
 
                 copy_indices(faces, m->m_indices.m_data);
                 copy_positions(positions, m->m_positions.m_data);
+                copy_normals(normals, m->m_normals.m_data);
                 copy_uv(uvs, m->m_uv.m_data);
 
                 copy_blend_weights(weights, m->m_blend_weights);
