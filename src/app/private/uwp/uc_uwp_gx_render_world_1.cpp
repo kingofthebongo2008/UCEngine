@@ -97,31 +97,40 @@ namespace uc
                     m_skeleton    = lip::create_from_compressed_lip_file<lip::skeleton>(L"appdata/skeletons/robot.skeleton");
                 });
 
-                //load preprocessed textured model
-                g.run([this]()
+                const std::array<std::wstring, 21> animation_names =
                 {
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/breathing_idle.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/climbing.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/closing_a_lid.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/crouch_death.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/drawing_gun.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/gunplay.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hanging_idle.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/hit_reaction.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/inspecting.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jump_away.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/jumping.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/lifting.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/picking_up_object.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_jump.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/rifle_run.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/running_jump.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/shooting.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/smash.animation"));
-                    m_animations.push_back(lip::create_from_compressed_lip_file<lip::joint_animations>(L"appdata/animations/swagger_walk.animation"));
-                });
+                    L"appdata/animations/breathing_idle.animation",
+                    L"appdata/animations/climbing.animation",
+                    L"appdata/animations/closing.animation",
+                    L"appdata/animations/closing_a_lid.animation",
+                    L"appdata/animations/crouch_death.animation",
+                    L"appdata/animations/drawing_gun.animation",
+                    L"appdata/animations/gunplay.animation",
+                    L"appdata/animations/hanging_idle.animation",
+                    L"appdata/animations/hit_reaction.animation",
+                    L"appdata/animations/inspecting.animation",
+                    L"appdata/animations/jump_away.animation",
+                    L"appdata/animations/jumping.animation",
+                    L"appdata/animations/lifting.animation",
+                    L"appdata/animations/picking_up_object.animation",
+                    L"appdata/animations/rifle_jump.animation",
+                    L"appdata/animations/rifle_run.animation",
+                    L"appdata/animations/running.animation",
+                    L"appdata/animations/running_jump.animation",
+                    L"appdata/animations/shooting.animation",
+                    L"appdata/animations/smash.animation",
+                    L"appdata/animations/swagger_walk.animation",
+                };
+
+                m_animations.resize(animation_names.size());
+
+                for (auto i = 0U; i < animation_names.size(); ++i)
+                {
+                    g.run([this, i, &animation_names]()
+                    {
+                        m_animations[i] = lip::create_from_compressed_lip_file<lip::joint_animations>(animation_names[i]);
+                    });
+                }
 
                 m_camera->set_view_position(math::set(15.0, 0.0f, -25.5f, 0.0f));
                 m_camera->set_far(1200.0f);
