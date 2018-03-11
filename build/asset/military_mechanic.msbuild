@@ -2,22 +2,22 @@
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-    <military_mechanic-textures Include="..\data\meshes_animated\cloth.png">
+    <military_mechanic-textures Include="..\data\meshes_animated\military_mechanic\cloth.png">
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
-    <military_mechanic-textures Include="..\data\meshes_animated\body.png">
+    <military_mechanic-textures Include="..\data\meshes_animated\military_mechanic\body.png">
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
-    <military_mechanic-textures Include="..\data\meshes_animated\face.png">
+    <military_mechanic-textures Include="..\data\meshes_animated\military_mechanic\face.png">
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
-    <military_mechanic-textures Include="..\data\meshes_animated\eyelashes.png">
+    <military_mechanic-textures Include="..\data\meshes_animated\military_mechanic\eyelashes.png">
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
-    <military_mechanic-textures Include="..\data\meshes_animated\eyes.png">
+    <military_mechanic-textures Include="..\data\meshes_animated\military_mechanic\eyes.png">
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
-    <Model Include="..\data\meshes_animated\military_mechanic.fbx">
+    <Model Include="..\data\meshes_animated\military_mechanic\military_mechanic.fbx">
       <ModelType>skinned</ModelType>
 
       <Name>military_mechanic</Name>
@@ -29,12 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Skeleton Include="..\data\meshes_animated\military_mechanic.fbx">
+    <Skeleton Include="..\data\meshes_animated\military_mechanic\military_mechanic.fbx">
       <OptionMakeLeftHanded>true</OptionMakeLeftHanded>
     </Skeleton>
   </ItemGroup>
   <ItemGroup>
-    <Animation Include="..\data\meshes_animated\military_mechanic.fbx">
+    <Animation Include="..\data\meshes_animated\military_mechanic\military_mechanic.fbx">
     <OptionMakeLeftHanded>true</OptionMakeLeftHanded>
     </Animation>
   </ItemGroup>
