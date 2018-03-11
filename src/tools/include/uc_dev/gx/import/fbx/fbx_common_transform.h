@@ -490,6 +490,8 @@ namespace uc
                         //gv = &gv_0; //todo; check this, produces different normals? the file data indicates otherwise
                     }
 
+                    auto normal_node_transform = math::transpose(math::inverse(world_transform(mesh->GetNode())));
+
                     for (auto triangle = 0; triangle < triangle_count; ++triangle)
                     {
                         auto triangle_to_fetch = triangle_indices(triangle);
@@ -505,19 +507,21 @@ namespace uc
 
                             using vector_type_t = typename return_vectors_type_t::value_type;
 
-                            vector_type_t normalp0 = { static_cast<float>(normal0[0]), static_cast<float>(normal0[1]), static_cast<float>(normal0[2]) };
-                            vector_type_t normalp1 = { static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]) };
-                            vector_type_t normalp2 = { static_cast<float>(normal2[0]), static_cast<float>(normal2[1]), static_cast<float>(normal2[2]) };
+                            vector_type_t normalp0;
+                            vector_type_t normalp1;
+                            vector_type_t normalp2;
 
-                            /*
                             math::float4  vr0 = math::set(static_cast<float>(normal0[0]), static_cast<float>(normal0[1]), static_cast<float>(normal0[2]), 0.0f);
                             math::float4  vr1 = math::set(static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]), 0.0f);
                             math::float4  vr2 = math::set(static_cast<float>(normal2[0]), static_cast<float>(normal2[1]), static_cast<float>(normal2[2]), 0.0f);
 
-                            math::store3u(&normalp0, vr0);
-                            math::store3u(&normalp1, vr1);
-                            math::store3u(&normalp2, vr2);
-                            */
+                            math::float4  vq0 = math::normalize3(math::mul(vr0, normal_node_transform));
+                            math::float4  vq1 = math::normalize3(math::mul(vr1, normal_node_transform));
+                            math::float4  vq2 = math::normalize3(math::mul(vr2, normal_node_transform));
+
+                            math::store3u(&normalp0, vq0);
+                            math::store3u(&normalp1, vq1);
+                            math::store3u(&normalp2, vq2);
 
                             vectors.push_back(normalp0);
                             vectors.push_back(normalp1);
