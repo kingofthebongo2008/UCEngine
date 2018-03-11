@@ -9,6 +9,7 @@ struct interpolants
     float4 position       : SV_POSITION0;
     float2 uv             : texcoord0;
     float3 position_ws    : position0;
+    float3 normal_ws      : normal0;
 };
 
 struct input
@@ -32,13 +33,22 @@ interpolants main(input i)
 {
     interpolants r;
 
-    float4     position         = float4(i.position, 1.0f);
-    point_os   skinned_position = make_point_os(skin_position(position, i.weights, i.indices, m_joints_palette).xyz);
-    point_ws   skinned_world    = transform_p_os( skinned_position, m_world );
+    float4     position                 = float4(i.position, 1.0f);
+    float3     normal                   = i.normal;
+    point_os   skinned_position         = make_point_os( skin_position(position, i.weights, i.indices, m_joints_palette).xyz);
+    vector_os  skinned_normal           = make_vector_os( skin_normal(normal, i.weights, i.indices, m_joints_palette).xyz);
+    point_ws   skinned_world            = transform_p_os( skinned_position, m_world );
+    
+    euclidean_transform_3d world_inverse;
+    world_inverse.m_value               = transpose(m_world.m_value);
+    vector_ws  skinned_world_normal     = transform_v_os( skinned_normal, world_inverse );
+
     
     r.uv                        = i.uv;
     r.position                  = project_p_os( skinned_position, m_world, m_view, m_perspective ).m_value;
     r.position_ws               = skinned_world.m_value.xyz;
+    //r.normal_ws                 = skinned_world_normal.m_value;
+    r.normal_ws                 = normal;//skinned_world_normal.m_value;
 
     return r;
 }

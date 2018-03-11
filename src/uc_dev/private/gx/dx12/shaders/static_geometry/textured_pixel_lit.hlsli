@@ -11,6 +11,10 @@ struct interpolants
     float4 position       : SV_POSITION0;
     float2 uv             : texcoord0;
     float3 position_ws    : position0;
+
+#if defined(USE_NORMALS)
+    float3 normal_ws      : normal0;
+#endif
 };
 
 #if defined(MOMENT_SHADOW_MAPS_4)
@@ -29,9 +33,15 @@ Texture2DArray<uint2> g_blue_noise         : register(t2);
 [earlydepthstencil]
 float4 main( interpolants r ) : SV_Target0
 {
-    float3 dudx = ddx(r.position_ws);
-    float3 dudy = ddy(r.position_ws);
-    float3 normal_ws = normalize(cross(dudx, dudy));
+    float3 dudx         = ddx(r.position_ws);
+    float3 dudy         = ddy(r.position_ws);
+
+    float3 normal_ws    = normalize(cross(dudx, dudy));
+
+#if defined(USE_NORMALS)
+           normal_ws    = normalize(r.normal_ws);
+#endif
+
     float3 sun_light_direction_ws = m_light_direction.xyz;
     float3 sun_light_intensity = float3(0.5, 0.5, 0.5);
     float3 albedo = float3(1.0f, 1.0f, 1.0f);
@@ -67,7 +77,7 @@ cbuffer shadow_parameters : register(b2)
     uint2                    m_pad1;
 };
 
-Texture2D<uint>         g_shadow_moments   	  : register(t1);
+Texture2D<uint>         g_shadow_moments      : register(t1);
 Texture2DArray<uint2>   g_blue_noise          : register(t2);
 
 int2 compute_view_port_pixel_index(float2 projection_space_position, float4 viewport_transform)
@@ -82,6 +92,11 @@ float4 main( interpolants r ) : SV_Target0
         float3 dudx                                 = ddx(r.position_ws);
         float3 dudy                                 = ddy(r.position_ws);
         float3 normal_ws                            = normalize(cross(dudx, dudy));
+
+#if defined(USE_NORMALS)
+        normal_ws                                   = normalize(r.normal_ws);
+#endif
+
         float3 sun_light_direction_ws               = m_light_direction.xyz;
         float3 sun_light_intensity                  = float3(0.5, 0.5, 0.5);
         float3 albedo                               = float3(1.0f, 1.0f, 1.0f);
@@ -105,8 +120,6 @@ float4 main( interpolants r ) : SV_Target0
         float3 ambient                              = 0.2f; //float3(noise / 255.0f, noise / 255.0f, noise / 255.0f);
 
         return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
-        //return float4 (shadow_intensity, shadow_intensity, shadow_intensity, 0.0);
-        //return float4 (ambient, 0.0);
 }
 #endif
 

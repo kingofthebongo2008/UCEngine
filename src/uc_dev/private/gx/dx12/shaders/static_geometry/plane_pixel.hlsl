@@ -5,6 +5,7 @@ struct interpolants
 {
     float4 position     : SV_POSITION0;
     float2 uv           : texcoord0;
+    float3 position_ws  : position0;
 };
 
 float checker_board_pattern(float2 uv)
@@ -15,8 +16,8 @@ float checker_board_pattern(float2 uv)
 
 float4 checker_board(float2 uv)
 {
-    float2 uv_scaled 	= uv * float2(32.0f, 32.0f);
-    float checker 	= checker_board_pattern(uv_scaled);
+    float2 uv_scaled    = uv * float2(32.0f, 32.0f);
+    float checker   = checker_board_pattern(uv_scaled);
     return float4(checker, checker, checker, 1.0f);
 }
 

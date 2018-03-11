@@ -30,7 +30,7 @@ interpolants main(input i)
 {
     interpolants r;
 
-    float4     position = float4(i.position, 1.0f);
+    float4     position         = float4(i.position, 1.0f);
     point_os   skinned_position = make_point_os(skin_position(position, i.weights, i.indices, m_joints_palette).xyz);
        
     r.uv       = i.uv;
