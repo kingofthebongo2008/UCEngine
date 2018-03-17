@@ -139,10 +139,9 @@ float4 main( interpolants r ) : SV_Target0
         float  shadow_intensity                     = compute_nonlinear_moment4_shadow_maps_32(make_sampler_non_linear_moments_32(g_shadow_moments, g_blue_noise), r.position_ws, ctx);
 
         float  ndotl                                = saturate(dot(normal_ws, sun_light_direction_ws));
-        float3 ambient                              = 0.2f; //float3(noise / 255.0f, noise / 255.0f, noise / 255.0f);
+        float3 ambient                              = 0.1f;
 
-        //return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
-        return float4 (albedo, 0.0);//shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
+        return float4 (shadow_intensity * ndotl * albedo * sun_light_intensity + ambient, 0.0);
 }
 #endif
 
