@@ -40,16 +40,14 @@ interpolants main(input i)
     point_ws   skinned_world            = transform_p_os( skinned_position, m_world );
     
     euclidean_transform_3d world_inverse;
-    world_inverse.m_value               = transpose(m_world.m_value);
+    world_inverse.m_value               = m_world.m_value;
     vector_ws  skinned_world_normal     = transform_v_os( skinned_normal, world_inverse );
 
     
     r.uv                        = i.uv;
     r.position                  = project_p_os( skinned_position, m_world, m_view, m_perspective ).m_value;
     r.position_ws               = skinned_world.m_value.xyz;
-    //r.normal_ws                 = skinned_world_normal.m_value;
-    r.normal_ws                 = normal;//skinned_world_normal.m_value;
-
+    r.normal_ws                 = skinned_world_normal.m_value;
     return r;
 }
 
