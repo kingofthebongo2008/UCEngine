@@ -227,8 +227,9 @@ namespace uc
                     for (auto i = start; i < start + size; ++i)
                     {
                         {
-                            //auto& t = m_military_mechanic->m_opaque_textures[i];
+                            auto& t = m_military_mechanic->m_opaque_textures[i];
                             //material
+                            graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, t->srv(), 2);
 
                         }
 
