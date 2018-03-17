@@ -22,6 +22,12 @@ namespace uc
                     return positions;
                 }
 
+                inline  geo::indexed_mesh::normals_t  transform_dcc_normals(const geo::indexed_mesh::normals_t& positions, const fbx_context* ctx)
+                {
+                    ctx;
+                    return positions;
+                }
+
                 inline std::shared_ptr<geo::indexed_mesh> create_mesh(const std::string& file_name)
                 {
                     auto context = load_fbx_file(file_name);

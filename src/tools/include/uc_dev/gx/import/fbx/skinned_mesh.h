@@ -454,6 +454,35 @@ namespace uc
                     return r;
                 }
 
+                //////////////////////
+                inline  std::vector<geo::skinned_mesh::normals_t> transform_dcc_positions(const std::vector<geo::skinned_mesh::normals_t>& normals, const fbx_context* ctx)
+                {
+                    std::vector<geo::skinned_mesh::normals_t> r;
+                    ctx;
+
+                    auto m0 = negate_z();
+
+                    r.reserve(normals.size());
+
+                    for (auto&& p : normals)
+                    {
+                        std::vector<geo::skinned_mesh::normal_t > pos;
+                        pos.reserve(p.size());
+
+                        for (auto&& p0 : p)
+                        {
+                            auto v = transform_from_dcc(math::load3_point(&p0), ctx);
+                            geo::skinned_mesh::normal_t s;
+                            math::store3u_point(&s, v);
+                            pos.push_back(s);
+                        }
+
+                        r.push_back(pos);
+                    }
+
+                    return r;
+                }
+
                 inline geo::skinned_mesh::skeleton_pose_t transform_dcc_pose(const geo::skinned_mesh::skeleton_pose_t& p, const fbx_context* ctx)
                 {
                     geo::skinned_mesh::skeleton_pose_t q = p;
@@ -549,7 +578,7 @@ namespace uc
                     return std::make_shared<geo::skinned_mesh>(
 
                         transform_dcc_positions(positions, context),
-                        std::move(normals),
+                        transform_dcc_positions(normals, context),
                         std::move(uvs),
                         std::move(faces),
                         get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())),
