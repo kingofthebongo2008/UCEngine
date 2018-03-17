@@ -57,6 +57,10 @@
 	<Backend>UniqueCreatorDev</Backend>
 	<EntryPointName>textured_skinned_lit_depth_only_graphics</EntryPointName>
 </GraphicsPipelineStateObject>
+<GraphicsPipelineStateObject Include = "..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_material_graphics.pso">
+	<Backend>UniqueCreatorDev</Backend>
+	<EntryPointName>textured_skinned_lit_material_graphics</EntryPointName>
+</GraphicsPipelineStateObject>
 <GraphicsPipelineStateObject Include = "..\src\uc_dev\private\gx\dx12\shaders\textured_skinned_lit_shadows_graphics.pso">
 	<Backend>UniqueCreatorDev</Backend>
 	<EntryPointName>textured_skinned_lit_shadows_graphics</EntryPointName>
