@@ -23,7 +23,7 @@ namespace UniqueCreator
 
             Impl() {}
 
-            Impl(uc::lip::unique_lip_pointer<uc::lip::skinned_model> && model) : m_model(std::move(model))
+            Impl(uc::lip::unique_lip_pointer<uc::lip::normal_skinned_model> && model) : m_model(std::move(model))
             {
                 m_texture_wrappers.resize(m_model->m_textures.size());
                 m_texture_storage.resize(m_model->m_textures.size());
@@ -36,7 +36,7 @@ namespace UniqueCreator
                 }
             }
 
-            uc::lip::unique_lip_pointer<uc::lip::skinned_model> m_model;
+            uc::lip::unique_lip_pointer<uc::lip::normal_skinned_model> m_model;
             std::vector< Texture2D* >                           m_texture_wrappers;
             std::vector< std::unique_ptr<Texture2D> >           m_texture_storage;
         };

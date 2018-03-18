@@ -26,7 +26,7 @@ namespace UniqueCreator
         {
         public:
 
-            SkinnedModelInternal(uc::lip::unique_lip_pointer<uc::lip::skinned_model> && model)
+            SkinnedModelInternal(uc::lip::unique_lip_pointer<uc::lip::normal_skinned_model> && model)
             {
                 m_impl = std::move(model);
             }
@@ -52,7 +52,7 @@ namespace UniqueCreator
 
         std::unique_ptr<SkinnedModel> SkinnedModelFactory::CreateFromFile(const wchar_t* fileName)
         {
-            auto model = uc::lip::create_from_compressed_lip_file<uc::lip::skinned_model>(fileName);
+            auto model = uc::lip::create_from_compressed_lip_file<uc::lip::normal_skinned_model>(fileName);
             return std::make_unique<SkinnedModelInternal>(std::move(model));
         }
     }
