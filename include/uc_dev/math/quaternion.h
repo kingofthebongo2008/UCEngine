@@ -99,7 +99,7 @@ namespace uc
         inline std::tuple< float4, float > UC_MATH_CALL quaternion_axis_angle(float4 q)
         {
             static const uint32_t __declspec(align(16))   mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
-            std::make_tuple< float4, float >(simd_and (q, reinterpret_cast<const float4*> (&mask_xyz)[0]), 2 * acosf(get_w(q)));
+            return std::make_tuple< float4, float >(simd_and (q, reinterpret_cast<const float4*> (&mask_xyz)[0]), 2 * acosf(get_w(q)));
         }
 
         inline float4 UC_MATH_CALL quaternion_normalize(float4 q1)
