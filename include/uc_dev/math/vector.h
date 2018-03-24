@@ -294,6 +294,16 @@ namespace uc
             _mm_store_ps(reinterpret_cast<float* __restrict> (address), value);
         }
 
+        inline void UC_MATH_CALL store4u(void* __restrict address, afloat4 value)
+        {
+            _mm_storeu_ps(reinterpret_cast<float* __restrict> (address), value);
+        }
+
+        inline void UC_MATH_CALL store4u(float* __restrict address, afloat4 value)
+        {
+            _mm_storeu_ps(reinterpret_cast<float* __restrict> (address), value);
+        }
+
         inline void UC_MATH_CALL stream(void* __restrict address, afloat4 value)
         {
             _mm_stream_ps(reinterpret_cast<float* __restrict> (address), value);
