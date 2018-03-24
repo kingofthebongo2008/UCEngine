@@ -22,9 +22,9 @@ namespace uc
 
                 struct storage_position
                 {
-                    float x = 0.0f;;
-                    float y = 0.0f;;
-                    float z = 0.0f;;
+                    float x = 0.0f;
+                    float y = 0.0f;
+                    float z = 0.0f;
                 };
 
                 inline bool operator==(const storage_position& a, const storage_position& b)
@@ -39,9 +39,9 @@ namespace uc
 
                 struct storage_normal
                 {
-                    float x = 0.0f;;
-                    float y = 0.0f;;
-                    float z = 0.0f;;
+                    float x = 0.0f;
+                    float y = 0.0f;
+                    float z = 0.0f;
                 };
 
                 inline bool operator==(const storage_normal& a, const storage_normal& b)
@@ -56,9 +56,10 @@ namespace uc
 
                 struct storage_tangent
                 {
-                    float x = 0.0f;;
-                    float y = 0.0f;;
-                    float z = 0.0f;;
+                    float x = 0.0f;
+                    float y = 0.0f;
+                    float z = 0.0f;
+                    float w = 0.0f; //1.0f, -1.0f shows the sign
                 };
 
                 inline bool operator==(const storage_tangent& a, const storage_tangent& b)
@@ -73,9 +74,9 @@ namespace uc
 
                 struct storage_bitangent
                 {
-                    float x = 0.0f;;
-                    float y = 0.0f;;
-                    float z = 0.0f;;
+                    float x = 0.0f;
+                    float y = 0.0f;
+                    float z = 0.0f;
                 };
 
                 inline bool operator==(const storage_bitangent& a, const storage_bitangent& b)
@@ -91,7 +92,7 @@ namespace uc
                 struct storage_uv
                 {
                     float x = 0.0f;
-                    float y = 0.0f;;
+                    float y = 0.0f;
                 };
 
                 inline bool operator==(const storage_uv& a, const storage_uv& b)
@@ -204,7 +205,7 @@ namespace uc
                     using face_t        = face;
 
                     using position_t    = position;
-                    using uv_t          = uv;;
+                    using uv_t          = uv;
                     using normal_t      = normal;
                     using positions_t   = std::vector<position>;
                     using faces_t       = std::vector<face>;
