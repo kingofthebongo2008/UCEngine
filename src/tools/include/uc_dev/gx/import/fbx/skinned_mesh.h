@@ -601,6 +601,8 @@ namespace uc
                     {
                         m->RemoveBadPolygons();
                         m->ComputeBBox();
+                        m->GenerateNormals();
+                        m->GenerateTangentsData();
                     }
 
                     std::vector<  std::shared_ptr<geo::skinned_mesh> > multimeshes;

@@ -47,6 +47,8 @@ namespace uc
           
                     mesh->RemoveBadPolygons();
                     mesh->ComputeBBox();
+                    mesh->GenerateNormals();
+                    mesh->GenerateTangentsData();
 
                     assert(mesh->GetPolygonSize(0));
 
