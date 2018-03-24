@@ -206,7 +206,7 @@ namespace uc
                     }
                 };
 
-                inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh, const std::array<int32_t, 3> & p)
+                inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh, const std::array<int32_t, 3> & permutation)
                 {
                     auto triangle_count = mesh->GetPolygonCount();
                     geo::indexed_mesh::faces_t faces;
@@ -217,7 +217,25 @@ namespace uc
                     for (auto triangle = 0U; triangle < static_cast<uint32_t>(triangle_count); ++triangle)
                     {
                         //reorient triangles ccw, since they come cw from fbx
-                        geo::indexed_mesh::face_t face = { triangle * 3 + p[0] , triangle * 3 + p[1], triangle * 3 + p[2] };
+                        geo::indexed_mesh::face_t face = { triangle * 3 + permutation[0] , triangle * 3 + permutation[1], triangle * 3 + permutation[2] };
+                        faces.push_back(face);
+                    }
+
+                    return faces;
+                }
+
+                inline geo::indexed_mesh::faces_t get_faces(const fbxsdk::FbxMesh* mesh)
+                {
+                    auto triangle_count = mesh->GetPolygonCount();
+                    geo::indexed_mesh::faces_t faces;
+                    faces.reserve(triangle_count);
+
+                    geo::indexed_mesh::positions_t positions;
+
+                    for (auto triangle = 0U; triangle < static_cast<uint32_t>(triangle_count); ++triangle)
+                    {
+                        //reorient triangles ccw, since they come cw from fbx
+                        geo::indexed_mesh::face_t face = { triangle * 3 + 0 , triangle * 3 + 1, triangle * 3 + 2 };
                         faces.push_back(face);
                     }
 
@@ -515,9 +533,9 @@ namespace uc
                             math::float4  vr1 = math::set(static_cast<float>(normal1[0]), static_cast<float>(normal1[1]), static_cast<float>(normal1[2]), 0.0f);
                             math::float4  vr2 = math::set(static_cast<float>(normal2[0]), static_cast<float>(normal2[1]), static_cast<float>(normal2[2]), 0.0f);
 
-                            math::float4  vq0 = math::normalize3(math::mul(vr0, normal_node_transform));
-                            math::float4  vq1 = math::normalize3(math::mul(vr1, normal_node_transform));
-                            math::float4  vq2 = math::normalize3(math::mul(vr2, normal_node_transform));
+                            math::float4  vq0 = vr0;// math::normalize3(math::mul(vr0, normal_node_transform));
+                            math::float4  vq1 = vr1;// math::normalize3(math::mul(vr1, normal_node_transform));
+                            math::float4  vq2 = vr2;// math::normalize3(math::mul(vr2, normal_node_transform));
 
                             math::store3u(&normalp0, vq0);
                             math::store3u(&normalp1, vq1);
@@ -530,31 +548,80 @@ namespace uc
                     }
                 }
 
-                static inline bool has_normals(const fbxsdk::FbxMesh* mesh)
+                static inline geo::indexed_mesh::normals_t transform_normals(const uc::math::float4x4 m, const geo::indexed_mesh::normals_t &s)
                 {
-                    return mesh->GetElementNormal(0) != nullptr;
+                    geo::indexed_mesh::normals_t r;
+                    r.resize(s.size());
+                    std::transform(s.cbegin(), s.cend(), r.begin(),
+                        [&m]( const geo::indexed_mesh::normal& n)
+                        {
+                            math::float4  r0 = math::load3u_vector(&n);
+                            math::float4  r1 = math::normalize3(math::mul(r0, m));
+
+                            geo::indexed_mesh::normal r;
+                            math::store3u_vector(&r, r1);
+                            return r;
+                        });
+
+                    return r;
                 }
 
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh)
                 {
-                    geo::indexed_mesh::normals_t                                vectors;
-                        get_normals_typed(mesh, 
-                                                [](auto triangle_index) {return triangle_index; }, 
-                                                [&mesh]() { return mesh->GetPolygonCount();}, mesh->GetElementNormal(0), vectors);
-                    return vectors;
+                    geo::indexed_mesh::normals_t  vectors;
+                    auto f0 = [](auto triangle_index) {return triangle_index; };
+                    auto f1 = [&mesh]() { return mesh->GetPolygonCount(); };
+
+                    get_normals_typed(mesh, f0, f1, mesh->GetElementNormal(0), vectors);
+
+                    auto normal_node_transform = math::transpose(math::inverse(world_transform(mesh->GetNode())));
+                    return transform_normals(normal_node_transform, vectors);
+                }
+
+                static inline bool has_normals(const fbxsdk::FbxMesh* m)
+                {
+                    return  m->GetElementNormal(0) != nullptr;
+                }
+
+                static inline bool has_tangents(const fbxsdk::FbxMesh* m)
+                {
+                    return  m->GetElementTangent(0) != nullptr;
+                }
+
+                static inline bool has_bitangents(const fbxsdk::FbxMesh* m)
+                {
+                    return  m->GetElementBinormal(0) != nullptr;
+                }
+
+                static inline geo::indexed_mesh::normals_t generate_normals(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
+                {
+                    geo::indexed_mesh::positions_t    positions = get_positions(mesh);
+                    geo::indexed_mesh::faces_t        faces     = get_faces(mesh);
+                    geo::indexed_mesh::normals_t                normals;
+                    
+                    return normals;
                 }
 
                 //returns all normals, which match triangle_indices
                 inline geo::indexed_mesh::normals_t get_normals(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
-                    geo::indexed_mesh::normals_t                                vectors;
-                    auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index];};
-                    auto f0 = [&triangle_indices]() { return triangle_indices.size(); };
-                    get_normals_typed(mesh, f, f0, mesh->GetElementNormal(0), vectors);
-                    return vectors;
+                    if (has_normals)
+                    {
+                        geo::indexed_mesh::normals_t                                vectors;
+                        auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index]; };
+                        auto f0 = [&triangle_indices]() { return triangle_indices.size(); };
+
+                        get_normals_typed(mesh, f, f0, mesh->GetElementNormal(0), vectors);
+                        auto normal_node_transform = math::transpose(math::inverse(world_transform(mesh->GetNode())));
+                        return transform_normals(normal_node_transform, vectors);
+                    }
+                    else
+                    {
+                        return generate_normals(mesh, triangle_indices);
+                    }
                 }
 
-                inline geo::indexed_mesh::tangents_t get_tangents(const fbxsdk::FbxMesh* mesh)
+                inline inline geo::indexed_mesh::tangents_t get_tangents(const fbxsdk::FbxMesh* mesh)
                 {
                     geo::indexed_mesh::tangents_t                                vectors;
                     get_normals_typed(mesh, 
@@ -565,7 +632,7 @@ namespace uc
                 }
 
                 //returns all normals, which match triangle_indices
-                inline geo::indexed_mesh::tangents_t get_tangents(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
+                inline inline geo::indexed_mesh::tangents_t get_tangents(const fbxsdk::FbxMesh* mesh, const std::vector<int32_t>& triangle_indices)
                 {
                     geo::indexed_mesh::tangents_t                                vectors;
                     auto f = [&triangle_indices](auto triangle_index) {return triangle_indices[triangle_index]; };
