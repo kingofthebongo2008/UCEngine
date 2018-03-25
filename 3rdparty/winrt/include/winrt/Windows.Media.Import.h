@@ -1,373 +1,1134 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Media.Import.3.h"
-#include "Windows.Media.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Media.Import.2.h"
+#include "winrt/Windows.Media.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Media::Import::PhotoImportSession consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::Session() const noexcept
+{
+    Windows::Media::Import::PhotoImportSession value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_Session(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::HasSucceeded() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_HasSucceeded(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::DeletedItems() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_DeletedItems(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::PhotosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_PhotosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::PhotosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_PhotosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::VideosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_VideosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::VideosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_VideosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SidecarsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_SidecarsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SidecarsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_SidecarsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SiblingsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_SiblingsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SiblingsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_SiblingsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::TotalCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_TotalCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportDeleteImportedItemsFromSourceResult<D>::TotalSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult)->get_TotalSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSession consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::Session() const noexcept
+{
+    Windows::Media::Import::PhotoImportSession value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_Session(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::HasSucceeded() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_HasSucceeded(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::FoundItems() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_FoundItems(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::PhotosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_PhotosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::PhotosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_PhotosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::VideosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_VideosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::VideosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_VideosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SidecarsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SidecarsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SidecarsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SidecarsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SiblingsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SiblingsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SiblingsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SiblingsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::TotalCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_TotalCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::TotalSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_TotalSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectAll() const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->SelectAll());
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectNone() const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->SelectNone());
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectNewAsync() const
+{
+    Windows::Foundation::IAsyncAction action{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->SelectNewAsync(put_abi(action)));
+    return action;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SetImportMode(Windows::Media::Import::PhotoImportImportMode const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->SetImportMode(get_abi(value)));
+}
+
+template <typename D> Windows::Media::Import::PhotoImportImportMode consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::ImportMode() const noexcept
+{
+    Windows::Media::Import::PhotoImportImportMode value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_ImportMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedPhotosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedPhotosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedPhotosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedPhotosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedVideosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedVideosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedVideosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedVideosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedSidecarsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedSidecarsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedSidecarsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedSidecarsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedSiblingsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedSiblingsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedSiblingsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedSiblingsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedTotalCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedTotalCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectedTotalSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->get_SelectedTotalSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectionChanged(Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> const& value) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->add_SelectionChanged(get_abi(value), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Import::IPhotoImportFindItemsResult> consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectionChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> const& value) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Import::IPhotoImportFindItemsResult>(this, &abi_t<Windows::Media::Import::IPhotoImportFindItemsResult>::remove_SelectionChanged, SelectionChanged(value));
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::SelectionChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->remove_SelectionChanged(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::ImportItemsAsync() const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->ImportItemsAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> event_token consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::ItemImported(Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> const& value) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->add_ItemImported(get_abi(value), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Import::IPhotoImportFindItemsResult> consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::ItemImported(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> const& value) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Import::IPhotoImportFindItemsResult>(this, &abi_t<Windows::Media::Import::IPhotoImportFindItemsResult>::remove_ItemImported, ItemImported(value));
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult<D>::ItemImported(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult)->remove_ItemImported(get_abi(token)));
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportFindItemsResult2<D>::AddItemsInDateRangeToSelection(Windows::Foundation::DateTime const& rangeStart, Windows::Foundation::TimeSpan const& rangeLength) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportFindItemsResult2)->AddItemsInDateRangeToSelection(get_abi(rangeStart), get_abi(rangeLength)));
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSession consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::Session() const noexcept
+{
+    Windows::Media::Import::PhotoImportSession value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_Session(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::HasSucceeded() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_HasSucceeded(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::ImportedItems() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_ImportedItems(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::PhotosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_PhotosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::PhotosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_PhotosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::VideosCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_VideosCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::VideosSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_VideosSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::SidecarsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_SidecarsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::SidecarsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_SidecarsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::SiblingsCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_SiblingsCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::SiblingsSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_SiblingsSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::TotalCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_TotalCount(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::TotalSizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->get_TotalSizeInBytes(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> consume_Windows_Media_Import_IPhotoImportImportItemsResult<D>::DeleteImportedItemsFromSourceAsync() const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportImportItemsResult)->DeleteImportedItemsFromSourceAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportItem<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportItem<D>::ItemKey() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_ItemKey(&value));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportContentType consume_Windows_Media_Import_IPhotoImportItem<D>::ContentType() const noexcept
+{
+    Windows::Media::Import::PhotoImportContentType value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_ContentType(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportItem<D>::SizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_SizeInBytes(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Media_Import_IPhotoImportItem<D>::Date() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_Date(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSidecar consume_Windows_Media_Import_IPhotoImportItem<D>::Sibling() const noexcept
+{
+    Windows::Media::Import::PhotoImportSidecar value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_Sibling(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> consume_Windows_Media_Import_IPhotoImportItem<D>::Sidecars() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_Sidecars(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportVideoSegment> consume_Windows_Media_Import_IPhotoImportItem<D>::VideoSegments() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportVideoSegment> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_VideoSegments(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportItem<D>::IsSelected() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_IsSelected(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportItem<D>::IsSelected(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->put_IsSelected(value));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_Media_Import_IPhotoImportItem<D>::Thumbnail() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_Thumbnail(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<hstring> consume_Windows_Media_Import_IPhotoImportItem<D>::ImportedFileNames() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_ImportedFileNames(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<hstring> consume_Windows_Media_Import_IPhotoImportItem<D>::DeletedFileNames() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItem)->get_DeletedFileNames(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportItem consume_Windows_Media_Import_IPhotoImportItemImportedEventArgs<D>::ImportedItem() const noexcept
+{
+    Windows::Media::Import::PhotoImportItem value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportItemImportedEventArgs)->get_ImportedItem(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_Media_Import_IPhotoImportManagerStatics<D>::IsSupportedAsync() const
+{
+    Windows::Foundation::IAsyncOperation<bool> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportManagerStatics)->IsSupportedAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>> consume_Windows_Media_Import_IPhotoImportManagerStatics<D>::FindAllSourcesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportManagerStatics)->FindAllSourcesAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation> consume_Windows_Media_Import_IPhotoImportManagerStatics<D>::GetPendingOperations() const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportManagerStatics)->GetPendingOperations(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportStage consume_Windows_Media_Import_IPhotoImportOperation<D>::Stage() const noexcept
+{
+    Windows::Media::Import::PhotoImportStage value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportOperation)->get_Stage(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSession consume_Windows_Media_Import_IPhotoImportOperation<D>::Session() const noexcept
+{
+    Windows::Media::Import::PhotoImportSession value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportOperation)->get_Session(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> consume_Windows_Media_Import_IPhotoImportOperation<D>::ContinueFindingItemsAsync() const noexcept
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> operation{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportOperation)->get_ContinueFindingItemsAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> consume_Windows_Media_Import_IPhotoImportOperation<D>::ContinueImportingItemsAsync() const noexcept
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> operation{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportOperation)->get_ContinueImportingItemsAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> consume_Windows_Media_Import_IPhotoImportOperation<D>::ContinueDeletingImportedItemsFromSourceAsync() const noexcept
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> operation{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportOperation)->get_ContinueDeletingImportedItemsFromSourceAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportSelectionChangedEventArgs<D>::IsSelectionEmpty() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSelectionChangedEventArgs)->get_IsSelectionEmpty(&value));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSource consume_Windows_Media_Import_IPhotoImportSession<D>::Source() const noexcept
+{
+    Windows::Media::Import::PhotoImportSource value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_Source(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_Media_Import_IPhotoImportSession<D>::SessionId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_SessionId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession<D>::DestinationFolder(Windows::Storage::IStorageFolder const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->put_DestinationFolder(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::IStorageFolder consume_Windows_Media_Import_IPhotoImportSession<D>::DestinationFolder() const noexcept
+{
+    Windows::Storage::IStorageFolder value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_DestinationFolder(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession<D>::AppendSessionDateToDestinationFolder(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->put_AppendSessionDateToDestinationFolder(value));
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportSession<D>::AppendSessionDateToDestinationFolder() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_AppendSessionDateToDestinationFolder(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession<D>::SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->put_SubfolderCreationMode(get_abi(value)));
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSubfolderCreationMode consume_Windows_Media_Import_IPhotoImportSession<D>::SubfolderCreationMode() const noexcept
+{
+    Windows::Media::Import::PhotoImportSubfolderCreationMode value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_SubfolderCreationMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession<D>::DestinationFileNamePrefix(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->put_DestinationFileNamePrefix(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSession<D>::DestinationFileNamePrefix() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->get_DestinationFileNamePrefix(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> consume_Windows_Media_Import_IPhotoImportSession<D>::FindItemsAsync(Windows::Media::Import::PhotoImportContentTypeFilter const& contentTypeFilter, Windows::Media::Import::PhotoImportItemSelectionMode const& itemSelectionMode) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession)->FindItemsAsync(get_abi(contentTypeFilter), get_abi(itemSelectionMode), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession2<D>::SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession2)->put_SubfolderDateFormat(get_abi(value)));
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSubfolderDateFormat consume_Windows_Media_Import_IPhotoImportSession2<D>::SubfolderDateFormat() const noexcept
+{
+    Windows::Media::Import::PhotoImportSubfolderDateFormat value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession2)->get_SubfolderDateFormat(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportSession2<D>::RememberDeselectedItems(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession2)->put_RememberDeselectedItems(value));
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportSession2<D>::RememberDeselectedItems() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSession2)->get_RememberDeselectedItems(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSidecar<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSidecar)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportSidecar<D>::SizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSidecar)->get_SizeInBytes(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Media_Import_IPhotoImportSidecar<D>::Date() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSidecar)->get_Date(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::DisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_DisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::Manufacturer() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Manufacturer(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::Model() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Model(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::SerialNumber() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_SerialNumber(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportSource<D>::ConnectionProtocol() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_ConnectionProtocol(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportConnectionTransport consume_Windows_Media_Import_IPhotoImportSource<D>::ConnectionTransport() const noexcept
+{
+    Windows::Media::Import::PhotoImportConnectionTransport value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_ConnectionTransport(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSourceType consume_Windows_Media_Import_IPhotoImportSource<D>::Type() const noexcept
+{
+    Windows::Media::Import::PhotoImportSourceType value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportPowerSource consume_Windows_Media_Import_IPhotoImportSource<D>::PowerSource() const noexcept
+{
+    Windows::Media::Import::PhotoImportPowerSource value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_PowerSource(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<uint32_t> consume_Windows_Media_Import_IPhotoImportSource<D>::BatteryLevelPercent() const noexcept
+{
+    Windows::Foundation::IReference<uint32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_BatteryLevelPercent(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Media_Import_IPhotoImportSource<D>::DateTime() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_DateTime(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportStorageMedium> consume_Windows_Media_Import_IPhotoImportSource<D>::StorageMedia() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportStorageMedium> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_StorageMedia(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<bool> consume_Windows_Media_Import_IPhotoImportSource<D>::IsLocked() const noexcept
+{
+    Windows::Foundation::IReference<bool> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_IsLocked(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Import_IPhotoImportSource<D>::IsMassStorage() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_IsMassStorage(&value));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_Media_Import_IPhotoImportSource<D>::Thumbnail() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->get_Thumbnail(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSession consume_Windows_Media_Import_IPhotoImportSource<D>::CreateImportSession() const
+{
+    Windows::Media::Import::PhotoImportSession result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportSource)->CreateImportSession(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> consume_Windows_Media_Import_IPhotoImportSourceStatics<D>::FromIdAsync(param::hstring const& sourceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportSourceStatics)->FromIdAsync(get_abi(sourceId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> consume_Windows_Media_Import_IPhotoImportSourceStatics<D>::FromFolderAsync(Windows::Storage::IStorageFolder const& sourceRootFolder) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportSourceStatics)->FromFolderAsync(get_abi(sourceRootFolder), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::SerialNumber() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_SerialNumber(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportStorageMediumType consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::StorageMediumType() const noexcept
+{
+    Windows::Media::Import::PhotoImportStorageMediumType value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_StorageMediumType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportAccessMode consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::SupportedAccessMode() const noexcept
+{
+    Windows::Media::Import::PhotoImportAccessMode value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_SupportedAccessMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::CapacityInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_CapacityInBytes(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::AvailableSpaceInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->get_AvailableSpaceInBytes(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Import_IPhotoImportStorageMedium<D>::Refresh() const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Import::IPhotoImportStorageMedium)->Refresh());
+}
+
+template <typename D> hstring consume_Windows_Media_Import_IPhotoImportVideoSegment<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportVideoSegment)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Media_Import_IPhotoImportVideoSegment<D>::SizeInBytes() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportVideoSegment)->get_SizeInBytes(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Media_Import_IPhotoImportVideoSegment<D>::Date() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportVideoSegment)->get_Date(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Import::PhotoImportSidecar consume_Windows_Media_Import_IPhotoImportVideoSegment<D>::Sibling() const noexcept
+{
+    Windows::Media::Import::PhotoImportSidecar value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportVideoSegment)->get_Sibling(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> consume_Windows_Media_Import_IPhotoImportVideoSegment<D>::Sidecars() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Import::IPhotoImportVideoSegment)->get_Sidecars(put_abi(value)));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult> : produce_base<D, Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult>
 {
-    HRESULT __stdcall get_Session(abi_arg_out<Windows::Media::Import::IPhotoImportSession> value) noexcept override
+    HRESULT __stdcall get_Session(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Session());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Session());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HasSucceeded(bool * value) noexcept override
+    HRESULT __stdcall get_HasSucceeded(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HasSucceeded());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HasSucceeded());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DeletedItems(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem>> value) noexcept override
+    HRESULT __stdcall get_DeletedItems(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeletedItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeletedItems());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_PhotosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_VideosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_VideosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_TotalCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_TotalSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalSizeInBytes());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce_base<D, Windows::Media::Import::IPhotoImportFindItemsResult>
 {
-    HRESULT __stdcall get_Session(abi_arg_out<Windows::Media::Import::IPhotoImportSession> value) noexcept override
+    HRESULT __stdcall get_Session(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Session());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Session());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HasSucceeded(bool * value) noexcept override
+    HRESULT __stdcall get_HasSucceeded(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HasSucceeded());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HasSucceeded());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FoundItems(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem>> value) noexcept override
+    HRESULT __stdcall get_FoundItems(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FoundItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FoundItems());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_PhotosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_VideosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_VideosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_TotalCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_TotalSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SelectAll() noexcept override
+    HRESULT __stdcall SelectAll() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SelectAll();
             return S_OK;
         }
@@ -377,10 +1138,11 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall abi_SelectNone() noexcept override
+    HRESULT __stdcall SelectNone() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SelectNone();
             return S_OK;
         }
@@ -390,11 +1152,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall abi_SelectNewAsync(abi_arg_out<Windows::Foundation::IAsyncAction> action) noexcept override
+    HRESULT __stdcall SelectNewAsync(::IUnknown** action) noexcept final
     {
         try
         {
-            *action = detach(this->shim().SelectNewAsync());
+            typename D::abi_guard guard(this->shim());
+            *action = detach_abi(this->shim().SelectNewAsync());
             return S_OK;
         }
         catch (...)
@@ -404,11 +1167,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall abi_SetImportMode(Windows::Media::Import::PhotoImportImportMode value) noexcept override
+    HRESULT __stdcall SetImportMode(Windows::Media::Import::PhotoImportImportMode value) noexcept final
     {
         try
         {
-            this->shim().SetImportMode(value);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetImportMode(*reinterpret_cast<Windows::Media::Import::PhotoImportImportMode const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -417,11 +1181,89 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall get_ImportMode(Windows::Media::Import::PhotoImportImportMode * value) noexcept override
+    HRESULT __stdcall get_ImportMode(Windows::Media::Import::PhotoImportImportMode* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ImportMode());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedPhotosCount(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedPhotosCount());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedPhotosSizeInBytes(uint64_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedPhotosSizeInBytes());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedVideosCount(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedVideosCount());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedVideosSizeInBytes(uint64_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedVideosSizeInBytes());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedSidecarsCount(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedSidecarsCount());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedSidecarsSizeInBytes(uint64_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedSidecarsSizeInBytes());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedSiblingsCount(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedSiblingsCount());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedSiblingsSizeInBytes(uint64_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedSiblingsSizeInBytes());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedTotalCount(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedTotalCount());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedTotalSizeInBytes(uint64_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedTotalSizeInBytes());
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_SelectionChanged(::IUnknown* value, event_token* token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ImportMode());
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().SelectionChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -430,11 +1272,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall get_SelectedPhotosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall remove_SelectionChanged(event_token token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().SelectedPhotosCount());
+            typename D::abi_guard guard(this->shim());
+            this->shim().SelectionChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -443,154 +1286,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall get_SelectedPhotosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall ImportItemsAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *value = detach(this->shim().SelectedPhotosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedVideosCount(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedVideosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedVideosSizeInBytes(uint64_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedVideosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedSidecarsCount(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedSidecarsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedSidecarsSizeInBytes(uint64_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedSidecarsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedSiblingsCount(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedSiblingsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedSiblingsSizeInBytes(uint64_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedSiblingsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedTotalCount(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedTotalCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_SelectedTotalSizeInBytes(uint64_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().SelectedTotalSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall add_SelectionChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs>> value, event_token * token) noexcept override
-    {
-        try
-        {
-            *token = detach(this->shim().SelectionChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> *>(&value)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_SelectionChanged(event_token token) noexcept override
-    {
-        try
-        {
-            this->shim().SelectionChanged(token);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ImportItemsAsync(abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress>> operation) noexcept override
-    {
-        try
-        {
-            *operation = detach(this->shim().ImportItemsAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ImportItemsAsync());
             return S_OK;
         }
         catch (...)
@@ -600,11 +1301,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall add_ItemImported(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs>> value, event_token * token) noexcept override
+    HRESULT __stdcall add_ItemImported(::IUnknown* value, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ItemImported(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ItemImported(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -613,11 +1315,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
         }
     }
 
-    HRESULT __stdcall remove_ItemImported(event_token token) noexcept override
+    HRESULT __stdcall remove_ItemImported(event_token token) noexcept final
     {
         try
         {
-            this->shim().ItemImported(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ItemImported(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -630,11 +1333,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult> : produce
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult2> : produce_base<D, Windows::Media::Import::IPhotoImportFindItemsResult2>
 {
-    HRESULT __stdcall abi_AddItemsInDateRangeToSelection(abi_arg_in<Windows::Foundation::DateTime> rangeStart, abi_arg_in<Windows::Foundation::TimeSpan> rangeLength) noexcept override
+    HRESULT __stdcall AddItemsInDateRangeToSelection(Windows::Foundation::DateTime rangeStart, Windows::Foundation::TimeSpan rangeLength) noexcept final
     {
         try
         {
-            this->shim().AddItemsInDateRangeToSelection(*reinterpret_cast<const Windows::Foundation::DateTime *>(&rangeStart), *reinterpret_cast<const Windows::Foundation::TimeSpan *>(&rangeLength));
+            typename D::abi_guard guard(this->shim());
+            this->shim().AddItemsInDateRangeToSelection(*reinterpret_cast<Windows::Foundation::DateTime const*>(&rangeStart), *reinterpret_cast<Windows::Foundation::TimeSpan const*>(&rangeLength));
             return S_OK;
         }
         catch (...)
@@ -647,182 +1351,103 @@ struct produce<D, Windows::Media::Import::IPhotoImportFindItemsResult2> : produc
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportImportItemsResult> : produce_base<D, Windows::Media::Import::IPhotoImportImportItemsResult>
 {
-    HRESULT __stdcall get_Session(abi_arg_out<Windows::Media::Import::IPhotoImportSession> value) noexcept override
+    HRESULT __stdcall get_Session(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Session());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Session());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HasSucceeded(bool * value) noexcept override
+    HRESULT __stdcall get_HasSucceeded(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HasSucceeded());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HasSucceeded());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ImportedItems(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem>> value) noexcept override
+    HRESULT __stdcall get_ImportedItems(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ImportedItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ImportedItems());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_PhotosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_PhotosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PhotosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PhotosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_VideosCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideosSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_VideosSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideosSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideosSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SidecarsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SidecarsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SidecarsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SiblingsSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SiblingsSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SiblingsSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_TotalCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TotalSizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_TotalSizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TotalSizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TotalSizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_DeleteImportedItemsFromSourceAsync(abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double>> result) noexcept override
+    HRESULT __stdcall DeleteImportedItemsFromSourceAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().DeleteImportedItemsFromSourceAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().DeleteImportedItemsFromSourceAsync());
             return S_OK;
         }
         catch (...)
@@ -836,209 +1461,118 @@ struct produce<D, Windows::Media::Import::IPhotoImportImportItemsResult> : produ
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportItem> : produce_base<D, Windows::Media::Import::IPhotoImportItem>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ItemKey(uint64_t * value) noexcept override
+    HRESULT __stdcall get_ItemKey(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ItemKey());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ItemKey());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContentType(Windows::Media::Import::PhotoImportContentType * value) noexcept override
+    HRESULT __stdcall get_ContentType(Windows::Media::Import::PhotoImportContentType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContentType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContentType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Date(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Date(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Date());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Date());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Sibling(abi_arg_out<Windows::Media::Import::IPhotoImportSidecar> value) noexcept override
+    HRESULT __stdcall get_Sibling(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Sibling());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Sibling());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Sidecars(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar>> value) noexcept override
+    HRESULT __stdcall get_Sidecars(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Sidecars());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Sidecars());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideoSegments(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportVideoSegment>> value) noexcept override
+    HRESULT __stdcall get_VideoSegments(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideoSegments());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideoSegments());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSelected(bool * value) noexcept override
+    HRESULT __stdcall get_IsSelected(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSelected());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSelected());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSelected(bool value) noexcept override
+    HRESULT __stdcall put_IsSelected(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSelected(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSelected(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Thumbnail(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Thumbnail(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Thumbnail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Thumbnail());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ImportedFileNames(abi_arg_out<Windows::Foundation::Collections::IVectorView<hstring>> value) noexcept override
+    HRESULT __stdcall get_ImportedFileNames(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ImportedFileNames());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ImportedFileNames());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DeletedFileNames(abi_arg_out<Windows::Foundation::Collections::IVectorView<hstring>> value) noexcept override
+    HRESULT __stdcall get_DeletedFileNames(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeletedFileNames());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeletedFileNames());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportItemImportedEventArgs> : produce_base<D, Windows::Media::Import::IPhotoImportItemImportedEventArgs>
 {
-    HRESULT __stdcall get_ImportedItem(abi_arg_out<Windows::Media::Import::IPhotoImportItem> value) noexcept override
+    HRESULT __stdcall get_ImportedItem(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ImportedItem());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ImportedItem());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportManagerStatics> : produce_base<D, Windows::Media::Import::IPhotoImportManagerStatics>
 {
-    HRESULT __stdcall abi_IsSupportedAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> operation) noexcept override
+    HRESULT __stdcall IsSupportedAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().IsSupportedAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().IsSupportedAsync());
             return S_OK;
         }
         catch (...)
@@ -1048,11 +1582,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportManagerStatics> : produce_
         }
     }
 
-    HRESULT __stdcall abi_FindAllSourcesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>>> operation) noexcept override
+    HRESULT __stdcall FindAllSourcesAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FindAllSourcesAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FindAllSourcesAsync());
             return S_OK;
         }
         catch (...)
@@ -1062,11 +1597,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportManagerStatics> : produce_
         }
     }
 
-    HRESULT __stdcall abi_GetPendingOperations(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation>> result) noexcept override
+    HRESULT __stdcall GetPendingOperations(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetPendingOperations());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetPendingOperations());
             return S_OK;
         }
         catch (...)
@@ -1080,234 +1616,132 @@ struct produce<D, Windows::Media::Import::IPhotoImportManagerStatics> : produce_
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportOperation> : produce_base<D, Windows::Media::Import::IPhotoImportOperation>
 {
-    HRESULT __stdcall get_Stage(Windows::Media::Import::PhotoImportStage * value) noexcept override
+    HRESULT __stdcall get_Stage(Windows::Media::Import::PhotoImportStage* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Stage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Stage());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Session(abi_arg_out<Windows::Media::Import::IPhotoImportSession> value) noexcept override
+    HRESULT __stdcall get_Session(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Session());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Session());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContinueFindingItemsAsync(abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t>> operation) noexcept override
+    HRESULT __stdcall get_ContinueFindingItemsAsync(::IUnknown** operation) noexcept final
     {
-        try
-        {
-            *operation = detach(this->shim().ContinueFindingItemsAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *operation = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *operation = detach_abi(this->shim().ContinueFindingItemsAsync());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContinueImportingItemsAsync(abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress>> operation) noexcept override
+    HRESULT __stdcall get_ContinueImportingItemsAsync(::IUnknown** operation) noexcept final
     {
-        try
-        {
-            *operation = detach(this->shim().ContinueImportingItemsAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *operation = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *operation = detach_abi(this->shim().ContinueImportingItemsAsync());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContinueDeletingImportedItemsFromSourceAsync(abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double>> operation) noexcept override
+    HRESULT __stdcall get_ContinueDeletingImportedItemsFromSourceAsync(::IUnknown** operation) noexcept final
     {
-        try
-        {
-            *operation = detach(this->shim().ContinueDeletingImportedItemsFromSourceAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *operation = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *operation = detach_abi(this->shim().ContinueDeletingImportedItemsFromSourceAsync());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSelectionChangedEventArgs> : produce_base<D, Windows::Media::Import::IPhotoImportSelectionChangedEventArgs>
 {
-    HRESULT __stdcall get_IsSelectionEmpty(bool * value) noexcept override
+    HRESULT __stdcall get_IsSelectionEmpty(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSelectionEmpty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSelectionEmpty());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSession> : produce_base<D, Windows::Media::Import::IPhotoImportSession>
 {
-    HRESULT __stdcall get_Source(abi_arg_out<Windows::Media::Import::IPhotoImportSource> value) noexcept override
+    HRESULT __stdcall get_Source(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Source());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Source());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SessionId(GUID * value) noexcept override
+    HRESULT __stdcall get_SessionId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SessionId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SessionId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DestinationFolder(abi_arg_in<Windows::Storage::IStorageFolder> value) noexcept override
+    HRESULT __stdcall put_DestinationFolder(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().DestinationFolder(*reinterpret_cast<const Windows::Storage::IStorageFolder *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DestinationFolder(*reinterpret_cast<Windows::Storage::IStorageFolder const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DestinationFolder(abi_arg_out<Windows::Storage::IStorageFolder> value) noexcept override
+    HRESULT __stdcall get_DestinationFolder(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DestinationFolder());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DestinationFolder());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AppendSessionDateToDestinationFolder(bool value) noexcept override
+    HRESULT __stdcall put_AppendSessionDateToDestinationFolder(bool value) noexcept final
     {
-        try
-        {
-            this->shim().AppendSessionDateToDestinationFolder(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AppendSessionDateToDestinationFolder(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AppendSessionDateToDestinationFolder(bool * value) noexcept override
+    HRESULT __stdcall get_AppendSessionDateToDestinationFolder(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AppendSessionDateToDestinationFolder());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AppendSessionDateToDestinationFolder());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode value) noexcept override
+    HRESULT __stdcall put_SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode value) noexcept final
     {
-        try
-        {
-            this->shim().SubfolderCreationMode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SubfolderCreationMode(*reinterpret_cast<Windows::Media::Import::PhotoImportSubfolderCreationMode const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode * value) noexcept override
+    HRESULT __stdcall get_SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SubfolderCreationMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SubfolderCreationMode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DestinationFileNamePrefix(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DestinationFileNamePrefix(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DestinationFileNamePrefix(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DestinationFileNamePrefix(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DestinationFileNamePrefix(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DestinationFileNamePrefix(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DestinationFileNamePrefix());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DestinationFileNamePrefix());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_FindItemsAsync(Windows::Media::Import::PhotoImportContentTypeFilter contentTypeFilter, Windows::Media::Import::PhotoImportItemSelectionMode itemSelectionMode, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t>> operation) noexcept override
+    HRESULT __stdcall FindItemsAsync(Windows::Media::Import::PhotoImportContentTypeFilter contentTypeFilter, Windows::Media::Import::PhotoImportItemSelectionMode itemSelectionMode, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FindItemsAsync(contentTypeFilter, itemSelectionMode));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FindItemsAsync(*reinterpret_cast<Windows::Media::Import::PhotoImportContentTypeFilter const*>(&contentTypeFilter), *reinterpret_cast<Windows::Media::Import::PhotoImportItemSelectionMode const*>(&itemSelectionMode)));
             return S_OK;
         }
         catch (...)
@@ -1321,331 +1755,181 @@ struct produce<D, Windows::Media::Import::IPhotoImportSession> : produce_base<D,
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSession2> : produce_base<D, Windows::Media::Import::IPhotoImportSession2>
 {
-    HRESULT __stdcall put_SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat value) noexcept override
+    HRESULT __stdcall put_SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat value) noexcept final
     {
-        try
-        {
-            this->shim().SubfolderDateFormat(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SubfolderDateFormat(*reinterpret_cast<Windows::Media::Import::PhotoImportSubfolderDateFormat const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat * value) noexcept override
+    HRESULT __stdcall get_SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SubfolderDateFormat());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SubfolderDateFormat());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RememberDeselectedItems(bool value) noexcept override
+    HRESULT __stdcall put_RememberDeselectedItems(bool value) noexcept final
     {
-        try
-        {
-            this->shim().RememberDeselectedItems(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RememberDeselectedItems(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RememberDeselectedItems(bool * value) noexcept override
+    HRESULT __stdcall get_RememberDeselectedItems(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RememberDeselectedItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RememberDeselectedItems());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSidecar> : produce_base<D, Windows::Media::Import::IPhotoImportSidecar>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Date(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Date(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Date());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Date());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSource> : produce_base<D, Windows::Media::Import::IPhotoImportSource>
 {
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Manufacturer(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Manufacturer(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Manufacturer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Manufacturer());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Model(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Model(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Model());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Model());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SerialNumber(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_SerialNumber(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SerialNumber());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SerialNumber());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionProtocol(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ConnectionProtocol(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionProtocol());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionProtocol());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionTransport(Windows::Media::Import::PhotoImportConnectionTransport * value) noexcept override
+    HRESULT __stdcall get_ConnectionTransport(Windows::Media::Import::PhotoImportConnectionTransport* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionTransport());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionTransport());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Type(Windows::Media::Import::PhotoImportSourceType * value) noexcept override
+    HRESULT __stdcall get_Type(Windows::Media::Import::PhotoImportSourceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PowerSource(Windows::Media::Import::PhotoImportPowerSource * value) noexcept override
+    HRESULT __stdcall get_PowerSource(Windows::Media::Import::PhotoImportPowerSource* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PowerSource());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PowerSource());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BatteryLevelPercent(abi_arg_out<Windows::Foundation::IReference<uint32_t>> value) noexcept override
+    HRESULT __stdcall get_BatteryLevelPercent(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BatteryLevelPercent());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BatteryLevelPercent());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DateTime(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_DateTime(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DateTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DateTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StorageMedia(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportStorageMedium>> value) noexcept override
+    HRESULT __stdcall get_StorageMedia(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StorageMedia());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StorageMedia());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsLocked(abi_arg_out<Windows::Foundation::IReference<bool>> value) noexcept override
+    HRESULT __stdcall get_IsLocked(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsLocked());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsLocked());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMassStorage(bool * value) noexcept override
+    HRESULT __stdcall get_IsMassStorage(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMassStorage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMassStorage());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Thumbnail(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Thumbnail(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Thumbnail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Thumbnail());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_CreateImportSession(abi_arg_out<Windows::Media::Import::IPhotoImportSession> result) noexcept override
+    HRESULT __stdcall CreateImportSession(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().CreateImportSession());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateImportSession());
             return S_OK;
         }
         catch (...)
@@ -1659,11 +1943,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportSource> : produce_base<D, 
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportSourceStatics> : produce_base<D, Windows::Media::Import::IPhotoImportSourceStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> sourceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource>> operation) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING sourceId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&sourceId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&sourceId)));
             return S_OK;
         }
         catch (...)
@@ -1673,11 +1958,12 @@ struct produce<D, Windows::Media::Import::IPhotoImportSourceStatics> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FromFolderAsync(abi_arg_in<Windows::Storage::IStorageFolder> sourceRootFolder, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource>> operation) noexcept override
+    HRESULT __stdcall FromFolderAsync(::IUnknown* sourceRootFolder, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FromFolderAsync(*reinterpret_cast<const Windows::Storage::IStorageFolder *>(&sourceRootFolder)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FromFolderAsync(*reinterpret_cast<Windows::Storage::IStorageFolder const*>(&sourceRootFolder)));
             return S_OK;
         }
         catch (...)
@@ -1691,104 +1977,60 @@ struct produce<D, Windows::Media::Import::IPhotoImportSourceStatics> : produce_b
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportStorageMedium> : produce_base<D, Windows::Media::Import::IPhotoImportStorageMedium>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SerialNumber(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_SerialNumber(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SerialNumber());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SerialNumber());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StorageMediumType(Windows::Media::Import::PhotoImportStorageMediumType * value) noexcept override
+    HRESULT __stdcall get_StorageMediumType(Windows::Media::Import::PhotoImportStorageMediumType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StorageMediumType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StorageMediumType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportedAccessMode(Windows::Media::Import::PhotoImportAccessMode * value) noexcept override
+    HRESULT __stdcall get_SupportedAccessMode(Windows::Media::Import::PhotoImportAccessMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportedAccessMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportedAccessMode());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CapacityInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_CapacityInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CapacityInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CapacityInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AvailableSpaceInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_AvailableSpaceInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AvailableSpaceInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AvailableSpaceInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Refresh() noexcept override
+    HRESULT __stdcall Refresh() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Refresh();
             return S_OK;
         }
@@ -1802,1024 +2044,162 @@ struct produce<D, Windows::Media::Import::IPhotoImportStorageMedium> : produce_b
 template <typename D>
 struct produce<D, Windows::Media::Import::IPhotoImportVideoSegment> : produce_base<D, Windows::Media::Import::IPhotoImportVideoSegment>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SizeInBytes(uint64_t * value) noexcept override
+    HRESULT __stdcall get_SizeInBytes(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SizeInBytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SizeInBytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Date(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Date(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Date());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Date());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Sibling(abi_arg_out<Windows::Media::Import::IPhotoImportSidecar> value) noexcept override
+    HRESULT __stdcall get_Sibling(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Sibling());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Sibling());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Sidecars(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar>> value) noexcept override
+    HRESULT __stdcall get_Sidecars(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Sidecars());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Sidecars());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Media::Import {
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPhotoImportManagerStatics<D>::IsSupportedAsync() const
-{
-    Windows::Foundation::IAsyncOperation<bool> operation;
-    check_hresult(static_cast<const IPhotoImportManagerStatics &>(static_cast<const D &>(*this))->abi_IsSupportedAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>> impl_IPhotoImportManagerStatics<D>::FindAllSourcesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>> operation;
-    check_hresult(static_cast<const IPhotoImportManagerStatics &>(static_cast<const D &>(*this))->abi_FindAllSourcesAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation> impl_IPhotoImportManagerStatics<D>::GetPendingOperations() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation> result;
-    check_hresult(static_cast<const IPhotoImportManagerStatics &>(static_cast<const D &>(*this))->abi_GetPendingOperations(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportStage impl_IPhotoImportOperation<D>::Stage() const
-{
-    Windows::Media::Import::PhotoImportStage value {};
-    check_hresult(static_cast<const IPhotoImportOperation &>(static_cast<const D &>(*this))->get_Stage(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSession impl_IPhotoImportOperation<D>::Session() const
-{
-    Windows::Media::Import::PhotoImportSession value { nullptr };
-    check_hresult(static_cast<const IPhotoImportOperation &>(static_cast<const D &>(*this))->get_Session(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> impl_IPhotoImportOperation<D>::ContinueFindingItemsAsync() const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> operation;
-    check_hresult(static_cast<const IPhotoImportOperation &>(static_cast<const D &>(*this))->get_ContinueFindingItemsAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> impl_IPhotoImportOperation<D>::ContinueImportingItemsAsync() const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> operation;
-    check_hresult(static_cast<const IPhotoImportOperation &>(static_cast<const D &>(*this))->get_ContinueImportingItemsAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> impl_IPhotoImportOperation<D>::ContinueDeletingImportedItemsFromSourceAsync() const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> operation;
-    check_hresult(static_cast<const IPhotoImportOperation &>(static_cast<const D &>(*this))->get_ContinueDeletingImportedItemsFromSourceAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_IPhotoImportStorageMedium<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportStorageMedium<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportStorageMedium<D>::SerialNumber() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_SerialNumber(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportStorageMediumType impl_IPhotoImportStorageMedium<D>::StorageMediumType() const
-{
-    Windows::Media::Import::PhotoImportStorageMediumType value {};
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_StorageMediumType(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportAccessMode impl_IPhotoImportStorageMedium<D>::SupportedAccessMode() const
-{
-    Windows::Media::Import::PhotoImportAccessMode value {};
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_SupportedAccessMode(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportStorageMedium<D>::CapacityInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_CapacityInBytes(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportStorageMedium<D>::AvailableSpaceInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->get_AvailableSpaceInBytes(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportStorageMedium<D>::Refresh() const
-{
-    check_hresult(static_cast<const IPhotoImportStorageMedium &>(static_cast<const D &>(*this))->abi_Refresh());
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> impl_IPhotoImportSourceStatics<D>::FromIdAsync(hstring_ref sourceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> operation;
-    check_hresult(static_cast<const IPhotoImportSourceStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(sourceId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> impl_IPhotoImportSourceStatics<D>::FromFolderAsync(const Windows::Storage::IStorageFolder & sourceRootFolder) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> operation;
-    check_hresult(static_cast<const IPhotoImportSourceStatics &>(static_cast<const D &>(*this))->abi_FromFolderAsync(get(sourceRootFolder), put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::DisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_DisplayName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::Manufacturer() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Manufacturer(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::Model() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Model(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::SerialNumber() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_SerialNumber(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSource<D>::ConnectionProtocol() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_ConnectionProtocol(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportConnectionTransport impl_IPhotoImportSource<D>::ConnectionTransport() const
-{
-    Windows::Media::Import::PhotoImportConnectionTransport value {};
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_ConnectionTransport(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSourceType impl_IPhotoImportSource<D>::Type() const
-{
-    Windows::Media::Import::PhotoImportSourceType value {};
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportPowerSource impl_IPhotoImportSource<D>::PowerSource() const
-{
-    Windows::Media::Import::PhotoImportPowerSource value {};
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_PowerSource(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<uint32_t> impl_IPhotoImportSource<D>::BatteryLevelPercent() const
-{
-    Windows::Foundation::IReference<uint32_t> value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_BatteryLevelPercent(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IPhotoImportSource<D>::DateTime() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_DateTime(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportStorageMedium> impl_IPhotoImportSource<D>::StorageMedia() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportStorageMedium> value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_StorageMedia(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<bool> impl_IPhotoImportSource<D>::IsLocked() const
-{
-    Windows::Foundation::IReference<bool> value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_IsLocked(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportSource<D>::IsMassStorage() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_IsMassStorage(&value));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IPhotoImportSource<D>::Thumbnail() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->get_Thumbnail(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSession impl_IPhotoImportSource<D>::CreateImportSession() const
-{
-    Windows::Media::Import::PhotoImportSession result { nullptr };
-    check_hresult(static_cast<const IPhotoImportSource &>(static_cast<const D &>(*this))->abi_CreateImportSession(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSource impl_IPhotoImportSession<D>::Source() const
-{
-    Windows::Media::Import::PhotoImportSource value { nullptr };
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_Source(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IPhotoImportSession<D>::SessionId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_SessionId(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportSession<D>::DestinationFolder(const Windows::Storage::IStorageFolder & value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->put_DestinationFolder(get(value)));
-}
-
-template <typename D> Windows::Storage::IStorageFolder impl_IPhotoImportSession<D>::DestinationFolder() const
-{
-    Windows::Storage::IStorageFolder value;
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_DestinationFolder(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportSession<D>::AppendSessionDateToDestinationFolder(bool value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->put_AppendSessionDateToDestinationFolder(value));
-}
-
-template <typename D> bool impl_IPhotoImportSession<D>::AppendSessionDateToDestinationFolder() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_AppendSessionDateToDestinationFolder(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportSession<D>::SubfolderCreationMode(Windows::Media::Import::PhotoImportSubfolderCreationMode value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->put_SubfolderCreationMode(value));
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSubfolderCreationMode impl_IPhotoImportSession<D>::SubfolderCreationMode() const
-{
-    Windows::Media::Import::PhotoImportSubfolderCreationMode value {};
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_SubfolderCreationMode(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportSession<D>::DestinationFileNamePrefix(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->put_DestinationFileNamePrefix(get(value)));
-}
-
-template <typename D> hstring impl_IPhotoImportSession<D>::DestinationFileNamePrefix() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->get_DestinationFileNamePrefix(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> impl_IPhotoImportSession<D>::FindItemsAsync(Windows::Media::Import::PhotoImportContentTypeFilter contentTypeFilter, Windows::Media::Import::PhotoImportItemSelectionMode itemSelectionMode) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportFindItemsResult, uint32_t> operation;
-    check_hresult(static_cast<const IPhotoImportSession &>(static_cast<const D &>(*this))->abi_FindItemsAsync(contentTypeFilter, itemSelectionMode, put(operation)));
-    return operation;
-}
-
-template <typename D> void impl_IPhotoImportSession2<D>::SubfolderDateFormat(Windows::Media::Import::PhotoImportSubfolderDateFormat value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession2 &>(static_cast<const D &>(*this))->put_SubfolderDateFormat(value));
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSubfolderDateFormat impl_IPhotoImportSession2<D>::SubfolderDateFormat() const
-{
-    Windows::Media::Import::PhotoImportSubfolderDateFormat value {};
-    check_hresult(static_cast<const IPhotoImportSession2 &>(static_cast<const D &>(*this))->get_SubfolderDateFormat(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportSession2<D>::RememberDeselectedItems(bool value) const
-{
-    check_hresult(static_cast<const IPhotoImportSession2 &>(static_cast<const D &>(*this))->put_RememberDeselectedItems(value));
-}
-
-template <typename D> bool impl_IPhotoImportSession2<D>::RememberDeselectedItems() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportSession2 &>(static_cast<const D &>(*this))->get_RememberDeselectedItems(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportItem<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportItem<D>::ItemKey() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_ItemKey(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportContentType impl_IPhotoImportItem<D>::ContentType() const
-{
-    Windows::Media::Import::PhotoImportContentType value {};
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_ContentType(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportItem<D>::SizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_SizeInBytes(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPhotoImportItem<D>::Date() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_Date(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSidecar impl_IPhotoImportItem<D>::Sibling() const
-{
-    Windows::Media::Import::PhotoImportSidecar value { nullptr };
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_Sibling(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> impl_IPhotoImportItem<D>::Sidecars() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_Sidecars(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportVideoSegment> impl_IPhotoImportItem<D>::VideoSegments() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportVideoSegment> value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_VideoSegments(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportItem<D>::IsSelected() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_IsSelected(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportItem<D>::IsSelected(bool value) const
-{
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->put_IsSelected(value));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IPhotoImportItem<D>::Thumbnail() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_Thumbnail(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<hstring> impl_IPhotoImportItem<D>::ImportedFileNames() const
-{
-    Windows::Foundation::Collections::IVectorView<hstring> value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_ImportedFileNames(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<hstring> impl_IPhotoImportItem<D>::DeletedFileNames() const
-{
-    Windows::Foundation::Collections::IVectorView<hstring> value;
-    check_hresult(static_cast<const IPhotoImportItem &>(static_cast<const D &>(*this))->get_DeletedFileNames(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSession impl_IPhotoImportFindItemsResult<D>::Session() const
-{
-    Windows::Media::Import::PhotoImportSession value { nullptr };
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_Session(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportFindItemsResult<D>::HasSucceeded() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_HasSucceeded(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> impl_IPhotoImportFindItemsResult<D>::FoundItems() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value;
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_FoundItems(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::PhotosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_PhotosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::PhotosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_PhotosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::VideosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_VideosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::VideosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_VideosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SidecarsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SidecarsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SidecarsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SidecarsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SiblingsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SiblingsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SiblingsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SiblingsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::TotalCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_TotalCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::TotalSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_TotalSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult<D>::SelectAll() const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->abi_SelectAll());
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult<D>::SelectNone() const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->abi_SelectNone());
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhotoImportFindItemsResult<D>::SelectNewAsync() const
-{
-    Windows::Foundation::IAsyncAction action;
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->abi_SelectNewAsync(put(action)));
-    return action;
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult<D>::SetImportMode(Windows::Media::Import::PhotoImportImportMode value) const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->abi_SetImportMode(value));
-}
-
-template <typename D> Windows::Media::Import::PhotoImportImportMode impl_IPhotoImportFindItemsResult<D>::ImportMode() const
-{
-    Windows::Media::Import::PhotoImportImportMode value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_ImportMode(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SelectedPhotosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedPhotosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SelectedPhotosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedPhotosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SelectedVideosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedVideosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SelectedVideosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedVideosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SelectedSidecarsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedSidecarsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SelectedSidecarsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedSidecarsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SelectedSiblingsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedSiblingsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SelectedSiblingsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedSiblingsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportFindItemsResult<D>::SelectedTotalCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedTotalCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportFindItemsResult<D>::SelectedTotalSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->get_SelectedTotalSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> event_token impl_IPhotoImportFindItemsResult<D>::SelectionChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> & value) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->add_SelectionChanged(get(value), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhotoImportFindItemsResult> impl_IPhotoImportFindItemsResult<D>::SelectionChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportSelectionChangedEventArgs> & value) const
-{
-    return impl::make_event_revoker<D, IPhotoImportFindItemsResult>(this, &ABI::Windows::Media::Import::IPhotoImportFindItemsResult::remove_SelectionChanged, SelectionChanged(value));
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult<D>::SelectionChanged(event_token token) const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->remove_SelectionChanged(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> impl_IPhotoImportFindItemsResult<D>::ImportItemsAsync() const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportImportItemsResult, Windows::Media::Import::PhotoImportProgress> operation;
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->abi_ImportItemsAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> event_token impl_IPhotoImportFindItemsResult<D>::ItemImported(const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> & value) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->add_ItemImported(get(value), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhotoImportFindItemsResult> impl_IPhotoImportFindItemsResult<D>::ItemImported(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Import::PhotoImportFindItemsResult, Windows::Media::Import::PhotoImportItemImportedEventArgs> & value) const
-{
-    return impl::make_event_revoker<D, IPhotoImportFindItemsResult>(this, &ABI::Windows::Media::Import::IPhotoImportFindItemsResult::remove_ItemImported, ItemImported(value));
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult<D>::ItemImported(event_token token) const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult &>(static_cast<const D &>(*this))->remove_ItemImported(token));
-}
-
-template <typename D> void impl_IPhotoImportFindItemsResult2<D>::AddItemsInDateRangeToSelection(const Windows::Foundation::DateTime & rangeStart, const Windows::Foundation::TimeSpan & rangeLength) const
-{
-    check_hresult(static_cast<const IPhotoImportFindItemsResult2 &>(static_cast<const D &>(*this))->abi_AddItemsInDateRangeToSelection(get(rangeStart), get(rangeLength)));
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSession impl_IPhotoImportImportItemsResult<D>::Session() const
-{
-    Windows::Media::Import::PhotoImportSession value { nullptr };
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_Session(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportImportItemsResult<D>::HasSucceeded() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_HasSucceeded(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> impl_IPhotoImportImportItemsResult<D>::ImportedItems() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value;
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_ImportedItems(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportImportItemsResult<D>::PhotosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_PhotosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportImportItemsResult<D>::PhotosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_PhotosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportImportItemsResult<D>::VideosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_VideosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportImportItemsResult<D>::VideosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_VideosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportImportItemsResult<D>::SidecarsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_SidecarsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportImportItemsResult<D>::SidecarsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_SidecarsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportImportItemsResult<D>::SiblingsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_SiblingsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportImportItemsResult<D>::SiblingsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_SiblingsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportImportItemsResult<D>::TotalCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_TotalCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportImportItemsResult<D>::TotalSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->get_TotalSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> impl_IPhotoImportImportItemsResult<D>::DeleteImportedItemsFromSourceAsync() const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult, double> result;
-    check_hresult(static_cast<const IPhotoImportImportItemsResult &>(static_cast<const D &>(*this))->abi_DeleteImportedItemsFromSourceAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSession impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::Session() const
-{
-    Windows::Media::Import::PhotoImportSession value { nullptr };
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_Session(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::HasSucceeded() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_HasSucceeded(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::DeletedItems() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportItem> value;
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_DeletedItems(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::PhotosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_PhotosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::PhotosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_PhotosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::VideosCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_VideosCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::VideosSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_VideosSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SidecarsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_SidecarsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SidecarsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_SidecarsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SiblingsCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_SiblingsCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::SiblingsSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_SiblingsSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::TotalCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_TotalCount(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportDeleteImportedItemsFromSourceResult<D>::TotalSizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportDeleteImportedItemsFromSourceResult &>(static_cast<const D &>(*this))->get_TotalSizeInBytes(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportSidecar<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportSidecar &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportSidecar<D>::SizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportSidecar &>(static_cast<const D &>(*this))->get_SizeInBytes(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPhotoImportSidecar<D>::Date() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPhotoImportSidecar &>(static_cast<const D &>(*this))->get_Date(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhotoImportVideoSegment<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhotoImportVideoSegment &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPhotoImportVideoSegment<D>::SizeInBytes() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPhotoImportVideoSegment &>(static_cast<const D &>(*this))->get_SizeInBytes(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPhotoImportVideoSegment<D>::Date() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPhotoImportVideoSegment &>(static_cast<const D &>(*this))->get_Date(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportSidecar impl_IPhotoImportVideoSegment<D>::Sibling() const
-{
-    Windows::Media::Import::PhotoImportSidecar value { nullptr };
-    check_hresult(static_cast<const IPhotoImportVideoSegment &>(static_cast<const D &>(*this))->get_Sibling(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> impl_IPhotoImportVideoSegment<D>::Sidecars() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSidecar> value;
-    check_hresult(static_cast<const IPhotoImportVideoSegment &>(static_cast<const D &>(*this))->get_Sidecars(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Import::PhotoImportItem impl_IPhotoImportItemImportedEventArgs<D>::ImportedItem() const
-{
-    Windows::Media::Import::PhotoImportItem value { nullptr };
-    check_hresult(static_cast<const IPhotoImportItemImportedEventArgs &>(static_cast<const D &>(*this))->get_ImportedItem(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPhotoImportSelectionChangedEventArgs<D>::IsSelectionEmpty() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhotoImportSelectionChangedEventArgs &>(static_cast<const D &>(*this))->get_IsSelectionEmpty(&value));
-    return value;
-}
+WINRT_EXPORT namespace winrt::Windows::Media::Import {
 
 inline Windows::Foundation::IAsyncOperation<bool> PhotoImportManager::IsSupportedAsync()
 {
-    return get_activation_factory<PhotoImportManager, IPhotoImportManagerStatics>().IsSupportedAsync();
+    return get_activation_factory<PhotoImportManager, Windows::Media::Import::IPhotoImportManagerStatics>().IsSupportedAsync();
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportSource>> PhotoImportManager::FindAllSourcesAsync()
 {
-    return get_activation_factory<PhotoImportManager, IPhotoImportManagerStatics>().FindAllSourcesAsync();
+    return get_activation_factory<PhotoImportManager, Windows::Media::Import::IPhotoImportManagerStatics>().FindAllSourcesAsync();
 }
 
 inline Windows::Foundation::Collections::IVectorView<Windows::Media::Import::PhotoImportOperation> PhotoImportManager::GetPendingOperations()
 {
-    return get_activation_factory<PhotoImportManager, IPhotoImportManagerStatics>().GetPendingOperations();
+    return get_activation_factory<PhotoImportManager, Windows::Media::Import::IPhotoImportManagerStatics>().GetPendingOperations();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> PhotoImportSource::FromIdAsync(hstring_ref sourceId)
+inline Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> PhotoImportSource::FromIdAsync(param::hstring const& sourceId)
 {
-    return get_activation_factory<PhotoImportSource, IPhotoImportSourceStatics>().FromIdAsync(sourceId);
+    return get_activation_factory<PhotoImportSource, Windows::Media::Import::IPhotoImportSourceStatics>().FromIdAsync(sourceId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> PhotoImportSource::FromFolderAsync(const Windows::Storage::IStorageFolder & sourceRootFolder)
+inline Windows::Foundation::IAsyncOperation<Windows::Media::Import::PhotoImportSource> PhotoImportSource::FromFolderAsync(Windows::Storage::IStorageFolder const& sourceRootFolder)
 {
-    return get_activation_factory<PhotoImportSource, IPhotoImportSourceStatics>().FromFolderAsync(sourceRootFolder);
+    return get_activation_factory<PhotoImportSource, Windows::Media::Import::IPhotoImportSourceStatics>().FromFolderAsync(sourceRootFolder);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportDeleteImportedItemsFromSourceResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportFindItemsResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportFindItemsResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportFindItemsResult2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportFindItemsResult2> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportImportItemsResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportImportItemsResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportItem> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportItemImportedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportItemImportedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportManagerStatics> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportOperation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportOperation> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSelectionChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSelectionChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSession> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSession> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSession2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSession2> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSidecar> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSidecar> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSource> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportSourceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportSourceStatics> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportStorageMedium> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportStorageMedium> {};
+
+template<> struct hash<winrt::Windows::Media::Import::IPhotoImportVideoSegment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::IPhotoImportVideoSegment> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportDeleteImportedItemsFromSourceResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportFindItemsResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportFindItemsResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportImportItemsResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportImportItemsResult> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportItem> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportItemImportedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportItemImportedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportManager> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportOperation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportOperation> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportSelectionChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportSelectionChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportSession> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportSession> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportSidecar> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportSidecar> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportSource> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportStorageMedium> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportStorageMedium> {};
+
+template<> struct hash<winrt::Windows::Media::Import::PhotoImportVideoSegment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Import::PhotoImportVideoSegment> {};
+
 }
+
+WINRT_WARNING_POP

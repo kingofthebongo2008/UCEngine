@@ -1,24 +1,64 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Phone.System.Power.3.h"
-#include "Windows.Phone.System.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Phone.System.Power.2.h"
+#include "winrt/Windows.Phone.System.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Phone::System::Power::PowerSavingMode consume_Windows_Phone_System_Power_IPowerManagerStatics<D>::PowerSavingMode() const noexcept
+{
+    Windows::Phone::System::Power::PowerSavingMode value{};
+    check_terminate(WINRT_SHIM(Windows::Phone::System::Power::IPowerManagerStatics)->get_PowerSavingMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Phone_System_Power_IPowerManagerStatics<D>::PowerSavingModeChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Phone::System::Power::IPowerManagerStatics)->add_PowerSavingModeChanged(get_abi(changeHandler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Phone::System::Power::IPowerManagerStatics> consume_Windows_Phone_System_Power_IPowerManagerStatics<D>::PowerSavingModeChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Phone::System::Power::IPowerManagerStatics>(this, &abi_t<Windows::Phone::System::Power::IPowerManagerStatics>::remove_PowerSavingModeChanged, PowerSavingModeChanged(changeHandler));
+}
+
+template <typename D> void consume_Windows_Phone_System_Power_IPowerManagerStatics<D>::PowerSavingModeChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Phone::System::Power::IPowerManagerStatics)->remove_PowerSavingModeChanged(get_abi(token)));
+}
+
+template <typename D> bool consume_Windows_Phone_System_Power_IPowerManagerStatics2<D>::PowerSavingModeEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Phone::System::Power::IPowerManagerStatics2)->get_PowerSavingModeEnabled(&value));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Phone::System::Power::IPowerManagerStatics> : produce_base<D, Windows::Phone::System::Power::IPowerManagerStatics>
 {
-    HRESULT __stdcall get_PowerSavingMode(Windows::Phone::System::Power::PowerSavingMode * value) noexcept override
+    HRESULT __stdcall get_PowerSavingMode(Windows::Phone::System::Power::PowerSavingMode* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PowerSavingMode());
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_PowerSavingModeChanged(::IUnknown* changeHandler, event_token* token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().PowerSavingMode());
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().PowerSavingModeChanged(*reinterpret_cast<Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const*>(&changeHandler)));
             return S_OK;
         }
         catch (...)
@@ -27,24 +67,12 @@ struct produce<D, Windows::Phone::System::Power::IPowerManagerStatics> : produce
         }
     }
 
-    HRESULT __stdcall add_PowerSavingModeChanged(abi_arg_in<Windows::Foundation::EventHandler<Windows::IInspectable>> changeHandler, event_token * token) noexcept override
+    HRESULT __stdcall remove_PowerSavingModeChanged(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().PowerSavingModeChanged(*reinterpret_cast<const Windows::Foundation::EventHandler<Windows::IInspectable> *>(&changeHandler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_PowerSavingModeChanged(event_token token) noexcept override
-    {
-        try
-        {
-            this->shim().PowerSavingModeChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().PowerSavingModeChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -57,81 +85,57 @@ struct produce<D, Windows::Phone::System::Power::IPowerManagerStatics> : produce
 template <typename D>
 struct produce<D, Windows::Phone::System::Power::IPowerManagerStatics2> : produce_base<D, Windows::Phone::System::Power::IPowerManagerStatics2>
 {
-    HRESULT __stdcall get_PowerSavingModeEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_PowerSavingModeEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PowerSavingModeEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PowerSavingModeEnabled());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Phone::System::Power {
-
-template <typename D> Windows::Phone::System::Power::PowerSavingMode impl_IPowerManagerStatics<D>::PowerSavingMode() const
-{
-    Windows::Phone::System::Power::PowerSavingMode value {};
-    check_hresult(static_cast<const IPowerManagerStatics &>(static_cast<const D &>(*this))->get_PowerSavingMode(&value));
-    return value;
-}
-
-template <typename D> event_token impl_IPowerManagerStatics<D>::PowerSavingModeChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPowerManagerStatics &>(static_cast<const D &>(*this))->add_PowerSavingModeChanged(get(changeHandler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPowerManagerStatics> impl_IPowerManagerStatics<D>::PowerSavingModeChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler) const
-{
-    return impl::make_event_revoker<D, IPowerManagerStatics>(this, &ABI::Windows::Phone::System::Power::IPowerManagerStatics::remove_PowerSavingModeChanged, PowerSavingModeChanged(changeHandler));
-}
-
-template <typename D> void impl_IPowerManagerStatics<D>::PowerSavingModeChanged(event_token token) const
-{
-    check_hresult(static_cast<const IPowerManagerStatics &>(static_cast<const D &>(*this))->remove_PowerSavingModeChanged(token));
-}
-
-template <typename D> bool impl_IPowerManagerStatics2<D>::PowerSavingModeEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPowerManagerStatics2 &>(static_cast<const D &>(*this))->get_PowerSavingModeEnabled(&value));
-    return value;
-}
+WINRT_EXPORT namespace winrt::Windows::Phone::System::Power {
 
 inline Windows::Phone::System::Power::PowerSavingMode PowerManager::PowerSavingMode()
 {
-    return get_activation_factory<PowerManager, IPowerManagerStatics>().PowerSavingMode();
+    return get_activation_factory<PowerManager, Windows::Phone::System::Power::IPowerManagerStatics>().PowerSavingMode();
 }
 
-inline event_token PowerManager::PowerSavingModeChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler)
+inline event_token PowerManager::PowerSavingModeChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler)
 {
-    return get_activation_factory<PowerManager, IPowerManagerStatics>().PowerSavingModeChanged(changeHandler);
+    return get_activation_factory<PowerManager, Windows::Phone::System::Power::IPowerManagerStatics>().PowerSavingModeChanged(changeHandler);
 }
 
-inline factory_event_revoker<IPowerManagerStatics> PowerManager::PowerSavingModeChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler)
+inline factory_event_revoker<Windows::Phone::System::Power::IPowerManagerStatics> PowerManager::PowerSavingModeChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler)
 {
-    auto factory = get_activation_factory<PowerManager, IPowerManagerStatics>();
-    return { factory, &ABI::Windows::Phone::System::Power::IPowerManagerStatics::remove_PowerSavingModeChanged, factory.PowerSavingModeChanged(changeHandler) };
+    auto factory = get_activation_factory<PowerManager, Windows::Phone::System::Power::IPowerManagerStatics>();
+    return { factory, &abi_t<Windows::Phone::System::Power::IPowerManagerStatics>::remove_PowerSavingModeChanged, factory.PowerSavingModeChanged(changeHandler) };
 }
 
-inline void PowerManager::PowerSavingModeChanged(event_token token)
+inline void PowerManager::PowerSavingModeChanged(event_token const& token)
 {
-    get_activation_factory<PowerManager, IPowerManagerStatics>().PowerSavingModeChanged(token);
+    get_activation_factory<PowerManager, Windows::Phone::System::Power::IPowerManagerStatics>().PowerSavingModeChanged(token);
 }
 
 inline bool PowerManager::PowerSavingModeEnabled()
 {
-    return get_activation_factory<PowerManager, IPowerManagerStatics2>().PowerSavingModeEnabled();
+    return get_activation_factory<PowerManager, Windows::Phone::System::Power::IPowerManagerStatics2>().PowerSavingModeEnabled();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Phone::System::Power::IPowerManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::System::Power::IPowerManagerStatics> {};
+
+template<> struct hash<winrt::Windows::Phone::System::Power::IPowerManagerStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::System::Power::IPowerManagerStatics2> {};
+
+template<> struct hash<winrt::Windows::Phone::System::Power::PowerManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::System::Power::PowerManager> {};
+
 }
+
+WINRT_WARNING_POP

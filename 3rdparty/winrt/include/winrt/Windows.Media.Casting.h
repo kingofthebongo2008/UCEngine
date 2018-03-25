@@ -1,29 +1,334 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Devices.Enumeration.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.UI.Popups.3.h"
-#include "internal/Windows.Media.Casting.3.h"
-#include "Windows.Media.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Enumeration.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.UI.Popups.2.h"
+#include "winrt/impl/Windows.Media.Casting.2.h"
+#include "winrt/Windows.Media.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Media::Casting::CastingConnectionState consume_Windows_Media_Casting_ICastingConnection<D>::State() const noexcept
+{
+    Windows::Media::Casting::CastingConnectionState value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->get_State(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Casting::CastingDevice consume_Windows_Media_Casting_ICastingConnection<D>::Device() const noexcept
+{
+    Windows::Media::Casting::CastingDevice value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->get_Device(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Casting::CastingSource consume_Windows_Media_Casting_ICastingConnection<D>::Source() const noexcept
+{
+    Windows::Media::Casting::CastingSource value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->get_Source(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingConnection<D>::Source(Windows::Media::Casting::CastingSource const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->put_Source(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_Media_Casting_ICastingConnection<D>::StateChanged(Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->add_StateChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Casting::ICastingConnection> consume_Windows_Media_Casting_ICastingConnection<D>::StateChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Casting::ICastingConnection>(this, &abi_t<Windows::Media::Casting::ICastingConnection>::remove_StateChanged, StateChanged(handler));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingConnection<D>::StateChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->remove_StateChanged(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Media_Casting_ICastingConnection<D>::ErrorOccurred(Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->add_ErrorOccurred(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Casting::ICastingConnection> consume_Windows_Media_Casting_ICastingConnection<D>::ErrorOccurred(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Casting::ICastingConnection>(this, &abi_t<Windows::Media::Casting::ICastingConnection>::remove_ErrorOccurred, ErrorOccurred(handler));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingConnection<D>::ErrorOccurred(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->remove_ErrorOccurred(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingConnectionErrorStatus> consume_Windows_Media_Casting_ICastingConnection<D>::RequestStartCastingAsync(Windows::Media::Casting::CastingSource const& value) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingConnectionErrorStatus> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->RequestStartCastingAsync(get_abi(value), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingConnectionErrorStatus> consume_Windows_Media_Casting_ICastingConnection<D>::DisconnectAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingConnectionErrorStatus> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingConnection)->DisconnectAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Media::Casting::CastingConnectionErrorStatus consume_Windows_Media_Casting_ICastingConnectionErrorOccurredEventArgs<D>::ErrorStatus() const noexcept
+{
+    Windows::Media::Casting::CastingConnectionErrorStatus value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs)->get_ErrorStatus(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Casting_ICastingConnectionErrorOccurredEventArgs<D>::Message() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs)->get_Message(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Casting_ICastingDevice<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevice)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Casting_ICastingDevice<D>::FriendlyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevice)->get_FriendlyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamWithContentType consume_Windows_Media_Casting_ICastingDevice<D>::Icon() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamWithContentType value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevice)->get_Icon(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingPlaybackTypes> consume_Windows_Media_Casting_ICastingDevice<D>::GetSupportedCastingPlaybackTypesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingPlaybackTypes> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevice)->GetSupportedCastingPlaybackTypesAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Media::Casting::CastingConnection consume_Windows_Media_Casting_ICastingDevice<D>::CreateCastingConnection() const
+{
+    Windows::Media::Casting::CastingConnection value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevice)->CreateCastingConnection(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Casting::CastingDevicePickerFilter consume_Windows_Media_Casting_ICastingDevicePicker<D>::Filter() const noexcept
+{
+    Windows::Media::Casting::CastingDevicePickerFilter value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->get_Filter(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Enumeration::DevicePickerAppearance consume_Windows_Media_Casting_ICastingDevicePicker<D>::Appearance() const noexcept
+{
+    Windows::Devices::Enumeration::DevicePickerAppearance value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->get_Appearance(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDeviceSelected(Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->add_CastingDeviceSelected(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Casting::ICastingDevicePicker> consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDeviceSelected(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Casting::ICastingDevicePicker>(this, &abi_t<Windows::Media::Casting::ICastingDevicePicker>::remove_CastingDeviceSelected, CastingDeviceSelected(handler));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDeviceSelected(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->remove_CastingDeviceSelected(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDevicePickerDismissed(Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->add_CastingDevicePickerDismissed(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Casting::ICastingDevicePicker> consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDevicePickerDismissed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Casting::ICastingDevicePicker>(this, &abi_t<Windows::Media::Casting::ICastingDevicePicker>::remove_CastingDevicePickerDismissed, CastingDevicePickerDismissed(handler));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePicker<D>::CastingDevicePickerDismissed(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->remove_CastingDevicePickerDismissed(get_abi(token)));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePicker<D>::Show(Windows::Foundation::Rect const& selection) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->Show(get_abi(selection)));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePicker<D>::Show(Windows::Foundation::Rect const& selection, Windows::UI::Popups::Placement const& preferredPlacement) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->ShowWithPlacement(get_abi(selection), get_abi(preferredPlacement)));
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePicker<D>::Hide() const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePicker)->Hide());
+}
+
+template <typename D> bool consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsAudio() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->get_SupportsAudio(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsAudio(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->put_SupportsAudio(value));
+}
+
+template <typename D> bool consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsVideo() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->get_SupportsVideo(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsVideo(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->put_SupportsVideo(value));
+}
+
+template <typename D> bool consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsPictures() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->get_SupportsPictures(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportsPictures(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->put_SupportsPictures(value));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::Media::Casting::CastingSource> consume_Windows_Media_Casting_ICastingDevicePickerFilter<D>::SupportedCastingSources() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::Media::Casting::CastingSource> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDevicePickerFilter)->get_SupportedCastingSources(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Casting::CastingDevice consume_Windows_Media_Casting_ICastingDeviceSelectedEventArgs<D>::SelectedCastingDevice() const noexcept
+{
+    Windows::Media::Casting::CastingDevice value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingDeviceSelectedEventArgs)->get_SelectedCastingDevice(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Casting_ICastingDeviceStatics<D>::GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes const& type) const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDeviceStatics)->GetDeviceSelector(get_abi(type), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_Media_Casting_ICastingDeviceStatics<D>::GetDeviceSelectorFromCastingSourceAsync(Windows::Media::Casting::CastingSource const& castingSource) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDeviceStatics)->GetDeviceSelectorFromCastingSourceAsync(get_abi(castingSource), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> consume_Windows_Media_Casting_ICastingDeviceStatics<D>::FromIdAsync(param::hstring const& value) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDeviceStatics)->FromIdAsync(get_abi(value), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_Media_Casting_ICastingDeviceStatics<D>::DeviceInfoSupportsCastingAsync(Windows::Devices::Enumeration::DeviceInformation const& device) const
+{
+    Windows::Foundation::IAsyncOperation<bool> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Casting::ICastingDeviceStatics)->DeviceInfoSupportsCastingAsync(get_abi(device), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_Media_Casting_ICastingSource<D>::PreferredSourceUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingSource)->get_PreferredSourceUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Media_Casting_ICastingSource<D>::PreferredSourceUri(Windows::Foundation::Uri const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Media::Casting::ICastingSource)->put_PreferredSourceUri(get_abi(value)));
+}
 
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D, Windows::Media::Casting::ICastingConnection>
 {
-    HRESULT __stdcall get_State(Windows::Media::Casting::CastingConnectionState * value) noexcept override
+    HRESULT __stdcall get_State(Windows::Media::Casting::CastingConnectionState* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().State());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Device(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Device());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Source(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Source());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_Source(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Source(*reinterpret_cast<Windows::Media::Casting::CastingSource const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_StateChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().State());
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().StateChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -32,39 +337,12 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall get_Device(abi_arg_out<Windows::Media::Casting::ICastingDevice> value) noexcept override
+    HRESULT __stdcall remove_StateChanged(event_token token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Device());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Source(abi_arg_out<Windows::Media::Casting::ICastingSource> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Source());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Source(abi_arg_in<Windows::Media::Casting::ICastingSource> value) noexcept override
-    {
-        try
-        {
-            this->shim().Source(*reinterpret_cast<const Windows::Media::Casting::CastingSource *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().StateChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -73,11 +351,12 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall add_StateChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_ErrorOccurred(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().StateChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ErrorOccurred(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -86,11 +365,12 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall remove_StateChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_ErrorOccurred(event_token token) noexcept final
     {
         try
         {
-            this->shim().StateChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ErrorOccurred(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -99,37 +379,12 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall add_ErrorOccurred(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall RequestStartCastingAsync(::IUnknown* value, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ErrorOccurred(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> *>(&handler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_ErrorOccurred(event_token token) noexcept override
-    {
-        try
-        {
-            this->shim().ErrorOccurred(token);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_RequestStartCastingAsync(abi_arg_in<Windows::Media::Casting::ICastingSource> value, abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus>> operation) noexcept override
-    {
-        try
-        {
-            *operation = detach(this->shim().RequestStartCastingAsync(*reinterpret_cast<const Windows::Media::Casting::CastingSource *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestStartCastingAsync(*reinterpret_cast<Windows::Media::Casting::CastingSource const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -139,11 +394,12 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall abi_DisconnectAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus>> operation) noexcept override
+    HRESULT __stdcall DisconnectAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().DisconnectAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().DisconnectAsync());
             return S_OK;
         }
         catch (...)
@@ -157,84 +413,51 @@ struct produce<D, Windows::Media::Casting::ICastingConnection> : produce_base<D,
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs> : produce_base<D, Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs>
 {
-    HRESULT __stdcall get_ErrorStatus(Windows::Media::Casting::CastingConnectionErrorStatus * value) noexcept override
+    HRESULT __stdcall get_ErrorStatus(Windows::Media::Casting::CastingConnectionErrorStatus* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ErrorStatus());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ErrorStatus());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Message(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Message(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Message());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingDevice> : produce_base<D, Windows::Media::Casting::ICastingDevice>
 {
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FriendlyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FriendlyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FriendlyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FriendlyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Icon(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamWithContentType> value) noexcept override
+    HRESULT __stdcall get_Icon(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Icon());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Icon());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSupportedCastingPlaybackTypesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingPlaybackTypes>> operation) noexcept override
+    HRESULT __stdcall GetSupportedCastingPlaybackTypesAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetSupportedCastingPlaybackTypesAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetSupportedCastingPlaybackTypesAsync());
             return S_OK;
         }
         catch (...)
@@ -244,11 +467,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevice> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_CreateCastingConnection(abi_arg_out<Windows::Media::Casting::ICastingConnection> value) noexcept override
+    HRESULT __stdcall CreateCastingConnection(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateCastingConnection());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateCastingConnection());
             return S_OK;
         }
         catch (...)
@@ -262,39 +486,26 @@ struct produce<D, Windows::Media::Casting::ICastingDevice> : produce_base<D, Win
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<D, Windows::Media::Casting::ICastingDevicePicker>
 {
-    HRESULT __stdcall get_Filter(abi_arg_out<Windows::Media::Casting::ICastingDevicePickerFilter> value) noexcept override
+    HRESULT __stdcall get_Filter(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Filter());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Filter());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Appearance(abi_arg_out<Windows::Devices::Enumeration::IDevicePickerAppearance> value) noexcept override
+    HRESULT __stdcall get_Appearance(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Appearance());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Appearance());
+        return S_OK;
     }
 
-    HRESULT __stdcall add_CastingDeviceSelected(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_CastingDeviceSelected(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().CastingDeviceSelected(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().CastingDeviceSelected(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -303,11 +514,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall remove_CastingDeviceSelected(event_token token) noexcept override
+    HRESULT __stdcall remove_CastingDeviceSelected(event_token token) noexcept final
     {
         try
         {
-            this->shim().CastingDeviceSelected(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().CastingDeviceSelected(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -316,11 +528,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall add_CastingDevicePickerDismissed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_CastingDevicePickerDismissed(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().CastingDevicePickerDismissed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().CastingDevicePickerDismissed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -329,11 +542,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall remove_CastingDevicePickerDismissed(event_token token) noexcept override
+    HRESULT __stdcall remove_CastingDevicePickerDismissed(event_token token) noexcept final
     {
         try
         {
-            this->shim().CastingDevicePickerDismissed(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().CastingDevicePickerDismissed(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -342,11 +556,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_Show(abi_arg_in<Windows::Foundation::Rect> selection) noexcept override
+    HRESULT __stdcall Show(Windows::Foundation::Rect selection) noexcept final
     {
         try
         {
-            this->shim().Show(*reinterpret_cast<const Windows::Foundation::Rect *>(&selection));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Show(*reinterpret_cast<Windows::Foundation::Rect const*>(&selection));
             return S_OK;
         }
         catch (...)
@@ -355,11 +570,12 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_ShowWithPlacement(abi_arg_in<Windows::Foundation::Rect> selection, Windows::UI::Popups::Placement preferredPlacement) noexcept override
+    HRESULT __stdcall ShowWithPlacement(Windows::Foundation::Rect selection, Windows::UI::Popups::Placement preferredPlacement) noexcept final
     {
         try
         {
-            this->shim().Show(*reinterpret_cast<const Windows::Foundation::Rect *>(&selection), preferredPlacement);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Show(*reinterpret_cast<Windows::Foundation::Rect const*>(&selection), *reinterpret_cast<Windows::UI::Popups::Placement const*>(&preferredPlacement));
             return S_OK;
         }
         catch (...)
@@ -368,10 +584,11 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_Hide() noexcept override
+    HRESULT __stdcall Hide() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Hide();
             return S_OK;
         }
@@ -385,125 +602,76 @@ struct produce<D, Windows::Media::Casting::ICastingDevicePicker> : produce_base<
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingDevicePickerFilter> : produce_base<D, Windows::Media::Casting::ICastingDevicePickerFilter>
 {
-    HRESULT __stdcall get_SupportsAudio(bool * value) noexcept override
+    HRESULT __stdcall get_SupportsAudio(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportsAudio());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportsAudio());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SupportsAudio(bool value) noexcept override
+    HRESULT __stdcall put_SupportsAudio(bool value) noexcept final
     {
-        try
-        {
-            this->shim().SupportsAudio(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SupportsAudio(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportsVideo(bool * value) noexcept override
+    HRESULT __stdcall get_SupportsVideo(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportsVideo());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportsVideo());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SupportsVideo(bool value) noexcept override
+    HRESULT __stdcall put_SupportsVideo(bool value) noexcept final
     {
-        try
-        {
-            this->shim().SupportsVideo(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SupportsVideo(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportsPictures(bool * value) noexcept override
+    HRESULT __stdcall get_SupportsPictures(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportsPictures());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportsPictures());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SupportsPictures(bool value) noexcept override
+    HRESULT __stdcall put_SupportsPictures(bool value) noexcept final
     {
-        try
-        {
-            this->shim().SupportsPictures(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SupportsPictures(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportedCastingSources(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::Media::Casting::CastingSource>> value) noexcept override
+    HRESULT __stdcall get_SupportedCastingSources(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportedCastingSources());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportedCastingSources());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingDeviceSelectedEventArgs> : produce_base<D, Windows::Media::Casting::ICastingDeviceSelectedEventArgs>
 {
-    HRESULT __stdcall get_SelectedCastingDevice(abi_arg_out<Windows::Media::Casting::ICastingDevice> value) noexcept override
+    HRESULT __stdcall get_SelectedCastingDevice(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SelectedCastingDevice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedCastingDevice());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingDeviceStatics> : produce_base<D, Windows::Media::Casting::ICastingDeviceStatics>
 {
-    HRESULT __stdcall abi_GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes type, abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes type, HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeviceSelector(type));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeviceSelector(*reinterpret_cast<Windows::Media::Casting::CastingPlaybackTypes const*>(&type)));
             return S_OK;
         }
         catch (...)
@@ -513,11 +681,12 @@ struct produce<D, Windows::Media::Casting::ICastingDeviceStatics> : produce_base
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelectorFromCastingSourceAsync(abi_arg_in<Windows::Media::Casting::ICastingSource> castingSource, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetDeviceSelectorFromCastingSourceAsync(::IUnknown* castingSource, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetDeviceSelectorFromCastingSourceAsync(*reinterpret_cast<const Windows::Media::Casting::CastingSource *>(&castingSource)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetDeviceSelectorFromCastingSourceAsync(*reinterpret_cast<Windows::Media::Casting::CastingSource const*>(&castingSource)));
             return S_OK;
         }
         catch (...)
@@ -527,11 +696,12 @@ struct produce<D, Windows::Media::Casting::ICastingDeviceStatics> : produce_base
         }
     }
 
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> value, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice>> operation) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING value, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -541,11 +711,12 @@ struct produce<D, Windows::Media::Casting::ICastingDeviceStatics> : produce_base
         }
     }
 
-    HRESULT __stdcall abi_DeviceInfoSupportsCastingAsync(abi_arg_in<Windows::Devices::Enumeration::IDeviceInformation> device, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> operation) noexcept override
+    HRESULT __stdcall DeviceInfoSupportsCastingAsync(::IUnknown* device, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().DeviceInfoSupportsCastingAsync(*reinterpret_cast<const Windows::Devices::Enumeration::DeviceInformation *>(&device)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().DeviceInfoSupportsCastingAsync(*reinterpret_cast<Windows::Devices::Enumeration::DeviceInformation const*>(&device)));
             return S_OK;
         }
         catch (...)
@@ -559,332 +730,43 @@ struct produce<D, Windows::Media::Casting::ICastingDeviceStatics> : produce_base
 template <typename D>
 struct produce<D, Windows::Media::Casting::ICastingSource> : produce_base<D, Windows::Media::Casting::ICastingSource>
 {
-    HRESULT __stdcall get_PreferredSourceUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_PreferredSourceUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PreferredSourceUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PreferredSourceUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PreferredSourceUri(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall put_PreferredSourceUri(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().PreferredSourceUri(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PreferredSourceUri(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Media::Casting {
+WINRT_EXPORT namespace winrt::Windows::Media::Casting {
 
-template <typename D> Windows::Foundation::Uri impl_ICastingSource<D>::PreferredSourceUri() const
+inline hstring CastingDevice::GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes const& type)
 {
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const ICastingSource &>(static_cast<const D &>(*this))->get_PreferredSourceUri(put(value)));
-    return value;
+    return get_activation_factory<CastingDevice, Windows::Media::Casting::ICastingDeviceStatics>().GetDeviceSelector(type);
 }
 
-template <typename D> void impl_ICastingSource<D>::PreferredSourceUri(const Windows::Foundation::Uri & value) const
+inline Windows::Foundation::IAsyncOperation<hstring> CastingDevice::GetDeviceSelectorFromCastingSourceAsync(Windows::Media::Casting::CastingSource const& castingSource)
 {
-    check_hresult(static_cast<const ICastingSource &>(static_cast<const D &>(*this))->put_PreferredSourceUri(get(value)));
+    return get_activation_factory<CastingDevice, Windows::Media::Casting::ICastingDeviceStatics>().GetDeviceSelectorFromCastingSourceAsync(castingSource);
 }
 
-template <typename D> Windows::Media::Casting::CastingConnectionErrorStatus impl_ICastingConnectionErrorOccurredEventArgs<D>::ErrorStatus() const
+inline Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> CastingDevice::FromIdAsync(param::hstring const& value)
 {
-    Windows::Media::Casting::CastingConnectionErrorStatus value {};
-    check_hresult(static_cast<const ICastingConnectionErrorOccurredEventArgs &>(static_cast<const D &>(*this))->get_ErrorStatus(&value));
-    return value;
+    return get_activation_factory<CastingDevice, Windows::Media::Casting::ICastingDeviceStatics>().FromIdAsync(value);
 }
 
-template <typename D> hstring impl_ICastingConnectionErrorOccurredEventArgs<D>::Message() const
+inline Windows::Foundation::IAsyncOperation<bool> CastingDevice::DeviceInfoSupportsCastingAsync(Windows::Devices::Enumeration::DeviceInformation const& device)
 {
-    hstring value;
-    check_hresult(static_cast<const ICastingConnectionErrorOccurredEventArgs &>(static_cast<const D &>(*this))->get_Message(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Casting::CastingConnectionState impl_ICastingConnection<D>::State() const
-{
-    Windows::Media::Casting::CastingConnectionState value {};
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->get_State(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::Casting::CastingDevice impl_ICastingConnection<D>::Device() const
-{
-    Windows::Media::Casting::CastingDevice value { nullptr };
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->get_Device(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Casting::CastingSource impl_ICastingConnection<D>::Source() const
-{
-    Windows::Media::Casting::CastingSource value { nullptr };
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->get_Source(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ICastingConnection<D>::Source(const Windows::Media::Casting::CastingSource & value) const
-{
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->put_Source(get(value)));
-}
-
-template <typename D> event_token impl_ICastingConnection<D>::StateChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->add_StateChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICastingConnection> impl_ICastingConnection<D>::StateChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, ICastingConnection>(this, &ABI::Windows::Media::Casting::ICastingConnection::remove_StateChanged, StateChanged(handler));
-}
-
-template <typename D> void impl_ICastingConnection<D>::StateChanged(event_token token) const
-{
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->remove_StateChanged(token));
-}
-
-template <typename D> event_token impl_ICastingConnection<D>::ErrorOccurred(const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->add_ErrorOccurred(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICastingConnection> impl_ICastingConnection<D>::ErrorOccurred(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingConnection, Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ICastingConnection>(this, &ABI::Windows::Media::Casting::ICastingConnection::remove_ErrorOccurred, ErrorOccurred(handler));
-}
-
-template <typename D> void impl_ICastingConnection<D>::ErrorOccurred(event_token token) const
-{
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->remove_ErrorOccurred(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus> impl_ICastingConnection<D>::RequestStartCastingAsync(const Windows::Media::Casting::CastingSource & value) const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus> operation;
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->abi_RequestStartCastingAsync(get(value), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus> impl_ICastingConnection<D>::DisconnectAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingConnectionErrorStatus> operation;
-    check_hresult(static_cast<const ICastingConnection &>(static_cast<const D &>(*this))->abi_DisconnectAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_ICastingDevice<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const ICastingDevice &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ICastingDevice<D>::FriendlyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const ICastingDevice &>(static_cast<const D &>(*this))->get_FriendlyName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamWithContentType impl_ICastingDevice<D>::Icon() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamWithContentType value;
-    check_hresult(static_cast<const ICastingDevice &>(static_cast<const D &>(*this))->get_Icon(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingPlaybackTypes> impl_ICastingDevice<D>::GetSupportedCastingPlaybackTypesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Media::Casting::CastingPlaybackTypes> operation;
-    check_hresult(static_cast<const ICastingDevice &>(static_cast<const D &>(*this))->abi_GetSupportedCastingPlaybackTypesAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Media::Casting::CastingConnection impl_ICastingDevice<D>::CreateCastingConnection() const
-{
-    Windows::Media::Casting::CastingConnection value { nullptr };
-    check_hresult(static_cast<const ICastingDevice &>(static_cast<const D &>(*this))->abi_CreateCastingConnection(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ICastingDeviceStatics<D>::GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes type) const
-{
-    hstring value;
-    check_hresult(static_cast<const ICastingDeviceStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(type, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICastingDeviceStatics<D>::GetDeviceSelectorFromCastingSourceAsync(const Windows::Media::Casting::CastingSource & castingSource) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const ICastingDeviceStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorFromCastingSourceAsync(get(castingSource), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> impl_ICastingDeviceStatics<D>::FromIdAsync(hstring_ref value) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> operation;
-    check_hresult(static_cast<const ICastingDeviceStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(value), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_ICastingDeviceStatics<D>::DeviceInfoSupportsCastingAsync(const Windows::Devices::Enumeration::DeviceInformation & device) const
-{
-    Windows::Foundation::IAsyncOperation<bool> operation;
-    check_hresult(static_cast<const ICastingDeviceStatics &>(static_cast<const D &>(*this))->abi_DeviceInfoSupportsCastingAsync(get(device), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Media::Casting::CastingDevice impl_ICastingDeviceSelectedEventArgs<D>::SelectedCastingDevice() const
-{
-    Windows::Media::Casting::CastingDevice value { nullptr };
-    check_hresult(static_cast<const ICastingDeviceSelectedEventArgs &>(static_cast<const D &>(*this))->get_SelectedCastingDevice(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_ICastingDevicePickerFilter<D>::SupportsAudio() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->get_SupportsAudio(&value));
-    return value;
-}
-
-template <typename D> void impl_ICastingDevicePickerFilter<D>::SupportsAudio(bool value) const
-{
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->put_SupportsAudio(value));
-}
-
-template <typename D> bool impl_ICastingDevicePickerFilter<D>::SupportsVideo() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->get_SupportsVideo(&value));
-    return value;
-}
-
-template <typename D> void impl_ICastingDevicePickerFilter<D>::SupportsVideo(bool value) const
-{
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->put_SupportsVideo(value));
-}
-
-template <typename D> bool impl_ICastingDevicePickerFilter<D>::SupportsPictures() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->get_SupportsPictures(&value));
-    return value;
-}
-
-template <typename D> void impl_ICastingDevicePickerFilter<D>::SupportsPictures(bool value) const
-{
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->put_SupportsPictures(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::Media::Casting::CastingSource> impl_ICastingDevicePickerFilter<D>::SupportedCastingSources() const
-{
-    Windows::Foundation::Collections::IVector<Windows::Media::Casting::CastingSource> value;
-    check_hresult(static_cast<const ICastingDevicePickerFilter &>(static_cast<const D &>(*this))->get_SupportedCastingSources(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Casting::CastingDevicePickerFilter impl_ICastingDevicePicker<D>::Filter() const
-{
-    Windows::Media::Casting::CastingDevicePickerFilter value { nullptr };
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->get_Filter(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Enumeration::DevicePickerAppearance impl_ICastingDevicePicker<D>::Appearance() const
-{
-    Windows::Devices::Enumeration::DevicePickerAppearance value { nullptr };
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->get_Appearance(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_ICastingDevicePicker<D>::CastingDeviceSelected(const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->add_CastingDeviceSelected(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICastingDevicePicker> impl_ICastingDevicePicker<D>::CastingDeviceSelected(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::Media::Casting::CastingDeviceSelectedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ICastingDevicePicker>(this, &ABI::Windows::Media::Casting::ICastingDevicePicker::remove_CastingDeviceSelected, CastingDeviceSelected(handler));
-}
-
-template <typename D> void impl_ICastingDevicePicker<D>::CastingDeviceSelected(event_token token) const
-{
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->remove_CastingDeviceSelected(token));
-}
-
-template <typename D> event_token impl_ICastingDevicePicker<D>::CastingDevicePickerDismissed(const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->add_CastingDevicePickerDismissed(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICastingDevicePicker> impl_ICastingDevicePicker<D>::CastingDevicePickerDismissed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Casting::CastingDevicePicker, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, ICastingDevicePicker>(this, &ABI::Windows::Media::Casting::ICastingDevicePicker::remove_CastingDevicePickerDismissed, CastingDevicePickerDismissed(handler));
-}
-
-template <typename D> void impl_ICastingDevicePicker<D>::CastingDevicePickerDismissed(event_token token) const
-{
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->remove_CastingDevicePickerDismissed(token));
-}
-
-template <typename D> void impl_ICastingDevicePicker<D>::Show(const Windows::Foundation::Rect & selection) const
-{
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->abi_Show(get(selection)));
-}
-
-template <typename D> void impl_ICastingDevicePicker<D>::Show(const Windows::Foundation::Rect & selection, Windows::UI::Popups::Placement preferredPlacement) const
-{
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->abi_ShowWithPlacement(get(selection), preferredPlacement));
-}
-
-template <typename D> void impl_ICastingDevicePicker<D>::Hide() const
-{
-    check_hresult(static_cast<const ICastingDevicePicker &>(static_cast<const D &>(*this))->abi_Hide());
-}
-
-inline hstring CastingDevice::GetDeviceSelector(Windows::Media::Casting::CastingPlaybackTypes type)
-{
-    return get_activation_factory<CastingDevice, ICastingDeviceStatics>().GetDeviceSelector(type);
-}
-
-inline Windows::Foundation::IAsyncOperation<hstring> CastingDevice::GetDeviceSelectorFromCastingSourceAsync(const Windows::Media::Casting::CastingSource & castingSource)
-{
-    return get_activation_factory<CastingDevice, ICastingDeviceStatics>().GetDeviceSelectorFromCastingSourceAsync(castingSource);
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Media::Casting::CastingDevice> CastingDevice::FromIdAsync(hstring_ref value)
-{
-    return get_activation_factory<CastingDevice, ICastingDeviceStatics>().FromIdAsync(value);
-}
-
-inline Windows::Foundation::IAsyncOperation<bool> CastingDevice::DeviceInfoSupportsCastingAsync(const Windows::Devices::Enumeration::DeviceInformation & device)
-{
-    return get_activation_factory<CastingDevice, ICastingDeviceStatics>().DeviceInfoSupportsCastingAsync(device);
+    return get_activation_factory<CastingDevice, Windows::Media::Casting::ICastingDeviceStatics>().DeviceInfoSupportsCastingAsync(device);
 }
 
 inline CastingDevicePicker::CastingDevicePicker() :
@@ -893,4 +775,53 @@ inline CastingDevicePicker::CastingDevicePicker() :
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingConnection> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingConnection> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingConnectionErrorOccurredEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingDevice> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingDevicePicker> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingDevicePicker> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingDevicePickerFilter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingDevicePickerFilter> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingDeviceSelectedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingDeviceSelectedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingDeviceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingDeviceStatics> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::ICastingSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::ICastingSource> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingConnection> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingConnection> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingConnectionErrorOccurredEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingDevice> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingDevicePicker> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingDevicePicker> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingDevicePickerFilter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingDevicePickerFilter> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingDeviceSelectedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingDeviceSelectedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Casting::CastingSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Casting::CastingSource> {};
+
 }
+
+WINRT_WARNING_POP

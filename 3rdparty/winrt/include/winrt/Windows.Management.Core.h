@@ -1,14 +1,24 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.Management.Core.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Management.Core.2.h"
+#include "winrt/Windows.Management.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Storage::ApplicationData consume_Windows_Management_Core_IApplicationDataManagerStatics<D>::CreateForPackageFamily(param::hstring const& packageFamilyName) const
+{
+    Windows::Storage::ApplicationData applicationData{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Core::IApplicationDataManagerStatics)->CreateForPackageFamily(get_abi(packageFamilyName), put_abi(applicationData)));
+    return applicationData;
+}
 
 template <typename D>
 struct produce<D, Windows::Management::Core::IApplicationDataManager> : produce_base<D, Windows::Management::Core::IApplicationDataManager>
@@ -17,11 +27,12 @@ struct produce<D, Windows::Management::Core::IApplicationDataManager> : produce_
 template <typename D>
 struct produce<D, Windows::Management::Core::IApplicationDataManagerStatics> : produce_base<D, Windows::Management::Core::IApplicationDataManagerStatics>
 {
-    HRESULT __stdcall abi_CreateForPackageFamily(abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Storage::IApplicationData> applicationData) noexcept override
+    HRESULT __stdcall CreateForPackageFamily(HSTRING packageFamilyName, ::IUnknown** applicationData) noexcept final
     {
         try
         {
-            *applicationData = detach(this->shim().CreateForPackageFamily(*reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *applicationData = detach_abi(this->shim().CreateForPackageFamily(*reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -34,20 +45,26 @@ struct produce<D, Windows::Management::Core::IApplicationDataManagerStatics> : p
 
 }
 
-namespace Windows::Management::Core {
+WINRT_EXPORT namespace winrt::Windows::Management::Core {
 
-template <typename D> Windows::Storage::ApplicationData impl_IApplicationDataManagerStatics<D>::CreateForPackageFamily(hstring_ref packageFamilyName) const
+inline Windows::Storage::ApplicationData ApplicationDataManager::CreateForPackageFamily(param::hstring const& packageFamilyName)
 {
-    Windows::Storage::ApplicationData applicationData { nullptr };
-    check_hresult(static_cast<const IApplicationDataManagerStatics &>(static_cast<const D &>(*this))->abi_CreateForPackageFamily(get(packageFamilyName), put(applicationData)));
-    return applicationData;
-}
-
-inline Windows::Storage::ApplicationData ApplicationDataManager::CreateForPackageFamily(hstring_ref packageFamilyName)
-{
-    return get_activation_factory<ApplicationDataManager, IApplicationDataManagerStatics>().CreateForPackageFamily(packageFamilyName);
+    return get_activation_factory<ApplicationDataManager, Windows::Management::Core::IApplicationDataManagerStatics>().CreateForPackageFamily(packageFamilyName);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Management::Core::IApplicationDataManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Core::IApplicationDataManager> {};
+
+template<> struct hash<winrt::Windows::Management::Core::IApplicationDataManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Core::IApplicationDataManagerStatics> {};
+
+template<> struct hash<winrt::Windows::Management::Core::ApplicationDataManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Core::ApplicationDataManager> {};
+
 }
+
+WINRT_WARNING_POP

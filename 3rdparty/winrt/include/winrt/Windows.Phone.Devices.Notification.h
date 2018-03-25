@@ -1,23 +1,42 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Phone.Devices.Notification.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Phone.Devices.Notification.2.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> void consume_Windows_Phone_Devices_Notification_IVibrationDevice<D>::Vibrate(Windows::Foundation::TimeSpan const& duration) const
+{
+    check_hresult(WINRT_SHIM(Windows::Phone::Devices::Notification::IVibrationDevice)->Vibrate(get_abi(duration)));
+}
+
+template <typename D> void consume_Windows_Phone_Devices_Notification_IVibrationDevice<D>::Cancel() const
+{
+    check_hresult(WINRT_SHIM(Windows::Phone::Devices::Notification::IVibrationDevice)->Cancel());
+}
+
+template <typename D> Windows::Phone::Devices::Notification::VibrationDevice consume_Windows_Phone_Devices_Notification_IVibrationDeviceStatics<D>::GetDefault() const
+{
+    Windows::Phone::Devices::Notification::VibrationDevice result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Phone::Devices::Notification::IVibrationDeviceStatics)->GetDefault(put_abi(result)));
+    return result;
+}
 
 template <typename D>
 struct produce<D, Windows::Phone::Devices::Notification::IVibrationDevice> : produce_base<D, Windows::Phone::Devices::Notification::IVibrationDevice>
 {
-    HRESULT __stdcall abi_Vibrate(abi_arg_in<Windows::Foundation::TimeSpan> duration) noexcept override
+    HRESULT __stdcall Vibrate(Windows::Foundation::TimeSpan duration) noexcept final
     {
         try
         {
-            this->shim().Vibrate(*reinterpret_cast<const Windows::Foundation::TimeSpan *>(&duration));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Vibrate(*reinterpret_cast<Windows::Foundation::TimeSpan const*>(&duration));
             return S_OK;
         }
         catch (...)
@@ -26,10 +45,11 @@ struct produce<D, Windows::Phone::Devices::Notification::IVibrationDevice> : pro
         }
     }
 
-    HRESULT __stdcall abi_Cancel() noexcept override
+    HRESULT __stdcall Cancel() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Cancel();
             return S_OK;
         }
@@ -43,11 +63,12 @@ struct produce<D, Windows::Phone::Devices::Notification::IVibrationDevice> : pro
 template <typename D>
 struct produce<D, Windows::Phone::Devices::Notification::IVibrationDeviceStatics> : produce_base<D, Windows::Phone::Devices::Notification::IVibrationDeviceStatics>
 {
-    HRESULT __stdcall abi_GetDefault(abi_arg_out<Windows::Phone::Devices::Notification::IVibrationDevice> result) noexcept override
+    HRESULT __stdcall GetDefault(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetDefault());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetDefault());
             return S_OK;
         }
         catch (...)
@@ -60,30 +81,26 @@ struct produce<D, Windows::Phone::Devices::Notification::IVibrationDeviceStatics
 
 }
 
-namespace Windows::Phone::Devices::Notification {
-
-template <typename D> Windows::Phone::Devices::Notification::VibrationDevice impl_IVibrationDeviceStatics<D>::GetDefault() const
-{
-    Windows::Phone::Devices::Notification::VibrationDevice result { nullptr };
-    check_hresult(static_cast<const IVibrationDeviceStatics &>(static_cast<const D &>(*this))->abi_GetDefault(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IVibrationDevice<D>::Vibrate(const Windows::Foundation::TimeSpan & duration) const
-{
-    check_hresult(static_cast<const IVibrationDevice &>(static_cast<const D &>(*this))->abi_Vibrate(get(duration)));
-}
-
-template <typename D> void impl_IVibrationDevice<D>::Cancel() const
-{
-    check_hresult(static_cast<const IVibrationDevice &>(static_cast<const D &>(*this))->abi_Cancel());
-}
+WINRT_EXPORT namespace winrt::Windows::Phone::Devices::Notification {
 
 inline Windows::Phone::Devices::Notification::VibrationDevice VibrationDevice::GetDefault()
 {
-    return get_activation_factory<VibrationDevice, IVibrationDeviceStatics>().GetDefault();
+    return get_activation_factory<VibrationDevice, Windows::Phone::Devices::Notification::IVibrationDeviceStatics>().GetDefault();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Phone::Devices::Notification::IVibrationDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::Devices::Notification::IVibrationDevice> {};
+
+template<> struct hash<winrt::Windows::Phone::Devices::Notification::IVibrationDeviceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::Devices::Notification::IVibrationDeviceStatics> {};
+
+template<> struct hash<winrt::Windows::Phone::Devices::Notification::VibrationDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Phone::Devices::Notification::VibrationDevice> {};
+
 }
+
+WINRT_WARNING_POP

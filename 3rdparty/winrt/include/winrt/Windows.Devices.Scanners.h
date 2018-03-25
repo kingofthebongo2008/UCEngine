@@ -1,55 +1,465 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Graphics.Printing.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.Devices.Scanners.3.h"
-#include "Windows.Devices.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Graphics.Printing.2.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Devices.Scanners.2.h"
+#include "winrt/Windows.Devices.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> hstring consume_Windows_Devices_Scanners_IImageScanner<D>::DeviceId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->get_DeviceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerScanSource consume_Windows_Devices_Scanners_IImageScanner<D>::DefaultScanSource() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerScanSource value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->get_DefaultScanSource(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScanner<D>::IsScanSourceSupported(Windows::Devices::Scanners::ImageScannerScanSource const& value) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->IsScanSourceSupported(get_abi(value), &result));
+    return result;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerFlatbedConfiguration consume_Windows_Devices_Scanners_IImageScanner<D>::FlatbedConfiguration() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerFlatbedConfiguration value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->get_FlatbedConfiguration(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerFeederConfiguration consume_Windows_Devices_Scanners_IImageScanner<D>::FeederConfiguration() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerFeederConfiguration value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->get_FeederConfiguration(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerAutoConfiguration consume_Windows_Devices_Scanners_IImageScanner<D>::AutoConfiguration() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerAutoConfiguration value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->get_AutoConfiguration(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScanner<D>::IsPreviewSupported(Windows::Devices::Scanners::ImageScannerScanSource const& scanSource) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->IsPreviewSupported(get_abi(scanSource), &result));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScannerPreviewResult> consume_Windows_Devices_Scanners_IImageScanner<D>::ScanPreviewToStreamAsync(Windows::Devices::Scanners::ImageScannerScanSource const& scanSource, Windows::Storage::Streams::IRandomAccessStream const& targetStream) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScannerPreviewResult> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->ScanPreviewToStreamAsync(get_abi(scanSource), get_abi(targetStream), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Devices::Scanners::ImageScannerScanResult, uint32_t> consume_Windows_Devices_Scanners_IImageScanner<D>::ScanFilesToFolderAsync(Windows::Devices::Scanners::ImageScannerScanSource const& scanSource, Windows::Storage::StorageFolder const& storageFolder) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Devices::Scanners::ImageScannerScanResult, uint32_t> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScanner)->ScanFilesToFolderAsync(get_abi(scanSource), get_abi(storageFolder), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::CanAutoDetectPageSize() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_CanAutoDetectPageSize(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::AutoDetectPageSize() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_AutoDetectPageSize(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::AutoDetectPageSize(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_AutoDetectPageSize(value));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintMediaSize consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::PageSize() const noexcept
+{
+    Windows::Graphics::Printing::PrintMediaSize value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_PageSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::PageSize(Windows::Graphics::Printing::PrintMediaSize const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_PageSize(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintOrientation consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::PageOrientation() const noexcept
+{
+    Windows::Graphics::Printing::PrintOrientation value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_PageOrientation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::PageOrientation(Windows::Graphics::Printing::PrintOrientation const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_PageOrientation(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Size consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::PageSizeDimensions() const noexcept
+{
+    Windows::Foundation::Size value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_PageSizeDimensions(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::IsPageSizeSupported(Windows::Graphics::Printing::PrintMediaSize const& pageSize, Windows::Graphics::Printing::PrintOrientation const& pageOrientation) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->IsPageSizeSupported(get_abi(pageSize), get_abi(pageOrientation), &result));
+    return result;
+}
+
+template <typename D> uint32_t consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::MaxNumberOfPages() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_MaxNumberOfPages(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::MaxNumberOfPages(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_MaxNumberOfPages(value));
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::CanScanDuplex() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_CanScanDuplex(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::Duplex() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_Duplex(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::Duplex(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_Duplex(value));
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::CanScanAhead() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_CanScanAhead(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::ScanAhead() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->get_ScanAhead(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFeederConfiguration<D>::ScanAhead(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFeederConfiguration)->put_ScanAhead(value));
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerFormat consume_Windows_Devices_Scanners_IImageScannerFormatConfiguration<D>::DefaultFormat() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerFormat value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFormatConfiguration)->get_DefaultFormat(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerFormat consume_Windows_Devices_Scanners_IImageScannerFormatConfiguration<D>::Format() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerFormat value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFormatConfiguration)->get_Format(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerFormatConfiguration<D>::Format(Windows::Devices::Scanners::ImageScannerFormat const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFormatConfiguration)->put_Format(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerFormatConfiguration<D>::IsFormatSupported(Windows::Devices::Scanners::ImageScannerFormat const& value) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerFormatConfiguration)->IsFormatSupported(get_abi(value), &result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerPreviewResult<D>::Succeeded() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerPreviewResult)->get_Succeeded(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerFormat consume_Windows_Devices_Scanners_IImageScannerPreviewResult<D>::Format() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerFormat value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerPreviewResult)->get_Format(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile> consume_Windows_Devices_Scanners_IImageScannerScanResult<D>::ScannedFiles() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerScanResult)->get_ScannedFiles(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Size consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MinScanArea() const noexcept
+{
+    Windows::Foundation::Size value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MinScanArea(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Size consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MaxScanArea() const noexcept
+{
+    Windows::Foundation::Size value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MaxScanArea(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::SelectedScanRegion() const noexcept
+{
+    Windows::Foundation::Rect value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_SelectedScanRegion(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::SelectedScanRegion(Windows::Foundation::Rect const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_SelectedScanRegion(get_abi(value)));
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerAutoCroppingMode consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::AutoCroppingMode() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerAutoCroppingMode value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_AutoCroppingMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_AutoCroppingMode(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::IsAutoCroppingModeSupported(Windows::Devices::Scanners::ImageScannerAutoCroppingMode const& value) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->IsAutoCroppingModeSupported(get_abi(value), &result));
+    return result;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerResolution consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MinResolution() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerResolution value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MinResolution(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerResolution consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MaxResolution() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerResolution value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MaxResolution(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerResolution consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::OpticalResolution() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerResolution value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_OpticalResolution(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerResolution consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::DesiredResolution() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerResolution value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_DesiredResolution(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::DesiredResolution(Windows::Devices::Scanners::ImageScannerResolution const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_DesiredResolution(get_abi(value)));
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerResolution consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::ActualResolution() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerResolution value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_ActualResolution(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerColorMode consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::DefaultColorMode() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerColorMode value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_DefaultColorMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Scanners::ImageScannerColorMode consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::ColorMode() const noexcept
+{
+    Windows::Devices::Scanners::ImageScannerColorMode value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_ColorMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::ColorMode(Windows::Devices::Scanners::ImageScannerColorMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_ColorMode(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::IsColorModeSupported(Windows::Devices::Scanners::ImageScannerColorMode const& value) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->IsColorModeSupported(get_abi(value), &result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MinBrightness() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MinBrightness(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MaxBrightness() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MaxBrightness(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::BrightnessStep() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_BrightnessStep(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::DefaultBrightness() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_DefaultBrightness(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::Brightness() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_Brightness(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::Brightness(int32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_Brightness(value));
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MinContrast() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MinContrast(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::MaxContrast() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_MaxContrast(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::ContrastStep() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_ContrastStep(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::DefaultContrast() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_DefaultContrast(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::Contrast() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->get_Contrast(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Scanners_IImageScannerSourceConfiguration<D>::Contrast(int32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerSourceConfiguration)->put_Contrast(value));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> consume_Windows_Devices_Scanners_IImageScannerStatics<D>::FromIdAsync(param::hstring const& deviceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerStatics)->FromIdAsync(get_abi(deviceId), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> hstring consume_Windows_Devices_Scanners_IImageScannerStatics<D>::GetDeviceSelector() const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Scanners::IImageScannerStatics)->GetDeviceSelector(put_abi(selector)));
+    return selector;
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScanner> : produce_base<D, Windows::Devices::Scanners::IImageScanner>
 {
-    HRESULT __stdcall get_DeviceId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DeviceId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeviceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeviceId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DefaultScanSource(Windows::Devices::Scanners::ImageScannerScanSource * value) noexcept override
+    HRESULT __stdcall get_DefaultScanSource(Windows::Devices::Scanners::ImageScannerScanSource* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultScanSource());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultScanSource());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsScanSourceSupported(Windows::Devices::Scanners::ImageScannerScanSource value, bool * result) noexcept override
+    HRESULT __stdcall IsScanSourceSupported(Windows::Devices::Scanners::ImageScannerScanSource value, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsScanSourceSupported(value));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsScanSourceSupported(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerScanSource const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -58,53 +468,33 @@ struct produce<D, Windows::Devices::Scanners::IImageScanner> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall get_FlatbedConfiguration(abi_arg_out<Windows::Devices::Scanners::IImageScannerFormatConfiguration> value) noexcept override
+    HRESULT __stdcall get_FlatbedConfiguration(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FlatbedConfiguration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FlatbedConfiguration());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FeederConfiguration(abi_arg_out<Windows::Devices::Scanners::IImageScannerFormatConfiguration> value) noexcept override
+    HRESULT __stdcall get_FeederConfiguration(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FeederConfiguration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FeederConfiguration());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AutoConfiguration(abi_arg_out<Windows::Devices::Scanners::IImageScannerFormatConfiguration> value) noexcept override
+    HRESULT __stdcall get_AutoConfiguration(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AutoConfiguration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutoConfiguration());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsPreviewSupported(Windows::Devices::Scanners::ImageScannerScanSource scanSource, bool * result) noexcept override
+    HRESULT __stdcall IsPreviewSupported(Windows::Devices::Scanners::ImageScannerScanSource scanSource, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsPreviewSupported(scanSource));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsPreviewSupported(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerScanSource const*>(&scanSource)));
             return S_OK;
         }
         catch (...)
@@ -113,11 +503,12 @@ struct produce<D, Windows::Devices::Scanners::IImageScanner> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_ScanPreviewToStreamAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, abi_arg_in<Windows::Storage::Streams::IRandomAccessStream> targetStream, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScannerPreviewResult>> operation) noexcept override
+    HRESULT __stdcall ScanPreviewToStreamAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, ::IUnknown* targetStream, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ScanPreviewToStreamAsync(scanSource, *reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStream *>(&targetStream)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ScanPreviewToStreamAsync(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerScanSource const*>(&scanSource), *reinterpret_cast<Windows::Storage::Streams::IRandomAccessStream const*>(&targetStream)));
             return S_OK;
         }
         catch (...)
@@ -127,11 +518,12 @@ struct produce<D, Windows::Devices::Scanners::IImageScanner> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_ScanFilesToFolderAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, abi_arg_in<Windows::Storage::IStorageFolder> storageFolder, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Devices::Scanners::ImageScannerScanResult, uint32_t>> operation) noexcept override
+    HRESULT __stdcall ScanFilesToFolderAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, ::IUnknown* storageFolder, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ScanFilesToFolderAsync(scanSource, *reinterpret_cast<const Windows::Storage::StorageFolder *>(&storageFolder)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ScanFilesToFolderAsync(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerScanSource const*>(&scanSource), *reinterpret_cast<Windows::Storage::StorageFolder const*>(&storageFolder)));
             return S_OK;
         }
         catch (...)
@@ -145,11 +537,68 @@ struct produce<D, Windows::Devices::Scanners::IImageScanner> : produce_base<D, W
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerFeederConfiguration> : produce_base<D, Windows::Devices::Scanners::IImageScannerFeederConfiguration>
 {
-    HRESULT __stdcall get_CanAutoDetectPageSize(bool * value) noexcept override
+    HRESULT __stdcall get_CanAutoDetectPageSize(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanAutoDetectPageSize());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_AutoDetectPageSize(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutoDetectPageSize());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_AutoDetectPageSize(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().AutoDetectPageSize(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PageSize(Windows::Graphics::Printing::PrintMediaSize* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PageSize());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_PageSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().PageSize(*reinterpret_cast<Windows::Graphics::Printing::PrintMediaSize const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PageOrientation(Windows::Graphics::Printing::PrintOrientation* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PageOrientation());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_PageOrientation(Windows::Graphics::Printing::PrintOrientation value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().PageOrientation(*reinterpret_cast<Windows::Graphics::Printing::PrintOrientation const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PageSizeDimensions(Windows::Foundation::Size* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PageSizeDimensions());
+        return S_OK;
+    }
+
+    HRESULT __stdcall IsPageSizeSupported(Windows::Graphics::Printing::PrintMediaSize pageSize, Windows::Graphics::Printing::PrintOrientation pageOrientation, bool* result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CanAutoDetectPageSize());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsPageSizeSupported(*reinterpret_cast<Windows::Graphics::Printing::PrintMediaSize const*>(&pageSize), *reinterpret_cast<Windows::Graphics::Printing::PrintOrientation const*>(&pageOrientation)));
             return S_OK;
         }
         catch (...)
@@ -158,262 +607,93 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerFeederConfiguration> 
         }
     }
 
-    HRESULT __stdcall get_AutoDetectPageSize(bool * value) noexcept override
+    HRESULT __stdcall get_MaxNumberOfPages(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AutoDetectPageSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxNumberOfPages());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AutoDetectPageSize(bool value) noexcept override
+    HRESULT __stdcall put_MaxNumberOfPages(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().AutoDetectPageSize(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MaxNumberOfPages(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PageSize(Windows::Graphics::Printing::PrintMediaSize * value) noexcept override
+    HRESULT __stdcall get_CanScanDuplex(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PageSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanScanDuplex());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PageSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept override
+    HRESULT __stdcall get_Duplex(bool* value) noexcept final
     {
-        try
-        {
-            this->shim().PageSize(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Duplex());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PageOrientation(Windows::Graphics::Printing::PrintOrientation * value) noexcept override
+    HRESULT __stdcall put_Duplex(bool value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PageOrientation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Duplex(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PageOrientation(Windows::Graphics::Printing::PrintOrientation value) noexcept override
+    HRESULT __stdcall get_CanScanAhead(bool* value) noexcept final
     {
-        try
-        {
-            this->shim().PageOrientation(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanScanAhead());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PageSizeDimensions(abi_arg_out<Windows::Foundation::Size> value) noexcept override
+    HRESULT __stdcall get_ScanAhead(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PageSizeDimensions());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ScanAhead());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsPageSizeSupported(Windows::Graphics::Printing::PrintMediaSize pageSize, Windows::Graphics::Printing::PrintOrientation pageOrientation, bool * result) noexcept override
+    HRESULT __stdcall put_ScanAhead(bool value) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsPageSizeSupported(pageSize, pageOrientation));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MaxNumberOfPages(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MaxNumberOfPages());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_MaxNumberOfPages(uint32_t value) noexcept override
-    {
-        try
-        {
-            this->shim().MaxNumberOfPages(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_CanScanDuplex(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().CanScanDuplex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Duplex(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Duplex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Duplex(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().Duplex(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_CanScanAhead(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().CanScanAhead());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ScanAhead(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ScanAhead());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_ScanAhead(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().ScanAhead(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ScanAhead(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerFormatConfiguration> : produce_base<D, Windows::Devices::Scanners::IImageScannerFormatConfiguration>
 {
-    HRESULT __stdcall get_DefaultFormat(Windows::Devices::Scanners::ImageScannerFormat * value) noexcept override
+    HRESULT __stdcall get_DefaultFormat(Windows::Devices::Scanners::ImageScannerFormat* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultFormat());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultFormat());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Format(Windows::Devices::Scanners::ImageScannerFormat * value) noexcept override
+    HRESULT __stdcall get_Format(Windows::Devices::Scanners::ImageScannerFormat* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Format());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Format());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Format(Windows::Devices::Scanners::ImageScannerFormat value) noexcept override
+    HRESULT __stdcall put_Format(Windows::Devices::Scanners::ImageScannerFormat value) noexcept final
     {
-        try
-        {
-            this->shim().Format(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Format(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerFormat const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsFormatSupported(Windows::Devices::Scanners::ImageScannerFormat value, bool * result) noexcept override
+    HRESULT __stdcall IsFormatSupported(Windows::Devices::Scanners::ImageScannerFormat value, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsFormatSupported(value));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsFormatSupported(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerFormat const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -426,59 +706,83 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerFormatConfiguration> 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerPreviewResult> : produce_base<D, Windows::Devices::Scanners::IImageScannerPreviewResult>
 {
-    HRESULT __stdcall get_Succeeded(bool * value) noexcept override
+    HRESULT __stdcall get_Succeeded(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Succeeded());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Succeeded());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Format(Windows::Devices::Scanners::ImageScannerFormat * value) noexcept override
+    HRESULT __stdcall get_Format(Windows::Devices::Scanners::ImageScannerFormat* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Format());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Format());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerScanResult> : produce_base<D, Windows::Devices::Scanners::IImageScannerScanResult>
 {
-    HRESULT __stdcall get_ScannedFiles(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile>> value) noexcept override
+    HRESULT __stdcall get_ScannedFiles(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ScannedFiles());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ScannedFiles());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerSourceConfiguration> : produce_base<D, Windows::Devices::Scanners::IImageScannerSourceConfiguration>
 {
-    HRESULT __stdcall get_MinScanArea(abi_arg_out<Windows::Foundation::Size> value) noexcept override
+    HRESULT __stdcall get_MinScanArea(Windows::Foundation::Size* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinScanArea());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_MaxScanArea(Windows::Foundation::Size* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxScanArea());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectedScanRegion(Windows::Foundation::Rect* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectedScanRegion());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_SelectedScanRegion(Windows::Foundation::Rect value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().SelectedScanRegion(*reinterpret_cast<Windows::Foundation::Rect const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutoCroppingMode());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().AutoCroppingMode(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerAutoCroppingMode const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall IsAutoCroppingModeSupported(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value, bool* result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().MinScanArea());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsAutoCroppingModeSupported(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerAutoCroppingMode const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -487,11 +791,75 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerSourceConfiguration> 
         }
     }
 
-    HRESULT __stdcall get_MaxScanArea(abi_arg_out<Windows::Foundation::Size> value) noexcept override
+    HRESULT __stdcall get_MinResolution(struct_of<8>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinResolution());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_MaxResolution(struct_of<8>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxResolution());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_OpticalResolution(struct_of<8>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().OpticalResolution());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_DesiredResolution(struct_of<8>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DesiredResolution());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_DesiredResolution(struct_of<8> value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().DesiredResolution(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerResolution const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ActualResolution(struct_of<8>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActualResolution());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_DefaultColorMode(Windows::Devices::Scanners::ImageScannerColorMode* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultColorMode());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ColorMode(Windows::Devices::Scanners::ImageScannerColorMode* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColorMode());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_ColorMode(Windows::Devices::Scanners::ImageScannerColorMode value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().ColorMode(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerColorMode const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall IsColorModeSupported(Windows::Devices::Scanners::ImageScannerColorMode value, bool* result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().MaxScanArea());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsColorModeSupported(*reinterpret_cast<Windows::Devices::Scanners::ImageScannerColorMode const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -500,366 +868,100 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerSourceConfiguration> 
         }
     }
 
-    HRESULT __stdcall get_SelectedScanRegion(abi_arg_out<Windows::Foundation::Rect> value) noexcept override
+    HRESULT __stdcall get_MinBrightness(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SelectedScanRegion());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinBrightness());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SelectedScanRegion(abi_arg_in<Windows::Foundation::Rect> value) noexcept override
+    HRESULT __stdcall get_MaxBrightness(int32_t* value) noexcept final
     {
-        try
-        {
-            this->shim().SelectedScanRegion(*reinterpret_cast<const Windows::Foundation::Rect *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxBrightness());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode * value) noexcept override
+    HRESULT __stdcall get_BrightnessStep(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AutoCroppingMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BrightnessStep());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value) noexcept override
+    HRESULT __stdcall get_DefaultBrightness(int32_t* value) noexcept final
     {
-        try
-        {
-            this->shim().AutoCroppingMode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultBrightness());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsAutoCroppingModeSupported(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value, bool * result) noexcept override
+    HRESULT __stdcall get_Brightness(int32_t* value) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsAutoCroppingModeSupported(value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Brightness());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MinResolution(abi_arg_out<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall put_Brightness(int32_t value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MinResolution());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Brightness(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxResolution(abi_arg_out<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall get_MinContrast(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxResolution());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinContrast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_OpticalResolution(abi_arg_out<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall get_MaxContrast(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().OpticalResolution());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxContrast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DesiredResolution(abi_arg_out<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall get_ContrastStep(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DesiredResolution());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContrastStep());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DesiredResolution(abi_arg_in<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall get_DefaultContrast(int32_t* value) noexcept final
     {
-        try
-        {
-            this->shim().DesiredResolution(*reinterpret_cast<const Windows::Devices::Scanners::ImageScannerResolution *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultContrast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ActualResolution(abi_arg_out<Windows::Devices::Scanners::ImageScannerResolution> value) noexcept override
+    HRESULT __stdcall get_Contrast(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ActualResolution());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contrast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DefaultColorMode(Windows::Devices::Scanners::ImageScannerColorMode * value) noexcept override
+    HRESULT __stdcall put_Contrast(int32_t value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultColorMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ColorMode(Windows::Devices::Scanners::ImageScannerColorMode * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ColorMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_ColorMode(Windows::Devices::Scanners::ImageScannerColorMode value) noexcept override
-    {
-        try
-        {
-            this->shim().ColorMode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_IsColorModeSupported(Windows::Devices::Scanners::ImageScannerColorMode value, bool * result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().IsColorModeSupported(value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MinBrightness(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MinBrightness());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MaxBrightness(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MaxBrightness());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_BrightnessStep(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().BrightnessStep());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_DefaultBrightness(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().DefaultBrightness());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Brightness(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Brightness());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Brightness(int32_t value) noexcept override
-    {
-        try
-        {
-            this->shim().Brightness(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MinContrast(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MinContrast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MaxContrast(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MaxContrast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ContrastStep(uint32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ContrastStep());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_DefaultContrast(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().DefaultContrast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Contrast(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Contrast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Contrast(int32_t value) noexcept override
-    {
-        try
-        {
-            this->shim().Contrast(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Contrast(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Scanners::IImageScannerStatics> : produce_base<D, Windows::Devices::Scanners::IImageScannerStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> deviceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner>> asyncInfo) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING deviceId, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&deviceId)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&deviceId)));
             return S_OK;
         }
         catch (...)
@@ -869,11 +971,12 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerStatics> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelector(abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelector(HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelector());
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelector());
             return S_OK;
         }
         catch (...)
@@ -886,440 +989,61 @@ struct produce<D, Windows::Devices::Scanners::IImageScannerStatics> : produce_ba
 
 }
 
-namespace Windows::Devices::Scanners {
+WINRT_EXPORT namespace winrt::Windows::Devices::Scanners {
 
-template <typename D> Windows::Devices::Scanners::ImageScannerFormat impl_IImageScannerFormatConfiguration<D>::DefaultFormat() const
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> ImageScanner::FromIdAsync(param::hstring const& deviceId)
 {
-    Windows::Devices::Scanners::ImageScannerFormat value {};
-    check_hresult(static_cast<const IImageScannerFormatConfiguration &>(static_cast<const D &>(*this))->get_DefaultFormat(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerFormat impl_IImageScannerFormatConfiguration<D>::Format() const
-{
-    Windows::Devices::Scanners::ImageScannerFormat value {};
-    check_hresult(static_cast<const IImageScannerFormatConfiguration &>(static_cast<const D &>(*this))->get_Format(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFormatConfiguration<D>::Format(Windows::Devices::Scanners::ImageScannerFormat value) const
-{
-    check_hresult(static_cast<const IImageScannerFormatConfiguration &>(static_cast<const D &>(*this))->put_Format(value));
-}
-
-template <typename D> bool impl_IImageScannerFormatConfiguration<D>::IsFormatSupported(Windows::Devices::Scanners::ImageScannerFormat value) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScannerFormatConfiguration &>(static_cast<const D &>(*this))->abi_IsFormatSupported(value, &result));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Size impl_IImageScannerSourceConfiguration<D>::MinScanArea() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MinScanArea(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Size impl_IImageScannerSourceConfiguration<D>::MaxScanArea() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MaxScanArea(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IImageScannerSourceConfiguration<D>::SelectedScanRegion() const
-{
-    Windows::Foundation::Rect value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_SelectedScanRegion(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::SelectedScanRegion(const Windows::Foundation::Rect & value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_SelectedScanRegion(get(value)));
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerAutoCroppingMode impl_IImageScannerSourceConfiguration<D>::AutoCroppingMode() const
-{
-    Windows::Devices::Scanners::ImageScannerAutoCroppingMode value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_AutoCroppingMode(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::AutoCroppingMode(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_AutoCroppingMode(value));
-}
-
-template <typename D> bool impl_IImageScannerSourceConfiguration<D>::IsAutoCroppingModeSupported(Windows::Devices::Scanners::ImageScannerAutoCroppingMode value) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->abi_IsAutoCroppingModeSupported(value, &result));
-    return result;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerResolution impl_IImageScannerSourceConfiguration<D>::MinResolution() const
-{
-    Windows::Devices::Scanners::ImageScannerResolution value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MinResolution(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerResolution impl_IImageScannerSourceConfiguration<D>::MaxResolution() const
-{
-    Windows::Devices::Scanners::ImageScannerResolution value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MaxResolution(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerResolution impl_IImageScannerSourceConfiguration<D>::OpticalResolution() const
-{
-    Windows::Devices::Scanners::ImageScannerResolution value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_OpticalResolution(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerResolution impl_IImageScannerSourceConfiguration<D>::DesiredResolution() const
-{
-    Windows::Devices::Scanners::ImageScannerResolution value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_DesiredResolution(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::DesiredResolution(const Windows::Devices::Scanners::ImageScannerResolution & value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_DesiredResolution(get(value)));
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerResolution impl_IImageScannerSourceConfiguration<D>::ActualResolution() const
-{
-    Windows::Devices::Scanners::ImageScannerResolution value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_ActualResolution(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerColorMode impl_IImageScannerSourceConfiguration<D>::DefaultColorMode() const
-{
-    Windows::Devices::Scanners::ImageScannerColorMode value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_DefaultColorMode(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerColorMode impl_IImageScannerSourceConfiguration<D>::ColorMode() const
-{
-    Windows::Devices::Scanners::ImageScannerColorMode value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_ColorMode(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::ColorMode(Windows::Devices::Scanners::ImageScannerColorMode value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_ColorMode(value));
-}
-
-template <typename D> bool impl_IImageScannerSourceConfiguration<D>::IsColorModeSupported(Windows::Devices::Scanners::ImageScannerColorMode value) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->abi_IsColorModeSupported(value, &result));
-    return result;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::MinBrightness() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MinBrightness(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::MaxBrightness() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MaxBrightness(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IImageScannerSourceConfiguration<D>::BrightnessStep() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_BrightnessStep(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::DefaultBrightness() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_DefaultBrightness(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::Brightness() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_Brightness(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::Brightness(int32_t value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_Brightness(value));
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::MinContrast() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MinContrast(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::MaxContrast() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_MaxContrast(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IImageScannerSourceConfiguration<D>::ContrastStep() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_ContrastStep(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::DefaultContrast() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_DefaultContrast(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IImageScannerSourceConfiguration<D>::Contrast() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->get_Contrast(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerSourceConfiguration<D>::Contrast(int32_t value) const
-{
-    check_hresult(static_cast<const IImageScannerSourceConfiguration &>(static_cast<const D &>(*this))->put_Contrast(value));
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::CanAutoDetectPageSize() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_CanAutoDetectPageSize(&value));
-    return value;
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::AutoDetectPageSize() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_AutoDetectPageSize(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::AutoDetectPageSize(bool value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_AutoDetectPageSize(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintMediaSize impl_IImageScannerFeederConfiguration<D>::PageSize() const
-{
-    Windows::Graphics::Printing::PrintMediaSize value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_PageSize(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::PageSize(Windows::Graphics::Printing::PrintMediaSize value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_PageSize(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintOrientation impl_IImageScannerFeederConfiguration<D>::PageOrientation() const
-{
-    Windows::Graphics::Printing::PrintOrientation value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_PageOrientation(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::PageOrientation(Windows::Graphics::Printing::PrintOrientation value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_PageOrientation(value));
-}
-
-template <typename D> Windows::Foundation::Size impl_IImageScannerFeederConfiguration<D>::PageSizeDimensions() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_PageSizeDimensions(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::IsPageSizeSupported(Windows::Graphics::Printing::PrintMediaSize pageSize, Windows::Graphics::Printing::PrintOrientation pageOrientation) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->abi_IsPageSizeSupported(pageSize, pageOrientation, &result));
-    return result;
-}
-
-template <typename D> uint32_t impl_IImageScannerFeederConfiguration<D>::MaxNumberOfPages() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_MaxNumberOfPages(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::MaxNumberOfPages(uint32_t value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_MaxNumberOfPages(value));
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::CanScanDuplex() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_CanScanDuplex(&value));
-    return value;
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::Duplex() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_Duplex(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::Duplex(bool value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_Duplex(value));
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::CanScanAhead() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_CanScanAhead(&value));
-    return value;
-}
-
-template <typename D> bool impl_IImageScannerFeederConfiguration<D>::ScanAhead() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->get_ScanAhead(&value));
-    return value;
-}
-
-template <typename D> void impl_IImageScannerFeederConfiguration<D>::ScanAhead(bool value) const
-{
-    check_hresult(static_cast<const IImageScannerFeederConfiguration &>(static_cast<const D &>(*this))->put_ScanAhead(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile> impl_IImageScannerScanResult<D>::ScannedFiles() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile> value;
-    check_hresult(static_cast<const IImageScannerScanResult &>(static_cast<const D &>(*this))->get_ScannedFiles(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IImageScannerPreviewResult<D>::Succeeded() const
-{
-    bool value {};
-    check_hresult(static_cast<const IImageScannerPreviewResult &>(static_cast<const D &>(*this))->get_Succeeded(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerFormat impl_IImageScannerPreviewResult<D>::Format() const
-{
-    Windows::Devices::Scanners::ImageScannerFormat value {};
-    check_hresult(static_cast<const IImageScannerPreviewResult &>(static_cast<const D &>(*this))->get_Format(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IImageScanner<D>::DeviceId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->get_DeviceId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerScanSource impl_IImageScanner<D>::DefaultScanSource() const
-{
-    Windows::Devices::Scanners::ImageScannerScanSource value {};
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->get_DefaultScanSource(&value));
-    return value;
-}
-
-template <typename D> bool impl_IImageScanner<D>::IsScanSourceSupported(Windows::Devices::Scanners::ImageScannerScanSource value) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->abi_IsScanSourceSupported(value, &result));
-    return result;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerFlatbedConfiguration impl_IImageScanner<D>::FlatbedConfiguration() const
-{
-    Windows::Devices::Scanners::ImageScannerFlatbedConfiguration value { nullptr };
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->get_FlatbedConfiguration(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerFeederConfiguration impl_IImageScanner<D>::FeederConfiguration() const
-{
-    Windows::Devices::Scanners::ImageScannerFeederConfiguration value { nullptr };
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->get_FeederConfiguration(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Scanners::ImageScannerAutoConfiguration impl_IImageScanner<D>::AutoConfiguration() const
-{
-    Windows::Devices::Scanners::ImageScannerAutoConfiguration value { nullptr };
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->get_AutoConfiguration(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IImageScanner<D>::IsPreviewSupported(Windows::Devices::Scanners::ImageScannerScanSource scanSource) const
-{
-    bool result {};
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->abi_IsPreviewSupported(scanSource, &result));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScannerPreviewResult> impl_IImageScanner<D>::ScanPreviewToStreamAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, const Windows::Storage::Streams::IRandomAccessStream & targetStream) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScannerPreviewResult> operation;
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->abi_ScanPreviewToStreamAsync(scanSource, get(targetStream), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Devices::Scanners::ImageScannerScanResult, uint32_t> impl_IImageScanner<D>::ScanFilesToFolderAsync(Windows::Devices::Scanners::ImageScannerScanSource scanSource, const Windows::Storage::StorageFolder & storageFolder) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Devices::Scanners::ImageScannerScanResult, uint32_t> operation;
-    check_hresult(static_cast<const IImageScanner &>(static_cast<const D &>(*this))->abi_ScanFilesToFolderAsync(scanSource, get(storageFolder), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> impl_IImageScannerStatics<D>::FromIdAsync(hstring_ref deviceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> asyncInfo;
-    check_hresult(static_cast<const IImageScannerStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(deviceId), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> hstring impl_IImageScannerStatics<D>::GetDeviceSelector() const
-{
-    hstring selector;
-    check_hresult(static_cast<const IImageScannerStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(put(selector)));
-    return selector;
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Scanners::ImageScanner> ImageScanner::FromIdAsync(hstring_ref deviceId)
-{
-    return get_activation_factory<ImageScanner, IImageScannerStatics>().FromIdAsync(deviceId);
+    return get_activation_factory<ImageScanner, Windows::Devices::Scanners::IImageScannerStatics>().FromIdAsync(deviceId);
 }
 
 inline hstring ImageScanner::GetDeviceSelector()
 {
-    return get_activation_factory<ImageScanner, IImageScannerStatics>().GetDeviceSelector();
+    return get_activation_factory<ImageScanner, Windows::Devices::Scanners::IImageScannerStatics>().GetDeviceSelector();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScanner> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScanner> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerFeederConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerFeederConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerFormatConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerFormatConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerPreviewResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerPreviewResult> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerScanResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerScanResult> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerSourceConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerSourceConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::IImageScannerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::IImageScannerStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScanner> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScanner> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScannerAutoConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScannerAutoConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScannerFeederConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScannerFeederConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScannerFlatbedConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScannerFlatbedConfiguration> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScannerPreviewResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScannerPreviewResult> {};
+
+template<> struct hash<winrt::Windows::Devices::Scanners::ImageScannerScanResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Scanners::ImageScannerScanResult> {};
+
 }
+
+WINRT_WARNING_POP

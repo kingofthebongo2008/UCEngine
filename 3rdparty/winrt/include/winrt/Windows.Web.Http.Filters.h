@@ -1,347 +1,445 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Web.Http.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Security.Cryptography.Certificates.3.h"
-#include "internal/Windows.Networking.Sockets.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Security.Credentials.3.h"
-#include "internal/Windows.Web.Http.Filters.3.h"
-#include "Windows.Web.Http.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Networking.Sockets.2.h"
+#include "winrt/impl/Windows.Security.Credentials.2.h"
+#include "winrt/impl/Windows.Security.Cryptography.Certificates.2.h"
+#include "winrt/impl/Windows.Web.Http.2.h"
+#include "winrt/impl/Windows.Web.Http.Filters.2.h"
+#include "winrt/Windows.Web.Http.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> bool consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AllowAutoRedirect() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_AllowAutoRedirect(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AllowAutoRedirect(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_AllowAutoRedirect(value));
+}
+
+template <typename D> bool consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AllowUI() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_AllowUI(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AllowUI(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_AllowUI(value));
+}
+
+template <typename D> bool consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AutomaticDecompression() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_AutomaticDecompression(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::AutomaticDecompression(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_AutomaticDecompression(value));
+}
+
+template <typename D> Windows::Web::Http::Filters::HttpCacheControl consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::CacheControl() const noexcept
+{
+    Windows::Web::Http::Filters::HttpCacheControl value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_CacheControl(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::HttpCookieManager consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::CookieManager() const noexcept
+{
+    Windows::Web::Http::HttpCookieManager value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_CookieManager(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Security::Cryptography::Certificates::Certificate consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ClientCertificate() const noexcept
+{
+    Windows::Security::Cryptography::Certificates::Certificate value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_ClientCertificate(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ClientCertificate(Windows::Security::Cryptography::Certificates::Certificate const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_ClientCertificate(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::Security::Cryptography::Certificates::ChainValidationResult> consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::IgnorableServerCertificateErrors() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::Security::Cryptography::Certificates::ChainValidationResult> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_IgnorableServerCertificateErrors(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::MaxConnectionsPerServer() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_MaxConnectionsPerServer(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::MaxConnectionsPerServer(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_MaxConnectionsPerServer(value));
+}
+
+template <typename D> Windows::Security::Credentials::PasswordCredential consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ProxyCredential() const noexcept
+{
+    Windows::Security::Credentials::PasswordCredential value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_ProxyCredential(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ProxyCredential(Windows::Security::Credentials::PasswordCredential const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_ProxyCredential(get_abi(value)));
+}
+
+template <typename D> Windows::Security::Credentials::PasswordCredential consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ServerCredential() const noexcept
+{
+    Windows::Security::Credentials::PasswordCredential value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_ServerCredential(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::ServerCredential(Windows::Security::Credentials::PasswordCredential const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_ServerCredential(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::UseProxy() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->get_UseProxy(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter<D>::UseProxy(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter)->put_UseProxy(value));
+}
+
+template <typename D> Windows::Web::Http::HttpVersion consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter2<D>::MaxVersion() const noexcept
+{
+    Windows::Web::Http::HttpVersion value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter2)->get_MaxVersion(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter2<D>::MaxVersion(Windows::Web::Http::HttpVersion const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter2)->put_MaxVersion(get_abi(value)));
+}
+
+template <typename D> Windows::Web::Http::Filters::HttpCookieUsageBehavior consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter3<D>::CookieUsageBehavior() const noexcept
+{
+    Windows::Web::Http::Filters::HttpCookieUsageBehavior value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter3)->get_CookieUsageBehavior(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter3<D>::CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter3)->put_CookieUsageBehavior(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter4)->add_ServerCustomValidationRequested(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4>(this, &abi_t<Windows::Web::Http::Filters::IHttpBaseProtocolFilter4>::remove_ServerCustomValidationRequested, ServerCustomValidationRequested(eventHandler));
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter4)->remove_ServerCustomValidationRequested(get_abi(eventCookie)));
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpBaseProtocolFilter4<D>::ClearAuthenticationCache() const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpBaseProtocolFilter4)->ClearAuthenticationCache());
+}
+
+template <typename D> Windows::Web::Http::Filters::HttpCacheReadBehavior consume_Windows_Web_Http_Filters_IHttpCacheControl<D>::ReadBehavior() const noexcept
+{
+    Windows::Web::Http::Filters::HttpCacheReadBehavior value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpCacheControl)->get_ReadBehavior(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpCacheControl<D>::ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpCacheControl)->put_ReadBehavior(get_abi(value)));
+}
+
+template <typename D> Windows::Web::Http::Filters::HttpCacheWriteBehavior consume_Windows_Web_Http_Filters_IHttpCacheControl<D>::WriteBehavior() const noexcept
+{
+    Windows::Web::Http::Filters::HttpCacheWriteBehavior value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpCacheControl)->get_WriteBehavior(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpCacheControl<D>::WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpCacheControl)->put_WriteBehavior(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> consume_Windows_Web_Http_Filters_IHttpFilter<D>::SendRequestAsync(Windows::Web::Http::HttpRequestMessage const& request) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpFilter)->SendRequestAsync(get_abi(request), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Web::Http::HttpRequestMessage consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::RequestMessage() const noexcept
+{
+    Windows::Web::Http::HttpRequestMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->get_RequestMessage(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Security::Cryptography::Certificates::Certificate consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificate() const noexcept
+{
+    Windows::Security::Cryptography::Certificates::Certificate value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->get_ServerCertificate(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Networking::Sockets::SocketSslErrorSeverity consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificateErrorSeverity() const noexcept
+{
+    Windows::Networking::Sockets::SocketSslErrorSeverity value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->get_ServerCertificateErrorSeverity(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::ChainValidationResult> consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificateErrors() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::ChainValidationResult> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->get_ServerCertificateErrors(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate> consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::ServerIntermediateCertificates() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->get_ServerIntermediateCertificates(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::Reject() const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->Reject());
+}
+
+template <typename D> Windows::Foundation::Deferral consume_Windows_Web_Http_Filters_IHttpServerCustomValidationRequestedEventArgs<D>::GetDeferral() const
+{
+    Windows::Foundation::Deferral result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs)->GetDeferral(put_abi(result)));
+    return result;
+}
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter> : produce_base<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter>
 {
-    HRESULT __stdcall get_AllowAutoRedirect(bool * value) noexcept override
+    HRESULT __stdcall get_AllowAutoRedirect(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AllowAutoRedirect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AllowAutoRedirect());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AllowAutoRedirect(bool value) noexcept override
+    HRESULT __stdcall put_AllowAutoRedirect(bool value) noexcept final
     {
-        try
-        {
-            this->shim().AllowAutoRedirect(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AllowAutoRedirect(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AllowUI(bool * value) noexcept override
+    HRESULT __stdcall get_AllowUI(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AllowUI());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AllowUI());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AllowUI(bool value) noexcept override
+    HRESULT __stdcall put_AllowUI(bool value) noexcept final
     {
-        try
-        {
-            this->shim().AllowUI(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AllowUI(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AutomaticDecompression(bool * value) noexcept override
+    HRESULT __stdcall get_AutomaticDecompression(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AutomaticDecompression());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutomaticDecompression());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AutomaticDecompression(bool value) noexcept override
+    HRESULT __stdcall put_AutomaticDecompression(bool value) noexcept final
     {
-        try
-        {
-            this->shim().AutomaticDecompression(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AutomaticDecompression(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CacheControl(abi_arg_out<Windows::Web::Http::Filters::IHttpCacheControl> value) noexcept override
+    HRESULT __stdcall get_CacheControl(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CacheControl());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CacheControl());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CookieManager(abi_arg_out<Windows::Web::Http::IHttpCookieManager> value) noexcept override
+    HRESULT __stdcall get_CookieManager(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CookieManager());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CookieManager());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ClientCertificate(abi_arg_out<Windows::Security::Cryptography::Certificates::ICertificate> value) noexcept override
+    HRESULT __stdcall get_ClientCertificate(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ClientCertificate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ClientCertificate());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ClientCertificate(abi_arg_in<Windows::Security::Cryptography::Certificates::ICertificate> value) noexcept override
+    HRESULT __stdcall put_ClientCertificate(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ClientCertificate(*reinterpret_cast<const Windows::Security::Cryptography::Certificates::Certificate *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ClientCertificate(*reinterpret_cast<Windows::Security::Cryptography::Certificates::Certificate const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IgnorableServerCertificateErrors(abi_arg_out<Windows::Foundation::Collections::IVector<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult>> value) noexcept override
+    HRESULT __stdcall get_IgnorableServerCertificateErrors(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IgnorableServerCertificateErrors());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IgnorableServerCertificateErrors());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxConnectionsPerServer(uint32_t * value) noexcept override
+    HRESULT __stdcall get_MaxConnectionsPerServer(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxConnectionsPerServer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxConnectionsPerServer());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MaxConnectionsPerServer(uint32_t value) noexcept override
+    HRESULT __stdcall put_MaxConnectionsPerServer(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().MaxConnectionsPerServer(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MaxConnectionsPerServer(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProxyCredential(abi_arg_out<Windows::Security::Credentials::IPasswordCredential> value) noexcept override
+    HRESULT __stdcall get_ProxyCredential(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProxyCredential());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProxyCredential());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ProxyCredential(abi_arg_in<Windows::Security::Credentials::IPasswordCredential> value) noexcept override
+    HRESULT __stdcall put_ProxyCredential(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ProxyCredential(*reinterpret_cast<const Windows::Security::Credentials::PasswordCredential *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ProxyCredential(*reinterpret_cast<Windows::Security::Credentials::PasswordCredential const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServerCredential(abi_arg_out<Windows::Security::Credentials::IPasswordCredential> value) noexcept override
+    HRESULT __stdcall get_ServerCredential(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServerCredential());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServerCredential());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ServerCredential(abi_arg_in<Windows::Security::Credentials::IPasswordCredential> value) noexcept override
+    HRESULT __stdcall put_ServerCredential(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ServerCredential(*reinterpret_cast<const Windows::Security::Credentials::PasswordCredential *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ServerCredential(*reinterpret_cast<Windows::Security::Credentials::PasswordCredential const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UseProxy(bool * value) noexcept override
+    HRESULT __stdcall get_UseProxy(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UseProxy());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UseProxy());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_UseProxy(bool value) noexcept override
+    HRESULT __stdcall put_UseProxy(bool value) noexcept final
     {
-        try
-        {
-            this->shim().UseProxy(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().UseProxy(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter2> : produce_base<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter2>
 {
-    HRESULT __stdcall get_MaxVersion(Windows::Web::Http::HttpVersion * value) noexcept override
+    HRESULT __stdcall get_MaxVersion(Windows::Web::Http::HttpVersion* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxVersion());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxVersion());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MaxVersion(Windows::Web::Http::HttpVersion value) noexcept override
+    HRESULT __stdcall put_MaxVersion(Windows::Web::Http::HttpVersion value) noexcept final
     {
-        try
-        {
-            this->shim().MaxVersion(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MaxVersion(*reinterpret_cast<Windows::Web::Http::HttpVersion const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter3> : produce_base<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter3>
 {
-    HRESULT __stdcall get_CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior * value) noexcept override
+    HRESULT __stdcall get_CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CookieUsageBehavior());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CookieUsageBehavior());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior value) noexcept override
+    HRESULT __stdcall put_CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior value) noexcept final
     {
-        try
-        {
-            this->shim().CookieUsageBehavior(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CookieUsageBehavior(*reinterpret_cast<Windows::Web::Http::Filters::HttpCookieUsageBehavior const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> : produce_base<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4>
 {
-    HRESULT __stdcall add_ServerCustomValidationRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_ServerCustomValidationRequested(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().ServerCustomValidationRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().ServerCustomValidationRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -350,11 +448,12 @@ struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> : produ
         }
     }
 
-    HRESULT __stdcall remove_ServerCustomValidationRequested(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_ServerCustomValidationRequested(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().ServerCustomValidationRequested(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ServerCustomValidationRequested(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -363,10 +462,11 @@ struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> : produ
         }
     }
 
-    HRESULT __stdcall abi_ClearAuthenticationCache() noexcept override
+    HRESULT __stdcall ClearAuthenticationCache() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ClearAuthenticationCache();
             return S_OK;
         }
@@ -380,67 +480,44 @@ struct produce<D, Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> : produ
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpCacheControl> : produce_base<D, Windows::Web::Http::Filters::IHttpCacheControl>
 {
-    HRESULT __stdcall get_ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior * value) noexcept override
+    HRESULT __stdcall get_ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ReadBehavior());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ReadBehavior());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior value) noexcept override
+    HRESULT __stdcall put_ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior value) noexcept final
     {
-        try
-        {
-            this->shim().ReadBehavior(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ReadBehavior(*reinterpret_cast<Windows::Web::Http::Filters::HttpCacheReadBehavior const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior * value) noexcept override
+    HRESULT __stdcall get_WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().WriteBehavior());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().WriteBehavior());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior value) noexcept override
+    HRESULT __stdcall put_WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior value) noexcept final
     {
-        try
-        {
-            this->shim().WriteBehavior(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().WriteBehavior(*reinterpret_cast<Windows::Web::Http::Filters::HttpCacheWriteBehavior const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpFilter> : produce_base<D, Windows::Web::Http::Filters::IHttpFilter>
 {
-    HRESULT __stdcall abi_SendRequestAsync(abi_arg_in<Windows::Web::Http::IHttpRequestMessage> request, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress>> operation) noexcept override
+    HRESULT __stdcall SendRequestAsync(::IUnknown* request, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().SendRequestAsync(*reinterpret_cast<const Windows::Web::Http::HttpRequestMessage *>(&request)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().SendRequestAsync(*reinterpret_cast<Windows::Web::Http::HttpRequestMessage const*>(&request)));
             return S_OK;
         }
         catch (...)
@@ -454,79 +531,46 @@ struct produce<D, Windows::Web::Http::Filters::IHttpFilter> : produce_base<D, Wi
 template <typename D>
 struct produce<D, Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs> : produce_base<D, Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs>
 {
-    HRESULT __stdcall get_RequestMessage(abi_arg_out<Windows::Web::Http::IHttpRequestMessage> value) noexcept override
+    HRESULT __stdcall get_RequestMessage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestMessage());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServerCertificate(abi_arg_out<Windows::Security::Cryptography::Certificates::ICertificate> value) noexcept override
+    HRESULT __stdcall get_ServerCertificate(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServerCertificate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServerCertificate());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServerCertificateErrorSeverity(Windows::Networking::Sockets::SocketSslErrorSeverity * value) noexcept override
+    HRESULT __stdcall get_ServerCertificateErrorSeverity(Windows::Networking::Sockets::SocketSslErrorSeverity* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServerCertificateErrorSeverity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServerCertificateErrorSeverity());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServerCertificateErrors(abi_arg_out<Windows::Foundation::Collections::IVectorView<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult>> value) noexcept override
+    HRESULT __stdcall get_ServerCertificateErrors(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServerCertificateErrors());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServerCertificateErrors());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServerIntermediateCertificates(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate>> value) noexcept override
+    HRESULT __stdcall get_ServerIntermediateCertificates(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServerIntermediateCertificates());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServerIntermediateCertificates());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Reject() noexcept override
+    HRESULT __stdcall Reject() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Reject();
             return S_OK;
         }
@@ -536,11 +580,12 @@ struct produce<D, Windows::Web::Http::Filters::IHttpServerCustomValidationReques
         }
     }
 
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::Foundation::IDeferral> result) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -553,248 +598,7 @@ struct produce<D, Windows::Web::Http::Filters::IHttpServerCustomValidationReques
 
 }
 
-namespace Windows::Web::Http::Filters {
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> impl_IHttpFilter<D>::SendRequestAsync(const Windows::Web::Http::HttpRequestMessage & request) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> operation;
-    check_hresult(static_cast<const IHttpFilter &>(static_cast<const D &>(*this))->abi_SendRequestAsync(get(request), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Web::Http::Filters::HttpCacheReadBehavior impl_IHttpCacheControl<D>::ReadBehavior() const
-{
-    Windows::Web::Http::Filters::HttpCacheReadBehavior value {};
-    check_hresult(static_cast<const IHttpCacheControl &>(static_cast<const D &>(*this))->get_ReadBehavior(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpCacheControl<D>::ReadBehavior(Windows::Web::Http::Filters::HttpCacheReadBehavior value) const
-{
-    check_hresult(static_cast<const IHttpCacheControl &>(static_cast<const D &>(*this))->put_ReadBehavior(value));
-}
-
-template <typename D> Windows::Web::Http::Filters::HttpCacheWriteBehavior impl_IHttpCacheControl<D>::WriteBehavior() const
-{
-    Windows::Web::Http::Filters::HttpCacheWriteBehavior value {};
-    check_hresult(static_cast<const IHttpCacheControl &>(static_cast<const D &>(*this))->get_WriteBehavior(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpCacheControl<D>::WriteBehavior(Windows::Web::Http::Filters::HttpCacheWriteBehavior value) const
-{
-    check_hresult(static_cast<const IHttpCacheControl &>(static_cast<const D &>(*this))->put_WriteBehavior(value));
-}
-
-template <typename D> Windows::Web::Http::HttpRequestMessage impl_IHttpServerCustomValidationRequestedEventArgs<D>::RequestMessage() const
-{
-    Windows::Web::Http::HttpRequestMessage value { nullptr };
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->get_RequestMessage(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Security::Cryptography::Certificates::Certificate impl_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificate() const
-{
-    Windows::Security::Cryptography::Certificates::Certificate value { nullptr };
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->get_ServerCertificate(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Networking::Sockets::SocketSslErrorSeverity impl_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificateErrorSeverity() const
-{
-    Windows::Networking::Sockets::SocketSslErrorSeverity value {};
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->get_ServerCertificateErrorSeverity(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult> impl_IHttpServerCustomValidationRequestedEventArgs<D>::ServerCertificateErrors() const
-{
-    Windows::Foundation::Collections::IVectorView<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult> value;
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->get_ServerCertificateErrors(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate> impl_IHttpServerCustomValidationRequestedEventArgs<D>::ServerIntermediateCertificates() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate> value;
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->get_ServerIntermediateCertificates(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IHttpServerCustomValidationRequestedEventArgs<D>::Reject() const
-{
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->abi_Reject());
-}
-
-template <typename D> Windows::Foundation::Deferral impl_IHttpServerCustomValidationRequestedEventArgs<D>::GetDeferral() const
-{
-    Windows::Foundation::Deferral result { nullptr };
-    check_hresult(static_cast<const IHttpServerCustomValidationRequestedEventArgs &>(static_cast<const D &>(*this))->abi_GetDeferral(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IHttpBaseProtocolFilter<D>::AllowAutoRedirect() const
-{
-    bool value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_AllowAutoRedirect(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::AllowAutoRedirect(bool value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_AllowAutoRedirect(value));
-}
-
-template <typename D> bool impl_IHttpBaseProtocolFilter<D>::AllowUI() const
-{
-    bool value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_AllowUI(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::AllowUI(bool value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_AllowUI(value));
-}
-
-template <typename D> bool impl_IHttpBaseProtocolFilter<D>::AutomaticDecompression() const
-{
-    bool value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_AutomaticDecompression(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::AutomaticDecompression(bool value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_AutomaticDecompression(value));
-}
-
-template <typename D> Windows::Web::Http::Filters::HttpCacheControl impl_IHttpBaseProtocolFilter<D>::CacheControl() const
-{
-    Windows::Web::Http::Filters::HttpCacheControl value { nullptr };
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_CacheControl(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::HttpCookieManager impl_IHttpBaseProtocolFilter<D>::CookieManager() const
-{
-    Windows::Web::Http::HttpCookieManager value { nullptr };
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_CookieManager(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Security::Cryptography::Certificates::Certificate impl_IHttpBaseProtocolFilter<D>::ClientCertificate() const
-{
-    Windows::Security::Cryptography::Certificates::Certificate value { nullptr };
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_ClientCertificate(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::ClientCertificate(const Windows::Security::Cryptography::Certificates::Certificate & value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_ClientCertificate(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult> impl_IHttpBaseProtocolFilter<D>::IgnorableServerCertificateErrors() const
-{
-    Windows::Foundation::Collections::IVector<winrt::Windows::Security::Cryptography::Certificates::ChainValidationResult> value;
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_IgnorableServerCertificateErrors(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IHttpBaseProtocolFilter<D>::MaxConnectionsPerServer() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_MaxConnectionsPerServer(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::MaxConnectionsPerServer(uint32_t value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_MaxConnectionsPerServer(value));
-}
-
-template <typename D> Windows::Security::Credentials::PasswordCredential impl_IHttpBaseProtocolFilter<D>::ProxyCredential() const
-{
-    Windows::Security::Credentials::PasswordCredential value { nullptr };
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_ProxyCredential(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::ProxyCredential(const Windows::Security::Credentials::PasswordCredential & value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_ProxyCredential(get(value)));
-}
-
-template <typename D> Windows::Security::Credentials::PasswordCredential impl_IHttpBaseProtocolFilter<D>::ServerCredential() const
-{
-    Windows::Security::Credentials::PasswordCredential value { nullptr };
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_ServerCredential(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::ServerCredential(const Windows::Security::Credentials::PasswordCredential & value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_ServerCredential(get(value)));
-}
-
-template <typename D> bool impl_IHttpBaseProtocolFilter<D>::UseProxy() const
-{
-    bool value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->get_UseProxy(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter<D>::UseProxy(bool value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter &>(static_cast<const D &>(*this))->put_UseProxy(value));
-}
-
-template <typename D> Windows::Web::Http::HttpVersion impl_IHttpBaseProtocolFilter2<D>::MaxVersion() const
-{
-    Windows::Web::Http::HttpVersion value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter2 &>(static_cast<const D &>(*this))->get_MaxVersion(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter2<D>::MaxVersion(Windows::Web::Http::HttpVersion value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter2 &>(static_cast<const D &>(*this))->put_MaxVersion(value));
-}
-
-template <typename D> Windows::Web::Http::Filters::HttpCookieUsageBehavior impl_IHttpBaseProtocolFilter3<D>::CookieUsageBehavior() const
-{
-    Windows::Web::Http::Filters::HttpCookieUsageBehavior value {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter3 &>(static_cast<const D &>(*this))->get_CookieUsageBehavior(&value));
-    return value;
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter3<D>::CookieUsageBehavior(Windows::Web::Http::Filters::HttpCookieUsageBehavior value) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter3 &>(static_cast<const D &>(*this))->put_CookieUsageBehavior(value));
-}
-
-template <typename D> event_token impl_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IHttpBaseProtocolFilter4 &>(static_cast<const D &>(*this))->add_ServerCustomValidationRequested(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IHttpBaseProtocolFilter4> impl_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Filters::HttpBaseProtocolFilter, Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IHttpBaseProtocolFilter4>(this, &ABI::Windows::Web::Http::Filters::IHttpBaseProtocolFilter4::remove_ServerCustomValidationRequested, ServerCustomValidationRequested(eventHandler));
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter4<D>::ServerCustomValidationRequested(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter4 &>(static_cast<const D &>(*this))->remove_ServerCustomValidationRequested(eventCookie));
-}
-
-template <typename D> void impl_IHttpBaseProtocolFilter4<D>::ClearAuthenticationCache() const
-{
-    check_hresult(static_cast<const IHttpBaseProtocolFilter4 &>(static_cast<const D &>(*this))->abi_ClearAuthenticationCache());
-}
+WINRT_EXPORT namespace winrt::Windows::Web::Http::Filters {
 
 inline HttpBaseProtocolFilter::HttpBaseProtocolFilter() :
     HttpBaseProtocolFilter(activate_instance<HttpBaseProtocolFilter>())
@@ -802,4 +606,38 @@ inline HttpBaseProtocolFilter::HttpBaseProtocolFilter() :
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter2> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter3> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpBaseProtocolFilter4> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpCacheControl> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpCacheControl> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpFilter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpFilter> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::IHttpServerCustomValidationRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::HttpBaseProtocolFilter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::HttpBaseProtocolFilter> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::HttpCacheControl> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::HttpCacheControl> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Filters::HttpServerCustomValidationRequestedEventArgs> {};
+
 }
+
+WINRT_WARNING_POP

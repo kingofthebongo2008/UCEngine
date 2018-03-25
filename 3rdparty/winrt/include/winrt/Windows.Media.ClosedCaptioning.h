@@ -1,324 +1,264 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.UI.3.h"
-#include "internal/Windows.Media.ClosedCaptioning.3.h"
-#include "Windows.Media.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.2.h"
+#include "winrt/impl/Windows.Media.ClosedCaptioning.2.h"
+#include "winrt/Windows.Media.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::FontColor() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionColor value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_FontColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::ComputedFontColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_ComputedFontColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::FontOpacity() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_FontOpacity(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionSize consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::FontSize() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionSize value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_FontSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionStyle consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::FontStyle() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionStyle value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_FontStyle(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::FontEffect() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_FontEffect(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::BackgroundColor() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionColor value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_BackgroundColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::ComputedBackgroundColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_ComputedBackgroundColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::BackgroundOpacity() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_BackgroundOpacity(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::RegionColor() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionColor value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_RegionColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::ComputedRegionColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_ComputedRegionColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity consume_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics<D>::RegionOpacity() const noexcept
+{
+    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value{};
+    check_terminate(WINRT_SHIM(Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics)->get_RegionOpacity(put_abi(value)));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics> : produce_base<D, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>
 {
-    HRESULT __stdcall get_FontColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor * value) noexcept override
+    HRESULT __stdcall get_FontColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ComputedFontColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_ComputedFontColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ComputedFontColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ComputedFontColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity * value) noexcept override
+    HRESULT __stdcall get_FontOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontOpacity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontOpacity());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontSize(Windows::Media::ClosedCaptioning::ClosedCaptionSize * value) noexcept override
+    HRESULT __stdcall get_FontSize(Windows::Media::ClosedCaptioning::ClosedCaptionSize* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontStyle(Windows::Media::ClosedCaptioning::ClosedCaptionStyle * value) noexcept override
+    HRESULT __stdcall get_FontStyle(Windows::Media::ClosedCaptioning::ClosedCaptionStyle* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontStyle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontStyle());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontEffect(Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect * value) noexcept override
+    HRESULT __stdcall get_FontEffect(Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontEffect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontEffect());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BackgroundColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor * value) noexcept override
+    HRESULT __stdcall get_BackgroundColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BackgroundColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BackgroundColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ComputedBackgroundColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_ComputedBackgroundColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ComputedBackgroundColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ComputedBackgroundColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BackgroundOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity * value) noexcept override
+    HRESULT __stdcall get_BackgroundOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BackgroundOpacity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BackgroundOpacity());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RegionColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor * value) noexcept override
+    HRESULT __stdcall get_RegionColor(Windows::Media::ClosedCaptioning::ClosedCaptionColor* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RegionColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RegionColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ComputedRegionColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_ComputedRegionColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ComputedRegionColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ComputedRegionColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RegionOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity * value) noexcept override
+    HRESULT __stdcall get_RegionOpacity(Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RegionOpacity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RegionOpacity());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Media::ClosedCaptioning {
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor impl_IClosedCaptionPropertiesStatics<D>::FontColor() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionColor value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_FontColor(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IClosedCaptionPropertiesStatics<D>::ComputedFontColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_ComputedFontColor(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity impl_IClosedCaptionPropertiesStatics<D>::FontOpacity() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_FontOpacity(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionSize impl_IClosedCaptionPropertiesStatics<D>::FontSize() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionSize value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_FontSize(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionStyle impl_IClosedCaptionPropertiesStatics<D>::FontStyle() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionStyle value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_FontStyle(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect impl_IClosedCaptionPropertiesStatics<D>::FontEffect() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_FontEffect(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor impl_IClosedCaptionPropertiesStatics<D>::BackgroundColor() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionColor value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_BackgroundColor(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IClosedCaptionPropertiesStatics<D>::ComputedBackgroundColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_ComputedBackgroundColor(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity impl_IClosedCaptionPropertiesStatics<D>::BackgroundOpacity() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_BackgroundOpacity(&value));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionColor impl_IClosedCaptionPropertiesStatics<D>::RegionColor() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionColor value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_RegionColor(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IClosedCaptionPropertiesStatics<D>::ComputedRegionColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_ComputedRegionColor(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::ClosedCaptioning::ClosedCaptionOpacity impl_IClosedCaptionPropertiesStatics<D>::RegionOpacity() const
-{
-    Windows::Media::ClosedCaptioning::ClosedCaptionOpacity value {};
-    check_hresult(static_cast<const IClosedCaptionPropertiesStatics &>(static_cast<const D &>(*this))->get_RegionOpacity(&value));
-    return value;
-}
+WINRT_EXPORT namespace winrt::Windows::Media::ClosedCaptioning {
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionColor ClosedCaptionProperties::FontColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().FontColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().FontColor();
 }
 
 inline Windows::UI::Color ClosedCaptionProperties::ComputedFontColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().ComputedFontColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().ComputedFontColor();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionOpacity ClosedCaptionProperties::FontOpacity()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().FontOpacity();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().FontOpacity();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionSize ClosedCaptionProperties::FontSize()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().FontSize();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().FontSize();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionStyle ClosedCaptionProperties::FontStyle()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().FontStyle();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().FontStyle();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect ClosedCaptionProperties::FontEffect()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().FontEffect();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().FontEffect();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionColor ClosedCaptionProperties::BackgroundColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().BackgroundColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().BackgroundColor();
 }
 
 inline Windows::UI::Color ClosedCaptionProperties::ComputedBackgroundColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().ComputedBackgroundColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().ComputedBackgroundColor();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionOpacity ClosedCaptionProperties::BackgroundOpacity()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().BackgroundOpacity();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().BackgroundOpacity();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionColor ClosedCaptionProperties::RegionColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().RegionColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().RegionColor();
 }
 
 inline Windows::UI::Color ClosedCaptionProperties::ComputedRegionColor()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().ComputedRegionColor();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().ComputedRegionColor();
 }
 
 inline Windows::Media::ClosedCaptioning::ClosedCaptionOpacity ClosedCaptionProperties::RegionOpacity()
 {
-    return get_activation_factory<ClosedCaptionProperties, IClosedCaptionPropertiesStatics>().RegionOpacity();
+    return get_activation_factory<ClosedCaptionProperties, Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics>().RegionOpacity();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics> {};
+
+template<> struct hash<winrt::Windows::Media::ClosedCaptioning::ClosedCaptionProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::ClosedCaptioning::ClosedCaptionProperties> {};
+
 }
+
+WINRT_WARNING_POP

@@ -1,69 +1,107 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.ApplicationModel.ExtendedExecution.Foreground.3.h"
-#include "Windows.ApplicationModel.ExtendedExecution.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.ApplicationModel.ExtendedExecution.Foreground.2.h"
+#include "winrt/Windows.ApplicationModel.ExtendedExecution.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundRevokedEventArgs<D>::Reason() const noexcept
+{
+    Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundRevokedEventArgs)->get_Reason(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Description(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->put_Description(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Revoked(Windows::Foundation::TypedEventHandler<Windows::Foundation::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->add_Revoked(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession> consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Revoked(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Foundation::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession>(this, &abi_t<Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession>::remove_Revoked, Revoked(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Revoked(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->remove_Revoked(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundResult> consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::RequestExtensionAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundResult> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->RequestExtensionAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Reason() const noexcept
+{
+    Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->get_Reason(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_ExtendedExecution_Foreground_IExtendedExecutionForegroundSession<D>::Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession)->put_Reason(get_abi(value)));
+}
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundRevokedEventArgs> : produce_base<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundRevokedEventArgs>
 {
-    HRESULT __stdcall get_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason * value) noexcept override
+    HRESULT __stdcall get_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Reason());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Reason());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession> : produce_base<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession>
 {
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Description(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Description(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Description(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Description(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall add_Revoked(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Revoked(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Revoked(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Revoked(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Foundation::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -72,11 +110,12 @@ struct produce<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExt
         }
     }
 
-    HRESULT __stdcall remove_Revoked(event_token token) noexcept override
+    HRESULT __stdcall remove_Revoked(event_token token) noexcept final
     {
         try
         {
-            this->shim().Revoked(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Revoked(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -85,11 +124,12 @@ struct produce<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExt
         }
     }
 
-    HRESULT __stdcall abi_RequestExtensionAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundResult>> operation) noexcept override
+    HRESULT __stdcall RequestExtensionAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().RequestExtensionAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestExtensionAsync());
             return S_OK;
         }
         catch (...)
@@ -99,91 +139,24 @@ struct produce<D, Windows::ApplicationModel::ExtendedExecution::Foreground::IExt
         }
     }
 
-    HRESULT __stdcall get_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason * value) noexcept override
+    HRESULT __stdcall get_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Reason());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Reason());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason value) noexcept override
+    HRESULT __stdcall put_Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason value) noexcept final
     {
-        try
-        {
-            this->shim().Reason(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Reason(*reinterpret_cast<Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason const*>(&value));
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::ApplicationModel::ExtendedExecution::Foreground {
-
-template <typename D> Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason impl_IExtendedExecutionForegroundRevokedEventArgs<D>::Reason() const
-{
-    Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedReason value {};
-    check_hresult(static_cast<const IExtendedExecutionForegroundRevokedEventArgs &>(static_cast<const D &>(*this))->get_Reason(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IExtendedExecutionForegroundSession<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IExtendedExecutionForegroundSession<D>::Description(hstring_ref value) const
-{
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->put_Description(get(value)));
-}
-
-template <typename D> event_token impl_IExtendedExecutionForegroundSession<D>::Revoked(const Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->add_Revoked(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IExtendedExecutionForegroundSession> impl_IExtendedExecutionForegroundSession<D>::Revoked(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IExtendedExecutionForegroundSession>(this, &ABI::Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession::remove_Revoked, Revoked(handler));
-}
-
-template <typename D> void impl_IExtendedExecutionForegroundSession<D>::Revoked(event_token token) const
-{
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->remove_Revoked(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundResult> impl_IExtendedExecutionForegroundSession<D>::RequestExtensionAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundResult> operation;
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->abi_RequestExtensionAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason impl_IExtendedExecutionForegroundSession<D>::Reason() const
-{
-    Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason value {};
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->get_Reason(&value));
-    return value;
-}
-
-template <typename D> void impl_IExtendedExecutionForegroundSession<D>::Reason(Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundReason value) const
-{
-    check_hresult(static_cast<const IExtendedExecutionForegroundSession &>(static_cast<const D &>(*this))->put_Reason(value));
-}
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::ExtendedExecution::Foreground {
 
 inline ExtendedExecutionForegroundSession::ExtendedExecutionForegroundSession() :
     ExtendedExecutionForegroundSession(activate_instance<ExtendedExecutionForegroundSession>())
@@ -191,4 +164,20 @@ inline ExtendedExecutionForegroundSession::ExtendedExecutionForegroundSession() 
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundRevokedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundRevokedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::IExtendedExecutionForegroundSession> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundRevokedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundSession> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::ExtendedExecution::Foreground::ExtendedExecutionForegroundSession> {};
+
 }
+
+WINRT_WARNING_POP

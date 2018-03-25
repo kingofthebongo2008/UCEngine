@@ -1,54 +1,346 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.ApplicationModel.Resources.Core.3.h"
-#include "Windows.ApplicationModel.Resources.h"
-#include "Windows.Foundation.Collections.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Foundation.Collections.2.h"
+#include "winrt/impl/Windows.ApplicationModel.Resources.Core.2.h"
+#include "winrt/Windows.ApplicationModel.Resources.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::Uri() const noexcept
+{
+    Windows::Foundation::Uri uri{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->get_Uri(put_abi(uri)));
+    return uri;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::Candidates() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->get_Candidates(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::Resolve() const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceCandidate result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->Resolve(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::Resolve(Windows::ApplicationModel::Resources::Core::ResourceContext const& resourceContext) const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceCandidate result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->ResolveForContext(get_abi(resourceContext), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::ResolveAll() const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->ResolveAll(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> consume_Windows_ApplicationModel_Resources_Core_INamedResource<D>::ResolveAll(Windows::ApplicationModel::Resources::Core::ResourceContext const& resourceContext) const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> instances{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::INamedResource)->ResolveAllForContext(get_abi(resourceContext), put_abi(instances)));
+    return instances;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier> consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::Qualifiers() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->get_Qualifiers(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::IsMatch() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->get_IsMatch(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::IsMatchAsDefault() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->get_IsMatchAsDefault(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::IsDefault() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->get_IsDefault(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::ValueAsString() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->get_ValueAsString(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::GetValueAsFileAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->GetValueAsFileAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate<D>::GetQualifierValue(param::hstring const& qualifierName) const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate)->GetQualifierValue(get_abi(qualifierName), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> consume_Windows_ApplicationModel_Resources_Core_IResourceCandidate2<D>::GetValueAsStreamAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceCandidate2)->GetValueAsStreamAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::Collections::IObservableMap<hstring, hstring> consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::QualifierValues() const noexcept
+{
+    Windows::Foundation::Collections::IObservableMap<hstring, hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->get_QualifierValues(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::Reset() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->Reset());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::Reset(param::iterable<hstring> const& qualifierNames) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->ResetQualifierValues(get_abi(qualifierNames)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::OverrideToMatch(param::iterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> const& result) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->OverrideToMatch(get_abi(result)));
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::Clone() const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceContext clone{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->Clone(put_abi(clone)));
+    return clone;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<hstring> consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::Languages() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->get_Languages(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContext<D>::Languages(param::async_vector_view<hstring> const& languages) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContext)->put_Languages(get_abi(languages)));
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics<D>::CreateMatchingContext(param::iterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> const& result) const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceContext value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics)->CreateMatchingContext(get_abi(result), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics2<D>::GetForCurrentView() const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceContext value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics2)->GetForCurrentView(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics2<D>::SetGlobalQualifierValue(param::hstring const& key, param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics2)->SetGlobalQualifierValue(get_abi(key), get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics2<D>::ResetGlobalQualifierValues() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics2)->ResetGlobalQualifierValues());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics2<D>::ResetGlobalQualifierValues(param::iterable<hstring> const& qualifierNames) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics2)->ResetGlobalQualifierValuesForSpecifiedQualifiers(get_abi(qualifierNames)));
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics2<D>::GetForViewIndependentUse() const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceContext loader{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics2)->GetForViewIndependentUse(put_abi(loader)));
+    return loader;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceContextStatics3<D>::SetGlobalQualifierValue(param::hstring const& key, param::hstring const& value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence const& persistence) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceContextStatics3)->SetGlobalQualifierValueWithPersistence(get_abi(key), get_abi(value), get_abi(persistence)));
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceMap consume_Windows_ApplicationModel_Resources_Core_IResourceManager<D>::MainResourceMap() const noexcept
+{
+    Windows::ApplicationModel::Resources::Core::ResourceMap value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager)->get_MainResourceMap(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> consume_Windows_ApplicationModel_Resources_Core_IResourceManager<D>::AllResourceMaps() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> maps{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager)->get_AllResourceMaps(put_abi(maps)));
+    return maps;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext consume_Windows_ApplicationModel_Resources_Core_IResourceManager<D>::DefaultContext() const noexcept
+{
+    Windows::ApplicationModel::Resources::Core::ResourceContext value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager)->get_DefaultContext(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceManager<D>::LoadPriFiles(param::iterable<Windows::Storage::IStorageFile> const& files) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager)->LoadPriFiles(get_abi(files)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Resources_Core_IResourceManager<D>::UnloadPriFiles(param::iterable<Windows::Storage::IStorageFile> const& files) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager)->UnloadPriFiles(get_abi(files)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource> consume_Windows_ApplicationModel_Resources_Core_IResourceManager2<D>::GetAllNamedResourcesForPackage(param::hstring const& packageName, Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo const& resourceLayoutInfo) const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource> table{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager2)->GetAllNamedResourcesForPackage(get_abi(packageName), get_abi(resourceLayoutInfo), put_abi(table)));
+    return table;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap> consume_Windows_ApplicationModel_Resources_Core_IResourceManager2<D>::GetAllSubtreesForPackage(param::hstring const& packageName, Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo const& resourceLayoutInfo) const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap> table{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManager2)->GetAllSubtreesForPackage(get_abi(packageName), get_abi(resourceLayoutInfo), put_abi(table)));
+    return table;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceManager consume_Windows_ApplicationModel_Resources_Core_IResourceManagerStatics<D>::Current() const noexcept
+{
+    Windows::ApplicationModel::Resources::Core::ResourceManager value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManagerStatics)->get_Current(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceManagerStatics<D>::IsResourceReference(param::hstring const& resourceReference) const
+{
+    bool isReference{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceManagerStatics)->IsResourceReference(get_abi(resourceReference), &isReference));
+    return isReference;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Resources_Core_IResourceMap<D>::Uri() const noexcept
+{
+    Windows::Foundation::Uri uri{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceMap)->get_Uri(put_abi(uri)));
+    return uri;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate consume_Windows_ApplicationModel_Resources_Core_IResourceMap<D>::GetValue(param::hstring const& resource) const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceCandidate value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceMap)->GetValue(get_abi(resource), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate consume_Windows_ApplicationModel_Resources_Core_IResourceMap<D>::GetValue(param::hstring const& resource, Windows::ApplicationModel::Resources::Core::ResourceContext const& context) const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceCandidate value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceMap)->GetValueForContext(get_abi(resource), get_abi(context), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Resources::Core::ResourceMap consume_Windows_ApplicationModel_Resources_Core_IResourceMap<D>::GetSubtree(param::hstring const& reference) const
+{
+    Windows::ApplicationModel::Resources::Core::ResourceMap map{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceMap)->GetSubtree(get_abi(reference), put_abi(map)));
+    return map;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Resources_Core_IResourceQualifier<D>::QualifierName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceQualifier)->get_QualifierName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Resources_Core_IResourceQualifier<D>::QualifierValue() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceQualifier)->get_QualifierValue(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceQualifier<D>::IsDefault() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceQualifier)->get_IsDefault(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Resources_Core_IResourceQualifier<D>::IsMatch() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceQualifier)->get_IsMatch(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_ApplicationModel_Resources_Core_IResourceQualifier<D>::Score() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Resources::Core::IResourceQualifier)->get_Score(&value));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::INamedResource> : produce_base<D, Windows::ApplicationModel::Resources::Core::INamedResource>
 {
-    HRESULT __stdcall get_Uri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> uri) noexcept override
+    HRESULT __stdcall get_Uri(::IUnknown** uri) noexcept final
     {
-        try
-        {
-            *uri = detach(this->shim().Uri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *uri = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *uri = detach_abi(this->shim().Uri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Candidates(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate>> value) noexcept override
+    HRESULT __stdcall get_Candidates(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Candidates());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Candidates());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Resolve(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceCandidate> result) noexcept override
+    HRESULT __stdcall Resolve(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Resolve());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().Resolve());
             return S_OK;
         }
         catch (...)
@@ -58,11 +350,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::INamedResource> : 
         }
     }
 
-    HRESULT __stdcall abi_ResolveForContext(abi_arg_in<Windows::ApplicationModel::Resources::Core::IResourceContext> resourceContext, abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceCandidate> result) noexcept override
+    HRESULT __stdcall ResolveForContext(::IUnknown* resourceContext, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Resolve(*reinterpret_cast<const Windows::ApplicationModel::Resources::Core::ResourceContext *>(&resourceContext)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().Resolve(*reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceContext const*>(&resourceContext)));
             return S_OK;
         }
         catch (...)
@@ -72,11 +365,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::INamedResource> : 
         }
     }
 
-    HRESULT __stdcall abi_ResolveAll(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate>> result) noexcept override
+    HRESULT __stdcall ResolveAll(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ResolveAll());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ResolveAll());
             return S_OK;
         }
         catch (...)
@@ -86,11 +380,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::INamedResource> : 
         }
     }
 
-    HRESULT __stdcall abi_ResolveAllForContext(abi_arg_in<Windows::ApplicationModel::Resources::Core::IResourceContext> resourceContext, abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate>> instances) noexcept override
+    HRESULT __stdcall ResolveAllForContext(::IUnknown* resourceContext, ::IUnknown** instances) noexcept final
     {
         try
         {
-            *instances = detach(this->shim().ResolveAll(*reinterpret_cast<const Windows::ApplicationModel::Resources::Core::ResourceContext *>(&resourceContext)));
+            typename D::abi_guard guard(this->shim());
+            *instances = detach_abi(this->shim().ResolveAll(*reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceContext const*>(&resourceContext)));
             return S_OK;
         }
         catch (...)
@@ -104,78 +399,47 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::INamedResource> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate>
 {
-    HRESULT __stdcall get_Qualifiers(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier>> value) noexcept override
+    HRESULT __stdcall get_Qualifiers(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Qualifiers());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Qualifiers());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMatch(bool * value) noexcept override
+    HRESULT __stdcall get_IsMatch(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMatch());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMatch());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMatchAsDefault(bool * value) noexcept override
+    HRESULT __stdcall get_IsMatchAsDefault(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMatchAsDefault());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMatchAsDefault());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsDefault(bool * value) noexcept override
+    HRESULT __stdcall get_IsDefault(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsDefault());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsDefault());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ValueAsString(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_ValueAsString(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ValueAsString());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ValueAsString());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetValueAsFileAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile>> operation) noexcept override
+    HRESULT __stdcall GetValueAsFileAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetValueAsFileAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetValueAsFileAsync());
             return S_OK;
         }
         catch (...)
@@ -185,11 +449,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate
         }
     }
 
-    HRESULT __stdcall abi_GetQualifierValue(abi_arg_in<hstring> qualifierName, abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetQualifierValue(HSTRING qualifierName, HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetQualifierValue(*reinterpret_cast<const hstring *>(&qualifierName)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetQualifierValue(*reinterpret_cast<hstring const*>(&qualifierName)));
             return S_OK;
         }
         catch (...)
@@ -203,11 +468,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate2> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate2>
 {
-    HRESULT __stdcall abi_GetValueAsStreamAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream>> operation) noexcept override
+    HRESULT __stdcall GetValueAsStreamAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetValueAsStreamAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetValueAsStreamAsync());
             return S_OK;
         }
         catch (...)
@@ -221,24 +487,18 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceCandidate
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContext> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceContext>
 {
-    HRESULT __stdcall get_QualifierValues(abi_arg_out<Windows::Foundation::Collections::IObservableMap<hstring, hstring>> value) noexcept override
+    HRESULT __stdcall get_QualifierValues(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().QualifierValues());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().QualifierValues());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Reset() noexcept override
+    HRESULT __stdcall Reset() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Reset();
             return S_OK;
         }
@@ -248,11 +508,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContext> 
         }
     }
 
-    HRESULT __stdcall abi_ResetQualifierValues(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> qualifierNames) noexcept override
+    HRESULT __stdcall ResetQualifierValues(::IUnknown* qualifierNames) noexcept final
     {
         try
         {
-            this->shim().Reset(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&qualifierNames));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Reset(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&qualifierNames));
             return S_OK;
         }
         catch (...)
@@ -261,11 +522,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContext> 
         }
     }
 
-    HRESULT __stdcall abi_OverrideToMatch(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier>> result) noexcept override
+    HRESULT __stdcall OverrideToMatch(::IUnknown* result) noexcept final
     {
         try
         {
-            this->shim().OverrideToMatch(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> *>(&result));
+            typename D::abi_guard guard(this->shim());
+            this->shim().OverrideToMatch(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> const*>(&result));
             return S_OK;
         }
         catch (...)
@@ -274,11 +536,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContext> 
         }
     }
 
-    HRESULT __stdcall abi_Clone(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceContext> clone) noexcept override
+    HRESULT __stdcall Clone(::IUnknown** clone) noexcept final
     {
         try
         {
-            *clone = detach(this->shim().Clone());
+            typename D::abi_guard guard(this->shim());
+            *clone = detach_abi(this->shim().Clone());
             return S_OK;
         }
         catch (...)
@@ -288,42 +551,30 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContext> 
         }
     }
 
-    HRESULT __stdcall get_Languages(abi_arg_out<Windows::Foundation::Collections::IVectorView<hstring>> value) noexcept override
+    HRESULT __stdcall get_Languages(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Languages());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Languages());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Languages(abi_arg_in<Windows::Foundation::Collections::IVectorView<hstring>> languages) noexcept override
+    HRESULT __stdcall put_Languages(::IUnknown* languages) noexcept final
     {
-        try
-        {
-            this->shim().Languages(*reinterpret_cast<const Windows::Foundation::Collections::IVectorView<hstring> *>(&languages));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Languages(*reinterpret_cast<Windows::Foundation::Collections::IVectorView<hstring> const*>(&languages));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics>
 {
-    HRESULT __stdcall abi_CreateMatchingContext(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier>> result, abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceContext> value) noexcept override
+    HRESULT __stdcall CreateMatchingContext(::IUnknown* result, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMatchingContext(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> *>(&result)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMatchingContext(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> const*>(&result)));
             return S_OK;
         }
         catch (...)
@@ -337,11 +588,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceContext> value) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -351,11 +603,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
         }
     }
 
-    HRESULT __stdcall abi_SetGlobalQualifierValue(abi_arg_in<hstring> key, abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall SetGlobalQualifierValue(HSTRING key, HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetGlobalQualifierValue(*reinterpret_cast<const hstring *>(&key), *reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetGlobalQualifierValue(*reinterpret_cast<hstring const*>(&key), *reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -364,10 +617,11 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
         }
     }
 
-    HRESULT __stdcall abi_ResetGlobalQualifierValues() noexcept override
+    HRESULT __stdcall ResetGlobalQualifierValues() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ResetGlobalQualifierValues();
             return S_OK;
         }
@@ -377,11 +631,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
         }
     }
 
-    HRESULT __stdcall abi_ResetGlobalQualifierValuesForSpecifiedQualifiers(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> qualifierNames) noexcept override
+    HRESULT __stdcall ResetGlobalQualifierValuesForSpecifiedQualifiers(::IUnknown* qualifierNames) noexcept final
     {
         try
         {
-            this->shim().ResetGlobalQualifierValues(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&qualifierNames));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ResetGlobalQualifierValues(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&qualifierNames));
             return S_OK;
         }
         catch (...)
@@ -390,11 +645,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
         }
     }
 
-    HRESULT __stdcall abi_GetForViewIndependentUse(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceContext> loader) noexcept override
+    HRESULT __stdcall GetForViewIndependentUse(::IUnknown** loader) noexcept final
     {
         try
         {
-            *loader = detach(this->shim().GetForViewIndependentUse());
+            typename D::abi_guard guard(this->shim());
+            *loader = detach_abi(this->shim().GetForViewIndependentUse());
             return S_OK;
         }
         catch (...)
@@ -408,11 +664,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics3> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceContextStatics3>
 {
-    HRESULT __stdcall abi_SetGlobalQualifierValueWithPersistence(abi_arg_in<hstring> key, abi_arg_in<hstring> value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence persistence) noexcept override
+    HRESULT __stdcall SetGlobalQualifierValueWithPersistence(HSTRING key, HSTRING value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence persistence) noexcept final
     {
         try
         {
-            this->shim().SetGlobalQualifierValue(*reinterpret_cast<const hstring *>(&key), *reinterpret_cast<const hstring *>(&value), persistence);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetGlobalQualifierValue(*reinterpret_cast<hstring const*>(&key), *reinterpret_cast<hstring const*>(&value), *reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence const*>(&persistence));
             return S_OK;
         }
         catch (...)
@@ -425,53 +682,33 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceContextSt
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceManager>
 {
-    HRESULT __stdcall get_MainResourceMap(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceMap> value) noexcept override
+    HRESULT __stdcall get_MainResourceMap(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MainResourceMap());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MainResourceMap());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AllResourceMaps(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap>> maps) noexcept override
+    HRESULT __stdcall get_AllResourceMaps(::IUnknown** maps) noexcept final
     {
-        try
-        {
-            *maps = detach(this->shim().AllResourceMaps());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *maps = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *maps = detach_abi(this->shim().AllResourceMaps());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DefaultContext(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceContext> value) noexcept override
+    HRESULT __stdcall get_DefaultContext(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultContext());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultContext());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_LoadPriFiles(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile>> files) noexcept override
+    HRESULT __stdcall LoadPriFiles(::IUnknown* files) noexcept final
     {
         try
         {
-            this->shim().LoadPriFiles(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> *>(&files));
+            typename D::abi_guard guard(this->shim());
+            this->shim().LoadPriFiles(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> const*>(&files));
             return S_OK;
         }
         catch (...)
@@ -480,11 +717,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager> 
         }
     }
 
-    HRESULT __stdcall abi_UnloadPriFiles(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile>> files) noexcept override
+    HRESULT __stdcall UnloadPriFiles(::IUnknown* files) noexcept final
     {
         try
         {
-            this->shim().UnloadPriFiles(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> *>(&files));
+            typename D::abi_guard guard(this->shim());
+            this->shim().UnloadPriFiles(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> const*>(&files));
             return S_OK;
         }
         catch (...)
@@ -497,11 +735,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager> 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager2> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceManager2>
 {
-    HRESULT __stdcall abi_GetAllNamedResourcesForPackage(abi_arg_in<hstring> packageName, abi_arg_in<Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo> resourceLayoutInfo, abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource>> table) noexcept override
+    HRESULT __stdcall GetAllNamedResourcesForPackage(HSTRING packageName, struct_of<20> resourceLayoutInfo, ::IUnknown** table) noexcept final
     {
         try
         {
-            *table = detach(this->shim().GetAllNamedResourcesForPackage(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo *>(&resourceLayoutInfo)));
+            typename D::abi_guard guard(this->shim());
+            *table = detach_abi(this->shim().GetAllNamedResourcesForPackage(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo const*>(&resourceLayoutInfo)));
             return S_OK;
         }
         catch (...)
@@ -511,11 +750,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager2>
         }
     }
 
-    HRESULT __stdcall abi_GetAllSubtreesForPackage(abi_arg_in<hstring> packageName, abi_arg_in<Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo> resourceLayoutInfo, abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap>> table) noexcept override
+    HRESULT __stdcall GetAllSubtreesForPackage(HSTRING packageName, struct_of<20> resourceLayoutInfo, ::IUnknown** table) noexcept final
     {
         try
         {
-            *table = detach(this->shim().GetAllSubtreesForPackage(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo *>(&resourceLayoutInfo)));
+            typename D::abi_guard guard(this->shim());
+            *table = detach_abi(this->shim().GetAllSubtreesForPackage(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo const*>(&resourceLayoutInfo)));
             return S_OK;
         }
         catch (...)
@@ -529,25 +769,19 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManager2>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManagerStatics> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceManagerStatics>
 {
-    HRESULT __stdcall get_Current(abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceManager> value) noexcept override
+    HRESULT __stdcall get_Current(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Current());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Current());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsResourceReference(abi_arg_in<hstring> resourceReference, bool * isReference) noexcept override
+    HRESULT __stdcall IsResourceReference(HSTRING resourceReference, bool* isReference) noexcept final
     {
         try
         {
-            *isReference = detach(this->shim().IsResourceReference(*reinterpret_cast<const hstring *>(&resourceReference)));
+            typename D::abi_guard guard(this->shim());
+            *isReference = detach_abi(this->shim().IsResourceReference(*reinterpret_cast<hstring const*>(&resourceReference)));
             return S_OK;
         }
         catch (...)
@@ -560,25 +794,19 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceManagerSt
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceMap> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceMap>
 {
-    HRESULT __stdcall get_Uri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> uri) noexcept override
+    HRESULT __stdcall get_Uri(::IUnknown** uri) noexcept final
     {
-        try
-        {
-            *uri = detach(this->shim().Uri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *uri = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *uri = detach_abi(this->shim().Uri());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetValue(abi_arg_in<hstring> resource, abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceCandidate> value) noexcept override
+    HRESULT __stdcall GetValue(HSTRING resource, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetValue(*reinterpret_cast<const hstring *>(&resource)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetValue(*reinterpret_cast<hstring const*>(&resource)));
             return S_OK;
         }
         catch (...)
@@ -588,11 +816,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceMap> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetValueForContext(abi_arg_in<hstring> resource, abi_arg_in<Windows::ApplicationModel::Resources::Core::IResourceContext> context, abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceCandidate> value) noexcept override
+    HRESULT __stdcall GetValueForContext(HSTRING resource, ::IUnknown* context, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetValue(*reinterpret_cast<const hstring *>(&resource), *reinterpret_cast<const Windows::ApplicationModel::Resources::Core::ResourceContext *>(&context)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetValue(*reinterpret_cast<hstring const*>(&resource), *reinterpret_cast<Windows::ApplicationModel::Resources::Core::ResourceContext const*>(&context)));
             return S_OK;
         }
         catch (...)
@@ -602,11 +831,12 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceMap> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetSubtree(abi_arg_in<hstring> reference, abi_arg_out<Windows::ApplicationModel::Resources::Core::IResourceMap> map) noexcept override
+    HRESULT __stdcall GetSubtree(HSTRING reference, ::IUnknown** map) noexcept final
     {
         try
         {
-            *map = detach(this->shim().GetSubtree(*reinterpret_cast<const hstring *>(&reference)));
+            typename D::abi_guard guard(this->shim());
+            *map = detach_abi(this->shim().GetSubtree(*reinterpret_cast<hstring const*>(&reference)));
             return S_OK;
         }
         catch (...)
@@ -620,429 +850,177 @@ struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceMap> : pr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Resources::Core::IResourceQualifier> : produce_base<D, Windows::ApplicationModel::Resources::Core::IResourceQualifier>
 {
-    HRESULT __stdcall get_QualifierName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_QualifierName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().QualifierName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().QualifierName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_QualifierValue(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_QualifierValue(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().QualifierValue());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().QualifierValue());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsDefault(bool * value) noexcept override
+    HRESULT __stdcall get_IsDefault(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsDefault());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsDefault());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMatch(bool * value) noexcept override
+    HRESULT __stdcall get_IsMatch(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMatch());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMatch());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Score(double * value) noexcept override
+    HRESULT __stdcall get_Score(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Score());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Score());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::ApplicationModel::Resources::Core {
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceMap impl_IResourceManager<D>::MainResourceMap() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceMap value { nullptr };
-    check_hresult(static_cast<const IResourceManager &>(static_cast<const D &>(*this))->get_MainResourceMap(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> impl_IResourceManager<D>::AllResourceMaps() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> maps;
-    check_hresult(static_cast<const IResourceManager &>(static_cast<const D &>(*this))->get_AllResourceMaps(put(maps)));
-    return maps;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext impl_IResourceManager<D>::DefaultContext() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext value { nullptr };
-    check_hresult(static_cast<const IResourceManager &>(static_cast<const D &>(*this))->get_DefaultContext(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IResourceManager<D>::LoadPriFiles(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> & files) const
-{
-    check_hresult(static_cast<const IResourceManager &>(static_cast<const D &>(*this))->abi_LoadPriFiles(get(files)));
-}
-
-template <typename D> void impl_IResourceManager<D>::UnloadPriFiles(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> & files) const
-{
-    check_hresult(static_cast<const IResourceManager &>(static_cast<const D &>(*this))->abi_UnloadPriFiles(get(files)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource> impl_IResourceManager2<D>::GetAllNamedResourcesForPackage(hstring_ref packageName, const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo & resourceLayoutInfo) const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource> table;
-    check_hresult(static_cast<const IResourceManager2 &>(static_cast<const D &>(*this))->abi_GetAllNamedResourcesForPackage(get(packageName), get(resourceLayoutInfo), put(table)));
-    return table;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap> impl_IResourceManager2<D>::GetAllSubtreesForPackage(hstring_ref packageName, const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo & resourceLayoutInfo) const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap> table;
-    check_hresult(static_cast<const IResourceManager2 &>(static_cast<const D &>(*this))->abi_GetAllSubtreesForPackage(get(packageName), get(resourceLayoutInfo), put(table)));
-    return table;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceManager impl_IResourceManagerStatics<D>::Current() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceManager value { nullptr };
-    check_hresult(static_cast<const IResourceManagerStatics &>(static_cast<const D &>(*this))->get_Current(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IResourceManagerStatics<D>::IsResourceReference(hstring_ref resourceReference) const
-{
-    bool isReference {};
-    check_hresult(static_cast<const IResourceManagerStatics &>(static_cast<const D &>(*this))->abi_IsResourceReference(get(resourceReference), &isReference));
-    return isReference;
-}
-
-template <typename D> hstring impl_IResourceQualifier<D>::QualifierName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IResourceQualifier &>(static_cast<const D &>(*this))->get_QualifierName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IResourceQualifier<D>::QualifierValue() const
-{
-    hstring value;
-    check_hresult(static_cast<const IResourceQualifier &>(static_cast<const D &>(*this))->get_QualifierValue(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IResourceQualifier<D>::IsDefault() const
-{
-    bool value {};
-    check_hresult(static_cast<const IResourceQualifier &>(static_cast<const D &>(*this))->get_IsDefault(&value));
-    return value;
-}
-
-template <typename D> bool impl_IResourceQualifier<D>::IsMatch() const
-{
-    bool value {};
-    check_hresult(static_cast<const IResourceQualifier &>(static_cast<const D &>(*this))->get_IsMatch(&value));
-    return value;
-}
-
-template <typename D> double impl_IResourceQualifier<D>::Score() const
-{
-    double value {};
-    check_hresult(static_cast<const IResourceQualifier &>(static_cast<const D &>(*this))->get_Score(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IObservableMap<hstring, hstring> impl_IResourceContext<D>::QualifierValues() const
-{
-    Windows::Foundation::Collections::IObservableMap<hstring, hstring> value;
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->get_QualifierValues(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IResourceContext<D>::Reset() const
-{
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->abi_Reset());
-}
-
-template <typename D> void impl_IResourceContext<D>::Reset(const Windows::Foundation::Collections::IIterable<hstring> & qualifierNames) const
-{
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->abi_ResetQualifierValues(get(qualifierNames)));
-}
-
-template <typename D> void impl_IResourceContext<D>::OverrideToMatch(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> & result) const
-{
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->abi_OverrideToMatch(get(result)));
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext impl_IResourceContext<D>::Clone() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext clone { nullptr };
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->abi_Clone(put(clone)));
-    return clone;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<hstring> impl_IResourceContext<D>::Languages() const
-{
-    Windows::Foundation::Collections::IVectorView<hstring> value;
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->get_Languages(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IResourceContext<D>::Languages(const Windows::Foundation::Collections::IVectorView<hstring> & languages) const
-{
-    check_hresult(static_cast<const IResourceContext &>(static_cast<const D &>(*this))->put_Languages(get(languages)));
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext impl_IResourceContextStatics<D>::CreateMatchingContext(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> & result) const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext value { nullptr };
-    check_hresult(static_cast<const IResourceContextStatics &>(static_cast<const D &>(*this))->abi_CreateMatchingContext(get(result), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext impl_IResourceContextStatics2<D>::GetForCurrentView() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext value { nullptr };
-    check_hresult(static_cast<const IResourceContextStatics2 &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IResourceContextStatics2<D>::SetGlobalQualifierValue(hstring_ref key, hstring_ref value) const
-{
-    check_hresult(static_cast<const IResourceContextStatics2 &>(static_cast<const D &>(*this))->abi_SetGlobalQualifierValue(get(key), get(value)));
-}
-
-template <typename D> void impl_IResourceContextStatics2<D>::ResetGlobalQualifierValues() const
-{
-    check_hresult(static_cast<const IResourceContextStatics2 &>(static_cast<const D &>(*this))->abi_ResetGlobalQualifierValues());
-}
-
-template <typename D> void impl_IResourceContextStatics2<D>::ResetGlobalQualifierValues(const Windows::Foundation::Collections::IIterable<hstring> & qualifierNames) const
-{
-    check_hresult(static_cast<const IResourceContextStatics2 &>(static_cast<const D &>(*this))->abi_ResetGlobalQualifierValuesForSpecifiedQualifiers(get(qualifierNames)));
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceContext impl_IResourceContextStatics2<D>::GetForViewIndependentUse() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext loader { nullptr };
-    check_hresult(static_cast<const IResourceContextStatics2 &>(static_cast<const D &>(*this))->abi_GetForViewIndependentUse(put(loader)));
-    return loader;
-}
-
-template <typename D> void impl_IResourceContextStatics3<D>::SetGlobalQualifierValue(hstring_ref key, hstring_ref value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence persistence) const
-{
-    check_hresult(static_cast<const IResourceContextStatics3 &>(static_cast<const D &>(*this))->abi_SetGlobalQualifierValueWithPersistence(get(key), get(value), persistence));
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier> impl_IResourceCandidate<D>::Qualifiers() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier> value;
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->get_Qualifiers(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IResourceCandidate<D>::IsMatch() const
-{
-    bool value {};
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->get_IsMatch(&value));
-    return value;
-}
-
-template <typename D> bool impl_IResourceCandidate<D>::IsMatchAsDefault() const
-{
-    bool value {};
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->get_IsMatchAsDefault(&value));
-    return value;
-}
-
-template <typename D> bool impl_IResourceCandidate<D>::IsDefault() const
-{
-    bool value {};
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->get_IsDefault(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IResourceCandidate<D>::ValueAsString() const
-{
-    hstring result;
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->get_ValueAsString(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> impl_IResourceCandidate<D>::GetValueAsFileAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> operation;
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->abi_GetValueAsFileAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_IResourceCandidate<D>::GetQualifierValue(hstring_ref qualifierName) const
-{
-    hstring value;
-    check_hresult(static_cast<const IResourceCandidate &>(static_cast<const D &>(*this))->abi_GetQualifierValue(get(qualifierName), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> impl_IResourceCandidate2<D>::GetValueAsStreamAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> operation;
-    check_hresult(static_cast<const IResourceCandidate2 &>(static_cast<const D &>(*this))->abi_GetValueAsStreamAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::Uri impl_INamedResource<D>::Uri() const
-{
-    Windows::Foundation::Uri uri { nullptr };
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->get_Uri(put(uri)));
-    return uri;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> impl_INamedResource<D>::Candidates() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> value;
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->get_Candidates(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate impl_INamedResource<D>::Resolve() const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate result { nullptr };
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->abi_Resolve(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate impl_INamedResource<D>::Resolve(const Windows::ApplicationModel::Resources::Core::ResourceContext & resourceContext) const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate result { nullptr };
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->abi_ResolveForContext(get(resourceContext), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> impl_INamedResource<D>::ResolveAll() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> result;
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->abi_ResolveAll(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> impl_INamedResource<D>::ResolveAll(const Windows::ApplicationModel::Resources::Core::ResourceContext & resourceContext) const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> instances;
-    check_hresult(static_cast<const INamedResource &>(static_cast<const D &>(*this))->abi_ResolveAllForContext(get(resourceContext), put(instances)));
-    return instances;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IResourceMap<D>::Uri() const
-{
-    Windows::Foundation::Uri uri { nullptr };
-    check_hresult(static_cast<const IResourceMap &>(static_cast<const D &>(*this))->get_Uri(put(uri)));
-    return uri;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate impl_IResourceMap<D>::GetValue(hstring_ref resource) const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate value { nullptr };
-    check_hresult(static_cast<const IResourceMap &>(static_cast<const D &>(*this))->abi_GetValue(get(resource), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceCandidate impl_IResourceMap<D>::GetValue(hstring_ref resource, const Windows::ApplicationModel::Resources::Core::ResourceContext & context) const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate value { nullptr };
-    check_hresult(static_cast<const IResourceMap &>(static_cast<const D &>(*this))->abi_GetValueForContext(get(resource), get(context), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Resources::Core::ResourceMap impl_IResourceMap<D>::GetSubtree(hstring_ref reference) const
-{
-    Windows::ApplicationModel::Resources::Core::ResourceMap map { nullptr };
-    check_hresult(static_cast<const IResourceMap &>(static_cast<const D &>(*this))->abi_GetSubtree(get(reference), put(map)));
-    return map;
-}
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::Resources::Core {
 
 inline ResourceContext::ResourceContext() :
     ResourceContext(activate_instance<ResourceContext>())
 {}
 
-inline Windows::ApplicationModel::Resources::Core::ResourceContext ResourceContext::CreateMatchingContext(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> & result)
+inline Windows::ApplicationModel::Resources::Core::ResourceContext ResourceContext::CreateMatchingContext(param::iterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> const& result)
 {
-    return get_activation_factory<ResourceContext, IResourceContextStatics>().CreateMatchingContext(result);
+    return get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics>().CreateMatchingContext(result);
 }
 
 inline Windows::ApplicationModel::Resources::Core::ResourceContext ResourceContext::GetForCurrentView()
 {
-    return get_activation_factory<ResourceContext, IResourceContextStatics2>().GetForCurrentView();
+    return get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>().GetForCurrentView();
 }
 
-inline void ResourceContext::SetGlobalQualifierValue(hstring_ref key, hstring_ref value)
+inline void ResourceContext::SetGlobalQualifierValue(param::hstring const& key, param::hstring const& value)
 {
-    get_activation_factory<ResourceContext, IResourceContextStatics2>().SetGlobalQualifierValue(key, value);
+    get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>().SetGlobalQualifierValue(key, value);
 }
 
 inline void ResourceContext::ResetGlobalQualifierValues()
 {
-    get_activation_factory<ResourceContext, IResourceContextStatics2>().ResetGlobalQualifierValues();
+    get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>().ResetGlobalQualifierValues();
 }
 
-inline void ResourceContext::ResetGlobalQualifierValues(const Windows::Foundation::Collections::IIterable<hstring> & qualifierNames)
+inline void ResourceContext::ResetGlobalQualifierValues(param::iterable<hstring> const& qualifierNames)
 {
-    get_activation_factory<ResourceContext, IResourceContextStatics2>().ResetGlobalQualifierValues(qualifierNames);
+    get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>().ResetGlobalQualifierValues(qualifierNames);
 }
 
 inline Windows::ApplicationModel::Resources::Core::ResourceContext ResourceContext::GetForViewIndependentUse()
 {
-    return get_activation_factory<ResourceContext, IResourceContextStatics2>().GetForViewIndependentUse();
+    return get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics2>().GetForViewIndependentUse();
 }
 
-inline void ResourceContext::SetGlobalQualifierValue(hstring_ref key, hstring_ref value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence persistence)
+inline void ResourceContext::SetGlobalQualifierValue(param::hstring const& key, param::hstring const& value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence const& persistence)
 {
-    get_activation_factory<ResourceContext, IResourceContextStatics3>().SetGlobalQualifierValue(key, value, persistence);
+    get_activation_factory<ResourceContext, Windows::ApplicationModel::Resources::Core::IResourceContextStatics3>().SetGlobalQualifierValue(key, value, persistence);
 }
 
 inline Windows::ApplicationModel::Resources::Core::ResourceManager ResourceManager::Current()
 {
-    return get_activation_factory<ResourceManager, IResourceManagerStatics>().Current();
+    return get_activation_factory<ResourceManager, Windows::ApplicationModel::Resources::Core::IResourceManagerStatics>().Current();
 }
 
-inline bool ResourceManager::IsResourceReference(hstring_ref resourceReference)
+inline bool ResourceManager::IsResourceReference(param::hstring const& resourceReference)
 {
-    return get_activation_factory<ResourceManager, IResourceManagerStatics>().IsResourceReference(resourceReference);
+    return get_activation_factory<ResourceManager, Windows::ApplicationModel::Resources::Core::IResourceManagerStatics>().IsResourceReference(resourceReference);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::INamedResource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::INamedResource> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceCandidate> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceCandidate> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceCandidate2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceCandidate2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceContext> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceContext> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceContextStatics3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceManager2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceManager2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceMap> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceMap> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::IResourceQualifier> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::IResourceQualifier> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::NamedResource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::NamedResource> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceCandidate> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceCandidate> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceCandidateVectorView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceCandidateVectorView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceContext> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceContext> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceContextLanguagesVectorView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceContextLanguagesVectorView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceMap> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceMap> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapIterator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapIterator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapMapView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapMapView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapMapViewIterator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceMapMapViewIterator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifier> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifier> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierMapView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierMapView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierObservableMap> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierObservableMap> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierVectorView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Resources::Core::ResourceQualifierVectorView> {};
+
 }
+
+WINRT_WARNING_POP

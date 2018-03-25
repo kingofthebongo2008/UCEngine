@@ -1,57 +1,415 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Devices.Enumeration.3.h"
-#include "internal/Windows.Devices.Midi.3.h"
-#include "Windows.Devices.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Enumeration.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Devices.Midi.2.h"
+#include "winrt/Windows.Devices.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiChannelPressureMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiChannelPressureMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiChannelPressureMessage<D>::Pressure() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiChannelPressureMessage)->get_Pressure(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiChannelPressureMessage consume_Windows_Devices_Midi_IMidiChannelPressureMessageFactory<D>::CreateMidiChannelPressureMessage(uint8_t channel, uint8_t pressure) const
+{
+    Windows::Devices::Midi::MidiChannelPressureMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiChannelPressureMessageFactory)->CreateMidiChannelPressureMessage(channel, pressure, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiControlChangeMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiControlChangeMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiControlChangeMessage<D>::Controller() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiControlChangeMessage)->get_Controller(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiControlChangeMessage<D>::ControlValue() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiControlChangeMessage)->get_ControlValue(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiControlChangeMessage consume_Windows_Devices_Midi_IMidiControlChangeMessageFactory<D>::CreateMidiControlChangeMessage(uint8_t channel, uint8_t controller, uint8_t controlValue) const
+{
+    Windows::Devices::Midi::MidiControlChangeMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiControlChangeMessageFactory)->CreateMidiControlChangeMessage(channel, controller, controlValue, put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Devices_Midi_IMidiInPort<D>::MessageReceived(Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiInPort)->add_MessageReceived(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Midi::IMidiInPort> consume_Windows_Devices_Midi_IMidiInPort<D>::MessageReceived(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Midi::IMidiInPort>(this, &abi_t<Windows::Devices::Midi::IMidiInPort>::remove_MessageReceived, MessageReceived(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Midi_IMidiInPort<D>::MessageReceived(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiInPort)->remove_MessageReceived(get_abi(token)));
+}
+
+template <typename D> hstring consume_Windows_Devices_Midi_IMidiInPort<D>::DeviceId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiInPort)->get_DeviceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> consume_Windows_Devices_Midi_IMidiInPortStatics<D>::FromIdAsync(param::hstring const& deviceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiInPortStatics)->FromIdAsync(get_abi(deviceId), put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Midi_IMidiInPortStatics<D>::GetDeviceSelector() const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiInPortStatics)->GetDeviceSelector(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::TimeSpan consume_Windows_Devices_Midi_IMidiMessage<D>::Timestamp() const noexcept
+{
+    Windows::Foundation::TimeSpan value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiMessage)->get_Timestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::IBuffer consume_Windows_Devices_Midi_IMidiMessage<D>::RawData() const noexcept
+{
+    Windows::Storage::Streams::IBuffer value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiMessage)->get_RawData(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiMessageType consume_Windows_Devices_Midi_IMidiMessage<D>::Type() const noexcept
+{
+    Windows::Devices::Midi::MidiMessageType value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiMessage)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::IMidiMessage consume_Windows_Devices_Midi_IMidiMessageReceivedEventArgs<D>::Message() const noexcept
+{
+    Windows::Devices::Midi::IMidiMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiMessageReceivedEventArgs)->get_Message(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOffMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOffMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOffMessage<D>::Note() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOffMessage)->get_Note(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOffMessage<D>::Velocity() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOffMessage)->get_Velocity(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiNoteOffMessage consume_Windows_Devices_Midi_IMidiNoteOffMessageFactory<D>::CreateMidiNoteOffMessage(uint8_t channel, uint8_t note, uint8_t velocity) const
+{
+    Windows::Devices::Midi::MidiNoteOffMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOffMessageFactory)->CreateMidiNoteOffMessage(channel, note, velocity, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOnMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOnMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOnMessage<D>::Note() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOnMessage)->get_Note(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiNoteOnMessage<D>::Velocity() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOnMessage)->get_Velocity(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiNoteOnMessage consume_Windows_Devices_Midi_IMidiNoteOnMessageFactory<D>::CreateMidiNoteOnMessage(uint8_t channel, uint8_t note, uint8_t velocity) const
+{
+    Windows::Devices::Midi::MidiNoteOnMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiNoteOnMessageFactory)->CreateMidiNoteOnMessage(channel, note, velocity, put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Midi_IMidiOutPort<D>::SendMessage(Windows::Devices::Midi::IMidiMessage const& midiMessage) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiOutPort)->SendMessage(get_abi(midiMessage)));
+}
+
+template <typename D> void consume_Windows_Devices_Midi_IMidiOutPort<D>::SendBuffer(Windows::Storage::Streams::IBuffer const& midiData) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiOutPort)->SendBuffer(get_abi(midiData)));
+}
+
+template <typename D> hstring consume_Windows_Devices_Midi_IMidiOutPort<D>::DeviceId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiOutPort)->get_DeviceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> consume_Windows_Devices_Midi_IMidiOutPortStatics<D>::FromIdAsync(param::hstring const& deviceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiOutPortStatics)->FromIdAsync(get_abi(deviceId), put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Midi_IMidiOutPortStatics<D>::GetDeviceSelector() const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiOutPortStatics)->GetDeviceSelector(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiPitchBendChangeMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiPitchBendChangeMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint16_t consume_Windows_Devices_Midi_IMidiPitchBendChangeMessage<D>::Bend() const noexcept
+{
+    uint16_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiPitchBendChangeMessage)->get_Bend(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiPitchBendChangeMessage consume_Windows_Devices_Midi_IMidiPitchBendChangeMessageFactory<D>::CreateMidiPitchBendChangeMessage(uint8_t channel, uint16_t bend) const
+{
+    Windows::Devices::Midi::MidiPitchBendChangeMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory)->CreateMidiPitchBendChangeMessage(channel, bend, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiPolyphonicKeyPressureMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiPolyphonicKeyPressureMessage<D>::Note() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage)->get_Note(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiPolyphonicKeyPressureMessage<D>::Pressure() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage)->get_Pressure(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage consume_Windows_Devices_Midi_IMidiPolyphonicKeyPressureMessageFactory<D>::CreateMidiPolyphonicKeyPressureMessage(uint8_t channel, uint8_t note, uint8_t pressure) const
+{
+    Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory)->CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiProgramChangeMessage<D>::Channel() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiProgramChangeMessage)->get_Channel(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiProgramChangeMessage<D>::Program() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiProgramChangeMessage)->get_Program(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiProgramChangeMessage consume_Windows_Devices_Midi_IMidiProgramChangeMessageFactory<D>::CreateMidiProgramChangeMessage(uint8_t channel, uint8_t program) const
+{
+    Windows::Devices::Midi::MidiProgramChangeMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiProgramChangeMessageFactory)->CreateMidiProgramChangeMessage(channel, program, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint16_t consume_Windows_Devices_Midi_IMidiSongPositionPointerMessage<D>::Beats() const noexcept
+{
+    uint16_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiSongPositionPointerMessage)->get_Beats(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiSongPositionPointerMessage consume_Windows_Devices_Midi_IMidiSongPositionPointerMessageFactory<D>::CreateMidiSongPositionPointerMessage(uint16_t beats) const
+{
+    Windows::Devices::Midi::MidiSongPositionPointerMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory)->CreateMidiSongPositionPointerMessage(beats, put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiSongSelectMessage<D>::Song() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiSongSelectMessage)->get_Song(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiSongSelectMessage consume_Windows_Devices_Midi_IMidiSongSelectMessageFactory<D>::CreateMidiSongSelectMessage(uint8_t song) const
+{
+    Windows::Devices::Midi::MidiSongSelectMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSongSelectMessageFactory)->CreateMidiSongSelectMessage(song, put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Enumeration::DeviceInformation consume_Windows_Devices_Midi_IMidiSynthesizer<D>::AudioDevice() const noexcept
+{
+    Windows::Devices::Enumeration::DeviceInformation value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizer)->get_AudioDevice(put_abi(value)));
+    return value;
+}
+
+template <typename D> double consume_Windows_Devices_Midi_IMidiSynthesizer<D>::Volume() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizer)->get_Volume(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Midi_IMidiSynthesizer<D>::Volume(double value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizer)->put_Volume(value));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> consume_Windows_Devices_Midi_IMidiSynthesizerStatics<D>::CreateAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizerStatics)->CreateAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> consume_Windows_Devices_Midi_IMidiSynthesizerStatics<D>::CreateAsync(Windows::Devices::Enumeration::DeviceInformation const& audioDevice) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizerStatics)->CreateFromAudioDeviceAsync(get_abi(audioDevice), put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Devices_Midi_IMidiSynthesizerStatics<D>::IsSynthesizer(Windows::Devices::Enumeration::DeviceInformation const& midiDevice) const
+{
+    bool value{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSynthesizerStatics)->IsSynthesizer(get_abi(midiDevice), &value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiSystemExclusiveMessage consume_Windows_Devices_Midi_IMidiSystemExclusiveMessageFactory<D>::CreateMidiSystemExclusiveMessage(Windows::Storage::Streams::IBuffer const& rawData) const
+{
+    Windows::Devices::Midi::MidiSystemExclusiveMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory)->CreateMidiSystemExclusiveMessage(get_abi(rawData), put_abi(value)));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiTimeCodeMessage<D>::FrameType() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiTimeCodeMessage)->get_FrameType(&value));
+    return value;
+}
+
+template <typename D> uint8_t consume_Windows_Devices_Midi_IMidiTimeCodeMessage<D>::Values() const noexcept
+{
+    uint8_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Midi::IMidiTimeCodeMessage)->get_Values(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Midi::MidiTimeCodeMessage consume_Windows_Devices_Midi_IMidiTimeCodeMessageFactory<D>::CreateMidiTimeCodeMessage(uint8_t frameType, uint8_t values) const
+{
+    Windows::Devices::Midi::MidiTimeCodeMessage value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Midi::IMidiTimeCodeMessageFactory)->CreateMidiTimeCodeMessage(frameType, values, put_abi(value)));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiChannelPressureMessage> : produce_base<D, Windows::Devices::Midi::IMidiChannelPressureMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Pressure(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Pressure(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Pressure());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Pressure());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiChannelPressureMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiChannelPressureMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiChannelPressureMessage(uint8_t channel, uint8_t pressure, abi_arg_out<Windows::Devices::Midi::IMidiChannelPressureMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiChannelPressureMessage(uint8_t channel, uint8_t pressure, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiChannelPressureMessage(channel, pressure));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiChannelPressureMessage(channel, pressure));
             return S_OK;
         }
         catch (...)
@@ -65,54 +423,37 @@ struct produce<D, Windows::Devices::Midi::IMidiChannelPressureMessageFactory> : 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiControlChangeMessage> : produce_base<D, Windows::Devices::Midi::IMidiControlChangeMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Controller(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Controller(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Controller());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Controller());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ControlValue(uint8_t * value) noexcept override
+    HRESULT __stdcall get_ControlValue(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ControlValue());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ControlValue());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiControlChangeMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiControlChangeMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiControlChangeMessage(uint8_t channel, uint8_t controller, uint8_t controlValue, abi_arg_out<Windows::Devices::Midi::IMidiControlChangeMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiControlChangeMessage(uint8_t channel, uint8_t controller, uint8_t controlValue, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiControlChangeMessage(channel, controller, controlValue));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiControlChangeMessage(channel, controller, controlValue));
             return S_OK;
         }
         catch (...)
@@ -126,11 +467,12 @@ struct produce<D, Windows::Devices::Midi::IMidiControlChangeMessageFactory> : pr
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiInPort> : produce_base<D, Windows::Devices::Midi::IMidiInPort>
 {
-    HRESULT __stdcall add_MessageReceived(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_MessageReceived(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().MessageReceived(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().MessageReceived(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -139,11 +481,12 @@ struct produce<D, Windows::Devices::Midi::IMidiInPort> : produce_base<D, Windows
         }
     }
 
-    HRESULT __stdcall remove_MessageReceived(event_token token) noexcept override
+    HRESULT __stdcall remove_MessageReceived(event_token token) noexcept final
     {
         try
         {
-            this->shim().MessageReceived(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().MessageReceived(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -152,29 +495,23 @@ struct produce<D, Windows::Devices::Midi::IMidiInPort> : produce_base<D, Windows
         }
     }
 
-    HRESULT __stdcall get_DeviceId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DeviceId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeviceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeviceId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiInPortStatics> : produce_base<D, Windows::Devices::Midi::IMidiInPortStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> deviceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort>> value) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING deviceId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&deviceId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&deviceId)));
             return S_OK;
         }
         catch (...)
@@ -184,11 +521,12 @@ struct produce<D, Windows::Devices::Midi::IMidiInPortStatics> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelector(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetDeviceSelector(HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeviceSelector());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeviceSelector());
             return S_OK;
         }
         catch (...)
@@ -202,116 +540,73 @@ struct produce<D, Windows::Devices::Midi::IMidiInPortStatics> : produce_base<D, 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiMessage> : produce_base<D, Windows::Devices::Midi::IMidiMessage>
 {
-    HRESULT __stdcall get_Timestamp(abi_arg_out<Windows::Foundation::TimeSpan> value) noexcept override
+    HRESULT __stdcall get_Timestamp(Windows::Foundation::TimeSpan* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Timestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Timestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RawData(abi_arg_out<Windows::Storage::Streams::IBuffer> value) noexcept override
+    HRESULT __stdcall get_RawData(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RawData());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RawData());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Type(Windows::Devices::Midi::MidiMessageType * value) noexcept override
+    HRESULT __stdcall get_Type(Windows::Devices::Midi::MidiMessageType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiMessageReceivedEventArgs> : produce_base<D, Windows::Devices::Midi::IMidiMessageReceivedEventArgs>
 {
-    HRESULT __stdcall get_Message(abi_arg_out<Windows::Devices::Midi::IMidiMessage> value) noexcept override
+    HRESULT __stdcall get_Message(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Message());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiNoteOffMessage> : produce_base<D, Windows::Devices::Midi::IMidiNoteOffMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Note(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Note(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Note());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Note());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Velocity(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Velocity(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Velocity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Velocity());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiNoteOffMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiNoteOffMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiNoteOffMessage(uint8_t channel, uint8_t note, uint8_t velocity, abi_arg_out<Windows::Devices::Midi::IMidiNoteOffMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiNoteOffMessage(uint8_t channel, uint8_t note, uint8_t velocity, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiNoteOffMessage(channel, note, velocity));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiNoteOffMessage(channel, note, velocity));
             return S_OK;
         }
         catch (...)
@@ -325,54 +620,37 @@ struct produce<D, Windows::Devices::Midi::IMidiNoteOffMessageFactory> : produce_
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiNoteOnMessage> : produce_base<D, Windows::Devices::Midi::IMidiNoteOnMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Note(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Note(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Note());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Note());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Velocity(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Velocity(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Velocity());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Velocity());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiNoteOnMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiNoteOnMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiNoteOnMessage(uint8_t channel, uint8_t note, uint8_t velocity, abi_arg_out<Windows::Devices::Midi::IMidiNoteOnMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiNoteOnMessage(uint8_t channel, uint8_t note, uint8_t velocity, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiNoteOnMessage(channel, note, velocity));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiNoteOnMessage(channel, note, velocity));
             return S_OK;
         }
         catch (...)
@@ -386,11 +664,12 @@ struct produce<D, Windows::Devices::Midi::IMidiNoteOnMessageFactory> : produce_b
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiOutPort> : produce_base<D, Windows::Devices::Midi::IMidiOutPort>
 {
-    HRESULT __stdcall abi_SendMessage(abi_arg_in<Windows::Devices::Midi::IMidiMessage> midiMessage) noexcept override
+    HRESULT __stdcall SendMessage(::IUnknown* midiMessage) noexcept final
     {
         try
         {
-            this->shim().SendMessage(*reinterpret_cast<const Windows::Devices::Midi::IMidiMessage *>(&midiMessage));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SendMessage(*reinterpret_cast<Windows::Devices::Midi::IMidiMessage const*>(&midiMessage));
             return S_OK;
         }
         catch (...)
@@ -399,11 +678,12 @@ struct produce<D, Windows::Devices::Midi::IMidiOutPort> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_SendBuffer(abi_arg_in<Windows::Storage::Streams::IBuffer> midiData) noexcept override
+    HRESULT __stdcall SendBuffer(::IUnknown* midiData) noexcept final
     {
         try
         {
-            this->shim().SendBuffer(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&midiData));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SendBuffer(*reinterpret_cast<Windows::Storage::Streams::IBuffer const*>(&midiData));
             return S_OK;
         }
         catch (...)
@@ -412,29 +692,23 @@ struct produce<D, Windows::Devices::Midi::IMidiOutPort> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall get_DeviceId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DeviceId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeviceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeviceId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiOutPortStatics> : produce_base<D, Windows::Devices::Midi::IMidiOutPortStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> deviceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort>> value) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING deviceId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&deviceId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&deviceId)));
             return S_OK;
         }
         catch (...)
@@ -444,11 +718,12 @@ struct produce<D, Windows::Devices::Midi::IMidiOutPortStatics> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelector(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetDeviceSelector(HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeviceSelector());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeviceSelector());
             return S_OK;
         }
         catch (...)
@@ -462,41 +737,30 @@ struct produce<D, Windows::Devices::Midi::IMidiOutPortStatics> : produce_base<D,
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiPitchBendChangeMessage> : produce_base<D, Windows::Devices::Midi::IMidiPitchBendChangeMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Bend(uint16_t * value) noexcept override
+    HRESULT __stdcall get_Bend(uint16_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Bend());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Bend());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiPitchBendChangeMessage(uint8_t channel, uint16_t bend, abi_arg_out<Windows::Devices::Midi::IMidiPitchBendChangeMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiPitchBendChangeMessage(uint8_t channel, uint16_t bend, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiPitchBendChangeMessage(channel, bend));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiPitchBendChangeMessage(channel, bend));
             return S_OK;
         }
         catch (...)
@@ -510,54 +774,37 @@ struct produce<D, Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory> : 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage> : produce_base<D, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Note(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Note(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Note());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Note());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Pressure(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Pressure(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Pressure());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Pressure());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiPolyphonicKeyPressureMessage(uint8_t channel, uint8_t note, uint8_t pressure, abi_arg_out<Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiPolyphonicKeyPressureMessage(uint8_t channel, uint8_t note, uint8_t pressure, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure));
             return S_OK;
         }
         catch (...)
@@ -571,41 +818,30 @@ struct produce<D, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFacto
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiProgramChangeMessage> : produce_base<D, Windows::Devices::Midi::IMidiProgramChangeMessage>
 {
-    HRESULT __stdcall get_Channel(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Channel(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Channel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Channel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Program(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Program(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Program());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Program());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiProgramChangeMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiProgramChangeMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiProgramChangeMessage(uint8_t channel, uint8_t program, abi_arg_out<Windows::Devices::Midi::IMidiProgramChangeMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiProgramChangeMessage(uint8_t channel, uint8_t program, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiProgramChangeMessage(channel, program));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiProgramChangeMessage(channel, program));
             return S_OK;
         }
         catch (...)
@@ -619,28 +855,23 @@ struct produce<D, Windows::Devices::Midi::IMidiProgramChangeMessageFactory> : pr
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSongPositionPointerMessage> : produce_base<D, Windows::Devices::Midi::IMidiSongPositionPointerMessage>
 {
-    HRESULT __stdcall get_Beats(uint16_t * value) noexcept override
+    HRESULT __stdcall get_Beats(uint16_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Beats());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Beats());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiSongPositionPointerMessage(uint16_t beats, abi_arg_out<Windows::Devices::Midi::IMidiSongPositionPointerMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiSongPositionPointerMessage(uint16_t beats, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiSongPositionPointerMessage(beats));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiSongPositionPointerMessage(beats));
             return S_OK;
         }
         catch (...)
@@ -654,28 +885,23 @@ struct produce<D, Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSongSelectMessage> : produce_base<D, Windows::Devices::Midi::IMidiSongSelectMessage>
 {
-    HRESULT __stdcall get_Song(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Song(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Song());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Song());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSongSelectMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiSongSelectMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiSongSelectMessage(uint8_t song, abi_arg_out<Windows::Devices::Midi::IMidiSongSelectMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiSongSelectMessage(uint8_t song, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiSongSelectMessage(song));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiSongSelectMessage(song));
             return S_OK;
         }
         catch (...)
@@ -689,55 +915,37 @@ struct produce<D, Windows::Devices::Midi::IMidiSongSelectMessageFactory> : produ
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSynthesizer> : produce_base<D, Windows::Devices::Midi::IMidiSynthesizer>
 {
-    HRESULT __stdcall get_AudioDevice(abi_arg_out<Windows::Devices::Enumeration::IDeviceInformation> value) noexcept override
+    HRESULT __stdcall get_AudioDevice(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AudioDevice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AudioDevice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Volume(double * value) noexcept override
+    HRESULT __stdcall get_Volume(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Volume());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Volume());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Volume(double value) noexcept override
+    HRESULT __stdcall put_Volume(double value) noexcept final
     {
-        try
-        {
-            this->shim().Volume(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Volume(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSynthesizerStatics> : produce_base<D, Windows::Devices::Midi::IMidiSynthesizerStatics>
 {
-    HRESULT __stdcall abi_CreateAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer>> value) noexcept override
+    HRESULT __stdcall CreateAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateAsync());
             return S_OK;
         }
         catch (...)
@@ -747,11 +955,12 @@ struct produce<D, Windows::Devices::Midi::IMidiSynthesizerStatics> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_CreateFromAudioDeviceAsync(abi_arg_in<Windows::Devices::Enumeration::IDeviceInformation> audioDevice, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer>> value) noexcept override
+    HRESULT __stdcall CreateFromAudioDeviceAsync(::IUnknown* audioDevice, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateAsync(*reinterpret_cast<const Windows::Devices::Enumeration::DeviceInformation *>(&audioDevice)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateAsync(*reinterpret_cast<Windows::Devices::Enumeration::DeviceInformation const*>(&audioDevice)));
             return S_OK;
         }
         catch (...)
@@ -761,11 +970,12 @@ struct produce<D, Windows::Devices::Midi::IMidiSynthesizerStatics> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_IsSynthesizer(abi_arg_in<Windows::Devices::Enumeration::IDeviceInformation> midiDevice, bool * value) noexcept override
+    HRESULT __stdcall IsSynthesizer(::IUnknown* midiDevice, bool* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsSynthesizer(*reinterpret_cast<const Windows::Devices::Enumeration::DeviceInformation *>(&midiDevice)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().IsSynthesizer(*reinterpret_cast<Windows::Devices::Enumeration::DeviceInformation const*>(&midiDevice)));
             return S_OK;
         }
         catch (...)
@@ -778,11 +988,12 @@ struct produce<D, Windows::Devices::Midi::IMidiSynthesizerStatics> : produce_bas
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiSystemExclusiveMessage(abi_arg_in<Windows::Storage::Streams::IBuffer> rawData, abi_arg_out<Windows::Devices::Midi::IMidiMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiSystemExclusiveMessage(::IUnknown* rawData, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiSystemExclusiveMessage(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&rawData)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiSystemExclusiveMessage(*reinterpret_cast<Windows::Storage::Streams::IBuffer const*>(&rawData)));
             return S_OK;
         }
         catch (...)
@@ -796,41 +1007,30 @@ struct produce<D, Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory> : 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiTimeCodeMessage> : produce_base<D, Windows::Devices::Midi::IMidiTimeCodeMessage>
 {
-    HRESULT __stdcall get_FrameType(uint8_t * value) noexcept override
+    HRESULT __stdcall get_FrameType(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FrameType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FrameType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Values(uint8_t * value) noexcept override
+    HRESULT __stdcall get_Values(uint8_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Values());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Values());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Midi::IMidiTimeCodeMessageFactory> : produce_base<D, Windows::Devices::Midi::IMidiTimeCodeMessageFactory>
 {
-    HRESULT __stdcall abi_CreateMidiTimeCodeMessage(uint8_t frameType, uint8_t values, abi_arg_out<Windows::Devices::Midi::IMidiTimeCodeMessage> value) noexcept override
+    HRESULT __stdcall CreateMidiTimeCodeMessage(uint8_t frameType, uint8_t values, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateMidiTimeCodeMessage(frameType, values));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateMidiTimeCodeMessage(frameType, values));
             return S_OK;
         }
         catch (...)
@@ -843,382 +1043,14 @@ struct produce<D, Windows::Devices::Midi::IMidiTimeCodeMessageFactory> : produce
 
 }
 
-namespace Windows::Devices::Midi {
-
-template <typename D> Windows::Foundation::TimeSpan impl_IMidiMessage<D>::Timestamp() const
-{
-    Windows::Foundation::TimeSpan value {};
-    check_hresult(static_cast<const IMidiMessage &>(static_cast<const D &>(*this))->get_Timestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::IBuffer impl_IMidiMessage<D>::RawData() const
-{
-    Windows::Storage::Streams::IBuffer value;
-    check_hresult(static_cast<const IMidiMessage &>(static_cast<const D &>(*this))->get_RawData(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiMessageType impl_IMidiMessage<D>::Type() const
-{
-    Windows::Devices::Midi::MidiMessageType value {};
-    check_hresult(static_cast<const IMidiMessage &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOffMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOffMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOffMessage<D>::Note() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOffMessage &>(static_cast<const D &>(*this))->get_Note(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOffMessage<D>::Velocity() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOffMessage &>(static_cast<const D &>(*this))->get_Velocity(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOnMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOnMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOnMessage<D>::Note() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOnMessage &>(static_cast<const D &>(*this))->get_Note(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiNoteOnMessage<D>::Velocity() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiNoteOnMessage &>(static_cast<const D &>(*this))->get_Velocity(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiPolyphonicKeyPressureMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiPolyphonicKeyPressureMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiPolyphonicKeyPressureMessage<D>::Note() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiPolyphonicKeyPressureMessage &>(static_cast<const D &>(*this))->get_Note(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiPolyphonicKeyPressureMessage<D>::Pressure() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiPolyphonicKeyPressureMessage &>(static_cast<const D &>(*this))->get_Pressure(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiControlChangeMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiControlChangeMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiControlChangeMessage<D>::Controller() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiControlChangeMessage &>(static_cast<const D &>(*this))->get_Controller(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiControlChangeMessage<D>::ControlValue() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiControlChangeMessage &>(static_cast<const D &>(*this))->get_ControlValue(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiProgramChangeMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiProgramChangeMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiProgramChangeMessage<D>::Program() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiProgramChangeMessage &>(static_cast<const D &>(*this))->get_Program(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiChannelPressureMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiChannelPressureMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiChannelPressureMessage<D>::Pressure() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiChannelPressureMessage &>(static_cast<const D &>(*this))->get_Pressure(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiPitchBendChangeMessage<D>::Channel() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiPitchBendChangeMessage &>(static_cast<const D &>(*this))->get_Channel(&value));
-    return value;
-}
-
-template <typename D> uint16_t impl_IMidiPitchBendChangeMessage<D>::Bend() const
-{
-    uint16_t value {};
-    check_hresult(static_cast<const IMidiPitchBendChangeMessage &>(static_cast<const D &>(*this))->get_Bend(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiTimeCodeMessage<D>::FrameType() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiTimeCodeMessage &>(static_cast<const D &>(*this))->get_FrameType(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiTimeCodeMessage<D>::Values() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiTimeCodeMessage &>(static_cast<const D &>(*this))->get_Values(&value));
-    return value;
-}
-
-template <typename D> uint16_t impl_IMidiSongPositionPointerMessage<D>::Beats() const
-{
-    uint16_t value {};
-    check_hresult(static_cast<const IMidiSongPositionPointerMessage &>(static_cast<const D &>(*this))->get_Beats(&value));
-    return value;
-}
-
-template <typename D> uint8_t impl_IMidiSongSelectMessage<D>::Song() const
-{
-    uint8_t value {};
-    check_hresult(static_cast<const IMidiSongSelectMessage &>(static_cast<const D &>(*this))->get_Song(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiNoteOffMessage impl_IMidiNoteOffMessageFactory<D>::CreateMidiNoteOffMessage(uint8_t channel, uint8_t note, uint8_t velocity) const
-{
-    Windows::Devices::Midi::MidiNoteOffMessage value { nullptr };
-    check_hresult(static_cast<const IMidiNoteOffMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiNoteOffMessage(channel, note, velocity, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiNoteOnMessage impl_IMidiNoteOnMessageFactory<D>::CreateMidiNoteOnMessage(uint8_t channel, uint8_t note, uint8_t velocity) const
-{
-    Windows::Devices::Midi::MidiNoteOnMessage value { nullptr };
-    check_hresult(static_cast<const IMidiNoteOnMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiNoteOnMessage(channel, note, velocity, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage impl_IMidiPolyphonicKeyPressureMessageFactory<D>::CreateMidiPolyphonicKeyPressureMessage(uint8_t channel, uint8_t note, uint8_t pressure) const
-{
-    Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage value { nullptr };
-    check_hresult(static_cast<const IMidiPolyphonicKeyPressureMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiControlChangeMessage impl_IMidiControlChangeMessageFactory<D>::CreateMidiControlChangeMessage(uint8_t channel, uint8_t controller, uint8_t controlValue) const
-{
-    Windows::Devices::Midi::MidiControlChangeMessage value { nullptr };
-    check_hresult(static_cast<const IMidiControlChangeMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiControlChangeMessage(channel, controller, controlValue, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiProgramChangeMessage impl_IMidiProgramChangeMessageFactory<D>::CreateMidiProgramChangeMessage(uint8_t channel, uint8_t program) const
-{
-    Windows::Devices::Midi::MidiProgramChangeMessage value { nullptr };
-    check_hresult(static_cast<const IMidiProgramChangeMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiProgramChangeMessage(channel, program, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiChannelPressureMessage impl_IMidiChannelPressureMessageFactory<D>::CreateMidiChannelPressureMessage(uint8_t channel, uint8_t pressure) const
-{
-    Windows::Devices::Midi::MidiChannelPressureMessage value { nullptr };
-    check_hresult(static_cast<const IMidiChannelPressureMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiChannelPressureMessage(channel, pressure, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiPitchBendChangeMessage impl_IMidiPitchBendChangeMessageFactory<D>::CreateMidiPitchBendChangeMessage(uint8_t channel, uint16_t bend) const
-{
-    Windows::Devices::Midi::MidiPitchBendChangeMessage value { nullptr };
-    check_hresult(static_cast<const IMidiPitchBendChangeMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiPitchBendChangeMessage(channel, bend, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiSystemExclusiveMessage impl_IMidiSystemExclusiveMessageFactory<D>::CreateMidiSystemExclusiveMessage(const Windows::Storage::Streams::IBuffer & rawData) const
-{
-    Windows::Devices::Midi::MidiSystemExclusiveMessage value { nullptr };
-    check_hresult(static_cast<const IMidiSystemExclusiveMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiSystemExclusiveMessage(get(rawData), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiTimeCodeMessage impl_IMidiTimeCodeMessageFactory<D>::CreateMidiTimeCodeMessage(uint8_t frameType, uint8_t values) const
-{
-    Windows::Devices::Midi::MidiTimeCodeMessage value { nullptr };
-    check_hresult(static_cast<const IMidiTimeCodeMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiTimeCodeMessage(frameType, values, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiSongPositionPointerMessage impl_IMidiSongPositionPointerMessageFactory<D>::CreateMidiSongPositionPointerMessage(uint16_t beats) const
-{
-    Windows::Devices::Midi::MidiSongPositionPointerMessage value { nullptr };
-    check_hresult(static_cast<const IMidiSongPositionPointerMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiSongPositionPointerMessage(beats, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::MidiSongSelectMessage impl_IMidiSongSelectMessageFactory<D>::CreateMidiSongSelectMessage(uint8_t song) const
-{
-    Windows::Devices::Midi::MidiSongSelectMessage value { nullptr };
-    check_hresult(static_cast<const IMidiSongSelectMessageFactory &>(static_cast<const D &>(*this))->abi_CreateMidiSongSelectMessage(song, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Midi::IMidiMessage impl_IMidiMessageReceivedEventArgs<D>::Message() const
-{
-    Windows::Devices::Midi::IMidiMessage value;
-    check_hresult(static_cast<const IMidiMessageReceivedEventArgs &>(static_cast<const D &>(*this))->get_Message(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> impl_IMidiInPortStatics<D>::FromIdAsync(hstring_ref deviceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> value;
-    check_hresult(static_cast<const IMidiInPortStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(deviceId), put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IMidiInPortStatics<D>::GetDeviceSelector() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMidiInPortStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> impl_IMidiOutPortStatics<D>::FromIdAsync(hstring_ref deviceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> value;
-    check_hresult(static_cast<const IMidiOutPortStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(deviceId), put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IMidiOutPortStatics<D>::GetDeviceSelector() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMidiOutPortStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> impl_IMidiSynthesizerStatics<D>::CreateAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> value;
-    check_hresult(static_cast<const IMidiSynthesizerStatics &>(static_cast<const D &>(*this))->abi_CreateAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> impl_IMidiSynthesizerStatics<D>::CreateAsync(const Windows::Devices::Enumeration::DeviceInformation & audioDevice) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> value;
-    check_hresult(static_cast<const IMidiSynthesizerStatics &>(static_cast<const D &>(*this))->abi_CreateFromAudioDeviceAsync(get(audioDevice), put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IMidiSynthesizerStatics<D>::IsSynthesizer(const Windows::Devices::Enumeration::DeviceInformation & midiDevice) const
-{
-    bool value {};
-    check_hresult(static_cast<const IMidiSynthesizerStatics &>(static_cast<const D &>(*this))->abi_IsSynthesizer(get(midiDevice), &value));
-    return value;
-}
-
-template <typename D> void impl_IMidiOutPort<D>::SendMessage(const Windows::Devices::Midi::IMidiMessage & midiMessage) const
-{
-    check_hresult(static_cast<const IMidiOutPort &>(static_cast<const D &>(*this))->abi_SendMessage(get(midiMessage)));
-}
-
-template <typename D> void impl_IMidiOutPort<D>::SendBuffer(const Windows::Storage::Streams::IBuffer & midiData) const
-{
-    check_hresult(static_cast<const IMidiOutPort &>(static_cast<const D &>(*this))->abi_SendBuffer(get(midiData)));
-}
-
-template <typename D> hstring impl_IMidiOutPort<D>::DeviceId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMidiOutPort &>(static_cast<const D &>(*this))->get_DeviceId(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_IMidiInPort<D>::MessageReceived(const Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IMidiInPort &>(static_cast<const D &>(*this))->add_MessageReceived(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IMidiInPort> impl_IMidiInPort<D>::MessageReceived(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Midi::MidiInPort, Windows::Devices::Midi::MidiMessageReceivedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IMidiInPort>(this, &ABI::Windows::Devices::Midi::IMidiInPort::remove_MessageReceived, MessageReceived(handler));
-}
-
-template <typename D> void impl_IMidiInPort<D>::MessageReceived(event_token token) const
-{
-    check_hresult(static_cast<const IMidiInPort &>(static_cast<const D &>(*this))->remove_MessageReceived(token));
-}
-
-template <typename D> hstring impl_IMidiInPort<D>::DeviceId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMidiInPort &>(static_cast<const D &>(*this))->get_DeviceId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Enumeration::DeviceInformation impl_IMidiSynthesizer<D>::AudioDevice() const
-{
-    Windows::Devices::Enumeration::DeviceInformation value { nullptr };
-    check_hresult(static_cast<const IMidiSynthesizer &>(static_cast<const D &>(*this))->get_AudioDevice(put(value)));
-    return value;
-}
-
-template <typename D> double impl_IMidiSynthesizer<D>::Volume() const
-{
-    double value {};
-    check_hresult(static_cast<const IMidiSynthesizer &>(static_cast<const D &>(*this))->get_Volume(&value));
-    return value;
-}
-
-template <typename D> void impl_IMidiSynthesizer<D>::Volume(double value) const
-{
-    check_hresult(static_cast<const IMidiSynthesizer &>(static_cast<const D &>(*this))->put_Volume(value));
-}
+WINRT_EXPORT namespace winrt::Windows::Devices::Midi {
 
 inline MidiActiveSensingMessage::MidiActiveSensingMessage() :
     MidiActiveSensingMessage(activate_instance<MidiActiveSensingMessage>())
 {}
 
 inline MidiChannelPressureMessage::MidiChannelPressureMessage(uint8_t channel, uint8_t pressure) :
-    MidiChannelPressureMessage(get_activation_factory<MidiChannelPressureMessage, IMidiChannelPressureMessageFactory>().CreateMidiChannelPressureMessage(channel, pressure))
+    MidiChannelPressureMessage(get_activation_factory<MidiChannelPressureMessage, Windows::Devices::Midi::IMidiChannelPressureMessageFactory>().CreateMidiChannelPressureMessage(channel, pressure))
 {}
 
 inline MidiContinueMessage::MidiContinueMessage() :
@@ -1226,55 +1058,55 @@ inline MidiContinueMessage::MidiContinueMessage() :
 {}
 
 inline MidiControlChangeMessage::MidiControlChangeMessage(uint8_t channel, uint8_t controller, uint8_t controlValue) :
-    MidiControlChangeMessage(get_activation_factory<MidiControlChangeMessage, IMidiControlChangeMessageFactory>().CreateMidiControlChangeMessage(channel, controller, controlValue))
+    MidiControlChangeMessage(get_activation_factory<MidiControlChangeMessage, Windows::Devices::Midi::IMidiControlChangeMessageFactory>().CreateMidiControlChangeMessage(channel, controller, controlValue))
 {}
 
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> MidiInPort::FromIdAsync(hstring_ref deviceId)
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiInPort> MidiInPort::FromIdAsync(param::hstring const& deviceId)
 {
-    return get_activation_factory<MidiInPort, IMidiInPortStatics>().FromIdAsync(deviceId);
+    return get_activation_factory<MidiInPort, Windows::Devices::Midi::IMidiInPortStatics>().FromIdAsync(deviceId);
 }
 
 inline hstring MidiInPort::GetDeviceSelector()
 {
-    return get_activation_factory<MidiInPort, IMidiInPortStatics>().GetDeviceSelector();
+    return get_activation_factory<MidiInPort, Windows::Devices::Midi::IMidiInPortStatics>().GetDeviceSelector();
 }
 
 inline MidiNoteOffMessage::MidiNoteOffMessage(uint8_t channel, uint8_t note, uint8_t velocity) :
-    MidiNoteOffMessage(get_activation_factory<MidiNoteOffMessage, IMidiNoteOffMessageFactory>().CreateMidiNoteOffMessage(channel, note, velocity))
+    MidiNoteOffMessage(get_activation_factory<MidiNoteOffMessage, Windows::Devices::Midi::IMidiNoteOffMessageFactory>().CreateMidiNoteOffMessage(channel, note, velocity))
 {}
 
 inline MidiNoteOnMessage::MidiNoteOnMessage(uint8_t channel, uint8_t note, uint8_t velocity) :
-    MidiNoteOnMessage(get_activation_factory<MidiNoteOnMessage, IMidiNoteOnMessageFactory>().CreateMidiNoteOnMessage(channel, note, velocity))
+    MidiNoteOnMessage(get_activation_factory<MidiNoteOnMessage, Windows::Devices::Midi::IMidiNoteOnMessageFactory>().CreateMidiNoteOnMessage(channel, note, velocity))
 {}
 
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> MidiOutPort::FromIdAsync(hstring_ref deviceId)
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::IMidiOutPort> MidiOutPort::FromIdAsync(param::hstring const& deviceId)
 {
-    return get_activation_factory<MidiOutPort, IMidiOutPortStatics>().FromIdAsync(deviceId);
+    return get_activation_factory<MidiOutPort, Windows::Devices::Midi::IMidiOutPortStatics>().FromIdAsync(deviceId);
 }
 
 inline hstring MidiOutPort::GetDeviceSelector()
 {
-    return get_activation_factory<MidiOutPort, IMidiOutPortStatics>().GetDeviceSelector();
+    return get_activation_factory<MidiOutPort, Windows::Devices::Midi::IMidiOutPortStatics>().GetDeviceSelector();
 }
 
 inline MidiPitchBendChangeMessage::MidiPitchBendChangeMessage(uint8_t channel, uint16_t bend) :
-    MidiPitchBendChangeMessage(get_activation_factory<MidiPitchBendChangeMessage, IMidiPitchBendChangeMessageFactory>().CreateMidiPitchBendChangeMessage(channel, bend))
+    MidiPitchBendChangeMessage(get_activation_factory<MidiPitchBendChangeMessage, Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory>().CreateMidiPitchBendChangeMessage(channel, bend))
 {}
 
 inline MidiPolyphonicKeyPressureMessage::MidiPolyphonicKeyPressureMessage(uint8_t channel, uint8_t note, uint8_t pressure) :
-    MidiPolyphonicKeyPressureMessage(get_activation_factory<MidiPolyphonicKeyPressureMessage, IMidiPolyphonicKeyPressureMessageFactory>().CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure))
+    MidiPolyphonicKeyPressureMessage(get_activation_factory<MidiPolyphonicKeyPressureMessage, Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory>().CreateMidiPolyphonicKeyPressureMessage(channel, note, pressure))
 {}
 
 inline MidiProgramChangeMessage::MidiProgramChangeMessage(uint8_t channel, uint8_t program) :
-    MidiProgramChangeMessage(get_activation_factory<MidiProgramChangeMessage, IMidiProgramChangeMessageFactory>().CreateMidiProgramChangeMessage(channel, program))
+    MidiProgramChangeMessage(get_activation_factory<MidiProgramChangeMessage, Windows::Devices::Midi::IMidiProgramChangeMessageFactory>().CreateMidiProgramChangeMessage(channel, program))
 {}
 
 inline MidiSongPositionPointerMessage::MidiSongPositionPointerMessage(uint16_t beats) :
-    MidiSongPositionPointerMessage(get_activation_factory<MidiSongPositionPointerMessage, IMidiSongPositionPointerMessageFactory>().CreateMidiSongPositionPointerMessage(beats))
+    MidiSongPositionPointerMessage(get_activation_factory<MidiSongPositionPointerMessage, Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory>().CreateMidiSongPositionPointerMessage(beats))
 {}
 
 inline MidiSongSelectMessage::MidiSongSelectMessage(uint8_t song) :
-    MidiSongSelectMessage(get_activation_factory<MidiSongSelectMessage, IMidiSongSelectMessageFactory>().CreateMidiSongSelectMessage(song))
+    MidiSongSelectMessage(get_activation_factory<MidiSongSelectMessage, Windows::Devices::Midi::IMidiSongSelectMessageFactory>().CreateMidiSongSelectMessage(song))
 {}
 
 inline MidiStartMessage::MidiStartMessage() :
@@ -1287,21 +1119,21 @@ inline MidiStopMessage::MidiStopMessage() :
 
 inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> MidiSynthesizer::CreateAsync()
 {
-    return get_activation_factory<MidiSynthesizer, IMidiSynthesizerStatics>().CreateAsync();
+    return get_activation_factory<MidiSynthesizer, Windows::Devices::Midi::IMidiSynthesizerStatics>().CreateAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> MidiSynthesizer::CreateAsync(const Windows::Devices::Enumeration::DeviceInformation & audioDevice)
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Midi::MidiSynthesizer> MidiSynthesizer::CreateAsync(Windows::Devices::Enumeration::DeviceInformation const& audioDevice)
 {
-    return get_activation_factory<MidiSynthesizer, IMidiSynthesizerStatics>().CreateAsync(audioDevice);
+    return get_activation_factory<MidiSynthesizer, Windows::Devices::Midi::IMidiSynthesizerStatics>().CreateAsync(audioDevice);
 }
 
-inline bool MidiSynthesizer::IsSynthesizer(const Windows::Devices::Enumeration::DeviceInformation & midiDevice)
+inline bool MidiSynthesizer::IsSynthesizer(Windows::Devices::Enumeration::DeviceInformation const& midiDevice)
 {
-    return get_activation_factory<MidiSynthesizer, IMidiSynthesizerStatics>().IsSynthesizer(midiDevice);
+    return get_activation_factory<MidiSynthesizer, Windows::Devices::Midi::IMidiSynthesizerStatics>().IsSynthesizer(midiDevice);
 }
 
-inline MidiSystemExclusiveMessage::MidiSystemExclusiveMessage(const Windows::Storage::Streams::IBuffer & rawData) :
-    MidiSystemExclusiveMessage(get_activation_factory<MidiSystemExclusiveMessage, IMidiSystemExclusiveMessageFactory>().CreateMidiSystemExclusiveMessage(rawData))
+inline MidiSystemExclusiveMessage::MidiSystemExclusiveMessage(Windows::Storage::Streams::IBuffer const& rawData) :
+    MidiSystemExclusiveMessage(get_activation_factory<MidiSystemExclusiveMessage, Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory>().CreateMidiSystemExclusiveMessage(rawData))
 {}
 
 inline MidiSystemResetMessage::MidiSystemResetMessage() :
@@ -1309,7 +1141,7 @@ inline MidiSystemResetMessage::MidiSystemResetMessage() :
 {}
 
 inline MidiTimeCodeMessage::MidiTimeCodeMessage(uint8_t frameType, uint8_t values) :
-    MidiTimeCodeMessage(get_activation_factory<MidiTimeCodeMessage, IMidiTimeCodeMessageFactory>().CreateMidiTimeCodeMessage(frameType, values))
+    MidiTimeCodeMessage(get_activation_factory<MidiTimeCodeMessage, Windows::Devices::Midi::IMidiTimeCodeMessageFactory>().CreateMidiTimeCodeMessage(frameType, values))
 {}
 
 inline MidiTimingClockMessage::MidiTimingClockMessage() :
@@ -1322,4 +1154,161 @@ inline MidiTuneRequestMessage::MidiTuneRequestMessage() :
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiChannelPressureMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiChannelPressureMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiChannelPressureMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiChannelPressureMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiControlChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiControlChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiControlChangeMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiControlChangeMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiInPort> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiInPort> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiInPortStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiInPortStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiMessageReceivedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiMessageReceivedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiNoteOffMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiNoteOffMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiNoteOffMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiNoteOffMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiNoteOnMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiNoteOnMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiNoteOnMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiNoteOnMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiOutPort> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiOutPort> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiOutPortStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiOutPortStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiPitchBendChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiPitchBendChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiPitchBendChangeMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiPolyphonicKeyPressureMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiProgramChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiProgramChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiProgramChangeMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiProgramChangeMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSongPositionPointerMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSongPositionPointerMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSongPositionPointerMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSongSelectMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSongSelectMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSongSelectMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSongSelectMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSynthesizer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSynthesizer> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSynthesizerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSynthesizerStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiSystemExclusiveMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiTimeCodeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiTimeCodeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::IMidiTimeCodeMessageFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::IMidiTimeCodeMessageFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiActiveSensingMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiActiveSensingMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiChannelPressureMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiChannelPressureMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiContinueMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiContinueMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiControlChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiControlChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiInPort> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiInPort> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiMessageReceivedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiMessageReceivedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiNoteOffMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiNoteOffMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiNoteOnMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiNoteOnMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiOutPort> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiOutPort> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiPitchBendChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiPitchBendChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiPolyphonicKeyPressureMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiProgramChangeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiProgramChangeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiSongPositionPointerMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiSongPositionPointerMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiSongSelectMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiSongSelectMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiStartMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiStartMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiStopMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiStopMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiSynthesizer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiSynthesizer> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiSystemExclusiveMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiSystemExclusiveMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiSystemResetMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiSystemResetMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiTimeCodeMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiTimeCodeMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiTimingClockMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiTimingClockMessage> {};
+
+template<> struct hash<winrt::Windows::Devices::Midi::MidiTuneRequestMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Midi::MidiTuneRequestMessage> {};
+
 }
+
+WINRT_WARNING_POP

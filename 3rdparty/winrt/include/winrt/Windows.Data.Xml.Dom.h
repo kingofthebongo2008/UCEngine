@@ -1,151 +1,842 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Data.Xml.Dom.3.h"
-#include "Windows.Foundation.Collections.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Foundation.Collections.2.h"
+#include "winrt/impl/Windows.Data.Xml.Dom.2.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IDtdEntity<D>::PublicId() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IDtdEntity)->get_PublicId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IDtdEntity<D>::SystemId() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IDtdEntity)->get_SystemId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IDtdEntity<D>::NotationName() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IDtdEntity)->get_NotationName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IDtdNotation<D>::PublicId() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IDtdNotation)->get_PublicId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IDtdNotation<D>::SystemId() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IDtdNotation)->get_SystemId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlAttribute<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlAttribute)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlAttribute<D>::Specified() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlAttribute)->get_Specified(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlAttribute<D>::Value() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlAttribute)->get_Value(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlAttribute<D>::Value(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlAttribute)->put_Value(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::Data() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->get_Data(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::Data(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->put_Data(get_abi(value)));
+}
+
+template <typename D> uint32_t consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::Length() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->get_Length(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::SubstringData(uint32_t offset, uint32_t count) const
+{
+    hstring data{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->SubstringData(offset, count, put_abi(data)));
+    return data;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::AppendData(param::hstring const& data) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->AppendData(get_abi(data)));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::InsertData(uint32_t offset, param::hstring const& data) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->InsertData(offset, get_abi(data)));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::DeleteData(uint32_t offset, uint32_t count) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->DeleteData(offset, count));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlCharacterData<D>::ReplaceData(uint32_t offset, uint32_t count, param::hstring const& data) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlCharacterData)->ReplaceData(offset, count, get_abi(data)));
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlDocumentType consume_Windows_Data_Xml_Dom_IXmlDocument<D>::Doctype() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlDocumentType value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->get_Doctype(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlDomImplementation consume_Windows_Data_Xml_Dom_IXmlDocument<D>::Implementation() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlDomImplementation value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->get_Implementation(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlElement consume_Windows_Data_Xml_Dom_IXmlDocument<D>::DocumentElement() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlElement value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->get_DocumentElement(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlElement consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateElement(param::hstring const& tagName) const
+{
+    Windows::Data::Xml::Dom::XmlElement newElement{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateElement(get_abi(tagName), put_abi(newElement)));
+    return newElement;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlDocumentFragment consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateDocumentFragment() const
+{
+    Windows::Data::Xml::Dom::XmlDocumentFragment newDocumentFragment{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateDocumentFragment(put_abi(newDocumentFragment)));
+    return newDocumentFragment;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlText consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateTextNode(param::hstring const& data) const
+{
+    Windows::Data::Xml::Dom::XmlText newTextNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateTextNode(get_abi(data), put_abi(newTextNode)));
+    return newTextNode;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlComment consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateComment(param::hstring const& data) const
+{
+    Windows::Data::Xml::Dom::XmlComment newComment{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateComment(get_abi(data), put_abi(newComment)));
+    return newComment;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlProcessingInstruction consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateProcessingInstruction(param::hstring const& target, param::hstring const& data) const
+{
+    Windows::Data::Xml::Dom::XmlProcessingInstruction newProcessingInstruction{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateProcessingInstruction(get_abi(target), get_abi(data), put_abi(newProcessingInstruction)));
+    return newProcessingInstruction;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateAttribute(param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute newAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateAttribute(get_abi(name), put_abi(newAttribute)));
+    return newAttribute;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlEntityReference consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateEntityReference(param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::XmlEntityReference newEntityReference{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateEntityReference(get_abi(name), put_abi(newEntityReference)));
+    return newEntityReference;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNodeList consume_Windows_Data_Xml_Dom_IXmlDocument<D>::GetElementsByTagName(param::hstring const& tagName) const
+{
+    Windows::Data::Xml::Dom::XmlNodeList elements{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->GetElementsByTagName(get_abi(tagName), put_abi(elements)));
+    return elements;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlCDataSection consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateCDataSection(param::hstring const& data) const
+{
+    Windows::Data::Xml::Dom::XmlCDataSection newCDataSection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateCDataSection(get_abi(data), put_abi(newCDataSection)));
+    return newCDataSection;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlDocument<D>::DocumentUri() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->get_DocumentUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateAttributeNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& qualifiedName) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute newAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateAttributeNS(get_abi(namespaceUri), get_abi(qualifiedName), put_abi(newAttribute)));
+    return newAttribute;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlElement consume_Windows_Data_Xml_Dom_IXmlDocument<D>::CreateElementNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& qualifiedName) const
+{
+    Windows::Data::Xml::Dom::XmlElement newElement{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->CreateElementNS(get_abi(namespaceUri), get_abi(qualifiedName), put_abi(newElement)));
+    return newElement;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlElement consume_Windows_Data_Xml_Dom_IXmlDocument<D>::GetElementById(param::hstring const& elementId) const
+{
+    Windows::Data::Xml::Dom::XmlElement element{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->GetElementById(get_abi(elementId), put_abi(element)));
+    return element;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlDocument<D>::ImportNode(Windows::Data::Xml::Dom::IXmlNode const& node, bool deep) const
+{
+    Windows::Data::Xml::Dom::IXmlNode newNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocument)->ImportNode(get_abi(node), deep, put_abi(newNode)));
+    return newNode;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlDocumentIO<D>::LoadXml(param::hstring const& xml) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentIO)->LoadXml(get_abi(xml)));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlDocumentIO<D>::LoadXml(param::hstring const& xml, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentIO)->LoadXmlWithSettings(get_abi(xml), get_abi(loadSettings)));
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Data_Xml_Dom_IXmlDocumentIO<D>::SaveToFileAsync(Windows::Storage::IStorageFile const& file) const
+{
+    Windows::Foundation::IAsyncAction asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentIO)->SaveToFileAsync(get_abi(file), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlDocumentIO2<D>::LoadXmlFromBuffer(Windows::Storage::Streams::IBuffer const& buffer) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentIO2)->LoadXmlFromBuffer(get_abi(buffer)));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlDocumentIO2<D>::LoadXmlFromBuffer(Windows::Storage::Streams::IBuffer const& buffer, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentIO2)->LoadXmlFromBufferWithSettings(get_abi(buffer), get_abi(loadSettings)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> consume_Windows_Data_Xml_Dom_IXmlDocumentStatics<D>::LoadFromUriAsync(Windows::Foundation::Uri const& uri) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentStatics)->LoadFromUriAsync(get_abi(uri), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> consume_Windows_Data_Xml_Dom_IXmlDocumentStatics<D>::LoadFromUriAsync(Windows::Foundation::Uri const& uri, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentStatics)->LoadFromUriWithSettingsAsync(get_abi(uri), get_abi(loadSettings), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> consume_Windows_Data_Xml_Dom_IXmlDocumentStatics<D>::LoadFromFileAsync(Windows::Storage::IStorageFile const& file) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentStatics)->LoadFromFileAsync(get_abi(file), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> consume_Windows_Data_Xml_Dom_IXmlDocumentStatics<D>::LoadFromFileAsync(Windows::Storage::IStorageFile const& file, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentStatics)->LoadFromFileWithSettingsAsync(get_abi(file), get_abi(loadSettings), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlDocumentType<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentType)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap consume_Windows_Data_Xml_Dom_IXmlDocumentType<D>::Entities() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlNamedNodeMap value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentType)->get_Entities(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap consume_Windows_Data_Xml_Dom_IXmlDocumentType<D>::Notations() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlNamedNodeMap value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDocumentType)->get_Notations(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlDomImplementation<D>::HasFeature(param::hstring const& feature, Windows::Foundation::IInspectable const& version) const
+{
+    bool featureSupported{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlDomImplementation)->HasFeature(get_abi(feature), get_abi(version), &featureSupported));
+    return featureSupported;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlElement<D>::TagName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->get_TagName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlElement<D>::GetAttribute(param::hstring const& attributeName) const
+{
+    hstring attributeValue{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->GetAttribute(get_abi(attributeName), put_abi(attributeValue)));
+    return attributeValue;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlElement<D>::SetAttribute(param::hstring const& attributeName, param::hstring const& attributeValue) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->SetAttribute(get_abi(attributeName), get_abi(attributeValue)));
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlElement<D>::RemoveAttribute(param::hstring const& attributeName) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->RemoveAttribute(get_abi(attributeName)));
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlElement<D>::GetAttributeNode(param::hstring const& attributeName) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute attributeNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->GetAttributeNode(get_abi(attributeName), put_abi(attributeNode)));
+    return attributeNode;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlElement<D>::SetAttributeNode(Windows::Data::Xml::Dom::XmlAttribute const& newAttribute) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute previousAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->SetAttributeNode(get_abi(newAttribute), put_abi(previousAttribute)));
+    return previousAttribute;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlElement<D>::RemoveAttributeNode(Windows::Data::Xml::Dom::XmlAttribute const& attributeNode) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute removedAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->RemoveAttributeNode(get_abi(attributeNode), put_abi(removedAttribute)));
+    return removedAttribute;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNodeList consume_Windows_Data_Xml_Dom_IXmlElement<D>::GetElementsByTagName(param::hstring const& tagName) const
+{
+    Windows::Data::Xml::Dom::XmlNodeList elements{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->GetElementsByTagName(get_abi(tagName), put_abi(elements)));
+    return elements;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlElement<D>::SetAttributeNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& qualifiedName, param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->SetAttributeNS(get_abi(namespaceUri), get_abi(qualifiedName), get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlElement<D>::GetAttributeNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& localName) const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->GetAttributeNS(get_abi(namespaceUri), get_abi(localName), put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlElement<D>::RemoveAttributeNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& localName) const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->RemoveAttributeNS(get_abi(namespaceUri), get_abi(localName)));
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlElement<D>::SetAttributeNodeNS(Windows::Data::Xml::Dom::XmlAttribute const& newAttribute) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute previousAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->SetAttributeNodeNS(get_abi(newAttribute), put_abi(previousAttribute)));
+    return previousAttribute;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlAttribute consume_Windows_Data_Xml_Dom_IXmlElement<D>::GetAttributeNodeNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& localName) const
+{
+    Windows::Data::Xml::Dom::XmlAttribute previousAttribute{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlElement)->GetAttributeNodeNS(get_abi(namespaceUri), get_abi(localName), put_abi(previousAttribute)));
+    return previousAttribute;
+}
+
+template <typename D> uint32_t consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::MaxElementDepth() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->get_MaxElementDepth(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::MaxElementDepth(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->put_MaxElementDepth(value));
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ProhibitDtd() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->get_ProhibitDtd(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ProhibitDtd(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->put_ProhibitDtd(value));
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ResolveExternals() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->get_ResolveExternals(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ResolveExternals(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->put_ResolveExternals(value));
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ValidateOnParse() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->get_ValidateOnParse(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ValidateOnParse(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->put_ValidateOnParse(value));
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ElementContentWhiteSpace() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->get_ElementContentWhiteSpace(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlLoadSettings<D>::ElementContentWhiteSpace(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlLoadSettings)->put_ElementContentWhiteSpace(value));
+}
+
+template <typename D> uint32_t consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::Length() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->get_Length(&value));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::Item(uint32_t index) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->Item(index, put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::GetNamedItem(param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->GetNamedItem(get_abi(name), put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::SetNamedItem(Windows::Data::Xml::Dom::IXmlNode const& node) const
+{
+    Windows::Data::Xml::Dom::IXmlNode previousNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->SetNamedItem(get_abi(node), put_abi(previousNode)));
+    return previousNode;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::RemoveNamedItem(param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::IXmlNode previousNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->RemoveNamedItem(get_abi(name), put_abi(previousNode)));
+    return previousNode;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::GetNamedItemNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->GetNamedItemNS(get_abi(namespaceUri), get_abi(name), put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::RemoveNamedItemNS(Windows::Foundation::IInspectable const& namespaceUri, param::hstring const& name) const
+{
+    Windows::Data::Xml::Dom::IXmlNode previousNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->RemoveNamedItemNS(get_abi(namespaceUri), get_abi(name), put_abi(previousNode)));
+    return previousNode;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNamedNodeMap<D>::SetNamedItemNS(Windows::Data::Xml::Dom::IXmlNode const& node) const
+{
+    Windows::Data::Xml::Dom::IXmlNode previousNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNamedNodeMap)->SetNamedItemNS(get_abi(node), put_abi(previousNode)));
+    return previousNode;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IXmlNode<D>::NodeValue() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_NodeValue(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlNode<D>::NodeValue(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->put_NodeValue(get_abi(value)));
+}
+
+template <typename D> Windows::Data::Xml::Dom::NodeType consume_Windows_Data_Xml_Dom_IXmlNode<D>::NodeType() const noexcept
+{
+    Windows::Data::Xml::Dom::NodeType value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_NodeType(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlNode<D>::NodeName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_NodeName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::ParentNode() const noexcept
+{
+    Windows::Data::Xml::Dom::IXmlNode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_ParentNode(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNodeList consume_Windows_Data_Xml_Dom_IXmlNode<D>::ChildNodes() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlNodeList value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_ChildNodes(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::FirstChild() const noexcept
+{
+    Windows::Data::Xml::Dom::IXmlNode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_FirstChild(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::LastChild() const noexcept
+{
+    Windows::Data::Xml::Dom::IXmlNode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_LastChild(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::PreviousSibling() const noexcept
+{
+    Windows::Data::Xml::Dom::IXmlNode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_PreviousSibling(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::NextSibling() const noexcept
+{
+    Windows::Data::Xml::Dom::IXmlNode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_NextSibling(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap consume_Windows_Data_Xml_Dom_IXmlNode<D>::Attributes() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlNamedNodeMap value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_Attributes(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Data_Xml_Dom_IXmlNode<D>::HasChildNodes() const
+{
+    bool value{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->HasChildNodes(&value));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlDocument consume_Windows_Data_Xml_Dom_IXmlNode<D>::OwnerDocument() const noexcept
+{
+    Windows::Data::Xml::Dom::XmlDocument value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_OwnerDocument(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::InsertBefore(Windows::Data::Xml::Dom::IXmlNode const& newChild, Windows::Data::Xml::Dom::IXmlNode const& referenceChild) const
+{
+    Windows::Data::Xml::Dom::IXmlNode insertedChild{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->InsertBefore(get_abi(newChild), get_abi(referenceChild), put_abi(insertedChild)));
+    return insertedChild;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::ReplaceChild(Windows::Data::Xml::Dom::IXmlNode const& newChild, Windows::Data::Xml::Dom::IXmlNode const& referenceChild) const
+{
+    Windows::Data::Xml::Dom::IXmlNode previousChild{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->ReplaceChild(get_abi(newChild), get_abi(referenceChild), put_abi(previousChild)));
+    return previousChild;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::RemoveChild(Windows::Data::Xml::Dom::IXmlNode const& childNode) const
+{
+    Windows::Data::Xml::Dom::IXmlNode removedChild{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->RemoveChild(get_abi(childNode), put_abi(removedChild)));
+    return removedChild;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::AppendChild(Windows::Data::Xml::Dom::IXmlNode const& newChild) const
+{
+    Windows::Data::Xml::Dom::IXmlNode appendedChild{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->AppendChild(get_abi(newChild), put_abi(appendedChild)));
+    return appendedChild;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNode<D>::CloneNode(bool deep) const
+{
+    Windows::Data::Xml::Dom::IXmlNode newNode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->CloneNode(deep, put_abi(newNode)));
+    return newNode;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IXmlNode<D>::NamespaceUri() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_NamespaceUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IXmlNode<D>::LocalName() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_LocalName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_Data_Xml_Dom_IXmlNode<D>::Prefix() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->get_Prefix(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlNode<D>::Normalize() const
+{
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->Normalize());
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlNode<D>::Prefix(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNode)->put_Prefix(get_abi(value)));
+}
+
+template <typename D> uint32_t consume_Windows_Data_Xml_Dom_IXmlNodeList<D>::Length() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeList)->get_Length(&value));
+    return value;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNodeList<D>::Item(uint32_t index) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeList)->Item(index, put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNodeSelector<D>::SelectSingleNode(param::hstring const& xpath) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSelector)->SelectSingleNode(get_abi(xpath), put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNodeList consume_Windows_Data_Xml_Dom_IXmlNodeSelector<D>::SelectNodes(param::hstring const& xpath) const
+{
+    Windows::Data::Xml::Dom::XmlNodeList nodelist{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSelector)->SelectNodes(get_abi(xpath), put_abi(nodelist)));
+    return nodelist;
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlNode consume_Windows_Data_Xml_Dom_IXmlNodeSelector<D>::SelectSingleNodeNS(param::hstring const& xpath, Windows::Foundation::IInspectable const& namespaces) const
+{
+    Windows::Data::Xml::Dom::IXmlNode node{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSelector)->SelectSingleNodeNS(get_abi(xpath), get_abi(namespaces), put_abi(node)));
+    return node;
+}
+
+template <typename D> Windows::Data::Xml::Dom::XmlNodeList consume_Windows_Data_Xml_Dom_IXmlNodeSelector<D>::SelectNodesNS(param::hstring const& xpath, Windows::Foundation::IInspectable const& namespaces) const
+{
+    Windows::Data::Xml::Dom::XmlNodeList nodelist{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSelector)->SelectNodesNS(get_abi(xpath), get_abi(namespaces), put_abi(nodelist)));
+    return nodelist;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlNodeSerializer<D>::GetXml() const
+{
+    hstring outerXml{};
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSerializer)->GetXml(put_abi(outerXml)));
+    return outerXml;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlNodeSerializer<D>::InnerText() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSerializer)->get_InnerText(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlNodeSerializer<D>::InnerText(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlNodeSerializer)->put_InnerText(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlProcessingInstruction<D>::Target() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlProcessingInstruction)->get_Target(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Data_Xml_Dom_IXmlProcessingInstruction<D>::Data() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlProcessingInstruction)->get_Data(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Data_Xml_Dom_IXmlProcessingInstruction<D>::Data(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlProcessingInstruction)->put_Data(get_abi(value)));
+}
+
+template <typename D> Windows::Data::Xml::Dom::IXmlText consume_Windows_Data_Xml_Dom_IXmlText<D>::SplitText(uint32_t offset) const
+{
+    Windows::Data::Xml::Dom::IXmlText secondPart{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Data::Xml::Dom::IXmlText)->SplitText(offset, put_abi(secondPart)));
+    return secondPart;
+}
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IDtdEntity> : produce_base<D, Windows::Data::Xml::Dom::IDtdEntity>
 {
-    HRESULT __stdcall get_PublicId(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_PublicId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PublicId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PublicId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SystemId(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_SystemId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SystemId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SystemId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NotationName(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_NotationName(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NotationName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NotationName());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IDtdNotation> : produce_base<D, Windows::Data::Xml::Dom::IDtdNotation>
 {
-    HRESULT __stdcall get_PublicId(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_PublicId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PublicId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PublicId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SystemId(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_SystemId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SystemId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SystemId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlAttribute> : produce_base<D, Windows::Data::Xml::Dom::IXmlAttribute>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Specified(bool * value) noexcept override
+    HRESULT __stdcall get_Specified(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Specified());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Specified());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Value(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Value(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Value());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Value());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Value(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Value(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Value(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Value(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
@@ -156,51 +847,33 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlCDataSection> : produce_base<D, W
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlCharacterData> : produce_base<D, Windows::Data::Xml::Dom::IXmlCharacterData>
 {
-    HRESULT __stdcall get_Data(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Data(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Data());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Data());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Data(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Data(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Data(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Data(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Length(uint32_t * value) noexcept override
+    HRESULT __stdcall get_Length(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Length());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Length());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SubstringData(uint32_t offset, uint32_t count, abi_arg_out<hstring> data) noexcept override
+    HRESULT __stdcall SubstringData(uint32_t offset, uint32_t count, HSTRING* data) noexcept final
     {
         try
         {
-            *data = detach(this->shim().SubstringData(offset, count));
+            typename D::abi_guard guard(this->shim());
+            *data = detach_abi(this->shim().SubstringData(offset, count));
             return S_OK;
         }
         catch (...)
@@ -210,11 +883,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlCharacterData> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_AppendData(abi_arg_in<hstring> data) noexcept override
+    HRESULT __stdcall AppendData(HSTRING data) noexcept final
     {
         try
         {
-            this->shim().AppendData(*reinterpret_cast<const hstring *>(&data));
+            typename D::abi_guard guard(this->shim());
+            this->shim().AppendData(*reinterpret_cast<hstring const*>(&data));
             return S_OK;
         }
         catch (...)
@@ -223,11 +897,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlCharacterData> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_InsertData(uint32_t offset, abi_arg_in<hstring> data) noexcept override
+    HRESULT __stdcall InsertData(uint32_t offset, HSTRING data) noexcept final
     {
         try
         {
-            this->shim().InsertData(offset, *reinterpret_cast<const hstring *>(&data));
+            typename D::abi_guard guard(this->shim());
+            this->shim().InsertData(offset, *reinterpret_cast<hstring const*>(&data));
             return S_OK;
         }
         catch (...)
@@ -236,10 +911,11 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlCharacterData> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_DeleteData(uint32_t offset, uint32_t count) noexcept override
+    HRESULT __stdcall DeleteData(uint32_t offset, uint32_t count) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().DeleteData(offset, count);
             return S_OK;
         }
@@ -249,11 +925,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlCharacterData> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_ReplaceData(uint32_t offset, uint32_t count, abi_arg_in<hstring> data) noexcept override
+    HRESULT __stdcall ReplaceData(uint32_t offset, uint32_t count, HSTRING data) noexcept final
     {
         try
         {
-            this->shim().ReplaceData(offset, count, *reinterpret_cast<const hstring *>(&data));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ReplaceData(offset, count, *reinterpret_cast<hstring const*>(&data));
             return S_OK;
         }
         catch (...)
@@ -270,53 +947,33 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlComment> : produce_base<D, Window
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windows::Data::Xml::Dom::IXmlDocument>
 {
-    HRESULT __stdcall get_Doctype(abi_arg_out<Windows::Data::Xml::Dom::IXmlDocumentType> value) noexcept override
+    HRESULT __stdcall get_Doctype(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Doctype());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Doctype());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Implementation(abi_arg_out<Windows::Data::Xml::Dom::IXmlDomImplementation> value) noexcept override
+    HRESULT __stdcall get_Implementation(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Implementation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Implementation());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DocumentElement(abi_arg_out<Windows::Data::Xml::Dom::IXmlElement> value) noexcept override
+    HRESULT __stdcall get_DocumentElement(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentElement());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentElement());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_CreateElement(abi_arg_in<hstring> tagName, abi_arg_out<Windows::Data::Xml::Dom::IXmlElement> newElement) noexcept override
+    HRESULT __stdcall CreateElement(HSTRING tagName, ::IUnknown** newElement) noexcept final
     {
         try
         {
-            *newElement = detach(this->shim().CreateElement(*reinterpret_cast<const hstring *>(&tagName)));
+            typename D::abi_guard guard(this->shim());
+            *newElement = detach_abi(this->shim().CreateElement(*reinterpret_cast<hstring const*>(&tagName)));
             return S_OK;
         }
         catch (...)
@@ -326,11 +983,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateDocumentFragment(abi_arg_out<Windows::Data::Xml::Dom::IXmlDocumentFragment> newDocumentFragment) noexcept override
+    HRESULT __stdcall CreateDocumentFragment(::IUnknown** newDocumentFragment) noexcept final
     {
         try
         {
-            *newDocumentFragment = detach(this->shim().CreateDocumentFragment());
+            typename D::abi_guard guard(this->shim());
+            *newDocumentFragment = detach_abi(this->shim().CreateDocumentFragment());
             return S_OK;
         }
         catch (...)
@@ -340,11 +998,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateTextNode(abi_arg_in<hstring> data, abi_arg_out<Windows::Data::Xml::Dom::IXmlText> newTextNode) noexcept override
+    HRESULT __stdcall CreateTextNode(HSTRING data, ::IUnknown** newTextNode) noexcept final
     {
         try
         {
-            *newTextNode = detach(this->shim().CreateTextNode(*reinterpret_cast<const hstring *>(&data)));
+            typename D::abi_guard guard(this->shim());
+            *newTextNode = detach_abi(this->shim().CreateTextNode(*reinterpret_cast<hstring const*>(&data)));
             return S_OK;
         }
         catch (...)
@@ -354,11 +1013,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateComment(abi_arg_in<hstring> data, abi_arg_out<Windows::Data::Xml::Dom::IXmlComment> newComment) noexcept override
+    HRESULT __stdcall CreateComment(HSTRING data, ::IUnknown** newComment) noexcept final
     {
         try
         {
-            *newComment = detach(this->shim().CreateComment(*reinterpret_cast<const hstring *>(&data)));
+            typename D::abi_guard guard(this->shim());
+            *newComment = detach_abi(this->shim().CreateComment(*reinterpret_cast<hstring const*>(&data)));
             return S_OK;
         }
         catch (...)
@@ -368,11 +1028,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateProcessingInstruction(abi_arg_in<hstring> target, abi_arg_in<hstring> data, abi_arg_out<Windows::Data::Xml::Dom::IXmlProcessingInstruction> newProcessingInstruction) noexcept override
+    HRESULT __stdcall CreateProcessingInstruction(HSTRING target, HSTRING data, ::IUnknown** newProcessingInstruction) noexcept final
     {
         try
         {
-            *newProcessingInstruction = detach(this->shim().CreateProcessingInstruction(*reinterpret_cast<const hstring *>(&target), *reinterpret_cast<const hstring *>(&data)));
+            typename D::abi_guard guard(this->shim());
+            *newProcessingInstruction = detach_abi(this->shim().CreateProcessingInstruction(*reinterpret_cast<hstring const*>(&target), *reinterpret_cast<hstring const*>(&data)));
             return S_OK;
         }
         catch (...)
@@ -382,11 +1043,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateAttribute(abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> newAttribute) noexcept override
+    HRESULT __stdcall CreateAttribute(HSTRING name, ::IUnknown** newAttribute) noexcept final
     {
         try
         {
-            *newAttribute = detach(this->shim().CreateAttribute(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *newAttribute = detach_abi(this->shim().CreateAttribute(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -396,11 +1058,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateEntityReference(abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlEntityReference> newEntityReference) noexcept override
+    HRESULT __stdcall CreateEntityReference(HSTRING name, ::IUnknown** newEntityReference) noexcept final
     {
         try
         {
-            *newEntityReference = detach(this->shim().CreateEntityReference(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *newEntityReference = detach_abi(this->shim().CreateEntityReference(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -410,11 +1073,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_GetElementsByTagName(abi_arg_in<hstring> tagName, abi_arg_out<Windows::Data::Xml::Dom::IXmlNodeList> elements) noexcept override
+    HRESULT __stdcall GetElementsByTagName(HSTRING tagName, ::IUnknown** elements) noexcept final
     {
         try
         {
-            *elements = detach(this->shim().GetElementsByTagName(*reinterpret_cast<const hstring *>(&tagName)));
+            typename D::abi_guard guard(this->shim());
+            *elements = detach_abi(this->shim().GetElementsByTagName(*reinterpret_cast<hstring const*>(&tagName)));
             return S_OK;
         }
         catch (...)
@@ -424,11 +1088,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateCDataSection(abi_arg_in<hstring> data, abi_arg_out<Windows::Data::Xml::Dom::IXmlCDataSection> newCDataSection) noexcept override
+    HRESULT __stdcall CreateCDataSection(HSTRING data, ::IUnknown** newCDataSection) noexcept final
     {
         try
         {
-            *newCDataSection = detach(this->shim().CreateCDataSection(*reinterpret_cast<const hstring *>(&data)));
+            typename D::abi_guard guard(this->shim());
+            *newCDataSection = detach_abi(this->shim().CreateCDataSection(*reinterpret_cast<hstring const*>(&data)));
             return S_OK;
         }
         catch (...)
@@ -438,25 +1103,19 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall get_DocumentUri(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DocumentUri(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_CreateAttributeNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> qualifiedName, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> newAttribute) noexcept override
+    HRESULT __stdcall CreateAttributeNS(::IUnknown* namespaceUri, HSTRING qualifiedName, ::IUnknown** newAttribute) noexcept final
     {
         try
         {
-            *newAttribute = detach(this->shim().CreateAttributeNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&qualifiedName)));
+            typename D::abi_guard guard(this->shim());
+            *newAttribute = detach_abi(this->shim().CreateAttributeNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&qualifiedName)));
             return S_OK;
         }
         catch (...)
@@ -466,11 +1125,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_CreateElementNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> qualifiedName, abi_arg_out<Windows::Data::Xml::Dom::IXmlElement> newElement) noexcept override
+    HRESULT __stdcall CreateElementNS(::IUnknown* namespaceUri, HSTRING qualifiedName, ::IUnknown** newElement) noexcept final
     {
         try
         {
-            *newElement = detach(this->shim().CreateElementNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&qualifiedName)));
+            typename D::abi_guard guard(this->shim());
+            *newElement = detach_abi(this->shim().CreateElementNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&qualifiedName)));
             return S_OK;
         }
         catch (...)
@@ -480,11 +1140,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_GetElementById(abi_arg_in<hstring> elementId, abi_arg_out<Windows::Data::Xml::Dom::IXmlElement> element) noexcept override
+    HRESULT __stdcall GetElementById(HSTRING elementId, ::IUnknown** element) noexcept final
     {
         try
         {
-            *element = detach(this->shim().GetElementById(*reinterpret_cast<const hstring *>(&elementId)));
+            typename D::abi_guard guard(this->shim());
+            *element = detach_abi(this->shim().GetElementById(*reinterpret_cast<hstring const*>(&elementId)));
             return S_OK;
         }
         catch (...)
@@ -494,11 +1155,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocument> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall abi_ImportNode(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> node, bool deep, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> newNode) noexcept override
+    HRESULT __stdcall ImportNode(::IUnknown* node, bool deep, ::IUnknown** newNode) noexcept final
     {
         try
         {
-            *newNode = detach(this->shim().ImportNode(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&node), deep));
+            typename D::abi_guard guard(this->shim());
+            *newNode = detach_abi(this->shim().ImportNode(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&node), deep));
             return S_OK;
         }
         catch (...)
@@ -516,11 +1178,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentFragment> : produce_base<
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO> : produce_base<D, Windows::Data::Xml::Dom::IXmlDocumentIO>
 {
-    HRESULT __stdcall abi_LoadXml(abi_arg_in<hstring> xml) noexcept override
+    HRESULT __stdcall LoadXml(HSTRING xml) noexcept final
     {
         try
         {
-            this->shim().LoadXml(*reinterpret_cast<const hstring *>(&xml));
+            typename D::abi_guard guard(this->shim());
+            this->shim().LoadXml(*reinterpret_cast<hstring const*>(&xml));
             return S_OK;
         }
         catch (...)
@@ -529,11 +1192,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_LoadXmlWithSettings(abi_arg_in<hstring> xml, abi_arg_in<Windows::Data::Xml::Dom::IXmlLoadSettings> loadSettings) noexcept override
+    HRESULT __stdcall LoadXmlWithSettings(HSTRING xml, ::IUnknown* loadSettings) noexcept final
     {
         try
         {
-            this->shim().LoadXml(*reinterpret_cast<const hstring *>(&xml), *reinterpret_cast<const Windows::Data::Xml::Dom::XmlLoadSettings *>(&loadSettings));
+            typename D::abi_guard guard(this->shim());
+            this->shim().LoadXml(*reinterpret_cast<hstring const*>(&xml), *reinterpret_cast<Windows::Data::Xml::Dom::XmlLoadSettings const*>(&loadSettings));
             return S_OK;
         }
         catch (...)
@@ -542,11 +1206,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_SaveToFileAsync(abi_arg_in<Windows::Storage::IStorageFile> file, abi_arg_out<Windows::Foundation::IAsyncAction> asyncInfo) noexcept override
+    HRESULT __stdcall SaveToFileAsync(::IUnknown* file, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().SaveToFileAsync(*reinterpret_cast<const Windows::Storage::IStorageFile *>(&file)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().SaveToFileAsync(*reinterpret_cast<Windows::Storage::IStorageFile const*>(&file)));
             return S_OK;
         }
         catch (...)
@@ -560,11 +1225,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO> : produce_base<D, Win
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO2> : produce_base<D, Windows::Data::Xml::Dom::IXmlDocumentIO2>
 {
-    HRESULT __stdcall abi_LoadXmlFromBuffer(abi_arg_in<Windows::Storage::Streams::IBuffer> buffer) noexcept override
+    HRESULT __stdcall LoadXmlFromBuffer(::IUnknown* buffer) noexcept final
     {
         try
         {
-            this->shim().LoadXmlFromBuffer(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&buffer));
+            typename D::abi_guard guard(this->shim());
+            this->shim().LoadXmlFromBuffer(*reinterpret_cast<Windows::Storage::Streams::IBuffer const*>(&buffer));
             return S_OK;
         }
         catch (...)
@@ -573,11 +1239,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO2> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_LoadXmlFromBufferWithSettings(abi_arg_in<Windows::Storage::Streams::IBuffer> buffer, abi_arg_in<Windows::Data::Xml::Dom::IXmlLoadSettings> loadSettings) noexcept override
+    HRESULT __stdcall LoadXmlFromBufferWithSettings(::IUnknown* buffer, ::IUnknown* loadSettings) noexcept final
     {
         try
         {
-            this->shim().LoadXmlFromBuffer(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&buffer), *reinterpret_cast<const Windows::Data::Xml::Dom::XmlLoadSettings *>(&loadSettings));
+            typename D::abi_guard guard(this->shim());
+            this->shim().LoadXmlFromBuffer(*reinterpret_cast<Windows::Storage::Streams::IBuffer const*>(&buffer), *reinterpret_cast<Windows::Data::Xml::Dom::XmlLoadSettings const*>(&loadSettings));
             return S_OK;
         }
         catch (...)
@@ -590,11 +1257,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentIO2> : produce_base<D, Wi
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentStatics> : produce_base<D, Windows::Data::Xml::Dom::IXmlDocumentStatics>
 {
-    HRESULT __stdcall abi_LoadFromUriAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> uri, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument>> asyncInfo) noexcept override
+    HRESULT __stdcall LoadFromUriAsync(::IUnknown* uri, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().LoadFromUriAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&uri)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().LoadFromUriAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&uri)));
             return S_OK;
         }
         catch (...)
@@ -604,11 +1272,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentStatics> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_LoadFromUriWithSettingsAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> uri, abi_arg_in<Windows::Data::Xml::Dom::IXmlLoadSettings> loadSettings, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument>> asyncInfo) noexcept override
+    HRESULT __stdcall LoadFromUriWithSettingsAsync(::IUnknown* uri, ::IUnknown* loadSettings, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().LoadFromUriAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&uri), *reinterpret_cast<const Windows::Data::Xml::Dom::XmlLoadSettings *>(&loadSettings)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().LoadFromUriAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&uri), *reinterpret_cast<Windows::Data::Xml::Dom::XmlLoadSettings const*>(&loadSettings)));
             return S_OK;
         }
         catch (...)
@@ -618,11 +1287,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentStatics> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_LoadFromFileAsync(abi_arg_in<Windows::Storage::IStorageFile> file, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument>> asyncInfo) noexcept override
+    HRESULT __stdcall LoadFromFileAsync(::IUnknown* file, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().LoadFromFileAsync(*reinterpret_cast<const Windows::Storage::IStorageFile *>(&file)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().LoadFromFileAsync(*reinterpret_cast<Windows::Storage::IStorageFile const*>(&file)));
             return S_OK;
         }
         catch (...)
@@ -632,11 +1302,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentStatics> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_LoadFromFileWithSettingsAsync(abi_arg_in<Windows::Storage::IStorageFile> file, abi_arg_in<Windows::Data::Xml::Dom::IXmlLoadSettings> loadSettings, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument>> asyncInfo) noexcept override
+    HRESULT __stdcall LoadFromFileWithSettingsAsync(::IUnknown* file, ::IUnknown* loadSettings, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().LoadFromFileAsync(*reinterpret_cast<const Windows::Storage::IStorageFile *>(&file), *reinterpret_cast<const Windows::Data::Xml::Dom::XmlLoadSettings *>(&loadSettings)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().LoadFromFileAsync(*reinterpret_cast<Windows::Storage::IStorageFile const*>(&file), *reinterpret_cast<Windows::Data::Xml::Dom::XmlLoadSettings const*>(&loadSettings)));
             return S_OK;
         }
         catch (...)
@@ -650,57 +1321,37 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentStatics> : produce_base<D
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDocumentType> : produce_base<D, Windows::Data::Xml::Dom::IXmlDocumentType>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Entities(abi_arg_out<Windows::Data::Xml::Dom::IXmlNamedNodeMap> value) noexcept override
+    HRESULT __stdcall get_Entities(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Entities());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Entities());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Notations(abi_arg_out<Windows::Data::Xml::Dom::IXmlNamedNodeMap> value) noexcept override
+    HRESULT __stdcall get_Notations(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Notations());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Notations());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlDomImplementation> : produce_base<D, Windows::Data::Xml::Dom::IXmlDomImplementation>
 {
-    HRESULT __stdcall abi_HasFeature(abi_arg_in<hstring> feature, abi_arg_in<Windows::IInspectable> version, bool * featureSupported) noexcept override
+    HRESULT __stdcall HasFeature(HSTRING feature, ::IUnknown* version, bool* featureSupported) noexcept final
     {
         try
         {
-            *featureSupported = detach(this->shim().HasFeature(*reinterpret_cast<const hstring *>(&feature), *reinterpret_cast<const Windows::IInspectable *>(&version)));
+            typename D::abi_guard guard(this->shim());
+            *featureSupported = detach_abi(this->shim().HasFeature(*reinterpret_cast<hstring const*>(&feature), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&version)));
             return S_OK;
         }
         catch (...)
@@ -713,25 +1364,19 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlDomImplementation> : produce_base
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Windows::Data::Xml::Dom::IXmlElement>
 {
-    HRESULT __stdcall get_TagName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TagName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TagName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TagName());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetAttribute(abi_arg_in<hstring> attributeName, abi_arg_out<hstring> attributeValue) noexcept override
+    HRESULT __stdcall GetAttribute(HSTRING attributeName, HSTRING* attributeValue) noexcept final
     {
         try
         {
-            *attributeValue = detach(this->shim().GetAttribute(*reinterpret_cast<const hstring *>(&attributeName)));
+            typename D::abi_guard guard(this->shim());
+            *attributeValue = detach_abi(this->shim().GetAttribute(*reinterpret_cast<hstring const*>(&attributeName)));
             return S_OK;
         }
         catch (...)
@@ -741,11 +1386,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_SetAttribute(abi_arg_in<hstring> attributeName, abi_arg_in<hstring> attributeValue) noexcept override
+    HRESULT __stdcall SetAttribute(HSTRING attributeName, HSTRING attributeValue) noexcept final
     {
         try
         {
-            this->shim().SetAttribute(*reinterpret_cast<const hstring *>(&attributeName), *reinterpret_cast<const hstring *>(&attributeValue));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetAttribute(*reinterpret_cast<hstring const*>(&attributeName), *reinterpret_cast<hstring const*>(&attributeValue));
             return S_OK;
         }
         catch (...)
@@ -754,11 +1400,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_RemoveAttribute(abi_arg_in<hstring> attributeName) noexcept override
+    HRESULT __stdcall RemoveAttribute(HSTRING attributeName) noexcept final
     {
         try
         {
-            this->shim().RemoveAttribute(*reinterpret_cast<const hstring *>(&attributeName));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RemoveAttribute(*reinterpret_cast<hstring const*>(&attributeName));
             return S_OK;
         }
         catch (...)
@@ -767,11 +1414,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_GetAttributeNode(abi_arg_in<hstring> attributeName, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> attributeNode) noexcept override
+    HRESULT __stdcall GetAttributeNode(HSTRING attributeName, ::IUnknown** attributeNode) noexcept final
     {
         try
         {
-            *attributeNode = detach(this->shim().GetAttributeNode(*reinterpret_cast<const hstring *>(&attributeName)));
+            typename D::abi_guard guard(this->shim());
+            *attributeNode = detach_abi(this->shim().GetAttributeNode(*reinterpret_cast<hstring const*>(&attributeName)));
             return S_OK;
         }
         catch (...)
@@ -781,11 +1429,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_SetAttributeNode(abi_arg_in<Windows::Data::Xml::Dom::IXmlAttribute> newAttribute, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> previousAttribute) noexcept override
+    HRESULT __stdcall SetAttributeNode(::IUnknown* newAttribute, ::IUnknown** previousAttribute) noexcept final
     {
         try
         {
-            *previousAttribute = detach(this->shim().SetAttributeNode(*reinterpret_cast<const Windows::Data::Xml::Dom::XmlAttribute *>(&newAttribute)));
+            typename D::abi_guard guard(this->shim());
+            *previousAttribute = detach_abi(this->shim().SetAttributeNode(*reinterpret_cast<Windows::Data::Xml::Dom::XmlAttribute const*>(&newAttribute)));
             return S_OK;
         }
         catch (...)
@@ -795,11 +1444,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_RemoveAttributeNode(abi_arg_in<Windows::Data::Xml::Dom::IXmlAttribute> attributeNode, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> removedAttribute) noexcept override
+    HRESULT __stdcall RemoveAttributeNode(::IUnknown* attributeNode, ::IUnknown** removedAttribute) noexcept final
     {
         try
         {
-            *removedAttribute = detach(this->shim().RemoveAttributeNode(*reinterpret_cast<const Windows::Data::Xml::Dom::XmlAttribute *>(&attributeNode)));
+            typename D::abi_guard guard(this->shim());
+            *removedAttribute = detach_abi(this->shim().RemoveAttributeNode(*reinterpret_cast<Windows::Data::Xml::Dom::XmlAttribute const*>(&attributeNode)));
             return S_OK;
         }
         catch (...)
@@ -809,11 +1459,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_GetElementsByTagName(abi_arg_in<hstring> tagName, abi_arg_out<Windows::Data::Xml::Dom::IXmlNodeList> elements) noexcept override
+    HRESULT __stdcall GetElementsByTagName(HSTRING tagName, ::IUnknown** elements) noexcept final
     {
         try
         {
-            *elements = detach(this->shim().GetElementsByTagName(*reinterpret_cast<const hstring *>(&tagName)));
+            typename D::abi_guard guard(this->shim());
+            *elements = detach_abi(this->shim().GetElementsByTagName(*reinterpret_cast<hstring const*>(&tagName)));
             return S_OK;
         }
         catch (...)
@@ -823,11 +1474,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_SetAttributeNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> qualifiedName, abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall SetAttributeNS(::IUnknown* namespaceUri, HSTRING qualifiedName, HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetAttributeNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&qualifiedName), *reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetAttributeNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&qualifiedName), *reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -836,11 +1488,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_GetAttributeNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> localName, abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetAttributeNS(::IUnknown* namespaceUri, HSTRING localName, HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetAttributeNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&localName)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetAttributeNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&localName)));
             return S_OK;
         }
         catch (...)
@@ -850,11 +1503,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_RemoveAttributeNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> localName) noexcept override
+    HRESULT __stdcall RemoveAttributeNS(::IUnknown* namespaceUri, HSTRING localName) noexcept final
     {
         try
         {
-            this->shim().RemoveAttributeNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&localName));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RemoveAttributeNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&localName));
             return S_OK;
         }
         catch (...)
@@ -863,11 +1517,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_SetAttributeNodeNS(abi_arg_in<Windows::Data::Xml::Dom::IXmlAttribute> newAttribute, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> previousAttribute) noexcept override
+    HRESULT __stdcall SetAttributeNodeNS(::IUnknown* newAttribute, ::IUnknown** previousAttribute) noexcept final
     {
         try
         {
-            *previousAttribute = detach(this->shim().SetAttributeNodeNS(*reinterpret_cast<const Windows::Data::Xml::Dom::XmlAttribute *>(&newAttribute)));
+            typename D::abi_guard guard(this->shim());
+            *previousAttribute = detach_abi(this->shim().SetAttributeNodeNS(*reinterpret_cast<Windows::Data::Xml::Dom::XmlAttribute const*>(&newAttribute)));
             return S_OK;
         }
         catch (...)
@@ -877,11 +1532,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlElement> : produce_base<D, Window
         }
     }
 
-    HRESULT __stdcall abi_GetAttributeNodeNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> localName, abi_arg_out<Windows::Data::Xml::Dom::IXmlAttribute> previousAttribute) noexcept override
+    HRESULT __stdcall GetAttributeNodeNS(::IUnknown* namespaceUri, HSTRING localName, ::IUnknown** previousAttribute) noexcept final
     {
         try
         {
-            *previousAttribute = detach(this->shim().GetAttributeNodeNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&localName)));
+            typename D::abi_guard guard(this->shim());
+            *previousAttribute = detach_abi(this->shim().GetAttributeNodeNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&localName)));
             return S_OK;
         }
         catch (...)
@@ -899,158 +1555,93 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlEntityReference> : produce_base<D
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlLoadSettings> : produce_base<D, Windows::Data::Xml::Dom::IXmlLoadSettings>
 {
-    HRESULT __stdcall get_MaxElementDepth(uint32_t * value) noexcept override
+    HRESULT __stdcall get_MaxElementDepth(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxElementDepth());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxElementDepth());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MaxElementDepth(uint32_t value) noexcept override
+    HRESULT __stdcall put_MaxElementDepth(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().MaxElementDepth(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MaxElementDepth(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProhibitDtd(bool * value) noexcept override
+    HRESULT __stdcall get_ProhibitDtd(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProhibitDtd());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProhibitDtd());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ProhibitDtd(bool value) noexcept override
+    HRESULT __stdcall put_ProhibitDtd(bool value) noexcept final
     {
-        try
-        {
-            this->shim().ProhibitDtd(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ProhibitDtd(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ResolveExternals(bool * value) noexcept override
+    HRESULT __stdcall get_ResolveExternals(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResolveExternals());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResolveExternals());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ResolveExternals(bool value) noexcept override
+    HRESULT __stdcall put_ResolveExternals(bool value) noexcept final
     {
-        try
-        {
-            this->shim().ResolveExternals(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ResolveExternals(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ValidateOnParse(bool * value) noexcept override
+    HRESULT __stdcall get_ValidateOnParse(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ValidateOnParse());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ValidateOnParse());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ValidateOnParse(bool value) noexcept override
+    HRESULT __stdcall put_ValidateOnParse(bool value) noexcept final
     {
-        try
-        {
-            this->shim().ValidateOnParse(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ValidateOnParse(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ElementContentWhiteSpace(bool * value) noexcept override
+    HRESULT __stdcall get_ElementContentWhiteSpace(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ElementContentWhiteSpace());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ElementContentWhiteSpace());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ElementContentWhiteSpace(bool value) noexcept override
+    HRESULT __stdcall put_ElementContentWhiteSpace(bool value) noexcept final
     {
-        try
-        {
-            this->shim().ElementContentWhiteSpace(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ElementContentWhiteSpace(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap>
 {
-    HRESULT __stdcall get_Length(uint32_t * value) noexcept override
+    HRESULT __stdcall get_Length(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Length());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Length());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Item(uint32_t index, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall Item(uint32_t index, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().Item(index));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().Item(index));
             return S_OK;
         }
         catch (...)
@@ -1060,11 +1651,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_GetNamedItem(abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall GetNamedItem(HSTRING name, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().GetNamedItem(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().GetNamedItem(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1074,11 +1666,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SetNamedItem(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> node, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> previousNode) noexcept override
+    HRESULT __stdcall SetNamedItem(::IUnknown* node, ::IUnknown** previousNode) noexcept final
     {
         try
         {
-            *previousNode = detach(this->shim().SetNamedItem(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&node)));
+            typename D::abi_guard guard(this->shim());
+            *previousNode = detach_abi(this->shim().SetNamedItem(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&node)));
             return S_OK;
         }
         catch (...)
@@ -1088,11 +1681,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_RemoveNamedItem(abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> previousNode) noexcept override
+    HRESULT __stdcall RemoveNamedItem(HSTRING name, ::IUnknown** previousNode) noexcept final
     {
         try
         {
-            *previousNode = detach(this->shim().RemoveNamedItem(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *previousNode = detach_abi(this->shim().RemoveNamedItem(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1102,11 +1696,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_GetNamedItemNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall GetNamedItemNS(::IUnknown* namespaceUri, HSTRING name, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().GetNamedItemNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().GetNamedItemNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1116,11 +1711,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_RemoveNamedItemNS(abi_arg_in<Windows::IInspectable> namespaceUri, abi_arg_in<hstring> name, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> previousNode) noexcept override
+    HRESULT __stdcall RemoveNamedItemNS(::IUnknown* namespaceUri, HSTRING name, ::IUnknown** previousNode) noexcept final
     {
         try
         {
-            *previousNode = detach(this->shim().RemoveNamedItemNS(*reinterpret_cast<const Windows::IInspectable *>(&namespaceUri), *reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *previousNode = detach_abi(this->shim().RemoveNamedItemNS(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaceUri), *reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1130,11 +1726,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SetNamedItemNS(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> node, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> previousNode) noexcept override
+    HRESULT __stdcall SetNamedItemNS(::IUnknown* node, ::IUnknown** previousNode) noexcept final
     {
         try
         {
-            *previousNode = detach(this->shim().SetNamedItemNS(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&node)));
+            typename D::abi_guard guard(this->shim());
+            *previousNode = detach_abi(this->shim().SetNamedItemNS(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&node)));
             return S_OK;
         }
         catch (...)
@@ -1148,163 +1745,89 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNamedNodeMap> : produce_base<D, W
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::Data::Xml::Dom::IXmlNode>
 {
-    HRESULT __stdcall get_NodeValue(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_NodeValue(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NodeValue());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NodeValue());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_NodeValue(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_NodeValue(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().NodeValue(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().NodeValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NodeType(Windows::Data::Xml::Dom::NodeType * value) noexcept override
+    HRESULT __stdcall get_NodeType(Windows::Data::Xml::Dom::NodeType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NodeType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NodeType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NodeName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_NodeName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NodeName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NodeName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ParentNode(abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> value) noexcept override
+    HRESULT __stdcall get_ParentNode(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ParentNode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ParentNode());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ChildNodes(abi_arg_out<Windows::Data::Xml::Dom::IXmlNodeList> value) noexcept override
+    HRESULT __stdcall get_ChildNodes(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ChildNodes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChildNodes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FirstChild(abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> value) noexcept override
+    HRESULT __stdcall get_FirstChild(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FirstChild());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FirstChild());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LastChild(abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> value) noexcept override
+    HRESULT __stdcall get_LastChild(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LastChild());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LastChild());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PreviousSibling(abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> value) noexcept override
+    HRESULT __stdcall get_PreviousSibling(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PreviousSibling());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PreviousSibling());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NextSibling(abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> value) noexcept override
+    HRESULT __stdcall get_NextSibling(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NextSibling());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NextSibling());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Attributes(abi_arg_out<Windows::Data::Xml::Dom::IXmlNamedNodeMap> value) noexcept override
+    HRESULT __stdcall get_Attributes(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Attributes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Attributes());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_HasChildNodes(bool * value) noexcept override
+    HRESULT __stdcall HasChildNodes(bool* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().HasChildNodes());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().HasChildNodes());
             return S_OK;
         }
         catch (...)
@@ -1313,25 +1836,19 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall get_OwnerDocument(abi_arg_out<Windows::Data::Xml::Dom::IXmlDocument> value) noexcept override
+    HRESULT __stdcall get_OwnerDocument(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().OwnerDocument());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().OwnerDocument());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_InsertBefore(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> newChild, abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> referenceChild, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> insertedChild) noexcept override
+    HRESULT __stdcall InsertBefore(::IUnknown* newChild, ::IUnknown* referenceChild, ::IUnknown** insertedChild) noexcept final
     {
         try
         {
-            *insertedChild = detach(this->shim().InsertBefore(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&newChild), *reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&referenceChild)));
+            typename D::abi_guard guard(this->shim());
+            *insertedChild = detach_abi(this->shim().InsertBefore(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&newChild), *reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&referenceChild)));
             return S_OK;
         }
         catch (...)
@@ -1341,11 +1858,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_ReplaceChild(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> newChild, abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> referenceChild, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> previousChild) noexcept override
+    HRESULT __stdcall ReplaceChild(::IUnknown* newChild, ::IUnknown* referenceChild, ::IUnknown** previousChild) noexcept final
     {
         try
         {
-            *previousChild = detach(this->shim().ReplaceChild(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&newChild), *reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&referenceChild)));
+            typename D::abi_guard guard(this->shim());
+            *previousChild = detach_abi(this->shim().ReplaceChild(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&newChild), *reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&referenceChild)));
             return S_OK;
         }
         catch (...)
@@ -1355,11 +1873,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_RemoveChild(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> childNode, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> removedChild) noexcept override
+    HRESULT __stdcall RemoveChild(::IUnknown* childNode, ::IUnknown** removedChild) noexcept final
     {
         try
         {
-            *removedChild = detach(this->shim().RemoveChild(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&childNode)));
+            typename D::abi_guard guard(this->shim());
+            *removedChild = detach_abi(this->shim().RemoveChild(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&childNode)));
             return S_OK;
         }
         catch (...)
@@ -1369,11 +1888,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_AppendChild(abi_arg_in<Windows::Data::Xml::Dom::IXmlNode> newChild, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> appendedChild) noexcept override
+    HRESULT __stdcall AppendChild(::IUnknown* newChild, ::IUnknown** appendedChild) noexcept final
     {
         try
         {
-            *appendedChild = detach(this->shim().AppendChild(*reinterpret_cast<const Windows::Data::Xml::Dom::IXmlNode *>(&newChild)));
+            typename D::abi_guard guard(this->shim());
+            *appendedChild = detach_abi(this->shim().AppendChild(*reinterpret_cast<Windows::Data::Xml::Dom::IXmlNode const*>(&newChild)));
             return S_OK;
         }
         catch (...)
@@ -1383,11 +1903,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_CloneNode(bool deep, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> newNode) noexcept override
+    HRESULT __stdcall CloneNode(bool deep, ::IUnknown** newNode) noexcept final
     {
         try
         {
-            *newNode = detach(this->shim().CloneNode(deep));
+            typename D::abi_guard guard(this->shim());
+            *newNode = detach_abi(this->shim().CloneNode(deep));
             return S_OK;
         }
         catch (...)
@@ -1397,52 +1918,32 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall get_NamespaceUri(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_NamespaceUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NamespaceUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NamespaceUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LocalName(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_LocalName(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LocalName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LocalName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Prefix(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Prefix(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Prefix());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Prefix());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Normalize() noexcept override
+    HRESULT __stdcall Normalize() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Normalize();
             return S_OK;
         }
@@ -1452,41 +1953,30 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNode> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall put_Prefix(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_Prefix(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Prefix(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Prefix(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlNodeList> : produce_base<D, Windows::Data::Xml::Dom::IXmlNodeList>
 {
-    HRESULT __stdcall get_Length(uint32_t * value) noexcept override
+    HRESULT __stdcall get_Length(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Length());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Length());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Item(uint32_t index, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall Item(uint32_t index, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().Item(index));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().Item(index));
             return S_OK;
         }
         catch (...)
@@ -1500,11 +1990,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeList> : produce_base<D, Windo
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSelector> : produce_base<D, Windows::Data::Xml::Dom::IXmlNodeSelector>
 {
-    HRESULT __stdcall abi_SelectSingleNode(abi_arg_in<hstring> xpath, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall SelectSingleNode(HSTRING xpath, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().SelectSingleNode(*reinterpret_cast<const hstring *>(&xpath)));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().SelectSingleNode(*reinterpret_cast<hstring const*>(&xpath)));
             return S_OK;
         }
         catch (...)
@@ -1514,11 +2005,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSelector> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SelectNodes(abi_arg_in<hstring> xpath, abi_arg_out<Windows::Data::Xml::Dom::IXmlNodeList> nodelist) noexcept override
+    HRESULT __stdcall SelectNodes(HSTRING xpath, ::IUnknown** nodelist) noexcept final
     {
         try
         {
-            *nodelist = detach(this->shim().SelectNodes(*reinterpret_cast<const hstring *>(&xpath)));
+            typename D::abi_guard guard(this->shim());
+            *nodelist = detach_abi(this->shim().SelectNodes(*reinterpret_cast<hstring const*>(&xpath)));
             return S_OK;
         }
         catch (...)
@@ -1528,11 +2020,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSelector> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SelectSingleNodeNS(abi_arg_in<hstring> xpath, abi_arg_in<Windows::IInspectable> namespaces, abi_arg_out<Windows::Data::Xml::Dom::IXmlNode> node) noexcept override
+    HRESULT __stdcall SelectSingleNodeNS(HSTRING xpath, ::IUnknown* namespaces, ::IUnknown** node) noexcept final
     {
         try
         {
-            *node = detach(this->shim().SelectSingleNodeNS(*reinterpret_cast<const hstring *>(&xpath), *reinterpret_cast<const Windows::IInspectable *>(&namespaces)));
+            typename D::abi_guard guard(this->shim());
+            *node = detach_abi(this->shim().SelectSingleNodeNS(*reinterpret_cast<hstring const*>(&xpath), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaces)));
             return S_OK;
         }
         catch (...)
@@ -1542,11 +2035,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSelector> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SelectNodesNS(abi_arg_in<hstring> xpath, abi_arg_in<Windows::IInspectable> namespaces, abi_arg_out<Windows::Data::Xml::Dom::IXmlNodeList> nodelist) noexcept override
+    HRESULT __stdcall SelectNodesNS(HSTRING xpath, ::IUnknown* namespaces, ::IUnknown** nodelist) noexcept final
     {
         try
         {
-            *nodelist = detach(this->shim().SelectNodesNS(*reinterpret_cast<const hstring *>(&xpath), *reinterpret_cast<const Windows::IInspectable *>(&namespaces)));
+            typename D::abi_guard guard(this->shim());
+            *nodelist = detach_abi(this->shim().SelectNodesNS(*reinterpret_cast<hstring const*>(&xpath), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&namespaces)));
             return S_OK;
         }
         catch (...)
@@ -1560,11 +2054,12 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSelector> : produce_base<D, W
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSerializer> : produce_base<D, Windows::Data::Xml::Dom::IXmlNodeSerializer>
 {
-    HRESULT __stdcall abi_GetXml(abi_arg_out<hstring> outerXml) noexcept override
+    HRESULT __stdcall GetXml(HSTRING* outerXml) noexcept final
     {
         try
         {
-            *outerXml = detach(this->shim().GetXml());
+            typename D::abi_guard guard(this->shim());
+            *outerXml = detach_abi(this->shim().GetXml());
             return S_OK;
         }
         catch (...)
@@ -1574,87 +2069,55 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlNodeSerializer> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall get_InnerText(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_InnerText(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().InnerText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InnerText());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_InnerText(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_InnerText(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().InnerText(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().InnerText(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlProcessingInstruction> : produce_base<D, Windows::Data::Xml::Dom::IXmlProcessingInstruction>
 {
-    HRESULT __stdcall get_Target(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Target(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Target());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Target());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Data(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Data(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Data());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Data());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Data(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Data(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Data(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Data(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Data::Xml::Dom::IXmlText> : produce_base<D, Windows::Data::Xml::Dom::IXmlText>
 {
-    HRESULT __stdcall abi_SplitText(uint32_t offset, abi_arg_out<Windows::Data::Xml::Dom::IXmlText> secondPart) noexcept override
+    HRESULT __stdcall SplitText(uint32_t offset, ::IUnknown** secondPart) noexcept final
     {
         try
         {
-            *secondPart = detach(this->shim().SplitText(offset));
+            typename D::abi_guard guard(this->shim());
+            *secondPart = detach_abi(this->shim().SplitText(offset));
             return S_OK;
         }
         catch (...)
@@ -1667,780 +2130,30 @@ struct produce<D, Windows::Data::Xml::Dom::IXmlText> : produce_base<D, Windows::
 
 }
 
-namespace Windows::Data::Xml::Dom {
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNodeSelector<D>::SelectSingleNode(hstring_ref xpath) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNodeSelector &>(static_cast<const D &>(*this))->abi_SelectSingleNode(get(xpath), put(node)));
-    return node;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNodeList impl_IXmlNodeSelector<D>::SelectNodes(hstring_ref xpath) const
-{
-    Windows::Data::Xml::Dom::XmlNodeList nodelist { nullptr };
-    check_hresult(static_cast<const IXmlNodeSelector &>(static_cast<const D &>(*this))->abi_SelectNodes(get(xpath), put(nodelist)));
-    return nodelist;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNodeSelector<D>::SelectSingleNodeNS(hstring_ref xpath, const Windows::IInspectable & namespaces) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNodeSelector &>(static_cast<const D &>(*this))->abi_SelectSingleNodeNS(get(xpath), get(namespaces), put(node)));
-    return node;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNodeList impl_IXmlNodeSelector<D>::SelectNodesNS(hstring_ref xpath, const Windows::IInspectable & namespaces) const
-{
-    Windows::Data::Xml::Dom::XmlNodeList nodelist { nullptr };
-    check_hresult(static_cast<const IXmlNodeSelector &>(static_cast<const D &>(*this))->abi_SelectNodesNS(get(xpath), get(namespaces), put(nodelist)));
-    return nodelist;
-}
-
-template <typename D> hstring impl_IXmlNodeSerializer<D>::GetXml() const
-{
-    hstring outerXml;
-    check_hresult(static_cast<const IXmlNodeSerializer &>(static_cast<const D &>(*this))->abi_GetXml(put(outerXml)));
-    return outerXml;
-}
-
-template <typename D> hstring impl_IXmlNodeSerializer<D>::InnerText() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlNodeSerializer &>(static_cast<const D &>(*this))->get_InnerText(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlNodeSerializer<D>::InnerText(hstring_ref value) const
-{
-    check_hresult(static_cast<const IXmlNodeSerializer &>(static_cast<const D &>(*this))->put_InnerText(get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_IXmlNode<D>::NodeValue() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_NodeValue(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlNode<D>::NodeValue(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->put_NodeValue(get(value)));
-}
-
-template <typename D> Windows::Data::Xml::Dom::NodeType impl_IXmlNode<D>::NodeType() const
-{
-    Windows::Data::Xml::Dom::NodeType value {};
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_NodeType(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlNode<D>::NodeName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_NodeName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::ParentNode() const
-{
-    Windows::Data::Xml::Dom::IXmlNode value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_ParentNode(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNodeList impl_IXmlNode<D>::ChildNodes() const
-{
-    Windows::Data::Xml::Dom::XmlNodeList value { nullptr };
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_ChildNodes(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::FirstChild() const
-{
-    Windows::Data::Xml::Dom::IXmlNode value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_FirstChild(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::LastChild() const
-{
-    Windows::Data::Xml::Dom::IXmlNode value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_LastChild(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::PreviousSibling() const
-{
-    Windows::Data::Xml::Dom::IXmlNode value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_PreviousSibling(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::NextSibling() const
-{
-    Windows::Data::Xml::Dom::IXmlNode value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_NextSibling(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap impl_IXmlNode<D>::Attributes() const
-{
-    Windows::Data::Xml::Dom::XmlNamedNodeMap value { nullptr };
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_Attributes(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IXmlNode<D>::HasChildNodes() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_HasChildNodes(&value));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlDocument impl_IXmlNode<D>::OwnerDocument() const
-{
-    Windows::Data::Xml::Dom::XmlDocument value { nullptr };
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_OwnerDocument(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::InsertBefore(const Windows::Data::Xml::Dom::IXmlNode & newChild, const Windows::Data::Xml::Dom::IXmlNode & referenceChild) const
-{
-    Windows::Data::Xml::Dom::IXmlNode insertedChild;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_InsertBefore(get(newChild), get(referenceChild), put(insertedChild)));
-    return insertedChild;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::ReplaceChild(const Windows::Data::Xml::Dom::IXmlNode & newChild, const Windows::Data::Xml::Dom::IXmlNode & referenceChild) const
-{
-    Windows::Data::Xml::Dom::IXmlNode previousChild;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_ReplaceChild(get(newChild), get(referenceChild), put(previousChild)));
-    return previousChild;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::RemoveChild(const Windows::Data::Xml::Dom::IXmlNode & childNode) const
-{
-    Windows::Data::Xml::Dom::IXmlNode removedChild;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_RemoveChild(get(childNode), put(removedChild)));
-    return removedChild;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::AppendChild(const Windows::Data::Xml::Dom::IXmlNode & newChild) const
-{
-    Windows::Data::Xml::Dom::IXmlNode appendedChild;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_AppendChild(get(newChild), put(appendedChild)));
-    return appendedChild;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNode<D>::CloneNode(bool deep) const
-{
-    Windows::Data::Xml::Dom::IXmlNode newNode;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_CloneNode(deep, put(newNode)));
-    return newNode;
-}
-
-template <typename D> Windows::IInspectable impl_IXmlNode<D>::NamespaceUri() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_NamespaceUri(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IXmlNode<D>::LocalName() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_LocalName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IXmlNode<D>::Prefix() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->get_Prefix(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlNode<D>::Normalize() const
-{
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->abi_Normalize());
-}
-
-template <typename D> void impl_IXmlNode<D>::Prefix(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IXmlNode &>(static_cast<const D &>(*this))->put_Prefix(get(value)));
-}
-
-template <typename D> bool impl_IXmlDomImplementation<D>::HasFeature(hstring_ref feature, const Windows::IInspectable & version) const
-{
-    bool featureSupported {};
-    check_hresult(static_cast<const IXmlDomImplementation &>(static_cast<const D &>(*this))->abi_HasFeature(get(feature), get(version), &featureSupported));
-    return featureSupported;
-}
-
-template <typename D> hstring impl_IXmlDocumentType<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlDocumentType &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap impl_IXmlDocumentType<D>::Entities() const
-{
-    Windows::Data::Xml::Dom::XmlNamedNodeMap value { nullptr };
-    check_hresult(static_cast<const IXmlDocumentType &>(static_cast<const D &>(*this))->get_Entities(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNamedNodeMap impl_IXmlDocumentType<D>::Notations() const
-{
-    Windows::Data::Xml::Dom::XmlNamedNodeMap value { nullptr };
-    check_hresult(static_cast<const IXmlDocumentType &>(static_cast<const D &>(*this))->get_Notations(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlAttribute<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlAttribute &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IXmlAttribute<D>::Specified() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlAttribute &>(static_cast<const D &>(*this))->get_Specified(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlAttribute<D>::Value() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlAttribute &>(static_cast<const D &>(*this))->get_Value(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlAttribute<D>::Value(hstring_ref value) const
-{
-    check_hresult(static_cast<const IXmlAttribute &>(static_cast<const D &>(*this))->put_Value(get(value)));
-}
-
-template <typename D> hstring impl_IXmlElement<D>::TagName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->get_TagName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlElement<D>::GetAttribute(hstring_ref attributeName) const
-{
-    hstring attributeValue;
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_GetAttribute(get(attributeName), put(attributeValue)));
-    return attributeValue;
-}
-
-template <typename D> void impl_IXmlElement<D>::SetAttribute(hstring_ref attributeName, hstring_ref attributeValue) const
-{
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_SetAttribute(get(attributeName), get(attributeValue)));
-}
-
-template <typename D> void impl_IXmlElement<D>::RemoveAttribute(hstring_ref attributeName) const
-{
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_RemoveAttribute(get(attributeName)));
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlElement<D>::GetAttributeNode(hstring_ref attributeName) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute attributeNode { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_GetAttributeNode(get(attributeName), put(attributeNode)));
-    return attributeNode;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlElement<D>::SetAttributeNode(const Windows::Data::Xml::Dom::XmlAttribute & newAttribute) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute previousAttribute { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_SetAttributeNode(get(newAttribute), put(previousAttribute)));
-    return previousAttribute;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlElement<D>::RemoveAttributeNode(const Windows::Data::Xml::Dom::XmlAttribute & attributeNode) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute removedAttribute { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_RemoveAttributeNode(get(attributeNode), put(removedAttribute)));
-    return removedAttribute;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNodeList impl_IXmlElement<D>::GetElementsByTagName(hstring_ref tagName) const
-{
-    Windows::Data::Xml::Dom::XmlNodeList elements { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_GetElementsByTagName(get(tagName), put(elements)));
-    return elements;
-}
-
-template <typename D> void impl_IXmlElement<D>::SetAttributeNS(const Windows::IInspectable & namespaceUri, hstring_ref qualifiedName, hstring_ref value) const
-{
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_SetAttributeNS(get(namespaceUri), get(qualifiedName), get(value)));
-}
-
-template <typename D> hstring impl_IXmlElement<D>::GetAttributeNS(const Windows::IInspectable & namespaceUri, hstring_ref localName) const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_GetAttributeNS(get(namespaceUri), get(localName), put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlElement<D>::RemoveAttributeNS(const Windows::IInspectable & namespaceUri, hstring_ref localName) const
-{
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_RemoveAttributeNS(get(namespaceUri), get(localName)));
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlElement<D>::SetAttributeNodeNS(const Windows::Data::Xml::Dom::XmlAttribute & newAttribute) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute previousAttribute { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_SetAttributeNodeNS(get(newAttribute), put(previousAttribute)));
-    return previousAttribute;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlElement<D>::GetAttributeNodeNS(const Windows::IInspectable & namespaceUri, hstring_ref localName) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute previousAttribute { nullptr };
-    check_hresult(static_cast<const IXmlElement &>(static_cast<const D &>(*this))->abi_GetAttributeNodeNS(get(namespaceUri), get(localName), put(previousAttribute)));
-    return previousAttribute;
-}
-
-template <typename D> Windows::IInspectable impl_IDtdNotation<D>::PublicId() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IDtdNotation &>(static_cast<const D &>(*this))->get_PublicId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IDtdNotation<D>::SystemId() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IDtdNotation &>(static_cast<const D &>(*this))->get_SystemId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IDtdEntity<D>::PublicId() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IDtdEntity &>(static_cast<const D &>(*this))->get_PublicId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IDtdEntity<D>::SystemId() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IDtdEntity &>(static_cast<const D &>(*this))->get_SystemId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IDtdEntity<D>::NotationName() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IDtdEntity &>(static_cast<const D &>(*this))->get_NotationName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlProcessingInstruction<D>::Target() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlProcessingInstruction &>(static_cast<const D &>(*this))->get_Target(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlProcessingInstruction<D>::Data() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlProcessingInstruction &>(static_cast<const D &>(*this))->get_Data(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlProcessingInstruction<D>::Data(hstring_ref value) const
-{
-    check_hresult(static_cast<const IXmlProcessingInstruction &>(static_cast<const D &>(*this))->put_Data(get(value)));
-}
-
-template <typename D> hstring impl_IXmlCharacterData<D>::Data() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->get_Data(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IXmlCharacterData<D>::Data(hstring_ref value) const
-{
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->put_Data(get(value)));
-}
-
-template <typename D> uint32_t impl_IXmlCharacterData<D>::Length() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->get_Length(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IXmlCharacterData<D>::SubstringData(uint32_t offset, uint32_t count) const
-{
-    hstring data;
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->abi_SubstringData(offset, count, put(data)));
-    return data;
-}
-
-template <typename D> void impl_IXmlCharacterData<D>::AppendData(hstring_ref data) const
-{
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->abi_AppendData(get(data)));
-}
-
-template <typename D> void impl_IXmlCharacterData<D>::InsertData(uint32_t offset, hstring_ref data) const
-{
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->abi_InsertData(offset, get(data)));
-}
-
-template <typename D> void impl_IXmlCharacterData<D>::DeleteData(uint32_t offset, uint32_t count) const
-{
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->abi_DeleteData(offset, count));
-}
-
-template <typename D> void impl_IXmlCharacterData<D>::ReplaceData(uint32_t offset, uint32_t count, hstring_ref data) const
-{
-    check_hresult(static_cast<const IXmlCharacterData &>(static_cast<const D &>(*this))->abi_ReplaceData(offset, count, get(data)));
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlText impl_IXmlText<D>::SplitText(uint32_t offset) const
-{
-    Windows::Data::Xml::Dom::IXmlText secondPart;
-    check_hresult(static_cast<const IXmlText &>(static_cast<const D &>(*this))->abi_SplitText(offset, put(secondPart)));
-    return secondPart;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlDocumentType impl_IXmlDocument<D>::Doctype() const
-{
-    Windows::Data::Xml::Dom::XmlDocumentType value { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->get_Doctype(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlDomImplementation impl_IXmlDocument<D>::Implementation() const
-{
-    Windows::Data::Xml::Dom::XmlDomImplementation value { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->get_Implementation(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlElement impl_IXmlDocument<D>::DocumentElement() const
-{
-    Windows::Data::Xml::Dom::XmlElement value { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->get_DocumentElement(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlElement impl_IXmlDocument<D>::CreateElement(hstring_ref tagName) const
-{
-    Windows::Data::Xml::Dom::XmlElement newElement { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateElement(get(tagName), put(newElement)));
-    return newElement;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlDocumentFragment impl_IXmlDocument<D>::CreateDocumentFragment() const
-{
-    Windows::Data::Xml::Dom::XmlDocumentFragment newDocumentFragment { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateDocumentFragment(put(newDocumentFragment)));
-    return newDocumentFragment;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlText impl_IXmlDocument<D>::CreateTextNode(hstring_ref data) const
-{
-    Windows::Data::Xml::Dom::XmlText newTextNode { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateTextNode(get(data), put(newTextNode)));
-    return newTextNode;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlComment impl_IXmlDocument<D>::CreateComment(hstring_ref data) const
-{
-    Windows::Data::Xml::Dom::XmlComment newComment { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateComment(get(data), put(newComment)));
-    return newComment;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlProcessingInstruction impl_IXmlDocument<D>::CreateProcessingInstruction(hstring_ref target, hstring_ref data) const
-{
-    Windows::Data::Xml::Dom::XmlProcessingInstruction newProcessingInstruction { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateProcessingInstruction(get(target), get(data), put(newProcessingInstruction)));
-    return newProcessingInstruction;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlDocument<D>::CreateAttribute(hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute newAttribute { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateAttribute(get(name), put(newAttribute)));
-    return newAttribute;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlEntityReference impl_IXmlDocument<D>::CreateEntityReference(hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::XmlEntityReference newEntityReference { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateEntityReference(get(name), put(newEntityReference)));
-    return newEntityReference;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlNodeList impl_IXmlDocument<D>::GetElementsByTagName(hstring_ref tagName) const
-{
-    Windows::Data::Xml::Dom::XmlNodeList elements { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_GetElementsByTagName(get(tagName), put(elements)));
-    return elements;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlCDataSection impl_IXmlDocument<D>::CreateCDataSection(hstring_ref data) const
-{
-    Windows::Data::Xml::Dom::XmlCDataSection newCDataSection { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateCDataSection(get(data), put(newCDataSection)));
-    return newCDataSection;
-}
-
-template <typename D> hstring impl_IXmlDocument<D>::DocumentUri() const
-{
-    hstring value;
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->get_DocumentUri(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlAttribute impl_IXmlDocument<D>::CreateAttributeNS(const Windows::IInspectable & namespaceUri, hstring_ref qualifiedName) const
-{
-    Windows::Data::Xml::Dom::XmlAttribute newAttribute { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateAttributeNS(get(namespaceUri), get(qualifiedName), put(newAttribute)));
-    return newAttribute;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlElement impl_IXmlDocument<D>::CreateElementNS(const Windows::IInspectable & namespaceUri, hstring_ref qualifiedName) const
-{
-    Windows::Data::Xml::Dom::XmlElement newElement { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_CreateElementNS(get(namespaceUri), get(qualifiedName), put(newElement)));
-    return newElement;
-}
-
-template <typename D> Windows::Data::Xml::Dom::XmlElement impl_IXmlDocument<D>::GetElementById(hstring_ref elementId) const
-{
-    Windows::Data::Xml::Dom::XmlElement element { nullptr };
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_GetElementById(get(elementId), put(element)));
-    return element;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlDocument<D>::ImportNode(const Windows::Data::Xml::Dom::IXmlNode & node, bool deep) const
-{
-    Windows::Data::Xml::Dom::IXmlNode newNode;
-    check_hresult(static_cast<const IXmlDocument &>(static_cast<const D &>(*this))->abi_ImportNode(get(node), deep, put(newNode)));
-    return newNode;
-}
-
-template <typename D> uint32_t impl_IXmlNamedNodeMap<D>::Length() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->get_Length(&value));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::Item(uint32_t index) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_Item(index, put(node)));
-    return node;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::GetNamedItem(hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_GetNamedItem(get(name), put(node)));
-    return node;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::SetNamedItem(const Windows::Data::Xml::Dom::IXmlNode & node) const
-{
-    Windows::Data::Xml::Dom::IXmlNode previousNode;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_SetNamedItem(get(node), put(previousNode)));
-    return previousNode;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::RemoveNamedItem(hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::IXmlNode previousNode;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_RemoveNamedItem(get(name), put(previousNode)));
-    return previousNode;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::GetNamedItemNS(const Windows::IInspectable & namespaceUri, hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_GetNamedItemNS(get(namespaceUri), get(name), put(node)));
-    return node;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::RemoveNamedItemNS(const Windows::IInspectable & namespaceUri, hstring_ref name) const
-{
-    Windows::Data::Xml::Dom::IXmlNode previousNode;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_RemoveNamedItemNS(get(namespaceUri), get(name), put(previousNode)));
-    return previousNode;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNamedNodeMap<D>::SetNamedItemNS(const Windows::Data::Xml::Dom::IXmlNode & node) const
-{
-    Windows::Data::Xml::Dom::IXmlNode previousNode;
-    check_hresult(static_cast<const IXmlNamedNodeMap &>(static_cast<const D &>(*this))->abi_SetNamedItemNS(get(node), put(previousNode)));
-    return previousNode;
-}
-
-template <typename D> uint32_t impl_IXmlNodeList<D>::Length() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IXmlNodeList &>(static_cast<const D &>(*this))->get_Length(&value));
-    return value;
-}
-
-template <typename D> Windows::Data::Xml::Dom::IXmlNode impl_IXmlNodeList<D>::Item(uint32_t index) const
-{
-    Windows::Data::Xml::Dom::IXmlNode node;
-    check_hresult(static_cast<const IXmlNodeList &>(static_cast<const D &>(*this))->abi_Item(index, put(node)));
-    return node;
-}
-
-template <typename D> uint32_t impl_IXmlLoadSettings<D>::MaxElementDepth() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->get_MaxElementDepth(&value));
-    return value;
-}
-
-template <typename D> void impl_IXmlLoadSettings<D>::MaxElementDepth(uint32_t value) const
-{
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->put_MaxElementDepth(value));
-}
-
-template <typename D> bool impl_IXmlLoadSettings<D>::ProhibitDtd() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->get_ProhibitDtd(&value));
-    return value;
-}
-
-template <typename D> void impl_IXmlLoadSettings<D>::ProhibitDtd(bool value) const
-{
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->put_ProhibitDtd(value));
-}
-
-template <typename D> bool impl_IXmlLoadSettings<D>::ResolveExternals() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->get_ResolveExternals(&value));
-    return value;
-}
-
-template <typename D> void impl_IXmlLoadSettings<D>::ResolveExternals(bool value) const
-{
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->put_ResolveExternals(value));
-}
-
-template <typename D> bool impl_IXmlLoadSettings<D>::ValidateOnParse() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->get_ValidateOnParse(&value));
-    return value;
-}
-
-template <typename D> void impl_IXmlLoadSettings<D>::ValidateOnParse(bool value) const
-{
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->put_ValidateOnParse(value));
-}
-
-template <typename D> bool impl_IXmlLoadSettings<D>::ElementContentWhiteSpace() const
-{
-    bool value {};
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->get_ElementContentWhiteSpace(&value));
-    return value;
-}
-
-template <typename D> void impl_IXmlLoadSettings<D>::ElementContentWhiteSpace(bool value) const
-{
-    check_hresult(static_cast<const IXmlLoadSettings &>(static_cast<const D &>(*this))->put_ElementContentWhiteSpace(value));
-}
-
-template <typename D> void impl_IXmlDocumentIO<D>::LoadXml(hstring_ref xml) const
-{
-    check_hresult(static_cast<const IXmlDocumentIO &>(static_cast<const D &>(*this))->abi_LoadXml(get(xml)));
-}
-
-template <typename D> void impl_IXmlDocumentIO<D>::LoadXml(hstring_ref xml, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings) const
-{
-    check_hresult(static_cast<const IXmlDocumentIO &>(static_cast<const D &>(*this))->abi_LoadXmlWithSettings(get(xml), get(loadSettings)));
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IXmlDocumentIO<D>::SaveToFileAsync(const Windows::Storage::IStorageFile & file) const
-{
-    Windows::Foundation::IAsyncAction asyncInfo;
-    check_hresult(static_cast<const IXmlDocumentIO &>(static_cast<const D &>(*this))->abi_SaveToFileAsync(get(file), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> void impl_IXmlDocumentIO2<D>::LoadXmlFromBuffer(const Windows::Storage::Streams::IBuffer & buffer) const
-{
-    check_hresult(static_cast<const IXmlDocumentIO2 &>(static_cast<const D &>(*this))->abi_LoadXmlFromBuffer(get(buffer)));
-}
-
-template <typename D> void impl_IXmlDocumentIO2<D>::LoadXmlFromBuffer(const Windows::Storage::Streams::IBuffer & buffer, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings) const
-{
-    check_hresult(static_cast<const IXmlDocumentIO2 &>(static_cast<const D &>(*this))->abi_LoadXmlFromBufferWithSettings(get(buffer), get(loadSettings)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> impl_IXmlDocumentStatics<D>::LoadFromUriAsync(const Windows::Foundation::Uri & uri) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo;
-    check_hresult(static_cast<const IXmlDocumentStatics &>(static_cast<const D &>(*this))->abi_LoadFromUriAsync(get(uri), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> impl_IXmlDocumentStatics<D>::LoadFromUriAsync(const Windows::Foundation::Uri & uri, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo;
-    check_hresult(static_cast<const IXmlDocumentStatics &>(static_cast<const D &>(*this))->abi_LoadFromUriWithSettingsAsync(get(uri), get(loadSettings), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> impl_IXmlDocumentStatics<D>::LoadFromFileAsync(const Windows::Storage::IStorageFile & file) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo;
-    check_hresult(static_cast<const IXmlDocumentStatics &>(static_cast<const D &>(*this))->abi_LoadFromFileAsync(get(file), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> impl_IXmlDocumentStatics<D>::LoadFromFileAsync(const Windows::Storage::IStorageFile & file, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> asyncInfo;
-    check_hresult(static_cast<const IXmlDocumentStatics &>(static_cast<const D &>(*this))->abi_LoadFromFileWithSettingsAsync(get(file), get(loadSettings), put(asyncInfo)));
-    return asyncInfo;
-}
+WINRT_EXPORT namespace winrt::Windows::Data::Xml::Dom {
 
 inline XmlDocument::XmlDocument() :
     XmlDocument(activate_instance<XmlDocument>())
 {}
 
-inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromUriAsync(const Windows::Foundation::Uri & uri)
+inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromUriAsync(Windows::Foundation::Uri const& uri)
 {
-    return get_activation_factory<XmlDocument, IXmlDocumentStatics>().LoadFromUriAsync(uri);
+    return get_activation_factory<XmlDocument, Windows::Data::Xml::Dom::IXmlDocumentStatics>().LoadFromUriAsync(uri);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromUriAsync(const Windows::Foundation::Uri & uri, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings)
+inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromUriAsync(Windows::Foundation::Uri const& uri, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings)
 {
-    return get_activation_factory<XmlDocument, IXmlDocumentStatics>().LoadFromUriAsync(uri, loadSettings);
+    return get_activation_factory<XmlDocument, Windows::Data::Xml::Dom::IXmlDocumentStatics>().LoadFromUriAsync(uri, loadSettings);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromFileAsync(const Windows::Storage::IStorageFile & file)
+inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromFileAsync(Windows::Storage::IStorageFile const& file)
 {
-    return get_activation_factory<XmlDocument, IXmlDocumentStatics>().LoadFromFileAsync(file);
+    return get_activation_factory<XmlDocument, Windows::Data::Xml::Dom::IXmlDocumentStatics>().LoadFromFileAsync(file);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromFileAsync(const Windows::Storage::IStorageFile & file, const Windows::Data::Xml::Dom::XmlLoadSettings & loadSettings)
+inline Windows::Foundation::IAsyncOperation<Windows::Data::Xml::Dom::XmlDocument> XmlDocument::LoadFromFileAsync(Windows::Storage::IStorageFile const& file, Windows::Data::Xml::Dom::XmlLoadSettings const& loadSettings)
 {
-    return get_activation_factory<XmlDocument, IXmlDocumentStatics>().LoadFromFileAsync(file, loadSettings);
+    return get_activation_factory<XmlDocument, Windows::Data::Xml::Dom::IXmlDocumentStatics>().LoadFromFileAsync(file, loadSettings);
 }
 
 inline XmlLoadSettings::XmlLoadSettings() :
@@ -2449,4 +2162,125 @@ inline XmlLoadSettings::XmlLoadSettings() :
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IDtdEntity> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IDtdEntity> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IDtdNotation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IDtdNotation> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlAttribute> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlAttribute> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlCDataSection> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlCDataSection> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlCharacterData> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlCharacterData> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlComment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlComment> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocument> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocument> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocumentFragment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocumentFragment> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocumentIO> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocumentIO> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocumentIO2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocumentIO2> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocumentStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocumentStatics> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDocumentType> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDocumentType> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlDomImplementation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlDomImplementation> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlElement> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlElement> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlEntityReference> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlEntityReference> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlLoadSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlLoadSettings> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlNamedNodeMap> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlNamedNodeMap> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlNode> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlNode> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlNodeList> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlNodeList> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlNodeSelector> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlNodeSelector> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlNodeSerializer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlNodeSerializer> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlProcessingInstruction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlProcessingInstruction> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::IXmlText> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::IXmlText> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::DtdEntity> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::DtdEntity> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::DtdNotation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::DtdNotation> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlAttribute> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlAttribute> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlCDataSection> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlCDataSection> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlComment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlComment> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlDocument> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlDocument> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlDocumentFragment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlDocumentFragment> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlDocumentType> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlDocumentType> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlDomImplementation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlDomImplementation> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlElement> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlElement> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlEntityReference> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlEntityReference> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlLoadSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlLoadSettings> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlNamedNodeMap> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlNamedNodeMap> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlNodeList> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlNodeList> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlProcessingInstruction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlProcessingInstruction> {};
+
+template<> struct hash<winrt::Windows::Data::Xml::Dom::XmlText> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Xml::Dom::XmlText> {};
+
 }
+
+WINRT_WARNING_POP

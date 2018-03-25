@@ -1,22 +1,32 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Data.Html.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Data.Html.2.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> hstring consume_Windows_Data_Html_IHtmlUtilities<D>::ConvertToText(param::hstring const& html) const
+{
+    hstring text{};
+    check_hresult(WINRT_SHIM(Windows::Data::Html::IHtmlUtilities)->ConvertToText(get_abi(html), put_abi(text)));
+    return text;
+}
 
 template <typename D>
 struct produce<D, Windows::Data::Html::IHtmlUtilities> : produce_base<D, Windows::Data::Html::IHtmlUtilities>
 {
-    HRESULT __stdcall abi_ConvertToText(abi_arg_in<hstring> html, abi_arg_out<hstring> text) noexcept override
+    HRESULT __stdcall ConvertToText(HSTRING html, HSTRING* text) noexcept final
     {
         try
         {
-            *text = detach(this->shim().ConvertToText(*reinterpret_cast<const hstring *>(&html)));
+            typename D::abi_guard guard(this->shim());
+            *text = detach_abi(this->shim().ConvertToText(*reinterpret_cast<hstring const*>(&html)));
             return S_OK;
         }
         catch (...)
@@ -29,20 +39,23 @@ struct produce<D, Windows::Data::Html::IHtmlUtilities> : produce_base<D, Windows
 
 }
 
-namespace Windows::Data::Html {
+WINRT_EXPORT namespace winrt::Windows::Data::Html {
 
-template <typename D> hstring impl_IHtmlUtilities<D>::ConvertToText(hstring_ref html) const
+inline hstring HtmlUtilities::ConvertToText(param::hstring const& html)
 {
-    hstring text;
-    check_hresult(static_cast<const IHtmlUtilities &>(static_cast<const D &>(*this))->abi_ConvertToText(get(html), put(text)));
-    return text;
-}
-
-inline hstring HtmlUtilities::ConvertToText(hstring_ref html)
-{
-    return get_activation_factory<HtmlUtilities, IHtmlUtilities>().ConvertToText(html);
+    return get_activation_factory<HtmlUtilities, Windows::Data::Html::IHtmlUtilities>().ConvertToText(html);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Data::Html::IHtmlUtilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Html::IHtmlUtilities> {};
+
+template<> struct hash<winrt::Windows::Data::Html::HtmlUtilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Data::Html::HtmlUtilities> {};
+
 }
+
+WINRT_WARNING_POP

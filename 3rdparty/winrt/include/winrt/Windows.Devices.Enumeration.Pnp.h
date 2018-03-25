@@ -1,68 +1,232 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Devices.Enumeration.3.h"
-#include "internal/Windows.Devices.Enumeration.Pnp.3.h"
-#include "Windows.Devices.Enumeration.h"
-#include "Windows.Foundation.Collections.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Enumeration.2.h"
+#include "winrt/impl/Windows.Devices.Enumeration.Pnp.2.h"
+#include "winrt/Windows.Devices.Enumeration.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectType consume_Windows_Devices_Enumeration_Pnp_IPnpObject<D>::Type() const noexcept
+{
+    Windows::Devices::Enumeration::Pnp::PnpObjectType value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObject)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Enumeration_Pnp_IPnpObject<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObject)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> consume_Windows_Devices_Enumeration_Pnp_IPnpObject<D>::Properties() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObject)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObject<D>::Update(Windows::Devices::Enumeration::Pnp::PnpObjectUpdate const& updateInfo) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObject)->Update(get_abi(updateInfo)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectStatics<D>::CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::hstring const& id, param::async_iterable<hstring> const& requestedProperties) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectStatics)->CreateFromIdAsync(get_abi(type), get_abi(id), get_abi(requestedProperties), put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectStatics<D>::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::async_iterable<hstring> const& requestedProperties) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectStatics)->FindAllAsync(get_abi(type), get_abi(requestedProperties), put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectStatics<D>::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::async_iterable<hstring> const& requestedProperties, param::hstring const& aqsFilter) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectStatics)->FindAllAsyncAqsFilter(get_abi(type), get_abi(requestedProperties), get_abi(aqsFilter), put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectWatcher consume_Windows_Devices_Enumeration_Pnp_IPnpObjectStatics<D>::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::iterable<hstring> const& requestedProperties) const
+{
+    Windows::Devices::Enumeration::Pnp::PnpObjectWatcher watcher{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectStatics)->CreateWatcher(get_abi(type), get_abi(requestedProperties), put_abi(watcher)));
+    return watcher;
+}
+
+template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectWatcher consume_Windows_Devices_Enumeration_Pnp_IPnpObjectStatics<D>::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::iterable<hstring> const& requestedProperties, param::hstring const& aqsFilter) const
+{
+    Windows::Devices::Enumeration::Pnp::PnpObjectWatcher watcher{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectStatics)->CreateWatcherAqsFilter(get_abi(type), get_abi(requestedProperties), get_abi(aqsFilter), put_abi(watcher)));
+    return watcher;
+}
+
+template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectType consume_Windows_Devices_Enumeration_Pnp_IPnpObjectUpdate<D>::Type() const noexcept
+{
+    Windows::Devices::Enumeration::Pnp::PnpObjectType value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Enumeration_Pnp_IPnpObjectUpdate<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectUpdate<D>::Properties() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Added(Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->add_Added(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Added(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>(this, &abi_t<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>::remove_Added, Added(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Added(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->remove_Added(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Updated(Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->add_Updated(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Updated(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>(this, &abi_t<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>::remove_Updated, Updated(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Updated(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->remove_Updated(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Removed(Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->add_Removed(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Removed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>(this, &abi_t<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>::remove_Removed, Removed(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Removed(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->remove_Removed(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::EnumerationCompleted(Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->add_EnumerationCompleted(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::EnumerationCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>(this, &abi_t<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>::remove_EnumerationCompleted, EnumerationCompleted(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::EnumerationCompleted(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->remove_EnumerationCompleted(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Stopped(Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->add_Stopped(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Stopped(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>(this, &abi_t<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>::remove_Stopped, Stopped(handler));
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Stopped(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->remove_Stopped(get_abi(token)));
+}
+
+template <typename D> Windows::Devices::Enumeration::DeviceWatcherStatus consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Status() const noexcept
+{
+    Windows::Devices::Enumeration::DeviceWatcherStatus status{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->get_Status(put_abi(status)));
+    return status;
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Start() const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->Start());
+}
+
+template <typename D> void consume_Windows_Devices_Enumeration_Pnp_IPnpObjectWatcher<D>::Stop() const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher)->Stop());
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObject> : produce_base<D, Windows::Devices::Enumeration::Pnp::IPnpObject>
 {
-    HRESULT __stdcall get_Type(Windows::Devices::Enumeration::Pnp::PnpObjectType * value) noexcept override
+    HRESULT __stdcall get_Type(Windows::Devices::Enumeration::Pnp::PnpObjectType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Update(abi_arg_in<Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate> updateInfo) noexcept override
+    HRESULT __stdcall Update(::IUnknown* updateInfo) noexcept final
     {
         try
         {
-            this->shim().Update(*reinterpret_cast<const Windows::Devices::Enumeration::Pnp::PnpObjectUpdate *>(&updateInfo));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Update(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectUpdate const*>(&updateInfo));
             return S_OK;
         }
         catch (...)
@@ -75,11 +239,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObject> : produce_base
 template <typename D>
 struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produce_base<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>
 {
-    HRESULT __stdcall abi_CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, abi_arg_in<hstring> id, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> requestedProperties, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject>> asyncOp) noexcept override
+    HRESULT __stdcall CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, HSTRING id, ::IUnknown* requestedProperties, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().CreateFromIdAsync(type, *reinterpret_cast<const hstring *>(&id), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&requestedProperties)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().CreateFromIdAsync(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectType const*>(&type), *reinterpret_cast<hstring const*>(&id), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&requestedProperties)));
             return S_OK;
         }
         catch (...)
@@ -89,11 +254,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produ
         }
     }
 
-    HRESULT __stdcall abi_FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> requestedProperties, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection>> asyncOp) noexcept override
+    HRESULT __stdcall FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, ::IUnknown* requestedProperties, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().FindAllAsync(type, *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&requestedProperties)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().FindAllAsync(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectType const*>(&type), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&requestedProperties)));
             return S_OK;
         }
         catch (...)
@@ -103,11 +269,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produ
         }
     }
 
-    HRESULT __stdcall abi_FindAllAsyncAqsFilter(Windows::Devices::Enumeration::Pnp::PnpObjectType type, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> requestedProperties, abi_arg_in<hstring> aqsFilter, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection>> asyncOp) noexcept override
+    HRESULT __stdcall FindAllAsyncAqsFilter(Windows::Devices::Enumeration::Pnp::PnpObjectType type, ::IUnknown* requestedProperties, HSTRING aqsFilter, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().FindAllAsync(type, *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&requestedProperties), *reinterpret_cast<const hstring *>(&aqsFilter)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().FindAllAsync(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectType const*>(&type), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&requestedProperties), *reinterpret_cast<hstring const*>(&aqsFilter)));
             return S_OK;
         }
         catch (...)
@@ -117,11 +284,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produ
         }
     }
 
-    HRESULT __stdcall abi_CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> requestedProperties, abi_arg_out<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> watcher) noexcept override
+    HRESULT __stdcall CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, ::IUnknown* requestedProperties, ::IUnknown** watcher) noexcept final
     {
         try
         {
-            *watcher = detach(this->shim().CreateWatcher(type, *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&requestedProperties)));
+            typename D::abi_guard guard(this->shim());
+            *watcher = detach_abi(this->shim().CreateWatcher(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectType const*>(&type), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&requestedProperties)));
             return S_OK;
         }
         catch (...)
@@ -131,11 +299,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produ
         }
     }
 
-    HRESULT __stdcall abi_CreateWatcherAqsFilter(Windows::Devices::Enumeration::Pnp::PnpObjectType type, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> requestedProperties, abi_arg_in<hstring> aqsFilter, abi_arg_out<Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> watcher) noexcept override
+    HRESULT __stdcall CreateWatcherAqsFilter(Windows::Devices::Enumeration::Pnp::PnpObjectType type, ::IUnknown* requestedProperties, HSTRING aqsFilter, ::IUnknown** watcher) noexcept final
     {
         try
         {
-            *watcher = detach(this->shim().CreateWatcher(type, *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&requestedProperties), *reinterpret_cast<const hstring *>(&aqsFilter)));
+            typename D::abi_guard guard(this->shim());
+            *watcher = detach_abi(this->shim().CreateWatcher(*reinterpret_cast<Windows::Devices::Enumeration::Pnp::PnpObjectType const*>(&type), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&requestedProperties), *reinterpret_cast<hstring const*>(&aqsFilter)));
             return S_OK;
         }
         catch (...)
@@ -149,56 +318,37 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : produ
 template <typename D>
 struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate> : produce_base<D, Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate>
 {
-    HRESULT __stdcall get_Type(Windows::Devices::Enumeration::Pnp::PnpObjectType * value) noexcept override
+    HRESULT __stdcall get_Type(Windows::Devices::Enumeration::Pnp::PnpObjectType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produce_base<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher>
 {
-    HRESULT __stdcall add_Added(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Added(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Added(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Added(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -207,11 +357,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall remove_Added(event_token token) noexcept override
+    HRESULT __stdcall remove_Added(event_token token) noexcept final
     {
         try
         {
-            this->shim().Added(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Added(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -220,11 +371,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall add_Updated(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Updated(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Updated(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Updated(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -233,11 +385,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall remove_Updated(event_token token) noexcept override
+    HRESULT __stdcall remove_Updated(event_token token) noexcept final
     {
         try
         {
-            this->shim().Updated(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Updated(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -246,11 +399,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall add_Removed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Removed(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Removed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Removed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -259,11 +413,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall remove_Removed(event_token token) noexcept override
+    HRESULT __stdcall remove_Removed(event_token token) noexcept final
     {
         try
         {
-            this->shim().Removed(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Removed(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -272,11 +427,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall add_EnumerationCompleted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_EnumerationCompleted(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().EnumerationCompleted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().EnumerationCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -285,11 +441,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall remove_EnumerationCompleted(event_token token) noexcept override
+    HRESULT __stdcall remove_EnumerationCompleted(event_token token) noexcept final
     {
         try
         {
-            this->shim().EnumerationCompleted(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().EnumerationCompleted(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -298,11 +455,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall add_Stopped(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Stopped(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Stopped(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Stopped(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -311,11 +469,12 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall remove_Stopped(event_token token) noexcept override
+    HRESULT __stdcall remove_Stopped(event_token token) noexcept final
     {
         try
         {
-            this->shim().Stopped(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Stopped(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -324,23 +483,18 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall get_Status(Windows::Devices::Enumeration::DeviceWatcherStatus * status) noexcept override
+    HRESULT __stdcall get_Status(Windows::Devices::Enumeration::DeviceWatcherStatus* status) noexcept final
     {
-        try
-        {
-            *status = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *status = detach_abi(this->shim().Status());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Start() noexcept override
+    HRESULT __stdcall Start() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Start();
             return S_OK;
         }
@@ -350,10 +504,11 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
         }
     }
 
-    HRESULT __stdcall abi_Stop() noexcept override
+    HRESULT __stdcall Stop() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Stop();
             return S_OK;
         }
@@ -366,217 +521,61 @@ struct produce<D, Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : produ
 
 }
 
-namespace Windows::Devices::Enumeration::Pnp {
+WINRT_EXPORT namespace winrt::Windows::Devices::Enumeration::Pnp {
 
-template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectType impl_IPnpObjectUpdate<D>::Type() const
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> PnpObject::CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::hstring const& id, param::async_iterable<hstring> const& requestedProperties)
 {
-    Windows::Devices::Enumeration::Pnp::PnpObjectType value {};
-    check_hresult(static_cast<const IPnpObjectUpdate &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
+    return get_activation_factory<PnpObject, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>().CreateFromIdAsync(type, id, requestedProperties);
 }
 
-template <typename D> hstring impl_IPnpObjectUpdate<D>::Id() const
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> PnpObject::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::async_iterable<hstring> const& requestedProperties)
 {
-    hstring value;
-    check_hresult(static_cast<const IPnpObjectUpdate &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
+    return get_activation_factory<PnpObject, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>().FindAllAsync(type, requestedProperties);
 }
 
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> impl_IPnpObjectUpdate<D>::Properties() const
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> PnpObject::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::async_iterable<hstring> const& requestedProperties, param::hstring const& aqsFilter)
 {
-    Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> value;
-    check_hresult(static_cast<const IPnpObjectUpdate &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
+    return get_activation_factory<PnpObject, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>().FindAllAsync(type, requestedProperties, aqsFilter);
 }
 
-template <typename D> event_token impl_IPnpObjectWatcher<D>::Added(const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> & handler) const
+inline Windows::Devices::Enumeration::Pnp::PnpObjectWatcher PnpObject::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::iterable<hstring> const& requestedProperties)
 {
-    event_token token {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->add_Added(get(handler), &token));
-    return token;
+    return get_activation_factory<PnpObject, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>().CreateWatcher(type, requestedProperties);
 }
 
-template <typename D> event_revoker<IPnpObjectWatcher> impl_IPnpObjectWatcher<D>::Added(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObject> & handler) const
+inline Windows::Devices::Enumeration::Pnp::PnpObjectWatcher PnpObject::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType const& type, param::iterable<hstring> const& requestedProperties, param::hstring const& aqsFilter)
 {
-    return impl::make_event_revoker<D, IPnpObjectWatcher>(this, &ABI::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher::remove_Added, Added(handler));
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Added(event_token token) const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->remove_Added(token));
-}
-
-template <typename D> event_token impl_IPnpObjectWatcher<D>::Updated(const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->add_Updated(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPnpObjectWatcher> impl_IPnpObjectWatcher<D>::Updated(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> & handler) const
-{
-    return impl::make_event_revoker<D, IPnpObjectWatcher>(this, &ABI::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher::remove_Updated, Updated(handler));
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Updated(event_token token) const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->remove_Updated(token));
-}
-
-template <typename D> event_token impl_IPnpObjectWatcher<D>::Removed(const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->add_Removed(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPnpObjectWatcher> impl_IPnpObjectWatcher<D>::Removed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> & handler) const
-{
-    return impl::make_event_revoker<D, IPnpObjectWatcher>(this, &ABI::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher::remove_Removed, Removed(handler));
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Removed(event_token token) const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->remove_Removed(token));
-}
-
-template <typename D> event_token impl_IPnpObjectWatcher<D>::EnumerationCompleted(const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->add_EnumerationCompleted(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPnpObjectWatcher> impl_IPnpObjectWatcher<D>::EnumerationCompleted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPnpObjectWatcher>(this, &ABI::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher::remove_EnumerationCompleted, EnumerationCompleted(handler));
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::EnumerationCompleted(event_token token) const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->remove_EnumerationCompleted(token));
-}
-
-template <typename D> event_token impl_IPnpObjectWatcher<D>::Stopped(const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->add_Stopped(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPnpObjectWatcher> impl_IPnpObjectWatcher<D>::Stopped(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::Pnp::PnpObjectWatcher, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPnpObjectWatcher>(this, &ABI::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher::remove_Stopped, Stopped(handler));
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Stopped(event_token token) const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->remove_Stopped(token));
-}
-
-template <typename D> Windows::Devices::Enumeration::DeviceWatcherStatus impl_IPnpObjectWatcher<D>::Status() const
-{
-    Windows::Devices::Enumeration::DeviceWatcherStatus status {};
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->get_Status(&status));
-    return status;
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Start() const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->abi_Start());
-}
-
-template <typename D> void impl_IPnpObjectWatcher<D>::Stop() const
-{
-    check_hresult(static_cast<const IPnpObjectWatcher &>(static_cast<const D &>(*this))->abi_Stop());
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> impl_IPnpObjectStatics<D>::CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, hstring_ref id, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> asyncOp;
-    check_hresult(static_cast<const IPnpObjectStatics &>(static_cast<const D &>(*this))->abi_CreateFromIdAsync(type, get(id), get(requestedProperties), put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> impl_IPnpObjectStatics<D>::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> asyncOp;
-    check_hresult(static_cast<const IPnpObjectStatics &>(static_cast<const D &>(*this))->abi_FindAllAsync(type, get(requestedProperties), put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> impl_IPnpObjectStatics<D>::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties, hstring_ref aqsFilter) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> asyncOp;
-    check_hresult(static_cast<const IPnpObjectStatics &>(static_cast<const D &>(*this))->abi_FindAllAsyncAqsFilter(type, get(requestedProperties), get(aqsFilter), put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectWatcher impl_IPnpObjectStatics<D>::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties) const
-{
-    Windows::Devices::Enumeration::Pnp::PnpObjectWatcher watcher { nullptr };
-    check_hresult(static_cast<const IPnpObjectStatics &>(static_cast<const D &>(*this))->abi_CreateWatcher(type, get(requestedProperties), put(watcher)));
-    return watcher;
-}
-
-template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectWatcher impl_IPnpObjectStatics<D>::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties, hstring_ref aqsFilter) const
-{
-    Windows::Devices::Enumeration::Pnp::PnpObjectWatcher watcher { nullptr };
-    check_hresult(static_cast<const IPnpObjectStatics &>(static_cast<const D &>(*this))->abi_CreateWatcherAqsFilter(type, get(requestedProperties), get(aqsFilter), put(watcher)));
-    return watcher;
-}
-
-template <typename D> Windows::Devices::Enumeration::Pnp::PnpObjectType impl_IPnpObject<D>::Type() const
-{
-    Windows::Devices::Enumeration::Pnp::PnpObjectType value {};
-    check_hresult(static_cast<const IPnpObject &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPnpObject<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPnpObject &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> impl_IPnpObject<D>::Properties() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> value;
-    check_hresult(static_cast<const IPnpObject &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPnpObject<D>::Update(const Windows::Devices::Enumeration::Pnp::PnpObjectUpdate & updateInfo) const
-{
-    check_hresult(static_cast<const IPnpObject &>(static_cast<const D &>(*this))->abi_Update(get(updateInfo)));
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObject> PnpObject::CreateFromIdAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, hstring_ref id, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties)
-{
-    return get_activation_factory<PnpObject, IPnpObjectStatics>().CreateFromIdAsync(type, id, requestedProperties);
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> PnpObject::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties)
-{
-    return get_activation_factory<PnpObject, IPnpObjectStatics>().FindAllAsync(type, requestedProperties);
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::Pnp::PnpObjectCollection> PnpObject::FindAllAsync(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties, hstring_ref aqsFilter)
-{
-    return get_activation_factory<PnpObject, IPnpObjectStatics>().FindAllAsync(type, requestedProperties, aqsFilter);
-}
-
-inline Windows::Devices::Enumeration::Pnp::PnpObjectWatcher PnpObject::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties)
-{
-    return get_activation_factory<PnpObject, IPnpObjectStatics>().CreateWatcher(type, requestedProperties);
-}
-
-inline Windows::Devices::Enumeration::Pnp::PnpObjectWatcher PnpObject::CreateWatcher(Windows::Devices::Enumeration::Pnp::PnpObjectType type, const Windows::Foundation::Collections::IIterable<hstring> & requestedProperties, hstring_ref aqsFilter)
-{
-    return get_activation_factory<PnpObject, IPnpObjectStatics>().CreateWatcher(type, requestedProperties, aqsFilter);
+    return get_activation_factory<PnpObject, Windows::Devices::Enumeration::Pnp::IPnpObjectStatics>().CreateWatcher(type, requestedProperties, aqsFilter);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::IPnpObject> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::IPnpObject> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectUpdate> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::IPnpObjectWatcher> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::PnpObject> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::PnpObject> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectCollection> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectCollection> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectUpdate> {};
+
+template<> struct hash<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectWatcher> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Enumeration::Pnp::PnpObjectWatcher> {};
+
 }
+
+WINRT_WARNING_POP

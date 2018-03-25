@@ -1,166 +1,284 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.UI.Popups.3.h"
-#include "Windows.UI.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Popups.2.h"
+#include "winrt/Windows.UI.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace Windows::UI::Popups {
-
-template <typename L> UICommandInvokedHandler::UICommandInvokedHandler(L lambda) :
-    UICommandInvokedHandler(impl::make_delegate<impl_UICommandInvokedHandler<L>, UICommandInvokedHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> UICommandInvokedHandler::UICommandInvokedHandler(F * function) :
-    UICommandInvokedHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> UICommandInvokedHandler::UICommandInvokedHandler(O * object, M method) :
-    UICommandInvokedHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void UICommandInvokedHandler::operator()(const Windows::UI::Popups::IUICommand & command) const
+template <typename D> hstring consume_Windows_UI_Popups_IMessageDialog<D>::Title() const noexcept
 {
-    check_hresult((*this)->abi_Invoke(get(command)));
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_Title(put_abi(value)));
+    return value;
 }
 
+template <typename D> void consume_Windows_UI_Popups_IMessageDialog<D>::Title(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->put_Title(get_abi(value)));
 }
 
-namespace impl {
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IMessageDialog<D>::Commands() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_Commands(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_UI_Popups_IMessageDialog<D>::DefaultCommandIndex() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_DefaultCommandIndex(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IMessageDialog<D>::DefaultCommandIndex(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->put_DefaultCommandIndex(value));
+}
+
+template <typename D> uint32_t consume_Windows_UI_Popups_IMessageDialog<D>::CancelCommandIndex() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_CancelCommandIndex(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IMessageDialog<D>::CancelCommandIndex(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->put_CancelCommandIndex(value));
+}
+
+template <typename D> hstring consume_Windows_UI_Popups_IMessageDialog<D>::Content() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_Content(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IMessageDialog<D>::Content(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->put_Content(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IMessageDialog<D>::ShowAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> messageDialogAsyncOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->ShowAsync(put_abi(messageDialogAsyncOperation)));
+    return messageDialogAsyncOperation;
+}
+
+template <typename D> Windows::UI::Popups::MessageDialogOptions consume_Windows_UI_Popups_IMessageDialog<D>::Options() const noexcept
+{
+    Windows::UI::Popups::MessageDialogOptions value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->get_Options(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IMessageDialog<D>::Options(Windows::UI::Popups::MessageDialogOptions const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IMessageDialog)->put_Options(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Popups::MessageDialog consume_Windows_UI_Popups_IMessageDialogFactory<D>::Create(param::hstring const& content) const
+{
+    Windows::UI::Popups::MessageDialog messageDialog{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IMessageDialogFactory)->Create(get_abi(content), put_abi(messageDialog)));
+    return messageDialog;
+}
+
+template <typename D> Windows::UI::Popups::MessageDialog consume_Windows_UI_Popups_IMessageDialogFactory<D>::CreateWithTitle(param::hstring const& content, param::hstring const& title) const
+{
+    Windows::UI::Popups::MessageDialog messageDialog{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IMessageDialogFactory)->CreateWithTitle(get_abi(content), get_abi(title), put_abi(messageDialog)));
+    return messageDialog;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IPopupMenu<D>::Commands() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IPopupMenu)->get_Commands(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IPopupMenu<D>::ShowAsync(Windows::Foundation::Point const& invocationPoint) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IPopupMenu)->ShowAsync(get_abi(invocationPoint), put_abi(asyncOperation)));
+    return asyncOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IPopupMenu<D>::ShowForSelectionAsync(Windows::Foundation::Rect const& selection) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IPopupMenu)->ShowAsyncWithRect(get_abi(selection), put_abi(asyncOperation)));
+    return asyncOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> consume_Windows_UI_Popups_IPopupMenu<D>::ShowForSelectionAsync(Windows::Foundation::Rect const& selection, Windows::UI::Popups::Placement const& preferredPlacement) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IPopupMenu)->ShowAsyncWithRectAndPlacement(get_abi(selection), get_abi(preferredPlacement), put_abi(asyncOperation)));
+    return asyncOperation;
+}
+
+template <typename D> hstring consume_Windows_UI_Popups_IUICommand<D>::Label() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->get_Label(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IUICommand<D>::Label(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->put_Label(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Popups::UICommandInvokedHandler consume_Windows_UI_Popups_IUICommand<D>::Invoked() const noexcept
+{
+    Windows::UI::Popups::UICommandInvokedHandler value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->get_Invoked(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IUICommand<D>::Invoked(Windows::UI::Popups::UICommandInvokedHandler const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->put_Invoked(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Popups_IUICommand<D>::Id() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Popups_IUICommand<D>::Id(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Popups::IUICommand)->put_Id(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Popups::UICommand consume_Windows_UI_Popups_IUICommandFactory<D>::Create(param::hstring const& label) const
+{
+    Windows::UI::Popups::UICommand instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IUICommandFactory)->Create(get_abi(label), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Popups::UICommand consume_Windows_UI_Popups_IUICommandFactory<D>::CreateWithHandler(param::hstring const& label, Windows::UI::Popups::UICommandInvokedHandler const& action) const
+{
+    Windows::UI::Popups::UICommand instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IUICommandFactory)->CreateWithHandler(get_abi(label), get_abi(action), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Popups::UICommand consume_Windows_UI_Popups_IUICommandFactory<D>::CreateWithHandlerAndId(param::hstring const& label, Windows::UI::Popups::UICommandInvokedHandler const& action, Windows::Foundation::IInspectable const& commandId) const
+{
+    Windows::UI::Popups::UICommand instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Popups::IUICommandFactory)->CreateWithHandlerAndId(get_abi(label), get_abi(action), get_abi(commandId), put_abi(instance)));
+    return instance;
+}
+
+template <> struct delegate<Windows::UI::Popups::UICommandInvokedHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::UI::Popups::UICommandInvokedHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::UI::Popups::UICommandInvokedHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* command) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::UI::Popups::IUICommand const*>(&command));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
 
 template <typename D>
 struct produce<D, Windows::UI::Popups::IMessageDialog> : produce_base<D, Windows::UI::Popups::IMessageDialog>
 {
-    HRESULT __stdcall get_Title(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Title(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Title());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Title());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Title(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Title(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Title(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Title(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Commands(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand>> value) noexcept override
+    HRESULT __stdcall get_Commands(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Commands());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Commands());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DefaultCommandIndex(uint32_t * value) noexcept override
+    HRESULT __stdcall get_DefaultCommandIndex(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultCommandIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultCommandIndex());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DefaultCommandIndex(uint32_t value) noexcept override
+    HRESULT __stdcall put_DefaultCommandIndex(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().DefaultCommandIndex(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DefaultCommandIndex(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CancelCommandIndex(uint32_t * value) noexcept override
+    HRESULT __stdcall get_CancelCommandIndex(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CancelCommandIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CancelCommandIndex());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CancelCommandIndex(uint32_t value) noexcept override
+    HRESULT __stdcall put_CancelCommandIndex(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().CancelCommandIndex(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CancelCommandIndex(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Content(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Content(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Content());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Content());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Content(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Content(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Content(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Content(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_ShowAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand>> messageDialogAsyncOperation) noexcept override
+    HRESULT __stdcall ShowAsync(::IUnknown** messageDialogAsyncOperation) noexcept final
     {
         try
         {
-            *messageDialogAsyncOperation = detach(this->shim().ShowAsync());
+            typename D::abi_guard guard(this->shim());
+            *messageDialogAsyncOperation = detach_abi(this->shim().ShowAsync());
             return S_OK;
         }
         catch (...)
@@ -170,41 +288,30 @@ struct produce<D, Windows::UI::Popups::IMessageDialog> : produce_base<D, Windows
         }
     }
 
-    HRESULT __stdcall get_Options(Windows::UI::Popups::MessageDialogOptions * value) noexcept override
+    HRESULT __stdcall get_Options(Windows::UI::Popups::MessageDialogOptions* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Options());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Options());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Options(Windows::UI::Popups::MessageDialogOptions value) noexcept override
+    HRESULT __stdcall put_Options(Windows::UI::Popups::MessageDialogOptions value) noexcept final
     {
-        try
-        {
-            this->shim().Options(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Options(*reinterpret_cast<Windows::UI::Popups::MessageDialogOptions const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Popups::IMessageDialogFactory> : produce_base<D, Windows::UI::Popups::IMessageDialogFactory>
 {
-    HRESULT __stdcall abi_Create(abi_arg_in<hstring> content, abi_arg_out<Windows::UI::Popups::IMessageDialog> messageDialog) noexcept override
+    HRESULT __stdcall Create(HSTRING content, ::IUnknown** messageDialog) noexcept final
     {
         try
         {
-            *messageDialog = detach(this->shim().Create(*reinterpret_cast<const hstring *>(&content)));
+            typename D::abi_guard guard(this->shim());
+            *messageDialog = detach_abi(this->shim().Create(*reinterpret_cast<hstring const*>(&content)));
             return S_OK;
         }
         catch (...)
@@ -214,11 +321,12 @@ struct produce<D, Windows::UI::Popups::IMessageDialogFactory> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_CreateWithTitle(abi_arg_in<hstring> content, abi_arg_in<hstring> title, abi_arg_out<Windows::UI::Popups::IMessageDialog> messageDialog) noexcept override
+    HRESULT __stdcall CreateWithTitle(HSTRING content, HSTRING title, ::IUnknown** messageDialog) noexcept final
     {
         try
         {
-            *messageDialog = detach(this->shim().CreateWithTitle(*reinterpret_cast<const hstring *>(&content), *reinterpret_cast<const hstring *>(&title)));
+            typename D::abi_guard guard(this->shim());
+            *messageDialog = detach_abi(this->shim().CreateWithTitle(*reinterpret_cast<hstring const*>(&content), *reinterpret_cast<hstring const*>(&title)));
             return S_OK;
         }
         catch (...)
@@ -232,25 +340,19 @@ struct produce<D, Windows::UI::Popups::IMessageDialogFactory> : produce_base<D, 
 template <typename D>
 struct produce<D, Windows::UI::Popups::IPopupMenu> : produce_base<D, Windows::UI::Popups::IPopupMenu>
 {
-    HRESULT __stdcall get_Commands(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand>> value) noexcept override
+    HRESULT __stdcall get_Commands(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Commands());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Commands());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_ShowAsync(abi_arg_in<Windows::Foundation::Point> invocationPoint, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand>> asyncOperation) noexcept override
+    HRESULT __stdcall ShowAsync(Windows::Foundation::Point invocationPoint, ::IUnknown** asyncOperation) noexcept final
     {
         try
         {
-            *asyncOperation = detach(this->shim().ShowAsync(*reinterpret_cast<const Windows::Foundation::Point *>(&invocationPoint)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOperation = detach_abi(this->shim().ShowAsync(*reinterpret_cast<Windows::Foundation::Point const*>(&invocationPoint)));
             return S_OK;
         }
         catch (...)
@@ -260,11 +362,12 @@ struct produce<D, Windows::UI::Popups::IPopupMenu> : produce_base<D, Windows::UI
         }
     }
 
-    HRESULT __stdcall abi_ShowAsyncWithRect(abi_arg_in<Windows::Foundation::Rect> selection, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand>> asyncOperation) noexcept override
+    HRESULT __stdcall ShowAsyncWithRect(Windows::Foundation::Rect selection, ::IUnknown** asyncOperation) noexcept final
     {
         try
         {
-            *asyncOperation = detach(this->shim().ShowForSelectionAsync(*reinterpret_cast<const Windows::Foundation::Rect *>(&selection)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOperation = detach_abi(this->shim().ShowForSelectionAsync(*reinterpret_cast<Windows::Foundation::Rect const*>(&selection)));
             return S_OK;
         }
         catch (...)
@@ -274,11 +377,12 @@ struct produce<D, Windows::UI::Popups::IPopupMenu> : produce_base<D, Windows::UI
         }
     }
 
-    HRESULT __stdcall abi_ShowAsyncWithRectAndPlacement(abi_arg_in<Windows::Foundation::Rect> selection, Windows::UI::Popups::Placement preferredPlacement, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand>> asyncOperation) noexcept override
+    HRESULT __stdcall ShowAsyncWithRectAndPlacement(Windows::Foundation::Rect selection, Windows::UI::Popups::Placement preferredPlacement, ::IUnknown** asyncOperation) noexcept final
     {
         try
         {
-            *asyncOperation = detach(this->shim().ShowForSelectionAsync(*reinterpret_cast<const Windows::Foundation::Rect *>(&selection), preferredPlacement));
+            typename D::abi_guard guard(this->shim());
+            *asyncOperation = detach_abi(this->shim().ShowForSelectionAsync(*reinterpret_cast<Windows::Foundation::Rect const*>(&selection), *reinterpret_cast<Windows::UI::Popups::Placement const*>(&preferredPlacement)));
             return S_OK;
         }
         catch (...)
@@ -292,96 +396,58 @@ struct produce<D, Windows::UI::Popups::IPopupMenu> : produce_base<D, Windows::UI
 template <typename D>
 struct produce<D, Windows::UI::Popups::IUICommand> : produce_base<D, Windows::UI::Popups::IUICommand>
 {
-    HRESULT __stdcall get_Label(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Label(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Label());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Label());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Label(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Label(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Label(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Label(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Invoked(abi_arg_out<Windows::UI::Popups::UICommandInvokedHandler> value) noexcept override
+    HRESULT __stdcall get_Invoked(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Invoked());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Invoked());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Invoked(abi_arg_in<Windows::UI::Popups::UICommandInvokedHandler> value) noexcept override
+    HRESULT __stdcall put_Invoked(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Invoked(*reinterpret_cast<const Windows::UI::Popups::UICommandInvokedHandler *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Invoked(*reinterpret_cast<Windows::UI::Popups::UICommandInvokedHandler const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Id(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Id(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_Id(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Id(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Id(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Popups::IUICommandFactory> : produce_base<D, Windows::UI::Popups::IUICommandFactory>
 {
-    HRESULT __stdcall abi_Create(abi_arg_in<hstring> label, abi_arg_out<Windows::UI::Popups::IUICommand> instance) noexcept override
+    HRESULT __stdcall Create(HSTRING label, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().Create(*reinterpret_cast<const hstring *>(&label)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().Create(*reinterpret_cast<hstring const*>(&label)));
             return S_OK;
         }
         catch (...)
@@ -391,11 +457,12 @@ struct produce<D, Windows::UI::Popups::IUICommandFactory> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall abi_CreateWithHandler(abi_arg_in<hstring> label, abi_arg_in<Windows::UI::Popups::UICommandInvokedHandler> action, abi_arg_out<Windows::UI::Popups::IUICommand> instance) noexcept override
+    HRESULT __stdcall CreateWithHandler(HSTRING label, ::IUnknown* action, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateWithHandler(*reinterpret_cast<const hstring *>(&label), *reinterpret_cast<const Windows::UI::Popups::UICommandInvokedHandler *>(&action)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateWithHandler(*reinterpret_cast<hstring const*>(&label), *reinterpret_cast<Windows::UI::Popups::UICommandInvokedHandler const*>(&action)));
             return S_OK;
         }
         catch (...)
@@ -405,11 +472,12 @@ struct produce<D, Windows::UI::Popups::IUICommandFactory> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall abi_CreateWithHandlerAndId(abi_arg_in<hstring> label, abi_arg_in<Windows::UI::Popups::UICommandInvokedHandler> action, abi_arg_in<Windows::IInspectable> commandId, abi_arg_out<Windows::UI::Popups::IUICommand> instance) noexcept override
+    HRESULT __stdcall CreateWithHandlerAndId(HSTRING label, ::IUnknown* action, ::IUnknown* commandId, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateWithHandlerAndId(*reinterpret_cast<const hstring *>(&label), *reinterpret_cast<const Windows::UI::Popups::UICommandInvokedHandler *>(&action), *reinterpret_cast<const Windows::IInspectable *>(&commandId)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateWithHandlerAndId(*reinterpret_cast<hstring const*>(&label), *reinterpret_cast<Windows::UI::Popups::UICommandInvokedHandler const*>(&action), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&commandId)));
             return S_OK;
         }
         catch (...)
@@ -422,187 +490,14 @@ struct produce<D, Windows::UI::Popups::IUICommandFactory> : produce_base<D, Wind
 
 }
 
-namespace Windows::UI::Popups {
+WINRT_EXPORT namespace winrt::Windows::UI::Popups {
 
-template <typename D> hstring impl_IMessageDialog<D>::Title() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_Title(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IMessageDialog<D>::Title(hstring_ref value) const
-{
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->put_Title(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_IMessageDialog<D>::Commands() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_Commands(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IMessageDialog<D>::DefaultCommandIndex() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_DefaultCommandIndex(&value));
-    return value;
-}
-
-template <typename D> void impl_IMessageDialog<D>::DefaultCommandIndex(uint32_t value) const
-{
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->put_DefaultCommandIndex(value));
-}
-
-template <typename D> uint32_t impl_IMessageDialog<D>::CancelCommandIndex() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_CancelCommandIndex(&value));
-    return value;
-}
-
-template <typename D> void impl_IMessageDialog<D>::CancelCommandIndex(uint32_t value) const
-{
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->put_CancelCommandIndex(value));
-}
-
-template <typename D> hstring impl_IMessageDialog<D>::Content() const
-{
-    hstring value;
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_Content(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IMessageDialog<D>::Content(hstring_ref value) const
-{
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->put_Content(get(value)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_IMessageDialog<D>::ShowAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> messageDialogAsyncOperation;
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->abi_ShowAsync(put(messageDialogAsyncOperation)));
-    return messageDialogAsyncOperation;
-}
-
-template <typename D> Windows::UI::Popups::MessageDialogOptions impl_IMessageDialog<D>::Options() const
-{
-    Windows::UI::Popups::MessageDialogOptions value {};
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->get_Options(&value));
-    return value;
-}
-
-template <typename D> void impl_IMessageDialog<D>::Options(Windows::UI::Popups::MessageDialogOptions value) const
-{
-    check_hresult(static_cast<const IMessageDialog &>(static_cast<const D &>(*this))->put_Options(value));
-}
-
-template <typename D> Windows::UI::Popups::MessageDialog impl_IMessageDialogFactory<D>::Create(hstring_ref content) const
-{
-    Windows::UI::Popups::MessageDialog messageDialog { nullptr };
-    check_hresult(static_cast<const IMessageDialogFactory &>(static_cast<const D &>(*this))->abi_Create(get(content), put(messageDialog)));
-    return messageDialog;
-}
-
-template <typename D> Windows::UI::Popups::MessageDialog impl_IMessageDialogFactory<D>::CreateWithTitle(hstring_ref content, hstring_ref title) const
-{
-    Windows::UI::Popups::MessageDialog messageDialog { nullptr };
-    check_hresult(static_cast<const IMessageDialogFactory &>(static_cast<const D &>(*this))->abi_CreateWithTitle(get(content), get(title), put(messageDialog)));
-    return messageDialog;
-}
-
-template <typename D> hstring impl_IUICommand<D>::Label() const
-{
-    hstring value;
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->get_Label(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IUICommand<D>::Label(hstring_ref value) const
-{
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->put_Label(get(value)));
-}
-
-template <typename D> Windows::UI::Popups::UICommandInvokedHandler impl_IUICommand<D>::Invoked() const
-{
-    Windows::UI::Popups::UICommandInvokedHandler value {};
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->get_Invoked(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IUICommand<D>::Invoked(const Windows::UI::Popups::UICommandInvokedHandler & value) const
-{
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->put_Invoked(get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_IUICommand<D>::Id() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IUICommand<D>::Id(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IUICommand &>(static_cast<const D &>(*this))->put_Id(get(value)));
-}
-
-template <typename D> Windows::UI::Popups::UICommand impl_IUICommandFactory<D>::Create(hstring_ref label) const
-{
-    Windows::UI::Popups::UICommand instance { nullptr };
-    check_hresult(static_cast<const IUICommandFactory &>(static_cast<const D &>(*this))->abi_Create(get(label), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Popups::UICommand impl_IUICommandFactory<D>::CreateWithHandler(hstring_ref label, const Windows::UI::Popups::UICommandInvokedHandler & action) const
-{
-    Windows::UI::Popups::UICommand instance { nullptr };
-    check_hresult(static_cast<const IUICommandFactory &>(static_cast<const D &>(*this))->abi_CreateWithHandler(get(label), get(action), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Popups::UICommand impl_IUICommandFactory<D>::CreateWithHandlerAndId(hstring_ref label, const Windows::UI::Popups::UICommandInvokedHandler & action, const Windows::IInspectable & commandId) const
-{
-    Windows::UI::Popups::UICommand instance { nullptr };
-    check_hresult(static_cast<const IUICommandFactory &>(static_cast<const D &>(*this))->abi_CreateWithHandlerAndId(get(label), get(action), get(commandId), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_IPopupMenu<D>::Commands() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
-    check_hresult(static_cast<const IPopupMenu &>(static_cast<const D &>(*this))->get_Commands(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_IPopupMenu<D>::ShowAsync(const Windows::Foundation::Point & invocationPoint) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation;
-    check_hresult(static_cast<const IPopupMenu &>(static_cast<const D &>(*this))->abi_ShowAsync(get(invocationPoint), put(asyncOperation)));
-    return asyncOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_IPopupMenu<D>::ShowForSelectionAsync(const Windows::Foundation::Rect & selection) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation;
-    check_hresult(static_cast<const IPopupMenu &>(static_cast<const D &>(*this))->abi_ShowAsyncWithRect(get(selection), put(asyncOperation)));
-    return asyncOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_IPopupMenu<D>::ShowForSelectionAsync(const Windows::Foundation::Rect & selection, Windows::UI::Popups::Placement preferredPlacement) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncOperation;
-    check_hresult(static_cast<const IPopupMenu &>(static_cast<const D &>(*this))->abi_ShowAsyncWithRectAndPlacement(get(selection), preferredPlacement, put(asyncOperation)));
-    return asyncOperation;
-}
-
-inline MessageDialog::MessageDialog(hstring_ref content) :
-    MessageDialog(get_activation_factory<MessageDialog, IMessageDialogFactory>().Create(content))
+inline MessageDialog::MessageDialog(param::hstring const& content) :
+    MessageDialog(get_activation_factory<MessageDialog, Windows::UI::Popups::IMessageDialogFactory>().Create(content))
 {}
 
-inline MessageDialog::MessageDialog(hstring_ref content, hstring_ref title) :
-    MessageDialog(get_activation_factory<MessageDialog, IMessageDialogFactory>().CreateWithTitle(content, title))
+inline MessageDialog::MessageDialog(param::hstring const& content, param::hstring const& title) :
+    MessageDialog(get_activation_factory<MessageDialog, Windows::UI::Popups::IMessageDialogFactory>().CreateWithTitle(content, title))
 {}
 
 inline PopupMenu::PopupMenu() :
@@ -613,22 +508,70 @@ inline UICommand::UICommand() :
     UICommand(activate_instance<UICommand>())
 {}
 
-inline UICommand::UICommand(hstring_ref label) :
-    UICommand(get_activation_factory<UICommand, IUICommandFactory>().Create(label))
+inline UICommand::UICommand(param::hstring const& label) :
+    UICommand(get_activation_factory<UICommand, Windows::UI::Popups::IUICommandFactory>().Create(label))
 {}
 
-inline UICommand::UICommand(hstring_ref label, const Windows::UI::Popups::UICommandInvokedHandler & action) :
-    UICommand(get_activation_factory<UICommand, IUICommandFactory>().CreateWithHandler(label, action))
+inline UICommand::UICommand(param::hstring const& label, Windows::UI::Popups::UICommandInvokedHandler const& action) :
+    UICommand(get_activation_factory<UICommand, Windows::UI::Popups::IUICommandFactory>().CreateWithHandler(label, action))
 {}
 
-inline UICommand::UICommand(hstring_ref label, const Windows::UI::Popups::UICommandInvokedHandler & action, const Windows::IInspectable & commandId) :
-    UICommand(get_activation_factory<UICommand, IUICommandFactory>().CreateWithHandlerAndId(label, action, commandId))
+inline UICommand::UICommand(param::hstring const& label, Windows::UI::Popups::UICommandInvokedHandler const& action, Windows::Foundation::IInspectable const& commandId) :
+    UICommand(get_activation_factory<UICommand, Windows::UI::Popups::IUICommandFactory>().CreateWithHandlerAndId(label, action, commandId))
 {}
 
 inline UICommandSeparator::UICommandSeparator() :
     UICommandSeparator(activate_instance<UICommandSeparator>())
 {}
 
+template <typename L> UICommandInvokedHandler::UICommandInvokedHandler(L handler) :
+    UICommandInvokedHandler(impl::make_delegate<UICommandInvokedHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> UICommandInvokedHandler::UICommandInvokedHandler(F* handler) :
+    UICommandInvokedHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> UICommandInvokedHandler::UICommandInvokedHandler(O* object, M method) :
+    UICommandInvokedHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void UICommandInvokedHandler::operator()(Windows::UI::Popups::IUICommand const& command) const
+{
+    check_hresult((*(abi_t<UICommandInvokedHandler>**)this)->Invoke(get_abi(command)));
 }
 
 }
+
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Popups::IMessageDialog> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::IMessageDialog> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::IMessageDialogFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::IMessageDialogFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::IPopupMenu> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::IPopupMenu> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::IUICommand> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::IUICommand> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::IUICommandFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::IUICommandFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::MessageDialog> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::MessageDialog> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::PopupMenu> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::PopupMenu> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::UICommand> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::UICommand> {};
+
+template<> struct hash<winrt::Windows::UI::Popups::UICommandSeparator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Popups::UICommandSeparator> {};
+
+}
+
+WINRT_WARNING_POP

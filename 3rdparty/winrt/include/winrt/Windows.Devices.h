@@ -1,101 +1,123 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Devices.Adc.Provider.3.h"
-#include "internal/Windows.Devices.Pwm.Provider.3.h"
-#include "internal/Windows.Devices.Gpio.Provider.3.h"
-#include "internal/Windows.Devices.I2c.Provider.3.h"
-#include "internal/Windows.Devices.Spi.Provider.3.h"
-#include "internal/Windows.Devices.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Adc.Provider.2.h"
+#include "winrt/impl/Windows.Devices.Gpio.Provider.2.h"
+#include "winrt/impl/Windows.Devices.I2c.Provider.2.h"
+#include "winrt/impl/Windows.Devices.Pwm.Provider.2.h"
+#include "winrt/impl/Windows.Devices.Spi.Provider.2.h"
+#include "winrt/impl/Windows.Devices.2.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Devices::Adc::Provider::IAdcControllerProvider consume_Windows_Devices_ILowLevelDevicesAggregateProvider<D>::AdcControllerProvider() const noexcept
+{
+    Windows::Devices::Adc::Provider::IAdcControllerProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProvider)->get_AdcControllerProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Pwm::Provider::IPwmControllerProvider consume_Windows_Devices_ILowLevelDevicesAggregateProvider<D>::PwmControllerProvider() const noexcept
+{
+    Windows::Devices::Pwm::Provider::IPwmControllerProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProvider)->get_PwmControllerProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Gpio::Provider::IGpioControllerProvider consume_Windows_Devices_ILowLevelDevicesAggregateProvider<D>::GpioControllerProvider() const noexcept
+{
+    Windows::Devices::Gpio::Provider::IGpioControllerProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProvider)->get_GpioControllerProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::I2c::Provider::II2cControllerProvider consume_Windows_Devices_ILowLevelDevicesAggregateProvider<D>::I2cControllerProvider() const noexcept
+{
+    Windows::Devices::I2c::Provider::II2cControllerProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProvider)->get_I2cControllerProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Spi::Provider::ISpiControllerProvider consume_Windows_Devices_ILowLevelDevicesAggregateProvider<D>::SpiControllerProvider() const noexcept
+{
+    Windows::Devices::Spi::Provider::ISpiControllerProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProvider)->get_SpiControllerProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::LowLevelDevicesAggregateProvider consume_Windows_Devices_ILowLevelDevicesAggregateProviderFactory<D>::Create(Windows::Devices::Adc::Provider::IAdcControllerProvider const& adc, Windows::Devices::Pwm::Provider::IPwmControllerProvider const& pwm, Windows::Devices::Gpio::Provider::IGpioControllerProvider const& gpio, Windows::Devices::I2c::Provider::II2cControllerProvider const& i2c, Windows::Devices::Spi::Provider::ISpiControllerProvider const& spi) const
+{
+    Windows::Devices::LowLevelDevicesAggregateProvider value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::ILowLevelDevicesAggregateProviderFactory)->Create(get_abi(adc), get_abi(pwm), get_abi(gpio), get_abi(i2c), get_abi(spi), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::ILowLevelDevicesAggregateProvider consume_Windows_Devices_ILowLevelDevicesControllerStatics<D>::DefaultProvider() const noexcept
+{
+    Windows::Devices::ILowLevelDevicesAggregateProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesControllerStatics)->get_DefaultProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_ILowLevelDevicesControllerStatics<D>::DefaultProvider(Windows::Devices::ILowLevelDevicesAggregateProvider const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::ILowLevelDevicesControllerStatics)->put_DefaultProvider(get_abi(value)));
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::ILowLevelDevicesAggregateProvider> : produce_base<D, Windows::Devices::ILowLevelDevicesAggregateProvider>
 {
-    HRESULT __stdcall get_AdcControllerProvider(abi_arg_out<Windows::Devices::Adc::Provider::IAdcControllerProvider> value) noexcept override
+    HRESULT __stdcall get_AdcControllerProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AdcControllerProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AdcControllerProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PwmControllerProvider(abi_arg_out<Windows::Devices::Pwm::Provider::IPwmControllerProvider> value) noexcept override
+    HRESULT __stdcall get_PwmControllerProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PwmControllerProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PwmControllerProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_GpioControllerProvider(abi_arg_out<Windows::Devices::Gpio::Provider::IGpioControllerProvider> value) noexcept override
+    HRESULT __stdcall get_GpioControllerProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().GpioControllerProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().GpioControllerProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_I2cControllerProvider(abi_arg_out<Windows::Devices::I2c::Provider::II2cControllerProvider> value) noexcept override
+    HRESULT __stdcall get_I2cControllerProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().I2cControllerProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().I2cControllerProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SpiControllerProvider(abi_arg_out<Windows::Devices::Spi::Provider::ISpiControllerProvider> value) noexcept override
+    HRESULT __stdcall get_SpiControllerProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SpiControllerProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SpiControllerProvider());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::ILowLevelDevicesAggregateProviderFactory> : produce_base<D, Windows::Devices::ILowLevelDevicesAggregateProviderFactory>
 {
-    HRESULT __stdcall abi_Create(abi_arg_in<Windows::Devices::Adc::Provider::IAdcControllerProvider> adc, abi_arg_in<Windows::Devices::Pwm::Provider::IPwmControllerProvider> pwm, abi_arg_in<Windows::Devices::Gpio::Provider::IGpioControllerProvider> gpio, abi_arg_in<Windows::Devices::I2c::Provider::II2cControllerProvider> i2c, abi_arg_in<Windows::Devices::Spi::Provider::ISpiControllerProvider> spi, abi_arg_out<Windows::Devices::ILowLevelDevicesAggregateProvider> value) noexcept override
+    HRESULT __stdcall Create(::IUnknown* adc, ::IUnknown* pwm, ::IUnknown* gpio, ::IUnknown* i2c, ::IUnknown* spi, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Create(*reinterpret_cast<const Windows::Devices::Adc::Provider::IAdcControllerProvider *>(&adc), *reinterpret_cast<const Windows::Devices::Pwm::Provider::IPwmControllerProvider *>(&pwm), *reinterpret_cast<const Windows::Devices::Gpio::Provider::IGpioControllerProvider *>(&gpio), *reinterpret_cast<const Windows::Devices::I2c::Provider::II2cControllerProvider *>(&i2c), *reinterpret_cast<const Windows::Devices::Spi::Provider::ISpiControllerProvider *>(&spi)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Create(*reinterpret_cast<Windows::Devices::Adc::Provider::IAdcControllerProvider const*>(&adc), *reinterpret_cast<Windows::Devices::Pwm::Provider::IPwmControllerProvider const*>(&pwm), *reinterpret_cast<Windows::Devices::Gpio::Provider::IGpioControllerProvider const*>(&gpio), *reinterpret_cast<Windows::Devices::I2c::Provider::II2cControllerProvider const*>(&i2c), *reinterpret_cast<Windows::Devices::Spi::Provider::ISpiControllerProvider const*>(&spi)));
             return S_OK;
         }
         catch (...)
@@ -113,106 +135,61 @@ struct produce<D, Windows::Devices::ILowLevelDevicesController> : produce_base<D
 template <typename D>
 struct produce<D, Windows::Devices::ILowLevelDevicesControllerStatics> : produce_base<D, Windows::Devices::ILowLevelDevicesControllerStatics>
 {
-    HRESULT __stdcall get_DefaultProvider(abi_arg_out<Windows::Devices::ILowLevelDevicesAggregateProvider> value) noexcept override
+    HRESULT __stdcall get_DefaultProvider(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DefaultProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DefaultProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DefaultProvider(abi_arg_in<Windows::Devices::ILowLevelDevicesAggregateProvider> value) noexcept override
+    HRESULT __stdcall put_DefaultProvider(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().DefaultProvider(*reinterpret_cast<const Windows::Devices::ILowLevelDevicesAggregateProvider *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DefaultProvider(*reinterpret_cast<Windows::Devices::ILowLevelDevicesAggregateProvider const*>(&value));
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Devices {
+WINRT_EXPORT namespace winrt::Windows::Devices {
 
-template <typename D> Windows::Devices::Adc::Provider::IAdcControllerProvider impl_ILowLevelDevicesAggregateProvider<D>::AdcControllerProvider() const
-{
-    Windows::Devices::Adc::Provider::IAdcControllerProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProvider &>(static_cast<const D &>(*this))->get_AdcControllerProvider(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Pwm::Provider::IPwmControllerProvider impl_ILowLevelDevicesAggregateProvider<D>::PwmControllerProvider() const
-{
-    Windows::Devices::Pwm::Provider::IPwmControllerProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProvider &>(static_cast<const D &>(*this))->get_PwmControllerProvider(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Gpio::Provider::IGpioControllerProvider impl_ILowLevelDevicesAggregateProvider<D>::GpioControllerProvider() const
-{
-    Windows::Devices::Gpio::Provider::IGpioControllerProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProvider &>(static_cast<const D &>(*this))->get_GpioControllerProvider(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::I2c::Provider::II2cControllerProvider impl_ILowLevelDevicesAggregateProvider<D>::I2cControllerProvider() const
-{
-    Windows::Devices::I2c::Provider::II2cControllerProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProvider &>(static_cast<const D &>(*this))->get_I2cControllerProvider(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Spi::Provider::ISpiControllerProvider impl_ILowLevelDevicesAggregateProvider<D>::SpiControllerProvider() const
-{
-    Windows::Devices::Spi::Provider::ISpiControllerProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProvider &>(static_cast<const D &>(*this))->get_SpiControllerProvider(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::LowLevelDevicesAggregateProvider impl_ILowLevelDevicesAggregateProviderFactory<D>::Create(const Windows::Devices::Adc::Provider::IAdcControllerProvider & adc, const Windows::Devices::Pwm::Provider::IPwmControllerProvider & pwm, const Windows::Devices::Gpio::Provider::IGpioControllerProvider & gpio, const Windows::Devices::I2c::Provider::II2cControllerProvider & i2c, const Windows::Devices::Spi::Provider::ISpiControllerProvider & spi) const
-{
-    Windows::Devices::LowLevelDevicesAggregateProvider value { nullptr };
-    check_hresult(static_cast<const ILowLevelDevicesAggregateProviderFactory &>(static_cast<const D &>(*this))->abi_Create(get(adc), get(pwm), get(gpio), get(i2c), get(spi), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::ILowLevelDevicesAggregateProvider impl_ILowLevelDevicesControllerStatics<D>::DefaultProvider() const
-{
-    Windows::Devices::ILowLevelDevicesAggregateProvider value;
-    check_hresult(static_cast<const ILowLevelDevicesControllerStatics &>(static_cast<const D &>(*this))->get_DefaultProvider(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ILowLevelDevicesControllerStatics<D>::DefaultProvider(const Windows::Devices::ILowLevelDevicesAggregateProvider & value) const
-{
-    check_hresult(static_cast<const ILowLevelDevicesControllerStatics &>(static_cast<const D &>(*this))->put_DefaultProvider(get(value)));
-}
-
-inline LowLevelDevicesAggregateProvider::LowLevelDevicesAggregateProvider(const Windows::Devices::Adc::Provider::IAdcControllerProvider & adc, const Windows::Devices::Pwm::Provider::IPwmControllerProvider & pwm, const Windows::Devices::Gpio::Provider::IGpioControllerProvider & gpio, const Windows::Devices::I2c::Provider::II2cControllerProvider & i2c, const Windows::Devices::Spi::Provider::ISpiControllerProvider & spi) :
-    LowLevelDevicesAggregateProvider(get_activation_factory<LowLevelDevicesAggregateProvider, ILowLevelDevicesAggregateProviderFactory>().Create(adc, pwm, gpio, i2c, spi))
+inline LowLevelDevicesAggregateProvider::LowLevelDevicesAggregateProvider(Windows::Devices::Adc::Provider::IAdcControllerProvider const& adc, Windows::Devices::Pwm::Provider::IPwmControllerProvider const& pwm, Windows::Devices::Gpio::Provider::IGpioControllerProvider const& gpio, Windows::Devices::I2c::Provider::II2cControllerProvider const& i2c, Windows::Devices::Spi::Provider::ISpiControllerProvider const& spi) :
+    LowLevelDevicesAggregateProvider(get_activation_factory<LowLevelDevicesAggregateProvider, Windows::Devices::ILowLevelDevicesAggregateProviderFactory>().Create(adc, pwm, gpio, i2c, spi))
 {}
 
 inline Windows::Devices::ILowLevelDevicesAggregateProvider LowLevelDevicesController::DefaultProvider()
 {
-    return get_activation_factory<LowLevelDevicesController, ILowLevelDevicesControllerStatics>().DefaultProvider();
+    return get_activation_factory<LowLevelDevicesController, Windows::Devices::ILowLevelDevicesControllerStatics>().DefaultProvider();
 }
 
-inline void LowLevelDevicesController::DefaultProvider(const Windows::Devices::ILowLevelDevicesAggregateProvider & value)
+inline void LowLevelDevicesController::DefaultProvider(Windows::Devices::ILowLevelDevicesAggregateProvider const& value)
 {
-    get_activation_factory<LowLevelDevicesController, ILowLevelDevicesControllerStatics>().DefaultProvider(value);
+    get_activation_factory<LowLevelDevicesController, Windows::Devices::ILowLevelDevicesControllerStatics>().DefaultProvider(value);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::ILowLevelDevicesAggregateProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::ILowLevelDevicesAggregateProvider> {};
+
+template<> struct hash<winrt::Windows::Devices::ILowLevelDevicesAggregateProviderFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::ILowLevelDevicesAggregateProviderFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::ILowLevelDevicesController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::ILowLevelDevicesController> {};
+
+template<> struct hash<winrt::Windows::Devices::ILowLevelDevicesControllerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::ILowLevelDevicesControllerStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::LowLevelDevicesAggregateProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::LowLevelDevicesAggregateProvider> {};
+
+template<> struct hash<winrt::Windows::Devices::LowLevelDevicesController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::LowLevelDevicesController> {};
+
 }
+
+WINRT_WARNING_POP

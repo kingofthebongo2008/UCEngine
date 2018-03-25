@@ -1,98 +1,306 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Devices.Bluetooth.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Networking.3.h"
-#include "internal/Windows.Networking.Sockets.3.h"
-#include "internal/Windows.Devices.Enumeration.3.h"
-#include "internal/Windows.Devices.Bluetooth.Rfcomm.3.h"
-#include "Windows.Devices.Bluetooth.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Bluetooth.2.h"
+#include "winrt/impl/Windows.Devices.Enumeration.2.h"
+#include "winrt/impl/Windows.Networking.2.h"
+#include "winrt/impl/Windows.Networking.Sockets.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Devices.Bluetooth.Rfcomm.2.h"
+#include "winrt/Windows.Devices.Bluetooth.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Networking::HostName consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::ConnectionHostName() const noexcept
+{
+    Windows::Networking::HostName value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->get_ConnectionHostName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::ConnectionServiceName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->get_ConnectionServiceName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::ServiceId() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->get_ServiceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Networking::Sockets::SocketProtectionLevel consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::ProtectionLevel() const noexcept
+{
+    Windows::Networking::Sockets::SocketProtectionLevel value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->get_ProtectionLevel(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Networking::Sockets::SocketProtectionLevel consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::MaxProtectionLevel() const noexcept
+{
+    Windows::Networking::Sockets::SocketProtectionLevel value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->get_MaxProtectionLevel(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::GetSdpRawAttributesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->GetSdpRawAttributesAsync(put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService<D>::GetSdpRawAttributesAsync(Windows::Devices::Bluetooth::BluetoothCacheMode const& cacheMode) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService)->GetSdpRawAttributesWithCacheModeAsync(get_abi(cacheMode), put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> Windows::Devices::Bluetooth::BluetoothDevice consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService2<D>::Device() const noexcept
+{
+    Windows::Devices::Bluetooth::BluetoothDevice value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService2)->get_Device(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Enumeration::DeviceAccessInformation consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService3<D>::DeviceAccessInformation() const noexcept
+{
+    Windows::Devices::Enumeration::DeviceAccessInformation value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3)->get_DeviceAccessInformation(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::DeviceAccessStatus> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceService3<D>::RequestAccessAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Enumeration::DeviceAccessStatus> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3)->RequestAccessAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics<D>::FromIdAsync(param::hstring const& deviceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics)->FromIdAsync(get_abi(deviceId), put_abi(asyncOp)));
+    return asyncOp;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics<D>::GetDeviceSelector(Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId) const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics)->GetDeviceSelector(get_abi(serviceId), put_abi(selector)));
+    return selector;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDevice(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice) const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2)->GetDeviceSelectorForBluetoothDevice(get_abi(bluetoothDevice), put_abi(selector)));
+    return selector;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDevice(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode const& cacheMode) const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2)->GetDeviceSelectorForBluetoothDeviceWithCacheMode(get_abi(bluetoothDevice), get_abi(cacheMode), put_abi(selector)));
+    return selector;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDeviceAndServiceId(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId) const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2)->GetDeviceSelectorForBluetoothDeviceAndServiceId(get_abi(bluetoothDevice), get_abi(serviceId), put_abi(selector)));
+    return selector;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDeviceAndServiceId(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode const& cacheMode) const
+{
+    hstring selector{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2)->GetDeviceSelectorForBluetoothDeviceAndServiceIdWithCacheMode(get_abi(bluetoothDevice), get_abi(serviceId), get_abi(cacheMode), put_abi(selector)));
+    return selector;
+}
+
+template <typename D> Windows::Devices::Bluetooth::BluetoothError consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServicesResult<D>::Error() const noexcept
+{
+    Windows::Devices::Bluetooth::BluetoothError value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult)->get_Error(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommDeviceServicesResult<D>::Services() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> services{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult)->get_Services(put_abi(services)));
+    return services;
+}
+
+template <typename D> GUID consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceId<D>::Uuid() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId)->get_Uuid(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceId<D>::AsShortId() const
+{
+    uint32_t shortId{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId)->AsShortId(&shortId));
+    return shortId;
+}
+
+template <typename D> hstring consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceId<D>::AsString() const
+{
+    hstring id{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId)->AsString(put_abi(id)));
+    return id;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::FromUuid(GUID const& uuid) const
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->FromUuid(get_abi(uuid), put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::FromShortId(uint32_t shortId) const
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->FromShortId(shortId, put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::SerialPort() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_SerialPort(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::ObexObjectPush() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_ObexObjectPush(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::ObexFileTransfer() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_ObexFileTransfer(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::PhoneBookAccessPce() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_PhoneBookAccessPce(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::PhoneBookAccessPse() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_PhoneBookAccessPse(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceIdStatics<D>::GenericFileTransfer() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics)->get_GenericFileTransfer(put_abi(serviceId)));
+    return serviceId;
+}
+
+template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProvider<D>::ServiceId() const noexcept
+{
+    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider)->get_ServiceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<uint32_t, Windows::Storage::Streams::IBuffer> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProvider<D>::SdpRawAttributes() const noexcept
+{
+    Windows::Foundation::Collections::IMap<uint32_t, Windows::Storage::Streams::IBuffer> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider)->get_SdpRawAttributes(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProvider<D>::StartAdvertising(Windows::Networking::Sockets::StreamSocketListener const& listener) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider)->StartAdvertising(get_abi(listener)));
+}
+
+template <typename D> void consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProvider<D>::StopAdvertising() const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider)->StopAdvertising());
+}
+
+template <typename D> void consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProvider2<D>::StartAdvertising(Windows::Networking::Sockets::StreamSocketListener const& listener, bool radioDiscoverable) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2)->StartAdvertisingWithRadioDiscoverability(get_abi(listener), radioDiscoverable));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> consume_Windows_Devices_Bluetooth_Rfcomm_IRfcommServiceProviderStatics<D>::CreateAsync(Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> asyncOp{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics)->CreateAsync(get_abi(serviceId), put_abi(asyncOp)));
+    return asyncOp;
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService>
 {
-    HRESULT __stdcall get_ConnectionHostName(abi_arg_out<Windows::Networking::IHostName> value) noexcept override
+    HRESULT __stdcall get_ConnectionHostName(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionHostName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionHostName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionServiceName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ConnectionServiceName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionServiceName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionServiceName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ServiceId(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> value) noexcept override
+    HRESULT __stdcall get_ServiceId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServiceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServiceId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProtectionLevel(Windows::Networking::Sockets::SocketProtectionLevel * value) noexcept override
+    HRESULT __stdcall get_ProtectionLevel(Windows::Networking::Sockets::SocketProtectionLevel* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProtectionLevel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProtectionLevel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxProtectionLevel(Windows::Networking::Sockets::SocketProtectionLevel * value) noexcept override
+    HRESULT __stdcall get_MaxProtectionLevel(Windows::Networking::Sockets::SocketProtectionLevel* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxProtectionLevel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxProtectionLevel());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSdpRawAttributesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>>> asyncOp) noexcept override
+    HRESULT __stdcall GetSdpRawAttributesAsync(::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().GetSdpRawAttributesAsync());
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().GetSdpRawAttributesAsync());
             return S_OK;
         }
         catch (...)
@@ -102,11 +310,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService> : p
         }
     }
 
-    HRESULT __stdcall abi_GetSdpRawAttributesWithCacheModeAsync(Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>>> asyncOp) noexcept override
+    HRESULT __stdcall GetSdpRawAttributesWithCacheModeAsync(Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().GetSdpRawAttributesAsync(cacheMode));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().GetSdpRawAttributesAsync(*reinterpret_cast<Windows::Devices::Bluetooth::BluetoothCacheMode const*>(&cacheMode)));
             return S_OK;
         }
         catch (...)
@@ -120,43 +329,30 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService> : p
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService2> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService2>
 {
-    HRESULT __stdcall get_Device(abi_arg_out<Windows::Devices::Bluetooth::IBluetoothDevice> value) noexcept override
+    HRESULT __stdcall get_Device(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Device());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Device());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3>
 {
-    HRESULT __stdcall get_DeviceAccessInformation(abi_arg_out<Windows::Devices::Enumeration::IDeviceAccessInformation> value) noexcept override
+    HRESULT __stdcall get_DeviceAccessInformation(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeviceAccessInformation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeviceAccessInformation());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_RequestAccessAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Enumeration::DeviceAccessStatus>> value) noexcept override
+    HRESULT __stdcall RequestAccessAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().RequestAccessAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().RequestAccessAsync());
             return S_OK;
         }
         catch (...)
@@ -170,11 +366,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3> : 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> deviceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService>> asyncOp) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING deviceId, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&deviceId)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&deviceId)));
             return S_OK;
         }
         catch (...)
@@ -184,11 +381,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelector(abi_arg_in<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId, abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelector(::IUnknown* serviceId, HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelector(*reinterpret_cast<const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId *>(&serviceId)));
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelector(*reinterpret_cast<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const*>(&serviceId)));
             return S_OK;
         }
         catch (...)
@@ -202,11 +400,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2>
 {
-    HRESULT __stdcall abi_GetDeviceSelectorForBluetoothDevice(abi_arg_in<Windows::Devices::Bluetooth::IBluetoothDevice> bluetoothDevice, abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelectorForBluetoothDevice(::IUnknown* bluetoothDevice, HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelectorForBluetoothDevice(*reinterpret_cast<const Windows::Devices::Bluetooth::BluetoothDevice *>(&bluetoothDevice)));
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelectorForBluetoothDevice(*reinterpret_cast<Windows::Devices::Bluetooth::BluetoothDevice const*>(&bluetoothDevice)));
             return S_OK;
         }
         catch (...)
@@ -216,11 +415,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelectorForBluetoothDeviceWithCacheMode(abi_arg_in<Windows::Devices::Bluetooth::IBluetoothDevice> bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelectorForBluetoothDeviceWithCacheMode(::IUnknown* bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelectorForBluetoothDevice(*reinterpret_cast<const Windows::Devices::Bluetooth::BluetoothDevice *>(&bluetoothDevice), cacheMode));
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelectorForBluetoothDevice(*reinterpret_cast<Windows::Devices::Bluetooth::BluetoothDevice const*>(&bluetoothDevice), *reinterpret_cast<Windows::Devices::Bluetooth::BluetoothCacheMode const*>(&cacheMode)));
             return S_OK;
         }
         catch (...)
@@ -230,11 +430,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelectorForBluetoothDeviceAndServiceId(abi_arg_in<Windows::Devices::Bluetooth::IBluetoothDevice> bluetoothDevice, abi_arg_in<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId, abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelectorForBluetoothDeviceAndServiceId(::IUnknown* bluetoothDevice, ::IUnknown* serviceId, HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelectorForBluetoothDeviceAndServiceId(*reinterpret_cast<const Windows::Devices::Bluetooth::BluetoothDevice *>(&bluetoothDevice), *reinterpret_cast<const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId *>(&serviceId)));
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelectorForBluetoothDeviceAndServiceId(*reinterpret_cast<Windows::Devices::Bluetooth::BluetoothDevice const*>(&bluetoothDevice), *reinterpret_cast<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const*>(&serviceId)));
             return S_OK;
         }
         catch (...)
@@ -244,11 +445,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelectorForBluetoothDeviceAndServiceIdWithCacheMode(abi_arg_in<Windows::Devices::Bluetooth::IBluetoothDevice> bluetoothDevice, abi_arg_in<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, abi_arg_out<hstring> selector) noexcept override
+    HRESULT __stdcall GetDeviceSelectorForBluetoothDeviceAndServiceIdWithCacheMode(::IUnknown* bluetoothDevice, ::IUnknown* serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode, HSTRING* selector) noexcept final
     {
         try
         {
-            *selector = detach(this->shim().GetDeviceSelectorForBluetoothDeviceAndServiceId(*reinterpret_cast<const Windows::Devices::Bluetooth::BluetoothDevice *>(&bluetoothDevice), *reinterpret_cast<const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId *>(&serviceId), cacheMode));
+            typename D::abi_guard guard(this->shim());
+            *selector = detach_abi(this->shim().GetDeviceSelectorForBluetoothDeviceAndServiceId(*reinterpret_cast<Windows::Devices::Bluetooth::BluetoothDevice const*>(&bluetoothDevice), *reinterpret_cast<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const*>(&serviceId), *reinterpret_cast<Windows::Devices::Bluetooth::BluetoothCacheMode const*>(&cacheMode)));
             return S_OK;
         }
         catch (...)
@@ -262,42 +464,37 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStati
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult>
 {
-    HRESULT __stdcall get_Error(Windows::Devices::Bluetooth::BluetoothError * value) noexcept override
+    HRESULT __stdcall get_Error(Windows::Devices::Bluetooth::BluetoothError* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Error());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Error());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Services(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService>> services) noexcept override
+    HRESULT __stdcall get_Services(::IUnknown** services) noexcept final
     {
-        try
-        {
-            *services = detach(this->shim().Services());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *services = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *services = detach_abi(this->shim().Services());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId>
 {
-    HRESULT __stdcall get_Uuid(GUID * value) noexcept override
+    HRESULT __stdcall get_Uuid(GUID* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Uuid());
+        return S_OK;
+    }
+
+    HRESULT __stdcall AsShortId(uint32_t* shortId) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Uuid());
+            typename D::abi_guard guard(this->shim());
+            *shortId = detach_abi(this->shim().AsShortId());
             return S_OK;
         }
         catch (...)
@@ -306,24 +503,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> : produ
         }
     }
 
-    HRESULT __stdcall abi_AsShortId(uint32_t * shortId) noexcept override
+    HRESULT __stdcall AsString(HSTRING* id) noexcept final
     {
         try
         {
-            *shortId = detach(this->shim().AsShortId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_AsString(abi_arg_out<hstring> id) noexcept override
-    {
-        try
-        {
-            *id = detach(this->shim().AsString());
+            typename D::abi_guard guard(this->shim());
+            *id = detach_abi(this->shim().AsString());
             return S_OK;
         }
         catch (...)
@@ -337,11 +522,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> : produ
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>
 {
-    HRESULT __stdcall abi_FromUuid(GUID uuid, abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall FromUuid(GUID uuid, ::IUnknown** serviceId) noexcept final
     {
         try
         {
-            *serviceId = detach(this->shim().FromUuid(uuid));
+            typename D::abi_guard guard(this->shim());
+            *serviceId = detach_abi(this->shim().FromUuid(*reinterpret_cast<GUID const*>(&uuid)));
             return S_OK;
         }
         catch (...)
@@ -351,11 +537,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics> 
         }
     }
 
-    HRESULT __stdcall abi_FromShortId(uint32_t shortId, abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall FromShortId(uint32_t shortId, ::IUnknown** serviceId) noexcept final
     {
         try
         {
-            *serviceId = detach(this->shim().FromShortId(shortId));
+            typename D::abi_guard guard(this->shim());
+            *serviceId = detach_abi(this->shim().FromShortId(shortId));
             return S_OK;
         }
         catch (...)
@@ -365,127 +552,72 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics> 
         }
     }
 
-    HRESULT __stdcall get_SerialPort(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_SerialPort(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().SerialPort());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().SerialPort());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ObexObjectPush(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_ObexObjectPush(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().ObexObjectPush());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().ObexObjectPush());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ObexFileTransfer(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_ObexFileTransfer(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().ObexFileTransfer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().ObexFileTransfer());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhoneBookAccessPce(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_PhoneBookAccessPce(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().PhoneBookAccessPce());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().PhoneBookAccessPce());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PhoneBookAccessPse(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_PhoneBookAccessPse(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().PhoneBookAccessPse());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().PhoneBookAccessPse());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_GenericFileTransfer(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId) noexcept override
+    HRESULT __stdcall get_GenericFileTransfer(::IUnknown** serviceId) noexcept final
     {
-        try
-        {
-            *serviceId = detach(this->shim().GenericFileTransfer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *serviceId = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *serviceId = detach_abi(this->shim().GenericFileTransfer());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider>
 {
-    HRESULT __stdcall get_ServiceId(abi_arg_out<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> value) noexcept override
+    HRESULT __stdcall get_ServiceId(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ServiceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ServiceId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SdpRawAttributes(abi_arg_out<Windows::Foundation::Collections::IMap<uint32_t, Windows::Storage::Streams::IBuffer>> value) noexcept override
+    HRESULT __stdcall get_SdpRawAttributes(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SdpRawAttributes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SdpRawAttributes());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_StartAdvertising(abi_arg_in<Windows::Networking::Sockets::IStreamSocketListener> listener) noexcept override
+    HRESULT __stdcall StartAdvertising(::IUnknown* listener) noexcept final
     {
         try
         {
-            this->shim().StartAdvertising(*reinterpret_cast<const Windows::Networking::Sockets::StreamSocketListener *>(&listener));
+            typename D::abi_guard guard(this->shim());
+            this->shim().StartAdvertising(*reinterpret_cast<Windows::Networking::Sockets::StreamSocketListener const*>(&listener));
             return S_OK;
         }
         catch (...)
@@ -494,10 +626,11 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider> :
         }
     }
 
-    HRESULT __stdcall abi_StopAdvertising() noexcept override
+    HRESULT __stdcall StopAdvertising() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().StopAdvertising();
             return S_OK;
         }
@@ -511,11 +644,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider> :
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2>
 {
-    HRESULT __stdcall abi_StartAdvertisingWithRadioDiscoverability(abi_arg_in<Windows::Networking::Sockets::IStreamSocketListener> listener, bool radioDiscoverable) noexcept override
+    HRESULT __stdcall StartAdvertisingWithRadioDiscoverability(::IUnknown* listener, bool radioDiscoverable) noexcept final
     {
         try
         {
-            this->shim().StartAdvertising(*reinterpret_cast<const Windows::Networking::Sockets::StreamSocketListener *>(&listener), radioDiscoverable);
+            typename D::abi_guard guard(this->shim());
+            this->shim().StartAdvertising(*reinterpret_cast<Windows::Networking::Sockets::StreamSocketListener const*>(&listener), radioDiscoverable);
             return S_OK;
         }
         catch (...)
@@ -528,11 +662,12 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2> 
 template <typename D>
 struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics> : produce_base<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics>
 {
-    HRESULT __stdcall abi_CreateAsync(abi_arg_in<Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> serviceId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider>> asyncOp) noexcept override
+    HRESULT __stdcall CreateAsync(::IUnknown* serviceId, ::IUnknown** asyncOp) noexcept final
     {
         try
         {
-            *asyncOp = detach(this->shim().CreateAsync(*reinterpret_cast<const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId *>(&serviceId)));
+            typename D::abi_guard guard(this->shim());
+            *asyncOp = detach_abi(this->shim().CreateAsync(*reinterpret_cast<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const*>(&serviceId)));
             return S_OK;
         }
         catch (...)
@@ -545,322 +680,132 @@ struct produce<D, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderSta
 
 }
 
-namespace Windows::Devices::Bluetooth::Rfcomm {
+WINRT_EXPORT namespace winrt::Windows::Devices::Bluetooth::Rfcomm {
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::FromUuid(GUID uuid) const
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> RfcommDeviceService::FromIdAsync(param::hstring const& deviceId)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->abi_FromUuid(uuid, put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics>().FromIdAsync(deviceId);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::FromShortId(uint32_t shortId) const
+inline hstring RfcommDeviceService::GetDeviceSelector(Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->abi_FromShortId(shortId, put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics>().GetDeviceSelector(serviceId);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::SerialPort() const
+inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDevice(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_SerialPort(put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDevice(bluetoothDevice);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::ObexObjectPush() const
+inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDevice(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode const& cacheMode)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_ObexObjectPush(put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDevice(bluetoothDevice, cacheMode);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::ObexFileTransfer() const
+inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDeviceAndServiceId(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_ObexFileTransfer(put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDeviceAndServiceId(bluetoothDevice, serviceId);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::PhoneBookAccessPce() const
+inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDeviceAndServiceId(Windows::Devices::Bluetooth::BluetoothDevice const& bluetoothDevice, Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode const& cacheMode)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_PhoneBookAccessPce(put(serviceId)));
-    return serviceId;
+    return get_activation_factory<RfcommDeviceService, Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDeviceAndServiceId(bluetoothDevice, serviceId, cacheMode);
 }
 
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::PhoneBookAccessPse() const
+inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::FromUuid(GUID const& uuid)
 {
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_PhoneBookAccessPse(put(serviceId)));
-    return serviceId;
-}
-
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceIdStatics<D>::GenericFileTransfer() const
-{
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId serviceId { nullptr };
-    check_hresult(static_cast<const IRfcommServiceIdStatics &>(static_cast<const D &>(*this))->get_GenericFileTransfer(put(serviceId)));
-    return serviceId;
-}
-
-template <typename D> GUID impl_IRfcommServiceId<D>::Uuid() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IRfcommServiceId &>(static_cast<const D &>(*this))->get_Uuid(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IRfcommServiceId<D>::AsShortId() const
-{
-    uint32_t shortId {};
-    check_hresult(static_cast<const IRfcommServiceId &>(static_cast<const D &>(*this))->abi_AsShortId(&shortId));
-    return shortId;
-}
-
-template <typename D> hstring impl_IRfcommServiceId<D>::AsString() const
-{
-    hstring id;
-    check_hresult(static_cast<const IRfcommServiceId &>(static_cast<const D &>(*this))->abi_AsString(put(id)));
-    return id;
-}
-
-template <typename D> Windows::Devices::Bluetooth::BluetoothError impl_IRfcommDeviceServicesResult<D>::Error() const
-{
-    Windows::Devices::Bluetooth::BluetoothError value {};
-    check_hresult(static_cast<const IRfcommDeviceServicesResult &>(static_cast<const D &>(*this))->get_Error(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> impl_IRfcommDeviceServicesResult<D>::Services() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> services;
-    check_hresult(static_cast<const IRfcommDeviceServicesResult &>(static_cast<const D &>(*this))->get_Services(put(services)));
-    return services;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> impl_IRfcommDeviceServiceStatics<D>::FromIdAsync(hstring_ref deviceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> asyncOp;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(deviceId), put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> hstring impl_IRfcommDeviceServiceStatics<D>::GetDeviceSelector(const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId) const
-{
-    hstring selector;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(get(serviceId), put(selector)));
-    return selector;
-}
-
-template <typename D> hstring impl_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDevice(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice) const
-{
-    hstring selector;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics2 &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorForBluetoothDevice(get(bluetoothDevice), put(selector)));
-    return selector;
-}
-
-template <typename D> hstring impl_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDevice(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode) const
-{
-    hstring selector;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics2 &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorForBluetoothDeviceWithCacheMode(get(bluetoothDevice), cacheMode, put(selector)));
-    return selector;
-}
-
-template <typename D> hstring impl_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDeviceAndServiceId(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId) const
-{
-    hstring selector;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics2 &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorForBluetoothDeviceAndServiceId(get(bluetoothDevice), get(serviceId), put(selector)));
-    return selector;
-}
-
-template <typename D> hstring impl_IRfcommDeviceServiceStatics2<D>::GetDeviceSelectorForBluetoothDeviceAndServiceId(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode) const
-{
-    hstring selector;
-    check_hresult(static_cast<const IRfcommDeviceServiceStatics2 &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorForBluetoothDeviceAndServiceIdWithCacheMode(get(bluetoothDevice), get(serviceId), cacheMode, put(selector)));
-    return selector;
-}
-
-template <typename D> Windows::Networking::HostName impl_IRfcommDeviceService<D>::ConnectionHostName() const
-{
-    Windows::Networking::HostName value { nullptr };
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->get_ConnectionHostName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IRfcommDeviceService<D>::ConnectionServiceName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->get_ConnectionServiceName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommDeviceService<D>::ServiceId() const
-{
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId value { nullptr };
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->get_ServiceId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Networking::Sockets::SocketProtectionLevel impl_IRfcommDeviceService<D>::ProtectionLevel() const
-{
-    Windows::Networking::Sockets::SocketProtectionLevel value {};
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->get_ProtectionLevel(&value));
-    return value;
-}
-
-template <typename D> Windows::Networking::Sockets::SocketProtectionLevel impl_IRfcommDeviceService<D>::MaxProtectionLevel() const
-{
-    Windows::Networking::Sockets::SocketProtectionLevel value {};
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->get_MaxProtectionLevel(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> impl_IRfcommDeviceService<D>::GetSdpRawAttributesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> asyncOp;
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->abi_GetSdpRawAttributesAsync(put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> impl_IRfcommDeviceService<D>::GetSdpRawAttributesAsync(Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<uint32_t, Windows::Storage::Streams::IBuffer>> asyncOp;
-    check_hresult(static_cast<const IRfcommDeviceService &>(static_cast<const D &>(*this))->abi_GetSdpRawAttributesWithCacheModeAsync(cacheMode, put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Devices::Bluetooth::BluetoothDevice impl_IRfcommDeviceService2<D>::Device() const
-{
-    Windows::Devices::Bluetooth::BluetoothDevice value { nullptr };
-    check_hresult(static_cast<const IRfcommDeviceService2 &>(static_cast<const D &>(*this))->get_Device(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Enumeration::DeviceAccessInformation impl_IRfcommDeviceService3<D>::DeviceAccessInformation() const
-{
-    Windows::Devices::Enumeration::DeviceAccessInformation value { nullptr };
-    check_hresult(static_cast<const IRfcommDeviceService3 &>(static_cast<const D &>(*this))->get_DeviceAccessInformation(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Enumeration::DeviceAccessStatus> impl_IRfcommDeviceService3<D>::RequestAccessAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Devices::Enumeration::DeviceAccessStatus> value;
-    check_hresult(static_cast<const IRfcommDeviceService3 &>(static_cast<const D &>(*this))->abi_RequestAccessAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> impl_IRfcommServiceProviderStatics<D>::CreateAsync(const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> asyncOp;
-    check_hresult(static_cast<const IRfcommServiceProviderStatics &>(static_cast<const D &>(*this))->abi_CreateAsync(get(serviceId), put(asyncOp)));
-    return asyncOp;
-}
-
-template <typename D> Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId impl_IRfcommServiceProvider<D>::ServiceId() const
-{
-    Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId value { nullptr };
-    check_hresult(static_cast<const IRfcommServiceProvider &>(static_cast<const D &>(*this))->get_ServiceId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<uint32_t, Windows::Storage::Streams::IBuffer> impl_IRfcommServiceProvider<D>::SdpRawAttributes() const
-{
-    Windows::Foundation::Collections::IMap<uint32_t, Windows::Storage::Streams::IBuffer> value;
-    check_hresult(static_cast<const IRfcommServiceProvider &>(static_cast<const D &>(*this))->get_SdpRawAttributes(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IRfcommServiceProvider<D>::StartAdvertising(const Windows::Networking::Sockets::StreamSocketListener & listener) const
-{
-    check_hresult(static_cast<const IRfcommServiceProvider &>(static_cast<const D &>(*this))->abi_StartAdvertising(get(listener)));
-}
-
-template <typename D> void impl_IRfcommServiceProvider<D>::StopAdvertising() const
-{
-    check_hresult(static_cast<const IRfcommServiceProvider &>(static_cast<const D &>(*this))->abi_StopAdvertising());
-}
-
-template <typename D> void impl_IRfcommServiceProvider2<D>::StartAdvertising(const Windows::Networking::Sockets::StreamSocketListener & listener, bool radioDiscoverable) const
-{
-    check_hresult(static_cast<const IRfcommServiceProvider2 &>(static_cast<const D &>(*this))->abi_StartAdvertisingWithRadioDiscoverability(get(listener), radioDiscoverable));
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> RfcommDeviceService::FromIdAsync(hstring_ref deviceId)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics>().FromIdAsync(deviceId);
-}
-
-inline hstring RfcommDeviceService::GetDeviceSelector(const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics>().GetDeviceSelector(serviceId);
-}
-
-inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDevice(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDevice(bluetoothDevice);
-}
-
-inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDevice(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDevice(bluetoothDevice, cacheMode);
-}
-
-inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDeviceAndServiceId(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDeviceAndServiceId(bluetoothDevice, serviceId);
-}
-
-inline hstring RfcommDeviceService::GetDeviceSelectorForBluetoothDeviceAndServiceId(const Windows::Devices::Bluetooth::BluetoothDevice & bluetoothDevice, const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId, Windows::Devices::Bluetooth::BluetoothCacheMode cacheMode)
-{
-    return get_activation_factory<RfcommDeviceService, IRfcommDeviceServiceStatics2>().GetDeviceSelectorForBluetoothDeviceAndServiceId(bluetoothDevice, serviceId, cacheMode);
-}
-
-inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::FromUuid(GUID uuid)
-{
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().FromUuid(uuid);
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().FromUuid(uuid);
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::FromShortId(uint32_t shortId)
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().FromShortId(shortId);
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().FromShortId(shortId);
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::SerialPort()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().SerialPort();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().SerialPort();
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::ObexObjectPush()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().ObexObjectPush();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().ObexObjectPush();
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::ObexFileTransfer()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().ObexFileTransfer();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().ObexFileTransfer();
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::PhoneBookAccessPce()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().PhoneBookAccessPce();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().PhoneBookAccessPce();
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::PhoneBookAccessPse()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().PhoneBookAccessPse();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().PhoneBookAccessPse();
 }
 
 inline Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId RfcommServiceId::GenericFileTransfer()
 {
-    return get_activation_factory<RfcommServiceId, IRfcommServiceIdStatics>().GenericFileTransfer();
+    return get_activation_factory<RfcommServiceId, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics>().GenericFileTransfer();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> RfcommServiceProvider::CreateAsync(const Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId & serviceId)
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> RfcommServiceProvider::CreateAsync(Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId const& serviceId)
 {
-    return get_activation_factory<RfcommServiceProvider, IRfcommServiceProviderStatics>().CreateAsync(serviceId);
+    return get_activation_factory<RfcommServiceProvider, Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics>().CreateAsync(serviceId);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService2> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceService3> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServiceStatics2> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommDeviceServicesResult> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceId> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceIdStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProvider2> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::IRfcommServiceProviderStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceService> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceServicesResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommDeviceServicesResult> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommServiceId> {};
+
+template<> struct hash<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Bluetooth::Rfcomm::RfcommServiceProvider> {};
+
 }
+
+WINRT_WARNING_POP

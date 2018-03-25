@@ -1,38 +1,611 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.ApplicationModel.DataTransfer.3.h"
-#include "internal/Windows.Graphics.Printing.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.ApplicationModel.DataTransfer.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.Graphics.Printing.2.h"
+#include "winrt/Windows.Graphics.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace Windows::Graphics::Printing {
-
-template <typename L> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(L lambda) :
-    PrintTaskSourceRequestedHandler(impl::make_delegate<impl_PrintTaskSourceRequestedHandler<L>, PrintTaskSourceRequestedHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(F * function) :
-    PrintTaskSourceRequestedHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(O * object, M method) :
-    PrintTaskSourceRequestedHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void PrintTaskSourceRequestedHandler::operator()(const Windows::Graphics::Printing::PrintTaskSourceRequestedArgs & args) const
+template <typename D> event_token consume_Windows_Graphics_Printing_IPrintManager<D>::PrintTaskRequested(Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> const& eventHandler) const
 {
-    check_hresult((*this)->abi_Invoke(get(args)));
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintManager)->add_PrintTaskRequested(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
 }
 
+template <typename D> event_revoker<Windows::Graphics::Printing::IPrintManager> consume_Windows_Graphics_Printing_IPrintManager<D>::PrintTaskRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Graphics::Printing::IPrintManager>(this, &abi_t<Windows::Graphics::Printing::IPrintManager>::remove_PrintTaskRequested, PrintTaskRequested(eventHandler));
 }
 
-namespace impl {
+template <typename D> void consume_Windows_Graphics_Printing_IPrintManager<D>::PrintTaskRequested(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintManager)->remove_PrintTaskRequested(get_abi(eventCookie)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintManager consume_Windows_Graphics_Printing_IPrintManagerStatic<D>::GetForCurrentView() const
+{
+    Windows::Graphics::Printing::PrintManager printingManager{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintManagerStatic)->GetForCurrentView(put_abi(printingManager)));
+    return printingManager;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_Graphics_Printing_IPrintManagerStatic<D>::ShowPrintUIAsync() const
+{
+    Windows::Foundation::IAsyncOperation<bool> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintManagerStatic)->ShowPrintUIAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> bool consume_Windows_Graphics_Printing_IPrintManagerStatic2<D>::IsSupported() const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintManagerStatic2)->IsSupported(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintPageInfo<D>::MediaSize(Windows::Graphics::Printing::PrintMediaSize const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->put_MediaSize(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintMediaSize consume_Windows_Graphics_Printing_IPrintPageInfo<D>::MediaSize() const noexcept
+{
+    Windows::Graphics::Printing::PrintMediaSize value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->get_MediaSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintPageInfo<D>::PageSize(Windows::Foundation::Size const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->put_PageSize(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Size consume_Windows_Graphics_Printing_IPrintPageInfo<D>::PageSize() const noexcept
+{
+    Windows::Foundation::Size value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->get_PageSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintPageInfo<D>::DpiX(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->put_DpiX(value));
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintPageInfo<D>::DpiX() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->get_DpiX(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintPageInfo<D>::DpiY(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->put_DpiY(value));
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintPageInfo<D>::DpiY() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->get_DpiY(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintPageInfo<D>::Orientation(Windows::Graphics::Printing::PrintOrientation const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->put_Orientation(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintOrientation consume_Windows_Graphics_Printing_IPrintPageInfo<D>::Orientation() const noexcept
+{
+    Windows::Graphics::Printing::PrintOrientation value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintPageInfo)->get_Orientation(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySet consume_Windows_Graphics_Printing_IPrintTask<D>::Properties() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackagePropertySet value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Graphics::Printing::IPrintDocumentSource consume_Windows_Graphics_Printing_IPrintTask<D>::Source() const noexcept
+{
+    Windows::Graphics::Printing::IPrintDocumentSource value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->get_Source(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTaskOptions consume_Windows_Graphics_Printing_IPrintTask<D>::Options() const noexcept
+{
+    Windows::Graphics::Printing::PrintTaskOptions value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->get_Options(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_Graphics_Printing_IPrintTask<D>::Previewing(Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->add_Previewing(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::Graphics::Printing::IPrintTask> consume_Windows_Graphics_Printing_IPrintTask<D>::Previewing(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Graphics::Printing::IPrintTask>(this, &abi_t<Windows::Graphics::Printing::IPrintTask>::remove_Previewing, Previewing(eventHandler));
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTask<D>::Previewing(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->remove_Previewing(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_Graphics_Printing_IPrintTask<D>::Submitting(Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->add_Submitting(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::Graphics::Printing::IPrintTask> consume_Windows_Graphics_Printing_IPrintTask<D>::Submitting(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Graphics::Printing::IPrintTask>(this, &abi_t<Windows::Graphics::Printing::IPrintTask>::remove_Submitting, Submitting(eventHandler));
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTask<D>::Submitting(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->remove_Submitting(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_Graphics_Printing_IPrintTask<D>::Progressing(Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->add_Progressing(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::Graphics::Printing::IPrintTask> consume_Windows_Graphics_Printing_IPrintTask<D>::Progressing(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Graphics::Printing::IPrintTask>(this, &abi_t<Windows::Graphics::Printing::IPrintTask>::remove_Progressing, Progressing(eventHandler));
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTask<D>::Progressing(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->remove_Progressing(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_Graphics_Printing_IPrintTask<D>::Completed(Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->add_Completed(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::Graphics::Printing::IPrintTask> consume_Windows_Graphics_Printing_IPrintTask<D>::Completed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::Graphics::Printing::IPrintTask>(this, &abi_t<Windows::Graphics::Printing::IPrintTask>::remove_Completed, Completed(eventHandler));
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTask<D>::Completed(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask)->remove_Completed(get_abi(eventCookie)));
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTask2<D>::IsPreviewEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask2)->put_IsPreviewEnabled(value));
+}
+
+template <typename D> bool consume_Windows_Graphics_Printing_IPrintTask2<D>::IsPreviewEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTask2)->get_IsPreviewEnabled(&value));
+    return value;
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTaskCompletion consume_Windows_Graphics_Printing_IPrintTaskCompletedEventArgs<D>::Completion() const noexcept
+{
+    Windows::Graphics::Printing::PrintTaskCompletion value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskCompletedEventArgs)->get_Completion(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptions<D>::Bordering(Windows::Graphics::Printing::PrintBordering const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptions)->put_Bordering(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintBordering consume_Windows_Graphics_Printing_IPrintTaskOptions<D>::Bordering() const noexcept
+{
+    Windows::Graphics::Printing::PrintBordering value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptions)->get_Bordering(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStream consume_Windows_Graphics_Printing_IPrintTaskOptions<D>::GetPagePrintTicket(Windows::Graphics::Printing::PrintPageInfo const& printPageInfo) const
+{
+    Windows::Storage::Streams::IRandomAccessStream printTicket{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptions)->GetPagePrintTicket(get_abi(printPageInfo), put_abi(printTicket)));
+    return printTicket;
+}
+
+template <typename D> Windows::Graphics::Printing::PrintPageDescription consume_Windows_Graphics_Printing_IPrintTaskOptionsCore<D>::GetPageDescription(uint32_t jobPageNumber) const
+{
+    Windows::Graphics::Printing::PrintPageDescription description{};
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCore)->GetPageDescription(jobPageNumber, put_abi(description)));
+    return description;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MediaSize(Windows::Graphics::Printing::PrintMediaSize const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_MediaSize(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintMediaSize consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MediaSize() const noexcept
+{
+    Windows::Graphics::Printing::PrintMediaSize value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_MediaSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MediaType(Windows::Graphics::Printing::PrintMediaType const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_MediaType(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintMediaType consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MediaType() const noexcept
+{
+    Windows::Graphics::Printing::PrintMediaType value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_MediaType(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Orientation(Windows::Graphics::Printing::PrintOrientation const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_Orientation(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintOrientation consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Orientation() const noexcept
+{
+    Windows::Graphics::Printing::PrintOrientation value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_Orientation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::PrintQuality(Windows::Graphics::Printing::PrintQuality const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_PrintQuality(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintQuality consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::PrintQuality() const noexcept
+{
+    Windows::Graphics::Printing::PrintQuality value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_PrintQuality(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::ColorMode(Windows::Graphics::Printing::PrintColorMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_ColorMode(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintColorMode consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::ColorMode() const noexcept
+{
+    Windows::Graphics::Printing::PrintColorMode value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_ColorMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Duplex(Windows::Graphics::Printing::PrintDuplex const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_Duplex(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintDuplex consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Duplex() const noexcept
+{
+    Windows::Graphics::Printing::PrintDuplex value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_Duplex(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Collation(Windows::Graphics::Printing::PrintCollation const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_Collation(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintCollation consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Collation() const noexcept
+{
+    Windows::Graphics::Printing::PrintCollation value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_Collation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Staple(Windows::Graphics::Printing::PrintStaple const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_Staple(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintStaple consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Staple() const noexcept
+{
+    Windows::Graphics::Printing::PrintStaple value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_Staple(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::HolePunch(Windows::Graphics::Printing::PrintHolePunch const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_HolePunch(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintHolePunch consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::HolePunch() const noexcept
+{
+    Windows::Graphics::Printing::PrintHolePunch value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_HolePunch(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Binding(Windows::Graphics::Printing::PrintBinding const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_Binding(get_abi(value)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintBinding consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::Binding() const noexcept
+{
+    Windows::Graphics::Printing::PrintBinding value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_Binding(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MinCopies() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_MinCopies(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::MaxCopies() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_MaxCopies(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::NumberOfCopies(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->put_NumberOfCopies(value));
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreProperties<D>::NumberOfCopies() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties)->get_NumberOfCopies(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_Graphics_Printing_IPrintTaskOptionsCoreUIConfiguration<D>::DisplayedOptions() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskOptionsCoreUIConfiguration)->get_DisplayedOptions(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Graphics_Printing_IPrintTaskProgressingEventArgs<D>::DocumentPageCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskProgressingEventArgs)->get_DocumentPageCount(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Graphics_Printing_IPrintTaskRequest<D>::Deadline() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskRequest)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTask consume_Windows_Graphics_Printing_IPrintTaskRequest<D>::CreatePrintTask(param::hstring const& title, Windows::Graphics::Printing::PrintTaskSourceRequestedHandler const& handler) const
+{
+    Windows::Graphics::Printing::PrintTask task{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskRequest)->CreatePrintTask(get_abi(title), get_abi(handler), put_abi(task)));
+    return task;
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTaskRequestedDeferral consume_Windows_Graphics_Printing_IPrintTaskRequest<D>::GetDeferral() const
+{
+    Windows::Graphics::Printing::PrintTaskRequestedDeferral deferral{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskRequest)->GetDeferral(put_abi(deferral)));
+    return deferral;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskRequestedDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskRequestedDeferral)->Complete());
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTaskRequest consume_Windows_Graphics_Printing_IPrintTaskRequestedEventArgs<D>::Request() const noexcept
+{
+    Windows::Graphics::Printing::PrintTaskRequest value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskRequestedEventArgs)->get_Request(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Graphics_Printing_IPrintTaskSourceRequestedArgs<D>::Deadline() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskSourceRequestedArgs<D>::SetSource(Windows::Graphics::Printing::IPrintDocumentSource const& source) const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs)->SetSource(get_abi(source)));
+}
+
+template <typename D> Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral consume_Windows_Graphics_Printing_IPrintTaskSourceRequestedArgs<D>::GetDeferral() const
+{
+    Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral deferral{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs)->GetDeferral(put_abi(deferral)));
+    return deferral;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskSourceRequestedDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral)->Complete());
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskTargetDeviceSupport<D>::IsPrinterTargetEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport)->put_IsPrinterTargetEnabled(value));
+}
+
+template <typename D> bool consume_Windows_Graphics_Printing_IPrintTaskTargetDeviceSupport<D>::IsPrinterTargetEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport)->get_IsPrinterTargetEnabled(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Graphics_Printing_IPrintTaskTargetDeviceSupport<D>::Is3DManufacturingTargetEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport)->put_Is3DManufacturingTargetEnabled(value));
+}
+
+template <typename D> bool consume_Windows_Graphics_Printing_IPrintTaskTargetDeviceSupport<D>::Is3DManufacturingTargetEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport)->get_Is3DManufacturingTargetEnabled(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::MediaSize() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_MediaSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::MediaType() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_MediaType(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Orientation() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Orientation(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::PrintQuality() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_PrintQuality(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::ColorMode() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_ColorMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Duplex() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Duplex(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Collation() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Collation(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Staple() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Staple(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::HolePunch() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_HolePunch(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Binding() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Binding(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::Copies() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_Copies(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::NUp() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_NUp(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic<D>::InputBin() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic)->get_InputBin(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Graphics_Printing_IStandardPrintTaskOptionsStatic2<D>::Bordering() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2)->get_Bordering(put_abi(value)));
+    return value;
+}
+
+template <> struct delegate<Windows::Graphics::Printing::PrintTaskSourceRequestedHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::Graphics::Printing::PrintTaskSourceRequestedHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::Graphics::Printing::PrintTaskSourceRequestedHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* args) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::Graphics::Printing::PrintTaskSourceRequestedArgs const*>(&args));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintDocumentSource> : produce_base<D, Windows::Graphics::Printing::IPrintDocumentSource>
@@ -41,11 +614,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintDocumentSource> : produce_b
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintManager> : produce_base<D, Windows::Graphics::Printing::IPrintManager>
 {
-    HRESULT __stdcall add_PrintTaskRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_PrintTaskRequested(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().PrintTaskRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().PrintTaskRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -54,11 +628,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintManager> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall remove_PrintTaskRequested(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_PrintTaskRequested(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().PrintTaskRequested(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().PrintTaskRequested(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -71,11 +646,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintManager> : produce_base<D, 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintManagerStatic> : produce_base<D, Windows::Graphics::Printing::IPrintManagerStatic>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::Graphics::Printing::IPrintManager> printingManager) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** printingManager) noexcept final
     {
         try
         {
-            *printingManager = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *printingManager = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -85,11 +661,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintManagerStatic> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_ShowPrintUIAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> operation) noexcept override
+    HRESULT __stdcall ShowPrintUIAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ShowPrintUIAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ShowPrintUIAsync());
             return S_OK;
         }
         catch (...)
@@ -103,11 +680,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintManagerStatic> : produce_ba
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintManagerStatic2> : produce_base<D, Windows::Graphics::Printing::IPrintManagerStatic2>
 {
-    HRESULT __stdcall abi_IsSupported(bool * result) noexcept override
+    HRESULT __stdcall IsSupported(bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsSupported());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsSupported());
             return S_OK;
         }
         catch (...)
@@ -120,187 +698,107 @@ struct produce<D, Windows::Graphics::Printing::IPrintManagerStatic2> : produce_b
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintPageInfo> : produce_base<D, Windows::Graphics::Printing::IPrintPageInfo>
 {
-    HRESULT __stdcall put_MediaSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept override
+    HRESULT __stdcall put_MediaSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept final
     {
-        try
-        {
-            this->shim().MediaSize(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MediaSize(*reinterpret_cast<Windows::Graphics::Printing::PrintMediaSize const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MediaSize(Windows::Graphics::Printing::PrintMediaSize * value) noexcept override
+    HRESULT __stdcall get_MediaSize(Windows::Graphics::Printing::PrintMediaSize* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MediaSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MediaSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PageSize(abi_arg_in<Windows::Foundation::Size> value) noexcept override
+    HRESULT __stdcall put_PageSize(Windows::Foundation::Size value) noexcept final
     {
-        try
-        {
-            this->shim().PageSize(*reinterpret_cast<const Windows::Foundation::Size *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PageSize(*reinterpret_cast<Windows::Foundation::Size const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PageSize(abi_arg_out<Windows::Foundation::Size> value) noexcept override
+    HRESULT __stdcall get_PageSize(Windows::Foundation::Size* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PageSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PageSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DpiX(uint32_t value) noexcept override
+    HRESULT __stdcall put_DpiX(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().DpiX(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DpiX(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DpiX(uint32_t * value) noexcept override
+    HRESULT __stdcall get_DpiX(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DpiX());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DpiX());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DpiY(uint32_t value) noexcept override
+    HRESULT __stdcall put_DpiY(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().DpiY(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DpiY(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DpiY(uint32_t * value) noexcept override
+    HRESULT __stdcall get_DpiY(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DpiY());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DpiY());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Orientation(Windows::Graphics::Printing::PrintOrientation value) noexcept override
+    HRESULT __stdcall put_Orientation(Windows::Graphics::Printing::PrintOrientation value) noexcept final
     {
-        try
-        {
-            this->shim().Orientation(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Orientation(*reinterpret_cast<Windows::Graphics::Printing::PrintOrientation const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Orientation(Windows::Graphics::Printing::PrintOrientation * value) noexcept override
+    HRESULT __stdcall get_Orientation(Windows::Graphics::Printing::PrintOrientation* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Orientation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Orientation());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Windows::Graphics::Printing::IPrintTask>
 {
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Source(abi_arg_out<Windows::Graphics::Printing::IPrintDocumentSource> value) noexcept override
+    HRESULT __stdcall get_Source(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Source());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Source());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Options(abi_arg_out<Windows::Graphics::Printing::IPrintTaskOptionsCore> value) noexcept override
+    HRESULT __stdcall get_Options(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Options());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Options());
+        return S_OK;
     }
 
-    HRESULT __stdcall add_Previewing(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_Previewing(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().Previewing(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().Previewing(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -309,11 +807,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall remove_Previewing(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_Previewing(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().Previewing(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Previewing(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -322,11 +821,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall add_Submitting(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_Submitting(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().Submitting(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().Submitting(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Foundation::IInspectable> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -335,11 +835,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall remove_Submitting(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_Submitting(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().Submitting(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Submitting(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -348,11 +849,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall add_Progressing(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_Progressing(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().Progressing(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().Progressing(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -361,11 +863,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall remove_Progressing(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_Progressing(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().Progressing(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Progressing(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -374,11 +877,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall add_Completed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_Completed(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().Completed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().Completed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -387,11 +891,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall remove_Completed(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_Completed(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().Completed(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Completed(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -404,84 +909,55 @@ struct produce<D, Windows::Graphics::Printing::IPrintTask> : produce_base<D, Win
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTask2> : produce_base<D, Windows::Graphics::Printing::IPrintTask2>
 {
-    HRESULT __stdcall put_IsPreviewEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsPreviewEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsPreviewEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsPreviewEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsPreviewEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsPreviewEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsPreviewEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsPreviewEnabled());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskCompletedEventArgs> : produce_base<D, Windows::Graphics::Printing::IPrintTaskCompletedEventArgs>
 {
-    HRESULT __stdcall get_Completion(Windows::Graphics::Printing::PrintTaskCompletion * value) noexcept override
+    HRESULT __stdcall get_Completion(Windows::Graphics::Printing::PrintTaskCompletion* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Completion());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Completion());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskOptions> : produce_base<D, Windows::Graphics::Printing::IPrintTaskOptions>
 {
-    HRESULT __stdcall put_Bordering(Windows::Graphics::Printing::PrintBordering value) noexcept override
+    HRESULT __stdcall put_Bordering(Windows::Graphics::Printing::PrintBordering value) noexcept final
     {
-        try
-        {
-            this->shim().Bordering(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Bordering(*reinterpret_cast<Windows::Graphics::Printing::PrintBordering const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Bordering(Windows::Graphics::Printing::PrintBordering * value) noexcept override
+    HRESULT __stdcall get_Bordering(Windows::Graphics::Printing::PrintBordering* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Bordering());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Bordering());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetPagePrintTicket(abi_arg_in<Windows::Graphics::Printing::IPrintPageInfo> printPageInfo, abi_arg_out<Windows::Storage::Streams::IRandomAccessStream> printTicket) noexcept override
+    HRESULT __stdcall GetPagePrintTicket(::IUnknown* printPageInfo, ::IUnknown** printTicket) noexcept final
     {
         try
         {
-            *printTicket = detach(this->shim().GetPagePrintTicket(*reinterpret_cast<const Windows::Graphics::Printing::PrintPageInfo *>(&printPageInfo)));
+            typename D::abi_guard guard(this->shim());
+            *printTicket = detach_abi(this->shim().GetPagePrintTicket(*reinterpret_cast<Windows::Graphics::Printing::PrintPageInfo const*>(&printPageInfo)));
             return S_OK;
         }
         catch (...)
@@ -495,11 +971,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskOptions> : produce_base
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskOptionsCore> : produce_base<D, Windows::Graphics::Printing::IPrintTaskOptionsCore>
 {
-    HRESULT __stdcall abi_GetPageDescription(uint32_t jobPageNumber, abi_arg_out<Windows::Graphics::Printing::PrintPageDescription> description) noexcept override
+    HRESULT __stdcall GetPageDescription(uint32_t jobPageNumber, struct_of<32>* description) noexcept final
     {
         try
         {
-            *description = detach(this->shim().GetPageDescription(jobPageNumber));
+            typename D::abi_guard guard(this->shim());
+            *description = detach_abi(this->shim().GetPageDescription(jobPageNumber));
             return S_OK;
         }
         catch (...)
@@ -512,375 +989,213 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskOptionsCore> : produce_
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties> : produce_base<D, Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties>
 {
-    HRESULT __stdcall put_MediaSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept override
+    HRESULT __stdcall put_MediaSize(Windows::Graphics::Printing::PrintMediaSize value) noexcept final
     {
-        try
-        {
-            this->shim().MediaSize(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MediaSize(*reinterpret_cast<Windows::Graphics::Printing::PrintMediaSize const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MediaSize(Windows::Graphics::Printing::PrintMediaSize * value) noexcept override
+    HRESULT __stdcall get_MediaSize(Windows::Graphics::Printing::PrintMediaSize* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MediaSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MediaSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MediaType(Windows::Graphics::Printing::PrintMediaType value) noexcept override
+    HRESULT __stdcall put_MediaType(Windows::Graphics::Printing::PrintMediaType value) noexcept final
     {
-        try
-        {
-            this->shim().MediaType(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MediaType(*reinterpret_cast<Windows::Graphics::Printing::PrintMediaType const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MediaType(Windows::Graphics::Printing::PrintMediaType * value) noexcept override
+    HRESULT __stdcall get_MediaType(Windows::Graphics::Printing::PrintMediaType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MediaType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MediaType());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Orientation(Windows::Graphics::Printing::PrintOrientation value) noexcept override
+    HRESULT __stdcall put_Orientation(Windows::Graphics::Printing::PrintOrientation value) noexcept final
     {
-        try
-        {
-            this->shim().Orientation(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Orientation(*reinterpret_cast<Windows::Graphics::Printing::PrintOrientation const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Orientation(Windows::Graphics::Printing::PrintOrientation * value) noexcept override
+    HRESULT __stdcall get_Orientation(Windows::Graphics::Printing::PrintOrientation* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Orientation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Orientation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PrintQuality(Windows::Graphics::Printing::PrintQuality value) noexcept override
+    HRESULT __stdcall put_PrintQuality(Windows::Graphics::Printing::PrintQuality value) noexcept final
     {
-        try
-        {
-            this->shim().PrintQuality(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PrintQuality(*reinterpret_cast<Windows::Graphics::Printing::PrintQuality const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PrintQuality(Windows::Graphics::Printing::PrintQuality * value) noexcept override
+    HRESULT __stdcall get_PrintQuality(Windows::Graphics::Printing::PrintQuality* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PrintQuality());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PrintQuality());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ColorMode(Windows::Graphics::Printing::PrintColorMode value) noexcept override
+    HRESULT __stdcall put_ColorMode(Windows::Graphics::Printing::PrintColorMode value) noexcept final
     {
-        try
-        {
-            this->shim().ColorMode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ColorMode(*reinterpret_cast<Windows::Graphics::Printing::PrintColorMode const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ColorMode(Windows::Graphics::Printing::PrintColorMode * value) noexcept override
+    HRESULT __stdcall get_ColorMode(Windows::Graphics::Printing::PrintColorMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ColorMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColorMode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Duplex(Windows::Graphics::Printing::PrintDuplex value) noexcept override
+    HRESULT __stdcall put_Duplex(Windows::Graphics::Printing::PrintDuplex value) noexcept final
     {
-        try
-        {
-            this->shim().Duplex(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Duplex(*reinterpret_cast<Windows::Graphics::Printing::PrintDuplex const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Duplex(Windows::Graphics::Printing::PrintDuplex * value) noexcept override
+    HRESULT __stdcall get_Duplex(Windows::Graphics::Printing::PrintDuplex* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Duplex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Duplex());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Collation(Windows::Graphics::Printing::PrintCollation value) noexcept override
+    HRESULT __stdcall put_Collation(Windows::Graphics::Printing::PrintCollation value) noexcept final
     {
-        try
-        {
-            this->shim().Collation(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Collation(*reinterpret_cast<Windows::Graphics::Printing::PrintCollation const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Collation(Windows::Graphics::Printing::PrintCollation * value) noexcept override
+    HRESULT __stdcall get_Collation(Windows::Graphics::Printing::PrintCollation* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Collation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Collation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Staple(Windows::Graphics::Printing::PrintStaple value) noexcept override
+    HRESULT __stdcall put_Staple(Windows::Graphics::Printing::PrintStaple value) noexcept final
     {
-        try
-        {
-            this->shim().Staple(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Staple(*reinterpret_cast<Windows::Graphics::Printing::PrintStaple const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Staple(Windows::Graphics::Printing::PrintStaple * value) noexcept override
+    HRESULT __stdcall get_Staple(Windows::Graphics::Printing::PrintStaple* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Staple());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Staple());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_HolePunch(Windows::Graphics::Printing::PrintHolePunch value) noexcept override
+    HRESULT __stdcall put_HolePunch(Windows::Graphics::Printing::PrintHolePunch value) noexcept final
     {
-        try
-        {
-            this->shim().HolePunch(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().HolePunch(*reinterpret_cast<Windows::Graphics::Printing::PrintHolePunch const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HolePunch(Windows::Graphics::Printing::PrintHolePunch * value) noexcept override
+    HRESULT __stdcall get_HolePunch(Windows::Graphics::Printing::PrintHolePunch* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HolePunch());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HolePunch());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Binding(Windows::Graphics::Printing::PrintBinding value) noexcept override
+    HRESULT __stdcall put_Binding(Windows::Graphics::Printing::PrintBinding value) noexcept final
     {
-        try
-        {
-            this->shim().Binding(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Binding(*reinterpret_cast<Windows::Graphics::Printing::PrintBinding const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Binding(Windows::Graphics::Printing::PrintBinding * value) noexcept override
+    HRESULT __stdcall get_Binding(Windows::Graphics::Printing::PrintBinding* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Binding());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Binding());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MinCopies(uint32_t * value) noexcept override
+    HRESULT __stdcall get_MinCopies(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MinCopies());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinCopies());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxCopies(uint32_t * value) noexcept override
+    HRESULT __stdcall get_MaxCopies(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxCopies());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxCopies());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_NumberOfCopies(uint32_t value) noexcept override
+    HRESULT __stdcall put_NumberOfCopies(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().NumberOfCopies(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().NumberOfCopies(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NumberOfCopies(uint32_t * value) noexcept override
+    HRESULT __stdcall get_NumberOfCopies(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NumberOfCopies());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NumberOfCopies());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskOptionsCoreUIConfiguration> : produce_base<D, Windows::Graphics::Printing::IPrintTaskOptionsCoreUIConfiguration>
 {
-    HRESULT __stdcall get_DisplayedOptions(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> value) noexcept override
+    HRESULT __stdcall get_DisplayedOptions(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayedOptions());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayedOptions());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskProgressingEventArgs> : produce_base<D, Windows::Graphics::Printing::IPrintTaskProgressingEventArgs>
 {
-    HRESULT __stdcall get_DocumentPageCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_DocumentPageCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentPageCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentPageCount());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskRequest> : produce_base<D, Windows::Graphics::Printing::IPrintTaskRequest>
 {
-    HRESULT __stdcall get_Deadline(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Deadline(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Deadline());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Deadline());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_CreatePrintTask(abi_arg_in<hstring> title, abi_arg_in<Windows::Graphics::Printing::PrintTaskSourceRequestedHandler> handler, abi_arg_out<Windows::Graphics::Printing::IPrintTask> task) noexcept override
+    HRESULT __stdcall CreatePrintTask(HSTRING title, ::IUnknown* handler, ::IUnknown** task) noexcept final
     {
         try
         {
-            *task = detach(this->shim().CreatePrintTask(*reinterpret_cast<const hstring *>(&title), *reinterpret_cast<const Windows::Graphics::Printing::PrintTaskSourceRequestedHandler *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *task = detach_abi(this->shim().CreatePrintTask(*reinterpret_cast<hstring const*>(&title), *reinterpret_cast<Windows::Graphics::Printing::PrintTaskSourceRequestedHandler const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -890,11 +1205,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskRequest> : produce_base
         }
     }
 
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::Graphics::Printing::IPrintTaskRequestedDeferral> deferral) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** deferral) noexcept final
     {
         try
         {
-            *deferral = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *deferral = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -908,10 +1224,11 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskRequest> : produce_base
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskRequestedDeferral> : produce_base<D, Windows::Graphics::Printing::IPrintTaskRequestedDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -925,29 +1242,30 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskRequestedDeferral> : pr
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskRequestedEventArgs> : produce_base<D, Windows::Graphics::Printing::IPrintTaskRequestedEventArgs>
 {
-    HRESULT __stdcall get_Request(abi_arg_out<Windows::Graphics::Printing::IPrintTaskRequest> value) noexcept override
+    HRESULT __stdcall get_Request(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Request());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Request());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs> : produce_base<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs>
 {
-    HRESULT __stdcall get_Deadline(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Deadline(Windows::Foundation::DateTime* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Deadline());
+        return S_OK;
+    }
+
+    HRESULT __stdcall SetSource(::IUnknown* source) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Deadline());
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetSource(*reinterpret_cast<Windows::Graphics::Printing::IPrintDocumentSource const*>(&source));
             return S_OK;
         }
         catch (...)
@@ -956,24 +1274,12 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs> : 
         }
     }
 
-    HRESULT __stdcall abi_SetSource(abi_arg_in<Windows::Graphics::Printing::IPrintDocumentSource> source) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** deferral) noexcept final
     {
         try
         {
-            this->shim().SetSource(*reinterpret_cast<const Windows::Graphics::Printing::IPrintDocumentSource *>(&source));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral> deferral) noexcept override
-    {
-        try
-        {
-            *deferral = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *deferral = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -987,10 +1293,11 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs> : 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral> : produce_base<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -1004,851 +1311,158 @@ struct produce<D, Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport> : produce_base<D, Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport>
 {
-    HRESULT __stdcall put_IsPrinterTargetEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsPrinterTargetEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsPrinterTargetEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsPrinterTargetEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsPrinterTargetEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsPrinterTargetEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsPrinterTargetEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsPrinterTargetEnabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Is3DManufacturingTargetEnabled(bool value) noexcept override
+    HRESULT __stdcall put_Is3DManufacturingTargetEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().Is3DManufacturingTargetEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Is3DManufacturingTargetEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Is3DManufacturingTargetEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_Is3DManufacturingTargetEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Is3DManufacturingTargetEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Is3DManufacturingTargetEnabled());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic> : produce_base<D, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>
 {
-    HRESULT __stdcall get_MediaSize(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_MediaSize(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MediaSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MediaSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MediaType(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_MediaType(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MediaType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MediaType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Orientation(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Orientation(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Orientation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Orientation());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PrintQuality(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_PrintQuality(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PrintQuality());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PrintQuality());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ColorMode(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ColorMode(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ColorMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColorMode());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Duplex(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Duplex(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Duplex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Duplex());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Collation(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Collation(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Collation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Collation());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Staple(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Staple(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Staple());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Staple());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HolePunch(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_HolePunch(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HolePunch());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HolePunch());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Binding(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Binding(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Binding());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Binding());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Copies(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Copies(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Copies());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Copies());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NUp(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_NUp(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NUp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NUp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_InputBin(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_InputBin(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().InputBin());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InputBin());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2> : produce_base<D, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2>
 {
-    HRESULT __stdcall get_Bordering(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Bordering(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Bordering());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Bordering());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Graphics::Printing {
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::MediaSize(Windows::Graphics::Printing::PrintMediaSize value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_MediaSize(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintMediaSize impl_IPrintTaskOptionsCoreProperties<D>::MediaSize() const
-{
-    Windows::Graphics::Printing::PrintMediaSize value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_MediaSize(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::MediaType(Windows::Graphics::Printing::PrintMediaType value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_MediaType(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintMediaType impl_IPrintTaskOptionsCoreProperties<D>::MediaType() const
-{
-    Windows::Graphics::Printing::PrintMediaType value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_MediaType(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::Orientation(Windows::Graphics::Printing::PrintOrientation value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_Orientation(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintOrientation impl_IPrintTaskOptionsCoreProperties<D>::Orientation() const
-{
-    Windows::Graphics::Printing::PrintOrientation value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_Orientation(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::PrintQuality(Windows::Graphics::Printing::PrintQuality value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_PrintQuality(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintQuality impl_IPrintTaskOptionsCoreProperties<D>::PrintQuality() const
-{
-    Windows::Graphics::Printing::PrintQuality value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_PrintQuality(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::ColorMode(Windows::Graphics::Printing::PrintColorMode value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_ColorMode(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintColorMode impl_IPrintTaskOptionsCoreProperties<D>::ColorMode() const
-{
-    Windows::Graphics::Printing::PrintColorMode value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_ColorMode(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::Duplex(Windows::Graphics::Printing::PrintDuplex value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_Duplex(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintDuplex impl_IPrintTaskOptionsCoreProperties<D>::Duplex() const
-{
-    Windows::Graphics::Printing::PrintDuplex value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_Duplex(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::Collation(Windows::Graphics::Printing::PrintCollation value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_Collation(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintCollation impl_IPrintTaskOptionsCoreProperties<D>::Collation() const
-{
-    Windows::Graphics::Printing::PrintCollation value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_Collation(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::Staple(Windows::Graphics::Printing::PrintStaple value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_Staple(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintStaple impl_IPrintTaskOptionsCoreProperties<D>::Staple() const
-{
-    Windows::Graphics::Printing::PrintStaple value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_Staple(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::HolePunch(Windows::Graphics::Printing::PrintHolePunch value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_HolePunch(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintHolePunch impl_IPrintTaskOptionsCoreProperties<D>::HolePunch() const
-{
-    Windows::Graphics::Printing::PrintHolePunch value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_HolePunch(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::Binding(Windows::Graphics::Printing::PrintBinding value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_Binding(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintBinding impl_IPrintTaskOptionsCoreProperties<D>::Binding() const
-{
-    Windows::Graphics::Printing::PrintBinding value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_Binding(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPrintTaskOptionsCoreProperties<D>::MinCopies() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_MinCopies(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPrintTaskOptionsCoreProperties<D>::MaxCopies() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_MaxCopies(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptionsCoreProperties<D>::NumberOfCopies(uint32_t value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->put_NumberOfCopies(value));
-}
-
-template <typename D> uint32_t impl_IPrintTaskOptionsCoreProperties<D>::NumberOfCopies() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintTaskOptionsCoreProperties &>(static_cast<const D &>(*this))->get_NumberOfCopies(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintPageInfo<D>::MediaSize(Windows::Graphics::Printing::PrintMediaSize value) const
-{
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->put_MediaSize(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintMediaSize impl_IPrintPageInfo<D>::MediaSize() const
-{
-    Windows::Graphics::Printing::PrintMediaSize value {};
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->get_MediaSize(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintPageInfo<D>::PageSize(const Windows::Foundation::Size & value) const
-{
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->put_PageSize(get(value)));
-}
-
-template <typename D> Windows::Foundation::Size impl_IPrintPageInfo<D>::PageSize() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->get_PageSize(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPrintPageInfo<D>::DpiX(uint32_t value) const
-{
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->put_DpiX(value));
-}
-
-template <typename D> uint32_t impl_IPrintPageInfo<D>::DpiX() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->get_DpiX(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintPageInfo<D>::DpiY(uint32_t value) const
-{
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->put_DpiY(value));
-}
-
-template <typename D> uint32_t impl_IPrintPageInfo<D>::DpiY() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->get_DpiY(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintPageInfo<D>::Orientation(Windows::Graphics::Printing::PrintOrientation value) const
-{
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->put_Orientation(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintOrientation impl_IPrintPageInfo<D>::Orientation() const
-{
-    Windows::Graphics::Printing::PrintOrientation value {};
-    check_hresult(static_cast<const IPrintPageInfo &>(static_cast<const D &>(*this))->get_Orientation(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskOptions<D>::Bordering(Windows::Graphics::Printing::PrintBordering value) const
-{
-    check_hresult(static_cast<const IPrintTaskOptions &>(static_cast<const D &>(*this))->put_Bordering(value));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintBordering impl_IPrintTaskOptions<D>::Bordering() const
-{
-    Windows::Graphics::Printing::PrintBordering value {};
-    check_hresult(static_cast<const IPrintTaskOptions &>(static_cast<const D &>(*this))->get_Bordering(&value));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStream impl_IPrintTaskOptions<D>::GetPagePrintTicket(const Windows::Graphics::Printing::PrintPageInfo & printPageInfo) const
-{
-    Windows::Storage::Streams::IRandomAccessStream printTicket;
-    check_hresult(static_cast<const IPrintTaskOptions &>(static_cast<const D &>(*this))->abi_GetPagePrintTicket(get(printPageInfo), put(printTicket)));
-    return printTicket;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IPrintTaskOptionsCoreUIConfiguration<D>::DisplayedOptions() const
-{
-    Windows::Foundation::Collections::IVector<hstring> value;
-    check_hresult(static_cast<const IPrintTaskOptionsCoreUIConfiguration &>(static_cast<const D &>(*this))->get_DisplayedOptions(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintPageDescription impl_IPrintTaskOptionsCore<D>::GetPageDescription(uint32_t jobPageNumber) const
-{
-    Windows::Graphics::Printing::PrintPageDescription description {};
-    check_hresult(static_cast<const IPrintTaskOptionsCore &>(static_cast<const D &>(*this))->abi_GetPageDescription(jobPageNumber, put(description)));
-    return description;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::MediaSize() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_MediaSize(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::MediaType() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_MediaType(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Orientation() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Orientation(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::PrintQuality() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_PrintQuality(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::ColorMode() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_ColorMode(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Duplex() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Duplex(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Collation() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Collation(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Staple() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Staple(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::HolePunch() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_HolePunch(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Binding() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Binding(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::Copies() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_Copies(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::NUp() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_NUp(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic<D>::InputBin() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic &>(static_cast<const D &>(*this))->get_InputBin(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardPrintTaskOptionsStatic2<D>::Bordering() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardPrintTaskOptionsStatic2 &>(static_cast<const D &>(*this))->get_Bordering(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPrintTaskProgressingEventArgs<D>::DocumentPageCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPrintTaskProgressingEventArgs &>(static_cast<const D &>(*this))->get_DocumentPageCount(&value));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTaskCompletion impl_IPrintTaskCompletedEventArgs<D>::Completion() const
-{
-    Windows::Graphics::Printing::PrintTaskCompletion value {};
-    check_hresult(static_cast<const IPrintTaskCompletedEventArgs &>(static_cast<const D &>(*this))->get_Completion(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySet impl_IPrintTask<D>::Properties() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackagePropertySet value { nullptr };
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::IPrintDocumentSource impl_IPrintTask<D>::Source() const
-{
-    Windows::Graphics::Printing::IPrintDocumentSource value;
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->get_Source(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTaskOptions impl_IPrintTask<D>::Options() const
-{
-    Windows::Graphics::Printing::PrintTaskOptions value { nullptr };
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->get_Options(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_IPrintTask<D>::Previewing(const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->add_Previewing(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IPrintTask> impl_IPrintTask<D>::Previewing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IPrintTask>(this, &ABI::Windows::Graphics::Printing::IPrintTask::remove_Previewing, Previewing(eventHandler));
-}
-
-template <typename D> void impl_IPrintTask<D>::Previewing(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->remove_Previewing(eventCookie));
-}
-
-template <typename D> event_token impl_IPrintTask<D>::Submitting(const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->add_Submitting(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IPrintTask> impl_IPrintTask<D>::Submitting(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::IInspectable> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IPrintTask>(this, &ABI::Windows::Graphics::Printing::IPrintTask::remove_Submitting, Submitting(eventHandler));
-}
-
-template <typename D> void impl_IPrintTask<D>::Submitting(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->remove_Submitting(eventCookie));
-}
-
-template <typename D> event_token impl_IPrintTask<D>::Progressing(const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->add_Progressing(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IPrintTask> impl_IPrintTask<D>::Progressing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskProgressingEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IPrintTask>(this, &ABI::Windows::Graphics::Printing::IPrintTask::remove_Progressing, Progressing(eventHandler));
-}
-
-template <typename D> void impl_IPrintTask<D>::Progressing(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->remove_Progressing(eventCookie));
-}
-
-template <typename D> event_token impl_IPrintTask<D>::Completed(const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->add_Completed(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IPrintTask> impl_IPrintTask<D>::Completed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintTask, Windows::Graphics::Printing::PrintTaskCompletedEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IPrintTask>(this, &ABI::Windows::Graphics::Printing::IPrintTask::remove_Completed, Completed(eventHandler));
-}
-
-template <typename D> void impl_IPrintTask<D>::Completed(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IPrintTask &>(static_cast<const D &>(*this))->remove_Completed(eventCookie));
-}
-
-template <typename D> void impl_IPrintTaskTargetDeviceSupport<D>::IsPrinterTargetEnabled(bool value) const
-{
-    check_hresult(static_cast<const IPrintTaskTargetDeviceSupport &>(static_cast<const D &>(*this))->put_IsPrinterTargetEnabled(value));
-}
-
-template <typename D> bool impl_IPrintTaskTargetDeviceSupport<D>::IsPrinterTargetEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPrintTaskTargetDeviceSupport &>(static_cast<const D &>(*this))->get_IsPrinterTargetEnabled(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskTargetDeviceSupport<D>::Is3DManufacturingTargetEnabled(bool value) const
-{
-    check_hresult(static_cast<const IPrintTaskTargetDeviceSupport &>(static_cast<const D &>(*this))->put_Is3DManufacturingTargetEnabled(value));
-}
-
-template <typename D> bool impl_IPrintTaskTargetDeviceSupport<D>::Is3DManufacturingTargetEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPrintTaskTargetDeviceSupport &>(static_cast<const D &>(*this))->get_Is3DManufacturingTargetEnabled(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTask2<D>::IsPreviewEnabled(bool value) const
-{
-    check_hresult(static_cast<const IPrintTask2 &>(static_cast<const D &>(*this))->put_IsPreviewEnabled(value));
-}
-
-template <typename D> bool impl_IPrintTask2<D>::IsPreviewEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPrintTask2 &>(static_cast<const D &>(*this))->get_IsPreviewEnabled(&value));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskSourceRequestedDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const IPrintTaskSourceRequestedDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPrintTaskSourceRequestedArgs<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPrintTaskSourceRequestedArgs &>(static_cast<const D &>(*this))->get_Deadline(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPrintTaskSourceRequestedArgs<D>::SetSource(const Windows::Graphics::Printing::IPrintDocumentSource & source) const
-{
-    check_hresult(static_cast<const IPrintTaskSourceRequestedArgs &>(static_cast<const D &>(*this))->abi_SetSource(get(source)));
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral impl_IPrintTaskSourceRequestedArgs<D>::GetDeferral() const
-{
-    Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral deferral { nullptr };
-    check_hresult(static_cast<const IPrintTaskSourceRequestedArgs &>(static_cast<const D &>(*this))->abi_GetDeferral(put(deferral)));
-    return deferral;
-}
-
-template <typename D> void impl_IPrintTaskRequestedDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const IPrintTaskRequestedDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPrintTaskRequest<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPrintTaskRequest &>(static_cast<const D &>(*this))->get_Deadline(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTask impl_IPrintTaskRequest<D>::CreatePrintTask(hstring_ref title, const Windows::Graphics::Printing::PrintTaskSourceRequestedHandler & handler) const
-{
-    Windows::Graphics::Printing::PrintTask task { nullptr };
-    check_hresult(static_cast<const IPrintTaskRequest &>(static_cast<const D &>(*this))->abi_CreatePrintTask(get(title), get(handler), put(task)));
-    return task;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTaskRequestedDeferral impl_IPrintTaskRequest<D>::GetDeferral() const
-{
-    Windows::Graphics::Printing::PrintTaskRequestedDeferral deferral { nullptr };
-    check_hresult(static_cast<const IPrintTaskRequest &>(static_cast<const D &>(*this))->abi_GetDeferral(put(deferral)));
-    return deferral;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintTaskRequest impl_IPrintTaskRequestedEventArgs<D>::Request() const
-{
-    Windows::Graphics::Printing::PrintTaskRequest value { nullptr };
-    check_hresult(static_cast<const IPrintTaskRequestedEventArgs &>(static_cast<const D &>(*this))->get_Request(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Graphics::Printing::PrintManager impl_IPrintManagerStatic<D>::GetForCurrentView() const
-{
-    Windows::Graphics::Printing::PrintManager printingManager { nullptr };
-    check_hresult(static_cast<const IPrintManagerStatic &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(printingManager)));
-    return printingManager;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPrintManagerStatic<D>::ShowPrintUIAsync() const
-{
-    Windows::Foundation::IAsyncOperation<bool> operation;
-    check_hresult(static_cast<const IPrintManagerStatic &>(static_cast<const D &>(*this))->abi_ShowPrintUIAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> bool impl_IPrintManagerStatic2<D>::IsSupported() const
-{
-    bool result {};
-    check_hresult(static_cast<const IPrintManagerStatic2 &>(static_cast<const D &>(*this))->abi_IsSupported(&result));
-    return result;
-}
-
-template <typename D> event_token impl_IPrintManager<D>::PrintTaskRequested(const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IPrintManager &>(static_cast<const D &>(*this))->add_PrintTaskRequested(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IPrintManager> impl_IPrintManager<D>::PrintTaskRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Graphics::Printing::PrintManager, Windows::Graphics::Printing::PrintTaskRequestedEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IPrintManager>(this, &ABI::Windows::Graphics::Printing::IPrintManager::remove_PrintTaskRequested, PrintTaskRequested(eventHandler));
-}
-
-template <typename D> void impl_IPrintManager<D>::PrintTaskRequested(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IPrintManager &>(static_cast<const D &>(*this))->remove_PrintTaskRequested(eventCookie));
-}
+WINRT_EXPORT namespace winrt::Windows::Graphics::Printing {
 
 inline Windows::Graphics::Printing::PrintManager PrintManager::GetForCurrentView()
 {
-    return get_activation_factory<PrintManager, IPrintManagerStatic>().GetForCurrentView();
+    return get_activation_factory<PrintManager, Windows::Graphics::Printing::IPrintManagerStatic>().GetForCurrentView();
 }
 
 inline Windows::Foundation::IAsyncOperation<bool> PrintManager::ShowPrintUIAsync()
 {
-    return get_activation_factory<PrintManager, IPrintManagerStatic>().ShowPrintUIAsync();
+    return get_activation_factory<PrintManager, Windows::Graphics::Printing::IPrintManagerStatic>().ShowPrintUIAsync();
 }
 
 inline bool PrintManager::IsSupported()
 {
-    return get_activation_factory<PrintManager, IPrintManagerStatic2>().IsSupported();
+    return get_activation_factory<PrintManager, Windows::Graphics::Printing::IPrintManagerStatic2>().IsSupported();
 }
 
 inline PrintPageInfo::PrintPageInfo() :
@@ -1857,74 +1471,194 @@ inline PrintPageInfo::PrintPageInfo() :
 
 inline hstring StandardPrintTaskOptions::MediaSize()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().MediaSize();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().MediaSize();
 }
 
 inline hstring StandardPrintTaskOptions::MediaType()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().MediaType();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().MediaType();
 }
 
 inline hstring StandardPrintTaskOptions::Orientation()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Orientation();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Orientation();
 }
 
 inline hstring StandardPrintTaskOptions::PrintQuality()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().PrintQuality();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().PrintQuality();
 }
 
 inline hstring StandardPrintTaskOptions::ColorMode()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().ColorMode();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().ColorMode();
 }
 
 inline hstring StandardPrintTaskOptions::Duplex()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Duplex();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Duplex();
 }
 
 inline hstring StandardPrintTaskOptions::Collation()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Collation();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Collation();
 }
 
 inline hstring StandardPrintTaskOptions::Staple()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Staple();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Staple();
 }
 
 inline hstring StandardPrintTaskOptions::HolePunch()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().HolePunch();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().HolePunch();
 }
 
 inline hstring StandardPrintTaskOptions::Binding()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Binding();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Binding();
 }
 
 inline hstring StandardPrintTaskOptions::Copies()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().Copies();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().Copies();
 }
 
 inline hstring StandardPrintTaskOptions::NUp()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().NUp();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().NUp();
 }
 
 inline hstring StandardPrintTaskOptions::InputBin()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic>().InputBin();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic>().InputBin();
 }
 
 inline hstring StandardPrintTaskOptions::Bordering()
 {
-    return get_activation_factory<StandardPrintTaskOptions, IStandardPrintTaskOptionsStatic2>().Bordering();
+    return get_activation_factory<StandardPrintTaskOptions, Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2>().Bordering();
+}
+
+template <typename L> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(L handler) :
+    PrintTaskSourceRequestedHandler(impl::make_delegate<PrintTaskSourceRequestedHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(F* handler) :
+    PrintTaskSourceRequestedHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> PrintTaskSourceRequestedHandler::PrintTaskSourceRequestedHandler(O* object, M method) :
+    PrintTaskSourceRequestedHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void PrintTaskSourceRequestedHandler::operator()(Windows::Graphics::Printing::PrintTaskSourceRequestedArgs const& args) const
+{
+    check_hresult((*(abi_t<PrintTaskSourceRequestedHandler>**)this)->Invoke(get_abi(args)));
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintDocumentSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintDocumentSource> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintManager> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintManagerStatic> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintManagerStatic> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintManagerStatic2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintManagerStatic2> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintPageInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintPageInfo> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTask> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTask> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTask2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTask2> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskOptions> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCore> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCoreProperties> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCoreUIConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskOptionsCoreUIConfiguration> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskProgressingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskProgressingEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskRequest> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskRequestedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskRequestedDeferral> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskSourceRequestedArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskSourceRequestedDeferral> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IPrintTaskTargetDeviceSupport> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::IStandardPrintTaskOptionsStatic2> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintManager> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintPageInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintPageInfo> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTask> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTask> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskOptions> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskProgressingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskProgressingEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskRequest> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskRequestedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskRequestedDeferral> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskSourceRequestedArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskSourceRequestedArgs> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::PrintTaskSourceRequestedDeferral> {};
+
+template<> struct hash<winrt::Windows::Graphics::Printing::StandardPrintTaskOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Graphics::Printing::StandardPrintTaskOptions> {};
+
 }
+
+WINRT_WARNING_POP

@@ -1,252 +1,266 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.UI.Text.3.h"
-#include "internal/Windows.Globalization.Fonts.3.h"
-#include "Windows.Globalization.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Text.2.h"
+#include "winrt/impl/Windows.Globalization.Fonts.2.h"
+#include "winrt/Windows.Globalization.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> hstring consume_Windows_Globalization_Fonts_ILanguageFont<D>::FontFamily() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFont)->get_FontFamily(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Text::FontWeight consume_Windows_Globalization_Fonts_ILanguageFont<D>::FontWeight() const noexcept
+{
+    Windows::UI::Text::FontWeight weight{};
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFont)->get_FontWeight(put_abi(weight)));
+    return weight;
+}
+
+template <typename D> Windows::UI::Text::FontStretch consume_Windows_Globalization_Fonts_ILanguageFont<D>::FontStretch() const noexcept
+{
+    Windows::UI::Text::FontStretch stretch{};
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFont)->get_FontStretch(put_abi(stretch)));
+    return stretch;
+}
+
+template <typename D> Windows::UI::Text::FontStyle consume_Windows_Globalization_Fonts_ILanguageFont<D>::FontStyle() const noexcept
+{
+    Windows::UI::Text::FontStyle style{};
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFont)->get_FontStyle(put_abi(style)));
+    return style;
+}
+
+template <typename D> double consume_Windows_Globalization_Fonts_ILanguageFont<D>::ScaleFactor() const noexcept
+{
+    double scale{};
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFont)->get_ScaleFactor(&scale));
+    return scale;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::UITextFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_UITextFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::UIHeadingFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_UIHeadingFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::UITitleFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_UITitleFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::UICaptionFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_UICaptionFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::UINotificationHeadingFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_UINotificationHeadingFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::TraditionalDocumentFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_TraditionalDocumentFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::ModernDocumentFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_ModernDocumentFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::DocumentHeadingFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_DocumentHeadingFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::FixedWidthTextFont() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_FixedWidthTextFont(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::DocumentAlternate1Font() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_DocumentAlternate1Font(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFont consume_Windows_Globalization_Fonts_ILanguageFontGroup<D>::DocumentAlternate2Font() const noexcept
+{
+    Windows::Globalization::Fonts::LanguageFont value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroup)->get_DocumentAlternate2Font(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Globalization::Fonts::LanguageFontGroup consume_Windows_Globalization_Fonts_ILanguageFontGroupFactory<D>::CreateLanguageFontGroup(param::hstring const& languageTag) const
+{
+    Windows::Globalization::Fonts::LanguageFontGroup recommendedFonts{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Globalization::Fonts::ILanguageFontGroupFactory)->CreateLanguageFontGroup(get_abi(languageTag), put_abi(recommendedFonts)));
+    return recommendedFonts;
+}
 
 template <typename D>
 struct produce<D, Windows::Globalization::Fonts::ILanguageFont> : produce_base<D, Windows::Globalization::Fonts::ILanguageFont>
 {
-    HRESULT __stdcall get_FontFamily(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FontFamily(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FontFamily());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FontFamily());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontWeight(abi_arg_out<Windows::UI::Text::FontWeight> weight) noexcept override
+    HRESULT __stdcall get_FontWeight(struct_of<2>* weight) noexcept final
     {
-        try
-        {
-            *weight = detach(this->shim().FontWeight());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *weight = detach_abi(this->shim().FontWeight());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontStretch(Windows::UI::Text::FontStretch * stretch) noexcept override
+    HRESULT __stdcall get_FontStretch(Windows::UI::Text::FontStretch* stretch) noexcept final
     {
-        try
-        {
-            *stretch = detach(this->shim().FontStretch());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *stretch = detach_abi(this->shim().FontStretch());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FontStyle(Windows::UI::Text::FontStyle * style) noexcept override
+    HRESULT __stdcall get_FontStyle(Windows::UI::Text::FontStyle* style) noexcept final
     {
-        try
-        {
-            *style = detach(this->shim().FontStyle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *style = detach_abi(this->shim().FontStyle());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ScaleFactor(double * scale) noexcept override
+    HRESULT __stdcall get_ScaleFactor(double* scale) noexcept final
     {
-        try
-        {
-            *scale = detach(this->shim().ScaleFactor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *scale = detach_abi(this->shim().ScaleFactor());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Globalization::Fonts::ILanguageFontGroup> : produce_base<D, Windows::Globalization::Fonts::ILanguageFontGroup>
 {
-    HRESULT __stdcall get_UITextFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_UITextFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UITextFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UITextFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UIHeadingFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_UIHeadingFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UIHeadingFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UIHeadingFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UITitleFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_UITitleFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UITitleFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UITitleFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UICaptionFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_UICaptionFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UICaptionFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UICaptionFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UINotificationHeadingFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_UINotificationHeadingFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UINotificationHeadingFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UINotificationHeadingFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TraditionalDocumentFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_TraditionalDocumentFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TraditionalDocumentFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TraditionalDocumentFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ModernDocumentFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_ModernDocumentFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ModernDocumentFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ModernDocumentFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DocumentHeadingFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_DocumentHeadingFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentHeadingFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentHeadingFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FixedWidthTextFont(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_FixedWidthTextFont(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FixedWidthTextFont());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FixedWidthTextFont());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DocumentAlternate1Font(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_DocumentAlternate1Font(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentAlternate1Font());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentAlternate1Font());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DocumentAlternate2Font(abi_arg_out<Windows::Globalization::Fonts::ILanguageFont> value) noexcept override
+    HRESULT __stdcall get_DocumentAlternate2Font(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentAlternate2Font());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentAlternate2Font());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Globalization::Fonts::ILanguageFontGroupFactory> : produce_base<D, Windows::Globalization::Fonts::ILanguageFontGroupFactory>
 {
-    HRESULT __stdcall abi_CreateLanguageFontGroup(abi_arg_in<hstring> languageTag, abi_arg_out<Windows::Globalization::Fonts::ILanguageFontGroup> recommendedFonts) noexcept override
+    HRESULT __stdcall CreateLanguageFontGroup(HSTRING languageTag, ::IUnknown** recommendedFonts) noexcept final
     {
         try
         {
-            *recommendedFonts = detach(this->shim().CreateLanguageFontGroup(*reinterpret_cast<const hstring *>(&languageTag)));
+            typename D::abi_guard guard(this->shim());
+            *recommendedFonts = detach_abi(this->shim().CreateLanguageFontGroup(*reinterpret_cast<hstring const*>(&languageTag)));
             return S_OK;
         }
         catch (...)
@@ -259,131 +273,31 @@ struct produce<D, Windows::Globalization::Fonts::ILanguageFontGroupFactory> : pr
 
 }
 
-namespace Windows::Globalization::Fonts {
+WINRT_EXPORT namespace winrt::Windows::Globalization::Fonts {
 
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::UITextFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_UITextFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::UIHeadingFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_UIHeadingFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::UITitleFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_UITitleFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::UICaptionFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_UICaptionFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::UINotificationHeadingFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_UINotificationHeadingFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::TraditionalDocumentFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_TraditionalDocumentFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::ModernDocumentFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_ModernDocumentFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::DocumentHeadingFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_DocumentHeadingFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::FixedWidthTextFont() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_FixedWidthTextFont(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::DocumentAlternate1Font() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_DocumentAlternate1Font(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFont impl_ILanguageFontGroup<D>::DocumentAlternate2Font() const
-{
-    Windows::Globalization::Fonts::LanguageFont value { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroup &>(static_cast<const D &>(*this))->get_DocumentAlternate2Font(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Globalization::Fonts::LanguageFontGroup impl_ILanguageFontGroupFactory<D>::CreateLanguageFontGroup(hstring_ref languageTag) const
-{
-    Windows::Globalization::Fonts::LanguageFontGroup recommendedFonts { nullptr };
-    check_hresult(static_cast<const ILanguageFontGroupFactory &>(static_cast<const D &>(*this))->abi_CreateLanguageFontGroup(get(languageTag), put(recommendedFonts)));
-    return recommendedFonts;
-}
-
-template <typename D> hstring impl_ILanguageFont<D>::FontFamily() const
-{
-    hstring value;
-    check_hresult(static_cast<const ILanguageFont &>(static_cast<const D &>(*this))->get_FontFamily(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Text::FontWeight impl_ILanguageFont<D>::FontWeight() const
-{
-    Windows::UI::Text::FontWeight weight {};
-    check_hresult(static_cast<const ILanguageFont &>(static_cast<const D &>(*this))->get_FontWeight(put(weight)));
-    return weight;
-}
-
-template <typename D> Windows::UI::Text::FontStretch impl_ILanguageFont<D>::FontStretch() const
-{
-    Windows::UI::Text::FontStretch stretch {};
-    check_hresult(static_cast<const ILanguageFont &>(static_cast<const D &>(*this))->get_FontStretch(&stretch));
-    return stretch;
-}
-
-template <typename D> Windows::UI::Text::FontStyle impl_ILanguageFont<D>::FontStyle() const
-{
-    Windows::UI::Text::FontStyle style {};
-    check_hresult(static_cast<const ILanguageFont &>(static_cast<const D &>(*this))->get_FontStyle(&style));
-    return style;
-}
-
-template <typename D> double impl_ILanguageFont<D>::ScaleFactor() const
-{
-    double scale {};
-    check_hresult(static_cast<const ILanguageFont &>(static_cast<const D &>(*this))->get_ScaleFactor(&scale));
-    return scale;
-}
-
-inline LanguageFontGroup::LanguageFontGroup(hstring_ref languageTag) :
-    LanguageFontGroup(get_activation_factory<LanguageFontGroup, ILanguageFontGroupFactory>().CreateLanguageFontGroup(languageTag))
+inline LanguageFontGroup::LanguageFontGroup(param::hstring const& languageTag) :
+    LanguageFontGroup(get_activation_factory<LanguageFontGroup, Windows::Globalization::Fonts::ILanguageFontGroupFactory>().CreateLanguageFontGroup(languageTag))
 {}
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Globalization::Fonts::ILanguageFont> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Globalization::Fonts::ILanguageFont> {};
+
+template<> struct hash<winrt::Windows::Globalization::Fonts::ILanguageFontGroup> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Globalization::Fonts::ILanguageFontGroup> {};
+
+template<> struct hash<winrt::Windows::Globalization::Fonts::ILanguageFontGroupFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Globalization::Fonts::ILanguageFontGroupFactory> {};
+
+template<> struct hash<winrt::Windows::Globalization::Fonts::LanguageFont> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Globalization::Fonts::LanguageFont> {};
+
+template<> struct hash<winrt::Windows::Globalization::Fonts::LanguageFontGroup> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Globalization::Fonts::LanguageFontGroup> {};
+
 }
+
+WINRT_WARNING_POP

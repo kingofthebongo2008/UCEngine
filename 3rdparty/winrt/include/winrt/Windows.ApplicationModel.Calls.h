@@ -1,78 +1,1288 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.System.3.h"
-#include "internal/Windows.ApplicationModel.Contacts.3.h"
-#include "internal/Windows.UI.3.h"
-#include "internal/Windows.ApplicationModel.Calls.3.h"
-#include "Windows.ApplicationModel.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.ApplicationModel.Contacts.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.System.2.h"
+#include "winrt/impl/Windows.UI.2.h"
+#include "winrt/impl/Windows.ApplicationModel.Calls.2.h"
+#include "winrt/Windows.ApplicationModel.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallMedia consume_Windows_ApplicationModel_Calls_ICallAnswerEventArgs<D>::AcceptedMedia() const noexcept
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCallMedia value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ICallAnswerEventArgs)->get_AcceptedMedia(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason consume_Windows_ApplicationModel_Calls_ICallRejectEventArgs<D>::RejectReason() const noexcept
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ICallRejectEventArgs)->get_RejectReason(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallState consume_Windows_ApplicationModel_Calls_ICallStateChangeEventArgs<D>::State() const noexcept
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCallState value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ICallStateChangeEventArgs)->get_State(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_ILockScreenCallEndCallDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral)->Complete());
+}
+
+template <typename D> Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral consume_Windows_ApplicationModel_Calls_ILockScreenCallEndRequestedEventArgs<D>::GetDeferral() const
+{
+    Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs)->GetDeferral(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Calls_ILockScreenCallEndRequestedEventArgs<D>::Deadline() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::Dismiss() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->Dismiss());
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::EndRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->add_EndRequested(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::ILockScreenCallUI> consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::EndRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::ILockScreenCallUI>(this, &abi_t<Windows::ApplicationModel::Calls::ILockScreenCallUI>::remove_EndRequested, EndRequested(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::EndRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->remove_EndRequested(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::Closed(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->add_Closed(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::ILockScreenCallUI> consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::Closed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::ILockScreenCallUI>(this, &abi_t<Windows::ApplicationModel::Calls::ILockScreenCallUI>::remove_Closed, Closed(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::Closed(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->remove_Closed(get_abi(token)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::CallTitle() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->get_CallTitle(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_ILockScreenCallUI<D>::CallTitle(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::ILockScreenCallUI)->put_CallTitle(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IMuteChangeEventArgs<D>::Muted() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IMuteChangeEventArgs)->get_Muted(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallBlockingStatics<D>::BlockUnknownNumbers() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics)->get_BlockUnknownNumbers(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallBlockingStatics<D>::BlockUnknownNumbers(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics)->put_BlockUnknownNumbers(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallBlockingStatics<D>::BlockPrivateNumbers() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics)->get_BlockPrivateNumbers(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallBlockingStatics<D>::BlockPrivateNumbers(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics)->put_BlockPrivateNumbers(value));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_ApplicationModel_Calls_IPhoneCallBlockingStatics<D>::SetCallBlockingListAsync(param::async_iterable<hstring> const& phoneNumberList) const
+{
+    Windows::Foundation::IAsyncOperation<bool> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics)->SetCallBlockingListAsync(get_abi(phoneNumberList), put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Address() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_Address(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Address(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_Address(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::TimeSpan> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Duration() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::TimeSpan> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_Duration(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Duration(optional<Windows::Foundation::TimeSpan> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_Duration(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsCallerIdBlocked() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsCallerIdBlocked(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsCallerIdBlocked(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsCallerIdBlocked(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsEmergency() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsEmergency(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsEmergency(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsEmergency(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsIncoming() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsIncoming(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsIncoming(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsIncoming(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsMissed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsMissed(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsMissed(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsMissed(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsRinging() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsRinging(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsRinging(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsRinging(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsSeen() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsSeen(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsSeen(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsSeen(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsSuppressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsSuppressed(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsSuppressed(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsSuppressed(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsVoicemail() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_IsVoicemail(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::IsVoicemail(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_IsVoicemail(value));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Media() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_Media(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_Media(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::OtherAppReadAccess() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_OtherAppReadAccess(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_OtherAppReadAccess(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::RemoteId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_RemoteId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::RemoteId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_RemoteId(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::SourceDisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_SourceDisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::SourceId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_SourceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::SourceId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_SourceId(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::SourceIdKind() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_SourceIdKind(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_SourceIdKind(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::StartTime() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->get_StartTime(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntry<D>::StartTime(Windows::Foundation::DateTime const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry)->put_StartTime(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::ContactId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->get_ContactId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::ContactId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->put_ContactId(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::DisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->get_DisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::DisplayName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->put_DisplayName(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::RawAddress() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->get_RawAddress(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::RawAddress(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->put_RawAddress(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::RawAddressKind() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->get_RawAddressKind(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddress<D>::RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress)->put_RawAddressKind(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryAddressFactory<D>::Create(param::hstring const& rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind const& rawAddressKind) const
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory)->Create(get_abi(rawAddress), get_abi(rawAddressKind), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryQueryOptions<D>::DesiredMedia() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions)->get_DesiredMedia(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryQueryOptions<D>::DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions)->put_DesiredMedia(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryQueryOptions<D>::SourceIds() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions)->get_SourceIds(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryEntryReader<D>::ReadBatchAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader)->ReadBatchAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryManagerForUser<D>::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType const& accessType) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser)->RequestStoreAsync(get_abi(accessType), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::System::User consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryManagerForUser<D>::User() const noexcept
+{
+    Windows::System::User value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser)->get_User(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryManagerStatics<D>::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType const& accessType) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics)->RequestStoreAsync(get_abi(accessType), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryManagerStatics2<D>::GetForUser(Windows::System::User const& user) const
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2)->GetForUser(get_abi(user), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::GetEntryAsync(param::hstring const& callHistoryEntryId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->GetEntryAsync(get_abi(callHistoryEntryId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::GetEntryReader() const
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->GetEntryReader(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::GetEntryReader(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions const& queryOptions) const
+{
+    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->GetEntryReaderWithOptions(get_abi(queryOptions), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::SaveEntryAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const& callHistoryEntry) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->SaveEntryAsync(get_abi(callHistoryEntry), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::DeleteEntryAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const& callHistoryEntry) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->DeleteEntryAsync(get_abi(callHistoryEntry), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::DeleteEntriesAsync(param::async_iterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> const& callHistoryEntries) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->DeleteEntriesAsync(get_abi(callHistoryEntries), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::MarkEntryAsSeenAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const& callHistoryEntry) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->MarkEntryAsSeenAsync(get_abi(callHistoryEntry), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::MarkEntriesAsSeenAsync(param::async_iterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> const& callHistoryEntries) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->MarkEntriesAsSeenAsync(get_abi(callHistoryEntries), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<uint32_t> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::GetUnseenCountAsync() const
+{
+    Windows::Foundation::IAsyncOperation<uint32_t> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->GetUnseenCountAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::MarkAllAsSeenAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->MarkAllAsSeenAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<uint32_t> consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::GetSourcesUnseenCountAsync(param::async_iterable<hstring> const& sourceIds) const
+{
+    Windows::Foundation::IAsyncOperation<uint32_t> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->GetSourcesUnseenCountAsync(get_abi(sourceIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneCallHistoryStore<D>::MarkSourcesAsSeenAsync(param::async_iterable<hstring> const& sourceIds) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallHistoryStore)->MarkSourcesAsSeenAsync(get_abi(sourceIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics<D>::ShowPhoneCallUI(param::hstring const& phoneNumber, param::hstring const& displayName) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics)->ShowPhoneCallUI(get_abi(phoneNumber), get_abi(displayName)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::CallStateChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->add_CallStateChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::CallStateChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>::remove_CallStateChanged, CallStateChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::CallStateChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->remove_CallStateChanged(get_abi(token)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::IsCallActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->get_IsCallActive(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::IsCallIncoming() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->get_IsCallIncoming(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::ShowPhoneCallSettingsUI() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->ShowPhoneCallSettingsUI());
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore> consume_Windows_ApplicationModel_Calls_IPhoneCallManagerStatics2<D>::RequestStoreAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2)->RequestStoreAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_ApplicationModel_Calls_IPhoneCallStore<D>::IsEmergencyPhoneNumberAsync(param::hstring const& number) const
+{
+    Windows::Foundation::IAsyncOperation<bool> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallStore)->IsEmergencyPhoneNumberAsync(get_abi(number), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<GUID> consume_Windows_ApplicationModel_Calls_IPhoneCallStore<D>::GetDefaultLineAsync() const
+{
+    Windows::Foundation::IAsyncOperation<GUID> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallStore)->GetDefaultLineAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneLineWatcher consume_Windows_ApplicationModel_Calls_IPhoneCallStore<D>::RequestLineWatcher() const
+{
+    Windows::ApplicationModel::Calls::PhoneLineWatcher result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallStore)->RequestLineWatcher(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneCallVideoCapabilities<D>::IsVideoCallingCapable() const noexcept
+{
+    bool pValue{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities)->get_IsVideoCallingCapable(&pValue));
+    return pValue;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> consume_Windows_ApplicationModel_Calls_IPhoneCallVideoCapabilitiesManagerStatics<D>::GetCapabilitiesAsync(param::hstring const& phoneNumber) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics)->GetCapabilitiesAsync(get_abi(phoneNumber), put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Number() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_Number(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Number(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_Number(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::DisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_DisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::DisplayName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_DisplayName(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Contacts::Contact consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Contact() const noexcept
+{
+    Windows::ApplicationModel::Contacts::Contact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Contact(Windows::ApplicationModel::Contacts::Contact const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_Contact(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Contacts::ContactPhone consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::ContactPhone() const noexcept
+{
+    Windows::ApplicationModel::Contacts::ContactPhone value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_ContactPhone(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::ContactPhone(Windows::ApplicationModel::Contacts::ContactPhone const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_ContactPhone(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallMedia consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Media() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallMedia value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_Media(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::Media(Windows::ApplicationModel::Calls::PhoneCallMedia const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_Media(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::AudioEndpoint() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->get_AudioEndpoint(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneDialOptions<D>::AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneDialOptions)->put_AudioEndpoint(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::LineChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->add_LineChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLine> consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::LineChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLine>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLine>::remove_LineChanged, LineChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::LineChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->remove_LineChanged(get_abi(token)));
+}
+
+template <typename D> GUID consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::Id() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::DisplayColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_DisplayColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneNetworkState consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::NetworkState() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneNetworkState value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_NetworkState(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::DisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_DisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneVoicemail consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::Voicemail() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneVoicemail value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_Voicemail(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::NetworkName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_NetworkName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneLineCellularDetails consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::CellularDetails() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneLineCellularDetails value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_CellularDetails(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneLineTransport consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::Transport() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneLineTransport value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_Transport(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::CanDial() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_CanDial(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::SupportsTile() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_SupportsTile(&value));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::VideoCallingCapabilities() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_VideoCallingCapabilities(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneLineConfiguration consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::LineConfiguration() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneLineConfiguration value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->get_LineConfiguration(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::IsImmediateDialNumberAsync(param::hstring const& number) const
+{
+    Windows::Foundation::IAsyncOperation<bool> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->IsImmediateDialNumberAsync(get_abi(number), put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::Dial(param::hstring const& number, param::hstring const& displayName) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->Dial(get_abi(number), get_abi(displayName)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLine<D>::DialWithOptions(Windows::ApplicationModel::Calls::PhoneDialOptions const& options) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLine)->DialWithOptions(get_abi(options)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneSimState consume_Windows_ApplicationModel_Calls_IPhoneLineCellularDetails<D>::SimState() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneSimState value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineCellularDetails)->get_SimState(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Calls_IPhoneLineCellularDetails<D>::SimSlotIndex() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineCellularDetails)->get_SimSlotIndex(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneLineCellularDetails<D>::IsModemOn() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineCellularDetails)->get_IsModemOn(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Calls_IPhoneLineCellularDetails<D>::RegistrationRejectCode() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineCellularDetails)->get_RegistrationRejectCode(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneLineCellularDetails<D>::GetNetworkOperatorDisplayText(Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation const& location) const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineCellularDetails)->GetNetworkOperatorDisplayText(get_abi(location), put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Calls_IPhoneLineConfiguration<D>::IsVideoCallingEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineConfiguration)->get_IsVideoCallingEnabled(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> consume_Windows_ApplicationModel_Calls_IPhoneLineConfiguration<D>::ExtendedProperties() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineConfiguration)->get_ExtendedProperties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> consume_Windows_ApplicationModel_Calls_IPhoneLineStatics<D>::FromIdAsync(GUID const& lineId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineStatics)->FromIdAsync(get_abi(lineId), put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Start() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->Start());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Stop() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->Stop());
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineAdded(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->add_LineAdded(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLineWatcher> consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineAdded(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLineWatcher>::remove_LineAdded, LineAdded(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineAdded(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->remove_LineAdded(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineRemoved(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->add_LineRemoved(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLineWatcher> consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineRemoved(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLineWatcher>::remove_LineRemoved, LineRemoved(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineRemoved(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->remove_LineRemoved(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineUpdated(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->add_LineUpdated(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLineWatcher> consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineUpdated(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLineWatcher>::remove_LineUpdated, LineUpdated(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::LineUpdated(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->remove_LineUpdated(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::EnumerationCompleted(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->add_EnumerationCompleted(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLineWatcher> consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::EnumerationCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLineWatcher>::remove_EnumerationCompleted, EnumerationCompleted(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::EnumerationCompleted(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->remove_EnumerationCompleted(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Stopped(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->add_Stopped(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IPhoneLineWatcher> consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Stopped(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>(this, &abi_t<Windows::ApplicationModel::Calls::IPhoneLineWatcher>::remove_Stopped, Stopped(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Stopped(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->remove_Stopped(get_abi(token)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneLineWatcherStatus consume_Windows_ApplicationModel_Calls_IPhoneLineWatcher<D>::Status() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneLineWatcherStatus status{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcher)->get_Status(put_abi(status)));
+    return status;
+}
+
+template <typename D> GUID consume_Windows_ApplicationModel_Calls_IPhoneLineWatcherEventArgs<D>::LineId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneLineWatcherEventArgs)->get_LineId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IPhoneVoicemail<D>::Number() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneVoicemail)->get_Number(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Calls_IPhoneVoicemail<D>::MessageCount() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneVoicemail)->get_MessageCount(&value));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::PhoneVoicemailType consume_Windows_ApplicationModel_Calls_IPhoneVoicemail<D>::Type() const noexcept
+{
+    Windows::ApplicationModel::Calls::PhoneVoicemailType value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneVoicemail)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Calls_IPhoneVoicemail<D>::DialVoicemailAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IPhoneVoicemail)->DialVoicemailAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::ReserveCallResourcesAsync(param::hstring const& taskEntryPoint) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->ReserveCallResourcesAsync(get_abi(taskEntryPoint), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::MuteStateChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> const& muteChangeHandler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->add_MuteStateChanged(get_abi(muteChangeHandler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipCallCoordinator> consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::MuteStateChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> const& muteChangeHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipCallCoordinator>::remove_MuteStateChanged, MuteStateChanged(muteChangeHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::MuteStateChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->remove_MuteStateChanged(get_abi(token)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::RequestNewIncomingCall(param::hstring const& context, param::hstring const& contactName, param::hstring const& contactNumber, Windows::Foundation::Uri const& contactImage, param::hstring const& serviceName, Windows::Foundation::Uri const& brandingImage, param::hstring const& callDetails, Windows::Foundation::Uri const& ringtone, Windows::ApplicationModel::Calls::VoipPhoneCallMedia const& media, Windows::Foundation::TimeSpan const& ringTimeout) const
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCall call{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->RequestNewIncomingCall(get_abi(context), get_abi(contactName), get_abi(contactNumber), get_abi(contactImage), get_abi(serviceName), get_abi(brandingImage), get_abi(callDetails), get_abi(ringtone), get_abi(media), get_abi(ringTimeout), put_abi(call)));
+    return call;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::RequestNewOutgoingCall(param::hstring const& context, param::hstring const& contactName, param::hstring const& serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia const& media) const
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCall call{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->RequestNewOutgoingCall(get_abi(context), get_abi(contactName), get_abi(serviceName), get_abi(media), put_abi(call)));
+    return call;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::NotifyMuted() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->NotifyMuted());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::NotifyUnmuted() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->NotifyUnmuted());
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::RequestOutgoingUpgradeToVideoCall(GUID const& callUpgradeGuid, param::hstring const& context, param::hstring const& contactName, param::hstring const& serviceName) const
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCall call{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->RequestOutgoingUpgradeToVideoCall(get_abi(callUpgradeGuid), get_abi(context), get_abi(contactName), get_abi(serviceName), put_abi(call)));
+    return call;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::RequestIncomingUpgradeToVideoCall(param::hstring const& context, param::hstring const& contactName, param::hstring const& contactNumber, Windows::Foundation::Uri const& contactImage, param::hstring const& serviceName, Windows::Foundation::Uri const& brandingImage, param::hstring const& callDetails, Windows::Foundation::Uri const& ringtone, Windows::Foundation::TimeSpan const& ringTimeout) const
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCall call{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->RequestIncomingUpgradeToVideoCall(get_abi(context), get_abi(contactName), get_abi(contactNumber), get_abi(contactImage), get_abi(serviceName), get_abi(brandingImage), get_abi(callDetails), get_abi(ringtone), get_abi(ringTimeout), put_abi(call)));
+    return call;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::TerminateCellularCall(GUID const& callUpgradeGuid) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->TerminateCellularCall(get_abi(callUpgradeGuid)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator<D>::CancelUpgrade(GUID const& callUpgradeGuid) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator)->CancelUpgrade(get_abi(callUpgradeGuid)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall consume_Windows_ApplicationModel_Calls_IVoipCallCoordinator2<D>::SetupNewAcceptedCall(param::hstring const& context, param::hstring const& contactName, param::hstring const& contactNumber, param::hstring const& serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia const& media) const
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCall call{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinator2)->SetupNewAcceptedCall(get_abi(context), get_abi(contactName), get_abi(contactNumber), get_abi(serviceName), get_abi(media), put_abi(call)));
+    return call;
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipCallCoordinator consume_Windows_ApplicationModel_Calls_IVoipCallCoordinatorStatics<D>::GetDefault() const
+{
+    Windows::ApplicationModel::Calls::VoipCallCoordinator coordinator{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics)->GetDefault(put_abi(coordinator)));
+    return coordinator;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::EndRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->add_EndRequested(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipPhoneCall> consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::EndRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipPhoneCall>::remove_EndRequested, EndRequested(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::EndRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->remove_EndRequested(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::HoldRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->add_HoldRequested(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipPhoneCall> consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::HoldRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipPhoneCall>::remove_HoldRequested, HoldRequested(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::HoldRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->remove_HoldRequested(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::ResumeRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->add_ResumeRequested(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipPhoneCall> consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::ResumeRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipPhoneCall>::remove_ResumeRequested, ResumeRequested(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::ResumeRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->remove_ResumeRequested(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::AnswerRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> const& acceptHandler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->add_AnswerRequested(get_abi(acceptHandler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipPhoneCall> consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::AnswerRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> const& acceptHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipPhoneCall>::remove_AnswerRequested, AnswerRequested(acceptHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::AnswerRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->remove_AnswerRequested(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::RejectRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> const& rejectHandler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->add_RejectRequested(get_abi(rejectHandler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Calls::IVoipPhoneCall> consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::RejectRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> const& rejectHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>(this, &abi_t<Windows::ApplicationModel::Calls::IVoipPhoneCall>::remove_RejectRequested, RejectRequested(rejectHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::RejectRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->remove_RejectRequested(get_abi(token)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::NotifyCallHeld() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->NotifyCallHeld());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::NotifyCallActive() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->NotifyCallActive());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::NotifyCallEnded() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->NotifyCallEnded());
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::ContactName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->get_ContactName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::ContactName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->put_ContactName(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::StartTime() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->get_StartTime(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::StartTime(Windows::Foundation::DateTime const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->put_StartTime(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallMedia consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::CallMedia() const noexcept
+{
+    Windows::ApplicationModel::Calls::VoipPhoneCallMedia value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->get_CallMedia(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->put_CallMedia(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall<D>::NotifyCallReady() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall)->NotifyCallReady());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Calls_IVoipPhoneCall2<D>::TryShowAppUI() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Calls::IVoipPhoneCall2)->TryShowAppUI());
+}
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ICallAnswerEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::ICallAnswerEventArgs>
 {
-    HRESULT __stdcall get_AcceptedMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia * value) noexcept override
+    HRESULT __stdcall get_AcceptedMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AcceptedMedia());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AcceptedMedia());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ICallRejectEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::ICallRejectEventArgs>
 {
-    HRESULT __stdcall get_RejectReason(Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason * value) noexcept override
+    HRESULT __stdcall get_RejectReason(Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RejectReason());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RejectReason());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ICallStateChangeEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::ICallStateChangeEventArgs>
 {
-    HRESULT __stdcall get_State(Windows::ApplicationModel::Calls::VoipPhoneCallState * value) noexcept override
+    HRESULT __stdcall get_State(Windows::ApplicationModel::Calls::VoipPhoneCallState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().State());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().State());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral> : produce_base<D, Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -86,11 +1296,12 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs>
 {
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral> value) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -100,27 +1311,22 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedE
         }
     }
 
-    HRESULT __stdcall get_Deadline(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Deadline(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Deadline());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Deadline());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce_base<D, Windows::ApplicationModel::Calls::ILockScreenCallUI>
 {
-    HRESULT __stdcall abi_Dismiss() noexcept override
+    HRESULT __stdcall Dismiss() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Dismiss();
             return S_OK;
         }
@@ -130,11 +1336,12 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce
         }
     }
 
-    HRESULT __stdcall add_EndRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_EndRequested(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().EndRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().EndRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -143,11 +1350,12 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce
         }
     }
 
-    HRESULT __stdcall remove_EndRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_EndRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().EndRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().EndRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -156,11 +1364,12 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce
         }
     }
 
-    HRESULT __stdcall add_Closed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Closed(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Closed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Closed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -169,11 +1378,12 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce
         }
     }
 
-    HRESULT __stdcall remove_Closed(event_token token) noexcept override
+    HRESULT __stdcall remove_Closed(event_token token) noexcept final
     {
         try
         {
-            this->shim().Closed(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Closed(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -182,111 +1392,69 @@ struct produce<D, Windows::ApplicationModel::Calls::ILockScreenCallUI> : produce
         }
     }
 
-    HRESULT __stdcall get_CallTitle(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_CallTitle(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CallTitle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CallTitle());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CallTitle(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_CallTitle(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().CallTitle(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CallTitle(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IMuteChangeEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::IMuteChangeEventArgs>
 {
-    HRESULT __stdcall get_Muted(bool * value) noexcept override
+    HRESULT __stdcall get_Muted(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Muted());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Muted());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>
 {
-    HRESULT __stdcall get_BlockUnknownNumbers(bool * value) noexcept override
+    HRESULT __stdcall get_BlockUnknownNumbers(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BlockUnknownNumbers());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BlockUnknownNumbers());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_BlockUnknownNumbers(bool value) noexcept override
+    HRESULT __stdcall put_BlockUnknownNumbers(bool value) noexcept final
     {
-        try
-        {
-            this->shim().BlockUnknownNumbers(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().BlockUnknownNumbers(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BlockPrivateNumbers(bool * value) noexcept override
+    HRESULT __stdcall get_BlockPrivateNumbers(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BlockPrivateNumbers());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BlockPrivateNumbers());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_BlockPrivateNumbers(bool value) noexcept override
+    HRESULT __stdcall put_BlockPrivateNumbers(bool value) noexcept final
     {
-        try
-        {
-            this->shim().BlockPrivateNumbers(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().BlockPrivateNumbers(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SetCallBlockingListAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> phoneNumberList, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> result) noexcept override
+    HRESULT __stdcall SetCallBlockingListAsync(::IUnknown* phoneNumberList, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().SetCallBlockingListAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&phoneNumberList)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SetCallBlockingListAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&phoneNumberList)));
             return S_OK;
         }
         catch (...)
@@ -300,574 +1468,314 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics> :
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry>
 {
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Address(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> value) noexcept override
+    HRESULT __stdcall get_Address(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Address());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Address());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Address(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> value) noexcept override
+    HRESULT __stdcall put_Address(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Address(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Address(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Duration(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::TimeSpan>> value) noexcept override
+    HRESULT __stdcall get_Duration(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Duration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Duration());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Duration(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::TimeSpan>> value) noexcept override
+    HRESULT __stdcall put_Duration(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Duration(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::TimeSpan> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Duration(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::TimeSpan> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsCallerIdBlocked(bool * value) noexcept override
+    HRESULT __stdcall get_IsCallerIdBlocked(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCallerIdBlocked());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCallerIdBlocked());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsCallerIdBlocked(bool value) noexcept override
+    HRESULT __stdcall put_IsCallerIdBlocked(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsCallerIdBlocked(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsCallerIdBlocked(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsEmergency(bool * value) noexcept override
+    HRESULT __stdcall get_IsEmergency(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsEmergency());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsEmergency());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsEmergency(bool value) noexcept override
+    HRESULT __stdcall put_IsEmergency(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsEmergency(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsEmergency(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsIncoming(bool * value) noexcept override
+    HRESULT __stdcall get_IsIncoming(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsIncoming());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsIncoming());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsIncoming(bool value) noexcept override
+    HRESULT __stdcall put_IsIncoming(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsIncoming(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsIncoming(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMissed(bool * value) noexcept override
+    HRESULT __stdcall get_IsMissed(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMissed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMissed());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsMissed(bool value) noexcept override
+    HRESULT __stdcall put_IsMissed(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsMissed(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsMissed(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsRinging(bool * value) noexcept override
+    HRESULT __stdcall get_IsRinging(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsRinging());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsRinging());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsRinging(bool value) noexcept override
+    HRESULT __stdcall put_IsRinging(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsRinging(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsRinging(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSeen(bool * value) noexcept override
+    HRESULT __stdcall get_IsSeen(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSeen());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSeen());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSeen(bool value) noexcept override
+    HRESULT __stdcall put_IsSeen(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSeen(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSeen(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSuppressed(bool * value) noexcept override
+    HRESULT __stdcall get_IsSuppressed(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSuppressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSuppressed());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSuppressed(bool value) noexcept override
+    HRESULT __stdcall put_IsSuppressed(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSuppressed(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSuppressed(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsVoicemail(bool * value) noexcept override
+    HRESULT __stdcall get_IsVoicemail(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsVoicemail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsVoicemail());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsVoicemail(bool value) noexcept override
+    HRESULT __stdcall put_IsVoicemail(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsVoicemail(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsVoicemail(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia * value) noexcept override
+    HRESULT __stdcall get_Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Media());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Media());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia value) noexcept override
+    HRESULT __stdcall put_Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia value) noexcept final
     {
-        try
-        {
-            this->shim().Media(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Media(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess * value) noexcept override
+    HRESULT __stdcall get_OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().OtherAppReadAccess());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().OtherAppReadAccess());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess value) noexcept override
+    HRESULT __stdcall put_OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess value) noexcept final
     {
-        try
-        {
-            this->shim().OtherAppReadAccess(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().OtherAppReadAccess(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RemoteId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_RemoteId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RemoteId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RemoteId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RemoteId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_RemoteId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().RemoteId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RemoteId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceDisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_SourceDisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceDisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceDisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_SourceId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SourceId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_SourceId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().SourceId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SourceId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind * value) noexcept override
+    HRESULT __stdcall get_SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceIdKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceIdKind());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind value) noexcept override
+    HRESULT __stdcall put_SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind value) noexcept final
     {
-        try
-        {
-            this->shim().SourceIdKind(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SourceIdKind(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StartTime(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_StartTime(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StartTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StartTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_StartTime(abi_arg_in<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall put_StartTime(Windows::Foundation::DateTime value) noexcept final
     {
-        try
-        {
-            this->shim().StartTime(*reinterpret_cast<const Windows::Foundation::DateTime *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().StartTime(*reinterpret_cast<Windows::Foundation::DateTime const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress>
 {
-    HRESULT __stdcall get_ContactId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ContactId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContactId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContactId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContactId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ContactId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ContactId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContactId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RawAddress(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_RawAddress(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RawAddress());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RawAddress());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RawAddress(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_RawAddress(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().RawAddress(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RawAddress(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind * value) noexcept override
+    HRESULT __stdcall get_RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RawAddressKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RawAddressKind());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind value) noexcept override
+    HRESULT __stdcall put_RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind value) noexcept final
     {
-        try
-        {
-            this->shim().RawAddressKind(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RawAddressKind(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory>
 {
-    HRESULT __stdcall abi_Create(abi_arg_in<hstring> rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind rawAddressKind, abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> result) noexcept override
+    HRESULT __stdcall Create(HSTRING rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind rawAddressKind, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Create(*reinterpret_cast<const hstring *>(&rawAddress), rawAddressKind));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().Create(*reinterpret_cast<hstring const*>(&rawAddress), *reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind const*>(&rawAddressKind)));
             return S_OK;
         }
         catch (...)
@@ -881,55 +1789,37 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddres
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions>
 {
-    HRESULT __stdcall get_DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia * value) noexcept override
+    HRESULT __stdcall get_DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DesiredMedia());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DesiredMedia());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia value) noexcept override
+    HRESULT __stdcall put_DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia value) noexcept final
     {
-        try
-        {
-            this->shim().DesiredMedia(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DesiredMedia(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceIds(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> value) noexcept override
+    HRESULT __stdcall get_SourceIds(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceIds());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceIds());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader>
 {
-    HRESULT __stdcall abi_ReadBatchAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>>> result) noexcept override
+    HRESULT __stdcall ReadBatchAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync());
             return S_OK;
         }
         catch (...)
@@ -943,11 +1833,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser>
 {
-    HRESULT __stdcall abi_RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore>> result) noexcept override
+    HRESULT __stdcall RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestStoreAsync(accessType));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestStoreAsync(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType const*>(&accessType)));
             return S_OK;
         }
         catch (...)
@@ -957,29 +1848,23 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForU
         }
     }
 
-    HRESULT __stdcall get_User(abi_arg_out<Windows::System::IUser> value) noexcept override
+    HRESULT __stdcall get_User(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().User());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().User());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics>
 {
-    HRESULT __stdcall abi_RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore>> result) noexcept override
+    HRESULT __stdcall RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestStoreAsync(accessType));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestStoreAsync(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType const*>(&accessType)));
             return S_OK;
         }
         catch (...)
@@ -993,11 +1878,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStat
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2>
 {
-    HRESULT __stdcall abi_GetForUser(abi_arg_in<Windows::System::IUser> user, abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser> result) noexcept override
+    HRESULT __stdcall GetForUser(::IUnknown* user, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetForUser(*reinterpret_cast<const Windows::System::User *>(&user)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetForUser(*reinterpret_cast<Windows::System::User const*>(&user)));
             return S_OK;
         }
         catch (...)
@@ -1011,11 +1897,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStat
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore>
 {
-    HRESULT __stdcall abi_GetEntryAsync(abi_arg_in<hstring> callHistoryEntryId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> result) noexcept override
+    HRESULT __stdcall GetEntryAsync(HSTRING callHistoryEntryId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetEntryAsync(*reinterpret_cast<const hstring *>(&callHistoryEntryId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetEntryAsync(*reinterpret_cast<hstring const*>(&callHistoryEntryId)));
             return S_OK;
         }
         catch (...)
@@ -1025,11 +1912,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetEntryReader(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader> result) noexcept override
+    HRESULT __stdcall GetEntryReader(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetEntryReader());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetEntryReader());
             return S_OK;
         }
         catch (...)
@@ -1039,11 +1927,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetEntryReaderWithOptions(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions> queryOptions, abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader> result) noexcept override
+    HRESULT __stdcall GetEntryReaderWithOptions(::IUnknown* queryOptions, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetEntryReader(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions *>(&queryOptions)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetEntryReader(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions const*>(&queryOptions)));
             return S_OK;
         }
         catch (...)
@@ -1053,11 +1942,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_SaveEntryAsync(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> callHistoryEntry, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall SaveEntryAsync(::IUnknown* callHistoryEntry, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().SaveEntryAsync(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry *>(&callHistoryEntry)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SaveEntryAsync(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const*>(&callHistoryEntry)));
             return S_OK;
         }
         catch (...)
@@ -1067,11 +1957,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_DeleteEntryAsync(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> callHistoryEntry, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall DeleteEntryAsync(::IUnknown* callHistoryEntry, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().DeleteEntryAsync(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry *>(&callHistoryEntry)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().DeleteEntryAsync(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const*>(&callHistoryEntry)));
             return S_OK;
         }
         catch (...)
@@ -1081,11 +1972,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_DeleteEntriesAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> callHistoryEntries, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall DeleteEntriesAsync(::IUnknown* callHistoryEntries, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().DeleteEntriesAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> *>(&callHistoryEntries)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().DeleteEntriesAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> const*>(&callHistoryEntries)));
             return S_OK;
         }
         catch (...)
@@ -1095,11 +1987,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_MarkEntryAsSeenAsync(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> callHistoryEntry, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkEntryAsSeenAsync(::IUnknown* callHistoryEntry, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkEntryAsSeenAsync(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry *>(&callHistoryEntry)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkEntryAsSeenAsync(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry const*>(&callHistoryEntry)));
             return S_OK;
         }
         catch (...)
@@ -1109,11 +2002,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_MarkEntriesAsSeenAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> callHistoryEntries, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkEntriesAsSeenAsync(::IUnknown* callHistoryEntries, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkEntriesAsSeenAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> *>(&callHistoryEntries)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkEntriesAsSeenAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> const*>(&callHistoryEntries)));
             return S_OK;
         }
         catch (...)
@@ -1123,11 +2017,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetUnseenCountAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<uint32_t>> result) noexcept override
+    HRESULT __stdcall GetUnseenCountAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetUnseenCountAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetUnseenCountAsync());
             return S_OK;
         }
         catch (...)
@@ -1137,11 +2032,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_MarkAllAsSeenAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkAllAsSeenAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkAllAsSeenAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkAllAsSeenAsync());
             return S_OK;
         }
         catch (...)
@@ -1151,11 +2047,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_GetSourcesUnseenCountAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> sourceIds, abi_arg_out<Windows::Foundation::IAsyncOperation<uint32_t>> result) noexcept override
+    HRESULT __stdcall GetSourcesUnseenCountAsync(::IUnknown* sourceIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetSourcesUnseenCountAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&sourceIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetSourcesUnseenCountAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&sourceIds)));
             return S_OK;
         }
         catch (...)
@@ -1165,11 +2062,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
         }
     }
 
-    HRESULT __stdcall abi_MarkSourcesAsSeenAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> sourceIds, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkSourcesAsSeenAsync(::IUnknown* sourceIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkSourcesAsSeenAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&sourceIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkSourcesAsSeenAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&sourceIds)));
             return S_OK;
         }
         catch (...)
@@ -1183,11 +2081,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : pr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics>
 {
-    HRESULT __stdcall abi_ShowPhoneCallUI(abi_arg_in<hstring> phoneNumber, abi_arg_in<hstring> displayName) noexcept override
+    HRESULT __stdcall ShowPhoneCallUI(HSTRING phoneNumber, HSTRING displayName) noexcept final
     {
         try
         {
-            this->shim().ShowPhoneCallUI(*reinterpret_cast<const hstring *>(&phoneNumber), *reinterpret_cast<const hstring *>(&displayName));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ShowPhoneCallUI(*reinterpret_cast<hstring const*>(&phoneNumber), *reinterpret_cast<hstring const*>(&displayName));
             return S_OK;
         }
         catch (...)
@@ -1200,11 +2099,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>
 {
-    HRESULT __stdcall add_CallStateChanged(abi_arg_in<Windows::Foundation::EventHandler<Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_CallStateChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().CallStateChanged(*reinterpret_cast<const Windows::Foundation::EventHandler<Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().CallStateChanged(*reinterpret_cast<Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1213,11 +2113,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> :
         }
     }
 
-    HRESULT __stdcall remove_CallStateChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_CallStateChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().CallStateChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().CallStateChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1226,36 +2127,25 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> :
         }
     }
 
-    HRESULT __stdcall get_IsCallActive(bool * value) noexcept override
+    HRESULT __stdcall get_IsCallActive(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCallActive());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCallActive());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsCallIncoming(bool * value) noexcept override
+    HRESULT __stdcall get_IsCallIncoming(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCallIncoming());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCallIncoming());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_ShowPhoneCallSettingsUI() noexcept override
+    HRESULT __stdcall ShowPhoneCallSettingsUI() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowPhoneCallSettingsUI();
             return S_OK;
         }
@@ -1265,11 +2155,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> :
         }
     }
 
-    HRESULT __stdcall abi_RequestStoreAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore>> result) noexcept override
+    HRESULT __stdcall RequestStoreAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestStoreAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestStoreAsync());
             return S_OK;
         }
         catch (...)
@@ -1283,11 +2174,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> :
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallStore> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallStore>
 {
-    HRESULT __stdcall abi_IsEmergencyPhoneNumberAsync(abi_arg_in<hstring> number, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> result) noexcept override
+    HRESULT __stdcall IsEmergencyPhoneNumberAsync(HSTRING number, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsEmergencyPhoneNumberAsync(*reinterpret_cast<const hstring *>(&number)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsEmergencyPhoneNumberAsync(*reinterpret_cast<hstring const*>(&number)));
             return S_OK;
         }
         catch (...)
@@ -1297,11 +2189,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallStore> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_GetDefaultLineAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<GUID>> result) noexcept override
+    HRESULT __stdcall GetDefaultLineAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetDefaultLineAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetDefaultLineAsync());
             return S_OK;
         }
         catch (...)
@@ -1311,11 +2204,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallStore> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_RequestLineWatcher(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneLineWatcher> result) noexcept override
+    HRESULT __stdcall RequestLineWatcher(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestLineWatcher());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestLineWatcher());
             return S_OK;
         }
         catch (...)
@@ -1329,28 +2223,23 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallStore> : produce_b
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities>
 {
-    HRESULT __stdcall get_IsVideoCallingCapable(bool * pValue) noexcept override
+    HRESULT __stdcall get_IsVideoCallingCapable(bool* pValue) noexcept final
     {
-        try
-        {
-            *pValue = detach(this->shim().IsVideoCallingCapable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *pValue = detach_abi(this->shim().IsVideoCallingCapable());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics>
 {
-    HRESULT __stdcall abi_GetCapabilitiesAsync(abi_arg_in<hstring> phoneNumber, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities>> result) noexcept override
+    HRESULT __stdcall GetCapabilitiesAsync(HSTRING phoneNumber, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetCapabilitiesAsync(*reinterpret_cast<const hstring *>(&phoneNumber)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetCapabilitiesAsync(*reinterpret_cast<hstring const*>(&phoneNumber)));
             return S_OK;
         }
         catch (...)
@@ -1364,175 +2253,100 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesM
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneDialOptions> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneDialOptions>
 {
-    HRESULT __stdcall get_Number(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Number(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Number());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Number());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Number(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Number(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Number(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Number(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::ApplicationModel::Contacts::IContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Contact(abi_arg_in<Windows::ApplicationModel::Contacts::IContact> value) noexcept override
+    HRESULT __stdcall put_Contact(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Contact(*reinterpret_cast<const Windows::ApplicationModel::Contacts::Contact *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Contact(*reinterpret_cast<Windows::ApplicationModel::Contacts::Contact const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContactPhone(abi_arg_out<Windows::ApplicationModel::Contacts::IContactPhone> value) noexcept override
+    HRESULT __stdcall get_ContactPhone(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContactPhone());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContactPhone());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContactPhone(abi_arg_in<Windows::ApplicationModel::Contacts::IContactPhone> value) noexcept override
+    HRESULT __stdcall put_ContactPhone(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ContactPhone(*reinterpret_cast<const Windows::ApplicationModel::Contacts::ContactPhone *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContactPhone(*reinterpret_cast<Windows::ApplicationModel::Contacts::ContactPhone const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Media(Windows::ApplicationModel::Calls::PhoneCallMedia * value) noexcept override
+    HRESULT __stdcall get_Media(Windows::ApplicationModel::Calls::PhoneCallMedia* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Media());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Media());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Media(Windows::ApplicationModel::Calls::PhoneCallMedia value) noexcept override
+    HRESULT __stdcall put_Media(Windows::ApplicationModel::Calls::PhoneCallMedia value) noexcept final
     {
-        try
-        {
-            this->shim().Media(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Media(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneCallMedia const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint * value) noexcept override
+    HRESULT __stdcall get_AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AudioEndpoint());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AudioEndpoint());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint value) noexcept override
+    HRESULT __stdcall put_AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint value) noexcept final
     {
-        try
-        {
-            this->shim().AudioEndpoint(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AudioEndpoint(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLine>
 {
-    HRESULT __stdcall add_LineChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_LineChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().LineChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().LineChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1541,11 +2355,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D
         }
     }
 
-    HRESULT __stdcall remove_LineChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_LineChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().LineChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().LineChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1554,173 +2369,96 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D
         }
     }
 
-    HRESULT __stdcall get_Id(GUID * value) noexcept override
+    HRESULT __stdcall get_Id(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_DisplayColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NetworkState(Windows::ApplicationModel::Calls::PhoneNetworkState * value) noexcept override
+    HRESULT __stdcall get_NetworkState(Windows::ApplicationModel::Calls::PhoneNetworkState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NetworkState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NetworkState());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Voicemail(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneVoicemail> value) noexcept override
+    HRESULT __stdcall get_Voicemail(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Voicemail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Voicemail());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NetworkName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_NetworkName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NetworkName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NetworkName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CellularDetails(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneLineCellularDetails> value) noexcept override
+    HRESULT __stdcall get_CellularDetails(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CellularDetails());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CellularDetails());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Transport(Windows::ApplicationModel::Calls::PhoneLineTransport * value) noexcept override
+    HRESULT __stdcall get_Transport(Windows::ApplicationModel::Calls::PhoneLineTransport* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Transport());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Transport());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CanDial(bool * value) noexcept override
+    HRESULT __stdcall get_CanDial(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanDial());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanDial());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportsTile(bool * value) noexcept override
+    HRESULT __stdcall get_SupportsTile(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportsTile());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportsTile());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VideoCallingCapabilities(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities> value) noexcept override
+    HRESULT __stdcall get_VideoCallingCapabilities(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VideoCallingCapabilities());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VideoCallingCapabilities());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LineConfiguration(abi_arg_out<Windows::ApplicationModel::Calls::IPhoneLineConfiguration> value) noexcept override
+    HRESULT __stdcall get_LineConfiguration(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LineConfiguration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LineConfiguration());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsImmediateDialNumberAsync(abi_arg_in<hstring> number, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> result) noexcept override
+    HRESULT __stdcall IsImmediateDialNumberAsync(HSTRING number, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsImmediateDialNumberAsync(*reinterpret_cast<const hstring *>(&number)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsImmediateDialNumberAsync(*reinterpret_cast<hstring const*>(&number)));
             return S_OK;
         }
         catch (...)
@@ -1730,11 +2468,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_Dial(abi_arg_in<hstring> number, abi_arg_in<hstring> displayName) noexcept override
+    HRESULT __stdcall Dial(HSTRING number, HSTRING displayName) noexcept final
     {
         try
         {
-            this->shim().Dial(*reinterpret_cast<const hstring *>(&number), *reinterpret_cast<const hstring *>(&displayName));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Dial(*reinterpret_cast<hstring const*>(&number), *reinterpret_cast<hstring const*>(&displayName));
             return S_OK;
         }
         catch (...)
@@ -1743,11 +2482,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_DialWithOptions(abi_arg_in<Windows::ApplicationModel::Calls::IPhoneDialOptions> options) noexcept override
+    HRESULT __stdcall DialWithOptions(::IUnknown* options) noexcept final
     {
         try
         {
-            this->shim().DialWithOptions(*reinterpret_cast<const Windows::ApplicationModel::Calls::PhoneDialOptions *>(&options));
+            typename D::abi_guard guard(this->shim());
+            this->shim().DialWithOptions(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneDialOptions const*>(&options));
             return S_OK;
         }
         catch (...)
@@ -1760,63 +2500,40 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLine> : produce_base<D
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineCellularDetails> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLineCellularDetails>
 {
-    HRESULT __stdcall get_SimState(Windows::ApplicationModel::Calls::PhoneSimState * value) noexcept override
+    HRESULT __stdcall get_SimState(Windows::ApplicationModel::Calls::PhoneSimState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SimState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimState());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SimSlotIndex(int32_t * value) noexcept override
+    HRESULT __stdcall get_SimSlotIndex(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SimSlotIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimSlotIndex());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsModemOn(bool * value) noexcept override
+    HRESULT __stdcall get_IsModemOn(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsModemOn());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsModemOn());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RegistrationRejectCode(int32_t * value) noexcept override
+    HRESULT __stdcall get_RegistrationRejectCode(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RegistrationRejectCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RegistrationRejectCode());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetNetworkOperatorDisplayText(Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation location, abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetNetworkOperatorDisplayText(Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation location, HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetNetworkOperatorDisplayText(location));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetNetworkOperatorDisplayText(*reinterpret_cast<Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation const*>(&location)));
             return S_OK;
         }
         catch (...)
@@ -1830,42 +2547,30 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineCellularDetails> :
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineConfiguration> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLineConfiguration>
 {
-    HRESULT __stdcall get_IsVideoCallingEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsVideoCallingEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsVideoCallingEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsVideoCallingEnabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExtendedProperties(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_ExtendedProperties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExtendedProperties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExtendedProperties());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineStatics> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLineStatics>
 {
-    HRESULT __stdcall abi_FromIdAsync(GUID lineId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine>> result) noexcept override
+    HRESULT __stdcall FromIdAsync(GUID lineId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().FromIdAsync(lineId));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<GUID const*>(&lineId)));
             return S_OK;
         }
         catch (...)
@@ -1879,10 +2584,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineStatics> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher>
 {
-    HRESULT __stdcall abi_Start() noexcept override
+    HRESULT __stdcall Start() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Start();
             return S_OK;
         }
@@ -1892,10 +2598,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall abi_Stop() noexcept override
+    HRESULT __stdcall Stop() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Stop();
             return S_OK;
         }
@@ -1905,11 +2612,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall add_LineAdded(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_LineAdded(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().LineAdded(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().LineAdded(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1918,11 +2626,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall remove_LineAdded(event_token token) noexcept override
+    HRESULT __stdcall remove_LineAdded(event_token token) noexcept final
     {
         try
         {
-            this->shim().LineAdded(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().LineAdded(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1931,11 +2640,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall add_LineRemoved(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_LineRemoved(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().LineRemoved(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().LineRemoved(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1944,11 +2654,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall remove_LineRemoved(event_token token) noexcept override
+    HRESULT __stdcall remove_LineRemoved(event_token token) noexcept final
     {
         try
         {
-            this->shim().LineRemoved(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().LineRemoved(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1957,11 +2668,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall add_LineUpdated(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_LineUpdated(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().LineUpdated(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().LineUpdated(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1970,11 +2682,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall remove_LineUpdated(event_token token) noexcept override
+    HRESULT __stdcall remove_LineUpdated(event_token token) noexcept final
     {
         try
         {
-            this->shim().LineUpdated(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().LineUpdated(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1983,11 +2696,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall add_EnumerationCompleted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_EnumerationCompleted(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().EnumerationCompleted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().EnumerationCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1996,11 +2710,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall remove_EnumerationCompleted(event_token token) noexcept override
+    HRESULT __stdcall remove_EnumerationCompleted(event_token token) noexcept final
     {
         try
         {
-            this->shim().EnumerationCompleted(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().EnumerationCompleted(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2009,11 +2724,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall add_Stopped(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Stopped(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Stopped(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Stopped(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2022,11 +2738,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall remove_Stopped(event_token token) noexcept override
+    HRESULT __stdcall remove_Stopped(event_token token) noexcept final
     {
         try
         {
-            this->shim().Stopped(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Stopped(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2035,85 +2752,55 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcher> : produce
         }
     }
 
-    HRESULT __stdcall get_Status(Windows::ApplicationModel::Calls::PhoneLineWatcherStatus * status) noexcept override
+    HRESULT __stdcall get_Status(Windows::ApplicationModel::Calls::PhoneLineWatcherStatus* status) noexcept final
     {
-        try
-        {
-            *status = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *status = detach_abi(this->shim().Status());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneLineWatcherEventArgs> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneLineWatcherEventArgs>
 {
-    HRESULT __stdcall get_LineId(GUID * value) noexcept override
+    HRESULT __stdcall get_LineId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LineId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LineId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IPhoneVoicemail> : produce_base<D, Windows::ApplicationModel::Calls::IPhoneVoicemail>
 {
-    HRESULT __stdcall get_Number(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Number(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Number());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Number());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MessageCount(int32_t * value) noexcept override
+    HRESULT __stdcall get_MessageCount(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MessageCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MessageCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Type(Windows::ApplicationModel::Calls::PhoneVoicemailType * value) noexcept override
+    HRESULT __stdcall get_Type(Windows::ApplicationModel::Calls::PhoneVoicemailType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_DialVoicemailAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall DialVoicemailAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().DialVoicemailAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().DialVoicemailAsync());
             return S_OK;
         }
         catch (...)
@@ -2127,11 +2814,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IPhoneVoicemail> : produce_b
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : produce_base<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator>
 {
-    HRESULT __stdcall abi_ReserveCallResourcesAsync(abi_arg_in<hstring> taskEntryPoint, abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus>> operation) noexcept override
+    HRESULT __stdcall ReserveCallResourcesAsync(HSTRING taskEntryPoint, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ReserveCallResourcesAsync(*reinterpret_cast<const hstring *>(&taskEntryPoint)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ReserveCallResourcesAsync(*reinterpret_cast<hstring const*>(&taskEntryPoint)));
             return S_OK;
         }
         catch (...)
@@ -2141,11 +2829,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall add_MuteStateChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs>> muteChangeHandler, event_token * token) noexcept override
+    HRESULT __stdcall add_MuteStateChanged(::IUnknown* muteChangeHandler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().MuteStateChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> *>(&muteChangeHandler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().MuteStateChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> const*>(&muteChangeHandler)));
             return S_OK;
         }
         catch (...)
@@ -2154,11 +2843,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall remove_MuteStateChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_MuteStateChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().MuteStateChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().MuteStateChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2167,25 +2857,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_RequestNewIncomingCall(abi_arg_in<hstring> context, abi_arg_in<hstring> contactName, abi_arg_in<hstring> contactNumber, abi_arg_in<Windows::Foundation::IUriRuntimeClass> contactImage, abi_arg_in<hstring> serviceName, abi_arg_in<Windows::Foundation::IUriRuntimeClass> brandingImage, abi_arg_in<hstring> callDetails, abi_arg_in<Windows::Foundation::IUriRuntimeClass> ringtone, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, abi_arg_in<Windows::Foundation::TimeSpan> ringTimeout, abi_arg_out<Windows::ApplicationModel::Calls::IVoipPhoneCall> call) noexcept override
+    HRESULT __stdcall RequestNewIncomingCall(HSTRING context, HSTRING contactName, HSTRING contactNumber, ::IUnknown* contactImage, HSTRING serviceName, ::IUnknown* brandingImage, HSTRING callDetails, ::IUnknown* ringtone, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, Windows::Foundation::TimeSpan ringTimeout, ::IUnknown** call) noexcept final
     {
         try
         {
-            *call = detach(this->shim().RequestNewIncomingCall(*reinterpret_cast<const hstring *>(&context), *reinterpret_cast<const hstring *>(&contactName), *reinterpret_cast<const hstring *>(&contactNumber), *reinterpret_cast<const Windows::Foundation::Uri *>(&contactImage), *reinterpret_cast<const hstring *>(&serviceName), *reinterpret_cast<const Windows::Foundation::Uri *>(&brandingImage), *reinterpret_cast<const hstring *>(&callDetails), *reinterpret_cast<const Windows::Foundation::Uri *>(&ringtone), media, *reinterpret_cast<const Windows::Foundation::TimeSpan *>(&ringTimeout)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *call = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_RequestNewOutgoingCall(abi_arg_in<hstring> context, abi_arg_in<hstring> contactName, abi_arg_in<hstring> serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, abi_arg_out<Windows::ApplicationModel::Calls::IVoipPhoneCall> call) noexcept override
-    {
-        try
-        {
-            *call = detach(this->shim().RequestNewOutgoingCall(*reinterpret_cast<const hstring *>(&context), *reinterpret_cast<const hstring *>(&contactName), *reinterpret_cast<const hstring *>(&serviceName), media));
+            typename D::abi_guard guard(this->shim());
+            *call = detach_abi(this->shim().RequestNewIncomingCall(*reinterpret_cast<hstring const*>(&context), *reinterpret_cast<hstring const*>(&contactName), *reinterpret_cast<hstring const*>(&contactNumber), *reinterpret_cast<Windows::Foundation::Uri const*>(&contactImage), *reinterpret_cast<hstring const*>(&serviceName), *reinterpret_cast<Windows::Foundation::Uri const*>(&brandingImage), *reinterpret_cast<hstring const*>(&callDetails), *reinterpret_cast<Windows::Foundation::Uri const*>(&ringtone), *reinterpret_cast<Windows::ApplicationModel::Calls::VoipPhoneCallMedia const*>(&media), *reinterpret_cast<Windows::Foundation::TimeSpan const*>(&ringTimeout)));
             return S_OK;
         }
         catch (...)
@@ -2195,10 +2872,26 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_NotifyMuted() noexcept override
+    HRESULT __stdcall RequestNewOutgoingCall(HSTRING context, HSTRING contactName, HSTRING serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, ::IUnknown** call) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
+            *call = detach_abi(this->shim().RequestNewOutgoingCall(*reinterpret_cast<hstring const*>(&context), *reinterpret_cast<hstring const*>(&contactName), *reinterpret_cast<hstring const*>(&serviceName), *reinterpret_cast<Windows::ApplicationModel::Calls::VoipPhoneCallMedia const*>(&media)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *call = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall NotifyMuted() noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyMuted();
             return S_OK;
         }
@@ -2208,10 +2901,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_NotifyUnmuted() noexcept override
+    HRESULT __stdcall NotifyUnmuted() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyUnmuted();
             return S_OK;
         }
@@ -2221,11 +2915,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_RequestOutgoingUpgradeToVideoCall(GUID callUpgradeGuid, abi_arg_in<hstring> context, abi_arg_in<hstring> contactName, abi_arg_in<hstring> serviceName, abi_arg_out<Windows::ApplicationModel::Calls::IVoipPhoneCall> call) noexcept override
+    HRESULT __stdcall RequestOutgoingUpgradeToVideoCall(GUID callUpgradeGuid, HSTRING context, HSTRING contactName, HSTRING serviceName, ::IUnknown** call) noexcept final
     {
         try
         {
-            *call = detach(this->shim().RequestOutgoingUpgradeToVideoCall(callUpgradeGuid, *reinterpret_cast<const hstring *>(&context), *reinterpret_cast<const hstring *>(&contactName), *reinterpret_cast<const hstring *>(&serviceName)));
+            typename D::abi_guard guard(this->shim());
+            *call = detach_abi(this->shim().RequestOutgoingUpgradeToVideoCall(*reinterpret_cast<GUID const*>(&callUpgradeGuid), *reinterpret_cast<hstring const*>(&context), *reinterpret_cast<hstring const*>(&contactName), *reinterpret_cast<hstring const*>(&serviceName)));
             return S_OK;
         }
         catch (...)
@@ -2235,11 +2930,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_RequestIncomingUpgradeToVideoCall(abi_arg_in<hstring> context, abi_arg_in<hstring> contactName, abi_arg_in<hstring> contactNumber, abi_arg_in<Windows::Foundation::IUriRuntimeClass> contactImage, abi_arg_in<hstring> serviceName, abi_arg_in<Windows::Foundation::IUriRuntimeClass> brandingImage, abi_arg_in<hstring> callDetails, abi_arg_in<Windows::Foundation::IUriRuntimeClass> ringtone, abi_arg_in<Windows::Foundation::TimeSpan> ringTimeout, abi_arg_out<Windows::ApplicationModel::Calls::IVoipPhoneCall> call) noexcept override
+    HRESULT __stdcall RequestIncomingUpgradeToVideoCall(HSTRING context, HSTRING contactName, HSTRING contactNumber, ::IUnknown* contactImage, HSTRING serviceName, ::IUnknown* brandingImage, HSTRING callDetails, ::IUnknown* ringtone, Windows::Foundation::TimeSpan ringTimeout, ::IUnknown** call) noexcept final
     {
         try
         {
-            *call = detach(this->shim().RequestIncomingUpgradeToVideoCall(*reinterpret_cast<const hstring *>(&context), *reinterpret_cast<const hstring *>(&contactName), *reinterpret_cast<const hstring *>(&contactNumber), *reinterpret_cast<const Windows::Foundation::Uri *>(&contactImage), *reinterpret_cast<const hstring *>(&serviceName), *reinterpret_cast<const Windows::Foundation::Uri *>(&brandingImage), *reinterpret_cast<const hstring *>(&callDetails), *reinterpret_cast<const Windows::Foundation::Uri *>(&ringtone), *reinterpret_cast<const Windows::Foundation::TimeSpan *>(&ringTimeout)));
+            typename D::abi_guard guard(this->shim());
+            *call = detach_abi(this->shim().RequestIncomingUpgradeToVideoCall(*reinterpret_cast<hstring const*>(&context), *reinterpret_cast<hstring const*>(&contactName), *reinterpret_cast<hstring const*>(&contactNumber), *reinterpret_cast<Windows::Foundation::Uri const*>(&contactImage), *reinterpret_cast<hstring const*>(&serviceName), *reinterpret_cast<Windows::Foundation::Uri const*>(&brandingImage), *reinterpret_cast<hstring const*>(&callDetails), *reinterpret_cast<Windows::Foundation::Uri const*>(&ringtone), *reinterpret_cast<Windows::Foundation::TimeSpan const*>(&ringTimeout)));
             return S_OK;
         }
         catch (...)
@@ -2249,11 +2945,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_TerminateCellularCall(GUID callUpgradeGuid) noexcept override
+    HRESULT __stdcall TerminateCellularCall(GUID callUpgradeGuid) noexcept final
     {
         try
         {
-            this->shim().TerminateCellularCall(callUpgradeGuid);
+            typename D::abi_guard guard(this->shim());
+            this->shim().TerminateCellularCall(*reinterpret_cast<GUID const*>(&callUpgradeGuid));
             return S_OK;
         }
         catch (...)
@@ -2262,11 +2959,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
         }
     }
 
-    HRESULT __stdcall abi_CancelUpgrade(GUID callUpgradeGuid) noexcept override
+    HRESULT __stdcall CancelUpgrade(GUID callUpgradeGuid) noexcept final
     {
         try
         {
-            this->shim().CancelUpgrade(callUpgradeGuid);
+            typename D::abi_guard guard(this->shim());
+            this->shim().CancelUpgrade(*reinterpret_cast<GUID const*>(&callUpgradeGuid));
             return S_OK;
         }
         catch (...)
@@ -2277,13 +2975,33 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator> : prod
 };
 
 template <typename D>
-struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics> : produce_base<D, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics>
+struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator2> : produce_base<D, Windows::ApplicationModel::Calls::IVoipCallCoordinator2>
 {
-    HRESULT __stdcall abi_GetDefault(abi_arg_out<Windows::ApplicationModel::Calls::IVoipCallCoordinator> coordinator) noexcept override
+    HRESULT __stdcall SetupNewAcceptedCall(HSTRING context, HSTRING contactName, HSTRING contactNumber, HSTRING serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, ::IUnknown** call) noexcept final
     {
         try
         {
-            *coordinator = detach(this->shim().GetDefault());
+            typename D::abi_guard guard(this->shim());
+            *call = detach_abi(this->shim().SetupNewAcceptedCall(*reinterpret_cast<hstring const*>(&context), *reinterpret_cast<hstring const*>(&contactName), *reinterpret_cast<hstring const*>(&contactNumber), *reinterpret_cast<hstring const*>(&serviceName), *reinterpret_cast<Windows::ApplicationModel::Calls::VoipPhoneCallMedia const*>(&media)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *call = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics> : produce_base<D, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics>
+{
+    HRESULT __stdcall GetDefault(::IUnknown** coordinator) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *coordinator = detach_abi(this->shim().GetDefault());
             return S_OK;
         }
         catch (...)
@@ -2297,11 +3015,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_base<D, Windows::ApplicationModel::Calls::IVoipPhoneCall>
 {
-    HRESULT __stdcall add_EndRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_EndRequested(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().EndRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().EndRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2310,11 +3029,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_EndRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_EndRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().EndRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().EndRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2323,11 +3043,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall add_HoldRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_HoldRequested(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().HoldRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().HoldRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2336,11 +3057,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_HoldRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_HoldRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().HoldRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().HoldRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2349,11 +3071,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall add_ResumeRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_ResumeRequested(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ResumeRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ResumeRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2362,11 +3085,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_ResumeRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_ResumeRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().ResumeRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ResumeRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2375,11 +3099,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall add_AnswerRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs>> acceptHandler, event_token * token) noexcept override
+    HRESULT __stdcall add_AnswerRequested(::IUnknown* acceptHandler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().AnswerRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> *>(&acceptHandler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().AnswerRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> const*>(&acceptHandler)));
             return S_OK;
         }
         catch (...)
@@ -2388,11 +3113,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_AnswerRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_AnswerRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().AnswerRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().AnswerRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2401,11 +3127,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall add_RejectRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs>> rejectHandler, event_token * token) noexcept override
+    HRESULT __stdcall add_RejectRequested(::IUnknown* rejectHandler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().RejectRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> *>(&rejectHandler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().RejectRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> const*>(&rejectHandler)));
             return S_OK;
         }
         catch (...)
@@ -2414,11 +3141,12 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_RejectRequested(event_token token) noexcept override
+    HRESULT __stdcall remove_RejectRequested(event_token token) noexcept final
     {
         try
         {
-            this->shim().RejectRequested(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RejectRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2427,10 +3155,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_NotifyCallHeld() noexcept override
+    HRESULT __stdcall NotifyCallHeld() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyCallHeld();
             return S_OK;
         }
@@ -2440,10 +3169,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_NotifyCallActive() noexcept override
+    HRESULT __stdcall NotifyCallActive() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyCallActive();
             return S_OK;
         }
@@ -2453,10 +3183,11 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_NotifyCallEnded() noexcept override
+    HRESULT __stdcall NotifyCallEnded() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyCallEnded();
             return S_OK;
         }
@@ -2466,90 +3197,72 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
         }
     }
 
-    HRESULT __stdcall get_ContactName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ContactName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContactName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContactName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContactName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ContactName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ContactName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContactName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StartTime(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_StartTime(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StartTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StartTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_StartTime(abi_arg_in<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall put_StartTime(Windows::Foundation::DateTime value) noexcept final
     {
-        try
-        {
-            this->shim().StartTime(*reinterpret_cast<const Windows::Foundation::DateTime *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().StartTime(*reinterpret_cast<Windows::Foundation::DateTime const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia * value) noexcept override
+    HRESULT __stdcall get_CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CallMedia());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CallMedia());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia value) noexcept override
+    HRESULT __stdcall put_CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia value) noexcept final
     {
-        try
-        {
-            this->shim().CallMedia(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CallMedia(*reinterpret_cast<Windows::ApplicationModel::Calls::VoipPhoneCallMedia const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_NotifyCallReady() noexcept override
+    HRESULT __stdcall NotifyCallReady() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().NotifyCallReady();
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall2> : produce_base<D, Windows::ApplicationModel::Calls::IVoipPhoneCall2>
+{
+    HRESULT __stdcall TryShowAppUI() noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().TryShowAppUI();
             return S_OK;
         }
         catch (...)
@@ -2561,1245 +3274,31 @@ struct produce<D, Windows::ApplicationModel::Calls::IVoipPhoneCall> : produce_ba
 
 }
 
-namespace Windows::ApplicationModel::Calls {
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallState impl_ICallStateChangeEventArgs<D>::State() const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCallState value {};
-    check_hresult(static_cast<const ICallStateChangeEventArgs &>(static_cast<const D &>(*this))->get_State(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallMedia impl_ICallAnswerEventArgs<D>::AcceptedMedia() const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCallMedia value {};
-    check_hresult(static_cast<const ICallAnswerEventArgs &>(static_cast<const D &>(*this))->get_AcceptedMedia(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason impl_ICallRejectEventArgs<D>::RejectReason() const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCallRejectReason value {};
-    check_hresult(static_cast<const ICallRejectEventArgs &>(static_cast<const D &>(*this))->get_RejectReason(&value));
-    return value;
-}
-
-template <typename D> event_token impl_IVoipPhoneCall<D>::EndRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->add_EndRequested(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipPhoneCall> impl_IVoipPhoneCall<D>::EndRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IVoipPhoneCall>(this, &ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall::remove_EndRequested, EndRequested(handler));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::EndRequested(event_token token) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->remove_EndRequested(token));
-}
-
-template <typename D> event_token impl_IVoipPhoneCall<D>::HoldRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->add_HoldRequested(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipPhoneCall> impl_IVoipPhoneCall<D>::HoldRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IVoipPhoneCall>(this, &ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall::remove_HoldRequested, HoldRequested(handler));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::HoldRequested(event_token token) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->remove_HoldRequested(token));
-}
-
-template <typename D> event_token impl_IVoipPhoneCall<D>::ResumeRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->add_ResumeRequested(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipPhoneCall> impl_IVoipPhoneCall<D>::ResumeRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallStateChangeEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IVoipPhoneCall>(this, &ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall::remove_ResumeRequested, ResumeRequested(handler));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::ResumeRequested(event_token token) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->remove_ResumeRequested(token));
-}
-
-template <typename D> event_token impl_IVoipPhoneCall<D>::AnswerRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> & acceptHandler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->add_AnswerRequested(get(acceptHandler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipPhoneCall> impl_IVoipPhoneCall<D>::AnswerRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallAnswerEventArgs> & acceptHandler) const
-{
-    return impl::make_event_revoker<D, IVoipPhoneCall>(this, &ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall::remove_AnswerRequested, AnswerRequested(acceptHandler));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::AnswerRequested(event_token token) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->remove_AnswerRequested(token));
-}
-
-template <typename D> event_token impl_IVoipPhoneCall<D>::RejectRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> & rejectHandler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->add_RejectRequested(get(rejectHandler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipPhoneCall> impl_IVoipPhoneCall<D>::RejectRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipPhoneCall, Windows::ApplicationModel::Calls::CallRejectEventArgs> & rejectHandler) const
-{
-    return impl::make_event_revoker<D, IVoipPhoneCall>(this, &ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall::remove_RejectRequested, RejectRequested(rejectHandler));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::RejectRequested(event_token token) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->remove_RejectRequested(token));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::NotifyCallHeld() const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->abi_NotifyCallHeld());
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::NotifyCallActive() const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->abi_NotifyCallActive());
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::NotifyCallEnded() const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->abi_NotifyCallEnded());
-}
-
-template <typename D> hstring impl_IVoipPhoneCall<D>::ContactName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->get_ContactName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::ContactName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->put_ContactName(get(value)));
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IVoipPhoneCall<D>::StartTime() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->get_StartTime(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::StartTime(const Windows::Foundation::DateTime & value) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->put_StartTime(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallMedia impl_IVoipPhoneCall<D>::CallMedia() const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCallMedia value {};
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->get_CallMedia(&value));
-    return value;
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::CallMedia(Windows::ApplicationModel::Calls::VoipPhoneCallMedia value) const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->put_CallMedia(value));
-}
-
-template <typename D> void impl_IVoipPhoneCall<D>::NotifyCallReady() const
-{
-    check_hresult(static_cast<const IVoipPhoneCall &>(static_cast<const D &>(*this))->abi_NotifyCallReady());
-}
-
-template <typename D> bool impl_IMuteChangeEventArgs<D>::Muted() const
-{
-    bool value {};
-    check_hresult(static_cast<const IMuteChangeEventArgs &>(static_cast<const D &>(*this))->get_Muted(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> impl_IVoipCallCoordinator<D>::ReserveCallResourcesAsync(hstring_ref taskEntryPoint) const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> operation;
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_ReserveCallResourcesAsync(get(taskEntryPoint), put(operation)));
-    return operation;
-}
-
-template <typename D> event_token impl_IVoipCallCoordinator<D>::MuteStateChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> & muteChangeHandler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->add_MuteStateChanged(get(muteChangeHandler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVoipCallCoordinator> impl_IVoipCallCoordinator<D>::MuteStateChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> & muteChangeHandler) const
-{
-    return impl::make_event_revoker<D, IVoipCallCoordinator>(this, &ABI::Windows::ApplicationModel::Calls::IVoipCallCoordinator::remove_MuteStateChanged, MuteStateChanged(muteChangeHandler));
-}
-
-template <typename D> void impl_IVoipCallCoordinator<D>::MuteStateChanged(event_token token) const
-{
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->remove_MuteStateChanged(token));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall impl_IVoipCallCoordinator<D>::RequestNewIncomingCall(hstring_ref context, hstring_ref contactName, hstring_ref contactNumber, const Windows::Foundation::Uri & contactImage, hstring_ref serviceName, const Windows::Foundation::Uri & brandingImage, hstring_ref callDetails, const Windows::Foundation::Uri & ringtone, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media, const Windows::Foundation::TimeSpan & ringTimeout) const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCall call { nullptr };
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_RequestNewIncomingCall(get(context), get(contactName), get(contactNumber), get(contactImage), get(serviceName), get(brandingImage), get(callDetails), get(ringtone), media, get(ringTimeout), put(call)));
-    return call;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall impl_IVoipCallCoordinator<D>::RequestNewOutgoingCall(hstring_ref context, hstring_ref contactName, hstring_ref serviceName, Windows::ApplicationModel::Calls::VoipPhoneCallMedia media) const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCall call { nullptr };
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_RequestNewOutgoingCall(get(context), get(contactName), get(serviceName), media, put(call)));
-    return call;
-}
-
-template <typename D> void impl_IVoipCallCoordinator<D>::NotifyMuted() const
-{
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_NotifyMuted());
-}
-
-template <typename D> void impl_IVoipCallCoordinator<D>::NotifyUnmuted() const
-{
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_NotifyUnmuted());
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall impl_IVoipCallCoordinator<D>::RequestOutgoingUpgradeToVideoCall(GUID callUpgradeGuid, hstring_ref context, hstring_ref contactName, hstring_ref serviceName) const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCall call { nullptr };
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_RequestOutgoingUpgradeToVideoCall(callUpgradeGuid, get(context), get(contactName), get(serviceName), put(call)));
-    return call;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCall impl_IVoipCallCoordinator<D>::RequestIncomingUpgradeToVideoCall(hstring_ref context, hstring_ref contactName, hstring_ref contactNumber, const Windows::Foundation::Uri & contactImage, hstring_ref serviceName, const Windows::Foundation::Uri & brandingImage, hstring_ref callDetails, const Windows::Foundation::Uri & ringtone, const Windows::Foundation::TimeSpan & ringTimeout) const
-{
-    Windows::ApplicationModel::Calls::VoipPhoneCall call { nullptr };
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_RequestIncomingUpgradeToVideoCall(get(context), get(contactName), get(contactNumber), get(contactImage), get(serviceName), get(brandingImage), get(callDetails), get(ringtone), get(ringTimeout), put(call)));
-    return call;
-}
-
-template <typename D> void impl_IVoipCallCoordinator<D>::TerminateCellularCall(GUID callUpgradeGuid) const
-{
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_TerminateCellularCall(callUpgradeGuid));
-}
-
-template <typename D> void impl_IVoipCallCoordinator<D>::CancelUpgrade(GUID callUpgradeGuid) const
-{
-    check_hresult(static_cast<const IVoipCallCoordinator &>(static_cast<const D &>(*this))->abi_CancelUpgrade(callUpgradeGuid));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::VoipCallCoordinator impl_IVoipCallCoordinatorStatics<D>::GetDefault() const
-{
-    Windows::ApplicationModel::Calls::VoipCallCoordinator coordinator { nullptr };
-    check_hresult(static_cast<const IVoipCallCoordinatorStatics &>(static_cast<const D &>(*this))->abi_GetDefault(put(coordinator)));
-    return coordinator;
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntry<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress impl_IPhoneCallHistoryEntry<D>::Address() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress value { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_Address(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::Address(const Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress & value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_Address(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::TimeSpan> impl_IPhoneCallHistoryEntry<D>::Duration() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::TimeSpan> value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_Duration(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::Duration(const Windows::Foundation::IReference<Windows::Foundation::TimeSpan> & value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_Duration(get(value)));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsCallerIdBlocked() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsCallerIdBlocked(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsCallerIdBlocked(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsCallerIdBlocked(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsEmergency() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsEmergency(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsEmergency(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsEmergency(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsIncoming() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsIncoming(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsIncoming(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsIncoming(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsMissed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsMissed(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsMissed(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsMissed(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsRinging() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsRinging(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsRinging(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsRinging(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsSeen() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsSeen(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsSeen(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsSeen(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsSuppressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsSuppressed(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsSuppressed(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsSuppressed(value));
-}
-
-template <typename D> bool impl_IPhoneCallHistoryEntry<D>::IsVoicemail() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_IsVoicemail(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::IsVoicemail(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_IsVoicemail(value));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia impl_IPhoneCallHistoryEntry<D>::Media() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_Media(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::Media(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryMedia value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_Media(value));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess impl_IPhoneCallHistoryEntry<D>::OtherAppReadAccess() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_OtherAppReadAccess(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::OtherAppReadAccess(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryOtherAppReadAccess value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_OtherAppReadAccess(value));
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntry<D>::RemoteId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_RemoteId(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::RemoteId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_RemoteId(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntry<D>::SourceDisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_SourceDisplayName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntry<D>::SourceId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_SourceId(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::SourceId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_SourceId(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind impl_IPhoneCallHistoryEntry<D>::SourceIdKind() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_SourceIdKind(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::SourceIdKind(Windows::ApplicationModel::Calls::PhoneCallHistorySourceIdKind value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_SourceIdKind(value));
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IPhoneCallHistoryEntry<D>::StartTime() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->get_StartTime(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntry<D>::StartTime(const Windows::Foundation::DateTime & value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntry &>(static_cast<const D &>(*this))->put_StartTime(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntryAddress<D>::ContactId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->get_ContactId(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntryAddress<D>::ContactId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->put_ContactId(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntryAddress<D>::DisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->get_DisplayName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntryAddress<D>::DisplayName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->put_DisplayName(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneCallHistoryEntryAddress<D>::RawAddress() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->get_RawAddress(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntryAddress<D>::RawAddress(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->put_RawAddress(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind impl_IPhoneCallHistoryEntryAddress<D>::RawAddressKind() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->get_RawAddressKind(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntryAddress<D>::RawAddressKind(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddress &>(static_cast<const D &>(*this))->put_RawAddressKind(value));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress impl_IPhoneCallHistoryEntryAddressFactory<D>::Create(hstring_ref rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind rawAddressKind) const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress result { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryEntryAddressFactory &>(static_cast<const D &>(*this))->abi_Create(get(rawAddress), rawAddressKind, put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia impl_IPhoneCallHistoryEntryQueryOptions<D>::DesiredMedia() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia value {};
-    check_hresult(static_cast<const IPhoneCallHistoryEntryQueryOptions &>(static_cast<const D &>(*this))->get_DesiredMedia(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallHistoryEntryQueryOptions<D>::DesiredMedia(Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryDesiredMedia value) const
-{
-    check_hresult(static_cast<const IPhoneCallHistoryEntryQueryOptions &>(static_cast<const D &>(*this))->put_DesiredMedia(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IPhoneCallHistoryEntryQueryOptions<D>::SourceIds() const
-{
-    Windows::Foundation::Collections::IVector<hstring> value;
-    check_hresult(static_cast<const IPhoneCallHistoryEntryQueryOptions &>(static_cast<const D &>(*this))->get_SourceIds(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> impl_IPhoneCallHistoryEntryReader<D>::ReadBatchAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry>> result;
-    check_hresult(static_cast<const IPhoneCallHistoryEntryReader &>(static_cast<const D &>(*this))->abi_ReadBatchAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> impl_IPhoneCallHistoryStore<D>::GetEntryAsync(hstring_ref callHistoryEntryId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_GetEntryAsync(get(callHistoryEntryId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader impl_IPhoneCallHistoryStore<D>::GetEntryReader() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader result { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_GetEntryReader(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader impl_IPhoneCallHistoryStore<D>::GetEntryReader(const Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions & queryOptions) const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader result { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_GetEntryReaderWithOptions(get(queryOptions), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::SaveEntryAsync(const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry & callHistoryEntry) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_SaveEntryAsync(get(callHistoryEntry), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::DeleteEntryAsync(const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry & callHistoryEntry) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_DeleteEntryAsync(get(callHistoryEntry), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::DeleteEntriesAsync(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> & callHistoryEntries) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_DeleteEntriesAsync(get(callHistoryEntries), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::MarkEntryAsSeenAsync(const Windows::ApplicationModel::Calls::PhoneCallHistoryEntry & callHistoryEntry) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_MarkEntryAsSeenAsync(get(callHistoryEntry), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::MarkEntriesAsSeenAsync(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> & callHistoryEntries) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_MarkEntriesAsSeenAsync(get(callHistoryEntries), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<uint32_t> impl_IPhoneCallHistoryStore<D>::GetUnseenCountAsync() const
-{
-    Windows::Foundation::IAsyncOperation<uint32_t> result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_GetUnseenCountAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::MarkAllAsSeenAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_MarkAllAsSeenAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<uint32_t> impl_IPhoneCallHistoryStore<D>::GetSourcesUnseenCountAsync(const Windows::Foundation::Collections::IIterable<hstring> & sourceIds) const
-{
-    Windows::Foundation::IAsyncOperation<uint32_t> result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_GetSourcesUnseenCountAsync(get(sourceIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneCallHistoryStore<D>::MarkSourcesAsSeenAsync(const Windows::Foundation::Collections::IIterable<hstring> & sourceIds) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneCallHistoryStore &>(static_cast<const D &>(*this))->abi_MarkSourcesAsSeenAsync(get(sourceIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> impl_IPhoneCallHistoryManagerStatics<D>::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> result;
-    check_hresult(static_cast<const IPhoneCallHistoryManagerStatics &>(static_cast<const D &>(*this))->abi_RequestStoreAsync(accessType, put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser impl_IPhoneCallHistoryManagerStatics2<D>::GetForUser(const Windows::System::User & user) const
-{
-    Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser result { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryManagerStatics2 &>(static_cast<const D &>(*this))->abi_GetForUser(get(user), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> impl_IPhoneCallHistoryManagerForUser<D>::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> result;
-    check_hresult(static_cast<const IPhoneCallHistoryManagerForUser &>(static_cast<const D &>(*this))->abi_RequestStoreAsync(accessType, put(result)));
-    return result;
-}
-
-template <typename D> Windows::System::User impl_IPhoneCallHistoryManagerForUser<D>::User() const
-{
-    Windows::System::User value { nullptr };
-    check_hresult(static_cast<const IPhoneCallHistoryManagerForUser &>(static_cast<const D &>(*this))->get_User(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ILockScreenCallEndCallDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const ILockScreenCallEndCallDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral impl_ILockScreenCallEndRequestedEventArgs<D>::GetDeferral() const
-{
-    Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral value { nullptr };
-    check_hresult(static_cast<const ILockScreenCallEndRequestedEventArgs &>(static_cast<const D &>(*this))->abi_GetDeferral(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_ILockScreenCallEndRequestedEventArgs<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const ILockScreenCallEndRequestedEventArgs &>(static_cast<const D &>(*this))->get_Deadline(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::Dismiss() const
-{
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->abi_Dismiss());
-}
-
-template <typename D> event_token impl_ILockScreenCallUI<D>::EndRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->add_EndRequested(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::EndRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_EndRequested, EndRequested(handler));
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::EndRequested(event_token token) const
-{
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->remove_EndRequested(token));
-}
-
-template <typename D> event_token impl_ILockScreenCallUI<D>::Closed(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->add_Closed(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::Closed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_Closed, Closed(handler));
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::Closed(event_token token) const
-{
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->remove_Closed(token));
-}
-
-template <typename D> hstring impl_ILockScreenCallUI<D>::CallTitle() const
-{
-    hstring value;
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->get_CallTitle(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::CallTitle(hstring_ref value) const
-{
-    check_hresult(static_cast<const ILockScreenCallUI &>(static_cast<const D &>(*this))->put_CallTitle(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneVoicemail<D>::Number() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneVoicemail &>(static_cast<const D &>(*this))->get_Number(put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_IPhoneVoicemail<D>::MessageCount() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IPhoneVoicemail &>(static_cast<const D &>(*this))->get_MessageCount(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneVoicemailType impl_IPhoneVoicemail<D>::Type() const
-{
-    Windows::ApplicationModel::Calls::PhoneVoicemailType value {};
-    check_hresult(static_cast<const IPhoneVoicemail &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IPhoneVoicemail<D>::DialVoicemailAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IPhoneVoicemail &>(static_cast<const D &>(*this))->abi_DialVoicemailAsync(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IPhoneDialOptions<D>::Number() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_Number(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::Number(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_Number(get(value)));
-}
-
-template <typename D> hstring impl_IPhoneDialOptions<D>::DisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_DisplayName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::DisplayName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_DisplayName(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Contacts::Contact impl_IPhoneDialOptions<D>::Contact() const
-{
-    Windows::ApplicationModel::Contacts::Contact value { nullptr };
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::Contact(const Windows::ApplicationModel::Contacts::Contact & value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_Contact(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Contacts::ContactPhone impl_IPhoneDialOptions<D>::ContactPhone() const
-{
-    Windows::ApplicationModel::Contacts::ContactPhone value { nullptr };
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_ContactPhone(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::ContactPhone(const Windows::ApplicationModel::Contacts::ContactPhone & value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_ContactPhone(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallMedia impl_IPhoneDialOptions<D>::Media() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallMedia value {};
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_Media(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::Media(Windows::ApplicationModel::Calls::PhoneCallMedia value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_Media(value));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint impl_IPhoneDialOptions<D>::AudioEndpoint() const
-{
-    Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint value {};
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->get_AudioEndpoint(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneDialOptions<D>::AudioEndpoint(Windows::ApplicationModel::Calls::PhoneAudioRoutingEndpoint value) const
-{
-    check_hresult(static_cast<const IPhoneDialOptions &>(static_cast<const D &>(*this))->put_AudioEndpoint(value));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneSimState impl_IPhoneLineCellularDetails<D>::SimState() const
-{
-    Windows::ApplicationModel::Calls::PhoneSimState value {};
-    check_hresult(static_cast<const IPhoneLineCellularDetails &>(static_cast<const D &>(*this))->get_SimState(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IPhoneLineCellularDetails<D>::SimSlotIndex() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IPhoneLineCellularDetails &>(static_cast<const D &>(*this))->get_SimSlotIndex(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPhoneLineCellularDetails<D>::IsModemOn() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneLineCellularDetails &>(static_cast<const D &>(*this))->get_IsModemOn(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IPhoneLineCellularDetails<D>::RegistrationRejectCode() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IPhoneLineCellularDetails &>(static_cast<const D &>(*this))->get_RegistrationRejectCode(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPhoneLineCellularDetails<D>::GetNetworkOperatorDisplayText(Windows::ApplicationModel::Calls::PhoneLineNetworkOperatorDisplayTextLocation location) const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneLineCellularDetails &>(static_cast<const D &>(*this))->abi_GetNetworkOperatorDisplayText(location, put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_IPhoneLine<D>::LineChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->add_LineChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLine> impl_IPhoneLine<D>::LineChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLine, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLine>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLine::remove_LineChanged, LineChanged(handler));
-}
-
-template <typename D> void impl_IPhoneLine<D>::LineChanged(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->remove_LineChanged(token));
-}
-
-template <typename D> GUID impl_IPhoneLine<D>::Id() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_Id(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IPhoneLine<D>::DisplayColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_DisplayColor(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneNetworkState impl_IPhoneLine<D>::NetworkState() const
-{
-    Windows::ApplicationModel::Calls::PhoneNetworkState value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_NetworkState(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPhoneLine<D>::DisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_DisplayName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneVoicemail impl_IPhoneLine<D>::Voicemail() const
-{
-    Windows::ApplicationModel::Calls::PhoneVoicemail value { nullptr };
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_Voicemail(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPhoneLine<D>::NetworkName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_NetworkName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneLineCellularDetails impl_IPhoneLine<D>::CellularDetails() const
-{
-    Windows::ApplicationModel::Calls::PhoneLineCellularDetails value { nullptr };
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_CellularDetails(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneLineTransport impl_IPhoneLine<D>::Transport() const
-{
-    Windows::ApplicationModel::Calls::PhoneLineTransport value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_Transport(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPhoneLine<D>::CanDial() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_CanDial(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPhoneLine<D>::SupportsTile() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_SupportsTile(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities impl_IPhoneLine<D>::VideoCallingCapabilities() const
-{
-    Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities value { nullptr };
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_VideoCallingCapabilities(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneLineConfiguration impl_IPhoneLine<D>::LineConfiguration() const
-{
-    Windows::ApplicationModel::Calls::PhoneLineConfiguration value { nullptr };
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->get_LineConfiguration(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPhoneLine<D>::IsImmediateDialNumberAsync(hstring_ref number) const
-{
-    Windows::Foundation::IAsyncOperation<bool> result;
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->abi_IsImmediateDialNumberAsync(get(number), put(result)));
-    return result;
-}
-
-template <typename D> void impl_IPhoneLine<D>::Dial(hstring_ref number, hstring_ref displayName) const
-{
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->abi_Dial(get(number), get(displayName)));
-}
-
-template <typename D> void impl_IPhoneLine<D>::DialWithOptions(const Windows::ApplicationModel::Calls::PhoneDialOptions & options) const
-{
-    check_hresult(static_cast<const IPhoneLine &>(static_cast<const D &>(*this))->abi_DialWithOptions(get(options)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPhoneCallStore<D>::IsEmergencyPhoneNumberAsync(hstring_ref number) const
-{
-    Windows::Foundation::IAsyncOperation<bool> result;
-    check_hresult(static_cast<const IPhoneCallStore &>(static_cast<const D &>(*this))->abi_IsEmergencyPhoneNumberAsync(get(number), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<GUID> impl_IPhoneCallStore<D>::GetDefaultLineAsync() const
-{
-    Windows::Foundation::IAsyncOperation<GUID> result;
-    check_hresult(static_cast<const IPhoneCallStore &>(static_cast<const D &>(*this))->abi_GetDefaultLineAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneLineWatcher impl_IPhoneCallStore<D>::RequestLineWatcher() const
-{
-    Windows::ApplicationModel::Calls::PhoneLineWatcher result { nullptr };
-    check_hresult(static_cast<const IPhoneCallStore &>(static_cast<const D &>(*this))->abi_RequestLineWatcher(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IPhoneLineConfiguration<D>::IsVideoCallingEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneLineConfiguration &>(static_cast<const D &>(*this))->get_IsVideoCallingEnabled(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> impl_IPhoneLineConfiguration<D>::ExtendedProperties() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> value;
-    check_hresult(static_cast<const IPhoneLineConfiguration &>(static_cast<const D &>(*this))->get_ExtendedProperties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> impl_IPhoneLineStatics<D>::FromIdAsync(GUID lineId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> result;
-    check_hresult(static_cast<const IPhoneLineStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(lineId, put(result)));
-    return result;
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::Start() const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->abi_Start());
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::Stop() const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->abi_Stop());
-}
-
-template <typename D> event_token impl_IPhoneLineWatcher<D>::LineAdded(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->add_LineAdded(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLineWatcher> impl_IPhoneLineWatcher<D>::LineAdded(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLineWatcher>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLineWatcher::remove_LineAdded, LineAdded(handler));
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::LineAdded(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->remove_LineAdded(token));
-}
-
-template <typename D> event_token impl_IPhoneLineWatcher<D>::LineRemoved(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->add_LineRemoved(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLineWatcher> impl_IPhoneLineWatcher<D>::LineRemoved(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLineWatcher>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLineWatcher::remove_LineRemoved, LineRemoved(handler));
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::LineRemoved(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->remove_LineRemoved(token));
-}
-
-template <typename D> event_token impl_IPhoneLineWatcher<D>::LineUpdated(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->add_LineUpdated(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLineWatcher> impl_IPhoneLineWatcher<D>::LineUpdated(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLineWatcher>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLineWatcher::remove_LineUpdated, LineUpdated(handler));
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::LineUpdated(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->remove_LineUpdated(token));
-}
-
-template <typename D> event_token impl_IPhoneLineWatcher<D>::EnumerationCompleted(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->add_EnumerationCompleted(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLineWatcher> impl_IPhoneLineWatcher<D>::EnumerationCompleted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLineWatcher>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLineWatcher::remove_EnumerationCompleted, EnumerationCompleted(handler));
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::EnumerationCompleted(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->remove_EnumerationCompleted(token));
-}
-
-template <typename D> event_token impl_IPhoneLineWatcher<D>::Stopped(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->add_Stopped(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneLineWatcher> impl_IPhoneLineWatcher<D>::Stopped(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::PhoneLineWatcher, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneLineWatcher>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneLineWatcher::remove_Stopped, Stopped(handler));
-}
-
-template <typename D> void impl_IPhoneLineWatcher<D>::Stopped(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->remove_Stopped(token));
-}
-
-template <typename D> Windows::ApplicationModel::Calls::PhoneLineWatcherStatus impl_IPhoneLineWatcher<D>::Status() const
-{
-    Windows::ApplicationModel::Calls::PhoneLineWatcherStatus status {};
-    check_hresult(static_cast<const IPhoneLineWatcher &>(static_cast<const D &>(*this))->get_Status(&status));
-    return status;
-}
-
-template <typename D> GUID impl_IPhoneLineWatcherEventArgs<D>::LineId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IPhoneLineWatcherEventArgs &>(static_cast<const D &>(*this))->get_LineId(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallManagerStatics<D>::ShowPhoneCallUI(hstring_ref phoneNumber, hstring_ref displayName) const
-{
-    check_hresult(static_cast<const IPhoneCallManagerStatics &>(static_cast<const D &>(*this))->abi_ShowPhoneCallUI(get(phoneNumber), get(displayName)));
-}
-
-template <typename D> event_token impl_IPhoneCallManagerStatics2<D>::CallStateChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->add_CallStateChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IPhoneCallManagerStatics2> impl_IPhoneCallManagerStatics2<D>::CallStateChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IPhoneCallManagerStatics2>(this, &ABI::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2::remove_CallStateChanged, CallStateChanged(handler));
-}
-
-template <typename D> void impl_IPhoneCallManagerStatics2<D>::CallStateChanged(event_token token) const
-{
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->remove_CallStateChanged(token));
-}
-
-template <typename D> bool impl_IPhoneCallManagerStatics2<D>::IsCallActive() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->get_IsCallActive(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPhoneCallManagerStatics2<D>::IsCallIncoming() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->get_IsCallIncoming(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallManagerStatics2<D>::ShowPhoneCallSettingsUI() const
-{
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->abi_ShowPhoneCallSettingsUI());
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore> impl_IPhoneCallManagerStatics2<D>::RequestStoreAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore> result;
-    check_hresult(static_cast<const IPhoneCallManagerStatics2 &>(static_cast<const D &>(*this))->abi_RequestStoreAsync(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IPhoneCallVideoCapabilities<D>::IsVideoCallingCapable() const
-{
-    bool pValue {};
-    check_hresult(static_cast<const IPhoneCallVideoCapabilities &>(static_cast<const D &>(*this))->get_IsVideoCallingCapable(&pValue));
-    return pValue;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> impl_IPhoneCallVideoCapabilitiesManagerStatics<D>::GetCapabilitiesAsync(hstring_ref phoneNumber) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> result;
-    check_hresult(static_cast<const IPhoneCallVideoCapabilitiesManagerStatics &>(static_cast<const D &>(*this))->abi_GetCapabilitiesAsync(get(phoneNumber), put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IPhoneCallBlockingStatics<D>::BlockUnknownNumbers() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallBlockingStatics &>(static_cast<const D &>(*this))->get_BlockUnknownNumbers(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallBlockingStatics<D>::BlockUnknownNumbers(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallBlockingStatics &>(static_cast<const D &>(*this))->put_BlockUnknownNumbers(value));
-}
-
-template <typename D> bool impl_IPhoneCallBlockingStatics<D>::BlockPrivateNumbers() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPhoneCallBlockingStatics &>(static_cast<const D &>(*this))->get_BlockPrivateNumbers(&value));
-    return value;
-}
-
-template <typename D> void impl_IPhoneCallBlockingStatics<D>::BlockPrivateNumbers(bool value) const
-{
-    check_hresult(static_cast<const IPhoneCallBlockingStatics &>(static_cast<const D &>(*this))->put_BlockPrivateNumbers(value));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPhoneCallBlockingStatics<D>::SetCallBlockingListAsync(const Windows::Foundation::Collections::IIterable<hstring> & phoneNumberList) const
-{
-    Windows::Foundation::IAsyncOperation<bool> result;
-    check_hresult(static_cast<const IPhoneCallBlockingStatics &>(static_cast<const D &>(*this))->abi_SetCallBlockingListAsync(get(phoneNumberList), put(result)));
-    return result;
-}
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::Calls {
 
 inline bool PhoneCallBlocking::BlockUnknownNumbers()
 {
-    return get_activation_factory<PhoneCallBlocking, IPhoneCallBlockingStatics>().BlockUnknownNumbers();
+    return get_activation_factory<PhoneCallBlocking, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>().BlockUnknownNumbers();
 }
 
 inline void PhoneCallBlocking::BlockUnknownNumbers(bool value)
 {
-    get_activation_factory<PhoneCallBlocking, IPhoneCallBlockingStatics>().BlockUnknownNumbers(value);
+    get_activation_factory<PhoneCallBlocking, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>().BlockUnknownNumbers(value);
 }
 
 inline bool PhoneCallBlocking::BlockPrivateNumbers()
 {
-    return get_activation_factory<PhoneCallBlocking, IPhoneCallBlockingStatics>().BlockPrivateNumbers();
+    return get_activation_factory<PhoneCallBlocking, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>().BlockPrivateNumbers();
 }
 
 inline void PhoneCallBlocking::BlockPrivateNumbers(bool value)
 {
-    get_activation_factory<PhoneCallBlocking, IPhoneCallBlockingStatics>().BlockPrivateNumbers(value);
+    get_activation_factory<PhoneCallBlocking, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>().BlockPrivateNumbers(value);
 }
 
-inline Windows::Foundation::IAsyncOperation<bool> PhoneCallBlocking::SetCallBlockingListAsync(const Windows::Foundation::Collections::IIterable<hstring> & phoneNumberList)
+inline Windows::Foundation::IAsyncOperation<bool> PhoneCallBlocking::SetCallBlockingListAsync(param::async_iterable<hstring> const& phoneNumberList)
 {
-    return get_activation_factory<PhoneCallBlocking, IPhoneCallBlockingStatics>().SetCallBlockingListAsync(phoneNumberList);
+    return get_activation_factory<PhoneCallBlocking, Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics>().SetCallBlockingListAsync(phoneNumberList);
 }
 
 inline PhoneCallHistoryEntry::PhoneCallHistoryEntry() :
@@ -3810,84 +3309,277 @@ inline PhoneCallHistoryEntryAddress::PhoneCallHistoryEntryAddress() :
     PhoneCallHistoryEntryAddress(activate_instance<PhoneCallHistoryEntryAddress>())
 {}
 
-inline PhoneCallHistoryEntryAddress::PhoneCallHistoryEntryAddress(hstring_ref rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind rawAddressKind) :
-    PhoneCallHistoryEntryAddress(get_activation_factory<PhoneCallHistoryEntryAddress, IPhoneCallHistoryEntryAddressFactory>().Create(rawAddress, rawAddressKind))
+inline PhoneCallHistoryEntryAddress::PhoneCallHistoryEntryAddress(param::hstring const& rawAddress, Windows::ApplicationModel::Calls::PhoneCallHistoryEntryRawAddressKind const& rawAddressKind) :
+    PhoneCallHistoryEntryAddress(get_activation_factory<PhoneCallHistoryEntryAddress, Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory>().Create(rawAddress, rawAddressKind))
 {}
 
 inline PhoneCallHistoryEntryQueryOptions::PhoneCallHistoryEntryQueryOptions() :
     PhoneCallHistoryEntryQueryOptions(activate_instance<PhoneCallHistoryEntryQueryOptions>())
 {}
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> PhoneCallHistoryManager::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType accessType)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallHistoryStore> PhoneCallHistoryManager::RequestStoreAsync(Windows::ApplicationModel::Calls::PhoneCallHistoryStoreAccessType const& accessType)
 {
-    return get_activation_factory<PhoneCallHistoryManager, IPhoneCallHistoryManagerStatics>().RequestStoreAsync(accessType);
+    return get_activation_factory<PhoneCallHistoryManager, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics>().RequestStoreAsync(accessType);
 }
 
-inline Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser PhoneCallHistoryManager::GetForUser(const Windows::System::User & user)
+inline Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser PhoneCallHistoryManager::GetForUser(Windows::System::User const& user)
 {
-    return get_activation_factory<PhoneCallHistoryManager, IPhoneCallHistoryManagerStatics2>().GetForUser(user);
+    return get_activation_factory<PhoneCallHistoryManager, Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2>().GetForUser(user);
 }
 
-inline void PhoneCallManager::ShowPhoneCallUI(hstring_ref phoneNumber, hstring_ref displayName)
+inline void PhoneCallManager::ShowPhoneCallUI(param::hstring const& phoneNumber, param::hstring const& displayName)
 {
-    get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics>().ShowPhoneCallUI(phoneNumber, displayName);
+    get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics>().ShowPhoneCallUI(phoneNumber, displayName);
 }
 
-inline event_token PhoneCallManager::CallStateChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & handler)
+inline event_token PhoneCallManager::CallStateChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& handler)
 {
-    return get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().CallStateChanged(handler);
+    return get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().CallStateChanged(handler);
 }
 
-inline factory_event_revoker<IPhoneCallManagerStatics2> PhoneCallManager::CallStateChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & handler)
+inline factory_event_revoker<Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> PhoneCallManager::CallStateChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& handler)
 {
-    auto factory = get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>();
-    return { factory, &ABI::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2::remove_CallStateChanged, factory.CallStateChanged(handler) };
+    auto factory = get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>();
+    return { factory, &abi_t<Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>::remove_CallStateChanged, factory.CallStateChanged(handler) };
 }
 
-inline void PhoneCallManager::CallStateChanged(event_token token)
+inline void PhoneCallManager::CallStateChanged(event_token const& token)
 {
-    get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().CallStateChanged(token);
+    get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().CallStateChanged(token);
 }
 
 inline bool PhoneCallManager::IsCallActive()
 {
-    return get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().IsCallActive();
+    return get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().IsCallActive();
 }
 
 inline bool PhoneCallManager::IsCallIncoming()
 {
-    return get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().IsCallIncoming();
+    return get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().IsCallIncoming();
 }
 
 inline void PhoneCallManager::ShowPhoneCallSettingsUI()
 {
-    get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().ShowPhoneCallSettingsUI();
+    get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().ShowPhoneCallSettingsUI();
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallStore> PhoneCallManager::RequestStoreAsync()
 {
-    return get_activation_factory<PhoneCallManager, IPhoneCallManagerStatics2>().RequestStoreAsync();
+    return get_activation_factory<PhoneCallManager, Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2>().RequestStoreAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> PhoneCallVideoCapabilitiesManager::GetCapabilitiesAsync(hstring_ref phoneNumber)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> PhoneCallVideoCapabilitiesManager::GetCapabilitiesAsync(param::hstring const& phoneNumber)
 {
-    return get_activation_factory<PhoneCallVideoCapabilitiesManager, IPhoneCallVideoCapabilitiesManagerStatics>().GetCapabilitiesAsync(phoneNumber);
+    return get_activation_factory<PhoneCallVideoCapabilitiesManager, Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics>().GetCapabilitiesAsync(phoneNumber);
 }
 
 inline PhoneDialOptions::PhoneDialOptions() :
     PhoneDialOptions(activate_instance<PhoneDialOptions>())
 {}
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> PhoneLine::FromIdAsync(GUID lineId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Calls::PhoneLine> PhoneLine::FromIdAsync(GUID const& lineId)
 {
-    return get_activation_factory<PhoneLine, IPhoneLineStatics>().FromIdAsync(lineId);
+    return get_activation_factory<PhoneLine, Windows::ApplicationModel::Calls::IPhoneLineStatics>().FromIdAsync(lineId);
 }
 
 inline Windows::ApplicationModel::Calls::VoipCallCoordinator VoipCallCoordinator::GetDefault()
 {
-    return get_activation_factory<VoipCallCoordinator, IVoipCallCoordinatorStatics>().GetDefault();
+    return get_activation_factory<VoipCallCoordinator, Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics>().GetDefault();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ICallAnswerEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ICallAnswerEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ICallRejectEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ICallRejectEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ICallStateChangeEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ICallStateChangeEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ILockScreenCallEndCallDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ILockScreenCallEndRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::ILockScreenCallUI> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::ILockScreenCallUI> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IMuteChangeEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IMuteChangeEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallBlockingStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntry> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddress> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryAddressFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryQueryOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryEntryReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerForUser> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryManagerStatics2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallHistoryStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallManagerStatics2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilities> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneCallVideoCapabilitiesManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneDialOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneDialOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLine> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLineCellularDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLineCellularDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLineConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLineConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLineStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLineStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLineWatcher> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLineWatcher> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneLineWatcherEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneLineWatcherEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IPhoneVoicemail> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IPhoneVoicemail> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinator2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinator2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IVoipPhoneCall> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IVoipPhoneCall> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::IVoipPhoneCall2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::IVoipPhoneCall2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::CallAnswerEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::CallAnswerEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::CallRejectEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::CallRejectEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::CallStateChangeEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::CallStateChangeEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::LockScreenCallUI> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::LockScreenCallUI> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::MuteChangeEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::MuteChangeEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallBlocking> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallBlocking> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntry> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryAddress> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryQueryOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryEntryReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryManagerForUser> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallHistoryStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallVideoCapabilities> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneCallVideoCapabilitiesManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneCallVideoCapabilitiesManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneDialOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneDialOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneLine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneLine> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneLineCellularDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneLineCellularDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneLineConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneLineConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneLineWatcher> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneLineWatcher> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneLineWatcherEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::PhoneVoicemail> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::PhoneVoicemail> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::VoipCallCoordinator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::VoipCallCoordinator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Calls::VoipPhoneCall> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Calls::VoipPhoneCall> {};
+
 }
+
+WINRT_WARNING_POP

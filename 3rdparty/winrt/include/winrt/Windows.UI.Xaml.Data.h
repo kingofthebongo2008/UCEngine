@@ -1,358 +1,859 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.UI.Xaml.Interop.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.UI.Xaml.3.h"
-#include "internal/Windows.UI.Xaml.Data.3.h"
-#include "Windows.UI.Xaml.h"
-#include "internal/Windows.UI.Xaml.Data.5.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Xaml.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Interop.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Foundation.Collections.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Data.2.h"
+#include "winrt/Windows.UI.Xaml.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace Windows::UI::Xaml::Data {
-
-template <typename L> CurrentChangingEventHandler::CurrentChangingEventHandler(L lambda) :
-    CurrentChangingEventHandler(impl::make_delegate<impl_CurrentChangingEventHandler<L>, CurrentChangingEventHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> CurrentChangingEventHandler::CurrentChangingEventHandler(F * function) :
-    CurrentChangingEventHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> CurrentChangingEventHandler::CurrentChangingEventHandler(O * object, M method) :
-    CurrentChangingEventHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void CurrentChangingEventHandler::operator()(const Windows::IInspectable & sender, const Windows::UI::Xaml::Data::CurrentChangingEventArgs & e) const
+template <typename D> Windows::UI::Xaml::PropertyPath consume_Windows_UI_Xaml_Data_IBinding<D>::Path() const noexcept
 {
-    check_hresult((*this)->abi_Invoke(get(sender), get(e)));
+    Windows::UI::Xaml::PropertyPath value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_Path(put_abi(value)));
+    return value;
 }
 
-template <typename L> PropertyChangedEventHandler::PropertyChangedEventHandler(L lambda) :
-    PropertyChangedEventHandler(impl::make_delegate<impl_PropertyChangedEventHandler<L>, PropertyChangedEventHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> PropertyChangedEventHandler::PropertyChangedEventHandler(F * function) :
-    PropertyChangedEventHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> PropertyChangedEventHandler::PropertyChangedEventHandler(O * object, M method) :
-    PropertyChangedEventHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void PropertyChangedEventHandler::operator()(const Windows::IInspectable & sender, const Windows::UI::Xaml::Data::PropertyChangedEventArgs & e) const
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::Path(Windows::UI::Xaml::PropertyPath const& value) const noexcept
 {
-    check_hresult((*this)->abi_Invoke(get(sender), get(e)));
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_Path(get_abi(value)));
 }
 
+template <typename D> Windows::UI::Xaml::Data::BindingMode consume_Windows_UI_Xaml_Data_IBinding<D>::Mode() const noexcept
+{
+    Windows::UI::Xaml::Data::BindingMode value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_Mode(put_abi(value)));
+    return value;
 }
 
-namespace impl {
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::Mode(Windows::UI::Xaml::Data::BindingMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_Mode(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IBinding<D>::Source() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_Source(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::Source(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_Source(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::RelativeSource consume_Windows_UI_Xaml_Data_IBinding<D>::RelativeSource() const noexcept
+{
+    Windows::UI::Xaml::Data::RelativeSource value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_RelativeSource(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::RelativeSource(Windows::UI::Xaml::Data::RelativeSource const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_RelativeSource(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Data_IBinding<D>::ElementName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_ElementName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::ElementName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_ElementName(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::IValueConverter consume_Windows_UI_Xaml_Data_IBinding<D>::Converter() const noexcept
+{
+    Windows::UI::Xaml::Data::IValueConverter value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_Converter(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::Converter(Windows::UI::Xaml::Data::IValueConverter const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_Converter(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IBinding<D>::ConverterParameter() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_ConverterParameter(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::ConverterParameter(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_ConverterParameter(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Data_IBinding<D>::ConverterLanguage() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->get_ConverterLanguage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding<D>::ConverterLanguage(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding)->put_ConverterLanguage(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IBinding2<D>::FallbackValue() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->get_FallbackValue(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding2<D>::FallbackValue(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->put_FallbackValue(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IBinding2<D>::TargetNullValue() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->get_TargetNullValue(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding2<D>::TargetNullValue(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->put_TargetNullValue(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::UpdateSourceTrigger consume_Windows_UI_Xaml_Data_IBinding2<D>::UpdateSourceTrigger() const noexcept
+{
+    Windows::UI::Xaml::Data::UpdateSourceTrigger value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->get_UpdateSourceTrigger(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBinding2<D>::UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBinding2)->put_UpdateSourceTrigger(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::BindingBase consume_Windows_UI_Xaml_Data_IBindingBaseFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::BindingBase instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingBaseFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IBindingExpression<D>::DataItem() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingExpression)->get_DataItem(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Data::Binding consume_Windows_UI_Xaml_Data_IBindingExpression<D>::ParentBinding() const noexcept
+{
+    Windows::UI::Xaml::Data::Binding value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingExpression)->get_ParentBinding(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBindingExpression<D>::UpdateSource() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingExpression)->UpdateSource());
+}
+
+template <typename D> Windows::UI::Xaml::Data::Binding consume_Windows_UI_Xaml_Data_IBindingFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::Binding instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IBindingOperationsStatics<D>::SetBinding(Windows::UI::Xaml::DependencyObject const& target, Windows::UI::Xaml::DependencyProperty const& dp, Windows::UI::Xaml::Data::BindingBase const& binding) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IBindingOperationsStatics)->SetBinding(get_abi(target), get_abi(dp), get_abi(binding)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentItem() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_CurrentItem(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentPosition() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_CurrentPosition(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::IsCurrentAfterLast() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_IsCurrentAfterLast(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::IsCurrentBeforeFirst() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_IsCurrentBeforeFirst(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> consume_Windows_UI_Xaml_Data_ICollectionView<D>::CollectionGroups() const noexcept
+{
+    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_CollectionGroups(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::HasMoreItems() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->get_HasMoreItems(&value));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& value) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->add_CurrentChanged(get_abi(value), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Xaml::Data::ICollectionView> consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& value) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Xaml::Data::ICollectionView>(this, &abi_t<Windows::UI::Xaml::Data::ICollectionView>::remove_CurrentChanged, CurrentChanged(value));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->remove_CurrentChanged(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanging(Windows::UI::Xaml::Data::CurrentChangingEventHandler const& value) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->add_CurrentChanging(get_abi(value), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Xaml::Data::ICollectionView> consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanging(auto_revoke_t, Windows::UI::Xaml::Data::CurrentChangingEventHandler const& value) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Xaml::Data::ICollectionView>(this, &abi_t<Windows::UI::Xaml::Data::ICollectionView>::remove_CurrentChanging, CurrentChanging(value));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICollectionView<D>::CurrentChanging(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->remove_CurrentChanging(get_abi(token)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentTo(Windows::Foundation::IInspectable const& item) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentTo(get_abi(item), &returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentToPosition(int32_t index) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentToPosition(index, &returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentToFirst() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentToFirst(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentToLast() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentToLast(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentToNext() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentToNext(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionView<D>::MoveCurrentToPrevious() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->MoveCurrentToPrevious(&returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> consume_Windows_UI_Xaml_Data_ICollectionView<D>::LoadMoreItemsAsync(uint32_t count) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionView)->LoadMoreItemsAsync(count, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Data::ICollectionView consume_Windows_UI_Xaml_Data_ICollectionViewFactory<D>::CreateView() const
+{
+    Windows::UI::Xaml::Data::ICollectionView result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewFactory)->CreateView(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_ICollectionViewGroup<D>::Group() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewGroup)->get_Group(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> consume_Windows_UI_Xaml_Data_ICollectionViewGroup<D>::GroupItems() const noexcept
+{
+    Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewGroup)->get_GroupItems(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::Source() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->get_Source(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::Source(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->put_Source(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::ICollectionView consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::View() const noexcept
+{
+    Windows::UI::Xaml::Data::ICollectionView value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->get_View(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::IsSourceGrouped() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->get_IsSourceGrouped(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::IsSourceGrouped(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->put_IsSourceGrouped(value));
+}
+
+template <typename D> Windows::UI::Xaml::PropertyPath consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::ItemsPath() const noexcept
+{
+    Windows::UI::Xaml::PropertyPath value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->get_ItemsPath(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICollectionViewSource<D>::ItemsPath(Windows::UI::Xaml::PropertyPath const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSource)->put_ItemsPath(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Data_ICollectionViewSourceStatics<D>::SourceProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSourceStatics)->get_SourceProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Data_ICollectionViewSourceStatics<D>::ViewProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSourceStatics)->get_ViewProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Data_ICollectionViewSourceStatics<D>::IsSourceGroupedProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSourceStatics)->get_IsSourceGroupedProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Data_ICollectionViewSourceStatics<D>::ItemsPathProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICollectionViewSourceStatics)->get_ItemsPathProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICurrentChangingEventArgs<D>::Cancel() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICurrentChangingEventArgs)->get_Cancel(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICurrentChangingEventArgs<D>::Cancel(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICurrentChangingEventArgs)->put_Cancel(value));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICurrentChangingEventArgs<D>::IsCancelable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICurrentChangingEventArgs)->get_IsCancelable(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Data::CurrentChangingEventArgs consume_Windows_UI_Xaml_Data_ICurrentChangingEventArgsFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::CurrentChangingEventArgs instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Data::CurrentChangingEventArgs consume_Windows_UI_Xaml_Data_ICurrentChangingEventArgsFactory<D>::CreateWithCancelableParameter(bool isCancelable, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::CurrentChangingEventArgs instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory)->CreateWithCancelableParameter(isCancelable, get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Interop::TypeName consume_Windows_UI_Xaml_Data_ICustomProperty<D>::Type() const noexcept
+{
+    Windows::UI::Xaml::Interop::TypeName value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Data_ICustomProperty<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_ICustomProperty<D>::GetValue(Windows::Foundation::IInspectable const& target) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->GetValue(get_abi(target), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICustomProperty<D>::SetValue(Windows::Foundation::IInspectable const& target, Windows::Foundation::IInspectable const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->SetValue(get_abi(target), get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_ICustomProperty<D>::GetIndexedValue(Windows::Foundation::IInspectable const& target, Windows::Foundation::IInspectable const& index) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->GetIndexedValue(get_abi(target), get_abi(index), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ICustomProperty<D>::SetIndexedValue(Windows::Foundation::IInspectable const& target, Windows::Foundation::IInspectable const& value, Windows::Foundation::IInspectable const& index) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->SetIndexedValue(get_abi(target), get_abi(value), get_abi(index)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICustomProperty<D>::CanWrite() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->get_CanWrite(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ICustomProperty<D>::CanRead() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomProperty)->get_CanRead(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Data::ICustomProperty consume_Windows_UI_Xaml_Data_ICustomPropertyProvider<D>::GetCustomProperty(param::hstring const& name) const
+{
+    Windows::UI::Xaml::Data::ICustomProperty returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomPropertyProvider)->GetCustomProperty(get_abi(name), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Data::ICustomProperty consume_Windows_UI_Xaml_Data_ICustomPropertyProvider<D>::GetIndexedProperty(param::hstring const& name, Windows::UI::Xaml::Interop::TypeName const& type) const
+{
+    Windows::UI::Xaml::Data::ICustomProperty returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomPropertyProvider)->GetIndexedProperty(get_abi(name), get_abi(type), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Data_ICustomPropertyProvider<D>::GetStringRepresentation() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomPropertyProvider)->GetStringRepresentation(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Interop::TypeName consume_Windows_UI_Xaml_Data_ICustomPropertyProvider<D>::Type() const noexcept
+{
+    Windows::UI::Xaml::Interop::TypeName value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ICustomPropertyProvider)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Data_IItemIndexRange<D>::FirstIndex() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IItemIndexRange)->get_FirstIndex(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_UI_Xaml_Data_IItemIndexRange<D>::Length() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IItemIndexRange)->get_Length(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Data_IItemIndexRange<D>::LastIndex() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IItemIndexRange)->get_LastIndex(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Data::ItemIndexRange consume_Windows_UI_Xaml_Data_IItemIndexRangeFactory<D>::CreateInstance(int32_t firstIndex, uint32_t length, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::ItemIndexRange instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IItemIndexRangeFactory)->CreateInstance(firstIndex, length, get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IItemsRangeInfo<D>::RangesChanged(Windows::UI::Xaml::Data::ItemIndexRange const& visibleRange, param::vector_view<Windows::UI::Xaml::Data::ItemIndexRange> const& trackedItems) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IItemsRangeInfo)->RangesChanged(get_abi(visibleRange), get_abi(trackedItems)));
+}
+
+template <typename D> event_token consume_Windows_UI_Xaml_Data_INotifyPropertyChanged<D>::PropertyChanged(Windows::UI::Xaml::Data::PropertyChangedEventHandler const& value) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::INotifyPropertyChanged)->add_PropertyChanged(get_abi(value), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Xaml::Data::INotifyPropertyChanged> consume_Windows_UI_Xaml_Data_INotifyPropertyChanged<D>::PropertyChanged(auto_revoke_t, Windows::UI::Xaml::Data::PropertyChangedEventHandler const& value) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Xaml::Data::INotifyPropertyChanged>(this, &abi_t<Windows::UI::Xaml::Data::INotifyPropertyChanged>::remove_PropertyChanged, PropertyChanged(value));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_INotifyPropertyChanged<D>::PropertyChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::INotifyPropertyChanged)->remove_PropertyChanged(get_abi(token)));
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Data_IPropertyChangedEventArgs<D>::PropertyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IPropertyChangedEventArgs)->get_PropertyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Data::PropertyChangedEventArgs consume_Windows_UI_Xaml_Data_IPropertyChangedEventArgsFactory<D>::CreateInstance(param::hstring const& name, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::PropertyChangedEventArgs instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory)->CreateInstance(get_abi(name), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Data::RelativeSourceMode consume_Windows_UI_Xaml_Data_IRelativeSource<D>::Mode() const noexcept
+{
+    Windows::UI::Xaml::Data::RelativeSourceMode value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IRelativeSource)->get_Mode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_IRelativeSource<D>::Mode(Windows::UI::Xaml::Data::RelativeSourceMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::IRelativeSource)->put_Mode(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Data::RelativeSource consume_Windows_UI_Xaml_Data_IRelativeSourceFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Data::RelativeSource instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IRelativeSourceFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ISelectionInfo<D>::SelectRange(Windows::UI::Xaml::Data::ItemIndexRange const& itemIndexRange) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ISelectionInfo)->SelectRange(get_abi(itemIndexRange)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Data_ISelectionInfo<D>::DeselectRange(Windows::UI::Xaml::Data::ItemIndexRange const& itemIndexRange) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ISelectionInfo)->DeselectRange(get_abi(itemIndexRange)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ISelectionInfo<D>::IsSelected(int32_t index) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ISelectionInfo)->IsSelected(index, &returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> consume_Windows_UI_Xaml_Data_ISelectionInfo<D>::GetSelectedRanges() const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ISelectionInfo)->GetSelectedRanges(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> consume_Windows_UI_Xaml_Data_ISupportIncrementalLoading<D>::LoadMoreItemsAsync(uint32_t count) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::ISupportIncrementalLoading)->LoadMoreItemsAsync(count, put_abi(operation)));
+    return operation;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Data_ISupportIncrementalLoading<D>::HasMoreItems() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Data::ISupportIncrementalLoading)->get_HasMoreItems(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IValueConverter<D>::Convert(Windows::Foundation::IInspectable const& value, Windows::UI::Xaml::Interop::TypeName const& targetType, Windows::Foundation::IInspectable const& parameter, param::hstring const& language) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IValueConverter)->Convert(get_abi(value), get_abi(targetType), get_abi(parameter), get_abi(language), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Data_IValueConverter<D>::ConvertBack(Windows::Foundation::IInspectable const& value, Windows::UI::Xaml::Interop::TypeName const& targetType, Windows::Foundation::IInspectable const& parameter, param::hstring const& language) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Data::IValueConverter)->ConvertBack(get_abi(value), get_abi(targetType), get_abi(parameter), get_abi(language), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <> struct delegate<Windows::UI::Xaml::Data::CurrentChangingEventHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::UI::Xaml::Data::CurrentChangingEventHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::UI::Xaml::Data::CurrentChangingEventHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* sender, ::IUnknown* e) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&sender), *reinterpret_cast<Windows::UI::Xaml::Data::CurrentChangingEventArgs const*>(&e));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
+
+template <> struct delegate<Windows::UI::Xaml::Data::PropertyChangedEventHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::UI::Xaml::Data::PropertyChangedEventHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::UI::Xaml::Data::PropertyChangedEventHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* sender, ::IUnknown* e) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&sender), *reinterpret_cast<Windows::UI::Xaml::Data::PropertyChangedEventArgs const*>(&e));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBinding> : produce_base<D, Windows::UI::Xaml::Data::IBinding>
 {
-    HRESULT __stdcall get_Path(abi_arg_out<Windows::UI::Xaml::IPropertyPath> value) noexcept override
+    HRESULT __stdcall get_Path(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Path());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Path());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Path(abi_arg_in<Windows::UI::Xaml::IPropertyPath> value) noexcept override
+    HRESULT __stdcall put_Path(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Path(*reinterpret_cast<const Windows::UI::Xaml::PropertyPath *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Path(*reinterpret_cast<Windows::UI::Xaml::PropertyPath const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Mode(Windows::UI::Xaml::Data::BindingMode * value) noexcept override
+    HRESULT __stdcall get_Mode(Windows::UI::Xaml::Data::BindingMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Mode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Mode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Mode(Windows::UI::Xaml::Data::BindingMode value) noexcept override
+    HRESULT __stdcall put_Mode(Windows::UI::Xaml::Data::BindingMode value) noexcept final
     {
-        try
-        {
-            this->shim().Mode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Mode(*reinterpret_cast<Windows::UI::Xaml::Data::BindingMode const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Source(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Source(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Source());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Source());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Source(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_Source(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Source(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Source(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RelativeSource(abi_arg_out<Windows::UI::Xaml::Data::IRelativeSource> value) noexcept override
+    HRESULT __stdcall get_RelativeSource(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RelativeSource());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RelativeSource());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RelativeSource(abi_arg_in<Windows::UI::Xaml::Data::IRelativeSource> value) noexcept override
+    HRESULT __stdcall put_RelativeSource(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().RelativeSource(*reinterpret_cast<const Windows::UI::Xaml::Data::RelativeSource *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RelativeSource(*reinterpret_cast<Windows::UI::Xaml::Data::RelativeSource const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ElementName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ElementName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ElementName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ElementName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ElementName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ElementName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ElementName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ElementName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Converter(abi_arg_out<Windows::UI::Xaml::Data::IValueConverter> value) noexcept override
+    HRESULT __stdcall get_Converter(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Converter());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Converter());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Converter(abi_arg_in<Windows::UI::Xaml::Data::IValueConverter> value) noexcept override
+    HRESULT __stdcall put_Converter(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Converter(*reinterpret_cast<const Windows::UI::Xaml::Data::IValueConverter *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Converter(*reinterpret_cast<Windows::UI::Xaml::Data::IValueConverter const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConverterParameter(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_ConverterParameter(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConverterParameter());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConverterParameter());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ConverterParameter(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_ConverterParameter(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ConverterParameter(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ConverterParameter(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConverterLanguage(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ConverterLanguage(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConverterLanguage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConverterLanguage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ConverterLanguage(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ConverterLanguage(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ConverterLanguage(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ConverterLanguage(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBinding2> : produce_base<D, Windows::UI::Xaml::Data::IBinding2>
 {
-    HRESULT __stdcall get_FallbackValue(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_FallbackValue(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FallbackValue());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FallbackValue());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_FallbackValue(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_FallbackValue(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().FallbackValue(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().FallbackValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TargetNullValue(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_TargetNullValue(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TargetNullValue());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TargetNullValue());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_TargetNullValue(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_TargetNullValue(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().TargetNullValue(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().TargetNullValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger * value) noexcept override
+    HRESULT __stdcall get_UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UpdateSourceTrigger());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UpdateSourceTrigger());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger value) noexcept override
+    HRESULT __stdcall put_UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger value) noexcept final
     {
-        try
-        {
-            this->shim().UpdateSourceTrigger(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().UpdateSourceTrigger(*reinterpret_cast<Windows::UI::Xaml::Data::UpdateSourceTrigger const*>(&value));
+        return S_OK;
     }
 };
 
@@ -363,16 +864,19 @@ struct produce<D, Windows::UI::Xaml::Data::IBindingBase> : produce_base<D, Windo
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBindingBaseFactory> : produce_base<D, Windows::UI::Xaml::Data::IBindingBaseFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::IBindingBase> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -382,38 +886,25 @@ struct produce<D, Windows::UI::Xaml::Data::IBindingBaseFactory> : produce_base<D
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBindingExpression> : produce_base<D, Windows::UI::Xaml::Data::IBindingExpression>
 {
-    HRESULT __stdcall get_DataItem(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_DataItem(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DataItem());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DataItem());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ParentBinding(abi_arg_out<Windows::UI::Xaml::Data::IBinding> value) noexcept override
+    HRESULT __stdcall get_ParentBinding(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ParentBinding());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ParentBinding());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_UpdateSource() noexcept override
+    HRESULT __stdcall UpdateSource() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().UpdateSource();
             return S_OK;
         }
@@ -439,16 +930,19 @@ struct produce<D, Windows::UI::Xaml::Data::IBindingExpressionFactory> : produce_
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBindingFactory> : produce_base<D, Windows::UI::Xaml::Data::IBindingFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::IBinding> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -462,11 +956,12 @@ struct produce<D, Windows::UI::Xaml::Data::IBindingOperations> : produce_base<D,
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IBindingOperationsStatics> : produce_base<D, Windows::UI::Xaml::Data::IBindingOperationsStatics>
 {
-    HRESULT __stdcall abi_SetBinding(abi_arg_in<Windows::UI::Xaml::IDependencyObject> target, abi_arg_in<Windows::UI::Xaml::IDependencyProperty> dp, abi_arg_in<Windows::UI::Xaml::Data::IBindingBase> binding) noexcept override
+    HRESULT __stdcall SetBinding(::IUnknown* target, ::IUnknown* dp, ::IUnknown* binding) noexcept final
     {
         try
         {
-            this->shim().SetBinding(*reinterpret_cast<const Windows::UI::Xaml::DependencyObject *>(&target), *reinterpret_cast<const Windows::UI::Xaml::DependencyProperty *>(&dp), *reinterpret_cast<const Windows::UI::Xaml::Data::BindingBase *>(&binding));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetBinding(*reinterpret_cast<Windows::UI::Xaml::DependencyObject const*>(&target), *reinterpret_cast<Windows::UI::Xaml::DependencyProperty const*>(&dp), *reinterpret_cast<Windows::UI::Xaml::Data::BindingBase const*>(&binding));
             return S_OK;
         }
         catch (...)
@@ -479,78 +974,54 @@ struct produce<D, Windows::UI::Xaml::Data::IBindingOperationsStatics> : produce_
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Windows::UI::Xaml::Data::ICollectionView>
 {
-    HRESULT __stdcall get_CurrentItem(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_CurrentItem(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrentItem());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrentItem());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CurrentPosition(int32_t * value) noexcept override
+    HRESULT __stdcall get_CurrentPosition(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrentPosition());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrentPosition());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsCurrentAfterLast(bool * value) noexcept override
+    HRESULT __stdcall get_IsCurrentAfterLast(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCurrentAfterLast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCurrentAfterLast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsCurrentBeforeFirst(bool * value) noexcept override
+    HRESULT __stdcall get_IsCurrentBeforeFirst(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCurrentBeforeFirst());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCurrentBeforeFirst());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CollectionGroups(abi_arg_out<Windows::Foundation::Collections::IObservableVector<Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_CollectionGroups(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CollectionGroups());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CollectionGroups());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HasMoreItems(bool * value) noexcept override
+    HRESULT __stdcall get_HasMoreItems(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HasMoreItems());
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_CurrentChanged(::IUnknown* value, event_token* token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().HasMoreItems());
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().CurrentChanged(*reinterpret_cast<Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -559,11 +1030,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall add_CurrentChanged(abi_arg_in<Windows::Foundation::EventHandler<Windows::IInspectable>> value, event_token * token) noexcept override
+    HRESULT __stdcall remove_CurrentChanged(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().CurrentChanged(*reinterpret_cast<const Windows::Foundation::EventHandler<Windows::IInspectable> *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().CurrentChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -572,11 +1044,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall remove_CurrentChanged(event_token token) noexcept override
+    HRESULT __stdcall add_CurrentChanging(::IUnknown* value, event_token* token) noexcept final
     {
         try
         {
-            this->shim().CurrentChanged(token);
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().CurrentChanging(*reinterpret_cast<Windows::UI::Xaml::Data::CurrentChangingEventHandler const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -585,11 +1058,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall add_CurrentChanging(abi_arg_in<Windows::UI::Xaml::Data::CurrentChangingEventHandler> value, event_token * token) noexcept override
+    HRESULT __stdcall remove_CurrentChanging(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().CurrentChanging(*reinterpret_cast<const Windows::UI::Xaml::Data::CurrentChangingEventHandler *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().CurrentChanging(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -598,11 +1072,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall remove_CurrentChanging(event_token token) noexcept override
+    HRESULT __stdcall MoveCurrentTo(::IUnknown* item, bool* returnValue) noexcept final
     {
         try
         {
-            this->shim().CurrentChanging(token);
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentTo(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item)));
             return S_OK;
         }
         catch (...)
@@ -611,11 +1086,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentTo(abi_arg_in<Windows::IInspectable> item, bool * returnValue) noexcept override
+    HRESULT __stdcall MoveCurrentToPosition(int32_t index, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentTo(*reinterpret_cast<const Windows::IInspectable *>(&item)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentToPosition(index));
             return S_OK;
         }
         catch (...)
@@ -624,11 +1100,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentToPosition(int32_t index, bool * returnValue) noexcept override
+    HRESULT __stdcall MoveCurrentToFirst(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentToPosition(index));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentToFirst());
             return S_OK;
         }
         catch (...)
@@ -637,11 +1114,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentToFirst(bool * returnValue) noexcept override
+    HRESULT __stdcall MoveCurrentToLast(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentToFirst());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentToLast());
             return S_OK;
         }
         catch (...)
@@ -650,11 +1128,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentToLast(bool * returnValue) noexcept override
+    HRESULT __stdcall MoveCurrentToNext(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentToLast());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentToNext());
             return S_OK;
         }
         catch (...)
@@ -663,11 +1142,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentToNext(bool * returnValue) noexcept override
+    HRESULT __stdcall MoveCurrentToPrevious(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentToNext());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveCurrentToPrevious());
             return S_OK;
         }
         catch (...)
@@ -676,24 +1156,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_MoveCurrentToPrevious(bool * returnValue) noexcept override
+    HRESULT __stdcall LoadMoreItemsAsync(uint32_t count, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveCurrentToPrevious());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_LoadMoreItemsAsync(uint32_t count, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult>> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().LoadMoreItemsAsync(count));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().LoadMoreItemsAsync(count));
             return S_OK;
         }
         catch (...)
@@ -707,11 +1175,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionView> : produce_base<D, Wi
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICollectionViewFactory> : produce_base<D, Windows::UI::Xaml::Data::ICollectionViewFactory>
 {
-    HRESULT __stdcall abi_CreateView(abi_arg_out<Windows::UI::Xaml::Data::ICollectionView> result) noexcept override
+    HRESULT __stdcall CreateView(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().CreateView());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateView());
             return S_OK;
         }
         catch (...)
@@ -725,264 +1194,165 @@ struct produce<D, Windows::UI::Xaml::Data::ICollectionViewFactory> : produce_bas
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICollectionViewGroup> : produce_base<D, Windows::UI::Xaml::Data::ICollectionViewGroup>
 {
-    HRESULT __stdcall get_Group(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Group(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Group());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Group());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_GroupItems(abi_arg_out<Windows::Foundation::Collections::IObservableVector<Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_GroupItems(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().GroupItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().GroupItems());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICollectionViewSource> : produce_base<D, Windows::UI::Xaml::Data::ICollectionViewSource>
 {
-    HRESULT __stdcall get_Source(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Source(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Source());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Source());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Source(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_Source(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Source(*reinterpret_cast<const Windows::IInspectable *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Source(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_View(abi_arg_out<Windows::UI::Xaml::Data::ICollectionView> value) noexcept override
+    HRESULT __stdcall get_View(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().View());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().View());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSourceGrouped(bool * value) noexcept override
+    HRESULT __stdcall get_IsSourceGrouped(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSourceGrouped());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSourceGrouped());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSourceGrouped(bool value) noexcept override
+    HRESULT __stdcall put_IsSourceGrouped(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSourceGrouped(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSourceGrouped(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ItemsPath(abi_arg_out<Windows::UI::Xaml::IPropertyPath> value) noexcept override
+    HRESULT __stdcall get_ItemsPath(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ItemsPath());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ItemsPath());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ItemsPath(abi_arg_in<Windows::UI::Xaml::IPropertyPath> value) noexcept override
+    HRESULT __stdcall put_ItemsPath(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ItemsPath(*reinterpret_cast<const Windows::UI::Xaml::PropertyPath *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ItemsPath(*reinterpret_cast<Windows::UI::Xaml::PropertyPath const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICollectionViewSourceStatics> : produce_base<D, Windows::UI::Xaml::Data::ICollectionViewSourceStatics>
 {
-    HRESULT __stdcall get_SourceProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_SourceProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceProperty());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ViewProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_ViewProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ViewProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ViewProperty());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSourceGroupedProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_IsSourceGroupedProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSourceGroupedProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSourceGroupedProperty());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ItemsPathProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_ItemsPathProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ItemsPathProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ItemsPathProperty());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgs> : produce_base<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgs>
 {
-    HRESULT __stdcall get_Cancel(bool * value) noexcept override
+    HRESULT __stdcall get_Cancel(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Cancel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Cancel());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Cancel(bool value) noexcept override
+    HRESULT __stdcall put_Cancel(bool value) noexcept final
     {
-        try
-        {
-            this->shim().Cancel(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Cancel(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsCancelable(bool * value) noexcept override
+    HRESULT __stdcall get_IsCancelable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsCancelable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCancelable());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory> : produce_base<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::ICurrentChangingEventArgs> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
     }
 
-    HRESULT __stdcall abi_CreateWithCancelableParameter(bool isCancelable, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::ICurrentChangingEventArgs> instance) noexcept override
+    HRESULT __stdcall CreateWithCancelableParameter(bool isCancelable, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateWithCancelableParameter(isCancelable, *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateWithCancelableParameter(isCancelable, *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -992,38 +1362,26 @@ struct produce<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory> : p
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICustomProperty> : produce_base<D, Windows::UI::Xaml::Data::ICustomProperty>
 {
-    HRESULT __stdcall get_Type(abi_arg_out<Windows::UI::Xaml::Interop::TypeName> value) noexcept override
+    HRESULT __stdcall get_Type(struct_of<8,16>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetValue(abi_arg_in<Windows::IInspectable> target, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetValue(::IUnknown* target, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetValue(*reinterpret_cast<const Windows::IInspectable *>(&target)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&target)));
             return S_OK;
         }
         catch (...)
@@ -1033,11 +1391,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomProperty> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_SetValue(abi_arg_in<Windows::IInspectable> target, abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall SetValue(::IUnknown* target, ::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().SetValue(*reinterpret_cast<const Windows::IInspectable *>(&target), *reinterpret_cast<const Windows::IInspectable *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&target), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -1046,11 +1405,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomProperty> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetIndexedValue(abi_arg_in<Windows::IInspectable> target, abi_arg_in<Windows::IInspectable> index, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetIndexedValue(::IUnknown* target, ::IUnknown* index, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetIndexedValue(*reinterpret_cast<const Windows::IInspectable *>(&target), *reinterpret_cast<const Windows::IInspectable *>(&index)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetIndexedValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&target), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&index)));
             return S_OK;
         }
         catch (...)
@@ -1060,11 +1420,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomProperty> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_SetIndexedValue(abi_arg_in<Windows::IInspectable> target, abi_arg_in<Windows::IInspectable> value, abi_arg_in<Windows::IInspectable> index) noexcept override
+    HRESULT __stdcall SetIndexedValue(::IUnknown* target, ::IUnknown* value, ::IUnknown* index) noexcept final
     {
         try
         {
-            this->shim().SetIndexedValue(*reinterpret_cast<const Windows::IInspectable *>(&target), *reinterpret_cast<const Windows::IInspectable *>(&value), *reinterpret_cast<const Windows::IInspectable *>(&index));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetIndexedValue(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&target), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&value), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&index));
             return S_OK;
         }
         catch (...)
@@ -1073,41 +1434,30 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomProperty> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall get_CanWrite(bool * value) noexcept override
+    HRESULT __stdcall get_CanWrite(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanWrite());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanWrite());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CanRead(bool * value) noexcept override
+    HRESULT __stdcall get_CanRead(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanRead());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanRead());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ICustomPropertyProvider> : produce_base<D, Windows::UI::Xaml::Data::ICustomPropertyProvider>
 {
-    HRESULT __stdcall abi_GetCustomProperty(abi_arg_in<hstring> name, abi_arg_out<Windows::UI::Xaml::Data::ICustomProperty> returnValue) noexcept override
+    HRESULT __stdcall GetCustomProperty(HSTRING name, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetCustomProperty(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetCustomProperty(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1117,11 +1467,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomPropertyProvider> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_GetIndexedProperty(abi_arg_in<hstring> name, abi_arg_in<Windows::UI::Xaml::Interop::TypeName> type, abi_arg_out<Windows::UI::Xaml::Data::ICustomProperty> returnValue) noexcept override
+    HRESULT __stdcall GetIndexedProperty(HSTRING name, struct_of<8,16> type, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetIndexedProperty(*reinterpret_cast<const hstring *>(&name), *reinterpret_cast<const Windows::UI::Xaml::Interop::TypeName *>(&type)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetIndexedProperty(*reinterpret_cast<hstring const*>(&name), *reinterpret_cast<Windows::UI::Xaml::Interop::TypeName const*>(&type)));
             return S_OK;
         }
         catch (...)
@@ -1131,11 +1482,12 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomPropertyProvider> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_GetStringRepresentation(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetStringRepresentation(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetStringRepresentation());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetStringRepresentation());
             return S_OK;
         }
         catch (...)
@@ -1145,76 +1497,55 @@ struct produce<D, Windows::UI::Xaml::Data::ICustomPropertyProvider> : produce_ba
         }
     }
 
-    HRESULT __stdcall get_Type(abi_arg_out<Windows::UI::Xaml::Interop::TypeName> value) noexcept override
+    HRESULT __stdcall get_Type(struct_of<8,16>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IItemIndexRange> : produce_base<D, Windows::UI::Xaml::Data::IItemIndexRange>
 {
-    HRESULT __stdcall get_FirstIndex(int32_t * value) noexcept override
+    HRESULT __stdcall get_FirstIndex(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FirstIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FirstIndex());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Length(uint32_t * value) noexcept override
+    HRESULT __stdcall get_Length(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Length());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Length());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LastIndex(int32_t * value) noexcept override
+    HRESULT __stdcall get_LastIndex(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LastIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LastIndex());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IItemIndexRangeFactory> : produce_base<D, Windows::UI::Xaml::Data::IItemIndexRangeFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(int32_t firstIndex, uint32_t length, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::IItemIndexRange> instance) noexcept override
+    HRESULT __stdcall CreateInstance(int32_t firstIndex, uint32_t length, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(firstIndex, length, *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(firstIndex, length, *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1224,11 +1555,12 @@ struct produce<D, Windows::UI::Xaml::Data::IItemIndexRangeFactory> : produce_bas
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IItemsRangeInfo> : produce_base<D, Windows::UI::Xaml::Data::IItemsRangeInfo>
 {
-    HRESULT __stdcall abi_RangesChanged(abi_arg_in<Windows::UI::Xaml::Data::IItemIndexRange> visibleRange, abi_arg_in<Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange>> trackedItems) noexcept override
+    HRESULT __stdcall RangesChanged(::IUnknown* visibleRange, ::IUnknown* trackedItems) noexcept final
     {
         try
         {
-            this->shim().RangesChanged(*reinterpret_cast<const Windows::UI::Xaml::Data::ItemIndexRange *>(&visibleRange), *reinterpret_cast<const Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> *>(&trackedItems));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RangesChanged(*reinterpret_cast<Windows::UI::Xaml::Data::ItemIndexRange const*>(&visibleRange), *reinterpret_cast<Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> const*>(&trackedItems));
             return S_OK;
         }
         catch (...)
@@ -1241,11 +1573,12 @@ struct produce<D, Windows::UI::Xaml::Data::IItemsRangeInfo> : produce_base<D, Wi
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::INotifyPropertyChanged> : produce_base<D, Windows::UI::Xaml::Data::INotifyPropertyChanged>
 {
-    HRESULT __stdcall add_PropertyChanged(abi_arg_in<Windows::UI::Xaml::Data::PropertyChangedEventHandler> value, event_token * token) noexcept override
+    HRESULT __stdcall add_PropertyChanged(::IUnknown* value, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().PropertyChanged(*reinterpret_cast<const Windows::UI::Xaml::Data::PropertyChangedEventHandler *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().PropertyChanged(*reinterpret_cast<Windows::UI::Xaml::Data::PropertyChangedEventHandler const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -1254,11 +1587,12 @@ struct produce<D, Windows::UI::Xaml::Data::INotifyPropertyChanged> : produce_bas
         }
     }
 
-    HRESULT __stdcall remove_PropertyChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_PropertyChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().PropertyChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().PropertyChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1271,34 +1605,30 @@ struct produce<D, Windows::UI::Xaml::Data::INotifyPropertyChanged> : produce_bas
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgs> : produce_base<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgs>
 {
-    HRESULT __stdcall get_PropertyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_PropertyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PropertyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PropertyName());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory> : produce_base<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<hstring> name, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::IPropertyChangedEventArgs> instance) noexcept override
+    HRESULT __stdcall CreateInstance(HSTRING name, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const hstring *>(&name), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<hstring const*>(&name), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1308,46 +1638,37 @@ struct produce<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory> : p
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IRelativeSource> : produce_base<D, Windows::UI::Xaml::Data::IRelativeSource>
 {
-    HRESULT __stdcall get_Mode(Windows::UI::Xaml::Data::RelativeSourceMode * value) noexcept override
+    HRESULT __stdcall get_Mode(Windows::UI::Xaml::Data::RelativeSourceMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Mode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Mode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Mode(Windows::UI::Xaml::Data::RelativeSourceMode value) noexcept override
+    HRESULT __stdcall put_Mode(Windows::UI::Xaml::Data::RelativeSourceMode value) noexcept final
     {
-        try
-        {
-            this->shim().Mode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Mode(*reinterpret_cast<Windows::UI::Xaml::Data::RelativeSourceMode const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IRelativeSourceFactory> : produce_base<D, Windows::UI::Xaml::Data::IRelativeSourceFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Data::IRelativeSource> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1357,11 +1678,12 @@ struct produce<D, Windows::UI::Xaml::Data::IRelativeSourceFactory> : produce_bas
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ISelectionInfo> : produce_base<D, Windows::UI::Xaml::Data::ISelectionInfo>
 {
-    HRESULT __stdcall abi_SelectRange(abi_arg_in<Windows::UI::Xaml::Data::IItemIndexRange> itemIndexRange) noexcept override
+    HRESULT __stdcall SelectRange(::IUnknown* itemIndexRange) noexcept final
     {
         try
         {
-            this->shim().SelectRange(*reinterpret_cast<const Windows::UI::Xaml::Data::ItemIndexRange *>(&itemIndexRange));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SelectRange(*reinterpret_cast<Windows::UI::Xaml::Data::ItemIndexRange const*>(&itemIndexRange));
             return S_OK;
         }
         catch (...)
@@ -1370,11 +1692,12 @@ struct produce<D, Windows::UI::Xaml::Data::ISelectionInfo> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_DeselectRange(abi_arg_in<Windows::UI::Xaml::Data::IItemIndexRange> itemIndexRange) noexcept override
+    HRESULT __stdcall DeselectRange(::IUnknown* itemIndexRange) noexcept final
     {
         try
         {
-            this->shim().DeselectRange(*reinterpret_cast<const Windows::UI::Xaml::Data::ItemIndexRange *>(&itemIndexRange));
+            typename D::abi_guard guard(this->shim());
+            this->shim().DeselectRange(*reinterpret_cast<Windows::UI::Xaml::Data::ItemIndexRange const*>(&itemIndexRange));
             return S_OK;
         }
         catch (...)
@@ -1383,11 +1706,12 @@ struct produce<D, Windows::UI::Xaml::Data::ISelectionInfo> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_IsSelected(int32_t index, bool * returnValue) noexcept override
+    HRESULT __stdcall IsSelected(int32_t index, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsSelected(index));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsSelected(index));
             return S_OK;
         }
         catch (...)
@@ -1396,11 +1720,12 @@ struct produce<D, Windows::UI::Xaml::Data::ISelectionInfo> : produce_base<D, Win
         }
     }
 
-    HRESULT __stdcall abi_GetSelectedRanges(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange>> returnValue) noexcept override
+    HRESULT __stdcall GetSelectedRanges(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetSelectedRanges());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetSelectedRanges());
             return S_OK;
         }
         catch (...)
@@ -1414,11 +1739,12 @@ struct produce<D, Windows::UI::Xaml::Data::ISelectionInfo> : produce_base<D, Win
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::ISupportIncrementalLoading> : produce_base<D, Windows::UI::Xaml::Data::ISupportIncrementalLoading>
 {
-    HRESULT __stdcall abi_LoadMoreItemsAsync(uint32_t count, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult>> operation) noexcept override
+    HRESULT __stdcall LoadMoreItemsAsync(uint32_t count, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().LoadMoreItemsAsync(count));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().LoadMoreItemsAsync(count));
             return S_OK;
         }
         catch (...)
@@ -1428,28 +1754,23 @@ struct produce<D, Windows::UI::Xaml::Data::ISupportIncrementalLoading> : produce
         }
     }
 
-    HRESULT __stdcall get_HasMoreItems(bool * value) noexcept override
+    HRESULT __stdcall get_HasMoreItems(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HasMoreItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HasMoreItems());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Data::IValueConverter> : produce_base<D, Windows::UI::Xaml::Data::IValueConverter>
 {
-    HRESULT __stdcall abi_Convert(abi_arg_in<Windows::IInspectable> value, abi_arg_in<Windows::UI::Xaml::Interop::TypeName> targetType, abi_arg_in<Windows::IInspectable> parameter, abi_arg_in<hstring> language, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall Convert(::IUnknown* value, struct_of<8,16> targetType, ::IUnknown* parameter, HSTRING language, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().Convert(*reinterpret_cast<const Windows::IInspectable *>(&value), *reinterpret_cast<const Windows::UI::Xaml::Interop::TypeName *>(&targetType), *reinterpret_cast<const Windows::IInspectable *>(&parameter), *reinterpret_cast<const hstring *>(&language)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().Convert(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value), *reinterpret_cast<Windows::UI::Xaml::Interop::TypeName const*>(&targetType), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&parameter), *reinterpret_cast<hstring const*>(&language)));
             return S_OK;
         }
         catch (...)
@@ -1459,11 +1780,12 @@ struct produce<D, Windows::UI::Xaml::Data::IValueConverter> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_ConvertBack(abi_arg_in<Windows::IInspectable> value, abi_arg_in<Windows::UI::Xaml::Interop::TypeName> targetType, abi_arg_in<Windows::IInspectable> parameter, abi_arg_in<hstring> language, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall ConvertBack(::IUnknown* value, struct_of<8,16> targetType, ::IUnknown* parameter, HSTRING language, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().ConvertBack(*reinterpret_cast<const Windows::IInspectable *>(&value), *reinterpret_cast<const Windows::UI::Xaml::Interop::TypeName *>(&targetType), *reinterpret_cast<const Windows::IInspectable *>(&parameter), *reinterpret_cast<const hstring *>(&language)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().ConvertBack(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value), *reinterpret_cast<Windows::UI::Xaml::Interop::TypeName const*>(&targetType), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&parameter), *reinterpret_cast<hstring const*>(&language)));
             return S_OK;
         }
         catch (...)
@@ -1476,658 +1798,23 @@ struct produce<D, Windows::UI::Xaml::Data::IValueConverter> : produce_base<D, Wi
 
 }
 
-namespace Windows::UI::Xaml::Data {
-
-template <typename D> void impl_IItemsRangeInfo<D>::RangesChanged(const Windows::UI::Xaml::Data::ItemIndexRange & visibleRange, const Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> & trackedItems) const
-{
-    check_hresult(static_cast<const IItemsRangeInfo &>(static_cast<const D &>(*this))->abi_RangesChanged(get(visibleRange), get(trackedItems)));
-}
-
-template <typename D> void impl_ISelectionInfo<D>::SelectRange(const Windows::UI::Xaml::Data::ItemIndexRange & itemIndexRange) const
-{
-    check_hresult(static_cast<const ISelectionInfo &>(static_cast<const D &>(*this))->abi_SelectRange(get(itemIndexRange)));
-}
-
-template <typename D> void impl_ISelectionInfo<D>::DeselectRange(const Windows::UI::Xaml::Data::ItemIndexRange & itemIndexRange) const
-{
-    check_hresult(static_cast<const ISelectionInfo &>(static_cast<const D &>(*this))->abi_DeselectRange(get(itemIndexRange)));
-}
-
-template <typename D> bool impl_ISelectionInfo<D>::IsSelected(int32_t index) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ISelectionInfo &>(static_cast<const D &>(*this))->abi_IsSelected(index, &returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> impl_ISelectionInfo<D>::GetSelectedRanges() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Data::ItemIndexRange> returnValue;
-    check_hresult(static_cast<const ISelectionInfo &>(static_cast<const D &>(*this))->abi_GetSelectedRanges(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Interop::TypeName impl_ICustomProperty<D>::Type() const
-{
-    Windows::UI::Xaml::Interop::TypeName value {};
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->get_Type(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ICustomProperty<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_ICustomProperty<D>::GetValue(const Windows::IInspectable & target) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->abi_GetValue(get(target), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_ICustomProperty<D>::SetValue(const Windows::IInspectable & target, const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->abi_SetValue(get(target), get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_ICustomProperty<D>::GetIndexedValue(const Windows::IInspectable & target, const Windows::IInspectable & index) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->abi_GetIndexedValue(get(target), get(index), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_ICustomProperty<D>::SetIndexedValue(const Windows::IInspectable & target, const Windows::IInspectable & value, const Windows::IInspectable & index) const
-{
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->abi_SetIndexedValue(get(target), get(value), get(index)));
-}
-
-template <typename D> bool impl_ICustomProperty<D>::CanWrite() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->get_CanWrite(&value));
-    return value;
-}
-
-template <typename D> bool impl_ICustomProperty<D>::CanRead() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICustomProperty &>(static_cast<const D &>(*this))->get_CanRead(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Data::ICustomProperty impl_ICustomPropertyProvider<D>::GetCustomProperty(hstring_ref name) const
-{
-    Windows::UI::Xaml::Data::ICustomProperty returnValue;
-    check_hresult(static_cast<const ICustomPropertyProvider &>(static_cast<const D &>(*this))->abi_GetCustomProperty(get(name), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Data::ICustomProperty impl_ICustomPropertyProvider<D>::GetIndexedProperty(hstring_ref name, const Windows::UI::Xaml::Interop::TypeName & type) const
-{
-    Windows::UI::Xaml::Data::ICustomProperty returnValue;
-    check_hresult(static_cast<const ICustomPropertyProvider &>(static_cast<const D &>(*this))->abi_GetIndexedProperty(get(name), get(type), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_ICustomPropertyProvider<D>::GetStringRepresentation() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const ICustomPropertyProvider &>(static_cast<const D &>(*this))->abi_GetStringRepresentation(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Interop::TypeName impl_ICustomPropertyProvider<D>::Type() const
-{
-    Windows::UI::Xaml::Interop::TypeName value {};
-    check_hresult(static_cast<const ICustomPropertyProvider &>(static_cast<const D &>(*this))->get_Type(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_INotifyPropertyChanged<D>::PropertyChanged(const Windows::UI::Xaml::Data::PropertyChangedEventHandler & value) const
-{
-    event_token token {};
-    check_hresult(static_cast<const INotifyPropertyChanged &>(static_cast<const D &>(*this))->add_PropertyChanged(get(value), &token));
-    return token;
-}
-
-template <typename D> event_revoker<INotifyPropertyChanged> impl_INotifyPropertyChanged<D>::PropertyChanged(auto_revoke_t, const Windows::UI::Xaml::Data::PropertyChangedEventHandler & value) const
-{
-    return impl::make_event_revoker<D, INotifyPropertyChanged>(this, &ABI::Windows::UI::Xaml::Data::INotifyPropertyChanged::remove_PropertyChanged, PropertyChanged(value));
-}
-
-template <typename D> void impl_INotifyPropertyChanged<D>::PropertyChanged(event_token token) const
-{
-    check_hresult(static_cast<const INotifyPropertyChanged &>(static_cast<const D &>(*this))->remove_PropertyChanged(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> impl_ISupportIncrementalLoading<D>::LoadMoreItemsAsync(uint32_t count) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> operation;
-    check_hresult(static_cast<const ISupportIncrementalLoading &>(static_cast<const D &>(*this))->abi_LoadMoreItemsAsync(count, put(operation)));
-    return operation;
-}
-
-template <typename D> bool impl_ISupportIncrementalLoading<D>::HasMoreItems() const
-{
-    bool value {};
-    check_hresult(static_cast<const ISupportIncrementalLoading &>(static_cast<const D &>(*this))->get_HasMoreItems(&value));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IValueConverter<D>::Convert(const Windows::IInspectable & value, const Windows::UI::Xaml::Interop::TypeName & targetType, const Windows::IInspectable & parameter, hstring_ref language) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IValueConverter &>(static_cast<const D &>(*this))->abi_Convert(get(value), get(targetType), get(parameter), get(language), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IValueConverter<D>::ConvertBack(const Windows::IInspectable & value, const Windows::UI::Xaml::Interop::TypeName & targetType, const Windows::IInspectable & parameter, hstring_ref language) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IValueConverter &>(static_cast<const D &>(*this))->abi_ConvertBack(get(value), get(targetType), get(parameter), get(language), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IBindingOperationsStatics<D>::SetBinding(const Windows::UI::Xaml::DependencyObject & target, const Windows::UI::Xaml::DependencyProperty & dp, const Windows::UI::Xaml::Data::BindingBase & binding) const
-{
-    check_hresult(static_cast<const IBindingOperationsStatics &>(static_cast<const D &>(*this))->abi_SetBinding(get(target), get(dp), get(binding)));
-}
-
-template <typename D> bool impl_ICurrentChangingEventArgs<D>::Cancel() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICurrentChangingEventArgs &>(static_cast<const D &>(*this))->get_Cancel(&value));
-    return value;
-}
-
-template <typename D> void impl_ICurrentChangingEventArgs<D>::Cancel(bool value) const
-{
-    check_hresult(static_cast<const ICurrentChangingEventArgs &>(static_cast<const D &>(*this))->put_Cancel(value));
-}
-
-template <typename D> bool impl_ICurrentChangingEventArgs<D>::IsCancelable() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICurrentChangingEventArgs &>(static_cast<const D &>(*this))->get_IsCancelable(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Data::CurrentChangingEventArgs impl_ICurrentChangingEventArgsFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::CurrentChangingEventArgs instance { nullptr };
-    check_hresult(static_cast<const ICurrentChangingEventArgsFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Data::CurrentChangingEventArgs impl_ICurrentChangingEventArgsFactory<D>::CreateWithCancelableParameter(bool isCancelable, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::CurrentChangingEventArgs instance { nullptr };
-    check_hresult(static_cast<const ICurrentChangingEventArgsFactory &>(static_cast<const D &>(*this))->abi_CreateWithCancelableParameter(isCancelable, get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> hstring impl_IPropertyChangedEventArgs<D>::PropertyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPropertyChangedEventArgs &>(static_cast<const D &>(*this))->get_PropertyName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Data::PropertyChangedEventArgs impl_IPropertyChangedEventArgsFactory<D>::CreateInstance(hstring_ref name, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::PropertyChangedEventArgs instance { nullptr };
-    check_hresult(static_cast<const IPropertyChangedEventArgsFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(name), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Data::BindingBase impl_IBindingBaseFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::BindingBase instance { nullptr };
-    check_hresult(static_cast<const IBindingBaseFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::IInspectable impl_IBindingExpression<D>::DataItem() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IBindingExpression &>(static_cast<const D &>(*this))->get_DataItem(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Data::Binding impl_IBindingExpression<D>::ParentBinding() const
-{
-    Windows::UI::Xaml::Data::Binding value { nullptr };
-    check_hresult(static_cast<const IBindingExpression &>(static_cast<const D &>(*this))->get_ParentBinding(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBindingExpression<D>::UpdateSource() const
-{
-    check_hresult(static_cast<const IBindingExpression &>(static_cast<const D &>(*this))->abi_UpdateSource());
-}
-
-template <typename D> Windows::UI::Xaml::Data::RelativeSourceMode impl_IRelativeSource<D>::Mode() const
-{
-    Windows::UI::Xaml::Data::RelativeSourceMode value {};
-    check_hresult(static_cast<const IRelativeSource &>(static_cast<const D &>(*this))->get_Mode(&value));
-    return value;
-}
-
-template <typename D> void impl_IRelativeSource<D>::Mode(Windows::UI::Xaml::Data::RelativeSourceMode value) const
-{
-    check_hresult(static_cast<const IRelativeSource &>(static_cast<const D &>(*this))->put_Mode(value));
-}
-
-template <typename D> Windows::UI::Xaml::Data::RelativeSource impl_IRelativeSourceFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::RelativeSource instance { nullptr };
-    check_hresult(static_cast<const IRelativeSourceFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::PropertyPath impl_IBinding<D>::Path() const
-{
-    Windows::UI::Xaml::PropertyPath value { nullptr };
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_Path(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::Path(const Windows::UI::Xaml::PropertyPath & value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_Path(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::BindingMode impl_IBinding<D>::Mode() const
-{
-    Windows::UI::Xaml::Data::BindingMode value {};
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_Mode(&value));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::Mode(Windows::UI::Xaml::Data::BindingMode value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_Mode(value));
-}
-
-template <typename D> Windows::IInspectable impl_IBinding<D>::Source() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_Source(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::Source(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_Source(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::RelativeSource impl_IBinding<D>::RelativeSource() const
-{
-    Windows::UI::Xaml::Data::RelativeSource value { nullptr };
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_RelativeSource(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::RelativeSource(const Windows::UI::Xaml::Data::RelativeSource & value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_RelativeSource(get(value)));
-}
-
-template <typename D> hstring impl_IBinding<D>::ElementName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_ElementName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::ElementName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_ElementName(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::IValueConverter impl_IBinding<D>::Converter() const
-{
-    Windows::UI::Xaml::Data::IValueConverter value;
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_Converter(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::Converter(const Windows::UI::Xaml::Data::IValueConverter & value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_Converter(get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_IBinding<D>::ConverterParameter() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_ConverterParameter(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::ConverterParameter(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_ConverterParameter(get(value)));
-}
-
-template <typename D> hstring impl_IBinding<D>::ConverterLanguage() const
-{
-    hstring value;
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->get_ConverterLanguage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding<D>::ConverterLanguage(hstring_ref value) const
-{
-    check_hresult(static_cast<const IBinding &>(static_cast<const D &>(*this))->put_ConverterLanguage(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::Binding impl_IBindingFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::Binding instance { nullptr };
-    check_hresult(static_cast<const IBindingFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::IInspectable impl_IBinding2<D>::FallbackValue() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->get_FallbackValue(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding2<D>::FallbackValue(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->put_FallbackValue(get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_IBinding2<D>::TargetNullValue() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->get_TargetNullValue(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IBinding2<D>::TargetNullValue(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->put_TargetNullValue(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::UpdateSourceTrigger impl_IBinding2<D>::UpdateSourceTrigger() const
-{
-    Windows::UI::Xaml::Data::UpdateSourceTrigger value {};
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->get_UpdateSourceTrigger(&value));
-    return value;
-}
-
-template <typename D> void impl_IBinding2<D>::UpdateSourceTrigger(Windows::UI::Xaml::Data::UpdateSourceTrigger value) const
-{
-    check_hresult(static_cast<const IBinding2 &>(static_cast<const D &>(*this))->put_UpdateSourceTrigger(value));
-}
-
-template <typename D> Windows::IInspectable impl_ICollectionView<D>::CurrentItem() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_CurrentItem(put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_ICollectionView<D>::CurrentPosition() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_CurrentPosition(&value));
-    return value;
-}
-
-template <typename D> bool impl_ICollectionView<D>::IsCurrentAfterLast() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_IsCurrentAfterLast(&value));
-    return value;
-}
-
-template <typename D> bool impl_ICollectionView<D>::IsCurrentBeforeFirst() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_IsCurrentBeforeFirst(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IObservableVector<Windows::IInspectable> impl_ICollectionView<D>::CollectionGroups() const
-{
-    Windows::Foundation::Collections::IObservableVector<Windows::IInspectable> value;
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_CollectionGroups(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_ICollectionView<D>::HasMoreItems() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->get_HasMoreItems(&value));
-    return value;
-}
-
-template <typename D> event_token impl_ICollectionView<D>::CurrentChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & value) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->add_CurrentChanged(get(value), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICollectionView> impl_ICollectionView<D>::CurrentChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & value) const
-{
-    return impl::make_event_revoker<D, ICollectionView>(this, &ABI::Windows::UI::Xaml::Data::ICollectionView::remove_CurrentChanged, CurrentChanged(value));
-}
-
-template <typename D> void impl_ICollectionView<D>::CurrentChanged(event_token token) const
-{
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->remove_CurrentChanged(token));
-}
-
-template <typename D> event_token impl_ICollectionView<D>::CurrentChanging(const Windows::UI::Xaml::Data::CurrentChangingEventHandler & value) const
-{
-    event_token token {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->add_CurrentChanging(get(value), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ICollectionView> impl_ICollectionView<D>::CurrentChanging(auto_revoke_t, const Windows::UI::Xaml::Data::CurrentChangingEventHandler & value) const
-{
-    return impl::make_event_revoker<D, ICollectionView>(this, &ABI::Windows::UI::Xaml::Data::ICollectionView::remove_CurrentChanging, CurrentChanging(value));
-}
-
-template <typename D> void impl_ICollectionView<D>::CurrentChanging(event_token token) const
-{
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->remove_CurrentChanging(token));
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentTo(const Windows::IInspectable & item) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentTo(get(item), &returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentToPosition(int32_t index) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentToPosition(index, &returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentToFirst() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentToFirst(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentToLast() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentToLast(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentToNext() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentToNext(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_ICollectionView<D>::MoveCurrentToPrevious() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_MoveCurrentToPrevious(&returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> impl_ICollectionView<D>::LoadMoreItemsAsync(uint32_t count) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Xaml::Data::LoadMoreItemsResult> returnValue;
-    check_hresult(static_cast<const ICollectionView &>(static_cast<const D &>(*this))->abi_LoadMoreItemsAsync(count, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Data::ICollectionView impl_ICollectionViewFactory<D>::CreateView() const
-{
-    Windows::UI::Xaml::Data::ICollectionView result;
-    check_hresult(static_cast<const ICollectionViewFactory &>(static_cast<const D &>(*this))->abi_CreateView(put(result)));
-    return result;
-}
-
-template <typename D> Windows::IInspectable impl_ICollectionViewGroup<D>::Group() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const ICollectionViewGroup &>(static_cast<const D &>(*this))->get_Group(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IObservableVector<Windows::IInspectable> impl_ICollectionViewGroup<D>::GroupItems() const
-{
-    Windows::Foundation::Collections::IObservableVector<Windows::IInspectable> value;
-    check_hresult(static_cast<const ICollectionViewGroup &>(static_cast<const D &>(*this))->get_GroupItems(put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_IItemIndexRange<D>::FirstIndex() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IItemIndexRange &>(static_cast<const D &>(*this))->get_FirstIndex(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IItemIndexRange<D>::Length() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IItemIndexRange &>(static_cast<const D &>(*this))->get_Length(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IItemIndexRange<D>::LastIndex() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IItemIndexRange &>(static_cast<const D &>(*this))->get_LastIndex(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Data::ItemIndexRange impl_IItemIndexRangeFactory<D>::CreateInstance(int32_t firstIndex, uint32_t length, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Data::ItemIndexRange instance { nullptr };
-    check_hresult(static_cast<const IItemIndexRangeFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(firstIndex, length, get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::IInspectable impl_ICollectionViewSource<D>::Source() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->get_Source(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ICollectionViewSource<D>::Source(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->put_Source(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Data::ICollectionView impl_ICollectionViewSource<D>::View() const
-{
-    Windows::UI::Xaml::Data::ICollectionView value;
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->get_View(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_ICollectionViewSource<D>::IsSourceGrouped() const
-{
-    bool value {};
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->get_IsSourceGrouped(&value));
-    return value;
-}
-
-template <typename D> void impl_ICollectionViewSource<D>::IsSourceGrouped(bool value) const
-{
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->put_IsSourceGrouped(value));
-}
-
-template <typename D> Windows::UI::Xaml::PropertyPath impl_ICollectionViewSource<D>::ItemsPath() const
-{
-    Windows::UI::Xaml::PropertyPath value { nullptr };
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->get_ItemsPath(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ICollectionViewSource<D>::ItemsPath(const Windows::UI::Xaml::PropertyPath & value) const
-{
-    check_hresult(static_cast<const ICollectionViewSource &>(static_cast<const D &>(*this))->put_ItemsPath(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_ICollectionViewSourceStatics<D>::SourceProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const ICollectionViewSourceStatics &>(static_cast<const D &>(*this))->get_SourceProperty(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_ICollectionViewSourceStatics<D>::ViewProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const ICollectionViewSourceStatics &>(static_cast<const D &>(*this))->get_ViewProperty(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_ICollectionViewSourceStatics<D>::IsSourceGroupedProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const ICollectionViewSourceStatics &>(static_cast<const D &>(*this))->get_IsSourceGroupedProperty(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_ICollectionViewSourceStatics<D>::ItemsPathProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const ICollectionViewSourceStatics &>(static_cast<const D &>(*this))->get_ItemsPathProperty(put(value)));
-    return value;
-}
+WINRT_EXPORT namespace winrt::Windows::UI::Xaml::Data {
 
 inline Binding::Binding()
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<Binding, IBindingFactory>().CreateInstance(outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<Binding, Windows::UI::Xaml::Data::IBindingFactory>().CreateInstance(outer, inner));
 }
 
 inline BindingBase::BindingBase()
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<BindingBase, IBindingBaseFactory>().CreateInstance(outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<BindingBase, Windows::UI::Xaml::Data::IBindingBaseFactory>().CreateInstance(outer, inner));
 }
 
-inline void BindingOperations::SetBinding(const Windows::UI::Xaml::DependencyObject & target, const Windows::UI::Xaml::DependencyProperty & dp, const Windows::UI::Xaml::Data::BindingBase & binding)
+inline void BindingOperations::SetBinding(Windows::UI::Xaml::DependencyObject const& target, Windows::UI::Xaml::DependencyProperty const& dp, Windows::UI::Xaml::Data::BindingBase const& binding)
 {
-    get_activation_factory<BindingOperations, IBindingOperationsStatics>().SetBinding(target, dp, binding);
+    get_activation_factory<BindingOperations, Windows::UI::Xaml::Data::IBindingOperationsStatics>().SetBinding(target, dp, binding);
 }
 
 inline CollectionViewSource::CollectionViewSource() :
@@ -2136,54 +1823,303 @@ inline CollectionViewSource::CollectionViewSource() :
 
 inline Windows::UI::Xaml::DependencyProperty CollectionViewSource::SourceProperty()
 {
-    return get_activation_factory<CollectionViewSource, ICollectionViewSourceStatics>().SourceProperty();
+    return get_activation_factory<CollectionViewSource, Windows::UI::Xaml::Data::ICollectionViewSourceStatics>().SourceProperty();
 }
 
 inline Windows::UI::Xaml::DependencyProperty CollectionViewSource::ViewProperty()
 {
-    return get_activation_factory<CollectionViewSource, ICollectionViewSourceStatics>().ViewProperty();
+    return get_activation_factory<CollectionViewSource, Windows::UI::Xaml::Data::ICollectionViewSourceStatics>().ViewProperty();
 }
 
 inline Windows::UI::Xaml::DependencyProperty CollectionViewSource::IsSourceGroupedProperty()
 {
-    return get_activation_factory<CollectionViewSource, ICollectionViewSourceStatics>().IsSourceGroupedProperty();
+    return get_activation_factory<CollectionViewSource, Windows::UI::Xaml::Data::ICollectionViewSourceStatics>().IsSourceGroupedProperty();
 }
 
 inline Windows::UI::Xaml::DependencyProperty CollectionViewSource::ItemsPathProperty()
 {
-    return get_activation_factory<CollectionViewSource, ICollectionViewSourceStatics>().ItemsPathProperty();
+    return get_activation_factory<CollectionViewSource, Windows::UI::Xaml::Data::ICollectionViewSourceStatics>().ItemsPathProperty();
 }
 
 inline CurrentChangingEventArgs::CurrentChangingEventArgs()
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<CurrentChangingEventArgs, ICurrentChangingEventArgsFactory>().CreateInstance(outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<CurrentChangingEventArgs, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory>().CreateInstance(outer, inner));
 }
 
 inline CurrentChangingEventArgs::CurrentChangingEventArgs(bool isCancelable)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<CurrentChangingEventArgs, ICurrentChangingEventArgsFactory>().CreateWithCancelableParameter(isCancelable, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<CurrentChangingEventArgs, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory>().CreateWithCancelableParameter(isCancelable, outer, inner));
 }
 
 inline ItemIndexRange::ItemIndexRange(int32_t firstIndex, uint32_t length)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ItemIndexRange, IItemIndexRangeFactory>().CreateInstance(firstIndex, length, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ItemIndexRange, Windows::UI::Xaml::Data::IItemIndexRangeFactory>().CreateInstance(firstIndex, length, outer, inner));
 }
 
-inline PropertyChangedEventArgs::PropertyChangedEventArgs(hstring_ref name)
+inline PropertyChangedEventArgs::PropertyChangedEventArgs(param::hstring const& name)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<PropertyChangedEventArgs, IPropertyChangedEventArgsFactory>().CreateInstance(name, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<PropertyChangedEventArgs, Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory>().CreateInstance(name, outer, inner));
 }
 
 inline RelativeSource::RelativeSource()
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RelativeSource, IRelativeSourceFactory>().CreateInstance(outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RelativeSource, Windows::UI::Xaml::Data::IRelativeSourceFactory>().CreateInstance(outer, inner));
 }
+
+template <typename L> CurrentChangingEventHandler::CurrentChangingEventHandler(L handler) :
+    CurrentChangingEventHandler(impl::make_delegate<CurrentChangingEventHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> CurrentChangingEventHandler::CurrentChangingEventHandler(F* handler) :
+    CurrentChangingEventHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> CurrentChangingEventHandler::CurrentChangingEventHandler(O* object, M method) :
+    CurrentChangingEventHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void CurrentChangingEventHandler::operator()(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Data::CurrentChangingEventArgs const& e) const
+{
+    check_hresult((*(abi_t<CurrentChangingEventHandler>**)this)->Invoke(get_abi(sender), get_abi(e)));
+}
+
+template <typename L> PropertyChangedEventHandler::PropertyChangedEventHandler(L handler) :
+    PropertyChangedEventHandler(impl::make_delegate<PropertyChangedEventHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> PropertyChangedEventHandler::PropertyChangedEventHandler(F* handler) :
+    PropertyChangedEventHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> PropertyChangedEventHandler::PropertyChangedEventHandler(O* object, M method) :
+    PropertyChangedEventHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void PropertyChangedEventHandler::operator()(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::Data::PropertyChangedEventArgs const& e) const
+{
+    check_hresult((*(abi_t<PropertyChangedEventHandler>**)this)->Invoke(get_abi(sender), get_abi(e)));
+}
+
+template <typename D, typename ... Interfaces>
+struct BindingT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::IBinding, Windows::UI::Xaml::Data::IBinding2, Windows::UI::Xaml::Data::IBindingBase, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+{
+    using composable = Binding;
+
+protected:
+    BindingT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::Binding, Windows::UI::Xaml::Data::IBindingFactory>().CreateInstance(*this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct BindingBaseT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::IBindingBase, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+{
+    using composable = BindingBase;
+
+protected:
+    BindingBaseT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::BindingBase, Windows::UI::Xaml::Data::IBindingBaseFactory>().CreateInstance(*this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct CurrentChangingEventArgsT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::ICurrentChangingEventArgs>
+{
+    using composable = CurrentChangingEventArgs;
+
+protected:
+    CurrentChangingEventArgsT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::CurrentChangingEventArgs, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory>().CreateInstance(*this, this->m_inner);
+    }
+    CurrentChangingEventArgsT(bool isCancelable)
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::CurrentChangingEventArgs, Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory>().CreateWithCancelableParameter(isCancelable, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ItemIndexRangeT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::IItemIndexRange>
+{
+    using composable = ItemIndexRange;
+
+protected:
+    ItemIndexRangeT(int32_t firstIndex, uint32_t length)
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::ItemIndexRange, Windows::UI::Xaml::Data::IItemIndexRangeFactory>().CreateInstance(firstIndex, length, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct PropertyChangedEventArgsT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::IPropertyChangedEventArgs>
+{
+    using composable = PropertyChangedEventArgs;
+
+protected:
+    PropertyChangedEventArgsT(param::hstring const& name)
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::PropertyChangedEventArgs, Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory>().CreateInstance(name, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RelativeSourceT :
+    implements<D, Windows::Foundation::IInspectable, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Data::IRelativeSource, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+{
+    using composable = RelativeSource;
+
+protected:
+    RelativeSourceT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Data::RelativeSource, Windows::UI::Xaml::Data::IRelativeSourceFactory>().CreateInstance(*this, this->m_inner);
+    }
+};
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBinding> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBinding> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBinding2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBinding2> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingBase> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingBase> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingBaseFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingBaseFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingExpression> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingExpression> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingExpressionBase> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingExpressionBase> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingExpressionBaseFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingExpressionBaseFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingExpressionFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingExpressionFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingOperations> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingOperations> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IBindingOperationsStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IBindingOperationsStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICollectionView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICollectionView> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICollectionViewFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICollectionViewFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICollectionViewGroup> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICollectionViewGroup> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICollectionViewSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICollectionViewSource> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICollectionViewSourceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICollectionViewSourceStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICurrentChangingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICurrentChangingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICurrentChangingEventArgsFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICustomProperty> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICustomProperty> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ICustomPropertyProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ICustomPropertyProvider> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IItemIndexRange> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IItemIndexRange> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IItemIndexRangeFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IItemIndexRangeFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IItemsRangeInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IItemsRangeInfo> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::INotifyPropertyChanged> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IPropertyChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IPropertyChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IPropertyChangedEventArgsFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IRelativeSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IRelativeSource> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IRelativeSourceFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IRelativeSourceFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ISelectionInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ISelectionInfo> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ISupportIncrementalLoading> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ISupportIncrementalLoading> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::IValueConverter> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::IValueConverter> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::Binding> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::Binding> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::BindingBase> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::BindingBase> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::BindingExpression> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::BindingExpression> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::BindingExpressionBase> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::BindingExpressionBase> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::BindingOperations> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::BindingOperations> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::CollectionViewSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::CollectionViewSource> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::CurrentChangingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::CurrentChangingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::ItemIndexRange> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::ItemIndexRange> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Data::RelativeSource> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Data::RelativeSource> {};
+
 }
+
+WINRT_WARNING_POP

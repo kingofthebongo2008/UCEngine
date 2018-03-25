@@ -1,218 +1,312 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Devices.Spi.Provider.3.h"
-#include "internal/Windows.Devices.Spi.3.h"
-#include "Windows.Devices.h"
-#include "Windows.Foundation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Spi.Provider.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Devices.Spi.2.h"
+#include "winrt/Windows.Devices.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiBusInfo<D>::ChipSelectLineCount() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiBusInfo)->get_ChipSelectLineCount(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiBusInfo<D>::MinClockFrequency() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiBusInfo)->get_MinClockFrequency(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiBusInfo<D>::MaxClockFrequency() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiBusInfo)->get_MaxClockFrequency(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<int32_t> consume_Windows_Devices_Spi_ISpiBusInfo<D>::SupportedDataBitLengths() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<int32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiBusInfo)->get_SupportedDataBitLengths(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::ChipSelectLine() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->get_ChipSelectLine(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::ChipSelectLine(int32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->put_ChipSelectLine(value));
+}
+
+template <typename D> Windows::Devices::Spi::SpiMode consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::Mode() const noexcept
+{
+    Windows::Devices::Spi::SpiMode value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->get_Mode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::Mode(Windows::Devices::Spi::SpiMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->put_Mode(get_abi(value)));
+}
+
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::DataBitLength() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->get_DataBitLength(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::DataBitLength(int32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->put_DataBitLength(value));
+}
+
+template <typename D> int32_t consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::ClockFrequency() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->get_ClockFrequency(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::ClockFrequency(int32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->put_ClockFrequency(value));
+}
+
+template <typename D> Windows::Devices::Spi::SpiSharingMode consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::SharingMode() const noexcept
+{
+    Windows::Devices::Spi::SpiSharingMode value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->get_SharingMode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiConnectionSettings<D>::SharingMode(Windows::Devices::Spi::SpiSharingMode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettings)->put_SharingMode(get_abi(value)));
+}
+
+template <typename D> Windows::Devices::Spi::SpiConnectionSettings consume_Windows_Devices_Spi_ISpiConnectionSettingsFactory<D>::Create(int32_t chipSelectLine) const
+{
+    Windows::Devices::Spi::SpiConnectionSettings value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiConnectionSettingsFactory)->Create(chipSelectLine, put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Spi::SpiDevice consume_Windows_Devices_Spi_ISpiController<D>::GetDevice(Windows::Devices::Spi::SpiConnectionSettings const& settings) const
+{
+    Windows::Devices::Spi::SpiDevice device{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiController)->GetDevice(get_abi(settings), put_abi(device)));
+    return device;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController> consume_Windows_Devices_Spi_ISpiControllerStatics<D>::GetDefaultAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiControllerStatics)->GetDefaultAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> consume_Windows_Devices_Spi_ISpiControllerStatics<D>::GetControllersAsync(Windows::Devices::Spi::Provider::ISpiProvider const& provider) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiControllerStatics)->GetControllersAsync(get_abi(provider), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> hstring consume_Windows_Devices_Spi_ISpiDevice<D>::DeviceId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->get_DeviceId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Spi::SpiConnectionSettings consume_Windows_Devices_Spi_ISpiDevice<D>::ConnectionSettings() const noexcept
+{
+    Windows::Devices::Spi::SpiConnectionSettings value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->get_ConnectionSettings(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiDevice<D>::Write(array_view<uint8_t const> buffer) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->Write(buffer.size(), get_abi(buffer)));
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiDevice<D>::Read(array_view<uint8_t> buffer) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->Read(buffer.size(), get_abi(buffer)));
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiDevice<D>::TransferSequential(array_view<uint8_t const> writeBuffer, array_view<uint8_t> readBuffer) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->TransferSequential(writeBuffer.size(), get_abi(writeBuffer), readBuffer.size(), get_abi(readBuffer)));
+}
+
+template <typename D> void consume_Windows_Devices_Spi_ISpiDevice<D>::TransferFullDuplex(array_view<uint8_t const> writeBuffer, array_view<uint8_t> readBuffer) const
+{
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDevice)->TransferFullDuplex(writeBuffer.size(), get_abi(writeBuffer), readBuffer.size(), get_abi(readBuffer)));
+}
+
+template <typename D> hstring consume_Windows_Devices_Spi_ISpiDeviceStatics<D>::GetDeviceSelector() const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDeviceStatics)->GetDeviceSelector(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Devices_Spi_ISpiDeviceStatics<D>::GetDeviceSelector(param::hstring const& friendlyName) const
+{
+    hstring value{};
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDeviceStatics)->GetDeviceSelectorFromFriendlyName(get_abi(friendlyName), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Spi::SpiBusInfo consume_Windows_Devices_Spi_ISpiDeviceStatics<D>::GetBusInfo(param::hstring const& busId) const
+{
+    Windows::Devices::Spi::SpiBusInfo busInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDeviceStatics)->GetBusInfo(get_abi(busId), put_abi(busInfo)));
+    return busInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> consume_Windows_Devices_Spi_ISpiDeviceStatics<D>::FromIdAsync(param::hstring const& busId, Windows::Devices::Spi::SpiConnectionSettings const& settings) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Devices::Spi::ISpiDeviceStatics)->FromIdAsync(get_abi(busId), get_abi(settings), put_abi(operation)));
+    return operation;
+}
 
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiBusInfo> : produce_base<D, Windows::Devices::Spi::ISpiBusInfo>
 {
-    HRESULT __stdcall get_ChipSelectLineCount(int32_t * value) noexcept override
+    HRESULT __stdcall get_ChipSelectLineCount(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ChipSelectLineCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChipSelectLineCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MinClockFrequency(int32_t * value) noexcept override
+    HRESULT __stdcall get_MinClockFrequency(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MinClockFrequency());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinClockFrequency());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxClockFrequency(int32_t * value) noexcept override
+    HRESULT __stdcall get_MaxClockFrequency(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxClockFrequency());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxClockFrequency());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportedDataBitLengths(abi_arg_out<Windows::Foundation::Collections::IVectorView<int32_t>> value) noexcept override
+    HRESULT __stdcall get_SupportedDataBitLengths(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportedDataBitLengths());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportedDataBitLengths());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiConnectionSettings> : produce_base<D, Windows::Devices::Spi::ISpiConnectionSettings>
 {
-    HRESULT __stdcall get_ChipSelectLine(int32_t * value) noexcept override
+    HRESULT __stdcall get_ChipSelectLine(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ChipSelectLine());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChipSelectLine());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ChipSelectLine(int32_t value) noexcept override
+    HRESULT __stdcall put_ChipSelectLine(int32_t value) noexcept final
     {
-        try
-        {
-            this->shim().ChipSelectLine(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ChipSelectLine(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Mode(Windows::Devices::Spi::SpiMode * value) noexcept override
+    HRESULT __stdcall get_Mode(Windows::Devices::Spi::SpiMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Mode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Mode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Mode(Windows::Devices::Spi::SpiMode value) noexcept override
+    HRESULT __stdcall put_Mode(Windows::Devices::Spi::SpiMode value) noexcept final
     {
-        try
-        {
-            this->shim().Mode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Mode(*reinterpret_cast<Windows::Devices::Spi::SpiMode const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DataBitLength(int32_t * value) noexcept override
+    HRESULT __stdcall get_DataBitLength(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DataBitLength());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DataBitLength());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DataBitLength(int32_t value) noexcept override
+    HRESULT __stdcall put_DataBitLength(int32_t value) noexcept final
     {
-        try
-        {
-            this->shim().DataBitLength(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DataBitLength(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ClockFrequency(int32_t * value) noexcept override
+    HRESULT __stdcall get_ClockFrequency(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ClockFrequency());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ClockFrequency());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ClockFrequency(int32_t value) noexcept override
+    HRESULT __stdcall put_ClockFrequency(int32_t value) noexcept final
     {
-        try
-        {
-            this->shim().ClockFrequency(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ClockFrequency(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SharingMode(Windows::Devices::Spi::SpiSharingMode * value) noexcept override
+    HRESULT __stdcall get_SharingMode(Windows::Devices::Spi::SpiSharingMode* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SharingMode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SharingMode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SharingMode(Windows::Devices::Spi::SpiSharingMode value) noexcept override
+    HRESULT __stdcall put_SharingMode(Windows::Devices::Spi::SpiSharingMode value) noexcept final
     {
-        try
-        {
-            this->shim().SharingMode(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SharingMode(*reinterpret_cast<Windows::Devices::Spi::SpiSharingMode const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiConnectionSettingsFactory> : produce_base<D, Windows::Devices::Spi::ISpiConnectionSettingsFactory>
 {
-    HRESULT __stdcall abi_Create(int32_t chipSelectLine, abi_arg_out<Windows::Devices::Spi::ISpiConnectionSettings> value) noexcept override
+    HRESULT __stdcall Create(int32_t chipSelectLine, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Create(chipSelectLine));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Create(chipSelectLine));
             return S_OK;
         }
         catch (...)
@@ -226,11 +320,12 @@ struct produce<D, Windows::Devices::Spi::ISpiConnectionSettingsFactory> : produc
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiController> : produce_base<D, Windows::Devices::Spi::ISpiController>
 {
-    HRESULT __stdcall abi_GetDevice(abi_arg_in<Windows::Devices::Spi::ISpiConnectionSettings> settings, abi_arg_out<Windows::Devices::Spi::ISpiDevice> device) noexcept override
+    HRESULT __stdcall GetDevice(::IUnknown* settings, ::IUnknown** device) noexcept final
     {
         try
         {
-            *device = detach(this->shim().GetDevice(*reinterpret_cast<const Windows::Devices::Spi::SpiConnectionSettings *>(&settings)));
+            typename D::abi_guard guard(this->shim());
+            *device = detach_abi(this->shim().GetDevice(*reinterpret_cast<Windows::Devices::Spi::SpiConnectionSettings const*>(&settings)));
             return S_OK;
         }
         catch (...)
@@ -244,11 +339,12 @@ struct produce<D, Windows::Devices::Spi::ISpiController> : produce_base<D, Windo
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiControllerStatics> : produce_base<D, Windows::Devices::Spi::ISpiControllerStatics>
 {
-    HRESULT __stdcall abi_GetDefaultAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController>> operation) noexcept override
+    HRESULT __stdcall GetDefaultAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetDefaultAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetDefaultAsync());
             return S_OK;
         }
         catch (...)
@@ -258,11 +354,12 @@ struct produce<D, Windows::Devices::Spi::ISpiControllerStatics> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_GetControllersAsync(abi_arg_in<Windows::Devices::Spi::Provider::ISpiProvider> provider, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>>> operation) noexcept override
+    HRESULT __stdcall GetControllersAsync(::IUnknown* provider, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetControllersAsync(*reinterpret_cast<const Windows::Devices::Spi::Provider::ISpiProvider *>(&provider)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetControllersAsync(*reinterpret_cast<Windows::Devices::Spi::Provider::ISpiProvider const*>(&provider)));
             return S_OK;
         }
         catch (...)
@@ -276,39 +373,26 @@ struct produce<D, Windows::Devices::Spi::ISpiControllerStatics> : produce_base<D
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiDevice> : produce_base<D, Windows::Devices::Spi::ISpiDevice>
 {
-    HRESULT __stdcall get_DeviceId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DeviceId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeviceId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeviceId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionSettings(abi_arg_out<Windows::Devices::Spi::ISpiConnectionSettings> value) noexcept override
+    HRESULT __stdcall get_ConnectionSettings(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionSettings());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionSettings());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Write(uint32_t __bufferSize, abi_arg_in<uint8_t> * buffer) noexcept override
+    HRESULT __stdcall Write(uint32_t __bufferSize, uint8_t* buffer) noexcept final
     {
         try
         {
-            this->shim().Write(array_ref<const uint8_t>(buffer, buffer + __bufferSize));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Write(array_view<uint8_t const>(reinterpret_cast<uint8_t const *>(buffer), reinterpret_cast<uint8_t const *>(buffer) + __bufferSize));
             return S_OK;
         }
         catch (...)
@@ -317,11 +401,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDevice> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_Read(uint32_t __bufferSize, abi_arg_out<uint8_t> buffer) noexcept override
+    HRESULT __stdcall Read(uint32_t __bufferSize, uint8_t* buffer) noexcept final
     {
         try
         {
-            this->shim().Read(*buffer);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Read(array_view<uint8_t>(reinterpret_cast<uint8_t*>(buffer), reinterpret_cast<uint8_t*>(buffer) + __bufferSize));
             return S_OK;
         }
         catch (...)
@@ -330,11 +415,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDevice> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_TransferSequential(uint32_t __writeBufferSize, abi_arg_in<uint8_t> * writeBuffer, uint32_t __readBufferSize, abi_arg_out<uint8_t> readBuffer) noexcept override
+    HRESULT __stdcall TransferSequential(uint32_t __writeBufferSize, uint8_t* writeBuffer, uint32_t __readBufferSize, uint8_t* readBuffer) noexcept final
     {
         try
         {
-            this->shim().TransferSequential(array_ref<const uint8_t>(writeBuffer, writeBuffer + __writeBufferSize), *readBuffer);
+            typename D::abi_guard guard(this->shim());
+            this->shim().TransferSequential(array_view<uint8_t const>(reinterpret_cast<uint8_t const *>(writeBuffer), reinterpret_cast<uint8_t const *>(writeBuffer) + __writeBufferSize), array_view<uint8_t>(reinterpret_cast<uint8_t*>(readBuffer), reinterpret_cast<uint8_t*>(readBuffer) + __readBufferSize));
             return S_OK;
         }
         catch (...)
@@ -343,11 +429,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDevice> : produce_base<D, Windows::
         }
     }
 
-    HRESULT __stdcall abi_TransferFullDuplex(uint32_t __writeBufferSize, abi_arg_in<uint8_t> * writeBuffer, uint32_t __readBufferSize, abi_arg_out<uint8_t> readBuffer) noexcept override
+    HRESULT __stdcall TransferFullDuplex(uint32_t __writeBufferSize, uint8_t* writeBuffer, uint32_t __readBufferSize, uint8_t* readBuffer) noexcept final
     {
         try
         {
-            this->shim().TransferFullDuplex(array_ref<const uint8_t>(writeBuffer, writeBuffer + __writeBufferSize), *readBuffer);
+            typename D::abi_guard guard(this->shim());
+            this->shim().TransferFullDuplex(array_view<uint8_t const>(reinterpret_cast<uint8_t const *>(writeBuffer), reinterpret_cast<uint8_t const *>(writeBuffer) + __writeBufferSize), array_view<uint8_t>(reinterpret_cast<uint8_t*>(readBuffer), reinterpret_cast<uint8_t*>(readBuffer) + __readBufferSize));
             return S_OK;
         }
         catch (...)
@@ -360,11 +447,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDevice> : produce_base<D, Windows::
 template <typename D>
 struct produce<D, Windows::Devices::Spi::ISpiDeviceStatics> : produce_base<D, Windows::Devices::Spi::ISpiDeviceStatics>
 {
-    HRESULT __stdcall abi_GetDeviceSelector(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetDeviceSelector(HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeviceSelector());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeviceSelector());
             return S_OK;
         }
         catch (...)
@@ -374,11 +462,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDeviceStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetDeviceSelectorFromFriendlyName(abi_arg_in<hstring> friendlyName, abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall GetDeviceSelectorFromFriendlyName(HSTRING friendlyName, HSTRING* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetDeviceSelector(*reinterpret_cast<const hstring *>(&friendlyName)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeviceSelector(*reinterpret_cast<hstring const*>(&friendlyName)));
             return S_OK;
         }
         catch (...)
@@ -388,11 +477,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDeviceStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetBusInfo(abi_arg_in<hstring> busId, abi_arg_out<Windows::Devices::Spi::ISpiBusInfo> busInfo) noexcept override
+    HRESULT __stdcall GetBusInfo(HSTRING busId, ::IUnknown** busInfo) noexcept final
     {
         try
         {
-            *busInfo = detach(this->shim().GetBusInfo(*reinterpret_cast<const hstring *>(&busId)));
+            typename D::abi_guard guard(this->shim());
+            *busInfo = detach_abi(this->shim().GetBusInfo(*reinterpret_cast<hstring const*>(&busId)));
             return S_OK;
         }
         catch (...)
@@ -402,11 +492,12 @@ struct produce<D, Windows::Devices::Spi::ISpiDeviceStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_FromIdAsync(abi_arg_in<hstring> busId, abi_arg_in<Windows::Devices::Spi::ISpiConnectionSettings> settings, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice>> operation) noexcept override
+    HRESULT __stdcall FromIdAsync(HSTRING busId, ::IUnknown* settings, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FromIdAsync(*reinterpret_cast<const hstring *>(&busId), *reinterpret_cast<const Windows::Devices::Spi::SpiConnectionSettings *>(&settings)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FromIdAsync(*reinterpret_cast<hstring const*>(&busId), *reinterpret_cast<Windows::Devices::Spi::SpiConnectionSettings const*>(&settings)));
             return S_OK;
         }
         catch (...)
@@ -419,220 +510,79 @@ struct produce<D, Windows::Devices::Spi::ISpiDeviceStatics> : produce_base<D, Wi
 
 }
 
-namespace Windows::Devices::Spi {
-
-template <typename D> Windows::Devices::Spi::SpiConnectionSettings impl_ISpiConnectionSettingsFactory<D>::Create(int32_t chipSelectLine) const
-{
-    Windows::Devices::Spi::SpiConnectionSettings value { nullptr };
-    check_hresult(static_cast<const ISpiConnectionSettingsFactory &>(static_cast<const D &>(*this))->abi_Create(chipSelectLine, put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_ISpiConnectionSettings<D>::ChipSelectLine() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->get_ChipSelectLine(&value));
-    return value;
-}
-
-template <typename D> void impl_ISpiConnectionSettings<D>::ChipSelectLine(int32_t value) const
-{
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->put_ChipSelectLine(value));
-}
-
-template <typename D> Windows::Devices::Spi::SpiMode impl_ISpiConnectionSettings<D>::Mode() const
-{
-    Windows::Devices::Spi::SpiMode value {};
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->get_Mode(&value));
-    return value;
-}
-
-template <typename D> void impl_ISpiConnectionSettings<D>::Mode(Windows::Devices::Spi::SpiMode value) const
-{
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->put_Mode(value));
-}
-
-template <typename D> int32_t impl_ISpiConnectionSettings<D>::DataBitLength() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->get_DataBitLength(&value));
-    return value;
-}
-
-template <typename D> void impl_ISpiConnectionSettings<D>::DataBitLength(int32_t value) const
-{
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->put_DataBitLength(value));
-}
-
-template <typename D> int32_t impl_ISpiConnectionSettings<D>::ClockFrequency() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->get_ClockFrequency(&value));
-    return value;
-}
-
-template <typename D> void impl_ISpiConnectionSettings<D>::ClockFrequency(int32_t value) const
-{
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->put_ClockFrequency(value));
-}
-
-template <typename D> Windows::Devices::Spi::SpiSharingMode impl_ISpiConnectionSettings<D>::SharingMode() const
-{
-    Windows::Devices::Spi::SpiSharingMode value {};
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->get_SharingMode(&value));
-    return value;
-}
-
-template <typename D> void impl_ISpiConnectionSettings<D>::SharingMode(Windows::Devices::Spi::SpiSharingMode value) const
-{
-    check_hresult(static_cast<const ISpiConnectionSettings &>(static_cast<const D &>(*this))->put_SharingMode(value));
-}
-
-template <typename D> int32_t impl_ISpiBusInfo<D>::ChipSelectLineCount() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiBusInfo &>(static_cast<const D &>(*this))->get_ChipSelectLineCount(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_ISpiBusInfo<D>::MinClockFrequency() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiBusInfo &>(static_cast<const D &>(*this))->get_MinClockFrequency(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_ISpiBusInfo<D>::MaxClockFrequency() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const ISpiBusInfo &>(static_cast<const D &>(*this))->get_MaxClockFrequency(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<int32_t> impl_ISpiBusInfo<D>::SupportedDataBitLengths() const
-{
-    Windows::Foundation::Collections::IVectorView<int32_t> value;
-    check_hresult(static_cast<const ISpiBusInfo &>(static_cast<const D &>(*this))->get_SupportedDataBitLengths(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ISpiDeviceStatics<D>::GetDeviceSelector() const
-{
-    hstring value;
-    check_hresult(static_cast<const ISpiDeviceStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelector(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ISpiDeviceStatics<D>::GetDeviceSelector(hstring_ref friendlyName) const
-{
-    hstring value;
-    check_hresult(static_cast<const ISpiDeviceStatics &>(static_cast<const D &>(*this))->abi_GetDeviceSelectorFromFriendlyName(get(friendlyName), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Spi::SpiBusInfo impl_ISpiDeviceStatics<D>::GetBusInfo(hstring_ref busId) const
-{
-    Windows::Devices::Spi::SpiBusInfo busInfo { nullptr };
-    check_hresult(static_cast<const ISpiDeviceStatics &>(static_cast<const D &>(*this))->abi_GetBusInfo(get(busId), put(busInfo)));
-    return busInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> impl_ISpiDeviceStatics<D>::FromIdAsync(hstring_ref busId, const Windows::Devices::Spi::SpiConnectionSettings & settings) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> operation;
-    check_hresult(static_cast<const ISpiDeviceStatics &>(static_cast<const D &>(*this))->abi_FromIdAsync(get(busId), get(settings), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Devices::Spi::SpiDevice impl_ISpiController<D>::GetDevice(const Windows::Devices::Spi::SpiConnectionSettings & settings) const
-{
-    Windows::Devices::Spi::SpiDevice device { nullptr };
-    check_hresult(static_cast<const ISpiController &>(static_cast<const D &>(*this))->abi_GetDevice(get(settings), put(device)));
-    return device;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController> impl_ISpiControllerStatics<D>::GetDefaultAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController> operation;
-    check_hresult(static_cast<const ISpiControllerStatics &>(static_cast<const D &>(*this))->abi_GetDefaultAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> impl_ISpiControllerStatics<D>::GetControllersAsync(const Windows::Devices::Spi::Provider::ISpiProvider & provider) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> operation;
-    check_hresult(static_cast<const ISpiControllerStatics &>(static_cast<const D &>(*this))->abi_GetControllersAsync(get(provider), put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_ISpiDevice<D>::DeviceId() const
-{
-    hstring value;
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->get_DeviceId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Spi::SpiConnectionSettings impl_ISpiDevice<D>::ConnectionSettings() const
-{
-    Windows::Devices::Spi::SpiConnectionSettings value { nullptr };
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->get_ConnectionSettings(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ISpiDevice<D>::Write(array_ref<const uint8_t> buffer) const
-{
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->abi_Write(buffer.size(), get(buffer)));
-}
-
-template <typename D> void impl_ISpiDevice<D>::Read(array_ref<uint8_t> buffer) const
-{
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->abi_Read(buffer.size(), get(buffer)));
-}
-
-template <typename D> void impl_ISpiDevice<D>::TransferSequential(array_ref<const uint8_t> writeBuffer, array_ref<uint8_t> readBuffer) const
-{
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->abi_TransferSequential(writeBuffer.size(), get(writeBuffer), readBuffer.size(), get(readBuffer)));
-}
-
-template <typename D> void impl_ISpiDevice<D>::TransferFullDuplex(array_ref<const uint8_t> writeBuffer, array_ref<uint8_t> readBuffer) const
-{
-    check_hresult(static_cast<const ISpiDevice &>(static_cast<const D &>(*this))->abi_TransferFullDuplex(writeBuffer.size(), get(writeBuffer), readBuffer.size(), get(readBuffer)));
-}
+WINRT_EXPORT namespace winrt::Windows::Devices::Spi {
 
 inline SpiConnectionSettings::SpiConnectionSettings(int32_t chipSelectLine) :
-    SpiConnectionSettings(get_activation_factory<SpiConnectionSettings, ISpiConnectionSettingsFactory>().Create(chipSelectLine))
+    SpiConnectionSettings(get_activation_factory<SpiConnectionSettings, Windows::Devices::Spi::ISpiConnectionSettingsFactory>().Create(chipSelectLine))
 {}
 
 inline Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiController> SpiController::GetDefaultAsync()
 {
-    return get_activation_factory<SpiController, ISpiControllerStatics>().GetDefaultAsync();
+    return get_activation_factory<SpiController, Windows::Devices::Spi::ISpiControllerStatics>().GetDefaultAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> SpiController::GetControllersAsync(const Windows::Devices::Spi::Provider::ISpiProvider & provider)
+inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Spi::SpiController>> SpiController::GetControllersAsync(Windows::Devices::Spi::Provider::ISpiProvider const& provider)
 {
-    return get_activation_factory<SpiController, ISpiControllerStatics>().GetControllersAsync(provider);
+    return get_activation_factory<SpiController, Windows::Devices::Spi::ISpiControllerStatics>().GetControllersAsync(provider);
 }
 
 inline hstring SpiDevice::GetDeviceSelector()
 {
-    return get_activation_factory<SpiDevice, ISpiDeviceStatics>().GetDeviceSelector();
+    return get_activation_factory<SpiDevice, Windows::Devices::Spi::ISpiDeviceStatics>().GetDeviceSelector();
 }
 
-inline hstring SpiDevice::GetDeviceSelector(hstring_ref friendlyName)
+inline hstring SpiDevice::GetDeviceSelector(param::hstring const& friendlyName)
 {
-    return get_activation_factory<SpiDevice, ISpiDeviceStatics>().GetDeviceSelector(friendlyName);
+    return get_activation_factory<SpiDevice, Windows::Devices::Spi::ISpiDeviceStatics>().GetDeviceSelector(friendlyName);
 }
 
-inline Windows::Devices::Spi::SpiBusInfo SpiDevice::GetBusInfo(hstring_ref busId)
+inline Windows::Devices::Spi::SpiBusInfo SpiDevice::GetBusInfo(param::hstring const& busId)
 {
-    return get_activation_factory<SpiDevice, ISpiDeviceStatics>().GetBusInfo(busId);
+    return get_activation_factory<SpiDevice, Windows::Devices::Spi::ISpiDeviceStatics>().GetBusInfo(busId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> SpiDevice::FromIdAsync(hstring_ref busId, const Windows::Devices::Spi::SpiConnectionSettings & settings)
+inline Windows::Foundation::IAsyncOperation<Windows::Devices::Spi::SpiDevice> SpiDevice::FromIdAsync(param::hstring const& busId, Windows::Devices::Spi::SpiConnectionSettings const& settings)
 {
-    return get_activation_factory<SpiDevice, ISpiDeviceStatics>().FromIdAsync(busId, settings);
+    return get_activation_factory<SpiDevice, Windows::Devices::Spi::ISpiDeviceStatics>().FromIdAsync(busId, settings);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiBusInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiBusInfo> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiConnectionSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiConnectionSettings> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiConnectionSettingsFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiConnectionSettingsFactory> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiController> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiControllerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiControllerStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiDevice> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::ISpiDeviceStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::ISpiDeviceStatics> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::SpiBusInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::SpiBusInfo> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::SpiConnectionSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::SpiConnectionSettings> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::SpiController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::SpiController> {};
+
+template<> struct hash<winrt::Windows::Devices::Spi::SpiDevice> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Devices::Spi::SpiDevice> {};
+
 }
+
+WINRT_WARNING_POP

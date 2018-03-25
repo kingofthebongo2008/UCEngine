@@ -1,97 +1,1644 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Media.MediaProperties.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Security.Credentials.3.h"
-#include "internal/Windows.ApplicationModel.Chat.3.h"
-#include "Windows.ApplicationModel.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Media.MediaProperties.2.h"
+#include "winrt/impl/Windows.Security.Credentials.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.ApplicationModel.Chat.2.h"
+#include "winrt/Windows.ApplicationModel.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatCapabilities<D>::IsOnline() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilities)->get_IsOnline(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatCapabilities<D>::IsChatCapable() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilities)->get_IsChatCapable(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatCapabilities<D>::IsFileTransferCapable() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilities)->get_IsFileTransferCapable(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatCapabilities<D>::IsGeoLocationPushCapable() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilities)->get_IsGeoLocationPushCapable(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatCapabilities<D>::IsIntegratedMessagingCapable() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilities)->get_IsIntegratedMessagingCapable(&result));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> consume_Windows_ApplicationModel_Chat_IChatCapabilitiesManagerStatics<D>::GetCachedCapabilitiesAsync(param::hstring const& address) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics)->GetCachedCapabilitiesAsync(get_abi(address), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> consume_Windows_ApplicationModel_Chat_IChatCapabilitiesManagerStatics<D>::GetCapabilitiesFromNetworkAsync(param::hstring const& address) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics)->GetCapabilitiesFromNetworkAsync(get_abi(address), put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatConversation<D>::HasUnreadMessages() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_HasUnreadMessages(&result));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversation<D>::Id() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_Id(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversation<D>::Subject() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_Subject(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation<D>::Subject(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->put_Subject(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatConversation<D>::IsConversationMuted() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_IsConversationMuted(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation<D>::IsConversationMuted(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->put_IsConversationMuted(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversation<D>::MostRecentMessageId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_MostRecentMessageId(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_ApplicationModel_Chat_IChatConversation<D>::Participants() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_Participants(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingInfo consume_Windows_ApplicationModel_Chat_IChatConversation<D>::ThreadingInfo() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatConversationThreadingInfo result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->get_ThreadingInfo(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatConversation<D>::DeleteAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->DeleteAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader consume_Windows_ApplicationModel_Chat_IChatConversation<D>::GetMessageReader() const
+{
+    Windows::ApplicationModel::Chat::ChatMessageReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->GetMessageReader(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatConversation<D>::MarkMessagesAsReadAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->MarkAllMessagesAsReadAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatConversation<D>::MarkMessagesAsReadAsync(Windows::Foundation::DateTime const& value) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->MarkMessagesAsReadAsync(get_abi(value), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatConversation<D>::SaveAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->SaveAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation<D>::NotifyLocalParticipantComposing(param::hstring const& transportId, param::hstring const& participantAddress, bool isComposing) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->NotifyLocalParticipantComposing(get_abi(transportId), get_abi(participantAddress), isComposing));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation<D>::NotifyRemoteParticipantComposing(param::hstring const& transportId, param::hstring const& participantAddress, bool isComposing) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->NotifyRemoteParticipantComposing(get_abi(transportId), get_abi(participantAddress), isComposing));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Chat_IChatConversation<D>::RemoteParticipantComposingChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->add_RemoteParticipantComposingChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Chat::IChatConversation> consume_Windows_ApplicationModel_Chat_IChatConversation<D>::RemoteParticipantComposingChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Chat::IChatConversation>(this, &abi_t<Windows::ApplicationModel::Chat::IChatConversation>::remove_RemoteParticipantComposingChanged, RemoteParticipantComposingChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation<D>::RemoteParticipantComposingChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation)->remove_RemoteParticipantComposingChanged(get_abi(token)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatConversation2<D>::CanModifyParticipants() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation2)->get_CanModifyParticipants(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversation2<D>::CanModifyParticipants(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversation2)->put_CanModifyParticipants(value));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> consume_Windows_ApplicationModel_Chat_IChatConversationReader<D>::ReadBatchAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationReader)->ReadBatchAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> consume_Windows_ApplicationModel_Chat_IChatConversationReader<D>::ReadBatchAsync(int32_t count) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationReader)->ReadBatchWithCountAsync(count, put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::ContactId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->get_ContactId(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::ContactId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->put_ContactId(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::Custom() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->get_Custom(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::Custom(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->put_Custom(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::ConversationId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->get_ConversationId(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::ConversationId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->put_ConversationId(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::Participants() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->get_Participants(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingKind consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::Kind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatConversationThreadingKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->get_Kind(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatConversationThreadingInfo<D>::Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatConversationThreadingInfo)->put_Kind(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatItemKind consume_Windows_ApplicationModel_Chat_IChatItem<D>::ItemKind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatItemKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatItem)->get_ItemKind(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatMessageAttachment> consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Attachments() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatMessageAttachment> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Attachments(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Body() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Body(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Body(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->put_Body(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::From() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_From(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage<D>::IsForwardingDisabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_IsForwardingDisabled(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage<D>::IsIncoming() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_IsIncoming(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage<D>::IsRead() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_IsRead(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Chat_IChatMessage<D>::LocalTimestamp() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_LocalTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Chat_IChatMessage<D>::NetworkTimestamp() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_NetworkTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Recipients() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Recipients(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Chat::ChatMessageStatus> consume_Windows_ApplicationModel_Chat_IChatMessage<D>::RecipientSendStatuses() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Chat::ChatMessageStatus> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_RecipientSendStatuses(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageStatus consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Status() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageStatus value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Status(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::Subject() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_Subject(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::TransportFriendlyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_TransportFriendlyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage<D>::TransportId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->get_TransportId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage<D>::TransportId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage)->put_TransportId(get_abi(value)));
+}
+
+template <typename D> uint64_t consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::EstimatedDownloadSize() const noexcept
+{
+    uint64_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_EstimatedDownloadSize(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::EstimatedDownloadSize(uint64_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_EstimatedDownloadSize(value));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::From(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_From(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsAutoReply() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_IsAutoReply(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsAutoReply(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsAutoReply(value));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsForwardingDisabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsForwardingDisabled(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsReplyDisabled() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_IsReplyDisabled(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsIncoming(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsIncoming(value));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsRead(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsRead(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsSeen() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_IsSeen(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsSeen(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsSeen(value));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsSimMessage() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_IsSimMessage(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::LocalTimestamp(Windows::Foundation::DateTime const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_LocalTimestamp(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageKind consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::MessageKind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_MessageKind(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_MessageKind(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageOperatorKind consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::MessageOperatorKind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageOperatorKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_MessageOperatorKind(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_MessageOperatorKind(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::NetworkTimestamp(Windows::Foundation::DateTime const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_NetworkTimestamp(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsReceivedDuringQuietHours() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_IsReceivedDuringQuietHours(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::IsReceivedDuringQuietHours(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_IsReceivedDuringQuietHours(value));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::RemoteId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_RemoteId(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::Status(Windows::ApplicationModel::Chat::ChatMessageStatus const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_Status(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::Subject(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_Subject(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::ShouldSuppressNotification() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_ShouldSuppressNotification(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::ShouldSuppressNotification(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_ShouldSuppressNotification(value));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingInfo consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::ThreadingInfo() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatConversationThreadingInfo result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_ThreadingInfo(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::ThreadingInfo(Windows::ApplicationModel::Chat::ChatConversationThreadingInfo const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->put_ThreadingInfo(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> consume_Windows_ApplicationModel_Chat_IChatMessage2<D>::RecipientsDeliveryInfos() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage2)->get_RecipientsDeliveryInfos(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage3<D>::RemoteId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage3)->get_RemoteId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessage4<D>::SyncId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage4)->get_SyncId(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessage4<D>::SyncId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessage4)->put_SyncId(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::DataStreamReference() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->get_DataStreamReference(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::DataStreamReference(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->put_DataStreamReference(get_abi(value)));
+}
+
+template <typename D> uint32_t consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::GroupId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->get_GroupId(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::GroupId(uint32_t value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->put_GroupId(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::MimeType() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->get_MimeType(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::MimeType(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->put_MimeType(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->get_Text(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment<D>::Text(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment)->put_Text(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::Thumbnail() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->get_Thumbnail(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::Thumbnail(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->put_Thumbnail(get_abi(value)));
+}
+
+template <typename D> double consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::TransferProgress() const noexcept
+{
+    double result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->get_TransferProgress(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::TransferProgress(double value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->put_TransferProgress(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::OriginalFileName() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->get_OriginalFileName(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageAttachment2<D>::OriginalFileName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachment2)->put_OriginalFileName(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageAttachment consume_Windows_ApplicationModel_Chat_IChatMessageAttachmentFactory<D>::CreateChatMessageAttachment(param::hstring const& mimeType, Windows::Storage::Streams::IRandomAccessStreamReference const& dataStreamReference) const
+{
+    Windows::ApplicationModel::Chat::ChatMessageAttachment value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory)->CreateChatMessageAttachment(get_abi(mimeType), get_abi(dataStreamReference), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageBlockingStatic<D>::MarkMessageAsBlockedAsync(param::hstring const& localChatMessageId, bool blocked) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageBlockingStatic)->MarkMessageAsBlockedAsync(get_abi(localChatMessageId), blocked, put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeType consume_Windows_ApplicationModel_Chat_IChatMessageChange<D>::ChangeType() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageChangeType value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChange)->get_ChangeType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessage consume_Windows_ApplicationModel_Chat_IChatMessageChange<D>::Message() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChange)->get_Message(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageChangeReader<D>::AcceptChanges() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeReader)->AcceptChanges());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageChangeReader<D>::AcceptChangesThrough(Windows::ApplicationModel::Chat::ChatMessageChange const& lastChangeToAcknowledge) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeReader)->AcceptChangesThrough(get_abi(lastChangeToAcknowledge)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageChange>> consume_Windows_ApplicationModel_Chat_IChatMessageChangeReader<D>::ReadBatchAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageChange>> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeReader)->ReadBatchAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageChangeTracker<D>::Enable() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeTracker)->Enable());
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeReader consume_Windows_ApplicationModel_Chat_IChatMessageChangeTracker<D>::GetChangeReader() const
+{
+    Windows::ApplicationModel::Chat::ChatMessageChangeReader value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeTracker)->GetChangeReader(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageChangeTracker<D>::Reset() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangeTracker)->Reset());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageChangedDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangedDeferral)->Complete());
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangedDeferral consume_Windows_ApplicationModel_Chat_IChatMessageChangedEventArgs<D>::GetDeferral() const
+{
+    Windows::ApplicationModel::Chat::ChatMessageChangedDeferral result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs)->GetDeferral(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Chat_IChatMessageManager2Statics<D>::RegisterTransportAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManager2Statics)->RegisterTransportAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> consume_Windows_ApplicationModel_Chat_IChatMessageManager2Statics<D>::GetTransportAsync(param::hstring const& transportId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManager2Statics)->GetTransportAsync(get_abi(transportId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>> consume_Windows_ApplicationModel_Chat_IChatMessageManagerStatic<D>::GetTransportsAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManagerStatic)->GetTransportsAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore> consume_Windows_ApplicationModel_Chat_IChatMessageManagerStatic<D>::RequestStoreAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManagerStatic)->RequestStoreAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageManagerStatic<D>::ShowComposeSmsMessageAsync(Windows::ApplicationModel::Chat::ChatMessage const& message) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManagerStatic)->ShowComposeSmsMessageAsync(get_abi(message), put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageManagerStatic<D>::ShowSmsSettings() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManagerStatic)->ShowSmsSettings());
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager> consume_Windows_ApplicationModel_Chat_IChatMessageManagerStatics3<D>::RequestSyncManagerAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageManagerStatics3)->RequestSyncManagerAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessage consume_Windows_ApplicationModel_Chat_IChatMessageNotificationTriggerDetails<D>::ChatMessage() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails)->get_ChatMessage(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageNotificationTriggerDetails2<D>::ShouldDisplayToast() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2)->get_ShouldDisplayToast(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateDetailText() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2)->get_ShouldUpdateDetailText(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateBadge() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2)->get_ShouldUpdateBadge(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateActionCenter() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2)->get_ShouldUpdateActionCenter(&result));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> consume_Windows_ApplicationModel_Chat_IChatMessageReader<D>::ReadBatchAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageReader)->ReadBatchAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> consume_Windows_ApplicationModel_Chat_IChatMessageReader2<D>::ReadBatchAsync(int32_t count) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageReader2)->ReadBatchWithCountAsync(count, put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeTracker consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::ChangeTracker() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageChangeTracker value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->get_ChangeTracker(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::DeleteMessageAsync(param::hstring const& localMessageId) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->DeleteMessageAsync(get_abi(localMessageId), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::DownloadMessageAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->DownloadMessageAsync(get_abi(localChatMessageId), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::GetMessageAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->GetMessageAsync(get_abi(localChatMessageId), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::GetMessageReader() const
+{
+    Windows::ApplicationModel::Chat::ChatMessageReader value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->GetMessageReader1(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::GetMessageReader(Windows::Foundation::TimeSpan const& recentTimeLimit) const
+{
+    Windows::ApplicationModel::Chat::ChatMessageReader value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->GetMessageReader2(get_abi(recentTimeLimit), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::MarkMessageReadAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->MarkMessageReadAsync(get_abi(localChatMessageId), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::RetrySendMessageAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->RetrySendMessageAsync(get_abi(localChatMessageId), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::SendMessageAsync(Windows::ApplicationModel::Chat::ChatMessage const& chatMessage) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->SendMessageAsync(get_abi(chatMessage), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageValidationResult consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::ValidateMessage(Windows::ApplicationModel::Chat::ChatMessage const& chatMessage) const
+{
+    Windows::ApplicationModel::Chat::ChatMessageValidationResult value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->ValidateMessage(get_abi(chatMessage), put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::MessageChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> const& value) const
+{
+    event_token returnValue{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->add_MessageChanged(get_abi(value), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Chat::IChatMessageStore> consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::MessageChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> const& value) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Chat::IChatMessageStore>(this, &abi_t<Windows::ApplicationModel::Chat::IChatMessageStore>::remove_MessageChanged, MessageChanged(value));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageStore<D>::MessageChanged(event_token const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore)->remove_MessageChanged(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::ForwardMessageAsync(param::hstring const& localChatMessageId, param::async_iterable<hstring> const& addresses) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->ForwardMessageAsync(get_abi(localChatMessageId), get_abi(addresses), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetConversationAsync(param::hstring const& conversationId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetConversationAsync(get_abi(conversationId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetConversationAsync(param::hstring const& conversationId, param::async_iterable<hstring> const& transportIds) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetConversationForTransportsAsync(get_abi(conversationId), get_abi(transportIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetConversationFromThreadingInfoAsync(Windows::ApplicationModel::Chat::ChatConversationThreadingInfo const& threadingInfo) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetConversationFromThreadingInfoAsync(get_abi(threadingInfo), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatConversationReader consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetConversationReader() const
+{
+    Windows::ApplicationModel::Chat::ChatConversationReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetConversationReader(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatConversationReader consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetConversationReader(param::iterable<hstring> const& transportIds) const
+{
+    Windows::ApplicationModel::Chat::ChatConversationReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetConversationForTransportsReader(get_abi(transportIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetMessageByRemoteIdAsync(param::hstring const& transportId, param::hstring const& remoteId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetMessageByRemoteIdAsync(get_abi(transportId), get_abi(remoteId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<int32_t> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetUnseenCountAsync() const
+{
+    Windows::Foundation::IAsyncOperation<int32_t> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetUnseenCountAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<int32_t> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetUnseenCountAsync(param::async_iterable<hstring> const& transportIds) const
+{
+    Windows::Foundation::IAsyncOperation<int32_t> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetUnseenCountForTransportsReaderAsync(get_abi(transportIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::MarkAsSeenAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->MarkAsSeenAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::MarkAsSeenAsync(param::async_iterable<hstring> const& transportIds) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->MarkAsSeenForTransportsAsync(get_abi(transportIds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatSearchReader consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::GetSearchReader(Windows::ApplicationModel::Chat::ChatQueryOptions const& value) const
+{
+    Windows::ApplicationModel::Chat::ChatSearchReader result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->GetSearchReader(get_abi(value), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::SaveMessageAsync(Windows::ApplicationModel::Chat::ChatMessage const& chatMessage) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->SaveMessageAsync(get_abi(chatMessage), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::TryCancelDownloadMessageAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncOperation<bool> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->TryCancelDownloadMessageAsync(get_abi(localChatMessageId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<bool> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::TryCancelSendMessageAsync(param::hstring const& localChatMessageId) const
+{
+    Windows::Foundation::IAsyncOperation<bool> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->TryCancelSendMessageAsync(get_abi(localChatMessageId), put_abi(result)));
+    return result;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::StoreChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->add_StoreChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Chat::IChatMessageStore2> consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::StoreChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Chat::IChatMessageStore2>(this, &abi_t<Windows::ApplicationModel::Chat::IChatMessageStore2>::remove_StoreChanged, StoreChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatMessageStore2<D>::StoreChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore2)->remove_StoreChanged(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> consume_Windows_ApplicationModel_Chat_IChatMessageStore3<D>::GetMessageBySyncIdAsync(param::hstring const& syncId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStore3)->GetMessageBySyncIdAsync(get_abi(syncId), put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageStoreChangedEventArgs<D>::Id() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs)->get_Id(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatStoreChangedEventKind consume_Windows_ApplicationModel_Chat_IChatMessageStoreChangedEventArgs<D>::Kind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatStoreChangedEventKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs)->get_Kind(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageTransport<D>::IsAppSetAsNotificationProvider() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport)->get_IsAppSetAsNotificationProvider(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatMessageTransport<D>::IsActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport)->get_IsActive(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageTransport<D>::TransportFriendlyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport)->get_TransportFriendlyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatMessageTransport<D>::TransportId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport)->get_TransportId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatMessageTransport<D>::RequestSetAsNotificationProviderAsync() const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport)->RequestSetAsNotificationProviderAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration consume_Windows_ApplicationModel_Chat_IChatMessageTransport2<D>::Configuration() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport2)->get_Configuration(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageTransportKind consume_Windows_ApplicationModel_Chat_IChatMessageTransport2<D>::TransportKind() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageTransportKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransport2)->get_TransportKind(put_abi(result)));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IChatMessageTransportConfiguration<D>::MaxAttachmentCount() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration)->get_MaxAttachmentCount(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IChatMessageTransportConfiguration<D>::MaxMessageSizeInKilobytes() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration)->get_MaxMessageSizeInKilobytes(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IChatMessageTransportConfiguration<D>::MaxRecipientCount() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration)->get_MaxRecipientCount(&result));
+    return result;
+}
+
+template <typename D> Windows::Media::MediaProperties::MediaEncodingProfile consume_Windows_ApplicationModel_Chat_IChatMessageTransportConfiguration<D>::SupportedVideoFormat() const noexcept
+{
+    Windows::Media::MediaProperties::MediaEncodingProfile result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration)->get_SupportedVideoFormat(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> consume_Windows_ApplicationModel_Chat_IChatMessageTransportConfiguration<D>::ExtendedProperties() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration)->get_ExtendedProperties(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IReference<uint32_t> consume_Windows_ApplicationModel_Chat_IChatMessageValidationResult<D>::MaxPartCount() const noexcept
+{
+    Windows::Foundation::IReference<uint32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageValidationResult)->get_MaxPartCount(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<uint32_t> consume_Windows_ApplicationModel_Chat_IChatMessageValidationResult<D>::PartCount() const noexcept
+{
+    Windows::Foundation::IReference<uint32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageValidationResult)->get_PartCount(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<uint32_t> consume_Windows_ApplicationModel_Chat_IChatMessageValidationResult<D>::RemainingCharacterCountInPart() const noexcept
+{
+    Windows::Foundation::IReference<uint32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageValidationResult)->get_RemainingCharacterCountInPart(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageValidationStatus consume_Windows_ApplicationModel_Chat_IChatMessageValidationResult<D>::Status() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageValidationStatus value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatMessageValidationResult)->get_Status(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatQueryOptions<D>::SearchString() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatQueryOptions)->get_SearchString(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatQueryOptions<D>::SearchString(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatQueryOptions)->put_SearchString(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::TransportAddress() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_TransportAddress(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::TransportAddress(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->put_TransportAddress(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::DeliveryTime() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_DeliveryTime(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::DeliveryTime(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->put_DeliveryTime(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::ReadTime() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_ReadTime(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::ReadTime(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->put_ReadTime(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::TransportErrorCodeCategory() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_TransportErrorCodeCategory(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::TransportInterpretedErrorCode() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_TransportInterpretedErrorCode(put_abi(result)));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::TransportErrorCode() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_TransportErrorCode(&result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::IsErrorPermanent() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_IsErrorPermanent(&result));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatMessageStatus consume_Windows_ApplicationModel_Chat_IChatRecipientDeliveryInfo<D>::Status() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatMessageStatus result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo)->get_Status(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> consume_Windows_ApplicationModel_Chat_IChatSearchReader<D>::ReadBatchAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSearchReader)->ReadBatchAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> consume_Windows_ApplicationModel_Chat_IChatSearchReader<D>::ReadBatchAsync(int32_t count) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSearchReader)->ReadBatchWithCountAsync(count, put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatSyncConfiguration<D>::IsSyncEnabled() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncConfiguration)->get_IsSyncEnabled(&result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatSyncConfiguration<D>::IsSyncEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncConfiguration)->put_IsSyncEnabled(value));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatRestoreHistorySpan consume_Windows_ApplicationModel_Chat_IChatSyncConfiguration<D>::RestoreHistorySpan() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatRestoreHistorySpan result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncConfiguration)->get_RestoreHistorySpan(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatSyncConfiguration<D>::RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncConfiguration)->put_RestoreHistorySpan(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::ChatSyncConfiguration consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::Configuration() const noexcept
+{
+    Windows::ApplicationModel::Chat::ChatSyncConfiguration result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->get_Configuration(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::AssociateAccountAsync(Windows::Security::Credentials::WebAccount const& webAccount) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->AssociateAccountAsync(get_abi(webAccount), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::UnassociateAccountAsync() const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->UnassociateAccountAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::IsAccountAssociated(Windows::Security::Credentials::WebAccount const& webAccount) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->IsAccountAssociated(get_abi(webAccount), &result));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::StartSync() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->StartSync());
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IChatSyncManager<D>::SetConfigurationAsync(Windows::ApplicationModel::Chat::ChatSyncConfiguration const& configuration) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IChatSyncManager)->SetConfigurationAsync(get_abi(configuration), put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::TransportId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->get_TransportId(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::Title() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->get_Title(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::Text() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->get_Text(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::IsPinRequired() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->get_IsPinRequired(&result));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsEndUserMessageAction> consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::Actions() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsEndUserMessageAction> result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->get_Actions(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::SendResponseAsync(Windows::ApplicationModel::Chat::RcsEndUserMessageAction const& action) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->SendResponseAsync(get_abi(action), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IRcsEndUserMessage<D>::SendResponseWithPinAsync(Windows::ApplicationModel::Chat::RcsEndUserMessageAction const& action, param::hstring const& pin) const
+{
+    Windows::Foundation::IAsyncAction result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessage)->SendResponseWithPinAsync(get_abi(action), get_abi(pin), put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageAction<D>::Label() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageAction)->get_Label(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageAvailableEventArgs<D>::IsMessageAvailable() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs)->get_IsMessageAvailable(&result));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::RcsEndUserMessage consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageAvailableEventArgs<D>::Message() const noexcept
+{
+    Windows::ApplicationModel::Chat::RcsEndUserMessage result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs)->get_Message(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageAvailableTriggerDetails<D>::Title() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageAvailableTriggerDetails<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails)->get_Text(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageManager<D>::MessageAvailableChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageManager)->add_MessageAvailableChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageManager<D>::MessageAvailableChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageManager>(this, &abi_t<Windows::ApplicationModel::Chat::IRcsEndUserMessageManager>::remove_MessageAvailableChanged, MessageAvailableChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IRcsEndUserMessageManager<D>::MessageAvailableChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsEndUserMessageManager)->remove_MessageAvailableChanged(get_abi(token)));
+}
+
+template <typename D> Windows::ApplicationModel::Chat::RcsEndUserMessageManager consume_Windows_ApplicationModel_Chat_IRcsManagerStatics<D>::GetEndUserMessageManager() const
+{
+    Windows::ApplicationModel::Chat::RcsEndUserMessageManager result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsManagerStatics)->GetEndUserMessageManager(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>> consume_Windows_ApplicationModel_Chat_IRcsManagerStatics<D>::GetTransportsAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>> value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsManagerStatics)->GetTransportsAsync(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> consume_Windows_ApplicationModel_Chat_IRcsManagerStatics<D>::GetTransportAsync(param::hstring const& transportId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsManagerStatics)->GetTransportAsync(get_abi(transportId), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Chat_IRcsManagerStatics<D>::LeaveConversationAsync(Windows::ApplicationModel::Chat::ChatConversation const& conversation) const
+{
+    Windows::Foundation::IAsyncAction value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsManagerStatics)->LeaveConversationAsync(get_abi(conversation), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::RcsServiceKind consume_Windows_ApplicationModel_Chat_IRcsServiceKindSupportedChangedEventArgs<D>::ServiceKind() const noexcept
+{
+    Windows::ApplicationModel::Chat::RcsServiceKind result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsServiceKindSupportedChangedEventArgs)->get_ServiceKind(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::ExtendedProperties() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->get_ExtendedProperties(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::IsActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->get_IsActive(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::TransportFriendlyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->get_TransportFriendlyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::TransportId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->get_TransportId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Chat::RcsTransportConfiguration consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::Configuration() const noexcept
+{
+    Windows::ApplicationModel::Chat::RcsTransportConfiguration result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->get_Configuration(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::IsStoreAndForwardEnabled(Windows::ApplicationModel::Chat::RcsServiceKind const& serviceKind) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->IsStoreAndForwardEnabled(get_abi(serviceKind), &result));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::IsServiceKindSupported(Windows::ApplicationModel::Chat::RcsServiceKind const& serviceKind) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->IsServiceKindSupported(get_abi(serviceKind), &result));
+    return result;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::ServiceKindSupportedChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->add_ServiceKindSupportedChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Chat::IRcsTransport> consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::ServiceKindSupportedChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Chat::IRcsTransport>(this, &abi_t<Windows::ApplicationModel::Chat::IRcsTransport>::remove_ServiceKindSupportedChanged, ServiceKindSupportedChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Chat_IRcsTransport<D>::ServiceKindSupportedChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransport)->remove_ServiceKindSupportedChanged(get_abi(token)));
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::MaxAttachmentCount() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_MaxAttachmentCount(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::MaxMessageSizeInKilobytes() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_MaxMessageSizeInKilobytes(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::MaxGroupMessageSizeInKilobytes() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_MaxGroupMessageSizeInKilobytes(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::MaxRecipientCount() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_MaxRecipientCount(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::MaxFileSizeInKilobytes() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_MaxFileSizeInKilobytes(&result));
+    return result;
+}
+
+template <typename D> int32_t consume_Windows_ApplicationModel_Chat_IRcsTransportConfiguration<D>::WarningFileSizeInKilobytes() const noexcept
+{
+    int32_t result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRcsTransportConfiguration)->get_WarningFileSizeInKilobytes(&result));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRemoteParticipantComposingChangedEventArgs<D>::TransportId() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs)->get_TransportId(put_abi(result)));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Chat_IRemoteParticipantComposingChangedEventArgs<D>::ParticipantAddress() const noexcept
+{
+    hstring result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs)->get_ParticipantAddress(put_abi(result)));
+    return result;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Chat_IRemoteParticipantComposingChangedEventArgs<D>::IsComposing() const noexcept
+{
+    bool result{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs)->get_IsComposing(&result));
+    return result;
+}
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatCapabilities> : produce_base<D, Windows::ApplicationModel::Chat::IChatCapabilities>
 {
-    HRESULT __stdcall get_IsOnline(bool * result) noexcept override
+    HRESULT __stdcall get_IsOnline(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsOnline());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsOnline());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsChatCapable(bool * result) noexcept override
+    HRESULT __stdcall get_IsChatCapable(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsChatCapable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsChatCapable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsFileTransferCapable(bool * result) noexcept override
+    HRESULT __stdcall get_IsFileTransferCapable(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsFileTransferCapable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsFileTransferCapable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsGeoLocationPushCapable(bool * result) noexcept override
+    HRESULT __stdcall get_IsGeoLocationPushCapable(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsGeoLocationPushCapable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsGeoLocationPushCapable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsIntegratedMessagingCapable(bool * result) noexcept override
+    HRESULT __stdcall get_IsIntegratedMessagingCapable(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsIntegratedMessagingCapable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsIntegratedMessagingCapable());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics> : produce_base<D, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics>
 {
-    HRESULT __stdcall abi_GetCachedCapabilitiesAsync(abi_arg_in<hstring> address, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities>> result) noexcept override
+    HRESULT __stdcall GetCachedCapabilitiesAsync(HSTRING address, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetCachedCapabilitiesAsync(*reinterpret_cast<const hstring *>(&address)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetCachedCapabilitiesAsync(*reinterpret_cast<hstring const*>(&address)));
             return S_OK;
         }
         catch (...)
@@ -101,11 +1648,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStati
         }
     }
 
-    HRESULT __stdcall abi_GetCapabilitiesFromNetworkAsync(abi_arg_in<hstring> address, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities>> result) noexcept override
+    HRESULT __stdcall GetCapabilitiesFromNetworkAsync(HSTRING address, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetCapabilitiesFromNetworkAsync(*reinterpret_cast<const hstring *>(&address)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetCapabilitiesFromNetworkAsync(*reinterpret_cast<hstring const*>(&address)));
             return S_OK;
         }
         catch (...)
@@ -119,91 +1667,75 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStati
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_base<D, Windows::ApplicationModel::Chat::IChatConversation>
 {
-    HRESULT __stdcall get_HasUnreadMessages(bool * result) noexcept override
+    HRESULT __stdcall get_HasUnreadMessages(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().HasUnreadMessages());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().HasUnreadMessages());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Subject(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_Subject(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Subject());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Subject());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Subject(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Subject(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Subject(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Subject(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsConversationMuted(bool * result) noexcept override
+    HRESULT __stdcall get_IsConversationMuted(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsConversationMuted());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsConversationMuted());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsConversationMuted(bool value) noexcept override
+    HRESULT __stdcall put_IsConversationMuted(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsConversationMuted(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsConversationMuted(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MostRecentMessageId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_MostRecentMessageId(HSTRING* result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MostRecentMessageId());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Participants(::IUnknown** result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Participants());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ThreadingInfo(::IUnknown** result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ThreadingInfo());
+        return S_OK;
+    }
+
+    HRESULT __stdcall DeleteAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MostRecentMessageId());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().DeleteAsync());
             return S_OK;
         }
         catch (...)
@@ -213,11 +1745,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall get_Participants(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> result) noexcept override
+    HRESULT __stdcall GetMessageReader(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Participants());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetMessageReader());
             return S_OK;
         }
         catch (...)
@@ -227,11 +1760,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall get_ThreadingInfo(abi_arg_out<Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> result) noexcept override
+    HRESULT __stdcall MarkAllMessagesAsReadAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ThreadingInfo());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkMessagesAsReadAsync());
             return S_OK;
         }
         catch (...)
@@ -241,11 +1775,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall abi_DeleteAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkMessagesAsReadAsync(Windows::Foundation::DateTime value, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().DeleteAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkMessagesAsReadAsync(*reinterpret_cast<Windows::Foundation::DateTime const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -255,11 +1790,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall abi_GetMessageReader(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageReader> result) noexcept override
+    HRESULT __stdcall SaveAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetMessageReader());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SaveAsync());
             return S_OK;
         }
         catch (...)
@@ -269,53 +1805,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall abi_MarkAllMessagesAsReadAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall NotifyLocalParticipantComposing(HSTRING transportId, HSTRING participantAddress, bool isComposing) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkMessagesAsReadAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_MarkMessagesAsReadAsync(abi_arg_in<Windows::Foundation::DateTime> value, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().MarkMessagesAsReadAsync(*reinterpret_cast<const Windows::Foundation::DateTime *>(&value)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SaveAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().SaveAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_NotifyLocalParticipantComposing(abi_arg_in<hstring> transportId, abi_arg_in<hstring> participantAddress, bool isComposing) noexcept override
-    {
-        try
-        {
-            this->shim().NotifyLocalParticipantComposing(*reinterpret_cast<const hstring *>(&transportId), *reinterpret_cast<const hstring *>(&participantAddress), isComposing);
+            typename D::abi_guard guard(this->shim());
+            this->shim().NotifyLocalParticipantComposing(*reinterpret_cast<hstring const*>(&transportId), *reinterpret_cast<hstring const*>(&participantAddress), isComposing);
             return S_OK;
         }
         catch (...)
@@ -324,11 +1819,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall abi_NotifyRemoteParticipantComposing(abi_arg_in<hstring> transportId, abi_arg_in<hstring> participantAddress, bool isComposing) noexcept override
+    HRESULT __stdcall NotifyRemoteParticipantComposing(HSTRING transportId, HSTRING participantAddress, bool isComposing) noexcept final
     {
         try
         {
-            this->shim().NotifyRemoteParticipantComposing(*reinterpret_cast<const hstring *>(&transportId), *reinterpret_cast<const hstring *>(&participantAddress), isComposing);
+            typename D::abi_guard guard(this->shim());
+            this->shim().NotifyRemoteParticipantComposing(*reinterpret_cast<hstring const*>(&transportId), *reinterpret_cast<hstring const*>(&participantAddress), isComposing);
             return S_OK;
         }
         catch (...)
@@ -337,11 +1833,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall add_RemoteParticipantComposingChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_RemoteParticipantComposingChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().RemoteParticipantComposingChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().RemoteParticipantComposingChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -350,11 +1847,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
         }
     }
 
-    HRESULT __stdcall remove_RemoteParticipantComposingChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_RemoteParticipantComposingChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().RemoteParticipantComposingChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RemoteParticipantComposingChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -367,41 +1865,30 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversation> : produce_
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatConversation2> : produce_base<D, Windows::ApplicationModel::Chat::IChatConversation2>
 {
-    HRESULT __stdcall get_CanModifyParticipants(bool * result) noexcept override
+    HRESULT __stdcall get_CanModifyParticipants(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().CanModifyParticipants());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().CanModifyParticipants());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CanModifyParticipants(bool value) noexcept override
+    HRESULT __stdcall put_CanModifyParticipants(bool value) noexcept final
     {
-        try
-        {
-            this->shim().CanModifyParticipants(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CanModifyParticipants(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatConversationReader> : produce_base<D, Windows::ApplicationModel::Chat::IChatConversationReader>
 {
-    HRESULT __stdcall abi_ReadBatchAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>>> result) noexcept override
+    HRESULT __stdcall ReadBatchAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync());
             return S_OK;
         }
         catch (...)
@@ -411,11 +1898,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversationReader> : pr
         }
     }
 
-    HRESULT __stdcall abi_ReadBatchWithCountAsync(int32_t count, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>>> result) noexcept override
+    HRESULT __stdcall ReadBatchWithCountAsync(int32_t count, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync(count));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync(count));
             return S_OK;
         }
         catch (...)
@@ -429,1001 +1917,548 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatConversationReader> : pr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> : produce_base<D, Windows::ApplicationModel::Chat::IChatConversationThreadingInfo>
 {
-    HRESULT __stdcall get_ContactId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_ContactId(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ContactId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ContactId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContactId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ContactId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ContactId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContactId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Custom(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_Custom(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Custom());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Custom());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Custom(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Custom(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Custom(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Custom(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConversationId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_ConversationId(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ConversationId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ConversationId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ConversationId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ConversationId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ConversationId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ConversationId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Participants(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> result) noexcept override
+    HRESULT __stdcall get_Participants(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Participants());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Participants());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind * result) noexcept override
+    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Kind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Kind());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind value) noexcept override
+    HRESULT __stdcall put_Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind value) noexcept final
     {
-        try
-        {
-            this->shim().Kind(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Kind(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatConversationThreadingKind const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatItem> : produce_base<D, Windows::ApplicationModel::Chat::IChatItem>
 {
-    HRESULT __stdcall get_ItemKind(Windows::ApplicationModel::Chat::ChatItemKind * result) noexcept override
+    HRESULT __stdcall get_ItemKind(Windows::ApplicationModel::Chat::ChatItemKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ItemKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ItemKind());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessage> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessage>
 {
-    HRESULT __stdcall get_Attachments(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatMessageAttachment>> value) noexcept override
+    HRESULT __stdcall get_Attachments(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Attachments());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Attachments());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Body(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Body(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Body());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Body());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Body(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Body(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Body(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Body(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_From(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_From(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().From());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().From());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsForwardingDisabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsForwardingDisabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsForwardingDisabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsForwardingDisabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsIncoming(bool * value) noexcept override
+    HRESULT __stdcall get_IsIncoming(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsIncoming());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsIncoming());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsRead(bool * value) noexcept override
+    HRESULT __stdcall get_IsRead(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsRead());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsRead());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LocalTimestamp(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_LocalTimestamp(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LocalTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LocalTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NetworkTimestamp(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_NetworkTimestamp(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NetworkTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NetworkTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Recipients(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> value) noexcept override
+    HRESULT __stdcall get_Recipients(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Recipients());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Recipients());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RecipientSendStatuses(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, winrt::Windows::ApplicationModel::Chat::ChatMessageStatus>> value) noexcept override
+    HRESULT __stdcall get_RecipientSendStatuses(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RecipientSendStatuses());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RecipientSendStatuses());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageStatus * value) noexcept override
+    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageStatus* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Status());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Subject(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Subject(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Subject());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Subject());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportFriendlyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportFriendlyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportFriendlyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportFriendlyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_TransportId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_TransportId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().TransportId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().TransportId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessage2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessage2>
 {
-    HRESULT __stdcall get_EstimatedDownloadSize(uint64_t * result) noexcept override
+    HRESULT __stdcall get_EstimatedDownloadSize(uint64_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().EstimatedDownloadSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().EstimatedDownloadSize());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_EstimatedDownloadSize(uint64_t value) noexcept override
+    HRESULT __stdcall put_EstimatedDownloadSize(uint64_t value) noexcept final
     {
-        try
-        {
-            this->shim().EstimatedDownloadSize(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().EstimatedDownloadSize(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall put_From(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_From(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().From(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().From(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsAutoReply(bool * result) noexcept override
+    HRESULT __stdcall get_IsAutoReply(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsAutoReply());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsAutoReply());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsAutoReply(bool value) noexcept override
+    HRESULT __stdcall put_IsAutoReply(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsAutoReply(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsAutoReply(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsForwardingDisabled(bool value) noexcept override
+    HRESULT __stdcall put_IsForwardingDisabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsForwardingDisabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsForwardingDisabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsReplyDisabled(bool * result) noexcept override
+    HRESULT __stdcall get_IsReplyDisabled(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsReplyDisabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsReplyDisabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsIncoming(bool value) noexcept override
+    HRESULT __stdcall put_IsIncoming(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsIncoming(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsIncoming(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsRead(bool value) noexcept override
+    HRESULT __stdcall put_IsRead(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsRead(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsRead(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSeen(bool * result) noexcept override
+    HRESULT __stdcall get_IsSeen(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsSeen());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsSeen());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSeen(bool value) noexcept override
+    HRESULT __stdcall put_IsSeen(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSeen(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSeen(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSimMessage(bool * result) noexcept override
+    HRESULT __stdcall get_IsSimMessage(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsSimMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsSimMessage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_LocalTimestamp(abi_arg_in<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall put_LocalTimestamp(Windows::Foundation::DateTime value) noexcept final
     {
-        try
-        {
-            this->shim().LocalTimestamp(*reinterpret_cast<const Windows::Foundation::DateTime *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().LocalTimestamp(*reinterpret_cast<Windows::Foundation::DateTime const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind * result) noexcept override
+    HRESULT __stdcall get_MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MessageKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MessageKind());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind value) noexcept override
+    HRESULT __stdcall put_MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind value) noexcept final
     {
-        try
-        {
-            this->shim().MessageKind(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MessageKind(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessageKind const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind * result) noexcept override
+    HRESULT __stdcall get_MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MessageOperatorKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MessageOperatorKind());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind value) noexcept override
+    HRESULT __stdcall put_MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind value) noexcept final
     {
-        try
-        {
-            this->shim().MessageOperatorKind(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MessageOperatorKind(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessageOperatorKind const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall put_NetworkTimestamp(abi_arg_in<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall put_NetworkTimestamp(Windows::Foundation::DateTime value) noexcept final
     {
-        try
-        {
-            this->shim().NetworkTimestamp(*reinterpret_cast<const Windows::Foundation::DateTime *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().NetworkTimestamp(*reinterpret_cast<Windows::Foundation::DateTime const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsReceivedDuringQuietHours(bool * result) noexcept override
+    HRESULT __stdcall get_IsReceivedDuringQuietHours(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsReceivedDuringQuietHours());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsReceivedDuringQuietHours());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsReceivedDuringQuietHours(bool value) noexcept override
+    HRESULT __stdcall put_IsReceivedDuringQuietHours(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsReceivedDuringQuietHours(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsReceivedDuringQuietHours(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RemoteId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_RemoteId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().RemoteId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RemoteId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Status(Windows::ApplicationModel::Chat::ChatMessageStatus value) noexcept override
+    HRESULT __stdcall put_Status(Windows::ApplicationModel::Chat::ChatMessageStatus value) noexcept final
     {
-        try
-        {
-            this->shim().Status(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Status(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessageStatus const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Subject(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Subject(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Subject(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Subject(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ShouldSuppressNotification(bool * result) noexcept override
+    HRESULT __stdcall get_ShouldSuppressNotification(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ShouldSuppressNotification());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ShouldSuppressNotification());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ShouldSuppressNotification(bool value) noexcept override
+    HRESULT __stdcall put_ShouldSuppressNotification(bool value) noexcept final
     {
-        try
-        {
-            this->shim().ShouldSuppressNotification(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ShouldSuppressNotification(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ThreadingInfo(abi_arg_out<Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> result) noexcept override
+    HRESULT __stdcall get_ThreadingInfo(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ThreadingInfo());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ThreadingInfo());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ThreadingInfo(abi_arg_in<Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> value) noexcept override
+    HRESULT __stdcall put_ThreadingInfo(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ThreadingInfo(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatConversationThreadingInfo *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ThreadingInfo(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatConversationThreadingInfo const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RecipientsDeliveryInfos(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo>> result) noexcept override
+    HRESULT __stdcall get_RecipientsDeliveryInfos(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().RecipientsDeliveryInfos());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().RecipientsDeliveryInfos());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessage3> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessage3>
 {
-    HRESULT __stdcall get_RemoteId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_RemoteId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RemoteId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RemoteId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessage4> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessage4>
 {
-    HRESULT __stdcall get_SyncId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_SyncId(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().SyncId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().SyncId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SyncId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_SyncId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().SyncId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SyncId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageAttachment> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageAttachment>
 {
-    HRESULT __stdcall get_DataStreamReference(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_DataStreamReference(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DataStreamReference());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DataStreamReference());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DataStreamReference(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_DataStreamReference(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().DataStreamReference(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DataStreamReference(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_GroupId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_GroupId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().GroupId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().GroupId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_GroupId(uint32_t value) noexcept override
+    HRESULT __stdcall put_GroupId(uint32_t value) noexcept final
     {
-        try
-        {
-            this->shim().GroupId(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().GroupId(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MimeType(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_MimeType(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MimeType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MimeType());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_MimeType(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_MimeType(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().MimeType(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().MimeType(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Text(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Text(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Text(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Text(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageAttachment2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageAttachment2>
 {
-    HRESULT __stdcall get_Thumbnail(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> result) noexcept override
+    HRESULT __stdcall get_Thumbnail(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Thumbnail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Thumbnail());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Thumbnail(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Thumbnail(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Thumbnail(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Thumbnail(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransferProgress(double * result) noexcept override
+    HRESULT __stdcall get_TransferProgress(double* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransferProgress());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransferProgress());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_TransferProgress(double value) noexcept override
+    HRESULT __stdcall put_TransferProgress(double value) noexcept final
     {
-        try
-        {
-            this->shim().TransferProgress(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().TransferProgress(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_OriginalFileName(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_OriginalFileName(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().OriginalFileName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().OriginalFileName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_OriginalFileName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_OriginalFileName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().OriginalFileName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().OriginalFileName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory>
 {
-    HRESULT __stdcall abi_CreateChatMessageAttachment(abi_arg_in<hstring> mimeType, abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> dataStreamReference, abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageAttachment> value) noexcept override
+    HRESULT __stdcall CreateChatMessageAttachment(HSTRING mimeType, ::IUnknown* dataStreamReference, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateChatMessageAttachment(*reinterpret_cast<const hstring *>(&mimeType), *reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&dataStreamReference)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateChatMessageAttachment(*reinterpret_cast<hstring const*>(&mimeType), *reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&dataStreamReference)));
             return S_OK;
         }
         catch (...)
@@ -1437,11 +2472,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageBlockingStatic> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageBlockingStatic>
 {
-    HRESULT __stdcall abi_MarkMessageAsBlockedAsync(abi_arg_in<hstring> localChatMessageId, bool blocked, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall MarkMessageAsBlockedAsync(HSTRING localChatMessageId, bool blocked, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().MarkMessageAsBlockedAsync(*reinterpret_cast<const hstring *>(&localChatMessageId), blocked));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().MarkMessageAsBlockedAsync(*reinterpret_cast<hstring const*>(&localChatMessageId), blocked));
             return S_OK;
         }
         catch (...)
@@ -1455,41 +2491,29 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageBlockingStatic> :
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChange> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageChange>
 {
-    HRESULT __stdcall get_ChangeType(Windows::ApplicationModel::Chat::ChatMessageChangeType * value) noexcept override
+    HRESULT __stdcall get_ChangeType(Windows::ApplicationModel::Chat::ChatMessageChangeType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ChangeType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChangeType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Message(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessage> value) noexcept override
+    HRESULT __stdcall get_Message(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Message());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeReader> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageChangeReader>
 {
-    HRESULT __stdcall abi_AcceptChanges() noexcept override
+    HRESULT __stdcall AcceptChanges() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().AcceptChanges();
             return S_OK;
         }
@@ -1499,11 +2523,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeReader> : p
         }
     }
 
-    HRESULT __stdcall abi_AcceptChangesThrough(abi_arg_in<Windows::ApplicationModel::Chat::IChatMessageChange> lastChangeToAcknowledge) noexcept override
+    HRESULT __stdcall AcceptChangesThrough(::IUnknown* lastChangeToAcknowledge) noexcept final
     {
         try
         {
-            this->shim().AcceptChangesThrough(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatMessageChange *>(&lastChangeToAcknowledge));
+            typename D::abi_guard guard(this->shim());
+            this->shim().AcceptChangesThrough(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessageChange const*>(&lastChangeToAcknowledge));
             return S_OK;
         }
         catch (...)
@@ -1512,11 +2537,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeReader> : p
         }
     }
 
-    HRESULT __stdcall abi_ReadBatchAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageChange>>> value) noexcept override
+    HRESULT __stdcall ReadBatchAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ReadBatchAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ReadBatchAsync());
             return S_OK;
         }
         catch (...)
@@ -1530,10 +2556,11 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeReader> : p
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeTracker> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageChangeTracker>
 {
-    HRESULT __stdcall abi_Enable() noexcept override
+    HRESULT __stdcall Enable() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Enable();
             return S_OK;
         }
@@ -1543,11 +2570,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeTracker> : 
         }
     }
 
-    HRESULT __stdcall abi_GetChangeReader(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageChangeReader> value) noexcept override
+    HRESULT __stdcall GetChangeReader(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetChangeReader());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetChangeReader());
             return S_OK;
         }
         catch (...)
@@ -1557,10 +2585,11 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeTracker> : 
         }
     }
 
-    HRESULT __stdcall abi_Reset() noexcept override
+    HRESULT __stdcall Reset() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Reset();
             return S_OK;
         }
@@ -1574,10 +2603,11 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangeTracker> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangedDeferral> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageChangedDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -1591,11 +2621,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangedDeferral> 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs>
 {
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageChangedDeferral> result) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -1609,11 +2640,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManager2Statics> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageManager2Statics>
 {
-    HRESULT __stdcall abi_RegisterTransportAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> result) noexcept override
+    HRESULT __stdcall RegisterTransportAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RegisterTransportAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RegisterTransportAsync());
             return S_OK;
         }
         catch (...)
@@ -1623,11 +2655,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManager2Statics> 
         }
     }
 
-    HRESULT __stdcall abi_GetTransportAsync(abi_arg_in<hstring> transportId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport>> result) noexcept override
+    HRESULT __stdcall GetTransportAsync(HSTRING transportId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetTransportAsync(*reinterpret_cast<const hstring *>(&transportId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetTransportAsync(*reinterpret_cast<hstring const*>(&transportId)));
             return S_OK;
         }
         catch (...)
@@ -1641,11 +2674,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManager2Statics> 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic>
 {
-    HRESULT __stdcall abi_GetTransportsAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>>> value) noexcept override
+    HRESULT __stdcall GetTransportsAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetTransportsAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetTransportsAsync());
             return S_OK;
         }
         catch (...)
@@ -1655,11 +2689,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : 
         }
     }
 
-    HRESULT __stdcall abi_RequestStoreAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore>> value) noexcept override
+    HRESULT __stdcall RequestStoreAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().RequestStoreAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().RequestStoreAsync());
             return S_OK;
         }
         catch (...)
@@ -1669,11 +2704,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : 
         }
     }
 
-    HRESULT __stdcall abi_ShowComposeSmsMessageAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatMessage> message, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall ShowComposeSmsMessageAsync(::IUnknown* message, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ShowComposeSmsMessageAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatMessage *>(&message)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ShowComposeSmsMessageAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessage const*>(&message)));
             return S_OK;
         }
         catch (...)
@@ -1683,10 +2719,11 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : 
         }
     }
 
-    HRESULT __stdcall abi_ShowSmsSettings() noexcept override
+    HRESULT __stdcall ShowSmsSettings() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowSmsSettings();
             return S_OK;
         }
@@ -1700,11 +2737,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatics3> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatics3>
 {
-    HRESULT __stdcall abi_RequestSyncManagerAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager>> result) noexcept override
+    HRESULT __stdcall RequestSyncManagerAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestSyncManagerAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestSyncManagerAsync());
             return S_OK;
         }
         catch (...)
@@ -1718,85 +2756,55 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageManagerStatics3> 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails>
 {
-    HRESULT __stdcall get_ChatMessage(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessage> value) noexcept override
+    HRESULT __stdcall get_ChatMessage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ChatMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChatMessage());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2>
 {
-    HRESULT __stdcall get_ShouldDisplayToast(bool * result) noexcept override
+    HRESULT __stdcall get_ShouldDisplayToast(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ShouldDisplayToast());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ShouldDisplayToast());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ShouldUpdateDetailText(bool * result) noexcept override
+    HRESULT __stdcall get_ShouldUpdateDetailText(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ShouldUpdateDetailText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ShouldUpdateDetailText());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ShouldUpdateBadge(bool * result) noexcept override
+    HRESULT __stdcall get_ShouldUpdateBadge(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ShouldUpdateBadge());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ShouldUpdateBadge());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ShouldUpdateActionCenter(bool * result) noexcept override
+    HRESULT __stdcall get_ShouldUpdateActionCenter(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ShouldUpdateActionCenter());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ShouldUpdateActionCenter());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageReader> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageReader>
 {
-    HRESULT __stdcall abi_ReadBatchAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>>> value) noexcept override
+    HRESULT __stdcall ReadBatchAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ReadBatchAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ReadBatchAsync());
             return S_OK;
         }
         catch (...)
@@ -1810,11 +2818,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageReader> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageReader2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageReader2>
 {
-    HRESULT __stdcall abi_ReadBatchWithCountAsync(int32_t count, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>>> result) noexcept override
+    HRESULT __stdcall ReadBatchWithCountAsync(int32_t count, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync(count));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync(count));
             return S_OK;
         }
         catch (...)
@@ -1828,11 +2837,19 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageReader2> : produc
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageStore>
 {
-    HRESULT __stdcall get_ChangeTracker(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageChangeTracker> value) noexcept override
+    HRESULT __stdcall get_ChangeTracker(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ChangeTracker());
+        return S_OK;
+    }
+
+    HRESULT __stdcall DeleteMessageAsync(HSTRING localMessageId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ChangeTracker());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().DeleteMessageAsync(*reinterpret_cast<hstring const*>(&localMessageId)));
             return S_OK;
         }
         catch (...)
@@ -1842,11 +2859,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_DeleteMessageAsync(abi_arg_in<hstring> localMessageId, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall DownloadMessageAsync(HSTRING localChatMessageId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().DeleteMessageAsync(*reinterpret_cast<const hstring *>(&localMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().DownloadMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -1856,11 +2874,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_DownloadMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall GetMessageAsync(HSTRING localChatMessageId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().DownloadMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -1870,11 +2889,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_GetMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage>> value) noexcept override
+    HRESULT __stdcall GetMessageReader1(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetMessageReader());
             return S_OK;
         }
         catch (...)
@@ -1884,11 +2904,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_GetMessageReader1(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageReader> value) noexcept override
+    HRESULT __stdcall GetMessageReader2(Windows::Foundation::TimeSpan recentTimeLimit, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetMessageReader());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetMessageReader(*reinterpret_cast<Windows::Foundation::TimeSpan const*>(&recentTimeLimit)));
             return S_OK;
         }
         catch (...)
@@ -1898,11 +2919,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_GetMessageReader2(abi_arg_in<Windows::Foundation::TimeSpan> recentTimeLimit, abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageReader> value) noexcept override
+    HRESULT __stdcall MarkMessageReadAsync(HSTRING localChatMessageId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetMessageReader(*reinterpret_cast<const Windows::Foundation::TimeSpan *>(&recentTimeLimit)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().MarkMessageReadAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -1912,11 +2934,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_MarkMessageReadAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall RetrySendMessageAsync(HSTRING localChatMessageId, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().MarkMessageReadAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().RetrySendMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -1926,11 +2949,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_RetrySendMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall SendMessageAsync(::IUnknown* chatMessage, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().RetrySendMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().SendMessageAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessage const*>(&chatMessage)));
             return S_OK;
         }
         catch (...)
@@ -1940,11 +2964,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_SendMessageAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatMessage> chatMessage, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall ValidateMessage(::IUnknown* chatMessage, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().SendMessageAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatMessage *>(&chatMessage)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ValidateMessage(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessage const*>(&chatMessage)));
             return S_OK;
         }
         catch (...)
@@ -1954,25 +2979,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall abi_ValidateMessage(abi_arg_in<Windows::ApplicationModel::Chat::IChatMessage> chatMessage, abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageValidationResult> value) noexcept override
+    HRESULT __stdcall add_MessageChanged(::IUnknown* value, event_token* returnValue) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ValidateMessage(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatMessage *>(&chatMessage)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall add_MessageChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs>> value, event_token * returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().MessageChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MessageChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -1981,11 +2993,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
         }
     }
 
-    HRESULT __stdcall remove_MessageChanged(event_token value) noexcept override
+    HRESULT __stdcall remove_MessageChanged(event_token value) noexcept final
     {
         try
         {
-            this->shim().MessageChanged(value);
+            typename D::abi_guard guard(this->shim());
+            this->shim().MessageChanged(*reinterpret_cast<event_token const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -1998,11 +3011,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore> : produce_
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageStore2>
 {
-    HRESULT __stdcall abi_ForwardMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> addresses, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage>> result) noexcept override
+    HRESULT __stdcall ForwardMessageAsync(HSTRING localChatMessageId, ::IUnknown* addresses, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ForwardMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&addresses)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ForwardMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&addresses)));
             return S_OK;
         }
         catch (...)
@@ -2012,11 +3026,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetConversationAsync(abi_arg_in<hstring> conversationId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation>> result) noexcept override
+    HRESULT __stdcall GetConversationAsync(HSTRING conversationId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetConversationAsync(*reinterpret_cast<const hstring *>(&conversationId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetConversationAsync(*reinterpret_cast<hstring const*>(&conversationId)));
             return S_OK;
         }
         catch (...)
@@ -2026,11 +3041,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetConversationForTransportsAsync(abi_arg_in<hstring> conversationId, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> transportIds, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation>> result) noexcept override
+    HRESULT __stdcall GetConversationForTransportsAsync(HSTRING conversationId, ::IUnknown* transportIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetConversationAsync(*reinterpret_cast<const hstring *>(&conversationId), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&transportIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetConversationAsync(*reinterpret_cast<hstring const*>(&conversationId), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&transportIds)));
             return S_OK;
         }
         catch (...)
@@ -2040,11 +3056,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetConversationFromThreadingInfoAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> threadingInfo, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation>> result) noexcept override
+    HRESULT __stdcall GetConversationFromThreadingInfoAsync(::IUnknown* threadingInfo, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetConversationFromThreadingInfoAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatConversationThreadingInfo *>(&threadingInfo)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetConversationFromThreadingInfoAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatConversationThreadingInfo const*>(&threadingInfo)));
             return S_OK;
         }
         catch (...)
@@ -2054,11 +3071,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetConversationReader(abi_arg_out<Windows::ApplicationModel::Chat::IChatConversationReader> result) noexcept override
+    HRESULT __stdcall GetConversationReader(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetConversationReader());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetConversationReader());
             return S_OK;
         }
         catch (...)
@@ -2068,11 +3086,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetConversationForTransportsReader(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> transportIds, abi_arg_out<Windows::ApplicationModel::Chat::IChatConversationReader> result) noexcept override
+    HRESULT __stdcall GetConversationForTransportsReader(::IUnknown* transportIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetConversationReader(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&transportIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetConversationReader(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&transportIds)));
             return S_OK;
         }
         catch (...)
@@ -2082,11 +3101,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetMessageByRemoteIdAsync(abi_arg_in<hstring> transportId, abi_arg_in<hstring> remoteId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage>> result) noexcept override
+    HRESULT __stdcall GetMessageByRemoteIdAsync(HSTRING transportId, HSTRING remoteId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetMessageByRemoteIdAsync(*reinterpret_cast<const hstring *>(&transportId), *reinterpret_cast<const hstring *>(&remoteId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetMessageByRemoteIdAsync(*reinterpret_cast<hstring const*>(&transportId), *reinterpret_cast<hstring const*>(&remoteId)));
             return S_OK;
         }
         catch (...)
@@ -2096,11 +3116,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetUnseenCountAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<int32_t>> result) noexcept override
+    HRESULT __stdcall GetUnseenCountAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetUnseenCountAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetUnseenCountAsync());
             return S_OK;
         }
         catch (...)
@@ -2110,11 +3131,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetUnseenCountForTransportsReaderAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> transportIds, abi_arg_out<Windows::Foundation::IAsyncOperation<int32_t>> result) noexcept override
+    HRESULT __stdcall GetUnseenCountForTransportsReaderAsync(::IUnknown* transportIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetUnseenCountAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&transportIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetUnseenCountAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&transportIds)));
             return S_OK;
         }
         catch (...)
@@ -2124,11 +3146,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_MarkAsSeenAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkAsSeenAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkAsSeenAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkAsSeenAsync());
             return S_OK;
         }
         catch (...)
@@ -2138,11 +3161,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_MarkAsSeenForTransportsAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> transportIds, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall MarkAsSeenForTransportsAsync(::IUnknown* transportIds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().MarkAsSeenAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&transportIds)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().MarkAsSeenAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&transportIds)));
             return S_OK;
         }
         catch (...)
@@ -2152,11 +3176,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetSearchReader(abi_arg_in<Windows::ApplicationModel::Chat::IChatQueryOptions> value, abi_arg_out<Windows::ApplicationModel::Chat::IChatSearchReader> result) noexcept override
+    HRESULT __stdcall GetSearchReader(::IUnknown* value, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetSearchReader(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatQueryOptions *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetSearchReader(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatQueryOptions const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -2166,11 +3191,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_SaveMessageAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatMessage> chatMessage, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall SaveMessageAsync(::IUnknown* chatMessage, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().SaveMessageAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatMessage *>(&chatMessage)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SaveMessageAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatMessage const*>(&chatMessage)));
             return S_OK;
         }
         catch (...)
@@ -2180,11 +3206,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_TryCancelDownloadMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> result) noexcept override
+    HRESULT __stdcall TryCancelDownloadMessageAsync(HSTRING localChatMessageId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TryCancelDownloadMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TryCancelDownloadMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -2194,11 +3221,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall abi_TryCancelSendMessageAsync(abi_arg_in<hstring> localChatMessageId, abi_arg_out<Windows::Foundation::IAsyncOperation<bool>> result) noexcept override
+    HRESULT __stdcall TryCancelSendMessageAsync(HSTRING localChatMessageId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TryCancelSendMessageAsync(*reinterpret_cast<const hstring *>(&localChatMessageId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TryCancelSendMessageAsync(*reinterpret_cast<hstring const*>(&localChatMessageId)));
             return S_OK;
         }
         catch (...)
@@ -2208,11 +3236,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall add_StoreChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_StoreChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().StoreChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().StoreChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2221,11 +3250,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
         }
     }
 
-    HRESULT __stdcall remove_StoreChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_StoreChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().StoreChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().StoreChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2238,11 +3268,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore2> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore3> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageStore3>
 {
-    HRESULT __stdcall abi_GetMessageBySyncIdAsync(abi_arg_in<hstring> syncId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage>> result) noexcept override
+    HRESULT __stdcall GetMessageBySyncIdAsync(HSTRING syncId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetMessageBySyncIdAsync(*reinterpret_cast<const hstring *>(&syncId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetMessageBySyncIdAsync(*reinterpret_cast<hstring const*>(&syncId)));
             return S_OK;
         }
         catch (...)
@@ -2256,96 +3287,58 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStore3> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs>
 {
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Chat::ChatStoreChangedEventKind * result) noexcept override
+    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Chat::ChatStoreChangedEventKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Kind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Kind());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageTransport> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageTransport>
 {
-    HRESULT __stdcall get_IsAppSetAsNotificationProvider(bool * value) noexcept override
+    HRESULT __stdcall get_IsAppSetAsNotificationProvider(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsAppSetAsNotificationProvider());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsAppSetAsNotificationProvider());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsActive(bool * value) noexcept override
+    HRESULT __stdcall get_IsActive(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsActive());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsActive());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportFriendlyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportFriendlyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportFriendlyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportFriendlyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportId());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_RequestSetAsNotificationProviderAsync(abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall RequestSetAsNotificationProviderAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().RequestSetAsNotificationProviderAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().RequestSetAsNotificationProviderAsync());
             return S_OK;
         }
         catch (...)
@@ -2359,353 +3352,200 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatMessageTransport> : prod
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageTransport2> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageTransport2>
 {
-    HRESULT __stdcall get_Configuration(abi_arg_out<Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration> result) noexcept override
+    HRESULT __stdcall get_Configuration(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Configuration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Configuration());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportKind(Windows::ApplicationModel::Chat::ChatMessageTransportKind * result) noexcept override
+    HRESULT __stdcall get_TransportKind(Windows::ApplicationModel::Chat::ChatMessageTransportKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportKind());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration>
 {
-    HRESULT __stdcall get_MaxAttachmentCount(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxAttachmentCount(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxAttachmentCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxAttachmentCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxMessageSizeInKilobytes(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxMessageSizeInKilobytes(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxMessageSizeInKilobytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxMessageSizeInKilobytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxRecipientCount(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxRecipientCount(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxRecipientCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxRecipientCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportedVideoFormat(abi_arg_out<Windows::Media::MediaProperties::IMediaEncodingProfile> result) noexcept override
+    HRESULT __stdcall get_SupportedVideoFormat(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().SupportedVideoFormat());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().SupportedVideoFormat());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExtendedProperties(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable>> result) noexcept override
+    HRESULT __stdcall get_ExtendedProperties(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ExtendedProperties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ExtendedProperties());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatMessageValidationResult> : produce_base<D, Windows::ApplicationModel::Chat::IChatMessageValidationResult>
 {
-    HRESULT __stdcall get_MaxPartCount(abi_arg_out<Windows::Foundation::IReference<uint32_t>> value) noexcept override
+    HRESULT __stdcall get_MaxPartCount(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxPartCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxPartCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PartCount(abi_arg_out<Windows::Foundation::IReference<uint32_t>> value) noexcept override
+    HRESULT __stdcall get_PartCount(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PartCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PartCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RemainingCharacterCountInPart(abi_arg_out<Windows::Foundation::IReference<uint32_t>> value) noexcept override
+    HRESULT __stdcall get_RemainingCharacterCountInPart(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RemainingCharacterCountInPart());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RemainingCharacterCountInPart());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageValidationStatus * value) noexcept override
+    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageValidationStatus* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Status());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatQueryOptions> : produce_base<D, Windows::ApplicationModel::Chat::IChatQueryOptions>
 {
-    HRESULT __stdcall get_SearchString(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_SearchString(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().SearchString());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().SearchString());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SearchString(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_SearchString(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().SearchString(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SearchString(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo> : produce_base<D, Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo>
 {
-    HRESULT __stdcall get_TransportAddress(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_TransportAddress(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportAddress());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportAddress());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_TransportAddress(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_TransportAddress(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().TransportAddress(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().TransportAddress(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DeliveryTime(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> result) noexcept override
+    HRESULT __stdcall get_DeliveryTime(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().DeliveryTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().DeliveryTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DeliveryTime(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_DeliveryTime(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().DeliveryTime(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DeliveryTime(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ReadTime(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> result) noexcept override
+    HRESULT __stdcall get_ReadTime(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ReadTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ReadTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ReadTime(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_ReadTime(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ReadTime(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ReadTime(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportErrorCodeCategory(Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory * result) noexcept override
+    HRESULT __stdcall get_TransportErrorCodeCategory(Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportErrorCodeCategory());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportErrorCodeCategory());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportInterpretedErrorCode(Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode * result) noexcept override
+    HRESULT __stdcall get_TransportInterpretedErrorCode(Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportInterpretedErrorCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportInterpretedErrorCode());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportErrorCode(int32_t * result) noexcept override
+    HRESULT __stdcall get_TransportErrorCode(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportErrorCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportErrorCode());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsErrorPermanent(bool * result) noexcept override
+    HRESULT __stdcall get_IsErrorPermanent(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsErrorPermanent());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsErrorPermanent());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageStatus * result) noexcept override
+    HRESULT __stdcall get_Status(Windows::ApplicationModel::Chat::ChatMessageStatus* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Status());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatSearchReader> : produce_base<D, Windows::ApplicationModel::Chat::IChatSearchReader>
 {
-    HRESULT __stdcall abi_ReadBatchAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>>> result) noexcept override
+    HRESULT __stdcall ReadBatchAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync());
             return S_OK;
         }
         catch (...)
@@ -2715,11 +3555,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSearchReader> : produce_
         }
     }
 
-    HRESULT __stdcall abi_ReadBatchWithCountAsync(int32_t count, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>>> result) noexcept override
+    HRESULT __stdcall ReadBatchWithCountAsync(int32_t count, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().ReadBatchAsync(count));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().ReadBatchAsync(count));
             return S_OK;
         }
         catch (...)
@@ -2733,67 +3574,51 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSearchReader> : produce_
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatSyncConfiguration> : produce_base<D, Windows::ApplicationModel::Chat::IChatSyncConfiguration>
 {
-    HRESULT __stdcall get_IsSyncEnabled(bool * result) noexcept override
+    HRESULT __stdcall get_IsSyncEnabled(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsSyncEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsSyncEnabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsSyncEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsSyncEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsSyncEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsSyncEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan * result) noexcept override
+    HRESULT __stdcall get_RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().RestoreHistorySpan());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().RestoreHistorySpan());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan value) noexcept override
+    HRESULT __stdcall put_RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan value) noexcept final
     {
-        try
-        {
-            this->shim().RestoreHistorySpan(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RestoreHistorySpan(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatRestoreHistorySpan const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_base<D, Windows::ApplicationModel::Chat::IChatSyncManager>
 {
-    HRESULT __stdcall get_Configuration(abi_arg_out<Windows::ApplicationModel::Chat::IChatSyncConfiguration> result) noexcept override
+    HRESULT __stdcall get_Configuration(::IUnknown** result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Configuration());
+        return S_OK;
+    }
+
+    HRESULT __stdcall AssociateAccountAsync(::IUnknown* webAccount, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Configuration());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().AssociateAccountAsync(*reinterpret_cast<Windows::Security::Credentials::WebAccount const*>(&webAccount)));
             return S_OK;
         }
         catch (...)
@@ -2803,11 +3628,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_AssociateAccountAsync(abi_arg_in<Windows::Security::Credentials::IWebAccount> webAccount, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall UnassociateAccountAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().AssociateAccountAsync(*reinterpret_cast<const Windows::Security::Credentials::WebAccount *>(&webAccount)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().UnassociateAccountAsync());
             return S_OK;
         }
         catch (...)
@@ -2817,25 +3643,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_UnassociateAccountAsync(abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall IsAccountAssociated(::IUnknown* webAccount, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().UnassociateAccountAsync());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_IsAccountAssociated(abi_arg_in<Windows::Security::Credentials::IWebAccount> webAccount, bool * result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().IsAccountAssociated(*reinterpret_cast<const Windows::Security::Credentials::WebAccount *>(&webAccount)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsAccountAssociated(*reinterpret_cast<Windows::Security::Credentials::WebAccount const*>(&webAccount)));
             return S_OK;
         }
         catch (...)
@@ -2844,10 +3657,11 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_StartSync() noexcept override
+    HRESULT __stdcall StartSync() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().StartSync();
             return S_OK;
         }
@@ -2857,11 +3671,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_SetConfigurationAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatSyncConfiguration> configuration, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
+    HRESULT __stdcall SetConfigurationAsync(::IUnknown* configuration, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().SetConfigurationAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatSyncConfiguration *>(&configuration)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SetConfigurationAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatSyncConfiguration const*>(&configuration)));
             return S_OK;
         }
         catch (...)
@@ -2875,11 +3690,47 @@ struct produce<D, Windows::ApplicationModel::Chat::IChatSyncManager> : produce_b
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessage> : produce_base<D, Windows::ApplicationModel::Chat::IRcsEndUserMessage>
 {
-    HRESULT __stdcall get_TransportId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_TransportId(HSTRING* result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportId());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Title(HSTRING* result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Title());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Text(HSTRING* result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Text());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsPinRequired(bool* result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsPinRequired());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Actions(::IUnknown** result) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Actions());
+        return S_OK;
+    }
+
+    HRESULT __stdcall SendResponseAsync(::IUnknown* action, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TransportId());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SendResponseAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::RcsEndUserMessageAction const*>(&action)));
             return S_OK;
         }
         catch (...)
@@ -2889,80 +3740,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessage> : produce
         }
     }
 
-    HRESULT __stdcall get_Title(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall SendResponseWithPinAsync(::IUnknown* action, HSTRING pin, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().Title());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsPinRequired(bool * result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().IsPinRequired());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Actions(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsEndUserMessageAction>> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().Actions());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SendResponseAsync(abi_arg_in<Windows::ApplicationModel::Chat::IRcsEndUserMessageAction> action, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().SendResponseAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::RcsEndUserMessageAction *>(&action)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SendResponseWithPinAsync(abi_arg_in<Windows::ApplicationModel::Chat::IRcsEndUserMessageAction> action, abi_arg_in<hstring> pin, abi_arg_out<Windows::Foundation::IAsyncAction> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().SendResponseWithPinAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::RcsEndUserMessageAction *>(&action), *reinterpret_cast<const hstring *>(&pin)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().SendResponseWithPinAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::RcsEndUserMessageAction const*>(&action), *reinterpret_cast<hstring const*>(&pin)));
             return S_OK;
         }
         catch (...)
@@ -2976,92 +3759,59 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessage> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAction> : produce_base<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAction>
 {
-    HRESULT __stdcall get_Label(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_Label(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Label());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Label());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs> : produce_base<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs>
 {
-    HRESULT __stdcall get_IsMessageAvailable(bool * result) noexcept override
+    HRESULT __stdcall get_IsMessageAvailable(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsMessageAvailable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsMessageAvailable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Message(abi_arg_out<Windows::ApplicationModel::Chat::IRcsEndUserMessage> result) noexcept override
+    HRESULT __stdcall get_Message(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Message());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails> : produce_base<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails>
 {
-    HRESULT __stdcall get_Title(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Title(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Title());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Title());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> : produce_base<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageManager>
 {
-    HRESULT __stdcall add_MessageAvailableChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_MessageAvailableChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().MessageAvailableChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().MessageAvailableChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -3070,11 +3820,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> : 
         }
     }
 
-    HRESULT __stdcall remove_MessageAvailableChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_MessageAvailableChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().MessageAvailableChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().MessageAvailableChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -3087,11 +3838,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsManagerStatics> : produce_base<D, Windows::ApplicationModel::Chat::IRcsManagerStatics>
 {
-    HRESULT __stdcall abi_GetEndUserMessageManager(abi_arg_out<Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> result) noexcept override
+    HRESULT __stdcall GetEndUserMessageManager(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetEndUserMessageManager());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetEndUserMessageManager());
             return S_OK;
         }
         catch (...)
@@ -3101,11 +3853,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsManagerStatics> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetTransportsAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>>> value) noexcept override
+    HRESULT __stdcall GetTransportsAsync(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetTransportsAsync());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetTransportsAsync());
             return S_OK;
         }
         catch (...)
@@ -3115,11 +3868,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsManagerStatics> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetTransportAsync(abi_arg_in<hstring> transportId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport>> result) noexcept override
+    HRESULT __stdcall GetTransportAsync(HSTRING transportId, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetTransportAsync(*reinterpret_cast<const hstring *>(&transportId)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetTransportAsync(*reinterpret_cast<hstring const*>(&transportId)));
             return S_OK;
         }
         catch (...)
@@ -3129,11 +3883,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsManagerStatics> : produce
         }
     }
 
-    HRESULT __stdcall abi_LeaveConversationAsync(abi_arg_in<Windows::ApplicationModel::Chat::IChatConversation> conversation, abi_arg_out<Windows::Foundation::IAsyncAction> value) noexcept override
+    HRESULT __stdcall LeaveConversationAsync(::IUnknown* conversation, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().LeaveConversationAsync(*reinterpret_cast<const Windows::ApplicationModel::Chat::ChatConversation *>(&conversation)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().LeaveConversationAsync(*reinterpret_cast<Windows::ApplicationModel::Chat::ChatConversation const*>(&conversation)));
             return S_OK;
         }
         catch (...)
@@ -3147,97 +3902,58 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsManagerStatics> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsServiceKindSupportedChangedEventArgs> : produce_base<D, Windows::ApplicationModel::Chat::IRcsServiceKindSupportedChangedEventArgs>
 {
-    HRESULT __stdcall get_ServiceKind(Windows::ApplicationModel::Chat::RcsServiceKind * result) noexcept override
+    HRESULT __stdcall get_ServiceKind(Windows::ApplicationModel::Chat::RcsServiceKind* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ServiceKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ServiceKind());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsTransport> : produce_base<D, Windows::ApplicationModel::Chat::IRcsTransport>
 {
-    HRESULT __stdcall get_ExtendedProperties(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable>> value) noexcept override
+    HRESULT __stdcall get_ExtendedProperties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExtendedProperties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExtendedProperties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsActive(bool * value) noexcept override
+    HRESULT __stdcall get_IsActive(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsActive());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsActive());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportFriendlyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportFriendlyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportFriendlyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportFriendlyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransportId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_TransportId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransportId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransportId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Configuration(abi_arg_out<Windows::ApplicationModel::Chat::IRcsTransportConfiguration> result) noexcept override
+    HRESULT __stdcall get_Configuration(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Configuration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Configuration());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_IsStoreAndForwardEnabled(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind, bool * result) noexcept override
+    HRESULT __stdcall IsStoreAndForwardEnabled(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsStoreAndForwardEnabled(serviceKind));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsStoreAndForwardEnabled(*reinterpret_cast<Windows::ApplicationModel::Chat::RcsServiceKind const*>(&serviceKind)));
             return S_OK;
         }
         catch (...)
@@ -3246,11 +3962,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsTransport> : produce_base
         }
     }
 
-    HRESULT __stdcall abi_IsServiceKindSupported(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind, bool * result) noexcept override
+    HRESULT __stdcall IsServiceKindSupported(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsServiceKindSupported(serviceKind));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsServiceKindSupported(*reinterpret_cast<Windows::ApplicationModel::Chat::RcsServiceKind const*>(&serviceKind)));
             return S_OK;
         }
         catch (...)
@@ -3259,11 +3976,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsTransport> : produce_base
         }
     }
 
-    HRESULT __stdcall add_ServiceKindSupportedChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_ServiceKindSupportedChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ServiceKindSupportedChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ServiceKindSupportedChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -3272,11 +3990,12 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsTransport> : produce_base
         }
     }
 
-    HRESULT __stdcall remove_ServiceKindSupportedChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_ServiceKindSupportedChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().ServiceKindSupportedChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ServiceKindSupportedChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -3289,1718 +4008,86 @@ struct produce<D, Windows::ApplicationModel::Chat::IRcsTransport> : produce_base
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRcsTransportConfiguration> : produce_base<D, Windows::ApplicationModel::Chat::IRcsTransportConfiguration>
 {
-    HRESULT __stdcall get_MaxAttachmentCount(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxAttachmentCount(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxAttachmentCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxAttachmentCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxMessageSizeInKilobytes(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxMessageSizeInKilobytes(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxMessageSizeInKilobytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxMessageSizeInKilobytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxGroupMessageSizeInKilobytes(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxGroupMessageSizeInKilobytes(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxGroupMessageSizeInKilobytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxGroupMessageSizeInKilobytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxRecipientCount(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxRecipientCount(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxRecipientCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxRecipientCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxFileSizeInKilobytes(int32_t * result) noexcept override
+    HRESULT __stdcall get_MaxFileSizeInKilobytes(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().MaxFileSizeInKilobytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().MaxFileSizeInKilobytes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_WarningFileSizeInKilobytes(int32_t * result) noexcept override
+    HRESULT __stdcall get_WarningFileSizeInKilobytes(int32_t* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().WarningFileSizeInKilobytes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().WarningFileSizeInKilobytes());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs> : produce_base<D, Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs>
 {
-    HRESULT __stdcall get_TransportId(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_TransportId(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().TransportId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().TransportId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ParticipantAddress(abi_arg_out<hstring> result) noexcept override
+    HRESULT __stdcall get_ParticipantAddress(HSTRING* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().ParticipantAddress());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().ParticipantAddress());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsComposing(bool * result) noexcept override
+    HRESULT __stdcall get_IsComposing(bool* result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().IsComposing());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().IsComposing());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::ApplicationModel::Chat {
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::Chat {
 
-template <typename D> bool impl_IChatMessageTransport<D>::IsAppSetAsNotificationProvider() const
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> ChatCapabilitiesManager::GetCachedCapabilitiesAsync(param::hstring const& address)
 {
-    bool value {};
-    check_hresult(static_cast<const IChatMessageTransport &>(static_cast<const D &>(*this))->get_IsAppSetAsNotificationProvider(&value));
-    return value;
+    return get_activation_factory<ChatCapabilitiesManager, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics>().GetCachedCapabilitiesAsync(address);
 }
 
-template <typename D> bool impl_IChatMessageTransport<D>::IsActive() const
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> ChatCapabilitiesManager::GetCapabilitiesFromNetworkAsync(param::hstring const& address)
 {
-    bool value {};
-    check_hresult(static_cast<const IChatMessageTransport &>(static_cast<const D &>(*this))->get_IsActive(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessageTransport<D>::TransportFriendlyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessageTransport &>(static_cast<const D &>(*this))->get_TransportFriendlyName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessageTransport<D>::TransportId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessageTransport &>(static_cast<const D &>(*this))->get_TransportId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageTransport<D>::RequestSetAsNotificationProviderAsync() const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageTransport &>(static_cast<const D &>(*this))->abi_RequestSetAsNotificationProviderAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration impl_IChatMessageTransport2<D>::Configuration() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration result { nullptr };
-    check_hresult(static_cast<const IChatMessageTransport2 &>(static_cast<const D &>(*this))->get_Configuration(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageTransportKind impl_IChatMessageTransport2<D>::TransportKind() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageTransportKind result {};
-    check_hresult(static_cast<const IChatMessageTransport2 &>(static_cast<const D &>(*this))->get_TransportKind(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IChatMessageTransportConfiguration<D>::MaxAttachmentCount() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IChatMessageTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxAttachmentCount(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IChatMessageTransportConfiguration<D>::MaxMessageSizeInKilobytes() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IChatMessageTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxMessageSizeInKilobytes(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IChatMessageTransportConfiguration<D>::MaxRecipientCount() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IChatMessageTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxRecipientCount(&result));
-    return result;
-}
-
-template <typename D> Windows::Media::MediaProperties::MediaEncodingProfile impl_IChatMessageTransportConfiguration<D>::SupportedVideoFormat() const
-{
-    Windows::Media::MediaProperties::MediaEncodingProfile result { nullptr };
-    check_hresult(static_cast<const IChatMessageTransportConfiguration &>(static_cast<const D &>(*this))->get_SupportedVideoFormat(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> impl_IChatMessageTransportConfiguration<D>::ExtendedProperties() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> result;
-    check_hresult(static_cast<const IChatMessageTransportConfiguration &>(static_cast<const D &>(*this))->get_ExtendedProperties(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeType impl_IChatMessageChange<D>::ChangeType() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageChangeType value {};
-    check_hresult(static_cast<const IChatMessageChange &>(static_cast<const D &>(*this))->get_ChangeType(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessage impl_IChatMessageChange<D>::Message() const
-{
-    Windows::ApplicationModel::Chat::ChatMessage value { nullptr };
-    check_hresult(static_cast<const IChatMessageChange &>(static_cast<const D &>(*this))->get_Message(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageChangeReader<D>::AcceptChanges() const
-{
-    check_hresult(static_cast<const IChatMessageChangeReader &>(static_cast<const D &>(*this))->abi_AcceptChanges());
-}
-
-template <typename D> void impl_IChatMessageChangeReader<D>::AcceptChangesThrough(const Windows::ApplicationModel::Chat::ChatMessageChange & lastChangeToAcknowledge) const
-{
-    check_hresult(static_cast<const IChatMessageChangeReader &>(static_cast<const D &>(*this))->abi_AcceptChangesThrough(get(lastChangeToAcknowledge)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageChange>> impl_IChatMessageChangeReader<D>::ReadBatchAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageChange>> value;
-    check_hresult(static_cast<const IChatMessageChangeReader &>(static_cast<const D &>(*this))->abi_ReadBatchAsync(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageChangeTracker<D>::Enable() const
-{
-    check_hresult(static_cast<const IChatMessageChangeTracker &>(static_cast<const D &>(*this))->abi_Enable());
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeReader impl_IChatMessageChangeTracker<D>::GetChangeReader() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageChangeReader value { nullptr };
-    check_hresult(static_cast<const IChatMessageChangeTracker &>(static_cast<const D &>(*this))->abi_GetChangeReader(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageChangeTracker<D>::Reset() const
-{
-    check_hresult(static_cast<const IChatMessageChangeTracker &>(static_cast<const D &>(*this))->abi_Reset());
-}
-
-template <typename D> Windows::Foundation::IReference<uint32_t> impl_IChatMessageValidationResult<D>::MaxPartCount() const
-{
-    Windows::Foundation::IReference<uint32_t> value;
-    check_hresult(static_cast<const IChatMessageValidationResult &>(static_cast<const D &>(*this))->get_MaxPartCount(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<uint32_t> impl_IChatMessageValidationResult<D>::PartCount() const
-{
-    Windows::Foundation::IReference<uint32_t> value;
-    check_hresult(static_cast<const IChatMessageValidationResult &>(static_cast<const D &>(*this))->get_PartCount(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<uint32_t> impl_IChatMessageValidationResult<D>::RemainingCharacterCountInPart() const
-{
-    Windows::Foundation::IReference<uint32_t> value;
-    check_hresult(static_cast<const IChatMessageValidationResult &>(static_cast<const D &>(*this))->get_RemainingCharacterCountInPart(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageValidationStatus impl_IChatMessageValidationResult<D>::Status() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageValidationStatus value {};
-    check_hresult(static_cast<const IChatMessageValidationResult &>(static_cast<const D &>(*this))->get_Status(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatMessageAttachment> impl_IChatMessage<D>::Attachments() const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatMessageAttachment> value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Attachments(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessage<D>::Body() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Body(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessage<D>::Body(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->put_Body(get(value)));
-}
-
-template <typename D> hstring impl_IChatMessage<D>::From() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_From(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessage<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IChatMessage<D>::IsForwardingDisabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_IsForwardingDisabled(&value));
-    return value;
-}
-
-template <typename D> bool impl_IChatMessage<D>::IsIncoming() const
-{
-    bool value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_IsIncoming(&value));
-    return value;
-}
-
-template <typename D> bool impl_IChatMessage<D>::IsRead() const
-{
-    bool value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_IsRead(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IChatMessage<D>::LocalTimestamp() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_LocalTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IChatMessage<D>::NetworkTimestamp() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_NetworkTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IChatMessage<D>::Recipients() const
-{
-    Windows::Foundation::Collections::IVector<hstring> value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Recipients(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, winrt::Windows::ApplicationModel::Chat::ChatMessageStatus> impl_IChatMessage<D>::RecipientSendStatuses() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, winrt::Windows::ApplicationModel::Chat::ChatMessageStatus> value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_RecipientSendStatuses(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageStatus impl_IChatMessage<D>::Status() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageStatus value {};
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Status(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessage<D>::Subject() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_Subject(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessage<D>::TransportFriendlyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_TransportFriendlyName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IChatMessage<D>::TransportId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->get_TransportId(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessage<D>::TransportId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage &>(static_cast<const D &>(*this))->put_TransportId(get(value)));
-}
-
-template <typename D> hstring impl_IChatMessage3<D>::RemoteId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessage3 &>(static_cast<const D &>(*this))->get_RemoteId(put(value)));
-    return value;
-}
-
-template <typename D> uint64_t impl_IChatMessage2<D>::EstimatedDownloadSize() const
-{
-    uint64_t result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_EstimatedDownloadSize(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::EstimatedDownloadSize(uint64_t value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_EstimatedDownloadSize(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::From(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_From(get(value)));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::IsAutoReply() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_IsAutoReply(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsAutoReply(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsAutoReply(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsForwardingDisabled(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsForwardingDisabled(value));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::IsReplyDisabled() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_IsReplyDisabled(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsIncoming(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsIncoming(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsRead(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsRead(value));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::IsSeen() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_IsSeen(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsSeen(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsSeen(value));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::IsSimMessage() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_IsSimMessage(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::LocalTimestamp(const Windows::Foundation::DateTime & value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_LocalTimestamp(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageKind impl_IChatMessage2<D>::MessageKind() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageKind result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_MessageKind(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::MessageKind(Windows::ApplicationModel::Chat::ChatMessageKind value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_MessageKind(value));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageOperatorKind impl_IChatMessage2<D>::MessageOperatorKind() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageOperatorKind result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_MessageOperatorKind(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::MessageOperatorKind(Windows::ApplicationModel::Chat::ChatMessageOperatorKind value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_MessageOperatorKind(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::NetworkTimestamp(const Windows::Foundation::DateTime & value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_NetworkTimestamp(get(value)));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::IsReceivedDuringQuietHours() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_IsReceivedDuringQuietHours(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::IsReceivedDuringQuietHours(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_IsReceivedDuringQuietHours(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::RemoteId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_RemoteId(get(value)));
-}
-
-template <typename D> void impl_IChatMessage2<D>::Status(Windows::ApplicationModel::Chat::ChatMessageStatus value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_Status(value));
-}
-
-template <typename D> void impl_IChatMessage2<D>::Subject(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_Subject(get(value)));
-}
-
-template <typename D> bool impl_IChatMessage2<D>::ShouldSuppressNotification() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_ShouldSuppressNotification(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::ShouldSuppressNotification(bool value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_ShouldSuppressNotification(value));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingInfo impl_IChatMessage2<D>::ThreadingInfo() const
-{
-    Windows::ApplicationModel::Chat::ChatConversationThreadingInfo result { nullptr };
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_ThreadingInfo(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage2<D>::ThreadingInfo(const Windows::ApplicationModel::Chat::ChatConversationThreadingInfo & value) const
-{
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->put_ThreadingInfo(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> impl_IChatMessage2<D>::RecipientsDeliveryInfos() const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> result;
-    check_hresult(static_cast<const IChatMessage2 &>(static_cast<const D &>(*this))->get_RecipientsDeliveryInfos(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IChatMessage4<D>::SyncId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatMessage4 &>(static_cast<const D &>(*this))->get_SyncId(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatMessage4<D>::SyncId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessage4 &>(static_cast<const D &>(*this))->put_SyncId(get(value)));
-}
-
-template <typename D> hstring impl_IChatQueryOptions<D>::SearchString() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatQueryOptions &>(static_cast<const D &>(*this))->get_SearchString(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatQueryOptions<D>::SearchString(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatQueryOptions &>(static_cast<const D &>(*this))->put_SearchString(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangeTracker impl_IChatMessageStore<D>::ChangeTracker() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageChangeTracker value { nullptr };
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->get_ChangeTracker(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore<D>::DeleteMessageAsync(hstring_ref localMessageId) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_DeleteMessageAsync(get(localMessageId), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore<D>::DownloadMessageAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_DownloadMessageAsync(get(localChatMessageId), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> impl_IChatMessageStore<D>::GetMessageAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_GetMessageAsync(get(localChatMessageId), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader impl_IChatMessageStore<D>::GetMessageReader() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageReader value { nullptr };
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_GetMessageReader1(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader impl_IChatMessageStore<D>::GetMessageReader(const Windows::Foundation::TimeSpan & recentTimeLimit) const
-{
-    Windows::ApplicationModel::Chat::ChatMessageReader value { nullptr };
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_GetMessageReader2(get(recentTimeLimit), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore<D>::MarkMessageReadAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_MarkMessageReadAsync(get(localChatMessageId), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore<D>::RetrySendMessageAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_RetrySendMessageAsync(get(localChatMessageId), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore<D>::SendMessageAsync(const Windows::ApplicationModel::Chat::ChatMessage & chatMessage) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_SendMessageAsync(get(chatMessage), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageValidationResult impl_IChatMessageStore<D>::ValidateMessage(const Windows::ApplicationModel::Chat::ChatMessage & chatMessage) const
-{
-    Windows::ApplicationModel::Chat::ChatMessageValidationResult value { nullptr };
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->abi_ValidateMessage(get(chatMessage), put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_IChatMessageStore<D>::MessageChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> & value) const
-{
-    event_token returnValue {};
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->add_MessageChanged(get(value), &returnValue));
-    return returnValue;
-}
-
-template <typename D> event_revoker<IChatMessageStore> impl_IChatMessageStore<D>::MessageChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> & value) const
-{
-    return impl::make_event_revoker<D, IChatMessageStore>(this, &ABI::Windows::ApplicationModel::Chat::IChatMessageStore::remove_MessageChanged, MessageChanged(value));
-}
-
-template <typename D> void impl_IChatMessageStore<D>::MessageChanged(event_token value) const
-{
-    check_hresult(static_cast<const IChatMessageStore &>(static_cast<const D &>(*this))->remove_MessageChanged(value));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> impl_IChatMessageStore2<D>::ForwardMessageAsync(hstring_ref localChatMessageId, const Windows::Foundation::Collections::IIterable<hstring> & addresses) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_ForwardMessageAsync(get(localChatMessageId), get(addresses), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> impl_IChatMessageStore2<D>::GetConversationAsync(hstring_ref conversationId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetConversationAsync(get(conversationId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> impl_IChatMessageStore2<D>::GetConversationAsync(hstring_ref conversationId, const Windows::Foundation::Collections::IIterable<hstring> & transportIds) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetConversationForTransportsAsync(get(conversationId), get(transportIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> impl_IChatMessageStore2<D>::GetConversationFromThreadingInfoAsync(const Windows::ApplicationModel::Chat::ChatConversationThreadingInfo & threadingInfo) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatConversation> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetConversationFromThreadingInfoAsync(get(threadingInfo), put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatConversationReader impl_IChatMessageStore2<D>::GetConversationReader() const
-{
-    Windows::ApplicationModel::Chat::ChatConversationReader result { nullptr };
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetConversationReader(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatConversationReader impl_IChatMessageStore2<D>::GetConversationReader(const Windows::Foundation::Collections::IIterable<hstring> & transportIds) const
-{
-    Windows::ApplicationModel::Chat::ChatConversationReader result { nullptr };
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetConversationForTransportsReader(get(transportIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> impl_IChatMessageStore2<D>::GetMessageByRemoteIdAsync(hstring_ref transportId, hstring_ref remoteId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetMessageByRemoteIdAsync(get(transportId), get(remoteId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<int32_t> impl_IChatMessageStore2<D>::GetUnseenCountAsync() const
-{
-    Windows::Foundation::IAsyncOperation<int32_t> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetUnseenCountAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<int32_t> impl_IChatMessageStore2<D>::GetUnseenCountAsync(const Windows::Foundation::Collections::IIterable<hstring> & transportIds) const
-{
-    Windows::Foundation::IAsyncOperation<int32_t> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetUnseenCountForTransportsReaderAsync(get(transportIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore2<D>::MarkAsSeenAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_MarkAsSeenAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore2<D>::MarkAsSeenAsync(const Windows::Foundation::Collections::IIterable<hstring> & transportIds) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_MarkAsSeenForTransportsAsync(get(transportIds), put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatSearchReader impl_IChatMessageStore2<D>::GetSearchReader(const Windows::ApplicationModel::Chat::ChatQueryOptions & value) const
-{
-    Windows::ApplicationModel::Chat::ChatSearchReader result { nullptr };
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_GetSearchReader(get(value), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageStore2<D>::SaveMessageAsync(const Windows::ApplicationModel::Chat::ChatMessage & chatMessage) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_SaveMessageAsync(get(chatMessage), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IChatMessageStore2<D>::TryCancelDownloadMessageAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncOperation<bool> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_TryCancelDownloadMessageAsync(get(localChatMessageId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IChatMessageStore2<D>::TryCancelSendMessageAsync(hstring_ref localChatMessageId) const
-{
-    Windows::Foundation::IAsyncOperation<bool> result;
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->abi_TryCancelSendMessageAsync(get(localChatMessageId), put(result)));
-    return result;
-}
-
-template <typename D> event_token impl_IChatMessageStore2<D>::StoreChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->add_StoreChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IChatMessageStore2> impl_IChatMessageStore2<D>::StoreChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatMessageStore, Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IChatMessageStore2>(this, &ABI::Windows::ApplicationModel::Chat::IChatMessageStore2::remove_StoreChanged, StoreChanged(handler));
-}
-
-template <typename D> void impl_IChatMessageStore2<D>::StoreChanged(event_token token) const
-{
-    check_hresult(static_cast<const IChatMessageStore2 &>(static_cast<const D &>(*this))->remove_StoreChanged(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> impl_IChatMessageStore3<D>::GetMessageBySyncIdAsync(hstring_ref syncId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessage> result;
-    check_hresult(static_cast<const IChatMessageStore3 &>(static_cast<const D &>(*this))->abi_GetMessageBySyncIdAsync(get(syncId), put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IChatMessageStoreChangedEventArgs<D>::Id() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatMessageStoreChangedEventArgs &>(static_cast<const D &>(*this))->get_Id(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatStoreChangedEventKind impl_IChatMessageStoreChangedEventArgs<D>::Kind() const
-{
-    Windows::ApplicationModel::Chat::ChatStoreChangedEventKind result {};
-    check_hresult(static_cast<const IChatMessageStoreChangedEventArgs &>(static_cast<const D &>(*this))->get_Kind(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageChangedDeferral impl_IChatMessageChangedEventArgs<D>::GetDeferral() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageChangedDeferral result { nullptr };
-    check_hresult(static_cast<const IChatMessageChangedEventArgs &>(static_cast<const D &>(*this))->abi_GetDeferral(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatMessageChangedDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const IChatMessageChangedDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageBlockingStatic<D>::MarkMessageAsBlockedAsync(hstring_ref localChatMessageId, bool blocked) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageBlockingStatic &>(static_cast<const D &>(*this))->abi_MarkMessageAsBlockedAsync(get(localChatMessageId), blocked, put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>> impl_IChatMessageManagerStatic<D>::GetTransportsAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>> value;
-    check_hresult(static_cast<const IChatMessageManagerStatic &>(static_cast<const D &>(*this))->abi_GetTransportsAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore> impl_IChatMessageManagerStatic<D>::RequestStoreAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore> value;
-    check_hresult(static_cast<const IChatMessageManagerStatic &>(static_cast<const D &>(*this))->abi_RequestStoreAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatMessageManagerStatic<D>::ShowComposeSmsMessageAsync(const Windows::ApplicationModel::Chat::ChatMessage & message) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IChatMessageManagerStatic &>(static_cast<const D &>(*this))->abi_ShowComposeSmsMessageAsync(get(message), put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageManagerStatic<D>::ShowSmsSettings() const
-{
-    check_hresult(static_cast<const IChatMessageManagerStatic &>(static_cast<const D &>(*this))->abi_ShowSmsSettings());
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_IChatMessageManager2Statics<D>::RegisterTransportAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> result;
-    check_hresult(static_cast<const IChatMessageManager2Statics &>(static_cast<const D &>(*this))->abi_RegisterTransportAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> impl_IChatMessageManager2Statics<D>::GetTransportAsync(hstring_ref transportId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> result;
-    check_hresult(static_cast<const IChatMessageManager2Statics &>(static_cast<const D &>(*this))->abi_GetTransportAsync(get(transportId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager> impl_IChatMessageManagerStatics3<D>::RequestSyncManagerAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager> result;
-    check_hresult(static_cast<const IChatMessageManagerStatics3 &>(static_cast<const D &>(*this))->abi_RequestSyncManagerAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> impl_IChatMessageReader<D>::ReadBatchAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> value;
-    check_hresult(static_cast<const IChatMessageReader &>(static_cast<const D &>(*this))->abi_ReadBatchAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> impl_IChatMessageReader2<D>::ReadBatchAsync(int32_t count) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessage>> result;
-    check_hresult(static_cast<const IChatMessageReader2 &>(static_cast<const D &>(*this))->abi_ReadBatchWithCountAsync(count, put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> impl_IChatSearchReader<D>::ReadBatchAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> result;
-    check_hresult(static_cast<const IChatSearchReader &>(static_cast<const D &>(*this))->abi_ReadBatchAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> impl_IChatSearchReader<D>::ReadBatchAsync(int32_t count) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::IChatItem>> result;
-    check_hresult(static_cast<const IChatSearchReader &>(static_cast<const D &>(*this))->abi_ReadBatchWithCountAsync(count, put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatItemKind impl_IChatItem<D>::ItemKind() const
-{
-    Windows::ApplicationModel::Chat::ChatItemKind result {};
-    check_hresult(static_cast<const IChatItem &>(static_cast<const D &>(*this))->get_ItemKind(&result));
-    return result;
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IChatMessageAttachment<D>::DataStreamReference() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->get_DataStreamReference(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageAttachment<D>::DataStreamReference(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->put_DataStreamReference(get(value)));
-}
-
-template <typename D> uint32_t impl_IChatMessageAttachment<D>::GroupId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->get_GroupId(&value));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageAttachment<D>::GroupId(uint32_t value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->put_GroupId(value));
-}
-
-template <typename D> hstring impl_IChatMessageAttachment<D>::MimeType() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->get_MimeType(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageAttachment<D>::MimeType(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->put_MimeType(get(value)));
-}
-
-template <typename D> hstring impl_IChatMessageAttachment<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IChatMessageAttachment<D>::Text(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment &>(static_cast<const D &>(*this))->put_Text(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IChatMessageAttachment2<D>::Thumbnail() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference result;
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->get_Thumbnail(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatMessageAttachment2<D>::Thumbnail(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->put_Thumbnail(get(value)));
-}
-
-template <typename D> double impl_IChatMessageAttachment2<D>::TransferProgress() const
-{
-    double result {};
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->get_TransferProgress(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatMessageAttachment2<D>::TransferProgress(double value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->put_TransferProgress(value));
-}
-
-template <typename D> hstring impl_IChatMessageAttachment2<D>::OriginalFileName() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->get_OriginalFileName(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatMessageAttachment2<D>::OriginalFileName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatMessageAttachment2 &>(static_cast<const D &>(*this))->put_OriginalFileName(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageAttachment impl_IChatMessageAttachmentFactory<D>::CreateChatMessageAttachment(hstring_ref mimeType, const Windows::Storage::Streams::IRandomAccessStreamReference & dataStreamReference) const
-{
-    Windows::ApplicationModel::Chat::ChatMessageAttachment value { nullptr };
-    check_hresult(static_cast<const IChatMessageAttachmentFactory &>(static_cast<const D &>(*this))->abi_CreateChatMessageAttachment(get(mimeType), get(dataStreamReference), put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessage impl_IChatMessageNotificationTriggerDetails<D>::ChatMessage() const
-{
-    Windows::ApplicationModel::Chat::ChatMessage value { nullptr };
-    check_hresult(static_cast<const IChatMessageNotificationTriggerDetails &>(static_cast<const D &>(*this))->get_ChatMessage(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IChatMessageNotificationTriggerDetails2<D>::ShouldDisplayToast() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessageNotificationTriggerDetails2 &>(static_cast<const D &>(*this))->get_ShouldDisplayToast(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateDetailText() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessageNotificationTriggerDetails2 &>(static_cast<const D &>(*this))->get_ShouldUpdateDetailText(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateBadge() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessageNotificationTriggerDetails2 &>(static_cast<const D &>(*this))->get_ShouldUpdateBadge(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatMessageNotificationTriggerDetails2<D>::ShouldUpdateActionCenter() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatMessageNotificationTriggerDetails2 &>(static_cast<const D &>(*this))->get_ShouldUpdateActionCenter(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatCapabilities<D>::IsOnline() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatCapabilities &>(static_cast<const D &>(*this))->get_IsOnline(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatCapabilities<D>::IsChatCapable() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatCapabilities &>(static_cast<const D &>(*this))->get_IsChatCapable(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatCapabilities<D>::IsFileTransferCapable() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatCapabilities &>(static_cast<const D &>(*this))->get_IsFileTransferCapable(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatCapabilities<D>::IsGeoLocationPushCapable() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatCapabilities &>(static_cast<const D &>(*this))->get_IsGeoLocationPushCapable(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatCapabilities<D>::IsIntegratedMessagingCapable() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatCapabilities &>(static_cast<const D &>(*this))->get_IsIntegratedMessagingCapable(&result));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> impl_IChatCapabilitiesManagerStatics<D>::GetCachedCapabilitiesAsync(hstring_ref address) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> result;
-    check_hresult(static_cast<const IChatCapabilitiesManagerStatics &>(static_cast<const D &>(*this))->abi_GetCachedCapabilitiesAsync(get(address), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> impl_IChatCapabilitiesManagerStatics<D>::GetCapabilitiesFromNetworkAsync(hstring_ref address) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> result;
-    check_hresult(static_cast<const IChatCapabilitiesManagerStatics &>(static_cast<const D &>(*this))->abi_GetCapabilitiesFromNetworkAsync(get(address), put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IChatRecipientDeliveryInfo<D>::TransportAddress() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_TransportAddress(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatRecipientDeliveryInfo<D>::TransportAddress(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->put_TransportAddress(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IChatRecipientDeliveryInfo<D>::DeliveryTime() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> result;
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_DeliveryTime(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatRecipientDeliveryInfo<D>::DeliveryTime(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->put_DeliveryTime(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IChatRecipientDeliveryInfo<D>::ReadTime() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> result;
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_ReadTime(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatRecipientDeliveryInfo<D>::ReadTime(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->put_ReadTime(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory impl_IChatRecipientDeliveryInfo<D>::TransportErrorCodeCategory() const
-{
-    Windows::ApplicationModel::Chat::ChatTransportErrorCodeCategory result {};
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_TransportErrorCodeCategory(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode impl_IChatRecipientDeliveryInfo<D>::TransportInterpretedErrorCode() const
-{
-    Windows::ApplicationModel::Chat::ChatTransportInterpretedErrorCode result {};
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_TransportInterpretedErrorCode(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IChatRecipientDeliveryInfo<D>::TransportErrorCode() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_TransportErrorCode(&result));
-    return result;
-}
-
-template <typename D> bool impl_IChatRecipientDeliveryInfo<D>::IsErrorPermanent() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_IsErrorPermanent(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageStatus impl_IChatRecipientDeliveryInfo<D>::Status() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageStatus result {};
-    check_hresult(static_cast<const IChatRecipientDeliveryInfo &>(static_cast<const D &>(*this))->get_Status(&result));
-    return result;
-}
-
-template <typename D> hstring impl_IChatConversationThreadingInfo<D>::ContactId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->get_ContactId(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatConversationThreadingInfo<D>::ContactId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->put_ContactId(get(value)));
-}
-
-template <typename D> hstring impl_IChatConversationThreadingInfo<D>::Custom() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->get_Custom(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatConversationThreadingInfo<D>::Custom(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->put_Custom(get(value)));
-}
-
-template <typename D> hstring impl_IChatConversationThreadingInfo<D>::ConversationId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->get_ConversationId(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatConversationThreadingInfo<D>::ConversationId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->put_ConversationId(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IChatConversationThreadingInfo<D>::Participants() const
-{
-    Windows::Foundation::Collections::IVector<hstring> result;
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->get_Participants(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingKind impl_IChatConversationThreadingInfo<D>::Kind() const
-{
-    Windows::ApplicationModel::Chat::ChatConversationThreadingKind result {};
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->get_Kind(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatConversationThreadingInfo<D>::Kind(Windows::ApplicationModel::Chat::ChatConversationThreadingKind value) const
-{
-    check_hresult(static_cast<const IChatConversationThreadingInfo &>(static_cast<const D &>(*this))->put_Kind(value));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> impl_IChatConversationReader<D>::ReadBatchAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> result;
-    check_hresult(static_cast<const IChatConversationReader &>(static_cast<const D &>(*this))->abi_ReadBatchAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> impl_IChatConversationReader<D>::ReadBatchAsync(int32_t count) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatConversation>> result;
-    check_hresult(static_cast<const IChatConversationReader &>(static_cast<const D &>(*this))->abi_ReadBatchWithCountAsync(count, put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IChatConversation<D>::HasUnreadMessages() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_HasUnreadMessages(&result));
-    return result;
-}
-
-template <typename D> hstring impl_IChatConversation<D>::Id() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_Id(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IChatConversation<D>::Subject() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_Subject(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatConversation<D>::Subject(hstring_ref value) const
-{
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->put_Subject(get(value)));
-}
-
-template <typename D> bool impl_IChatConversation<D>::IsConversationMuted() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_IsConversationMuted(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatConversation<D>::IsConversationMuted(bool value) const
-{
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->put_IsConversationMuted(value));
-}
-
-template <typename D> hstring impl_IChatConversation<D>::MostRecentMessageId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_MostRecentMessageId(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IChatConversation<D>::Participants() const
-{
-    Windows::Foundation::Collections::IVector<hstring> result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_Participants(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatConversationThreadingInfo impl_IChatConversation<D>::ThreadingInfo() const
-{
-    Windows::ApplicationModel::Chat::ChatConversationThreadingInfo result { nullptr };
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->get_ThreadingInfo(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatConversation<D>::DeleteAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_DeleteAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatMessageReader impl_IChatConversation<D>::GetMessageReader() const
-{
-    Windows::ApplicationModel::Chat::ChatMessageReader result { nullptr };
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_GetMessageReader(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatConversation<D>::MarkMessagesAsReadAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_MarkAllMessagesAsReadAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatConversation<D>::MarkMessagesAsReadAsync(const Windows::Foundation::DateTime & value) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_MarkMessagesAsReadAsync(get(value), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatConversation<D>::SaveAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_SaveAsync(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IChatConversation<D>::NotifyLocalParticipantComposing(hstring_ref transportId, hstring_ref participantAddress, bool isComposing) const
-{
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_NotifyLocalParticipantComposing(get(transportId), get(participantAddress), isComposing));
-}
-
-template <typename D> void impl_IChatConversation<D>::NotifyRemoteParticipantComposing(hstring_ref transportId, hstring_ref participantAddress, bool isComposing) const
-{
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->abi_NotifyRemoteParticipantComposing(get(transportId), get(participantAddress), isComposing));
-}
-
-template <typename D> event_token impl_IChatConversation<D>::RemoteParticipantComposingChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->add_RemoteParticipantComposingChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IChatConversation> impl_IChatConversation<D>::RemoteParticipantComposingChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::ChatConversation, Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IChatConversation>(this, &ABI::Windows::ApplicationModel::Chat::IChatConversation::remove_RemoteParticipantComposingChanged, RemoteParticipantComposingChanged(handler));
-}
-
-template <typename D> void impl_IChatConversation<D>::RemoteParticipantComposingChanged(event_token token) const
-{
-    check_hresult(static_cast<const IChatConversation &>(static_cast<const D &>(*this))->remove_RemoteParticipantComposingChanged(token));
-}
-
-template <typename D> bool impl_IChatConversation2<D>::CanModifyParticipants() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatConversation2 &>(static_cast<const D &>(*this))->get_CanModifyParticipants(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatConversation2<D>::CanModifyParticipants(bool value) const
-{
-    check_hresult(static_cast<const IChatConversation2 &>(static_cast<const D &>(*this))->put_CanModifyParticipants(value));
-}
-
-template <typename D> hstring impl_IRemoteParticipantComposingChangedEventArgs<D>::TransportId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRemoteParticipantComposingChangedEventArgs &>(static_cast<const D &>(*this))->get_TransportId(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRemoteParticipantComposingChangedEventArgs<D>::ParticipantAddress() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRemoteParticipantComposingChangedEventArgs &>(static_cast<const D &>(*this))->get_ParticipantAddress(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IRemoteParticipantComposingChangedEventArgs<D>::IsComposing() const
-{
-    bool result {};
-    check_hresult(static_cast<const IRemoteParticipantComposingChangedEventArgs &>(static_cast<const D &>(*this))->get_IsComposing(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatSyncConfiguration impl_IChatSyncManager<D>::Configuration() const
-{
-    Windows::ApplicationModel::Chat::ChatSyncConfiguration result { nullptr };
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->get_Configuration(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatSyncManager<D>::AssociateAccountAsync(const Windows::Security::Credentials::WebAccount & webAccount) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->abi_AssociateAccountAsync(get(webAccount), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatSyncManager<D>::UnassociateAccountAsync() const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->abi_UnassociateAccountAsync(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IChatSyncManager<D>::IsAccountAssociated(const Windows::Security::Credentials::WebAccount & webAccount) const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->abi_IsAccountAssociated(get(webAccount), &result));
-    return result;
-}
-
-template <typename D> void impl_IChatSyncManager<D>::StartSync() const
-{
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->abi_StartSync());
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IChatSyncManager<D>::SetConfigurationAsync(const Windows::ApplicationModel::Chat::ChatSyncConfiguration & configuration) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IChatSyncManager &>(static_cast<const D &>(*this))->abi_SetConfigurationAsync(get(configuration), put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IChatSyncConfiguration<D>::IsSyncEnabled() const
-{
-    bool result {};
-    check_hresult(static_cast<const IChatSyncConfiguration &>(static_cast<const D &>(*this))->get_IsSyncEnabled(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatSyncConfiguration<D>::IsSyncEnabled(bool value) const
-{
-    check_hresult(static_cast<const IChatSyncConfiguration &>(static_cast<const D &>(*this))->put_IsSyncEnabled(value));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::ChatRestoreHistorySpan impl_IChatSyncConfiguration<D>::RestoreHistorySpan() const
-{
-    Windows::ApplicationModel::Chat::ChatRestoreHistorySpan result {};
-    check_hresult(static_cast<const IChatSyncConfiguration &>(static_cast<const D &>(*this))->get_RestoreHistorySpan(&result));
-    return result;
-}
-
-template <typename D> void impl_IChatSyncConfiguration<D>::RestoreHistorySpan(Windows::ApplicationModel::Chat::ChatRestoreHistorySpan value) const
-{
-    check_hresult(static_cast<const IChatSyncConfiguration &>(static_cast<const D &>(*this))->put_RestoreHistorySpan(value));
-}
-
-template <typename D> Windows::ApplicationModel::Chat::RcsServiceKind impl_IRcsServiceKindSupportedChangedEventArgs<D>::ServiceKind() const
-{
-    Windows::ApplicationModel::Chat::RcsServiceKind result {};
-    check_hresult(static_cast<const IRcsServiceKindSupportedChangedEventArgs &>(static_cast<const D &>(*this))->get_ServiceKind(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::RcsEndUserMessageManager impl_IRcsManagerStatics<D>::GetEndUserMessageManager() const
-{
-    Windows::ApplicationModel::Chat::RcsEndUserMessageManager result { nullptr };
-    check_hresult(static_cast<const IRcsManagerStatics &>(static_cast<const D &>(*this))->abi_GetEndUserMessageManager(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>> impl_IRcsManagerStatics<D>::GetTransportsAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>> value;
-    check_hresult(static_cast<const IRcsManagerStatics &>(static_cast<const D &>(*this))->abi_GetTransportsAsync(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> impl_IRcsManagerStatics<D>::GetTransportAsync(hstring_ref transportId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> result;
-    check_hresult(static_cast<const IRcsManagerStatics &>(static_cast<const D &>(*this))->abi_GetTransportAsync(get(transportId), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IRcsManagerStatics<D>::LeaveConversationAsync(const Windows::ApplicationModel::Chat::ChatConversation & conversation) const
-{
-    Windows::Foundation::IAsyncAction value;
-    check_hresult(static_cast<const IRcsManagerStatics &>(static_cast<const D &>(*this))->abi_LeaveConversationAsync(get(conversation), put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> impl_IRcsTransport<D>::ExtendedProperties() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> value;
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->get_ExtendedProperties(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IRcsTransport<D>::IsActive() const
-{
-    bool value {};
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->get_IsActive(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IRcsTransport<D>::TransportFriendlyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->get_TransportFriendlyName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IRcsTransport<D>::TransportId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->get_TransportId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::RcsTransportConfiguration impl_IRcsTransport<D>::Configuration() const
-{
-    Windows::ApplicationModel::Chat::RcsTransportConfiguration result { nullptr };
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->get_Configuration(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IRcsTransport<D>::IsStoreAndForwardEnabled(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind) const
-{
-    bool result {};
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->abi_IsStoreAndForwardEnabled(serviceKind, &result));
-    return result;
-}
-
-template <typename D> bool impl_IRcsTransport<D>::IsServiceKindSupported(Windows::ApplicationModel::Chat::RcsServiceKind serviceKind) const
-{
-    bool result {};
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->abi_IsServiceKindSupported(serviceKind, &result));
-    return result;
-}
-
-template <typename D> event_token impl_IRcsTransport<D>::ServiceKindSupportedChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->add_ServiceKindSupportedChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IRcsTransport> impl_IRcsTransport<D>::ServiceKindSupportedChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsTransport, Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRcsTransport>(this, &ABI::Windows::ApplicationModel::Chat::IRcsTransport::remove_ServiceKindSupportedChanged, ServiceKindSupportedChanged(handler));
-}
-
-template <typename D> void impl_IRcsTransport<D>::ServiceKindSupportedChanged(event_token token) const
-{
-    check_hresult(static_cast<const IRcsTransport &>(static_cast<const D &>(*this))->remove_ServiceKindSupportedChanged(token));
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::MaxAttachmentCount() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxAttachmentCount(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::MaxMessageSizeInKilobytes() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxMessageSizeInKilobytes(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::MaxGroupMessageSizeInKilobytes() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxGroupMessageSizeInKilobytes(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::MaxRecipientCount() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxRecipientCount(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::MaxFileSizeInKilobytes() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_MaxFileSizeInKilobytes(&result));
-    return result;
-}
-
-template <typename D> int32_t impl_IRcsTransportConfiguration<D>::WarningFileSizeInKilobytes() const
-{
-    int32_t result {};
-    check_hresult(static_cast<const IRcsTransportConfiguration &>(static_cast<const D &>(*this))->get_WarningFileSizeInKilobytes(&result));
-    return result;
-}
-
-template <typename D> event_token impl_IRcsEndUserMessageManager<D>::MessageAvailableChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IRcsEndUserMessageManager &>(static_cast<const D &>(*this))->add_MessageAvailableChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IRcsEndUserMessageManager> impl_IRcsEndUserMessageManager<D>::MessageAvailableChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Chat::RcsEndUserMessageManager, Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRcsEndUserMessageManager>(this, &ABI::Windows::ApplicationModel::Chat::IRcsEndUserMessageManager::remove_MessageAvailableChanged, MessageAvailableChanged(handler));
-}
-
-template <typename D> void impl_IRcsEndUserMessageManager<D>::MessageAvailableChanged(event_token token) const
-{
-    check_hresult(static_cast<const IRcsEndUserMessageManager &>(static_cast<const D &>(*this))->remove_MessageAvailableChanged(token));
-}
-
-template <typename D> hstring impl_IRcsEndUserMessageAction<D>::Label() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRcsEndUserMessageAction &>(static_cast<const D &>(*this))->get_Label(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRcsEndUserMessage<D>::TransportId() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->get_TransportId(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRcsEndUserMessage<D>::Title() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->get_Title(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRcsEndUserMessage<D>::Text() const
-{
-    hstring result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->get_Text(put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IRcsEndUserMessage<D>::IsPinRequired() const
-{
-    bool result {};
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->get_IsPinRequired(&result));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsEndUserMessageAction> impl_IRcsEndUserMessage<D>::Actions() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsEndUserMessageAction> result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->get_Actions(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IRcsEndUserMessage<D>::SendResponseAsync(const Windows::ApplicationModel::Chat::RcsEndUserMessageAction & action) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->abi_SendResponseAsync(get(action), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IRcsEndUserMessage<D>::SendResponseWithPinAsync(const Windows::ApplicationModel::Chat::RcsEndUserMessageAction & action, hstring_ref pin) const
-{
-    Windows::Foundation::IAsyncAction result;
-    check_hresult(static_cast<const IRcsEndUserMessage &>(static_cast<const D &>(*this))->abi_SendResponseWithPinAsync(get(action), get(pin), put(result)));
-    return result;
-}
-
-template <typename D> bool impl_IRcsEndUserMessageAvailableEventArgs<D>::IsMessageAvailable() const
-{
-    bool result {};
-    check_hresult(static_cast<const IRcsEndUserMessageAvailableEventArgs &>(static_cast<const D &>(*this))->get_IsMessageAvailable(&result));
-    return result;
-}
-
-template <typename D> Windows::ApplicationModel::Chat::RcsEndUserMessage impl_IRcsEndUserMessageAvailableEventArgs<D>::Message() const
-{
-    Windows::ApplicationModel::Chat::RcsEndUserMessage result { nullptr };
-    check_hresult(static_cast<const IRcsEndUserMessageAvailableEventArgs &>(static_cast<const D &>(*this))->get_Message(put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRcsEndUserMessageAvailableTriggerDetails<D>::Title() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRcsEndUserMessageAvailableTriggerDetails &>(static_cast<const D &>(*this))->get_Title(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IRcsEndUserMessageAvailableTriggerDetails<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRcsEndUserMessageAvailableTriggerDetails &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> ChatCapabilitiesManager::GetCachedCapabilitiesAsync(hstring_ref address)
-{
-    return get_activation_factory<ChatCapabilitiesManager, IChatCapabilitiesManagerStatics>().GetCachedCapabilitiesAsync(address);
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatCapabilities> ChatCapabilitiesManager::GetCapabilitiesFromNetworkAsync(hstring_ref address)
-{
-    return get_activation_factory<ChatCapabilitiesManager, IChatCapabilitiesManagerStatics>().GetCapabilitiesFromNetworkAsync(address);
+    return get_activation_factory<ChatCapabilitiesManager, Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics>().GetCapabilitiesFromNetworkAsync(address);
 }
 
 inline ChatConversationThreadingInfo::ChatConversationThreadingInfo() :
@@ -5011,48 +4098,48 @@ inline ChatMessage::ChatMessage() :
     ChatMessage(activate_instance<ChatMessage>())
 {}
 
-inline ChatMessageAttachment::ChatMessageAttachment(hstring_ref mimeType, const Windows::Storage::Streams::IRandomAccessStreamReference & dataStreamReference) :
-    ChatMessageAttachment(get_activation_factory<ChatMessageAttachment, IChatMessageAttachmentFactory>().CreateChatMessageAttachment(mimeType, dataStreamReference))
+inline ChatMessageAttachment::ChatMessageAttachment(param::hstring const& mimeType, Windows::Storage::Streams::IRandomAccessStreamReference const& dataStreamReference) :
+    ChatMessageAttachment(get_activation_factory<ChatMessageAttachment, Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory>().CreateChatMessageAttachment(mimeType, dataStreamReference))
 {}
 
-inline Windows::Foundation::IAsyncAction ChatMessageBlocking::MarkMessageAsBlockedAsync(hstring_ref localChatMessageId, bool blocked)
+inline Windows::Foundation::IAsyncAction ChatMessageBlocking::MarkMessageAsBlockedAsync(param::hstring const& localChatMessageId, bool blocked)
 {
-    return get_activation_factory<ChatMessageBlocking, IChatMessageBlockingStatic>().MarkMessageAsBlockedAsync(localChatMessageId, blocked);
+    return get_activation_factory<ChatMessageBlocking, Windows::ApplicationModel::Chat::IChatMessageBlockingStatic>().MarkMessageAsBlockedAsync(localChatMessageId, blocked);
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> ChatMessageManager::RegisterTransportAsync()
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManager2Statics>().RegisterTransportAsync();
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManager2Statics>().RegisterTransportAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> ChatMessageManager::GetTransportAsync(hstring_ref transportId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageTransport> ChatMessageManager::GetTransportAsync(param::hstring const& transportId)
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManager2Statics>().GetTransportAsync(transportId);
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManager2Statics>().GetTransportAsync(transportId);
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::ChatMessageTransport>> ChatMessageManager::GetTransportsAsync()
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManagerStatic>().GetTransportsAsync();
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManagerStatic>().GetTransportsAsync();
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatMessageStore> ChatMessageManager::RequestStoreAsync()
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManagerStatic>().RequestStoreAsync();
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManagerStatic>().RequestStoreAsync();
 }
 
-inline Windows::Foundation::IAsyncAction ChatMessageManager::ShowComposeSmsMessageAsync(const Windows::ApplicationModel::Chat::ChatMessage & message)
+inline Windows::Foundation::IAsyncAction ChatMessageManager::ShowComposeSmsMessageAsync(Windows::ApplicationModel::Chat::ChatMessage const& message)
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManagerStatic>().ShowComposeSmsMessageAsync(message);
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManagerStatic>().ShowComposeSmsMessageAsync(message);
 }
 
 inline void ChatMessageManager::ShowSmsSettings()
 {
-    get_activation_factory<ChatMessageManager, IChatMessageManagerStatic>().ShowSmsSettings();
+    get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManagerStatic>().ShowSmsSettings();
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::ChatSyncManager> ChatMessageManager::RequestSyncManagerAsync()
 {
-    return get_activation_factory<ChatMessageManager, IChatMessageManagerStatics3>().RequestSyncManagerAsync();
+    return get_activation_factory<ChatMessageManager, Windows::ApplicationModel::Chat::IChatMessageManagerStatics3>().RequestSyncManagerAsync();
 }
 
 inline ChatQueryOptions::ChatQueryOptions() :
@@ -5065,24 +4152,286 @@ inline ChatRecipientDeliveryInfo::ChatRecipientDeliveryInfo() :
 
 inline Windows::ApplicationModel::Chat::RcsEndUserMessageManager RcsManager::GetEndUserMessageManager()
 {
-    return get_activation_factory<RcsManager, IRcsManagerStatics>().GetEndUserMessageManager();
+    return get_activation_factory<RcsManager, Windows::ApplicationModel::Chat::IRcsManagerStatics>().GetEndUserMessageManager();
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Chat::RcsTransport>> RcsManager::GetTransportsAsync()
 {
-    return get_activation_factory<RcsManager, IRcsManagerStatics>().GetTransportsAsync();
+    return get_activation_factory<RcsManager, Windows::ApplicationModel::Chat::IRcsManagerStatics>().GetTransportsAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> RcsManager::GetTransportAsync(hstring_ref transportId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Chat::RcsTransport> RcsManager::GetTransportAsync(param::hstring const& transportId)
 {
-    return get_activation_factory<RcsManager, IRcsManagerStatics>().GetTransportAsync(transportId);
+    return get_activation_factory<RcsManager, Windows::ApplicationModel::Chat::IRcsManagerStatics>().GetTransportAsync(transportId);
 }
 
-inline Windows::Foundation::IAsyncAction RcsManager::LeaveConversationAsync(const Windows::ApplicationModel::Chat::ChatConversation & conversation)
+inline Windows::Foundation::IAsyncAction RcsManager::LeaveConversationAsync(Windows::ApplicationModel::Chat::ChatConversation const& conversation)
 {
-    return get_activation_factory<RcsManager, IRcsManagerStatics>().LeaveConversationAsync(conversation);
+    return get_activation_factory<RcsManager, Windows::ApplicationModel::Chat::IRcsManagerStatics>().LeaveConversationAsync(conversation);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatCapabilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatCapabilities> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatCapabilitiesManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatConversation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatConversation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatConversation2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatConversation2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatConversationReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatConversationReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatConversationThreadingInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatItem> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessage2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessage2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessage3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessage3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessage4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessage4> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachment> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachment2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachment2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageAttachmentFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageBlockingStatic> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageBlockingStatic> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageChange> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageChange> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageChangeReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageChangeReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageChangeTracker> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageChangeTracker> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageChangedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageChangedDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageManager2Statics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageManager2Statics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageManagerStatic> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageManagerStatic> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageManagerStatics3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageManagerStatics3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageNotificationTriggerDetails2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageReader2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageReader2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageStore2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageStore2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageStore3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageStore3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageStoreChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageTransport> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageTransport> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageTransport2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageTransport2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageTransportConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatMessageValidationResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatMessageValidationResult> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatQueryOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatQueryOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatRecipientDeliveryInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatSearchReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatSearchReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatSyncConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatSyncConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IChatSyncManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IChatSyncManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAction> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageAvailableTriggerDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsEndUserMessageManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsServiceKindSupportedChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsServiceKindSupportedChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsTransport> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsTransport> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRcsTransportConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRcsTransportConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::IRemoteParticipantComposingChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatCapabilities> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatCapabilities> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatCapabilitiesManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatCapabilitiesManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatConversation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatConversation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatConversationReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatConversationReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatConversationThreadingInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatConversationThreadingInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageAttachment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageAttachment> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageBlocking> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageBlocking> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageChange> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageChange> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageChangeReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageChangeReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageChangeTracker> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageChangeTracker> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageChangedDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageChangedDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageNotificationTriggerDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageNotificationTriggerDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageStoreChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageTransport> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageTransport> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageTransportConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatMessageValidationResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatMessageValidationResult> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatQueryOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatQueryOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatRecipientDeliveryInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatSearchReader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatSearchReader> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatSyncConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatSyncConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::ChatSyncManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::ChatSyncManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAction> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableTriggerDetails> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageAvailableTriggerDetails> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsEndUserMessageManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsServiceKindSupportedChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsTransport> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsTransport> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RcsTransportConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RcsTransportConfiguration> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Chat::RemoteParticipantComposingChangedEventArgs> {};
+
 }
+
+WINRT_WARNING_POP

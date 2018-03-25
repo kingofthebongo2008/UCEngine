@@ -1,51 +1,997 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.UI.3.h"
-#include "internal/Windows.Security.EnterpriseData.3.h"
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.ApplicationModel.DataTransfer.3.h"
-#include "Windows.ApplicationModel.h"
-#include "Windows.Foundation.Collections.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Security.EnterpriseData.2.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.UI.2.h"
+#include "winrt/impl/Windows.Foundation.Collections.2.h"
+#include "winrt/impl/Windows.ApplicationModel.DataTransfer.2.h"
+#include "winrt/Windows.ApplicationModel.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace Windows::ApplicationModel::DataTransfer {
-
-template <typename L> DataProviderHandler::DataProviderHandler(L lambda) :
-    DataProviderHandler(impl::make_delegate<impl_DataProviderHandler<L>, DataProviderHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> DataProviderHandler::DataProviderHandler(F * function) :
-    DataProviderHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> DataProviderHandler::DataProviderHandler(O * object, M method) :
-    DataProviderHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void DataProviderHandler::operator()(const Windows::ApplicationModel::DataTransfer::DataProviderRequest & request) const
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::GetContent() const
 {
-    check_hresult((*this)->abi_Invoke(get(request)));
+    Windows::ApplicationModel::DataTransfer::DataPackageView content{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->GetContent(put_abi(content)));
+    return content;
 }
 
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::SetContent(Windows::ApplicationModel::DataTransfer::DataPackage const& content) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->SetContent(get_abi(content)));
 }
 
-namespace impl {
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::Flush() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->Flush());
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::Clear() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->Clear());
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::ContentChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->add_ContentChanged(get_abi(changeHandler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IClipboardStatics> consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::ContentChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IClipboardStatics>::remove_ContentChanged, ContentChanged(changeHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IClipboardStatics<D>::ContentChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IClipboardStatics)->remove_ContentChanged(get_abi(token)));
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::GetView() const
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageView value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->GetView(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySet consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::Properties() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackagePropertySet value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::RequestedOperation() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageOperation value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->get_RequestedOperation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->put_RequestedOperation(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::OperationCompleted(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> const& handler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->add_OperationCompleted(get_abi(handler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataPackage> consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::OperationCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataPackage>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataPackage>::remove_OperationCompleted, OperationCompleted(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::OperationCompleted(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->remove_OperationCompleted(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::Destroyed(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->add_Destroyed(get_abi(handler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataPackage> consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::Destroyed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataPackage>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataPackage>::remove_Destroyed, Destroyed(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::Destroyed(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->remove_Destroyed(get_abi(eventCookie)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetData(param::hstring const& formatId, Windows::Foundation::IInspectable const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetData(get_abi(formatId), get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetDataProvider(param::hstring const& formatId, Windows::ApplicationModel::DataTransfer::DataProviderHandler const& delayRenderer) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetDataProvider(get_abi(formatId), get_abi(delayRenderer)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetText(param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetText(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetUri(Windows::Foundation::Uri const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetUri(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetHtmlFormat(param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetHtmlFormat(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::Storage::Streams::RandomAccessStreamReference> consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::ResourceMap() const noexcept
+{
+    Windows::Foundation::Collections::IMap<hstring, Windows::Storage::Streams::RandomAccessStreamReference> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->get_ResourceMap(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetRtf(param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetRtf(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetBitmap(Windows::Storage::Streams::RandomAccessStreamReference const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetBitmap(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetStorageItems(param::iterable<Windows::Storage::IStorageItem> const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetStorageItemsReadOnly(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage<D>::SetStorageItems(param::iterable<Windows::Storage::IStorageItem> const& value, bool readOnly) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage)->SetStorageItems(get_abi(value), readOnly));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage2<D>::SetApplicationLink(Windows::Foundation::Uri const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage2)->SetApplicationLink(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage2<D>::SetWebLink(Windows::Foundation::Uri const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage2)->SetWebLink(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataPackage3<D>::ShareCompleted(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage3)->add_ShareCompleted(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataPackage3> consume_Windows_ApplicationModel_DataTransfer_IDataPackage3<D>::ShareCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataPackage3>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataPackage3>::remove_ShareCompleted, ShareCompleted(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackage3<D>::ShareCompleted(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackage3)->remove_ShareCompleted(get_abi(token)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Title() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Title(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->put_Title(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Description(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->put_Description(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Thumbnail() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_Thumbnail(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::Thumbnail(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->put_Thumbnail(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::FileTypes() const noexcept
+{
+    Windows::Foundation::Collections::IVector<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_FileTypes(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::ApplicationName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_ApplicationName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::ApplicationName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->put_ApplicationName(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::ApplicationListingUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->get_ApplicationListingUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet<D>::ApplicationListingUri(Windows::Foundation::Uri const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet)->put_ApplicationListingUri(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::ContentSourceWebLink() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->get_ContentSourceWebLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::ContentSourceWebLink(Windows::Foundation::Uri const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->put_ContentSourceWebLink(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::ContentSourceApplicationLink() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->get_ContentSourceApplicationLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::ContentSourceApplicationLink(Windows::Foundation::Uri const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->put_ContentSourceApplicationLink(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::PackageFamilyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->get_PackageFamilyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::PackageFamilyName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->put_PackageFamilyName(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::Square30x30Logo() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->get_Square30x30Logo(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::Square30x30Logo(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->put_Square30x30Logo(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::LogoBackgroundColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->get_LogoBackgroundColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2<D>::LogoBackgroundColor(Windows::UI::Color const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2)->put_LogoBackgroundColor(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3<D>::EnterpriseId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3)->get_EnterpriseId(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3<D>::EnterpriseId(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3)->put_EnterpriseId(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::Title() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::RandomAccessStreamReference consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::Thumbnail() const noexcept
+{
+    Windows::Storage::Streams::RandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_Thumbnail(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::FileTypes() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_FileTypes(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::ApplicationName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_ApplicationName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView<D>::ApplicationListingUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView)->get_ApplicationListingUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2<D>::PackageFamilyName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2)->get_PackageFamilyName(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2<D>::ContentSourceWebLink() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2)->get_ContentSourceWebLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2<D>::ContentSourceApplicationLink() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2)->get_ContentSourceApplicationLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2<D>::Square30x30Logo() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2)->get_Square30x30Logo(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2<D>::LogoBackgroundColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2)->get_LogoBackgroundColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView3<D>::EnterpriseId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView3)->get_EnterpriseId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::Properties() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::RequestedOperation() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageOperation value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->get_RequestedOperation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::ReportOperationCompleted(Windows::ApplicationModel::DataTransfer::DataPackageOperation const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->ReportOperationCompleted(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::AvailableFormats() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<hstring> formatIds{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->get_AvailableFormats(put_abi(formatIds)));
+    return formatIds;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::Contains(param::hstring const& formatId) const
+{
+    bool value{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->Contains(get_abi(formatId), &value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::IInspectable> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetDataAsync(param::hstring const& formatId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::IInspectable> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetDataAsync(get_abi(formatId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetTextAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetTextAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetTextAsync(param::hstring const& formatId) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetCustomTextAsync(get_abi(formatId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetUriAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetUriAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetHtmlFormatAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetHtmlFormatAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<hstring, Windows::Storage::Streams::RandomAccessStreamReference>> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetResourceMapAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<hstring, Windows::Storage::Streams::RandomAccessStreamReference>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetResourceMapAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetRtfAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetRtfAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::RandomAccessStreamReference> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetBitmapAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::RandomAccessStreamReference> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetBitmapAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem>> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView<D>::GetStorageItemsAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView)->GetStorageItemsAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView2<D>::GetApplicationLinkAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView2)->GetApplicationLinkAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView2<D>::GetWebLinkAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView2)->GetWebLinkAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView3<D>::RequestAccessAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView3)->RequestAccessAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> consume_Windows_ApplicationModel_DataTransfer_IDataPackageView3<D>::RequestAccessAsync(param::hstring const& enterpriseId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView3)->RequestAccessWithEnterpriseIdAsync(get_abi(enterpriseId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult consume_Windows_ApplicationModel_DataTransfer_IDataPackageView3<D>::UnlockAndAssumeEnterpriseIdentity() const
+{
+    Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult result{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView3)->UnlockAndAssumeEnterpriseIdentity(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataPackageView4<D>::SetAcceptedFormatId(param::hstring const& formatId) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataPackageView4)->SetAcceptedFormatId(get_abi(formatId)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataProviderDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataProviderDeferral)->Complete());
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IDataProviderRequest<D>::FormatId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataProviderRequest)->get_FormatId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_DataTransfer_IDataProviderRequest<D>::Deadline() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataProviderRequest)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataProviderDeferral consume_Windows_ApplicationModel_DataTransfer_IDataProviderRequest<D>::GetDeferral() const
+{
+    Windows::ApplicationModel::DataTransfer::DataProviderDeferral value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataProviderRequest)->GetDeferral(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataProviderRequest<D>::SetData(Windows::Foundation::IInspectable const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataProviderRequest)->SetData(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackage consume_Windows_ApplicationModel_DataTransfer_IDataRequest<D>::Data() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequest)->get_Data(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataRequest<D>::Data(Windows::ApplicationModel::DataTransfer::DataPackage const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequest)->put_Data(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_DataTransfer_IDataRequest<D>::Deadline() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequest)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataRequest<D>::FailWithDisplayText(param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequest)->FailWithDisplayText(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataRequestDeferral consume_Windows_ApplicationModel_DataTransfer_IDataRequest<D>::GetDeferral() const
+{
+    Windows::ApplicationModel::DataTransfer::DataRequestDeferral value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequest)->GetDeferral(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataRequestDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequestDeferral)->Complete());
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataRequest consume_Windows_ApplicationModel_DataTransfer_IDataRequestedEventArgs<D>::Request() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataRequest value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataRequestedEventArgs)->get_Request(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::DataRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager)->add_DataRequested(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataTransferManager> consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::DataRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataTransferManager>::remove_DataRequested, DataRequested(eventHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::DataRequested(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager)->remove_DataRequested(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::TargetApplicationChosen(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> const& eventHandler) const
+{
+    event_token eventCookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager)->add_TargetApplicationChosen(get_abi(eventHandler), put_abi(eventCookie)));
+    return eventCookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataTransferManager> consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::TargetApplicationChosen(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> const& eventHandler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataTransferManager>::remove_TargetApplicationChosen, TargetApplicationChosen(eventHandler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager<D>::TargetApplicationChosen(event_token const& eventCookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager)->remove_TargetApplicationChosen(get_abi(eventCookie)));
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager2<D>::ShareProvidersRequested(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::ShareProvidersRequestedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager2)->add_ShareProvidersRequested(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::DataTransfer::IDataTransferManager2> consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager2<D>::ShareProvidersRequested(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::ShareProvidersRequestedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager2>(this, &abi_t<Windows::ApplicationModel::DataTransfer::IDataTransferManager2>::remove_ShareProvidersRequested, ShareProvidersRequested(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataTransferManager2<D>::ShareProvidersRequested(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManager2)->remove_ShareProvidersRequested(get_abi(token)));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataTransferManagerStatics<D>::ShowShareUI() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics)->ShowShareUI());
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataTransferManager consume_Windows_ApplicationModel_DataTransfer_IDataTransferManagerStatics<D>::GetForCurrentView() const
+{
+    Windows::ApplicationModel::DataTransfer::DataTransferManager value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics)->GetForCurrentView(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_DataTransfer_IDataTransferManagerStatics2<D>::IsSupported() const
+{
+    bool value{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2)->IsSupported(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IDataTransferManagerStatics3<D>::ShowShareUI(Windows::ApplicationModel::DataTransfer::ShareUIOptions const& options) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3)->ShowShareUIWithOptions(get_abi(options)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IHtmlFormatHelperStatics<D>::GetStaticFragment(param::hstring const& htmlFormat) const
+{
+    hstring htmlFragment{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics)->GetStaticFragment(get_abi(htmlFormat), put_abi(htmlFragment)));
+    return htmlFragment;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IHtmlFormatHelperStatics<D>::CreateHtmlFormat(param::hstring const& htmlFragment) const
+{
+    hstring htmlFormat{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics)->CreateHtmlFormat(get_abi(htmlFragment), put_abi(htmlFormat)));
+    return htmlFormat;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation consume_Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs<D>::Operation() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageOperation value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs)->get_Operation(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs2<D>::AcceptedFormatId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2)->get_AcceptedFormatId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::ShareTargetInfo consume_Windows_ApplicationModel_DataTransfer_IShareCompletedEventArgs<D>::ShareTarget() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::ShareTargetInfo value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs)->get_ShareTarget(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IShareProvider<D>::Title() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvider)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Storage::Streams::RandomAccessStreamReference consume_Windows_ApplicationModel_DataTransfer_IShareProvider<D>::DisplayIcon() const noexcept
+{
+    Windows::Storage::Streams::RandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvider)->get_DisplayIcon(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_DataTransfer_IShareProvider<D>::BackgroundColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvider)->get_BackgroundColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_ApplicationModel_DataTransfer_IShareProvider<D>::Tag() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvider)->get_Tag(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IShareProvider<D>::Tag(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvider)->put_Tag(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::ShareProvider consume_Windows_ApplicationModel_DataTransfer_IShareProviderFactory<D>::Create(param::hstring const& title, Windows::Storage::Streams::RandomAccessStreamReference const& displayIcon, Windows::UI::Color const& backgroundColor, Windows::ApplicationModel::DataTransfer::ShareProviderHandler const& handler) const
+{
+    Windows::ApplicationModel::DataTransfer::ShareProvider result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProviderFactory)->Create(get_abi(title), get_abi(displayIcon), get_abi(backgroundColor), get_abi(handler), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView consume_Windows_ApplicationModel_DataTransfer_IShareProviderOperation<D>::Data() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageView value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProviderOperation)->get_Data(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::ShareProvider consume_Windows_ApplicationModel_DataTransfer_IShareProviderOperation<D>::Provider() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::ShareProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProviderOperation)->get_Provider(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IShareProviderOperation<D>::ReportCompleted() const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProviderOperation)->ReportCompleted());
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::DataTransfer::ShareProvider> consume_Windows_ApplicationModel_DataTransfer_IShareProvidersRequestedEventArgs<D>::Providers() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::DataTransfer::ShareProvider> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs)->get_Providers(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView consume_Windows_ApplicationModel_DataTransfer_IShareProvidersRequestedEventArgs<D>::Data() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::DataPackageView value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs)->get_Data(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Deferral consume_Windows_ApplicationModel_DataTransfer_IShareProvidersRequestedEventArgs<D>::GetDeferral() const
+{
+    Windows::Foundation::Deferral value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs)->GetDeferral(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IShareTargetInfo<D>::AppUserModelId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareTargetInfo)->get_AppUserModelId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::ShareProvider consume_Windows_ApplicationModel_DataTransfer_IShareTargetInfo<D>::ShareProvider() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::ShareProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareTargetInfo)->get_ShareProvider(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::DataTransfer::ShareUITheme consume_Windows_ApplicationModel_DataTransfer_IShareUIOptions<D>::Theme() const noexcept
+{
+    Windows::ApplicationModel::DataTransfer::ShareUITheme value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareUIOptions)->get_Theme(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IShareUIOptions<D>::Theme(Windows::ApplicationModel::DataTransfer::ShareUITheme const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareUIOptions)->put_Theme(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::Rect> consume_Windows_ApplicationModel_DataTransfer_IShareUIOptions<D>::SelectionRect() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::Rect> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareUIOptions)->get_SelectionRect(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_IShareUIOptions<D>::SelectionRect(optional<Windows::Foundation::Rect> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IShareUIOptions)->put_SelectionRect(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_ISharedStorageAccessManagerStatics<D>::AddFile(Windows::Storage::IStorageFile const& file) const
+{
+    hstring outToken{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics)->AddFile(get_abi(file), put_abi(outToken)));
+    return outToken;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> consume_Windows_ApplicationModel_DataTransfer_ISharedStorageAccessManagerStatics<D>::RedeemTokenForFileAsync(param::hstring const& token) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics)->RedeemTokenForFileAsync(get_abi(token), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_DataTransfer_ISharedStorageAccessManagerStatics<D>::RemoveFile(param::hstring const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics)->RemoveFile(get_abi(token)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_Text(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::Uri() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_Uri(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::Html() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_Html(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::Rtf() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_Rtf(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::Bitmap() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_Bitmap(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics<D>::StorageItems() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics)->get_StorageItems(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics2<D>::WebLink() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2)->get_WebLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_IStandardDataFormatsStatics2<D>::ApplicationLink() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2)->get_ApplicationLink(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_DataTransfer_ITargetApplicationChosenEventArgs<D>::ApplicationName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::DataTransfer::ITargetApplicationChosenEventArgs)->get_ApplicationName(put_abi(value)));
+    return value;
+}
+
+template <> struct delegate<Windows::ApplicationModel::DataTransfer::DataProviderHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::ApplicationModel::DataTransfer::DataProviderHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::ApplicationModel::DataTransfer::DataProviderHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* request) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataProviderRequest const*>(&request));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
+
+template <> struct delegate<Windows::ApplicationModel::DataTransfer::ShareProviderHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::ApplicationModel::DataTransfer::ShareProviderHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::ApplicationModel::DataTransfer::ShareProviderHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke(::IUnknown* operation) noexcept final
+        {
+            try
+            {
+                (*this)(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::ShareProviderOperation const*>(&operation));
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : produce_base<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics>
 {
-    HRESULT __stdcall abi_GetContent(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackageView> content) noexcept override
+    HRESULT __stdcall GetContent(::IUnknown** content) noexcept final
     {
         try
         {
-            *content = detach(this->shim().GetContent());
+            typename D::abi_guard guard(this->shim());
+            *content = detach_abi(this->shim().GetContent());
             return S_OK;
         }
         catch (...)
@@ -55,11 +1001,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
         }
     }
 
-    HRESULT __stdcall abi_SetContent(abi_arg_in<Windows::ApplicationModel::DataTransfer::IDataPackage> content) noexcept override
+    HRESULT __stdcall SetContent(::IUnknown* content) noexcept final
     {
         try
         {
-            this->shim().SetContent(*reinterpret_cast<const Windows::ApplicationModel::DataTransfer::DataPackage *>(&content));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetContent(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataPackage const*>(&content));
             return S_OK;
         }
         catch (...)
@@ -68,10 +1015,11 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
         }
     }
 
-    HRESULT __stdcall abi_Flush() noexcept override
+    HRESULT __stdcall Flush() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Flush();
             return S_OK;
         }
@@ -81,10 +1029,11 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
         }
     }
 
-    HRESULT __stdcall abi_Clear() noexcept override
+    HRESULT __stdcall Clear() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Clear();
             return S_OK;
         }
@@ -94,11 +1043,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
         }
     }
 
-    HRESULT __stdcall add_ContentChanged(abi_arg_in<Windows::Foundation::EventHandler<Windows::IInspectable>> changeHandler, event_token * token) noexcept override
+    HRESULT __stdcall add_ContentChanged(::IUnknown* changeHandler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ContentChanged(*reinterpret_cast<const Windows::Foundation::EventHandler<Windows::IInspectable> *>(&changeHandler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ContentChanged(*reinterpret_cast<Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const*>(&changeHandler)));
             return S_OK;
         }
         catch (...)
@@ -107,11 +1057,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
         }
     }
 
-    HRESULT __stdcall remove_ContentChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_ContentChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().ContentChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ContentChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -124,11 +1075,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackage>
 {
-    HRESULT __stdcall abi_GetView(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackageView> value) noexcept override
+    HRESULT __stdcall GetView(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetView());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetView());
             return S_OK;
         }
         catch (...)
@@ -138,38 +1090,33 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation * value) noexcept override
+    HRESULT __stdcall get_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestedOperation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestedOperation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) noexcept override
+    HRESULT __stdcall put_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().RequestedOperation(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataPackageOperation const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_OperationCompleted(::IUnknown* handler, event_token* eventCookie) noexcept final
     {
         try
         {
-            this->shim().RequestedOperation(value);
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().OperationCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -178,11 +1125,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall add_OperationCompleted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs>> handler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall remove_OperationCompleted(event_token eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().OperationCompleted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().OperationCompleted(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -191,11 +1139,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall remove_OperationCompleted(event_token eventCookie) noexcept override
+    HRESULT __stdcall add_Destroyed(::IUnknown* handler, event_token* eventCookie) noexcept final
     {
         try
         {
-            this->shim().OperationCompleted(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().Destroyed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -204,11 +1153,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall add_Destroyed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::IInspectable>> handler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall remove_Destroyed(event_token eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().Destroyed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().Destroyed(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -217,11 +1167,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall remove_Destroyed(event_token eventCookie) noexcept override
+    HRESULT __stdcall SetData(HSTRING formatId, ::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().Destroyed(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetData(*reinterpret_cast<hstring const*>(&formatId), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -230,11 +1181,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetData(abi_arg_in<hstring> formatId, abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall SetDataProvider(HSTRING formatId, ::IUnknown* delayRenderer) noexcept final
     {
         try
         {
-            this->shim().SetData(*reinterpret_cast<const hstring *>(&formatId), *reinterpret_cast<const Windows::IInspectable *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetDataProvider(*reinterpret_cast<hstring const*>(&formatId), *reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataProviderHandler const*>(&delayRenderer));
             return S_OK;
         }
         catch (...)
@@ -243,11 +1195,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetDataProvider(abi_arg_in<hstring> formatId, abi_arg_in<Windows::ApplicationModel::DataTransfer::DataProviderHandler> delayRenderer) noexcept override
+    HRESULT __stdcall SetText(HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetDataProvider(*reinterpret_cast<const hstring *>(&formatId), *reinterpret_cast<const Windows::ApplicationModel::DataTransfer::DataProviderHandler *>(&delayRenderer));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetText(*reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -256,11 +1209,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetText(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall SetUri(::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().SetText(*reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetUri(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -269,11 +1223,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetUri(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall SetHtmlFormat(HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetUri(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetHtmlFormat(*reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -282,11 +1237,19 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetHtmlFormat(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall get_ResourceMap(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResourceMap());
+        return S_OK;
+    }
+
+    HRESULT __stdcall SetRtf(HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetHtmlFormat(*reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetRtf(*reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -295,25 +1258,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall get_ResourceMap(abi_arg_out<Windows::Foundation::Collections::IMap<hstring, Windows::Storage::Streams::RandomAccessStreamReference>> value) noexcept override
+    HRESULT __stdcall SetBitmap(::IUnknown* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ResourceMap());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SetRtf(abi_arg_in<hstring> value) noexcept override
-    {
-        try
-        {
-            this->shim().SetRtf(*reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetBitmap(*reinterpret_cast<Windows::Storage::Streams::RandomAccessStreamReference const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -322,11 +1272,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetBitmap(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall SetStorageItemsReadOnly(::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().SetBitmap(*reinterpret_cast<const Windows::Storage::Streams::RandomAccessStreamReference *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetStorageItems(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -335,24 +1286,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetStorageItemsReadOnly(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem>> value) noexcept override
+    HRESULT __stdcall SetStorageItems(::IUnknown* value, bool readOnly) noexcept final
     {
         try
         {
-            this->shim().SetStorageItems(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SetStorageItems(abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem>> value, bool readOnly) noexcept override
-    {
-        try
-        {
-            this->shim().SetStorageItems(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> *>(&value), readOnly);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetStorageItems(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> const*>(&value), readOnly);
             return S_OK;
         }
         catch (...)
@@ -365,11 +1304,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage> : produ
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackage2>
 {
-    HRESULT __stdcall abi_SetApplicationLink(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall SetApplicationLink(::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().SetApplicationLink(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetApplicationLink(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -378,11 +1318,44 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage2> : prod
         }
     }
 
-    HRESULT __stdcall abi_SetWebLink(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall SetWebLink(::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().SetWebLink(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetWebLink(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage3> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackage3>
+{
+    HRESULT __stdcall add_ShareCompleted(::IUnknown* handler, event_token* token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ShareCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs> const*>(&handler)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall remove_ShareCompleted(event_token token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ShareCompleted(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -395,539 +1368,295 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackage2> : prod
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet>
 {
-    HRESULT __stdcall get_Title(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Title(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Title());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Title());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Title(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Title(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Title(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Title(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Description(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Description(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Description(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Description(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Thumbnail(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Thumbnail(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Thumbnail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Thumbnail());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Thumbnail(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Thumbnail(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Thumbnail(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Thumbnail(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FileTypes(abi_arg_out<Windows::Foundation::Collections::IVector<hstring>> value) noexcept override
+    HRESULT __stdcall get_FileTypes(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FileTypes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FileTypes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ApplicationName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ApplicationName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ApplicationName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_ApplicationName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().ApplicationName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ApplicationName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ApplicationListingUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ApplicationListingUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationListingUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationListingUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ApplicationListingUri(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall put_ApplicationListingUri(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ApplicationListingUri(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ApplicationListingUri(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2>
 {
-    HRESULT __stdcall get_ContentSourceWebLink(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ContentSourceWebLink(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContentSourceWebLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContentSourceWebLink());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContentSourceWebLink(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall put_ContentSourceWebLink(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ContentSourceWebLink(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContentSourceWebLink(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContentSourceApplicationLink(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ContentSourceApplicationLink(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContentSourceApplicationLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContentSourceApplicationLink());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ContentSourceApplicationLink(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall put_ContentSourceApplicationLink(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ContentSourceApplicationLink(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ContentSourceApplicationLink(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PackageFamilyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_PackageFamilyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PackageFamilyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PackageFamilyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PackageFamilyName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_PackageFamilyName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().PackageFamilyName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PackageFamilyName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Square30x30Logo(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Square30x30Logo(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Square30x30Logo());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Square30x30Logo());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Square30x30Logo(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Square30x30Logo(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Square30x30Logo(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Square30x30Logo(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LogoBackgroundColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_LogoBackgroundColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LogoBackgroundColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LogoBackgroundColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_LogoBackgroundColor(abi_arg_in<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall put_LogoBackgroundColor(struct_of<4> value) noexcept final
     {
-        try
-        {
-            this->shim().LogoBackgroundColor(*reinterpret_cast<const Windows::UI::Color *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().LogoBackgroundColor(*reinterpret_cast<Windows::UI::Color const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3>
 {
-    HRESULT __stdcall get_EnterpriseId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_EnterpriseId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().EnterpriseId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().EnterpriseId());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_EnterpriseId(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_EnterpriseId(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().EnterpriseId(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().EnterpriseId(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView>
 {
-    HRESULT __stdcall get_Title(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Title(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Title());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Title());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Thumbnail(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Thumbnail(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Thumbnail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Thumbnail());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FileTypes(abi_arg_out<Windows::Foundation::Collections::IVectorView<hstring>> value) noexcept override
+    HRESULT __stdcall get_FileTypes(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FileTypes());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FileTypes());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ApplicationName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ApplicationName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ApplicationListingUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ApplicationListingUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationListingUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationListingUri());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2>
 {
-    HRESULT __stdcall get_PackageFamilyName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_PackageFamilyName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PackageFamilyName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PackageFamilyName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContentSourceWebLink(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ContentSourceWebLink(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContentSourceWebLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContentSourceWebLink());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContentSourceApplicationLink(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ContentSourceApplicationLink(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContentSourceApplicationLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContentSourceApplicationLink());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Square30x30Logo(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Square30x30Logo(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Square30x30Logo());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Square30x30Logo());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LogoBackgroundColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_LogoBackgroundColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LogoBackgroundColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LogoBackgroundColor());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView3> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView3>
 {
-    HRESULT __stdcall get_EnterpriseId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_EnterpriseId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().EnterpriseId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().EnterpriseId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackageView>
 {
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation * value) noexcept override
+    HRESULT __stdcall get_RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestedOperation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestedOperation());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_ReportOperationCompleted(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) noexcept override
+    HRESULT __stdcall ReportOperationCompleted(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) noexcept final
     {
         try
         {
-            this->shim().ReportOperationCompleted(value);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ReportOperationCompleted(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataPackageOperation const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -936,25 +1665,19 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall get_AvailableFormats(abi_arg_out<Windows::Foundation::Collections::IVectorView<hstring>> formatIds) noexcept override
+    HRESULT __stdcall get_AvailableFormats(::IUnknown** formatIds) noexcept final
     {
-        try
-        {
-            *formatIds = detach(this->shim().AvailableFormats());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *formatIds = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *formatIds = detach_abi(this->shim().AvailableFormats());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Contains(abi_arg_in<hstring> formatId, bool * value) noexcept override
+    HRESULT __stdcall Contains(HSTRING formatId, bool* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Contains(*reinterpret_cast<const hstring *>(&formatId)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Contains(*reinterpret_cast<hstring const*>(&formatId)));
             return S_OK;
         }
         catch (...)
@@ -963,11 +1686,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetDataAsync(abi_arg_in<hstring> formatId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::IInspectable>> operation) noexcept override
+    HRESULT __stdcall GetDataAsync(HSTRING formatId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetDataAsync(*reinterpret_cast<const hstring *>(&formatId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetDataAsync(*reinterpret_cast<hstring const*>(&formatId)));
             return S_OK;
         }
         catch (...)
@@ -977,11 +1701,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetTextAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetTextAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetTextAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetTextAsync());
             return S_OK;
         }
         catch (...)
@@ -991,11 +1716,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetCustomTextAsync(abi_arg_in<hstring> formatId, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetCustomTextAsync(HSTRING formatId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetTextAsync(*reinterpret_cast<const hstring *>(&formatId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetTextAsync(*reinterpret_cast<hstring const*>(&formatId)));
             return S_OK;
         }
         catch (...)
@@ -1005,11 +1731,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetUriAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri>> operation) noexcept override
+    HRESULT __stdcall GetUriAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetUriAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetUriAsync());
             return S_OK;
         }
         catch (...)
@@ -1019,11 +1746,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetHtmlFormatAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetHtmlFormatAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetHtmlFormatAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetHtmlFormatAsync());
             return S_OK;
         }
         catch (...)
@@ -1033,11 +1761,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetResourceMapAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<hstring, Windows::Storage::Streams::RandomAccessStreamReference>>> operation) noexcept override
+    HRESULT __stdcall GetResourceMapAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetResourceMapAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetResourceMapAsync());
             return S_OK;
         }
         catch (...)
@@ -1047,11 +1776,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetRtfAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetRtfAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetRtfAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetRtfAsync());
             return S_OK;
         }
         catch (...)
@@ -1061,11 +1791,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetBitmapAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::RandomAccessStreamReference>> operation) noexcept override
+    HRESULT __stdcall GetBitmapAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetBitmapAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetBitmapAsync());
             return S_OK;
         }
         catch (...)
@@ -1075,11 +1806,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
         }
     }
 
-    HRESULT __stdcall abi_GetStorageItemsAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem>>> operation) noexcept override
+    HRESULT __stdcall GetStorageItemsAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetStorageItemsAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetStorageItemsAsync());
             return S_OK;
         }
         catch (...)
@@ -1093,11 +1825,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView> : p
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackageView2>
 {
-    HRESULT __stdcall abi_GetApplicationLinkAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri>> operation) noexcept override
+    HRESULT __stdcall GetApplicationLinkAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetApplicationLinkAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetApplicationLinkAsync());
             return S_OK;
         }
         catch (...)
@@ -1107,11 +1840,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView2> : 
         }
     }
 
-    HRESULT __stdcall abi_GetWebLinkAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri>> operation) noexcept override
+    HRESULT __stdcall GetWebLinkAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetWebLinkAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetWebLinkAsync());
             return S_OK;
         }
         catch (...)
@@ -1125,11 +1859,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView2> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView3> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackageView3>
 {
-    HRESULT __stdcall abi_RequestAccessAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult>> operation) noexcept override
+    HRESULT __stdcall RequestAccessAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().RequestAccessAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestAccessAsync());
             return S_OK;
         }
         catch (...)
@@ -1139,11 +1874,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView3> : 
         }
     }
 
-    HRESULT __stdcall abi_RequestAccessWithEnterpriseIdAsync(abi_arg_in<hstring> enterpriseId, abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult>> operation) noexcept override
+    HRESULT __stdcall RequestAccessWithEnterpriseIdAsync(HSTRING enterpriseId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().RequestAccessAsync(*reinterpret_cast<const hstring *>(&enterpriseId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestAccessAsync(*reinterpret_cast<hstring const*>(&enterpriseId)));
             return S_OK;
         }
         catch (...)
@@ -1153,11 +1889,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView3> : 
         }
     }
 
-    HRESULT __stdcall abi_UnlockAndAssumeEnterpriseIdentity(Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult * result) noexcept override
+    HRESULT __stdcall UnlockAndAssumeEnterpriseIdentity(Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().UnlockAndAssumeEnterpriseIdentity());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().UnlockAndAssumeEnterpriseIdentity());
             return S_OK;
         }
         catch (...)
@@ -1170,11 +1907,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView3> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView4> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataPackageView4>
 {
-    HRESULT __stdcall abi_SetAcceptedFormatId(abi_arg_in<hstring> formatId) noexcept override
+    HRESULT __stdcall SetAcceptedFormatId(HSTRING formatId) noexcept final
     {
         try
         {
-            this->shim().SetAcceptedFormatId(*reinterpret_cast<const hstring *>(&formatId));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetAcceptedFormatId(*reinterpret_cast<hstring const*>(&formatId));
             return S_OK;
         }
         catch (...)
@@ -1187,10 +1925,11 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataPackageView4> : 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataProviderDeferral> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataProviderDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -1204,11 +1943,26 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataProviderDeferral
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataProviderRequest> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataProviderRequest>
 {
-    HRESULT __stdcall get_FormatId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FormatId(HSTRING* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FormatId());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Deadline(Windows::Foundation::DateTime* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Deadline());
+        return S_OK;
+    }
+
+    HRESULT __stdcall GetDeferral(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().FormatId());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -1218,38 +1972,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataProviderRequest>
         }
     }
 
-    HRESULT __stdcall get_Deadline(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall SetData(::IUnknown* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Deadline());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataProviderDeferral> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().GetDeferral());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SetData(abi_arg_in<Windows::IInspectable> value) noexcept override
-    {
-        try
-        {
-            this->shim().SetData(*reinterpret_cast<const Windows::IInspectable *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetData(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -1262,38 +1990,33 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataProviderRequest>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequest> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataRequest>
 {
-    HRESULT __stdcall get_Data(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataPackage> value) noexcept override
+    HRESULT __stdcall get_Data(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Data());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Data());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Data(abi_arg_in<Windows::ApplicationModel::DataTransfer::IDataPackage> value) noexcept override
+    HRESULT __stdcall put_Data(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Data(*reinterpret_cast<const Windows::ApplicationModel::DataTransfer::DataPackage *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Data(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::DataPackage const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Deadline(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Deadline(Windows::Foundation::DateTime* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Deadline());
+        return S_OK;
+    }
+
+    HRESULT __stdcall FailWithDisplayText(HSTRING value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Deadline());
+            typename D::abi_guard guard(this->shim());
+            this->shim().FailWithDisplayText(*reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -1302,24 +2025,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequest> : produ
         }
     }
 
-    HRESULT __stdcall abi_FailWithDisplayText(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall GetDeferral(::IUnknown** value) noexcept final
     {
         try
         {
-            this->shim().FailWithDisplayText(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetDeferral(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataRequestDeferral> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().GetDeferral());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -1333,10 +2044,11 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequest> : produ
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequestDeferral> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataRequestDeferral>
 {
-    HRESULT __stdcall abi_Complete() noexcept override
+    HRESULT __stdcall Complete() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Complete();
             return S_OK;
         }
@@ -1350,29 +2062,23 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequestDeferral>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataRequestedEventArgs> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataRequestedEventArgs>
 {
-    HRESULT __stdcall get_Request(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataRequest> value) noexcept override
+    HRESULT __stdcall get_Request(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Request());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Request());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>
 {
-    HRESULT __stdcall add_DataRequested(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_DataRequested(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().DataRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().DataRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -1381,11 +2087,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>
         }
     }
 
-    HRESULT __stdcall remove_DataRequested(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_DataRequested(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().DataRequested(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().DataRequested(*reinterpret_cast<event_token const*>(&eventCookie));
             return S_OK;
         }
         catch (...)
@@ -1394,11 +2101,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>
         }
     }
 
-    HRESULT __stdcall add_TargetApplicationChosen(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs>> eventHandler, event_token * eventCookie) noexcept override
+    HRESULT __stdcall add_TargetApplicationChosen(::IUnknown* eventHandler, event_token* eventCookie) noexcept final
     {
         try
         {
-            *eventCookie = detach(this->shim().TargetApplicationChosen(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> *>(&eventHandler)));
+            typename D::abi_guard guard(this->shim());
+            *eventCookie = detach_abi(this->shim().TargetApplicationChosen(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> const*>(&eventHandler)));
             return S_OK;
         }
         catch (...)
@@ -1407,11 +2115,44 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>
         }
     }
 
-    HRESULT __stdcall remove_TargetApplicationChosen(event_token eventCookie) noexcept override
+    HRESULT __stdcall remove_TargetApplicationChosen(event_token eventCookie) noexcept final
     {
         try
         {
-            this->shim().TargetApplicationChosen(eventCookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().TargetApplicationChosen(*reinterpret_cast<event_token const*>(&eventCookie));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager2>
+{
+    HRESULT __stdcall add_ShareProvidersRequested(::IUnknown* handler, event_token* token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ShareProvidersRequested(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::ShareProvidersRequestedEventArgs> const*>(&handler)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall remove_ShareProvidersRequested(event_token token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ShareProvidersRequested(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1424,10 +2165,11 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManager>
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics>
 {
-    HRESULT __stdcall abi_ShowShareUI() noexcept override
+    HRESULT __stdcall ShowShareUI() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowShareUI();
             return S_OK;
         }
@@ -1437,11 +2179,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerS
         }
     }
 
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::ApplicationModel::DataTransfer::IDataTransferManager> value) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -1455,11 +2198,30 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerS
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2>
 {
-    HRESULT __stdcall abi_IsSupported(bool * value) noexcept override
+    HRESULT __stdcall IsSupported(bool* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsSupported());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().IsSupported());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3> : produce_base<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3>
+{
+    HRESULT __stdcall ShowShareUIWithOptions(::IUnknown* options) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ShowShareUI(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::ShareUIOptions const*>(&options));
             return S_OK;
         }
         catch (...)
@@ -1472,11 +2234,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IDataTransferManagerS
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics> : produce_base<D, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics>
 {
-    HRESULT __stdcall abi_GetStaticFragment(abi_arg_in<hstring> htmlFormat, abi_arg_out<hstring> htmlFragment) noexcept override
+    HRESULT __stdcall GetStaticFragment(HSTRING htmlFormat, HSTRING* htmlFragment) noexcept final
     {
         try
         {
-            *htmlFragment = detach(this->shim().GetStaticFragment(*reinterpret_cast<const hstring *>(&htmlFormat)));
+            typename D::abi_guard guard(this->shim());
+            *htmlFragment = detach_abi(this->shim().GetStaticFragment(*reinterpret_cast<hstring const*>(&htmlFormat)));
             return S_OK;
         }
         catch (...)
@@ -1486,11 +2249,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStat
         }
     }
 
-    HRESULT __stdcall abi_CreateHtmlFormat(abi_arg_in<hstring> htmlFragment, abi_arg_out<hstring> htmlFormat) noexcept override
+    HRESULT __stdcall CreateHtmlFormat(HSTRING htmlFragment, HSTRING* htmlFormat) noexcept final
     {
         try
         {
-            *htmlFormat = detach(this->shim().CreateHtmlFormat(*reinterpret_cast<const hstring *>(&htmlFragment)));
+            typename D::abi_guard guard(this->shim());
+            *htmlFormat = detach_abi(this->shim().CreateHtmlFormat(*reinterpret_cast<hstring const*>(&htmlFragment)));
             return S_OK;
         }
         catch (...)
@@ -1504,11 +2268,117 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStat
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs> : produce_base<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs>
 {
-    HRESULT __stdcall get_Operation(Windows::ApplicationModel::DataTransfer::DataPackageOperation * value) noexcept override
+    HRESULT __stdcall get_Operation(Windows::ApplicationModel::DataTransfer::DataPackageOperation* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Operation());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2>
+{
+    HRESULT __stdcall get_AcceptedFormatId(HSTRING* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AcceptedFormatId());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs>
+{
+    HRESULT __stdcall get_ShareTarget(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ShareTarget());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareProvider> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareProvider>
+{
+    HRESULT __stdcall get_Title(HSTRING* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Title());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_DisplayIcon(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayIcon());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_BackgroundColor(struct_of<4>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BackgroundColor());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Tag(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Tag());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_Tag(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Tag(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareProviderFactory> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareProviderFactory>
+{
+    HRESULT __stdcall Create(HSTRING title, ::IUnknown* displayIcon, struct_of<4> backgroundColor, ::IUnknown* handler, ::IUnknown** result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Operation());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().Create(*reinterpret_cast<hstring const*>(&title), *reinterpret_cast<Windows::Storage::Streams::RandomAccessStreamReference const*>(&displayIcon), *reinterpret_cast<Windows::UI::Color const*>(&backgroundColor), *reinterpret_cast<Windows::ApplicationModel::DataTransfer::ShareProviderHandler const*>(&handler)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *result = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareProviderOperation> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareProviderOperation>
+{
+    HRESULT __stdcall get_Data(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Data());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Provider(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Provider());
+        return S_OK;
+    }
+
+    HRESULT __stdcall ReportCompleted() noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ReportCompleted();
             return S_OK;
         }
         catch (...)
@@ -1519,13 +2389,28 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEv
 };
 
 template <typename D>
-struct produce<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs>
 {
-    HRESULT __stdcall get_AcceptedFormatId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Providers(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Providers());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Data(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Data());
+        return S_OK;
+    }
+
+    HRESULT __stdcall GetDeferral(::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().AcceptedFormatId());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDeferral());
             return S_OK;
         }
         catch (...)
@@ -1537,13 +2422,64 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::IOperationCompletedEv
 };
 
 template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareTargetInfo> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareTargetInfo>
+{
+    HRESULT __stdcall get_AppUserModelId(HSTRING* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AppUserModelId());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ShareProvider(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ShareProvider());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::ApplicationModel::DataTransfer::IShareUIOptions> : produce_base<D, Windows::ApplicationModel::DataTransfer::IShareUIOptions>
+{
+    HRESULT __stdcall get_Theme(Windows::ApplicationModel::DataTransfer::ShareUITheme* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Theme());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_Theme(Windows::ApplicationModel::DataTransfer::ShareUITheme value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Theme(*reinterpret_cast<Windows::ApplicationModel::DataTransfer::ShareUITheme const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SelectionRect(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectionRect());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_SelectionRect(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().SelectionRect(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::Rect> const*>(&value));
+        return S_OK;
+    }
+};
+
+template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics> : produce_base<D, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics>
 {
-    HRESULT __stdcall abi_AddFile(abi_arg_in<Windows::Storage::IStorageFile> file, abi_arg_out<hstring> outToken) noexcept override
+    HRESULT __stdcall AddFile(::IUnknown* file, HSTRING* outToken) noexcept final
     {
         try
         {
-            *outToken = detach(this->shim().AddFile(*reinterpret_cast<const Windows::Storage::IStorageFile *>(&file)));
+            typename D::abi_guard guard(this->shim());
+            *outToken = detach_abi(this->shim().AddFile(*reinterpret_cast<Windows::Storage::IStorageFile const*>(&file)));
             return S_OK;
         }
         catch (...)
@@ -1553,11 +2489,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessM
         }
     }
 
-    HRESULT __stdcall abi_RedeemTokenForFileAsync(abi_arg_in<hstring> token, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile>> operation) noexcept override
+    HRESULT __stdcall RedeemTokenForFileAsync(HSTRING token, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().RedeemTokenForFileAsync(*reinterpret_cast<const hstring *>(&token)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RedeemTokenForFileAsync(*reinterpret_cast<hstring const*>(&token)));
             return S_OK;
         }
         catch (...)
@@ -1567,11 +2504,12 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessM
         }
     }
 
-    HRESULT __stdcall abi_RemoveFile(abi_arg_in<hstring> token) noexcept override
+    HRESULT __stdcall RemoveFile(HSTRING token) noexcept final
     {
         try
         {
-            this->shim().RemoveFile(*reinterpret_cast<const hstring *>(&token));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RemoveFile(*reinterpret_cast<hstring const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1584,936 +2522,116 @@ struct produce<D, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessM
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics> : produce_base<D, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>
 {
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Uri(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Uri(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Uri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Uri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Html(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Html(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Html());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Html());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Rtf(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Rtf(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Rtf());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Rtf());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Bitmap(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Bitmap(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Bitmap());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Bitmap());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StorageItems(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_StorageItems(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StorageItems());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StorageItems());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2> : produce_base<D, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2>
 {
-    HRESULT __stdcall get_WebLink(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_WebLink(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().WebLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().WebLink());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ApplicationLink(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ApplicationLink(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationLink());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationLink());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::DataTransfer::ITargetApplicationChosenEventArgs> : produce_base<D, Windows::ApplicationModel::DataTransfer::ITargetApplicationChosenEventArgs>
 {
-    HRESULT __stdcall get_ApplicationName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ApplicationName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ApplicationName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ApplicationName());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::ApplicationModel::DataTransfer {
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::Uri() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_Uri(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::Html() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_Html(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::Rtf() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_Rtf(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::Bitmap() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_Bitmap(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics<D>::StorageItems() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics &>(static_cast<const D &>(*this))->get_StorageItems(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics2<D>::WebLink() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics2 &>(static_cast<const D &>(*this))->get_WebLink(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStandardDataFormatsStatics2<D>::ApplicationLink() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStandardDataFormatsStatics2 &>(static_cast<const D &>(*this))->get_ApplicationLink(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySetView<D>::Title() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_Title(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySetView<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::RandomAccessStreamReference impl_IDataPackagePropertySetView<D>::Thumbnail() const
-{
-    Windows::Storage::Streams::RandomAccessStreamReference value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_Thumbnail(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<hstring> impl_IDataPackagePropertySetView<D>::FileTypes() const
-{
-    Windows::Foundation::Collections::IVectorView<hstring> value;
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_FileTypes(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySetView<D>::ApplicationName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_ApplicationName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySetView<D>::ApplicationListingUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySetView &>(static_cast<const D &>(*this))->get_ApplicationListingUri(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySetView2<D>::PackageFamilyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySetView2 &>(static_cast<const D &>(*this))->get_PackageFamilyName(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySetView2<D>::ContentSourceWebLink() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySetView2 &>(static_cast<const D &>(*this))->get_ContentSourceWebLink(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySetView2<D>::ContentSourceApplicationLink() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySetView2 &>(static_cast<const D &>(*this))->get_ContentSourceApplicationLink(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IDataPackagePropertySetView2<D>::Square30x30Logo() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IDataPackagePropertySetView2 &>(static_cast<const D &>(*this))->get_Square30x30Logo(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IDataPackagePropertySetView2<D>::LogoBackgroundColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IDataPackagePropertySetView2 &>(static_cast<const D &>(*this))->get_LogoBackgroundColor(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySetView3<D>::EnterpriseId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySetView3 &>(static_cast<const D &>(*this))->get_EnterpriseId(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySet<D>::Title() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_Title(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet<D>::Title(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->put_Title(get(value)));
-}
-
-template <typename D> hstring impl_IDataPackagePropertySet<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet<D>::Description(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->put_Description(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IDataPackagePropertySet<D>::Thumbnail() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_Thumbnail(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet<D>::Thumbnail(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->put_Thumbnail(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<hstring> impl_IDataPackagePropertySet<D>::FileTypes() const
-{
-    Windows::Foundation::Collections::IVector<hstring> value;
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_FileTypes(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IDataPackagePropertySet<D>::ApplicationName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_ApplicationName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet<D>::ApplicationName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->put_ApplicationName(get(value)));
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySet<D>::ApplicationListingUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->get_ApplicationListingUri(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet<D>::ApplicationListingUri(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet &>(static_cast<const D &>(*this))->put_ApplicationListingUri(get(value)));
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySet2<D>::ContentSourceWebLink() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->get_ContentSourceWebLink(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet2<D>::ContentSourceWebLink(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->put_ContentSourceWebLink(get(value)));
-}
-
-template <typename D> Windows::Foundation::Uri impl_IDataPackagePropertySet2<D>::ContentSourceApplicationLink() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->get_ContentSourceApplicationLink(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet2<D>::ContentSourceApplicationLink(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->put_ContentSourceApplicationLink(get(value)));
-}
-
-template <typename D> hstring impl_IDataPackagePropertySet2<D>::PackageFamilyName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->get_PackageFamilyName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet2<D>::PackageFamilyName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->put_PackageFamilyName(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IDataPackagePropertySet2<D>::Square30x30Logo() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->get_Square30x30Logo(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet2<D>::Square30x30Logo(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->put_Square30x30Logo(get(value)));
-}
-
-template <typename D> Windows::UI::Color impl_IDataPackagePropertySet2<D>::LogoBackgroundColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->get_LogoBackgroundColor(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet2<D>::LogoBackgroundColor(const Windows::UI::Color & value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet2 &>(static_cast<const D &>(*this))->put_LogoBackgroundColor(get(value)));
-}
-
-template <typename D> hstring impl_IDataPackagePropertySet3<D>::EnterpriseId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataPackagePropertySet3 &>(static_cast<const D &>(*this))->get_EnterpriseId(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackagePropertySet3<D>::EnterpriseId(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackagePropertySet3 &>(static_cast<const D &>(*this))->put_EnterpriseId(get(value)));
-}
-
-template <typename D> void impl_IDataProviderDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const IDataProviderDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> hstring impl_IDataProviderRequest<D>::FormatId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDataProviderRequest &>(static_cast<const D &>(*this))->get_FormatId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IDataProviderRequest<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IDataProviderRequest &>(static_cast<const D &>(*this))->get_Deadline(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataProviderDeferral impl_IDataProviderRequest<D>::GetDeferral() const
-{
-    Windows::ApplicationModel::DataTransfer::DataProviderDeferral value { nullptr };
-    check_hresult(static_cast<const IDataProviderRequest &>(static_cast<const D &>(*this))->abi_GetDeferral(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataProviderRequest<D>::SetData(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IDataProviderRequest &>(static_cast<const D &>(*this))->abi_SetData(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation impl_IOperationCompletedEventArgs<D>::Operation() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackageOperation value {};
-    check_hresult(static_cast<const IOperationCompletedEventArgs &>(static_cast<const D &>(*this))->get_Operation(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IOperationCompletedEventArgs2<D>::AcceptedFormatId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IOperationCompletedEventArgs2 &>(static_cast<const D &>(*this))->get_AcceptedFormatId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView impl_IDataPackageView<D>::Properties() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView value { nullptr };
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation impl_IDataPackageView<D>::RequestedOperation() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackageOperation value {};
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->get_RequestedOperation(&value));
-    return value;
-}
-
-template <typename D> void impl_IDataPackageView<D>::ReportOperationCompleted(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) const
-{
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_ReportOperationCompleted(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<hstring> impl_IDataPackageView<D>::AvailableFormats() const
-{
-    Windows::Foundation::Collections::IVectorView<hstring> formatIds;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->get_AvailableFormats(put(formatIds)));
-    return formatIds;
-}
-
-template <typename D> bool impl_IDataPackageView<D>::Contains(hstring_ref formatId) const
-{
-    bool value {};
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_Contains(get(formatId), &value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::IInspectable> impl_IDataPackageView<D>::GetDataAsync(hstring_ref formatId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::IInspectable> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetDataAsync(get(formatId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_IDataPackageView<D>::GetTextAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetTextAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_IDataPackageView<D>::GetTextAsync(hstring_ref formatId) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetCustomTextAsync(get(formatId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> impl_IDataPackageView<D>::GetUriAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetUriAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_IDataPackageView<D>::GetHtmlFormatAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetHtmlFormatAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<hstring, Windows::Storage::Streams::RandomAccessStreamReference>> impl_IDataPackageView<D>::GetResourceMapAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IMapView<hstring, Windows::Storage::Streams::RandomAccessStreamReference>> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetResourceMapAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_IDataPackageView<D>::GetRtfAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetRtfAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::RandomAccessStreamReference> impl_IDataPackageView<D>::GetBitmapAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::RandomAccessStreamReference> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetBitmapAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem>> impl_IDataPackageView<D>::GetStorageItemsAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::IStorageItem>> operation;
-    check_hresult(static_cast<const IDataPackageView &>(static_cast<const D &>(*this))->abi_GetStorageItemsAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> impl_IDataPackageView2<D>::GetApplicationLinkAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation;
-    check_hresult(static_cast<const IDataPackageView2 &>(static_cast<const D &>(*this))->abi_GetApplicationLinkAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> impl_IDataPackageView2<D>::GetWebLinkAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Uri> operation;
-    check_hresult(static_cast<const IDataPackageView2 &>(static_cast<const D &>(*this))->abi_GetWebLinkAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> impl_IDataPackageView3<D>::RequestAccessAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> operation;
-    check_hresult(static_cast<const IDataPackageView3 &>(static_cast<const D &>(*this))->abi_RequestAccessAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> impl_IDataPackageView3<D>::RequestAccessAsync(hstring_ref enterpriseId) const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult> operation;
-    check_hresult(static_cast<const IDataPackageView3 &>(static_cast<const D &>(*this))->abi_RequestAccessWithEnterpriseIdAsync(get(enterpriseId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult impl_IDataPackageView3<D>::UnlockAndAssumeEnterpriseIdentity() const
-{
-    Windows::Security::EnterpriseData::ProtectionPolicyEvaluationResult result {};
-    check_hresult(static_cast<const IDataPackageView3 &>(static_cast<const D &>(*this))->abi_UnlockAndAssumeEnterpriseIdentity(&result));
-    return result;
-}
-
-template <typename D> void impl_IDataPackageView4<D>::SetAcceptedFormatId(hstring_ref formatId) const
-{
-    check_hresult(static_cast<const IDataPackageView4 &>(static_cast<const D &>(*this))->abi_SetAcceptedFormatId(get(formatId)));
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView impl_IDataPackage<D>::GetView() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackageView value { nullptr };
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_GetView(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackagePropertySet impl_IDataPackage<D>::Properties() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackagePropertySet value { nullptr };
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageOperation impl_IDataPackage<D>::RequestedOperation() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackageOperation value {};
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->get_RequestedOperation(&value));
-    return value;
-}
-
-template <typename D> void impl_IDataPackage<D>::RequestedOperation(Windows::ApplicationModel::DataTransfer::DataPackageOperation value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->put_RequestedOperation(value));
-}
-
-template <typename D> event_token impl_IDataPackage<D>::OperationCompleted(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> & handler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->add_OperationCompleted(get(handler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IDataPackage> impl_IDataPackage<D>::OperationCompleted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IDataPackage>(this, &ABI::Windows::ApplicationModel::DataTransfer::IDataPackage::remove_OperationCompleted, OperationCompleted(handler));
-}
-
-template <typename D> void impl_IDataPackage<D>::OperationCompleted(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->remove_OperationCompleted(eventCookie));
-}
-
-template <typename D> event_token impl_IDataPackage<D>::Destroyed(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::IInspectable> & handler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->add_Destroyed(get(handler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IDataPackage> impl_IDataPackage<D>::Destroyed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataPackage, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IDataPackage>(this, &ABI::Windows::ApplicationModel::DataTransfer::IDataPackage::remove_Destroyed, Destroyed(handler));
-}
-
-template <typename D> void impl_IDataPackage<D>::Destroyed(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->remove_Destroyed(eventCookie));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetData(hstring_ref formatId, const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetData(get(formatId), get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetDataProvider(hstring_ref formatId, const Windows::ApplicationModel::DataTransfer::DataProviderHandler & delayRenderer) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetDataProvider(get(formatId), get(delayRenderer)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetText(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetText(get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetUri(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetUri(get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetHtmlFormat(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetHtmlFormat(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::Storage::Streams::RandomAccessStreamReference> impl_IDataPackage<D>::ResourceMap() const
-{
-    Windows::Foundation::Collections::IMap<hstring, Windows::Storage::Streams::RandomAccessStreamReference> value;
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->get_ResourceMap(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataPackage<D>::SetRtf(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetRtf(get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetBitmap(const Windows::Storage::Streams::RandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetBitmap(get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetStorageItems(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> & value) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetStorageItemsReadOnly(get(value)));
-}
-
-template <typename D> void impl_IDataPackage<D>::SetStorageItems(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageItem> & value, bool readOnly) const
-{
-    check_hresult(static_cast<const IDataPackage &>(static_cast<const D &>(*this))->abi_SetStorageItems(get(value), readOnly));
-}
-
-template <typename D> void impl_IDataPackage2<D>::SetApplicationLink(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackage2 &>(static_cast<const D &>(*this))->abi_SetApplicationLink(get(value)));
-}
-
-template <typename D> void impl_IDataPackage2<D>::SetWebLink(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IDataPackage2 &>(static_cast<const D &>(*this))->abi_SetWebLink(get(value)));
-}
-
-template <typename D> hstring impl_IHtmlFormatHelperStatics<D>::GetStaticFragment(hstring_ref htmlFormat) const
-{
-    hstring htmlFragment;
-    check_hresult(static_cast<const IHtmlFormatHelperStatics &>(static_cast<const D &>(*this))->abi_GetStaticFragment(get(htmlFormat), put(htmlFragment)));
-    return htmlFragment;
-}
-
-template <typename D> hstring impl_IHtmlFormatHelperStatics<D>::CreateHtmlFormat(hstring_ref htmlFragment) const
-{
-    hstring htmlFormat;
-    check_hresult(static_cast<const IHtmlFormatHelperStatics &>(static_cast<const D &>(*this))->abi_CreateHtmlFormat(get(htmlFragment), put(htmlFormat)));
-    return htmlFormat;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackageView impl_IClipboardStatics<D>::GetContent() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackageView content { nullptr };
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->abi_GetContent(put(content)));
-    return content;
-}
-
-template <typename D> void impl_IClipboardStatics<D>::SetContent(const Windows::ApplicationModel::DataTransfer::DataPackage & content) const
-{
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->abi_SetContent(get(content)));
-}
-
-template <typename D> void impl_IClipboardStatics<D>::Flush() const
-{
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->abi_Flush());
-}
-
-template <typename D> void impl_IClipboardStatics<D>::Clear() const
-{
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->abi_Clear());
-}
-
-template <typename D> event_token impl_IClipboardStatics<D>::ContentChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->add_ContentChanged(get(changeHandler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IClipboardStatics> impl_IClipboardStatics<D>::ContentChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler) const
-{
-    return impl::make_event_revoker<D, IClipboardStatics>(this, &ABI::Windows::ApplicationModel::DataTransfer::IClipboardStatics::remove_ContentChanged, ContentChanged(changeHandler));
-}
-
-template <typename D> void impl_IClipboardStatics<D>::ContentChanged(event_token token) const
-{
-    check_hresult(static_cast<const IClipboardStatics &>(static_cast<const D &>(*this))->remove_ContentChanged(token));
-}
-
-template <typename D> void impl_IDataRequestDeferral<D>::Complete() const
-{
-    check_hresult(static_cast<const IDataRequestDeferral &>(static_cast<const D &>(*this))->abi_Complete());
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataPackage impl_IDataRequest<D>::Data() const
-{
-    Windows::ApplicationModel::DataTransfer::DataPackage value { nullptr };
-    check_hresult(static_cast<const IDataRequest &>(static_cast<const D &>(*this))->get_Data(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataRequest<D>::Data(const Windows::ApplicationModel::DataTransfer::DataPackage & value) const
-{
-    check_hresult(static_cast<const IDataRequest &>(static_cast<const D &>(*this))->put_Data(get(value)));
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IDataRequest<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IDataRequest &>(static_cast<const D &>(*this))->get_Deadline(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IDataRequest<D>::FailWithDisplayText(hstring_ref value) const
-{
-    check_hresult(static_cast<const IDataRequest &>(static_cast<const D &>(*this))->abi_FailWithDisplayText(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataRequestDeferral impl_IDataRequest<D>::GetDeferral() const
-{
-    Windows::ApplicationModel::DataTransfer::DataRequestDeferral value { nullptr };
-    check_hresult(static_cast<const IDataRequest &>(static_cast<const D &>(*this))->abi_GetDeferral(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataRequest impl_IDataRequestedEventArgs<D>::Request() const
-{
-    Windows::ApplicationModel::DataTransfer::DataRequest value { nullptr };
-    check_hresult(static_cast<const IDataRequestedEventArgs &>(static_cast<const D &>(*this))->get_Request(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ITargetApplicationChosenEventArgs<D>::ApplicationName() const
-{
-    hstring value;
-    check_hresult(static_cast<const ITargetApplicationChosenEventArgs &>(static_cast<const D &>(*this))->get_ApplicationName(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_IDataTransferManager<D>::DataRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IDataTransferManager &>(static_cast<const D &>(*this))->add_DataRequested(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IDataTransferManager> impl_IDataTransferManager<D>::DataRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IDataTransferManager>(this, &ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager::remove_DataRequested, DataRequested(eventHandler));
-}
-
-template <typename D> void impl_IDataTransferManager<D>::DataRequested(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IDataTransferManager &>(static_cast<const D &>(*this))->remove_DataRequested(eventCookie));
-}
-
-template <typename D> event_token impl_IDataTransferManager<D>::TargetApplicationChosen(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> & eventHandler) const
-{
-    event_token eventCookie {};
-    check_hresult(static_cast<const IDataTransferManager &>(static_cast<const D &>(*this))->add_TargetApplicationChosen(get(eventHandler), &eventCookie));
-    return eventCookie;
-}
-
-template <typename D> event_revoker<IDataTransferManager> impl_IDataTransferManager<D>::TargetApplicationChosen(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> & eventHandler) const
-{
-    return impl::make_event_revoker<D, IDataTransferManager>(this, &ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager::remove_TargetApplicationChosen, TargetApplicationChosen(eventHandler));
-}
-
-template <typename D> void impl_IDataTransferManager<D>::TargetApplicationChosen(event_token eventCookie) const
-{
-    check_hresult(static_cast<const IDataTransferManager &>(static_cast<const D &>(*this))->remove_TargetApplicationChosen(eventCookie));
-}
-
-template <typename D> void impl_IDataTransferManagerStatics<D>::ShowShareUI() const
-{
-    check_hresult(static_cast<const IDataTransferManagerStatics &>(static_cast<const D &>(*this))->abi_ShowShareUI());
-}
-
-template <typename D> Windows::ApplicationModel::DataTransfer::DataTransferManager impl_IDataTransferManagerStatics<D>::GetForCurrentView() const
-{
-    Windows::ApplicationModel::DataTransfer::DataTransferManager value { nullptr };
-    check_hresult(static_cast<const IDataTransferManagerStatics &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IDataTransferManagerStatics2<D>::IsSupported() const
-{
-    bool value {};
-    check_hresult(static_cast<const IDataTransferManagerStatics2 &>(static_cast<const D &>(*this))->abi_IsSupported(&value));
-    return value;
-}
-
-template <typename D> hstring impl_ISharedStorageAccessManagerStatics<D>::AddFile(const Windows::Storage::IStorageFile & file) const
-{
-    hstring outToken;
-    check_hresult(static_cast<const ISharedStorageAccessManagerStatics &>(static_cast<const D &>(*this))->abi_AddFile(get(file), put(outToken)));
-    return outToken;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> impl_ISharedStorageAccessManagerStatics<D>::RedeemTokenForFileAsync(hstring_ref token) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> operation;
-    check_hresult(static_cast<const ISharedStorageAccessManagerStatics &>(static_cast<const D &>(*this))->abi_RedeemTokenForFileAsync(get(token), put(operation)));
-    return operation;
-}
-
-template <typename D> void impl_ISharedStorageAccessManagerStatics<D>::RemoveFile(hstring_ref token) const
-{
-    check_hresult(static_cast<const ISharedStorageAccessManagerStatics &>(static_cast<const D &>(*this))->abi_RemoveFile(get(token)));
-}
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::DataTransfer {
 
 inline Windows::ApplicationModel::DataTransfer::DataPackageView Clipboard::GetContent()
 {
-    return get_activation_factory<Clipboard, IClipboardStatics>().GetContent();
+    return get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().GetContent();
 }
 
-inline void Clipboard::SetContent(const Windows::ApplicationModel::DataTransfer::DataPackage & content)
+inline void Clipboard::SetContent(Windows::ApplicationModel::DataTransfer::DataPackage const& content)
 {
-    get_activation_factory<Clipboard, IClipboardStatics>().SetContent(content);
+    get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().SetContent(content);
 }
 
 inline void Clipboard::Flush()
 {
-    get_activation_factory<Clipboard, IClipboardStatics>().Flush();
+    get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().Flush();
 }
 
 inline void Clipboard::Clear()
 {
-    get_activation_factory<Clipboard, IClipboardStatics>().Clear();
+    get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().Clear();
 }
 
-inline event_token Clipboard::ContentChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler)
+inline event_token Clipboard::ContentChanged(Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler)
 {
-    return get_activation_factory<Clipboard, IClipboardStatics>().ContentChanged(changeHandler);
+    return get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().ContentChanged(changeHandler);
 }
 
-inline factory_event_revoker<IClipboardStatics> Clipboard::ContentChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler)
+inline factory_event_revoker<Windows::ApplicationModel::DataTransfer::IClipboardStatics> Clipboard::ContentChanged(auto_revoke_t, Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> const& changeHandler)
 {
-    auto factory = get_activation_factory<Clipboard, IClipboardStatics>();
-    return { factory, &ABI::Windows::ApplicationModel::DataTransfer::IClipboardStatics::remove_ContentChanged, factory.ContentChanged(changeHandler) };
+    auto factory = get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>();
+    return { factory, &abi_t<Windows::ApplicationModel::DataTransfer::IClipboardStatics>::remove_ContentChanged, factory.ContentChanged(changeHandler) };
 }
 
-inline void Clipboard::ContentChanged(event_token token)
+inline void Clipboard::ContentChanged(event_token const& token)
 {
-    get_activation_factory<Clipboard, IClipboardStatics>().ContentChanged(token);
+    get_activation_factory<Clipboard, Windows::ApplicationModel::DataTransfer::IClipboardStatics>().ContentChanged(token);
 }
 
 inline DataPackage::DataPackage() :
@@ -2522,84 +2640,315 @@ inline DataPackage::DataPackage() :
 
 inline void DataTransferManager::ShowShareUI()
 {
-    get_activation_factory<DataTransferManager, IDataTransferManagerStatics>().ShowShareUI();
+    get_activation_factory<DataTransferManager, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics>().ShowShareUI();
 }
 
 inline Windows::ApplicationModel::DataTransfer::DataTransferManager DataTransferManager::GetForCurrentView()
 {
-    return get_activation_factory<DataTransferManager, IDataTransferManagerStatics>().GetForCurrentView();
+    return get_activation_factory<DataTransferManager, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics>().GetForCurrentView();
 }
 
 inline bool DataTransferManager::IsSupported()
 {
-    return get_activation_factory<DataTransferManager, IDataTransferManagerStatics2>().IsSupported();
+    return get_activation_factory<DataTransferManager, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2>().IsSupported();
 }
 
-inline hstring HtmlFormatHelper::GetStaticFragment(hstring_ref htmlFormat)
+inline void DataTransferManager::ShowShareUI(Windows::ApplicationModel::DataTransfer::ShareUIOptions const& options)
 {
-    return get_activation_factory<HtmlFormatHelper, IHtmlFormatHelperStatics>().GetStaticFragment(htmlFormat);
+    get_activation_factory<DataTransferManager, Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3>().ShowShareUI(options);
 }
 
-inline hstring HtmlFormatHelper::CreateHtmlFormat(hstring_ref htmlFragment)
+inline hstring HtmlFormatHelper::GetStaticFragment(param::hstring const& htmlFormat)
 {
-    return get_activation_factory<HtmlFormatHelper, IHtmlFormatHelperStatics>().CreateHtmlFormat(htmlFragment);
+    return get_activation_factory<HtmlFormatHelper, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics>().GetStaticFragment(htmlFormat);
 }
 
-inline hstring SharedStorageAccessManager::AddFile(const Windows::Storage::IStorageFile & file)
+inline hstring HtmlFormatHelper::CreateHtmlFormat(param::hstring const& htmlFragment)
 {
-    return get_activation_factory<SharedStorageAccessManager, ISharedStorageAccessManagerStatics>().AddFile(file);
+    return get_activation_factory<HtmlFormatHelper, Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics>().CreateHtmlFormat(htmlFragment);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> SharedStorageAccessManager::RedeemTokenForFileAsync(hstring_ref token)
+inline ShareProvider::ShareProvider(param::hstring const& title, Windows::Storage::Streams::RandomAccessStreamReference const& displayIcon, Windows::UI::Color const& backgroundColor, Windows::ApplicationModel::DataTransfer::ShareProviderHandler const& handler) :
+    ShareProvider(get_activation_factory<ShareProvider, Windows::ApplicationModel::DataTransfer::IShareProviderFactory>().Create(title, displayIcon, backgroundColor, handler))
+{}
+
+inline ShareUIOptions::ShareUIOptions() :
+    ShareUIOptions(activate_instance<ShareUIOptions>())
+{}
+
+inline hstring SharedStorageAccessManager::AddFile(Windows::Storage::IStorageFile const& file)
 {
-    return get_activation_factory<SharedStorageAccessManager, ISharedStorageAccessManagerStatics>().RedeemTokenForFileAsync(token);
+    return get_activation_factory<SharedStorageAccessManager, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics>().AddFile(file);
 }
 
-inline void SharedStorageAccessManager::RemoveFile(hstring_ref token)
+inline Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> SharedStorageAccessManager::RedeemTokenForFileAsync(param::hstring const& token)
 {
-    get_activation_factory<SharedStorageAccessManager, ISharedStorageAccessManagerStatics>().RemoveFile(token);
+    return get_activation_factory<SharedStorageAccessManager, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics>().RedeemTokenForFileAsync(token);
+}
+
+inline void SharedStorageAccessManager::RemoveFile(param::hstring const& token)
+{
+    get_activation_factory<SharedStorageAccessManager, Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics>().RemoveFile(token);
 }
 
 inline hstring StandardDataFormats::Text()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().Text();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().Text();
 }
 
 inline hstring StandardDataFormats::Uri()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().Uri();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().Uri();
 }
 
 inline hstring StandardDataFormats::Html()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().Html();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().Html();
 }
 
 inline hstring StandardDataFormats::Rtf()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().Rtf();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().Rtf();
 }
 
 inline hstring StandardDataFormats::Bitmap()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().Bitmap();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().Bitmap();
 }
 
 inline hstring StandardDataFormats::StorageItems()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics>().StorageItems();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics>().StorageItems();
 }
 
 inline hstring StandardDataFormats::WebLink()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics2>().WebLink();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2>().WebLink();
 }
 
 inline hstring StandardDataFormats::ApplicationLink()
 {
-    return get_activation_factory<StandardDataFormats, IStandardDataFormatsStatics2>().ApplicationLink();
+    return get_activation_factory<StandardDataFormats, Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2>().ApplicationLink();
+}
+
+template <typename L> DataProviderHandler::DataProviderHandler(L handler) :
+    DataProviderHandler(impl::make_delegate<DataProviderHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> DataProviderHandler::DataProviderHandler(F* handler) :
+    DataProviderHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> DataProviderHandler::DataProviderHandler(O* object, M method) :
+    DataProviderHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void DataProviderHandler::operator()(Windows::ApplicationModel::DataTransfer::DataProviderRequest const& request) const
+{
+    check_hresult((*(abi_t<DataProviderHandler>**)this)->Invoke(get_abi(request)));
+}
+
+template <typename L> ShareProviderHandler::ShareProviderHandler(L handler) :
+    ShareProviderHandler(impl::make_delegate<ShareProviderHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> ShareProviderHandler::ShareProviderHandler(F* handler) :
+    ShareProviderHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> ShareProviderHandler::ShareProviderHandler(O* object, M method) :
+    ShareProviderHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void ShareProviderHandler::operator()(Windows::ApplicationModel::DataTransfer::ShareProviderOperation const& operation) const
+{
+    check_hresult((*(abi_t<ShareProviderHandler>**)this)->Invoke(get_abi(operation)));
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IClipboardStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IClipboardStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackage3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySet3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackagePropertySetView3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataPackageView4> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataProviderDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataProviderDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataProviderRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataProviderRequest> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataRequest> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataRequestDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataRequestDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManager2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManager2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IDataTransferManagerStatics3> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IHtmlFormatHelperStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IOperationCompletedEventArgs2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareProvider> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareProviderFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareProviderFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareProviderOperation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareProviderOperation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareTargetInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareTargetInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IShareUIOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IShareUIOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ISharedStorageAccessManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::IStandardDataFormatsStatics2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ITargetApplicationChosenEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ITargetApplicationChosenEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::Clipboard> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::Clipboard> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataPackage> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataPackage> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataPackagePropertySet> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataPackagePropertySet> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataPackagePropertySetView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataPackageView> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataPackageView> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataProviderDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataProviderDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataProviderRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataProviderRequest> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataRequest> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataRequest> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataRequestDeferral> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataRequestDeferral> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::DataTransferManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::DataTransferManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::HtmlFormatHelper> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::HtmlFormatHelper> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::OperationCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareProvider> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareProviderOperation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareProviderOperation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareProvidersRequestedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareProvidersRequestedEventArgs> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareTargetInfo> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareTargetInfo> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::ShareUIOptions> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::ShareUIOptions> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::SharedStorageAccessManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::SharedStorageAccessManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::StandardDataFormats> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::StandardDataFormats> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs> {};
+
 }
+
+WINRT_WARNING_POP

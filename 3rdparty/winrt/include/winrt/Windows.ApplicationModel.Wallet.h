@@ -1,55 +1,679 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.UI.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Devices.Geolocation.3.h"
-#include "internal/Windows.ApplicationModel.Wallet.3.h"
-#include "Windows.ApplicationModel.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Geolocation.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.UI.2.h"
+#include "winrt/impl/Windows.ApplicationModel.Wallet.2.h"
+#include "winrt/Windows.ApplicationModel.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::ApplicationModel::Wallet::WalletBarcodeSymbology consume_Windows_ApplicationModel_Wallet_IWalletBarcode<D>::Symbology() const noexcept
+{
+    Windows::ApplicationModel::Wallet::WalletBarcodeSymbology value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletBarcode)->get_Symbology(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletBarcode<D>::Value() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletBarcode)->get_Value(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> consume_Windows_ApplicationModel_Wallet_IWalletBarcode<D>::GetImageAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletBarcode)->GetImageAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode consume_Windows_ApplicationModel_Wallet_IWalletBarcodeFactory<D>::CreateWalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology const& symbology, param::hstring const& value) const
+{
+    Windows::ApplicationModel::Wallet::WalletBarcode barcode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletBarcodeFactory)->CreateWalletBarcode(get_abi(symbology), get_abi(value), put_abi(barcode)));
+    return barcode;
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode consume_Windows_ApplicationModel_Wallet_IWalletBarcodeFactory<D>::CreateCustomWalletBarcode(Windows::Storage::Streams::IRandomAccessStreamReference const& streamToBarcodeImage) const
+{
+    Windows::ApplicationModel::Wallet::WalletBarcode barcode{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletBarcodeFactory)->CreateCustomWalletBarcode(get_abi(streamToBarcodeImage), put_abi(barcode)));
+    return barcode;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::DisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_DisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::DisplayName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_DisplayName(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Id() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Id(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsAcknowledged() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_IsAcknowledged(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsAcknowledged(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_IsAcknowledged(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IssuerDisplayName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_IssuerDisplayName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IssuerDisplayName(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_IssuerDisplayName(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LastUpdated() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_LastUpdated(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LastUpdated(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_LastUpdated(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletItemKind consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Kind() const noexcept
+{
+    Windows::ApplicationModel::Wallet::WalletItemKind value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Kind(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Barcode() const noexcept
+{
+    Windows::ApplicationModel::Wallet::WalletBarcode value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Barcode(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Barcode(Windows::ApplicationModel::Wallet::WalletBarcode const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_Barcode(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::ExpirationDate() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_ExpirationDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::ExpirationDate(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_ExpirationDate(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo159x159() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Logo159x159(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo159x159(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_Logo159x159(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo336x336() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Logo336x336(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo336x336(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_Logo336x336(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo99x99() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Logo99x99(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Logo99x99(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_Logo99x99(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::DisplayMessage() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_DisplayMessage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::DisplayMessage(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_DisplayMessage(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsDisplayMessageLaunchable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_IsDisplayMessageLaunchable(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsDisplayMessageLaunchable(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_IsDisplayMessageLaunchable(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LogoText() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_LogoText(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LogoText(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_LogoText(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_HeaderColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderColor(Windows::UI::Color const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_HeaderColor(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_BodyColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyColor(Windows::UI::Color const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_BodyColor(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderFontColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_HeaderFontColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderFontColor(Windows::UI::Color const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_HeaderFontColor(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Color consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyFontColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_BodyFontColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyFontColor(Windows::UI::Color const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_BodyFontColor(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderBackgroundImage() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_HeaderBackgroundImage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::HeaderBackgroundImage(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_HeaderBackgroundImage(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyBackgroundImage() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_BodyBackgroundImage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::BodyBackgroundImage(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_BodyBackgroundImage(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LogoImage() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_LogoImage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::LogoImage(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_LogoImage(get_abi(value)));
+}
+
+template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::PromotionalImage() const noexcept
+{
+    Windows::Storage::Streams::IRandomAccessStreamReference value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_PromotionalImage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::PromotionalImage(Windows::Storage::Streams::IRandomAccessStreamReference const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_PromotionalImage(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::RelevantDate() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_RelevantDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::RelevantDate(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_RelevantDate(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::RelevantDateDisplayMessage() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_RelevantDateDisplayMessage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::RelevantDateDisplayMessage(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_RelevantDateDisplayMessage(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletTransaction> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::TransactionHistory() const noexcept
+{
+    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletTransaction> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_TransactionHistory(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletRelevantLocation> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::RelevantLocations() const noexcept
+{
+    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletRelevantLocation> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_RelevantLocations(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsMoreTransactionHistoryLaunchable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_IsMoreTransactionHistoryLaunchable(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::IsMoreTransactionHistoryLaunchable(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->put_IsMoreTransactionHistoryLaunchable(value));
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletItemCustomProperty> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::DisplayProperties() const noexcept
+{
+    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletItemCustomProperty> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_DisplayProperties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletVerb> consume_Windows_ApplicationModel_Wallet_IWalletItem<D>::Verbs() const noexcept
+{
+    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletVerb> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItem)->get_Verbs(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::Name(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->put_Name(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::Value() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->get_Value(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::Value(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->put_Value(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::AutoDetectLinks() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->get_AutoDetectLinks(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::AutoDetectLinks(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->put_AutoDetectLinks(value));
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletDetailViewPosition consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::DetailViewPosition() const noexcept
+{
+    Windows::ApplicationModel::Wallet::WalletDetailViewPosition value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->get_DetailViewPosition(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->put_DetailViewPosition(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletSummaryViewPosition consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::SummaryViewPosition() const noexcept
+{
+    Windows::ApplicationModel::Wallet::WalletSummaryViewPosition value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->get_SummaryViewPosition(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemCustomProperty<D>::SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomProperty)->put_SummaryViewPosition(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletItemCustomProperty consume_Windows_ApplicationModel_Wallet_IWalletItemCustomPropertyFactory<D>::CreateWalletItemCustomProperty(param::hstring const& name, param::hstring const& value) const
+{
+    Windows::ApplicationModel::Wallet::WalletItemCustomProperty walletItemCustomProperty{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory)->CreateWalletItemCustomProperty(get_abi(name), get_abi(value), put_abi(walletItemCustomProperty)));
+    return walletItemCustomProperty;
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletItem consume_Windows_ApplicationModel_Wallet_IWalletItemFactory<D>::CreateWalletItem(Windows::ApplicationModel::Wallet::WalletItemKind const& kind, param::hstring const& displayName) const
+{
+    Windows::ApplicationModel::Wallet::WalletItem walletItem{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemFactory)->CreateWalletItem(get_abi(kind), get_abi(displayName), put_abi(walletItem)));
+    return walletItem;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::AddAsync(param::hstring const& id, Windows::ApplicationModel::Wallet::WalletItem const& item) const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->AddAsync(get_abi(id), get_abi(item), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::ClearAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->ClearAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::GetWalletItemAsync(param::hstring const& id) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->GetWalletItemAsync(get_abi(id), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::GetItemsAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->GetItemsAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::GetItemsAsync(Windows::ApplicationModel::Wallet::WalletItemKind const& kind) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->GetItemsWithKindAsync(get_abi(kind), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::ImportItemAsync(Windows::Storage::Streams::IRandomAccessStreamReference const& stream) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->ImportItemAsync(get_abi(stream), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::DeleteAsync(param::hstring const& id) const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->DeleteAsync(get_abi(id), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::ShowAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->ShowAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::ShowAsync(param::hstring const& id) const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->ShowItemAsync(get_abi(id), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Wallet_IWalletItemStore<D>::UpdateAsync(Windows::ApplicationModel::Wallet::WalletItem const& item) const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore)->UpdateAsync(get_abi(item), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Wallet_IWalletItemStore2<D>::ItemsChanged(Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore2)->add_ItemsChanged(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Wallet::IWalletItemStore2> consume_Windows_ApplicationModel_Wallet_IWalletItemStore2<D>::ItemsChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Wallet::IWalletItemStore2>(this, &abi_t<Windows::ApplicationModel::Wallet::IWalletItemStore2>::remove_ItemsChanged, ItemsChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletItemStore2<D>::ItemsChanged(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletItemStore2)->remove_ItemsChanged(get_abi(cookie)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore> consume_Windows_ApplicationModel_Wallet_IWalletManagerStatics<D>::RequestStoreAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletManagerStatics)->RequestStoreAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Devices::Geolocation::BasicGeoposition consume_Windows_ApplicationModel_Wallet_IWalletRelevantLocation<D>::Position() const noexcept
+{
+    Windows::Devices::Geolocation::BasicGeoposition value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletRelevantLocation)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletRelevantLocation<D>::Position(Windows::Devices::Geolocation::BasicGeoposition const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletRelevantLocation)->put_Position(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletRelevantLocation<D>::DisplayMessage() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletRelevantLocation)->get_DisplayMessage(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletRelevantLocation<D>::DisplayMessage(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletRelevantLocation)->put_DisplayMessage(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::Description(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_Description(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::DisplayAmount() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_DisplayAmount(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::DisplayAmount(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_DisplayAmount(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::IgnoreTimeOfDay() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_IgnoreTimeOfDay(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::IgnoreTimeOfDay(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_IgnoreTimeOfDay(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::DisplayLocation() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_DisplayLocation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::DisplayLocation(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_DisplayLocation(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::TransactionDate() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_TransactionDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::TransactionDate(optional<Windows::Foundation::DateTime> const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_TransactionDate(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::IsLaunchable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->get_IsLaunchable(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletTransaction<D>::IsLaunchable(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletTransaction)->put_IsLaunchable(value));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Wallet_IWalletVerb<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletVerb)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Wallet_IWalletVerb<D>::Name(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletVerb)->put_Name(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Wallet::WalletVerb consume_Windows_ApplicationModel_Wallet_IWalletVerbFactory<D>::CreateWalletVerb(param::hstring const& name) const
+{
+    Windows::ApplicationModel::Wallet::WalletVerb WalletVerb{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Wallet::IWalletVerbFactory)->CreateWalletVerb(get_abi(name), put_abi(WalletVerb)));
+    return WalletVerb;
+}
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletBarcode> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletBarcode>
 {
-    HRESULT __stdcall get_Symbology(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology * value) noexcept override
+    HRESULT __stdcall get_Symbology(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Symbology());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Symbology());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Value(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Value(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Value());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Value());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetImageAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference>> operation) noexcept override
+    HRESULT __stdcall GetImageAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetImageAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetImageAsync());
             return S_OK;
         }
         catch (...)
@@ -63,11 +687,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletBarcode> : produce_b
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory>
 {
-    HRESULT __stdcall abi_CreateWalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology symbology, abi_arg_in<hstring> value, abi_arg_out<Windows::ApplicationModel::Wallet::IWalletBarcode> barcode) noexcept override
+    HRESULT __stdcall CreateWalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology symbology, HSTRING value, ::IUnknown** barcode) noexcept final
     {
         try
         {
-            *barcode = detach(this->shim().CreateWalletBarcode(symbology, *reinterpret_cast<const hstring *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *barcode = detach_abi(this->shim().CreateWalletBarcode(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletBarcodeSymbology const*>(&symbology), *reinterpret_cast<hstring const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -77,11 +702,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory> : pr
         }
     }
 
-    HRESULT __stdcall abi_CreateCustomWalletBarcode(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> streamToBarcodeImage, abi_arg_out<Windows::ApplicationModel::Wallet::IWalletBarcode> barcode) noexcept override
+    HRESULT __stdcall CreateCustomWalletBarcode(::IUnknown* streamToBarcodeImage, ::IUnknown** barcode) noexcept final
     {
         try
         {
-            *barcode = detach(this->shim().CreateCustomWalletBarcode(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&streamToBarcodeImage)));
+            typename D::abi_guard guard(this->shim());
+            *barcode = detach_abi(this->shim().CreateCustomWalletBarcode(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&streamToBarcodeImage)));
             return S_OK;
         }
         catch (...)
@@ -95,848 +721,454 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory> : pr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItem> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItem>
 {
-    HRESULT __stdcall get_DisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Id(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Id(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Id());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Id());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsAcknowledged(bool * value) noexcept override
+    HRESULT __stdcall get_IsAcknowledged(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsAcknowledged());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsAcknowledged());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsAcknowledged(bool value) noexcept override
+    HRESULT __stdcall put_IsAcknowledged(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsAcknowledged(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsAcknowledged(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IssuerDisplayName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_IssuerDisplayName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IssuerDisplayName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IssuerDisplayName());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IssuerDisplayName(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_IssuerDisplayName(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().IssuerDisplayName(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IssuerDisplayName(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LastUpdated(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_LastUpdated(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LastUpdated());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LastUpdated());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_LastUpdated(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_LastUpdated(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().LastUpdated(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().LastUpdated(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Wallet::WalletItemKind * value) noexcept override
+    HRESULT __stdcall get_Kind(Windows::ApplicationModel::Wallet::WalletItemKind* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Kind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Kind());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Barcode(abi_arg_out<Windows::ApplicationModel::Wallet::IWalletBarcode> value) noexcept override
+    HRESULT __stdcall get_Barcode(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Barcode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Barcode());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Barcode(abi_arg_in<Windows::ApplicationModel::Wallet::IWalletBarcode> value) noexcept override
+    HRESULT __stdcall put_Barcode(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Barcode(*reinterpret_cast<const Windows::ApplicationModel::Wallet::WalletBarcode *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Barcode(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletBarcode const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExpirationDate(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_ExpirationDate(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExpirationDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExpirationDate());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_ExpirationDate(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_ExpirationDate(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().ExpirationDate(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().ExpirationDate(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Logo159x159(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Logo159x159(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Logo159x159());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Logo159x159());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Logo159x159(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Logo159x159(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Logo159x159(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Logo159x159(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Logo336x336(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Logo336x336(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Logo336x336());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Logo336x336());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Logo336x336(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Logo336x336(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Logo336x336(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Logo336x336(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Logo99x99(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_Logo99x99(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Logo99x99());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Logo99x99());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Logo99x99(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_Logo99x99(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Logo99x99(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Logo99x99(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayMessage(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayMessage(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayMessage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayMessage(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayMessage(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayMessage(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayMessage(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsDisplayMessageLaunchable(bool * value) noexcept override
+    HRESULT __stdcall get_IsDisplayMessageLaunchable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsDisplayMessageLaunchable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsDisplayMessageLaunchable());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsDisplayMessageLaunchable(bool value) noexcept override
+    HRESULT __stdcall put_IsDisplayMessageLaunchable(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsDisplayMessageLaunchable(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsDisplayMessageLaunchable(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LogoText(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_LogoText(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LogoText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LogoText());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_LogoText(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_LogoText(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().LogoText(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().LogoText(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HeaderColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_HeaderColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HeaderColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HeaderColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_HeaderColor(abi_arg_in<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall put_HeaderColor(struct_of<4> value) noexcept final
     {
-        try
-        {
-            this->shim().HeaderColor(*reinterpret_cast<const Windows::UI::Color *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().HeaderColor(*reinterpret_cast<Windows::UI::Color const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BodyColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_BodyColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BodyColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BodyColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_BodyColor(abi_arg_in<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall put_BodyColor(struct_of<4> value) noexcept final
     {
-        try
-        {
-            this->shim().BodyColor(*reinterpret_cast<const Windows::UI::Color *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().BodyColor(*reinterpret_cast<Windows::UI::Color const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HeaderFontColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_HeaderFontColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HeaderFontColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HeaderFontColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_HeaderFontColor(abi_arg_in<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall put_HeaderFontColor(struct_of<4> value) noexcept final
     {
-        try
-        {
-            this->shim().HeaderFontColor(*reinterpret_cast<const Windows::UI::Color *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().HeaderFontColor(*reinterpret_cast<Windows::UI::Color const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BodyFontColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_BodyFontColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BodyFontColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BodyFontColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_BodyFontColor(abi_arg_in<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall put_BodyFontColor(struct_of<4> value) noexcept final
     {
-        try
-        {
-            this->shim().BodyFontColor(*reinterpret_cast<const Windows::UI::Color *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().BodyFontColor(*reinterpret_cast<Windows::UI::Color const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HeaderBackgroundImage(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_HeaderBackgroundImage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HeaderBackgroundImage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HeaderBackgroundImage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_HeaderBackgroundImage(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_HeaderBackgroundImage(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().HeaderBackgroundImage(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().HeaderBackgroundImage(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_BodyBackgroundImage(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_BodyBackgroundImage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BodyBackgroundImage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BodyBackgroundImage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_BodyBackgroundImage(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_BodyBackgroundImage(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().BodyBackgroundImage(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().BodyBackgroundImage(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LogoImage(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_LogoImage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LogoImage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LogoImage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_LogoImage(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_LogoImage(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().LogoImage(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().LogoImage(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PromotionalImage(abi_arg_out<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall get_PromotionalImage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PromotionalImage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PromotionalImage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PromotionalImage(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> value) noexcept override
+    HRESULT __stdcall put_PromotionalImage(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().PromotionalImage(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PromotionalImage(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RelevantDate(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_RelevantDate(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RelevantDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RelevantDate());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RelevantDate(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_RelevantDate(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().RelevantDate(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RelevantDate(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RelevantDateDisplayMessage(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_RelevantDateDisplayMessage(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RelevantDateDisplayMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RelevantDateDisplayMessage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RelevantDateDisplayMessage(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_RelevantDateDisplayMessage(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().RelevantDateDisplayMessage(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RelevantDateDisplayMessage(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransactionHistory(abi_arg_out<Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletTransaction>> value) noexcept override
+    HRESULT __stdcall get_TransactionHistory(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransactionHistory());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransactionHistory());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RelevantLocations(abi_arg_out<Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletRelevantLocation>> value) noexcept override
+    HRESULT __stdcall get_RelevantLocations(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RelevantLocations());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RelevantLocations());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsMoreTransactionHistoryLaunchable(bool * value) noexcept override
+    HRESULT __stdcall get_IsMoreTransactionHistoryLaunchable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsMoreTransactionHistoryLaunchable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMoreTransactionHistoryLaunchable());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsMoreTransactionHistoryLaunchable(bool value) noexcept override
+    HRESULT __stdcall put_IsMoreTransactionHistoryLaunchable(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsMoreTransactionHistoryLaunchable(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsMoreTransactionHistoryLaunchable(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayProperties(abi_arg_out<Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletItemCustomProperty>> value) noexcept override
+    HRESULT __stdcall get_DisplayProperties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayProperties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayProperties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Verbs(abi_arg_out<Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletVerb>> value) noexcept override
+    HRESULT __stdcall get_Verbs(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Verbs());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Verbs());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemCustomProperty> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItemCustomProperty>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Name(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Name(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Name(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Name(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Value(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Value(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Value());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Value());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Value(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Value(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Value(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Value(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AutoDetectLinks(bool * value) noexcept override
+    HRESULT __stdcall get_AutoDetectLinks(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AutoDetectLinks());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutoDetectLinks());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_AutoDetectLinks(bool value) noexcept override
+    HRESULT __stdcall put_AutoDetectLinks(bool value) noexcept final
     {
-        try
-        {
-            this->shim().AutoDetectLinks(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().AutoDetectLinks(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition * value) noexcept override
+    HRESULT __stdcall get_DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DetailViewPosition());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DetailViewPosition());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition value) noexcept override
+    HRESULT __stdcall put_DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition value) noexcept final
     {
-        try
-        {
-            this->shim().DetailViewPosition(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DetailViewPosition(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletDetailViewPosition const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition * value) noexcept override
+    HRESULT __stdcall get_SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SummaryViewPosition());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SummaryViewPosition());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition value) noexcept override
+    HRESULT __stdcall put_SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition value) noexcept final
     {
-        try
-        {
-            this->shim().SummaryViewPosition(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().SummaryViewPosition(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletSummaryViewPosition const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory>
 {
-    HRESULT __stdcall abi_CreateWalletItemCustomProperty(abi_arg_in<hstring> name, abi_arg_in<hstring> value, abi_arg_out<Windows::ApplicationModel::Wallet::IWalletItemCustomProperty> walletItemCustomProperty) noexcept override
+    HRESULT __stdcall CreateWalletItemCustomProperty(HSTRING name, HSTRING value, ::IUnknown** walletItemCustomProperty) noexcept final
     {
         try
         {
-            *walletItemCustomProperty = detach(this->shim().CreateWalletItemCustomProperty(*reinterpret_cast<const hstring *>(&name), *reinterpret_cast<const hstring *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *walletItemCustomProperty = detach_abi(this->shim().CreateWalletItemCustomProperty(*reinterpret_cast<hstring const*>(&name), *reinterpret_cast<hstring const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -950,11 +1182,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFa
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemFactory> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItemFactory>
 {
-    HRESULT __stdcall abi_CreateWalletItem(Windows::ApplicationModel::Wallet::WalletItemKind kind, abi_arg_in<hstring> displayName, abi_arg_out<Windows::ApplicationModel::Wallet::IWalletItem> walletItem) noexcept override
+    HRESULT __stdcall CreateWalletItem(Windows::ApplicationModel::Wallet::WalletItemKind kind, HSTRING displayName, ::IUnknown** walletItem) noexcept final
     {
         try
         {
-            *walletItem = detach(this->shim().CreateWalletItem(kind, *reinterpret_cast<const hstring *>(&displayName)));
+            typename D::abi_guard guard(this->shim());
+            *walletItem = detach_abi(this->shim().CreateWalletItem(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletItemKind const*>(&kind), *reinterpret_cast<hstring const*>(&displayName)));
             return S_OK;
         }
         catch (...)
@@ -968,11 +1201,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemFactory> : produ
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItemStore>
 {
-    HRESULT __stdcall abi_AddAsync(abi_arg_in<hstring> id, abi_arg_in<Windows::ApplicationModel::Wallet::IWalletItem> item, abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall AddAsync(HSTRING id, ::IUnknown* item, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().AddAsync(*reinterpret_cast<const hstring *>(&id), *reinterpret_cast<const Windows::ApplicationModel::Wallet::WalletItem *>(&item)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().AddAsync(*reinterpret_cast<hstring const*>(&id), *reinterpret_cast<Windows::ApplicationModel::Wallet::WalletItem const*>(&item)));
             return S_OK;
         }
         catch (...)
@@ -982,11 +1216,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_ClearAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall ClearAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ClearAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ClearAsync());
             return S_OK;
         }
         catch (...)
@@ -996,11 +1231,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetWalletItemAsync(abi_arg_in<hstring> id, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem>> operation) noexcept override
+    HRESULT __stdcall GetWalletItemAsync(HSTRING id, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetWalletItemAsync(*reinterpret_cast<const hstring *>(&id)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetWalletItemAsync(*reinterpret_cast<hstring const*>(&id)));
             return S_OK;
         }
         catch (...)
@@ -1010,11 +1246,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetItemsAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>>> operation) noexcept override
+    HRESULT __stdcall GetItemsAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetItemsAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetItemsAsync());
             return S_OK;
         }
         catch (...)
@@ -1024,11 +1261,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_GetItemsWithKindAsync(Windows::ApplicationModel::Wallet::WalletItemKind kind, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>>> operation) noexcept override
+    HRESULT __stdcall GetItemsWithKindAsync(Windows::ApplicationModel::Wallet::WalletItemKind kind, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetItemsAsync(kind));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetItemsAsync(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletItemKind const*>(&kind)));
             return S_OK;
         }
         catch (...)
@@ -1038,11 +1276,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_ImportItemAsync(abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> stream, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem>> operation) noexcept override
+    HRESULT __stdcall ImportItemAsync(::IUnknown* stream, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ImportItemAsync(*reinterpret_cast<const Windows::Storage::Streams::IRandomAccessStreamReference *>(&stream)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ImportItemAsync(*reinterpret_cast<Windows::Storage::Streams::IRandomAccessStreamReference const*>(&stream)));
             return S_OK;
         }
         catch (...)
@@ -1052,11 +1291,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_DeleteAsync(abi_arg_in<hstring> id, abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall DeleteAsync(HSTRING id, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().DeleteAsync(*reinterpret_cast<const hstring *>(&id)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().DeleteAsync(*reinterpret_cast<hstring const*>(&id)));
             return S_OK;
         }
         catch (...)
@@ -1066,11 +1306,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_ShowAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall ShowAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ShowAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ShowAsync());
             return S_OK;
         }
         catch (...)
@@ -1080,11 +1321,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_ShowItemAsync(abi_arg_in<hstring> id, abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall ShowItemAsync(HSTRING id, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().ShowAsync(*reinterpret_cast<const hstring *>(&id)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ShowAsync(*reinterpret_cast<hstring const*>(&id)));
             return S_OK;
         }
         catch (...)
@@ -1094,11 +1336,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
         }
     }
 
-    HRESULT __stdcall abi_UpdateAsync(abi_arg_in<Windows::ApplicationModel::Wallet::IWalletItem> item, abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall UpdateAsync(::IUnknown* item, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().UpdateAsync(*reinterpret_cast<const Windows::ApplicationModel::Wallet::WalletItem *>(&item)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().UpdateAsync(*reinterpret_cast<Windows::ApplicationModel::Wallet::WalletItem const*>(&item)));
             return S_OK;
         }
         catch (...)
@@ -1112,11 +1355,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore> : produce
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore2> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletItemStore2>
 {
-    HRESULT __stdcall add_ItemsChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::IInspectable>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall add_ItemsChanged(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ItemsChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ItemsChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1125,11 +1369,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore2> : produc
         }
     }
 
-    HRESULT __stdcall remove_ItemsChanged(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ItemsChanged(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().ItemsChanged(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ItemsChanged(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -1142,11 +1387,12 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletItemStore2> : produc
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletManagerStatics> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletManagerStatics>
 {
-    HRESULT __stdcall abi_RequestStoreAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore>> operation) noexcept override
+    HRESULT __stdcall RequestStoreAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().RequestStoreAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestStoreAsync());
             return S_OK;
         }
         catch (...)
@@ -1160,263 +1406,150 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletManagerStatics> : pr
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletRelevantLocation> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletRelevantLocation>
 {
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Devices::Geolocation::BasicGeoposition> value) noexcept override
+    HRESULT __stdcall get_Position(struct_of<24>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Position(abi_arg_in<Windows::Devices::Geolocation::BasicGeoposition> value) noexcept override
+    HRESULT __stdcall put_Position(struct_of<24> value) noexcept final
     {
-        try
-        {
-            this->shim().Position(*reinterpret_cast<const Windows::Devices::Geolocation::BasicGeoposition *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Position(*reinterpret_cast<Windows::Devices::Geolocation::BasicGeoposition const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayMessage(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayMessage(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayMessage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayMessage());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayMessage(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayMessage(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayMessage(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayMessage(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletTransaction> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletTransaction>
 {
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Description(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Description(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Description(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Description(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayAmount(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayAmount(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayAmount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayAmount());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayAmount(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayAmount(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayAmount(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayAmount(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IgnoreTimeOfDay(bool * value) noexcept override
+    HRESULT __stdcall get_IgnoreTimeOfDay(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IgnoreTimeOfDay());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IgnoreTimeOfDay());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IgnoreTimeOfDay(bool value) noexcept override
+    HRESULT __stdcall put_IgnoreTimeOfDay(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IgnoreTimeOfDay(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IgnoreTimeOfDay(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DisplayLocation(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayLocation(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayLocation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayLocation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DisplayLocation(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_DisplayLocation(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().DisplayLocation(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DisplayLocation(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransactionDate(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_TransactionDate(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransactionDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransactionDate());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_TransactionDate(abi_arg_in<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall put_TransactionDate(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().TransactionDate(*reinterpret_cast<const Windows::Foundation::IReference<Windows::Foundation::DateTime> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().TransactionDate(*reinterpret_cast<Windows::Foundation::IReference<Windows::Foundation::DateTime> const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsLaunchable(bool * value) noexcept override
+    HRESULT __stdcall get_IsLaunchable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsLaunchable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsLaunchable());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsLaunchable(bool value) noexcept override
+    HRESULT __stdcall put_IsLaunchable(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsLaunchable(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsLaunchable(value);
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletVerb> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletVerb>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Name(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Name(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Name(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Name(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Wallet::IWalletVerbFactory> : produce_base<D, Windows::ApplicationModel::Wallet::IWalletVerbFactory>
 {
-    HRESULT __stdcall abi_CreateWalletVerb(abi_arg_in<hstring> name, abi_arg_out<Windows::ApplicationModel::Wallet::IWalletVerb> WalletVerb) noexcept override
+    HRESULT __stdcall CreateWalletVerb(HSTRING name, ::IUnknown** WalletVerb) noexcept final
     {
         try
         {
-            *WalletVerb = detach(this->shim().CreateWalletVerb(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *WalletVerb = detach_abi(this->shim().CreateWalletVerb(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1429,663 +1562,27 @@ struct produce<D, Windows::ApplicationModel::Wallet::IWalletVerbFactory> : produ
 
 }
 
-namespace Windows::ApplicationModel::Wallet {
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::Wallet {
 
-template <typename D> Windows::ApplicationModel::Wallet::WalletBarcodeSymbology impl_IWalletBarcode<D>::Symbology() const
-{
-    Windows::ApplicationModel::Wallet::WalletBarcodeSymbology value {};
-    check_hresult(static_cast<const IWalletBarcode &>(static_cast<const D &>(*this))->get_Symbology(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IWalletBarcode<D>::Value() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletBarcode &>(static_cast<const D &>(*this))->get_Value(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> impl_IWalletBarcode<D>::GetImageAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> operation;
-    check_hresult(static_cast<const IWalletBarcode &>(static_cast<const D &>(*this))->abi_GetImageAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> hstring impl_IWalletItemCustomProperty<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItemCustomProperty<D>::Name(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->put_Name(get(value)));
-}
-
-template <typename D> hstring impl_IWalletItemCustomProperty<D>::Value() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->get_Value(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItemCustomProperty<D>::Value(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->put_Value(get(value)));
-}
-
-template <typename D> bool impl_IWalletItemCustomProperty<D>::AutoDetectLinks() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->get_AutoDetectLinks(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItemCustomProperty<D>::AutoDetectLinks(bool value) const
-{
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->put_AutoDetectLinks(value));
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletDetailViewPosition impl_IWalletItemCustomProperty<D>::DetailViewPosition() const
-{
-    Windows::ApplicationModel::Wallet::WalletDetailViewPosition value {};
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->get_DetailViewPosition(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItemCustomProperty<D>::DetailViewPosition(Windows::ApplicationModel::Wallet::WalletDetailViewPosition value) const
-{
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->put_DetailViewPosition(value));
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletSummaryViewPosition impl_IWalletItemCustomProperty<D>::SummaryViewPosition() const
-{
-    Windows::ApplicationModel::Wallet::WalletSummaryViewPosition value {};
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->get_SummaryViewPosition(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItemCustomProperty<D>::SummaryViewPosition(Windows::ApplicationModel::Wallet::WalletSummaryViewPosition value) const
-{
-    check_hresult(static_cast<const IWalletItemCustomProperty &>(static_cast<const D &>(*this))->put_SummaryViewPosition(value));
-}
-
-template <typename D> hstring impl_IWalletVerb<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletVerb &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletVerb<D>::Name(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletVerb &>(static_cast<const D &>(*this))->put_Name(get(value)));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::DisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_DisplayName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::DisplayName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_DisplayName(get(value)));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::Id() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Id(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IWalletItem<D>::IsAcknowledged() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_IsAcknowledged(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::IsAcknowledged(bool value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_IsAcknowledged(value));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::IssuerDisplayName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_IssuerDisplayName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::IssuerDisplayName(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_IssuerDisplayName(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IWalletItem<D>::LastUpdated() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_LastUpdated(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::LastUpdated(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_LastUpdated(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletItemKind impl_IWalletItem<D>::Kind() const
-{
-    Windows::ApplicationModel::Wallet::WalletItemKind value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Kind(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode impl_IWalletItem<D>::Barcode() const
-{
-    Windows::ApplicationModel::Wallet::WalletBarcode value { nullptr };
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Barcode(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::Barcode(const Windows::ApplicationModel::Wallet::WalletBarcode & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_Barcode(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IWalletItem<D>::ExpirationDate() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_ExpirationDate(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::ExpirationDate(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_ExpirationDate(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::Logo159x159() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Logo159x159(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::Logo159x159(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_Logo159x159(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::Logo336x336() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Logo336x336(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::Logo336x336(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_Logo336x336(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::Logo99x99() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Logo99x99(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::Logo99x99(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_Logo99x99(get(value)));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::DisplayMessage() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_DisplayMessage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::DisplayMessage(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_DisplayMessage(get(value)));
-}
-
-template <typename D> bool impl_IWalletItem<D>::IsDisplayMessageLaunchable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_IsDisplayMessageLaunchable(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::IsDisplayMessageLaunchable(bool value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_IsDisplayMessageLaunchable(value));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::LogoText() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_LogoText(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::LogoText(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_LogoText(get(value)));
-}
-
-template <typename D> Windows::UI::Color impl_IWalletItem<D>::HeaderColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_HeaderColor(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::HeaderColor(const Windows::UI::Color & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_HeaderColor(get(value)));
-}
-
-template <typename D> Windows::UI::Color impl_IWalletItem<D>::BodyColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_BodyColor(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::BodyColor(const Windows::UI::Color & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_BodyColor(get(value)));
-}
-
-template <typename D> Windows::UI::Color impl_IWalletItem<D>::HeaderFontColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_HeaderFontColor(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::HeaderFontColor(const Windows::UI::Color & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_HeaderFontColor(get(value)));
-}
-
-template <typename D> Windows::UI::Color impl_IWalletItem<D>::BodyFontColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_BodyFontColor(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::BodyFontColor(const Windows::UI::Color & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_BodyFontColor(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::HeaderBackgroundImage() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_HeaderBackgroundImage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::HeaderBackgroundImage(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_HeaderBackgroundImage(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::BodyBackgroundImage() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_BodyBackgroundImage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::BodyBackgroundImage(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_BodyBackgroundImage(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::LogoImage() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_LogoImage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::LogoImage(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_LogoImage(get(value)));
-}
-
-template <typename D> Windows::Storage::Streams::IRandomAccessStreamReference impl_IWalletItem<D>::PromotionalImage() const
-{
-    Windows::Storage::Streams::IRandomAccessStreamReference value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_PromotionalImage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::PromotionalImage(const Windows::Storage::Streams::IRandomAccessStreamReference & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_PromotionalImage(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IWalletItem<D>::RelevantDate() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_RelevantDate(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::RelevantDate(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_RelevantDate(get(value)));
-}
-
-template <typename D> hstring impl_IWalletItem<D>::RelevantDateDisplayMessage() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_RelevantDateDisplayMessage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::RelevantDateDisplayMessage(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_RelevantDateDisplayMessage(get(value)));
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletTransaction> impl_IWalletItem<D>::TransactionHistory() const
-{
-    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletTransaction> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_TransactionHistory(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletRelevantLocation> impl_IWalletItem<D>::RelevantLocations() const
-{
-    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletRelevantLocation> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_RelevantLocations(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IWalletItem<D>::IsMoreTransactionHistoryLaunchable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_IsMoreTransactionHistoryLaunchable(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletItem<D>::IsMoreTransactionHistoryLaunchable(bool value) const
-{
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->put_IsMoreTransactionHistoryLaunchable(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletItemCustomProperty> impl_IWalletItem<D>::DisplayProperties() const
-{
-    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletItemCustomProperty> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_DisplayProperties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletVerb> impl_IWalletItem<D>::Verbs() const
-{
-    Windows::Foundation::Collections::IMap<hstring, Windows::ApplicationModel::Wallet::WalletVerb> value;
-    check_hresult(static_cast<const IWalletItem &>(static_cast<const D &>(*this))->get_Verbs(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IWalletTransaction<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::Description(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_Description(get(value)));
-}
-
-template <typename D> hstring impl_IWalletTransaction<D>::DisplayAmount() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_DisplayAmount(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::DisplayAmount(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_DisplayAmount(get(value)));
-}
-
-template <typename D> bool impl_IWalletTransaction<D>::IgnoreTimeOfDay() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_IgnoreTimeOfDay(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::IgnoreTimeOfDay(bool value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_IgnoreTimeOfDay(value));
-}
-
-template <typename D> hstring impl_IWalletTransaction<D>::DisplayLocation() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_DisplayLocation(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::DisplayLocation(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_DisplayLocation(get(value)));
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IWalletTransaction<D>::TransactionDate() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_TransactionDate(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::TransactionDate(const Windows::Foundation::IReference<Windows::Foundation::DateTime> & value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_TransactionDate(get(value)));
-}
-
-template <typename D> bool impl_IWalletTransaction<D>::IsLaunchable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->get_IsLaunchable(&value));
-    return value;
-}
-
-template <typename D> void impl_IWalletTransaction<D>::IsLaunchable(bool value) const
-{
-    check_hresult(static_cast<const IWalletTransaction &>(static_cast<const D &>(*this))->put_IsLaunchable(value));
-}
-
-template <typename D> Windows::Devices::Geolocation::BasicGeoposition impl_IWalletRelevantLocation<D>::Position() const
-{
-    Windows::Devices::Geolocation::BasicGeoposition value {};
-    check_hresult(static_cast<const IWalletRelevantLocation &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletRelevantLocation<D>::Position(const Windows::Devices::Geolocation::BasicGeoposition & value) const
-{
-    check_hresult(static_cast<const IWalletRelevantLocation &>(static_cast<const D &>(*this))->put_Position(get(value)));
-}
-
-template <typename D> hstring impl_IWalletRelevantLocation<D>::DisplayMessage() const
-{
-    hstring value;
-    check_hresult(static_cast<const IWalletRelevantLocation &>(static_cast<const D &>(*this))->get_DisplayMessage(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IWalletRelevantLocation<D>::DisplayMessage(hstring_ref value) const
-{
-    check_hresult(static_cast<const IWalletRelevantLocation &>(static_cast<const D &>(*this))->put_DisplayMessage(get(value)));
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::AddAsync(hstring_ref id, const Windows::ApplicationModel::Wallet::WalletItem & item) const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_AddAsync(get(id), get(item), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::ClearAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_ClearAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> impl_IWalletItemStore<D>::GetWalletItemAsync(hstring_ref id) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_GetWalletItemAsync(get(id), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> impl_IWalletItemStore<D>::GetItemsAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_GetItemsAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> impl_IWalletItemStore<D>::GetItemsAsync(Windows::ApplicationModel::Wallet::WalletItemKind kind) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Wallet::WalletItem>> operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_GetItemsWithKindAsync(kind, put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> impl_IWalletItemStore<D>::ImportItemAsync(const Windows::Storage::Streams::IRandomAccessStreamReference & stream) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItem> operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_ImportItemAsync(get(stream), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::DeleteAsync(hstring_ref id) const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_DeleteAsync(get(id), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::ShowAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_ShowAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::ShowAsync(hstring_ref id) const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_ShowItemAsync(get(id), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IWalletItemStore<D>::UpdateAsync(const Windows::ApplicationModel::Wallet::WalletItem & item) const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IWalletItemStore &>(static_cast<const D &>(*this))->abi_UpdateAsync(get(item), put(operation)));
-    return operation;
-}
-
-template <typename D> event_token impl_IWalletItemStore2<D>::ItemsChanged(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::IInspectable> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IWalletItemStore2 &>(static_cast<const D &>(*this))->add_ItemsChanged(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IWalletItemStore2> impl_IWalletItemStore2<D>::ItemsChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Wallet::WalletItemStore, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IWalletItemStore2>(this, &ABI::Windows::ApplicationModel::Wallet::IWalletItemStore2::remove_ItemsChanged, ItemsChanged(handler));
-}
-
-template <typename D> void impl_IWalletItemStore2<D>::ItemsChanged(event_token cookie) const
-{
-    check_hresult(static_cast<const IWalletItemStore2 &>(static_cast<const D &>(*this))->remove_ItemsChanged(cookie));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore> impl_IWalletManagerStatics<D>::RequestStoreAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore> operation;
-    check_hresult(static_cast<const IWalletManagerStatics &>(static_cast<const D &>(*this))->abi_RequestStoreAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletItemCustomProperty impl_IWalletItemCustomPropertyFactory<D>::CreateWalletItemCustomProperty(hstring_ref name, hstring_ref value) const
-{
-    Windows::ApplicationModel::Wallet::WalletItemCustomProperty walletItemCustomProperty { nullptr };
-    check_hresult(static_cast<const IWalletItemCustomPropertyFactory &>(static_cast<const D &>(*this))->abi_CreateWalletItemCustomProperty(get(name), get(value), put(walletItemCustomProperty)));
-    return walletItemCustomProperty;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletVerb impl_IWalletVerbFactory<D>::CreateWalletVerb(hstring_ref name) const
-{
-    Windows::ApplicationModel::Wallet::WalletVerb WalletVerb { nullptr };
-    check_hresult(static_cast<const IWalletVerbFactory &>(static_cast<const D &>(*this))->abi_CreateWalletVerb(get(name), put(WalletVerb)));
-    return WalletVerb;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletItem impl_IWalletItemFactory<D>::CreateWalletItem(Windows::ApplicationModel::Wallet::WalletItemKind kind, hstring_ref displayName) const
-{
-    Windows::ApplicationModel::Wallet::WalletItem walletItem { nullptr };
-    check_hresult(static_cast<const IWalletItemFactory &>(static_cast<const D &>(*this))->abi_CreateWalletItem(kind, get(displayName), put(walletItem)));
-    return walletItem;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode impl_IWalletBarcodeFactory<D>::CreateWalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology symbology, hstring_ref value) const
-{
-    Windows::ApplicationModel::Wallet::WalletBarcode barcode { nullptr };
-    check_hresult(static_cast<const IWalletBarcodeFactory &>(static_cast<const D &>(*this))->abi_CreateWalletBarcode(symbology, get(value), put(barcode)));
-    return barcode;
-}
-
-template <typename D> Windows::ApplicationModel::Wallet::WalletBarcode impl_IWalletBarcodeFactory<D>::CreateCustomWalletBarcode(const Windows::Storage::Streams::IRandomAccessStreamReference & streamToBarcodeImage) const
-{
-    Windows::ApplicationModel::Wallet::WalletBarcode barcode { nullptr };
-    check_hresult(static_cast<const IWalletBarcodeFactory &>(static_cast<const D &>(*this))->abi_CreateCustomWalletBarcode(get(streamToBarcodeImage), put(barcode)));
-    return barcode;
-}
-
-inline WalletBarcode::WalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology symbology, hstring_ref value) :
-    WalletBarcode(get_activation_factory<WalletBarcode, IWalletBarcodeFactory>().CreateWalletBarcode(symbology, value))
+inline WalletBarcode::WalletBarcode(Windows::ApplicationModel::Wallet::WalletBarcodeSymbology const& symbology, param::hstring const& value) :
+    WalletBarcode(get_activation_factory<WalletBarcode, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory>().CreateWalletBarcode(symbology, value))
 {}
 
-inline WalletBarcode::WalletBarcode(const Windows::Storage::Streams::IRandomAccessStreamReference & streamToBarcodeImage) :
-    WalletBarcode(get_activation_factory<WalletBarcode, IWalletBarcodeFactory>().CreateCustomWalletBarcode(streamToBarcodeImage))
+inline WalletBarcode::WalletBarcode(Windows::Storage::Streams::IRandomAccessStreamReference const& streamToBarcodeImage) :
+    WalletBarcode(get_activation_factory<WalletBarcode, Windows::ApplicationModel::Wallet::IWalletBarcodeFactory>().CreateCustomWalletBarcode(streamToBarcodeImage))
 {}
 
-inline WalletItem::WalletItem(Windows::ApplicationModel::Wallet::WalletItemKind kind, hstring_ref displayName) :
-    WalletItem(get_activation_factory<WalletItem, IWalletItemFactory>().CreateWalletItem(kind, displayName))
+inline WalletItem::WalletItem(Windows::ApplicationModel::Wallet::WalletItemKind const& kind, param::hstring const& displayName) :
+    WalletItem(get_activation_factory<WalletItem, Windows::ApplicationModel::Wallet::IWalletItemFactory>().CreateWalletItem(kind, displayName))
 {}
 
-inline WalletItemCustomProperty::WalletItemCustomProperty(hstring_ref name, hstring_ref value) :
-    WalletItemCustomProperty(get_activation_factory<WalletItemCustomProperty, IWalletItemCustomPropertyFactory>().CreateWalletItemCustomProperty(name, value))
+inline WalletItemCustomProperty::WalletItemCustomProperty(param::hstring const& name, param::hstring const& value) :
+    WalletItemCustomProperty(get_activation_factory<WalletItemCustomProperty, Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory>().CreateWalletItemCustomProperty(name, value))
 {}
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Wallet::WalletItemStore> WalletManager::RequestStoreAsync()
 {
-    return get_activation_factory<WalletManager, IWalletManagerStatics>().RequestStoreAsync();
+    return get_activation_factory<WalletManager, Windows::ApplicationModel::Wallet::IWalletManagerStatics>().RequestStoreAsync();
 }
 
 inline WalletRelevantLocation::WalletRelevantLocation() :
@@ -2096,10 +1593,77 @@ inline WalletTransaction::WalletTransaction() :
     WalletTransaction(activate_instance<WalletTransaction>())
 {}
 
-inline WalletVerb::WalletVerb(hstring_ref name) :
-    WalletVerb(get_activation_factory<WalletVerb, IWalletVerbFactory>().CreateWalletVerb(name))
+inline WalletVerb::WalletVerb(param::hstring const& name) :
+    WalletVerb(get_activation_factory<WalletVerb, Windows::ApplicationModel::Wallet::IWalletVerbFactory>().CreateWalletVerb(name))
 {}
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletBarcode> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletBarcode> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletBarcodeFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletBarcodeFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItem> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItemCustomProperty> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItemCustomProperty> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItemCustomPropertyFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItemFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItemFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItemStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItemStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletItemStore2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletItemStore2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletManagerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletManagerStatics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletRelevantLocation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletRelevantLocation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletTransaction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletTransaction> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletVerb> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletVerb> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::IWalletVerbFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::IWalletVerbFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletBarcode> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletBarcode> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletItem> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletItemCustomProperty> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletItemCustomProperty> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletItemStore> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletItemStore> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletManager> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletRelevantLocation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletRelevantLocation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletTransaction> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletTransaction> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Wallet::WalletVerb> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Wallet::WalletVerb> {};
+
 }
+
+WINRT_WARNING_POP

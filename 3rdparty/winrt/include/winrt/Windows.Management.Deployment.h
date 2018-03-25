@@ -1,69 +1,637 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.ApplicationModel.3.h"
-#include "internal/Windows.Management.Deployment.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.ApplicationModel.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Management.Deployment.2.h"
+#include "winrt/Windows.Management.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> hstring consume_Windows_Management_Deployment_IDeploymentResult<D>::ErrorText() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IDeploymentResult)->get_ErrorText(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_Management_Deployment_IDeploymentResult<D>::ActivityId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IDeploymentResult)->get_ActivityId(put_abi(value)));
+    return value;
+}
+
+template <typename D> HRESULT consume_Windows_Management_Deployment_IDeploymentResult<D>::ExtendedErrorCode() const noexcept
+{
+    HRESULT value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IDeploymentResult)->get_ExtendedErrorCode(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IDeploymentResult2<D>::IsRegistered() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IDeploymentResult2)->get_IsRegistered(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::AddPackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->AddPackageAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::UpdatePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->UpdatePackageAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::RemovePackageAsync(param::hstring const& packageFullName) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->RemovePackageAsync(get_abi(packageFullName), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::StagePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->StagePackageAsync(get_abi(packageUri), get_abi(dependencyPackageUris), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::RegisterPackageAsync(Windows::Foundation::Uri const& manifestUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->RegisterPackageAsync(get_abi(manifestUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackages() const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackages(put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackagesForUser(param::hstring const& userSecurityId) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackagesByUserSecurityId(get_abi(userSecurityId), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackages(param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackagesByNamePublisher(get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackagesForUser(param::hstring const& userSecurityId, param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackagesByUserSecurityIdNamePublisher(get_abi(userSecurityId), get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageUserInformation> consume_Windows_Management_Deployment_IPackageManager<D>::FindUsers(param::hstring const& packageFullName) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageUserInformation> users{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindUsers(get_abi(packageFullName), put_abi(users)));
+    return users;
+}
+
+template <typename D> void consume_Windows_Management_Deployment_IPackageManager<D>::SetPackageState(param::hstring const& packageFullName, Windows::Management::Deployment::PackageState const& packageState) const
+{
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->SetPackageState(get_abi(packageFullName), get_abi(packageState)));
+}
+
+template <typename D> Windows::ApplicationModel::Package consume_Windows_Management_Deployment_IPackageManager<D>::FindPackage(param::hstring const& packageFullName) const
+{
+    Windows::ApplicationModel::Package packageInformation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackageByPackageFullName(get_abi(packageFullName), put_abi(packageInformation)));
+    return packageInformation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager<D>::CleanupPackageForUserAsync(param::hstring const& packageName, param::hstring const& userSecurityId) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->CleanupPackageForUserAsync(get_abi(packageName), get_abi(userSecurityId), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackages(param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackagesByPackageFamilyName(get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager<D>::FindPackagesForUser(param::hstring const& userSecurityId, param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackagesByUserSecurityIdPackageFamilyName(get_abi(userSecurityId), get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::ApplicationModel::Package consume_Windows_Management_Deployment_IPackageManager<D>::FindPackageForUser(param::hstring const& userSecurityId, param::hstring const& packageFullName) const
+{
+    Windows::ApplicationModel::Package packageInformation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager)->FindPackageByUserSecurityIdPackageFullName(get_abi(userSecurityId), get_abi(packageFullName), put_abi(packageInformation)));
+    return packageInformation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager2<D>::RemovePackageAsync(param::hstring const& packageFullName, Windows::Management::Deployment::RemovalOptions const& removalOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->RemovePackageWithOptionsAsync(get_abi(packageFullName), get_abi(removalOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager2<D>::StagePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->StagePackageWithOptionsAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager2<D>::RegisterPackageByFullNameAsync(param::hstring const& mainPackageFullName, param::async_iterable<hstring> const& dependencyPackageFullNames, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->RegisterPackageByFullNameAsync(get_abi(mainPackageFullName), get_abi(dependencyPackageFullNames), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesWithPackageTypes(get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesByUserSecurityIdWithPackageTypes(get_abi(userSecurityId), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesWithPackageTypes(param::hstring const& packageName, param::hstring const& packagePublisher, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesByNamePublisherWithPackageTypes(get_abi(packageName), get_abi(packagePublisher), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, param::hstring const& packageName, param::hstring const& packagePublisher, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(get_abi(userSecurityId), get_abi(packageName), get_abi(packagePublisher), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesWithPackageTypes(param::hstring const& packageFamilyName, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesByPackageFamilyNameWithPackageTypes(get_abi(packageFamilyName), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, param::hstring const& packageFamilyName, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(get_abi(userSecurityId), get_abi(packageFamilyName), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager2<D>::StageUserDataAsync(param::hstring const& packageFullName) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager2)->StageUserDataAsync(get_abi(packageFullName), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Management::Deployment::PackageVolume> consume_Windows_Management_Deployment_IPackageManager3<D>::AddPackageVolumeAsync(param::hstring const& packageStorePath) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Management::Deployment::PackageVolume> packageVolume{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->AddPackageVolumeAsync(get_abi(packageStorePath), put_abi(packageVolume)));
+    return packageVolume;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::AddPackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->AddPackageToVolumeAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(targetVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> void consume_Windows_Management_Deployment_IPackageManager3<D>::ClearPackageStatus(param::hstring const& packageFullName, Windows::Management::Deployment::PackageStatus const& status) const
+{
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->ClearPackageStatus(get_abi(packageFullName), get_abi(status)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::RegisterPackageAsync(Windows::Foundation::Uri const& manifestUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& appDataVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->RegisterPackageWithAppDataVolumeAsync(get_abi(manifestUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(appDataVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Management::Deployment::PackageVolume consume_Windows_Management_Deployment_IPackageManager3<D>::FindPackageVolume(param::hstring const& volumeName) const
+{
+    Windows::Management::Deployment::PackageVolume volume{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->FindPackageVolumeByName(get_abi(volumeName), put_abi(volume)));
+    return volume;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageVolume> consume_Windows_Management_Deployment_IPackageManager3<D>::FindPackageVolumes() const
+{
+    Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageVolume> volumeCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->FindPackageVolumes(put_abi(volumeCollection)));
+    return volumeCollection;
+}
+
+template <typename D> Windows::Management::Deployment::PackageVolume consume_Windows_Management_Deployment_IPackageManager3<D>::GetDefaultPackageVolume() const
+{
+    Windows::Management::Deployment::PackageVolume volume{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->GetDefaultPackageVolume(put_abi(volume)));
+    return volume;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::MovePackageToVolumeAsync(param::hstring const& packageFullName, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->MovePackageToVolumeAsync(get_abi(packageFullName), get_abi(deploymentOptions), get_abi(targetVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::RemovePackageVolumeAsync(Windows::Management::Deployment::PackageVolume const& volume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->RemovePackageVolumeAsync(get_abi(volume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> void consume_Windows_Management_Deployment_IPackageManager3<D>::SetDefaultPackageVolume(Windows::Management::Deployment::PackageVolume const& volume) const
+{
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->SetDefaultPackageVolume(get_abi(volume)));
+}
+
+template <typename D> void consume_Windows_Management_Deployment_IPackageManager3<D>::SetPackageStatus(param::hstring const& packageFullName, Windows::Management::Deployment::PackageStatus const& status) const
+{
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->SetPackageStatus(get_abi(packageFullName), get_abi(status)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::SetPackageVolumeOfflineAsync(Windows::Management::Deployment::PackageVolume const& packageVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->SetPackageVolumeOfflineAsync(get_abi(packageVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::SetPackageVolumeOnlineAsync(Windows::Management::Deployment::PackageVolume const& packageVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->SetPackageVolumeOnlineAsync(get_abi(packageVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::StagePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->StagePackageToVolumeAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(targetVolume), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager3<D>::StageUserDataAsync(param::hstring const& packageFullName, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager3)->StageUserDataWithOptionsAsync(get_abi(packageFullName), get_abi(deploymentOptions), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Management::Deployment::PackageVolume>> consume_Windows_Management_Deployment_IPackageManager4<D>::GetPackageVolumesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Management::Deployment::PackageVolume>> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager4)->GetPackageVolumesAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager5<D>::AddPackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames, param::async_iterable<Windows::Foundation::Uri> const& externalPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager5)->AddPackageToVolumeAndOptionalPackagesAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(targetVolume), get_abi(optionalPackageFamilyNames), get_abi(externalPackageUris), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager5<D>::StagePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames, param::async_iterable<Windows::Foundation::Uri> const& externalPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager5)->StagePackageToVolumeAndOptionalPackagesAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(targetVolume), get_abi(optionalPackageFamilyNames), get_abi(externalPackageUris), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager5<D>::RegisterPackageByFamilyNameAsync(param::hstring const& mainPackageFamilyName, param::async_iterable<hstring> const& dependencyPackageFamilyNames, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& appDataVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager5)->RegisterPackageByFamilyNameAndOptionalPackagesAsync(get_abi(mainPackageFamilyName), get_abi(dependencyPackageFamilyNames), get_abi(deploymentOptions), get_abi(appDataVolume), get_abi(optionalPackageFamilyNames), put_abi(deploymentOperation)));
+    return deploymentOperation;
+}
+
+template <typename D> Windows::Management::Deployment::PackageManagerDebugSettings consume_Windows_Management_Deployment_IPackageManager5<D>::DebugSettings() const noexcept
+{
+    Windows::Management::Deployment::PackageManagerDebugSettings value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageManager5)->get_DebugSettings(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::ProvisionPackageForAllUsersAsync(param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->ProvisionPackageForAllUsersAsync(get_abi(packageFamilyName), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::AddPackageByAppInstallerFileAsync(Windows::Foundation::Uri const& appInstallerFileUri, Windows::Management::Deployment::AddPackageByAppInstallerOptions const& options, Windows::Management::Deployment::PackageVolume const& targetVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->AddPackageByAppInstallerFileAsync(get_abi(appInstallerFileUri), get_abi(options), get_abi(targetVolume), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::RequestAddPackageByAppInstallerFileAsync(Windows::Foundation::Uri const& appInstallerFileUri, Windows::Management::Deployment::AddPackageByAppInstallerOptions const& options, Windows::Management::Deployment::PackageVolume const& targetVolume) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->RequestAddPackageByAppInstallerFileAsync(get_abi(appInstallerFileUri), get_abi(options), get_abi(targetVolume), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::AddPackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& options, Windows::Management::Deployment::PackageVolume const& targetVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames, param::async_iterable<Windows::Foundation::Uri> const& packageUrisToInstall, param::async_iterable<Windows::Foundation::Uri> const& relatedPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->AddPackageToVolumeAndRelatedSetAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(options), get_abi(targetVolume), get_abi(optionalPackageFamilyNames), get_abi(packageUrisToInstall), get_abi(relatedPackageUris), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::StagePackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& options, Windows::Management::Deployment::PackageVolume const& targetVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames, param::async_iterable<Windows::Foundation::Uri> const& packageUrisToInstall, param::async_iterable<Windows::Foundation::Uri> const& relatedPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->StagePackageToVolumeAndRelatedSetAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(options), get_abi(targetVolume), get_abi(optionalPackageFamilyNames), get_abi(packageUrisToInstall), get_abi(relatedPackageUris), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> consume_Windows_Management_Deployment_IPackageManager6<D>::RequestAddPackageAsync(Windows::Foundation::Uri const& packageUri, param::async_iterable<Windows::Foundation::Uri> const& dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions const& deploymentOptions, Windows::Management::Deployment::PackageVolume const& targetVolume, param::async_iterable<hstring> const& optionalPackageFamilyNames, param::async_iterable<Windows::Foundation::Uri> const& relatedPackageUris) const
+{
+    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManager6)->RequestAddPackageAsync(get_abi(packageUri), get_abi(dependencyPackageUris), get_abi(deploymentOptions), get_abi(targetVolume), get_abi(optionalPackageFamilyNames), get_abi(relatedPackageUris), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Management_Deployment_IPackageManagerDebugSettings<D>::SetContentGroupStateAsync(Windows::ApplicationModel::Package const& package, param::hstring const& contentGroupName, Windows::ApplicationModel::PackageContentGroupState const& state) const
+{
+    Windows::Foundation::IAsyncAction action{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManagerDebugSettings)->SetContentGroupStateAsync(get_abi(package), get_abi(contentGroupName), get_abi(state), put_abi(action)));
+    return action;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Management_Deployment_IPackageManagerDebugSettings<D>::SetContentGroupStateAsync(Windows::ApplicationModel::Package const& package, param::hstring const& contentGroupName, Windows::ApplicationModel::PackageContentGroupState const& state, double completionPercentage) const
+{
+    Windows::Foundation::IAsyncAction action{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageManagerDebugSettings)->SetContentGroupStateWithPercentageAsync(get_abi(package), get_abi(contentGroupName), get_abi(state), completionPercentage, put_abi(action)));
+    return action;
+}
+
+template <typename D> hstring consume_Windows_Management_Deployment_IPackageUserInformation<D>::UserSecurityId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageUserInformation)->get_UserSecurityId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Management::Deployment::PackageInstallState consume_Windows_Management_Deployment_IPackageUserInformation<D>::InstallState() const noexcept
+{
+    Windows::Management::Deployment::PackageInstallState value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageUserInformation)->get_InstallState(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IPackageVolume<D>::IsOffline() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_IsOffline(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IPackageVolume<D>::IsSystemVolume() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_IsSystemVolume(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Management_Deployment_IPackageVolume<D>::MountPoint() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_MountPoint(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Management_Deployment_IPackageVolume<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Management_Deployment_IPackageVolume<D>::PackageStorePath() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_PackageStorePath(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IPackageVolume<D>::SupportsHardLinks() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->get_SupportsHardLinks(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackages() const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackages(put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackages(param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByNamePublisher(get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackages(param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByPackageFamilyName(get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesWithPackageTypes(get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes const& packageTypes, param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByNamePublisherWithPackagesTypes(get_abi(packageTypes), get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes const& packageTypes, param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByPackageFamilyNameWithPackageTypes(get_abi(packageTypes), get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackage(param::hstring const& packageFullName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackageByPackageFullName(get_abi(packageFullName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUser(param::hstring const& userSecurityId) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityId(get_abi(userSecurityId), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUser(param::hstring const& userSecurityId, param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityIdNamePublisher(get_abi(userSecurityId), get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUser(param::hstring const& userSecurityId, param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityIdPackageFamilyName(get_abi(userSecurityId), get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, Windows::Management::Deployment::PackageTypes const& packageTypes) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityIdWithPackageTypes(get_abi(userSecurityId), get_abi(packageTypes), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, Windows::Management::Deployment::PackageTypes const& packageTypes, param::hstring const& packageName, param::hstring const& packagePublisher) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(get_abi(userSecurityId), get_abi(packageTypes), get_abi(packageName), get_abi(packagePublisher), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(param::hstring const& userSecurityId, Windows::Management::Deployment::PackageTypes const& packageTypes, param::hstring const& packageFamilyName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(get_abi(userSecurityId), get_abi(packageTypes), get_abi(packageFamilyName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> consume_Windows_Management_Deployment_IPackageVolume<D>::FindPackageForUser(param::hstring const& userSecurityId, param::hstring const& packageFullName) const
+{
+    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume)->FindPackageByUserSecurityIdPackageFullName(get_abi(userSecurityId), get_abi(packageFullName), put_abi(packageCollection)));
+    return packageCollection;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IPackageVolume2<D>::IsFullTrustPackageSupported() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume2)->get_IsFullTrustPackageSupported(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Management_Deployment_IPackageVolume2<D>::IsAppxInstallSupported() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume2)->get_IsAppxInstallSupported(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<uint64_t> consume_Windows_Management_Deployment_IPackageVolume2<D>::GetAvailableSpaceAsync() const
+{
+    Windows::Foundation::IAsyncOperation<uint64_t> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Management::Deployment::IPackageVolume2)->GetAvailableSpaceAsync(put_abi(operation)));
+    return operation;
+}
 
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IDeploymentResult> : produce_base<D, Windows::Management::Deployment::IDeploymentResult>
 {
-    HRESULT __stdcall get_ErrorText(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ErrorText(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ErrorText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ErrorText());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ActivityId(GUID * value) noexcept override
+    HRESULT __stdcall get_ActivityId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ActivityId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActivityId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExtendedErrorCode(HRESULT * value) noexcept override
+    HRESULT __stdcall get_ExtendedErrorCode(HRESULT* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExtendedErrorCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExtendedErrorCode());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::Management::Deployment::IDeploymentResult2> : produce_base<D, Windows::Management::Deployment::IDeploymentResult2>
+{
+    HRESULT __stdcall get_IsRegistered(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsRegistered());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_base<D, Windows::Management::Deployment::IPackageManager>
 {
-    HRESULT __stdcall abi_AddPackageAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall AddPackageAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().AddPackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().AddPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -73,11 +641,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_UpdatePackageAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall UpdatePackageAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().UpdatePackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().UpdatePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -87,11 +656,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_RemovePackageAsync(abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RemovePackageAsync(HSTRING packageFullName, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RemovePackageAsync(*reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RemovePackageAsync(*reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -101,11 +671,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_StagePackageAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall StagePackageAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().StagePackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StagePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris)));
             return S_OK;
         }
         catch (...)
@@ -115,11 +686,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_RegisterPackageAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> manifestUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RegisterPackageAsync(::IUnknown* manifestUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RegisterPackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&manifestUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RegisterPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&manifestUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -129,11 +701,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackages(abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackages(::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages());
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages());
             return S_OK;
         }
         catch (...)
@@ -143,11 +716,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityId(abi_arg_in<hstring> userSecurityId, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityId(HSTRING userSecurityId, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId)));
             return S_OK;
         }
         catch (...)
@@ -157,11 +731,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByNamePublisher(abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByNamePublisher(HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -171,11 +746,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdNamePublisher(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdNamePublisher(HSTRING userSecurityId, HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -185,11 +761,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindUsers(abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageUserInformation>> users) noexcept override
+    HRESULT __stdcall FindUsers(HSTRING packageFullName, ::IUnknown** users) noexcept final
     {
         try
         {
-            *users = detach(this->shim().FindUsers(*reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *users = detach_abi(this->shim().FindUsers(*reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -199,11 +776,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_SetPackageState(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::PackageState packageState) noexcept override
+    HRESULT __stdcall SetPackageState(HSTRING packageFullName, Windows::Management::Deployment::PackageState packageState) noexcept final
     {
         try
         {
-            this->shim().SetPackageState(*reinterpret_cast<const hstring *>(&packageFullName), packageState);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetPackageState(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::PackageState const*>(&packageState));
             return S_OK;
         }
         catch (...)
@@ -212,11 +790,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackageByPackageFullName(abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::ApplicationModel::IPackage> packageInformation) noexcept override
+    HRESULT __stdcall FindPackageByPackageFullName(HSTRING packageFullName, ::IUnknown** packageInformation) noexcept final
     {
         try
         {
-            *packageInformation = detach(this->shim().FindPackage(*reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *packageInformation = detach_abi(this->shim().FindPackage(*reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -226,11 +805,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_CleanupPackageForUserAsync(abi_arg_in<hstring> packageName, abi_arg_in<hstring> userSecurityId, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall CleanupPackageForUserAsync(HSTRING packageName, HSTRING userSecurityId, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().CleanupPackageForUserAsync(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&userSecurityId)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().CleanupPackageForUserAsync(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&userSecurityId)));
             return S_OK;
         }
         catch (...)
@@ -240,11 +820,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByPackageFamilyName(abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByPackageFamilyName(HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages(*reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages(*reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -254,11 +835,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdPackageFamilyName(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdPackageFamilyName(HSTRING userSecurityId, HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -268,11 +850,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
         }
     }
 
-    HRESULT __stdcall abi_FindPackageByUserSecurityIdPackageFullName(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::ApplicationModel::IPackage> packageInformation) noexcept override
+    HRESULT __stdcall FindPackageByUserSecurityIdPackageFullName(HSTRING userSecurityId, HSTRING packageFullName, ::IUnknown** packageInformation) noexcept final
     {
         try
         {
-            *packageInformation = detach(this->shim().FindPackageForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *packageInformation = detach_abi(this->shim().FindPackageForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -286,11 +869,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager> : produce_ba
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_base<D, Windows::Management::Deployment::IPackageManager2>
 {
-    HRESULT __stdcall abi_RemovePackageWithOptionsAsync(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::RemovalOptions removalOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RemovePackageWithOptionsAsync(HSTRING packageFullName, Windows::Management::Deployment::RemovalOptions removalOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RemovePackageAsync(*reinterpret_cast<const hstring *>(&packageFullName), removalOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RemovePackageAsync(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::RemovalOptions const*>(&removalOptions)));
             return S_OK;
         }
         catch (...)
@@ -300,11 +884,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_StagePackageWithOptionsAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall StagePackageWithOptionsAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().StagePackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StagePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -314,11 +899,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_RegisterPackageByFullNameAsync(abi_arg_in<hstring> mainPackageFullName, abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> dependencyPackageFullNames, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RegisterPackageByFullNameAsync(HSTRING mainPackageFullName, ::IUnknown* dependencyPackageFullNames, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RegisterPackageByFullNameAsync(*reinterpret_cast<const hstring *>(&mainPackageFullName), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&dependencyPackageFullNames), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RegisterPackageByFullNameAsync(*reinterpret_cast<hstring const*>(&mainPackageFullName), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&dependencyPackageFullNames), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -328,11 +914,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -342,11 +929,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdWithPackageTypes(abi_arg_in<hstring> userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdWithPackageTypes(HSTRING userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -356,11 +944,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByNamePublisherWithPackageTypes(abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByNamePublisherWithPackageTypes(HSTRING packageName, HSTRING packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -370,11 +959,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(HSTRING userSecurityId, HSTRING packageName, HSTRING packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -384,11 +974,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByPackageFamilyNameWithPackageTypes(abi_arg_in<hstring> packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByPackageFamilyNameWithPackageTypes(HSTRING packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<const hstring *>(&packageFamilyName), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<hstring const*>(&packageFamilyName), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -398,11 +989,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(HSTRING userSecurityId, HSTRING packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageFamilyName), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageFamilyName), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -412,11 +1004,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_StageUserDataAsync(abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall StageUserDataAsync(HSTRING packageFullName, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().StageUserDataAsync(*reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StageUserDataAsync(*reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -430,11 +1023,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager2> : produce_b
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_base<D, Windows::Management::Deployment::IPackageManager3>
 {
-    HRESULT __stdcall abi_AddPackageVolumeAsync(abi_arg_in<hstring> packageStorePath, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Management::Deployment::PackageVolume>> packageVolume) noexcept override
+    HRESULT __stdcall AddPackageVolumeAsync(HSTRING packageStorePath, ::IUnknown** packageVolume) noexcept final
     {
         try
         {
-            *packageVolume = detach(this->shim().AddPackageVolumeAsync(*reinterpret_cast<const hstring *>(&packageStorePath)));
+            typename D::abi_guard guard(this->shim());
+            *packageVolume = detach_abi(this->shim().AddPackageVolumeAsync(*reinterpret_cast<hstring const*>(&packageStorePath)));
             return S_OK;
         }
         catch (...)
@@ -444,11 +1038,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_AddPackageToVolumeAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_in<Windows::Management::Deployment::IPackageVolume> targetVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall AddPackageToVolumeAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().AddPackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions, *reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&targetVolume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().AddPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume)));
             return S_OK;
         }
         catch (...)
@@ -458,11 +1053,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_ClearPackageStatus(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::PackageStatus status) noexcept override
+    HRESULT __stdcall ClearPackageStatus(HSTRING packageFullName, Windows::Management::Deployment::PackageStatus status) noexcept final
     {
         try
         {
-            this->shim().ClearPackageStatus(*reinterpret_cast<const hstring *>(&packageFullName), status);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ClearPackageStatus(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::PackageStatus const*>(&status));
             return S_OK;
         }
         catch (...)
@@ -471,11 +1067,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_RegisterPackageWithAppDataVolumeAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> manifestUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_in<Windows::Management::Deployment::IPackageVolume> appDataVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RegisterPackageWithAppDataVolumeAsync(::IUnknown* manifestUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* appDataVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RegisterPackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&manifestUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions, *reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&appDataVolume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RegisterPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&manifestUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&appDataVolume)));
             return S_OK;
         }
         catch (...)
@@ -485,11 +1082,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackageVolumeByName(abi_arg_in<hstring> volumeName, abi_arg_out<Windows::Management::Deployment::IPackageVolume> volume) noexcept override
+    HRESULT __stdcall FindPackageVolumeByName(HSTRING volumeName, ::IUnknown** volume) noexcept final
     {
         try
         {
-            *volume = detach(this->shim().FindPackageVolume(*reinterpret_cast<const hstring *>(&volumeName)));
+            typename D::abi_guard guard(this->shim());
+            *volume = detach_abi(this->shim().FindPackageVolume(*reinterpret_cast<hstring const*>(&volumeName)));
             return S_OK;
         }
         catch (...)
@@ -499,11 +1097,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_FindPackageVolumes(abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageVolume>> volumeCollection) noexcept override
+    HRESULT __stdcall FindPackageVolumes(::IUnknown** volumeCollection) noexcept final
     {
         try
         {
-            *volumeCollection = detach(this->shim().FindPackageVolumes());
+            typename D::abi_guard guard(this->shim());
+            *volumeCollection = detach_abi(this->shim().FindPackageVolumes());
             return S_OK;
         }
         catch (...)
@@ -513,11 +1112,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_GetDefaultPackageVolume(abi_arg_out<Windows::Management::Deployment::IPackageVolume> volume) noexcept override
+    HRESULT __stdcall GetDefaultPackageVolume(::IUnknown** volume) noexcept final
     {
         try
         {
-            *volume = detach(this->shim().GetDefaultPackageVolume());
+            typename D::abi_guard guard(this->shim());
+            *volume = detach_abi(this->shim().GetDefaultPackageVolume());
             return S_OK;
         }
         catch (...)
@@ -527,11 +1127,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_MovePackageToVolumeAsync(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_in<Windows::Management::Deployment::IPackageVolume> targetVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall MovePackageToVolumeAsync(HSTRING packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().MovePackageToVolumeAsync(*reinterpret_cast<const hstring *>(&packageFullName), deploymentOptions, *reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&targetVolume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().MovePackageToVolumeAsync(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume)));
             return S_OK;
         }
         catch (...)
@@ -541,11 +1142,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_RemovePackageVolumeAsync(abi_arg_in<Windows::Management::Deployment::IPackageVolume> volume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall RemovePackageVolumeAsync(::IUnknown* volume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().RemovePackageVolumeAsync(*reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&volume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RemovePackageVolumeAsync(*reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&volume)));
             return S_OK;
         }
         catch (...)
@@ -555,11 +1157,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_SetDefaultPackageVolume(abi_arg_in<Windows::Management::Deployment::IPackageVolume> volume) noexcept override
+    HRESULT __stdcall SetDefaultPackageVolume(::IUnknown* volume) noexcept final
     {
         try
         {
-            this->shim().SetDefaultPackageVolume(*reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&volume));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetDefaultPackageVolume(*reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&volume));
             return S_OK;
         }
         catch (...)
@@ -568,11 +1171,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_SetPackageStatus(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::PackageStatus status) noexcept override
+    HRESULT __stdcall SetPackageStatus(HSTRING packageFullName, Windows::Management::Deployment::PackageStatus status) noexcept final
     {
         try
         {
-            this->shim().SetPackageStatus(*reinterpret_cast<const hstring *>(&packageFullName), status);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetPackageStatus(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::PackageStatus const*>(&status));
             return S_OK;
         }
         catch (...)
@@ -581,25 +1185,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_SetPackageVolumeOfflineAsync(abi_arg_in<Windows::Management::Deployment::IPackageVolume> packageVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall SetPackageVolumeOfflineAsync(::IUnknown* packageVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().SetPackageVolumeOfflineAsync(*reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&packageVolume)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *deploymentOperation = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SetPackageVolumeOnlineAsync(abi_arg_in<Windows::Management::Deployment::IPackageVolume> packageVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
-    {
-        try
-        {
-            *deploymentOperation = detach(this->shim().SetPackageVolumeOnlineAsync(*reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&packageVolume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().SetPackageVolumeOfflineAsync(*reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&packageVolume)));
             return S_OK;
         }
         catch (...)
@@ -609,11 +1200,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_StagePackageToVolumeAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> packageUri, abi_arg_in<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri>> dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_in<Windows::Management::Deployment::IPackageVolume> targetVolume, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall SetPackageVolumeOnlineAsync(::IUnknown* packageVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().StagePackageAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&packageUri), *reinterpret_cast<const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> *>(&dependencyPackageUris), deploymentOptions, *reinterpret_cast<const Windows::Management::Deployment::PackageVolume *>(&targetVolume)));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().SetPackageVolumeOnlineAsync(*reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&packageVolume)));
             return S_OK;
         }
         catch (...)
@@ -623,11 +1215,27 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
         }
     }
 
-    HRESULT __stdcall abi_StageUserDataWithOptionsAsync(abi_arg_in<hstring> packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions, abi_arg_out<Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress>> deploymentOperation) noexcept override
+    HRESULT __stdcall StagePackageToVolumeAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *deploymentOperation = detach(this->shim().StageUserDataAsync(*reinterpret_cast<const hstring *>(&packageFullName), deploymentOptions));
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StagePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *deploymentOperation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall StageUserDataWithOptionsAsync(HSTRING packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown** deploymentOperation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StageUserDataAsync(*reinterpret_cast<hstring const*>(&packageFullName), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions)));
             return S_OK;
         }
         catch (...)
@@ -641,11 +1249,12 @@ struct produce<D, Windows::Management::Deployment::IPackageManager3> : produce_b
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageManager4> : produce_base<D, Windows::Management::Deployment::IPackageManager4>
 {
-    HRESULT __stdcall abi_GetPackageVolumesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Management::Deployment::PackageVolume>>> operation) noexcept override
+    HRESULT __stdcall GetPackageVolumesAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetPackageVolumesAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetPackageVolumesAsync());
             return S_OK;
         }
         catch (...)
@@ -657,125 +1266,258 @@ struct produce<D, Windows::Management::Deployment::IPackageManager4> : produce_b
 };
 
 template <typename D>
-struct produce<D, Windows::Management::Deployment::IPackageUserInformation> : produce_base<D, Windows::Management::Deployment::IPackageUserInformation>
+struct produce<D, Windows::Management::Deployment::IPackageManager5> : produce_base<D, Windows::Management::Deployment::IPackageManager5>
 {
-    HRESULT __stdcall get_UserSecurityId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall AddPackageToVolumeAndOptionalPackagesAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown* externalPackageUris, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *value = detach(this->shim().UserSecurityId());
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().AddPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&externalPackageUris)));
             return S_OK;
         }
         catch (...)
         {
-            *value = nullptr;
+            *deploymentOperation = nullptr;
             return impl::to_hresult();
         }
     }
 
-    HRESULT __stdcall get_InstallState(Windows::Management::Deployment::PackageInstallState * value) noexcept override
+    HRESULT __stdcall StagePackageToVolumeAndOptionalPackagesAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown* externalPackageUris, ::IUnknown** deploymentOperation) noexcept final
     {
         try
         {
-            *value = detach(this->shim().InstallState());
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().StagePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&externalPackageUris)));
             return S_OK;
         }
         catch (...)
         {
+            *deploymentOperation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall RegisterPackageByFamilyNameAndOptionalPackagesAsync(HSTRING mainPackageFamilyName, ::IUnknown* dependencyPackageFamilyNames, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* appDataVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown** deploymentOperation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *deploymentOperation = detach_abi(this->shim().RegisterPackageByFamilyNameAsync(*reinterpret_cast<hstring const*>(&mainPackageFamilyName), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&dependencyPackageFamilyNames), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&appDataVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *deploymentOperation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall get_DebugSettings(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DebugSettings());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::Management::Deployment::IPackageManager6> : produce_base<D, Windows::Management::Deployment::IPackageManager6>
+{
+    HRESULT __stdcall ProvisionPackageForAllUsersAsync(HSTRING packageFamilyName, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().ProvisionPackageForAllUsersAsync(*reinterpret_cast<hstring const*>(&packageFamilyName)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall AddPackageByAppInstallerFileAsync(::IUnknown* appInstallerFileUri, Windows::Management::Deployment::AddPackageByAppInstallerOptions options, ::IUnknown* targetVolume, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().AddPackageByAppInstallerFileAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&appInstallerFileUri), *reinterpret_cast<Windows::Management::Deployment::AddPackageByAppInstallerOptions const*>(&options), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall RequestAddPackageByAppInstallerFileAsync(::IUnknown* appInstallerFileUri, Windows::Management::Deployment::AddPackageByAppInstallerOptions options, ::IUnknown* targetVolume, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestAddPackageByAppInstallerFileAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&appInstallerFileUri), *reinterpret_cast<Windows::Management::Deployment::AddPackageByAppInstallerOptions const*>(&options), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall AddPackageToVolumeAndRelatedSetAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions options, ::IUnknown* targetVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown* packageUrisToInstall, ::IUnknown* relatedPackageUris, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().AddPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&options), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&packageUrisToInstall), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&relatedPackageUris)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall StagePackageToVolumeAndRelatedSetAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions options, ::IUnknown* targetVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown* packageUrisToInstall, ::IUnknown* relatedPackageUris, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().StagePackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&options), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&packageUrisToInstall), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&relatedPackageUris)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall RequestAddPackageAsync(::IUnknown* packageUri, ::IUnknown* dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, ::IUnknown* targetVolume, ::IUnknown* optionalPackageFamilyNames, ::IUnknown* relatedPackageUris, ::IUnknown** operation) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().RequestAddPackageAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&packageUri), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&dependencyPackageUris), *reinterpret_cast<Windows::Management::Deployment::DeploymentOptions const*>(&deploymentOptions), *reinterpret_cast<Windows::Management::Deployment::PackageVolume const*>(&targetVolume), *reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&optionalPackageFamilyNames), *reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> const*>(&relatedPackageUris)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
             return impl::to_hresult();
         }
     }
 };
 
 template <typename D>
+struct produce<D, Windows::Management::Deployment::IPackageManagerDebugSettings> : produce_base<D, Windows::Management::Deployment::IPackageManagerDebugSettings>
+{
+    HRESULT __stdcall SetContentGroupStateAsync(::IUnknown* package, HSTRING contentGroupName, Windows::ApplicationModel::PackageContentGroupState state, ::IUnknown** action) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *action = detach_abi(this->shim().SetContentGroupStateAsync(*reinterpret_cast<Windows::ApplicationModel::Package const*>(&package), *reinterpret_cast<hstring const*>(&contentGroupName), *reinterpret_cast<Windows::ApplicationModel::PackageContentGroupState const*>(&state)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *action = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall SetContentGroupStateWithPercentageAsync(::IUnknown* package, HSTRING contentGroupName, Windows::ApplicationModel::PackageContentGroupState state, double completionPercentage, ::IUnknown** action) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *action = detach_abi(this->shim().SetContentGroupStateAsync(*reinterpret_cast<Windows::ApplicationModel::Package const*>(&package), *reinterpret_cast<hstring const*>(&contentGroupName), *reinterpret_cast<Windows::ApplicationModel::PackageContentGroupState const*>(&state), completionPercentage));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *action = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::Management::Deployment::IPackageUserInformation> : produce_base<D, Windows::Management::Deployment::IPackageUserInformation>
+{
+    HRESULT __stdcall get_UserSecurityId(HSTRING* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UserSecurityId());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InstallState(Windows::Management::Deployment::PackageInstallState* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InstallState());
+        return S_OK;
+    }
+};
+
+template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_base<D, Windows::Management::Deployment::IPackageVolume>
 {
-    HRESULT __stdcall get_IsOffline(bool * value) noexcept override
+    HRESULT __stdcall get_IsOffline(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsOffline());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsOffline());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSystemVolume(bool * value) noexcept override
+    HRESULT __stdcall get_IsSystemVolume(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSystemVolume());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSystemVolume());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MountPoint(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_MountPoint(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MountPoint());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MountPoint());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PackageStorePath(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_PackageStorePath(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PackageStorePath());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PackageStorePath());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportsHardLinks(bool * value) noexcept override
+    HRESULT __stdcall get_SupportsHardLinks(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportsHardLinks());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportsHardLinks());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_FindPackages(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackages(::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages());
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages());
             return S_OK;
         }
         catch (...)
@@ -785,11 +1527,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByNamePublisher(abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByNamePublisher(HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages(*reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages(*reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -799,11 +1542,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByPackageFamilyName(abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByPackageFamilyName(HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackages(*reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackages(*reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -813,11 +1557,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -827,11 +1572,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByNamePublisherWithPackagesTypes(Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByNamePublisherWithPackagesTypes(Windows::Management::Deployment::PackageTypes packageTypes, HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(packageTypes, *reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes), *reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -841,11 +1587,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByPackageFamilyNameWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByPackageFamilyNameWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesWithPackageTypes(packageTypes, *reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesWithPackageTypes(*reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes), *reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -855,11 +1602,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackageByPackageFullName(abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackageByPackageFullName(HSTRING packageFullName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackage(*reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackage(*reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -869,11 +1617,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityId(abi_arg_in<hstring> userSecurityId, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityId(HSTRING userSecurityId, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId)));
             return S_OK;
         }
         catch (...)
@@ -883,11 +1632,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdNamePublisher(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdNamePublisher(HSTRING userSecurityId, HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -897,11 +1647,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdPackageFamilyName(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdPackageFamilyName(HSTRING userSecurityId, HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -911,11 +1662,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdWithPackageTypes(abi_arg_in<hstring> userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdWithPackageTypes(HSTRING userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), packageTypes));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes)));
             return S_OK;
         }
         catch (...)
@@ -925,11 +1677,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(abi_arg_in<hstring> userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_in<hstring> packageName, abi_arg_in<hstring> packagePublisher, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(HSTRING userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, HSTRING packageName, HSTRING packagePublisher, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), packageTypes, *reinterpret_cast<const hstring *>(&packageName), *reinterpret_cast<const hstring *>(&packagePublisher)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes), *reinterpret_cast<hstring const*>(&packageName), *reinterpret_cast<hstring const*>(&packagePublisher)));
             return S_OK;
         }
         catch (...)
@@ -939,11 +1692,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(abi_arg_in<hstring> userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, abi_arg_in<hstring> packageFamilyName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(HSTRING userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, HSTRING packageFamilyName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<const hstring *>(&userSecurityId), packageTypes, *reinterpret_cast<const hstring *>(&packageFamilyName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackagesForUserWithPackageTypes(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<Windows::Management::Deployment::PackageTypes const*>(&packageTypes), *reinterpret_cast<hstring const*>(&packageFamilyName)));
             return S_OK;
         }
         catch (...)
@@ -953,11 +1707,12 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
         }
     }
 
-    HRESULT __stdcall abi_FindPackageByUserSecurityIdPackageFullName(abi_arg_in<hstring> userSecurityId, abi_arg_in<hstring> packageFullName, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package>> packageCollection) noexcept override
+    HRESULT __stdcall FindPackageByUserSecurityIdPackageFullName(HSTRING userSecurityId, HSTRING packageFullName, ::IUnknown** packageCollection) noexcept final
     {
         try
         {
-            *packageCollection = detach(this->shim().FindPackageForUser(*reinterpret_cast<const hstring *>(&userSecurityId), *reinterpret_cast<const hstring *>(&packageFullName)));
+            typename D::abi_guard guard(this->shim());
+            *packageCollection = detach_abi(this->shim().FindPackageForUser(*reinterpret_cast<hstring const*>(&userSecurityId), *reinterpret_cast<hstring const*>(&packageFullName)));
             return S_OK;
         }
         catch (...)
@@ -971,37 +1726,26 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume> : produce_bas
 template <typename D>
 struct produce<D, Windows::Management::Deployment::IPackageVolume2> : produce_base<D, Windows::Management::Deployment::IPackageVolume2>
 {
-    HRESULT __stdcall get_IsFullTrustPackageSupported(bool * value) noexcept override
+    HRESULT __stdcall get_IsFullTrustPackageSupported(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsFullTrustPackageSupported());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsFullTrustPackageSupported());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsAppxInstallSupported(bool * value) noexcept override
+    HRESULT __stdcall get_IsAppxInstallSupported(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsAppxInstallSupported());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsAppxInstallSupported());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetAvailableSpaceAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<uint64_t>> operation) noexcept override
+    HRESULT __stdcall GetAvailableSpaceAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetAvailableSpaceAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetAvailableSpaceAsync());
             return S_OK;
         }
         catch (...)
@@ -1014,489 +1758,7 @@ struct produce<D, Windows::Management::Deployment::IPackageVolume2> : produce_ba
 
 }
 
-namespace Windows::Management::Deployment {
-
-template <typename D> hstring impl_IDeploymentResult<D>::ErrorText() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDeploymentResult &>(static_cast<const D &>(*this))->get_ErrorText(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IDeploymentResult<D>::ActivityId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IDeploymentResult &>(static_cast<const D &>(*this))->get_ActivityId(&value));
-    return value;
-}
-
-template <typename D> HRESULT impl_IDeploymentResult<D>::ExtendedErrorCode() const
-{
-    HRESULT value {};
-    check_hresult(static_cast<const IDeploymentResult &>(static_cast<const D &>(*this))->get_ExtendedErrorCode(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPackageUserInformation<D>::UserSecurityId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPackageUserInformation &>(static_cast<const D &>(*this))->get_UserSecurityId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Management::Deployment::PackageInstallState impl_IPackageUserInformation<D>::InstallState() const
-{
-    Windows::Management::Deployment::PackageInstallState value {};
-    check_hresult(static_cast<const IPackageUserInformation &>(static_cast<const D &>(*this))->get_InstallState(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::AddPackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_AddPackageAsync(get(packageUri), get(dependencyPackageUris), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::UpdatePackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_UpdatePackageAsync(get(packageUri), get(dependencyPackageUris), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::RemovePackageAsync(hstring_ref packageFullName) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_RemovePackageAsync(get(packageFullName), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::StagePackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_StagePackageAsync(get(packageUri), get(dependencyPackageUris), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::RegisterPackageAsync(const Windows::Foundation::Uri & manifestUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_RegisterPackageAsync(get(manifestUri), get(dependencyPackageUris), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackages() const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackages(put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackagesForUser(hstring_ref userSecurityId) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityId(get(userSecurityId), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackages(hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackagesByNamePublisher(get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackagesForUser(hstring_ref userSecurityId, hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdNamePublisher(get(userSecurityId), get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageUserInformation> impl_IPackageManager<D>::FindUsers(hstring_ref packageFullName) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageUserInformation> users;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindUsers(get(packageFullName), put(users)));
-    return users;
-}
-
-template <typename D> void impl_IPackageManager<D>::SetPackageState(hstring_ref packageFullName, Windows::Management::Deployment::PackageState packageState) const
-{
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_SetPackageState(get(packageFullName), packageState));
-}
-
-template <typename D> Windows::ApplicationModel::Package impl_IPackageManager<D>::FindPackage(hstring_ref packageFullName) const
-{
-    Windows::ApplicationModel::Package packageInformation { nullptr };
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackageByPackageFullName(get(packageFullName), put(packageInformation)));
-    return packageInformation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager<D>::CleanupPackageForUserAsync(hstring_ref packageName, hstring_ref userSecurityId) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_CleanupPackageForUserAsync(get(packageName), get(userSecurityId), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackages(hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackagesByPackageFamilyName(get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager<D>::FindPackagesForUser(hstring_ref userSecurityId, hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdPackageFamilyName(get(userSecurityId), get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::ApplicationModel::Package impl_IPackageManager<D>::FindPackageForUser(hstring_ref userSecurityId, hstring_ref packageFullName) const
-{
-    Windows::ApplicationModel::Package packageInformation { nullptr };
-    check_hresult(static_cast<const IPackageManager &>(static_cast<const D &>(*this))->abi_FindPackageByUserSecurityIdPackageFullName(get(userSecurityId), get(packageFullName), put(packageInformation)));
-    return packageInformation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager2<D>::RemovePackageAsync(hstring_ref packageFullName, Windows::Management::Deployment::RemovalOptions removalOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_RemovePackageWithOptionsAsync(get(packageFullName), removalOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager2<D>::StagePackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_StagePackageWithOptionsAsync(get(packageUri), get(dependencyPackageUris), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager2<D>::RegisterPackageByFullNameAsync(hstring_ref mainPackageFullName, const Windows::Foundation::Collections::IIterable<hstring> & dependencyPackageFullNames, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_RegisterPackageByFullNameAsync(get(mainPackageFullName), get(dependencyPackageFullNames), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesWithPackageTypes(packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdWithPackageTypes(get(userSecurityId), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesWithPackageTypes(hstring_ref packageName, hstring_ref packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesByNamePublisherWithPackageTypes(get(packageName), get(packagePublisher), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, hstring_ref packageName, hstring_ref packagePublisher, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(get(userSecurityId), get(packageName), get(packagePublisher), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesWithPackageTypes(hstring_ref packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesByPackageFamilyNameWithPackageTypes(get(packageFamilyName), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> impl_IPackageManager2<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, hstring_ref packageFamilyName, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(get(userSecurityId), get(packageFamilyName), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager2<D>::StageUserDataAsync(hstring_ref packageFullName) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager2 &>(static_cast<const D &>(*this))->abi_StageUserDataAsync(get(packageFullName), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Management::Deployment::PackageVolume> impl_IPackageManager3<D>::AddPackageVolumeAsync(hstring_ref packageStorePath) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Management::Deployment::PackageVolume> packageVolume;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_AddPackageVolumeAsync(get(packageStorePath), put(packageVolume)));
-    return packageVolume;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::AddPackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, const Windows::Management::Deployment::PackageVolume & targetVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_AddPackageToVolumeAsync(get(packageUri), get(dependencyPackageUris), deploymentOptions, get(targetVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> void impl_IPackageManager3<D>::ClearPackageStatus(hstring_ref packageFullName, Windows::Management::Deployment::PackageStatus status) const
-{
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_ClearPackageStatus(get(packageFullName), status));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::RegisterPackageAsync(const Windows::Foundation::Uri & manifestUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, const Windows::Management::Deployment::PackageVolume & appDataVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_RegisterPackageWithAppDataVolumeAsync(get(manifestUri), get(dependencyPackageUris), deploymentOptions, get(appDataVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Management::Deployment::PackageVolume impl_IPackageManager3<D>::FindPackageVolume(hstring_ref volumeName) const
-{
-    Windows::Management::Deployment::PackageVolume volume { nullptr };
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_FindPackageVolumeByName(get(volumeName), put(volume)));
-    return volume;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageVolume> impl_IPackageManager3<D>::FindPackageVolumes() const
-{
-    Windows::Foundation::Collections::IIterable<Windows::Management::Deployment::PackageVolume> volumeCollection;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_FindPackageVolumes(put(volumeCollection)));
-    return volumeCollection;
-}
-
-template <typename D> Windows::Management::Deployment::PackageVolume impl_IPackageManager3<D>::GetDefaultPackageVolume() const
-{
-    Windows::Management::Deployment::PackageVolume volume { nullptr };
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_GetDefaultPackageVolume(put(volume)));
-    return volume;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::MovePackageToVolumeAsync(hstring_ref packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions, const Windows::Management::Deployment::PackageVolume & targetVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_MovePackageToVolumeAsync(get(packageFullName), deploymentOptions, get(targetVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::RemovePackageVolumeAsync(const Windows::Management::Deployment::PackageVolume & volume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_RemovePackageVolumeAsync(get(volume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> void impl_IPackageManager3<D>::SetDefaultPackageVolume(const Windows::Management::Deployment::PackageVolume & volume) const
-{
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_SetDefaultPackageVolume(get(volume)));
-}
-
-template <typename D> void impl_IPackageManager3<D>::SetPackageStatus(hstring_ref packageFullName, Windows::Management::Deployment::PackageStatus status) const
-{
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_SetPackageStatus(get(packageFullName), status));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::SetPackageVolumeOfflineAsync(const Windows::Management::Deployment::PackageVolume & packageVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_SetPackageVolumeOfflineAsync(get(packageVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::SetPackageVolumeOnlineAsync(const Windows::Management::Deployment::PackageVolume & packageVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_SetPackageVolumeOnlineAsync(get(packageVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::StagePackageAsync(const Windows::Foundation::Uri & packageUri, const Windows::Foundation::Collections::IIterable<Windows::Foundation::Uri> & dependencyPackageUris, Windows::Management::Deployment::DeploymentOptions deploymentOptions, const Windows::Management::Deployment::PackageVolume & targetVolume) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_StagePackageToVolumeAsync(get(packageUri), get(dependencyPackageUris), deploymentOptions, get(targetVolume), put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> impl_IPackageManager3<D>::StageUserDataAsync(hstring_ref packageFullName, Windows::Management::Deployment::DeploymentOptions deploymentOptions) const
-{
-    Windows::Foundation::IAsyncOperationWithProgress<Windows::Management::Deployment::DeploymentResult, Windows::Management::Deployment::DeploymentProgress> deploymentOperation;
-    check_hresult(static_cast<const IPackageManager3 &>(static_cast<const D &>(*this))->abi_StageUserDataWithOptionsAsync(get(packageFullName), deploymentOptions, put(deploymentOperation)));
-    return deploymentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Management::Deployment::PackageVolume>> impl_IPackageManager4<D>::GetPackageVolumesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Management::Deployment::PackageVolume>> operation;
-    check_hresult(static_cast<const IPackageManager4 &>(static_cast<const D &>(*this))->abi_GetPackageVolumesAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> bool impl_IPackageVolume<D>::IsOffline() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_IsOffline(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPackageVolume<D>::IsSystemVolume() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_IsSystemVolume(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPackageVolume<D>::MountPoint() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_MountPoint(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPackageVolume<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPackageVolume<D>::PackageStorePath() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_PackageStorePath(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPackageVolume<D>::SupportsHardLinks() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->get_SupportsHardLinks(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackages() const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackages(put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackages(hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByNamePublisher(get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackages(hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByPackageFamilyName(get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesWithPackageTypes(packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByNamePublisherWithPackagesTypes(packageTypes, get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesWithPackageTypes(Windows::Management::Deployment::PackageTypes packageTypes, hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes, get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackage(hstring_ref packageFullName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackageByPackageFullName(get(packageFullName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUser(hstring_ref userSecurityId) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityId(get(userSecurityId), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUser(hstring_ref userSecurityId, hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdNamePublisher(get(userSecurityId), get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUser(hstring_ref userSecurityId, hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdPackageFamilyName(get(userSecurityId), get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdWithPackageTypes(get(userSecurityId), packageTypes, put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, hstring_ref packageName, hstring_ref packagePublisher) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(get(userSecurityId), packageTypes, get(packageName), get(packagePublisher), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackagesForUserWithPackageTypes(hstring_ref userSecurityId, Windows::Management::Deployment::PackageTypes packageTypes, hstring_ref packageFamilyName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(get(userSecurityId), packageTypes, get(packageFamilyName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> impl_IPackageVolume<D>::FindPackageForUser(hstring_ref userSecurityId, hstring_ref packageFullName) const
-{
-    Windows::Foundation::Collections::IVector<Windows::ApplicationModel::Package> packageCollection;
-    check_hresult(static_cast<const IPackageVolume &>(static_cast<const D &>(*this))->abi_FindPackageByUserSecurityIdPackageFullName(get(userSecurityId), get(packageFullName), put(packageCollection)));
-    return packageCollection;
-}
-
-template <typename D> bool impl_IPackageVolume2<D>::IsFullTrustPackageSupported() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPackageVolume2 &>(static_cast<const D &>(*this))->get_IsFullTrustPackageSupported(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPackageVolume2<D>::IsAppxInstallSupported() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPackageVolume2 &>(static_cast<const D &>(*this))->get_IsAppxInstallSupported(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<uint64_t> impl_IPackageVolume2<D>::GetAvailableSpaceAsync() const
-{
-    Windows::Foundation::IAsyncOperation<uint64_t> operation;
-    check_hresult(static_cast<const IPackageVolume2 &>(static_cast<const D &>(*this))->abi_GetAvailableSpaceAsync(put(operation)));
-    return operation;
-}
+WINRT_EXPORT namespace winrt::Windows::Management::Deployment {
 
 inline PackageManager::PackageManager() :
     PackageManager(activate_instance<PackageManager>())
@@ -1504,4 +1766,59 @@ inline PackageManager::PackageManager() :
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Management::Deployment::IDeploymentResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IDeploymentResult> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IDeploymentResult2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IDeploymentResult2> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager2> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager3> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager4> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager5> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager5> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManager6> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManager6> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageManagerDebugSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageManagerDebugSettings> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageUserInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageUserInformation> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageVolume> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageVolume> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::IPackageVolume2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::IPackageVolume2> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::DeploymentResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::DeploymentResult> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::PackageManager> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::PackageManager> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::PackageManagerDebugSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::PackageManagerDebugSettings> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::PackageUserInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::PackageUserInformation> {};
+
+template<> struct hash<winrt::Windows::Management::Deployment::PackageVolume> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Management::Deployment::PackageVolume> {};
+
 }
+
+WINRT_WARNING_POP

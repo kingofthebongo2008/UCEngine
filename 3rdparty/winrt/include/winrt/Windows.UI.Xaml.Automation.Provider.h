@@ -1,101 +1,930 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.UI.Xaml.Automation.3.h"
-#include "internal/Windows.UI.3.h"
-#include "internal/Windows.UI.Xaml.Automation.Text.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.UI.Xaml.Automation.Peers.3.h"
-#include "internal/Windows.UI.Xaml.Automation.Provider.3.h"
-#include "Windows.UI.Xaml.Automation.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.Peers.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.Text.2.h"
+#include "winrt/impl/Windows.UI.Xaml.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.Provider.2.h"
+#include "winrt/Windows.UI.Xaml.Automation.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IAnnotationProvider<D>::AnnotationTypeId() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IAnnotationProvider)->get_AnnotationTypeId(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IAnnotationProvider<D>::AnnotationTypeName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IAnnotationProvider)->get_AnnotationTypeName(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IAnnotationProvider<D>::Author() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IAnnotationProvider)->get_Author(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IAnnotationProvider<D>::DateTime() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IAnnotationProvider)->get_DateTime(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_IAnnotationProvider<D>::Target() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IAnnotationProvider)->get_Target(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Provider_ICustomNavigationProvider<D>::NavigateCustom(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const& direction) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ICustomNavigationProvider)->NavigateCustom(get_abi(direction), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::DockPosition consume_Windows_UI_Xaml_Automation_Provider_IDockProvider<D>::DockPosition() const noexcept
+{
+    Windows::UI::Xaml::Automation::DockPosition value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDockProvider)->get_DockPosition(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IDockProvider<D>::SetDockPosition(Windows::UI::Xaml::Automation::DockPosition const& dockPosition) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDockProvider)->SetDockPosition(get_abi(dockPosition)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IDragProvider<D>::IsGrabbed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDragProvider)->get_IsGrabbed(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IDragProvider<D>::DropEffect() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDragProvider)->get_DropEffect(put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<hstring> consume_Windows_UI_Xaml_Automation_Provider_IDragProvider<D>::DropEffects() const noexcept
+{
+    com_array<hstring> value;
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDragProvider)->get_DropEffects(impl::put_size_abi(value), put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_IDragProvider<D>::GetGrabbedItems() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDragProvider)->GetGrabbedItems(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IDropTargetProvider<D>::DropEffect() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDropTargetProvider)->get_DropEffect(put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<hstring> consume_Windows_UI_Xaml_Automation_Provider_IDropTargetProvider<D>::DropEffects() const noexcept
+{
+    com_array<hstring> value;
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IDropTargetProvider)->get_DropEffects(impl::put_size_abi(value), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::ExpandCollapseState consume_Windows_UI_Xaml_Automation_Provider_IExpandCollapseProvider<D>::ExpandCollapseState() const noexcept
+{
+    Windows::UI::Xaml::Automation::ExpandCollapseState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider)->get_ExpandCollapseState(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IExpandCollapseProvider<D>::Collapse() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider)->Collapse());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IExpandCollapseProvider<D>::Expand() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider)->Expand());
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridItemProvider<D>::Column() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridItemProvider)->get_Column(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridItemProvider<D>::ColumnSpan() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridItemProvider)->get_ColumnSpan(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_IGridItemProvider<D>::ContainingGrid() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridItemProvider)->get_ContainingGrid(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridItemProvider<D>::Row() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridItemProvider)->get_Row(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridItemProvider<D>::RowSpan() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridItemProvider)->get_RowSpan(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridProvider<D>::ColumnCount() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridProvider)->get_ColumnCount(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IGridProvider<D>::RowCount() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridProvider)->get_RowCount(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_IGridProvider<D>::GetItem(int32_t row, int32_t column) const
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IGridProvider)->GetItem(row, column, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IInvokeProvider<D>::Invoke() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IInvokeProvider)->Invoke());
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_IItemContainerProvider<D>::FindItemByProperty(Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const& startAfter, Windows::UI::Xaml::Automation::AutomationProperty const& automationProperty, Windows::Foundation::IInspectable const& value) const
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IItemContainerProvider)->FindItemByProperty(get_abi(startAfter), get_abi(automationProperty), get_abi(value), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IMultipleViewProvider<D>::CurrentView() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider)->get_CurrentView(&value));
+    return value;
+}
+
+template <typename D> com_array<int32_t> consume_Windows_UI_Xaml_Automation_Provider_IMultipleViewProvider<D>::GetSupportedViews() const
+{
+    com_array<int32_t> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider)->GetSupportedViews(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IMultipleViewProvider<D>::GetViewName(int32_t viewId) const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider)->GetViewName(viewId, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IMultipleViewProvider<D>::SetCurrentView(int32_t viewId) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider)->SetCurrentView(viewId));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Provider_IObjectModelProvider<D>::GetUnderlyingObjectModel() const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IObjectModelProvider)->GetUnderlyingObjectModel(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::IsReadOnly() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_IsReadOnly(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::LargeChange() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_LargeChange(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::Maximum() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_Maximum(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::Minimum() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_Minimum(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::SmallChange() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_SmallChange(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::Value() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->get_Value(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IRangeValueProvider<D>::SetValue(double value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IRangeValueProvider)->SetValue(value));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IScrollItemProvider<D>::ScrollIntoView() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollItemProvider)->ScrollIntoView());
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::HorizontallyScrollable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_HorizontallyScrollable(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::HorizontalScrollPercent() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_HorizontalScrollPercent(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::HorizontalViewSize() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_HorizontalViewSize(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::VerticallyScrollable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_VerticallyScrollable(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::VerticalScrollPercent() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_VerticalScrollPercent(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::VerticalViewSize() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->get_VerticalViewSize(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::Scroll(Windows::UI::Xaml::Automation::ScrollAmount const& horizontalAmount, Windows::UI::Xaml::Automation::ScrollAmount const& verticalAmount) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->Scroll(get_abi(horizontalAmount), get_abi(verticalAmount)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IScrollProvider<D>::SetScrollPercent(double horizontalPercent, double verticalPercent) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IScrollProvider)->SetScrollPercent(horizontalPercent, verticalPercent));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ISelectionItemProvider<D>::IsSelected() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider)->get_IsSelected(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_ISelectionItemProvider<D>::SelectionContainer() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider)->get_SelectionContainer(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ISelectionItemProvider<D>::AddToSelection() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider)->AddToSelection());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ISelectionItemProvider<D>::RemoveFromSelection() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider)->RemoveFromSelection());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ISelectionItemProvider<D>::Select() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider)->Select());
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ISelectionProvider<D>::CanSelectMultiple() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionProvider)->get_CanSelectMultiple(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ISelectionProvider<D>::IsSelectionRequired() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionProvider)->get_IsSelectionRequired(&value));
+    return value;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ISelectionProvider<D>::GetSelection() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISelectionProvider)->GetSelection(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_ISpreadsheetItemProvider<D>::Formula() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider)->get_Formula(put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ISpreadsheetItemProvider<D>::GetAnnotationObjects() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider)->GetAnnotationObjects(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::AnnotationType> consume_Windows_UI_Xaml_Automation_Provider_ISpreadsheetItemProvider<D>::GetAnnotationTypes() const
+{
+    com_array<Windows::UI::Xaml::Automation::AnnotationType> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider)->GetAnnotationTypes(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_ISpreadsheetProvider<D>::GetItemByName(param::hstring const& name) const
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider)->GetItemByName(get_abi(name), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::ExtendedProperties() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_ExtendedProperties(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::FillColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_FillColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Color consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::FillPatternColor() const noexcept
+{
+    Windows::UI::Color value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_FillPatternColor(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::FillPatternStyle() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_FillPatternStyle(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::Shape() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_Shape(put_abi(value)));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::StyleId() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_StyleId(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IStylesProvider<D>::StyleName() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IStylesProvider)->get_StyleName(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ISynchronizedInputProvider<D>::Cancel() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider)->Cancel());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ISynchronizedInputProvider<D>::StartListening(Windows::UI::Xaml::Automation::SynchronizedInputType const& inputType) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider)->StartListening(get_abi(inputType)));
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ITableItemProvider<D>::GetColumnHeaderItems() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITableItemProvider)->GetColumnHeaderItems(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ITableItemProvider<D>::GetRowHeaderItems() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITableItemProvider)->GetRowHeaderItems(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::RowOrColumnMajor consume_Windows_UI_Xaml_Automation_Provider_ITableProvider<D>::RowOrColumnMajor() const noexcept
+{
+    Windows::UI::Xaml::Automation::RowOrColumnMajor value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITableProvider)->get_RowOrColumnMajor(put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ITableProvider<D>::GetColumnHeaders() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITableProvider)->GetColumnHeaders(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ITableProvider<D>::GetRowHeaders() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITableProvider)->GetRowHeaders(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_ITextChildProvider<D>::TextContainer() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextChildProvider)->get_TextContainer(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextChildProvider<D>::TextRange() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextChildProvider)->get_TextRange(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextEditProvider<D>::GetActiveComposition() const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextEditProvider)->GetActiveComposition(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextEditProvider<D>::GetConversionTarget() const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextEditProvider)->GetConversionTarget(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::DocumentRange() const noexcept
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->get_DocumentRange(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::SupportedTextSelection consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::SupportedTextSelection() const noexcept
+{
+    Windows::UI::Xaml::Automation::SupportedTextSelection value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->get_SupportedTextSelection(put_abi(value)));
+    return value;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::GetSelection() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->GetSelection(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::GetVisibleRanges() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->GetVisibleRanges(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::RangeFromChild(Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const& childElement) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->RangeFromChild(get_abi(childElement), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextProvider<D>::RangeFromPoint(Windows::Foundation::Point const& screenLocation) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider)->RangeFromPoint(get_abi(screenLocation), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextProvider2<D>::RangeFromAnnotation(Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const& annotationElement) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider2)->RangeFromAnnotation(get_abi(annotationElement), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextProvider2<D>::GetCaretRange(bool& isActive) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextProvider2)->GetCaretRange(&isActive, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::Clone() const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->Clone(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::Compare(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const& textRangeProvider) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->Compare(get_abi(textRangeProvider), &returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::CompareEndpoints(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const& endpoint, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const& textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const& targetEndpoint) const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->CompareEndpoints(get_abi(endpoint), get_abi(textRangeProvider), get_abi(targetEndpoint), &returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::ExpandToEnclosingUnit(Windows::UI::Xaml::Automation::Text::TextUnit const& unit) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->ExpandToEnclosingUnit(get_abi(unit)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::FindAttribute(int32_t attributeId, Windows::Foundation::IInspectable const& value, bool backward) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->FindAttribute(attributeId, get_abi(value), backward, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::FindText(param::hstring const& text, bool backward, bool ignoreCase) const
+{
+    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->FindText(get_abi(text), backward, ignoreCase, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::GetAttributeValue(int32_t attributeId) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->GetAttributeValue(attributeId, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::GetBoundingRectangles(com_array<double>& returnValue) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->GetBoundingRectangles(impl::put_size_abi(returnValue), put_abi(returnValue)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::GetEnclosingElement() const
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->GetEnclosingElement(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::GetText(int32_t maxLength) const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->GetText(maxLength, put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::Move(Windows::UI::Xaml::Automation::Text::TextUnit const& unit, int32_t count) const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->Move(get_abi(unit), count, &returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::MoveEndpointByUnit(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const& endpoint, Windows::UI::Xaml::Automation::Text::TextUnit const& unit, int32_t count) const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->MoveEndpointByUnit(get_abi(endpoint), get_abi(unit), count, &returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::MoveEndpointByRange(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const& endpoint, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const& textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const& targetEndpoint) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->MoveEndpointByRange(get_abi(endpoint), get_abi(textRangeProvider), get_abi(targetEndpoint)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::Select() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->Select());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::AddToSelection() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->AddToSelection());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::RemoveFromSelection() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->RemoveFromSelection());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::ScrollIntoView(bool alignToTop) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->ScrollIntoView(alignToTop));
+}
+
+template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider<D>::GetChildren() const
+{
+    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue;
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider)->GetChildren(impl::put_size_abi(returnValue), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITextRangeProvider2<D>::ShowContextMenu() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2)->ShowContextMenu());
+}
+
+template <typename D> Windows::UI::Xaml::Automation::ToggleState consume_Windows_UI_Xaml_Automation_Provider_IToggleProvider<D>::ToggleState() const noexcept
+{
+    Windows::UI::Xaml::Automation::ToggleState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IToggleProvider)->get_ToggleState(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IToggleProvider<D>::Toggle() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IToggleProvider)->Toggle());
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::CanMove() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->get_CanMove(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::CanResize() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->get_CanResize(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::CanRotate() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->get_CanRotate(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::Move(double x, double y) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->Move(x, y));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::Resize(double width, double height) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->Resize(width, height));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider<D>::Rotate(double degrees) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider)->Rotate(degrees));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::CanZoom() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->get_CanZoom(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::ZoomLevel() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->get_ZoomLevel(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::MaxZoom() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->get_MaxZoom(&value));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::MinZoom() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->get_MinZoom(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::Zoom(double zoom) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->Zoom(zoom));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_ITransformProvider2<D>::ZoomByUnit(Windows::UI::Xaml::Automation::ZoomUnit const& zoomUnit) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::ITransformProvider2)->ZoomByUnit(get_abi(zoomUnit)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IValueProvider<D>::IsReadOnly() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IValueProvider)->get_IsReadOnly(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Provider_IValueProvider<D>::Value() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IValueProvider)->get_Value(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IValueProvider<D>::SetValue(param::hstring const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IValueProvider)->SetValue(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IVirtualizedItemProvider<D>::Realize() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider)->Realize());
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::IsModal() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_IsModal(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::IsTopmost() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_IsTopmost(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::Maximizable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_Maximizable(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::Minimizable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_Minimizable(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::WindowInteractionState consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::InteractionState() const noexcept
+{
+    Windows::UI::Xaml::Automation::WindowInteractionState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_InteractionState(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::WindowVisualState consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::VisualState() const noexcept
+{
+    Windows::UI::Xaml::Automation::WindowVisualState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->get_VisualState(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::Close() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->Close());
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::SetVisualState(Windows::UI::Xaml::Automation::WindowVisualState const& state) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->SetVisualState(get_abi(state)));
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Provider_IWindowProvider<D>::WaitForInputIdle(int32_t milliseconds) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Provider::IWindowProvider)->WaitForInputIdle(milliseconds, &returnValue));
+    return returnValue;
+}
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IAnnotationProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IAnnotationProvider>
 {
-    HRESULT __stdcall get_AnnotationTypeId(int32_t * value) noexcept override
+    HRESULT __stdcall get_AnnotationTypeId(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AnnotationTypeId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AnnotationTypeId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AnnotationTypeName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_AnnotationTypeName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AnnotationTypeName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AnnotationTypeName());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Author(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Author(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Author());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Author());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DateTime(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DateTime(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DateTime());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DateTime());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Target(abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> value) noexcept override
+    HRESULT __stdcall get_Target(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Target());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Target());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ICustomNavigationProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ICustomNavigationProvider>
 {
-    HRESULT __stdcall abi_NavigateCustom(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall NavigateCustom(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().NavigateCustom(direction));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().NavigateCustom(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const*>(&direction)));
             return S_OK;
         }
         catch (...)
@@ -109,24 +938,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ICustomNavigationProv
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IDockProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IDockProvider>
 {
-    HRESULT __stdcall get_DockPosition(Windows::UI::Xaml::Automation::DockPosition * value) noexcept override
+    HRESULT __stdcall get_DockPosition(Windows::UI::Xaml::Automation::DockPosition* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DockPosition());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DockPosition());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SetDockPosition(Windows::UI::Xaml::Automation::DockPosition dockPosition) noexcept override
+    HRESULT __stdcall SetDockPosition(Windows::UI::Xaml::Automation::DockPosition dockPosition) noexcept final
     {
         try
         {
-            this->shim().SetDockPosition(dockPosition);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetDockPosition(*reinterpret_cast<Windows::UI::Xaml::Automation::DockPosition const*>(&dockPosition));
             return S_OK;
         }
         catch (...)
@@ -139,53 +963,33 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IDockProvider> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IDragProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IDragProvider>
 {
-    HRESULT __stdcall get_IsGrabbed(bool * value) noexcept override
+    HRESULT __stdcall get_IsGrabbed(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsGrabbed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsGrabbed());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DropEffect(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DropEffect(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DropEffect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DropEffect());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DropEffects(uint32_t * __valueSize, abi_arg_out<hstring> * value) noexcept override
+    HRESULT __stdcall get_DropEffects(uint32_t* __valueSize, HSTRING** value) noexcept final
     {
-        try
-        {
-            std::tie(*__valueSize, *value) = detach(this->shim().DropEffects());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *__valueSize = 0;
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        std::tie(*__valueSize, *value) = detach_abi(this->shim().DropEffects());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetGrabbedItems(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetGrabbedItems(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetGrabbedItems());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetGrabbedItems());
             return S_OK;
         }
         catch (...)
@@ -200,56 +1004,36 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IDragProvider> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IDropTargetProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IDropTargetProvider>
 {
-    HRESULT __stdcall get_DropEffect(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DropEffect(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DropEffect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DropEffect());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DropEffects(uint32_t * __valueSize, abi_arg_out<hstring> * value) noexcept override
+    HRESULT __stdcall get_DropEffects(uint32_t* __valueSize, HSTRING** value) noexcept final
     {
-        try
-        {
-            std::tie(*__valueSize, *value) = detach(this->shim().DropEffects());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *__valueSize = 0;
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        std::tie(*__valueSize, *value) = detach_abi(this->shim().DropEffects());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider>
 {
-    HRESULT __stdcall get_ExpandCollapseState(Windows::UI::Xaml::Automation::ExpandCollapseState * value) noexcept override
+    HRESULT __stdcall get_ExpandCollapseState(Windows::UI::Xaml::Automation::ExpandCollapseState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExpandCollapseState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExpandCollapseState());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Collapse() noexcept override
+    HRESULT __stdcall Collapse() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Collapse();
             return S_OK;
         }
@@ -259,10 +1043,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvid
         }
     }
 
-    HRESULT __stdcall abi_Expand() noexcept override
+    HRESULT __stdcall Expand() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Expand();
             return S_OK;
         }
@@ -276,107 +1061,65 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvid
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IGridItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IGridItemProvider>
 {
-    HRESULT __stdcall get_Column(int32_t * value) noexcept override
+    HRESULT __stdcall get_Column(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Column());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Column());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ColumnSpan(int32_t * value) noexcept override
+    HRESULT __stdcall get_ColumnSpan(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ColumnSpan());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColumnSpan());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ContainingGrid(abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> value) noexcept override
+    HRESULT __stdcall get_ContainingGrid(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ContainingGrid());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContainingGrid());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Row(int32_t * value) noexcept override
+    HRESULT __stdcall get_Row(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Row());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Row());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RowSpan(int32_t * value) noexcept override
+    HRESULT __stdcall get_RowSpan(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RowSpan());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RowSpan());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IGridProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IGridProvider>
 {
-    HRESULT __stdcall get_ColumnCount(int32_t * value) noexcept override
+    HRESULT __stdcall get_ColumnCount(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ColumnCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColumnCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RowCount(int32_t * value) noexcept override
+    HRESULT __stdcall get_RowCount(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RowCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RowCount());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetItem(int32_t row, int32_t column, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> returnValue) noexcept override
+    HRESULT __stdcall GetItem(int32_t row, int32_t column, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetItem(row, column));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItem(row, column));
             return S_OK;
         }
         catch (...)
@@ -394,10 +1137,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IIRawElementProviderS
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IInvokeProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IInvokeProvider>
 {
-    HRESULT __stdcall abi_Invoke() noexcept override
+    HRESULT __stdcall Invoke() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Invoke();
             return S_OK;
         }
@@ -411,11 +1155,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IInvokeProvider> : pr
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider>
 {
-    HRESULT __stdcall abi_FindItemByProperty(abi_arg_in<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> startAfter, abi_arg_in<Windows::UI::Xaml::Automation::IAutomationProperty> automationProperty, abi_arg_in<Windows::IInspectable> value, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> returnValue) noexcept override
+    HRESULT __stdcall FindItemByProperty(::IUnknown* startAfter, ::IUnknown* automationProperty, ::IUnknown* value, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().FindItemByProperty(*reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple *>(&startAfter), *reinterpret_cast<const Windows::UI::Xaml::Automation::AutomationProperty *>(&automationProperty), *reinterpret_cast<const Windows::IInspectable *>(&value)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().FindItemByProperty(*reinterpret_cast<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const*>(&startAfter), *reinterpret_cast<Windows::UI::Xaml::Automation::AutomationProperty const*>(&automationProperty), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -429,24 +1174,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IItemContainerProvide
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider>
 {
-    HRESULT __stdcall get_CurrentView(int32_t * value) noexcept override
+    HRESULT __stdcall get_CurrentView(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrentView());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrentView());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSupportedViews(uint32_t * __returnValueSize, abi_arg_out<int32_t> * returnValue) noexcept override
+    HRESULT __stdcall GetSupportedViews(uint32_t* __returnValueSize, int32_t** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetSupportedViews());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetSupportedViews());
             return S_OK;
         }
         catch (...)
@@ -457,11 +1197,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider
         }
     }
 
-    HRESULT __stdcall abi_GetViewName(int32_t viewId, abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetViewName(int32_t viewId, HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetViewName(viewId));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetViewName(viewId));
             return S_OK;
         }
         catch (...)
@@ -471,10 +1212,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider
         }
     }
 
-    HRESULT __stdcall abi_SetCurrentView(int32_t viewId) noexcept override
+    HRESULT __stdcall SetCurrentView(int32_t viewId) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SetCurrentView(viewId);
             return S_OK;
         }
@@ -488,11 +1230,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IObjectModelProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IObjectModelProvider>
 {
-    HRESULT __stdcall abi_GetUnderlyingObjectModel(abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetUnderlyingObjectModel(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetUnderlyingObjectModel());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetUnderlyingObjectModel());
             return S_OK;
         }
         catch (...)
@@ -506,88 +1249,53 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IObjectModelProvider>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider>
 {
-    HRESULT __stdcall get_IsReadOnly(bool * value) noexcept override
+    HRESULT __stdcall get_IsReadOnly(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsReadOnly());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsReadOnly());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LargeChange(double * value) noexcept override
+    HRESULT __stdcall get_LargeChange(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LargeChange());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LargeChange());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Maximum(double * value) noexcept override
+    HRESULT __stdcall get_Maximum(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Maximum());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Maximum());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Minimum(double * value) noexcept override
+    HRESULT __stdcall get_Minimum(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Minimum());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Minimum());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SmallChange(double * value) noexcept override
+    HRESULT __stdcall get_SmallChange(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SmallChange());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SmallChange());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Value(double * value) noexcept override
+    HRESULT __stdcall get_Value(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Value());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Value());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SetValue(double value) noexcept override
+    HRESULT __stdcall SetValue(double value) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SetValue(value);
             return S_OK;
         }
@@ -601,10 +1309,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider>
 {
-    HRESULT __stdcall abi_ScrollIntoView() noexcept override
+    HRESULT __stdcall ScrollIntoView() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ScrollIntoView();
             return S_OK;
         }
@@ -618,11 +1327,54 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IScrollProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IScrollProvider>
 {
-    HRESULT __stdcall get_HorizontallyScrollable(bool * value) noexcept override
+    HRESULT __stdcall get_HorizontallyScrollable(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HorizontallyScrollable());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_HorizontalScrollPercent(double* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HorizontalScrollPercent());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_HorizontalViewSize(double* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HorizontalViewSize());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_VerticallyScrollable(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VerticallyScrollable());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_VerticalScrollPercent(double* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VerticalScrollPercent());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_VerticalViewSize(double* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VerticalViewSize());
+        return S_OK;
+    }
+
+    HRESULT __stdcall Scroll(Windows::UI::Xaml::Automation::ScrollAmount horizontalAmount, Windows::UI::Xaml::Automation::ScrollAmount verticalAmount) noexcept final
     {
         try
         {
-            *value = detach(this->shim().HorizontallyScrollable());
+            typename D::abi_guard guard(this->shim());
+            this->shim().Scroll(*reinterpret_cast<Windows::UI::Xaml::Automation::ScrollAmount const*>(&horizontalAmount), *reinterpret_cast<Windows::UI::Xaml::Automation::ScrollAmount const*>(&verticalAmount));
             return S_OK;
         }
         catch (...)
@@ -631,88 +1383,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IScrollProvider> : pr
         }
     }
 
-    HRESULT __stdcall get_HorizontalScrollPercent(double * value) noexcept override
+    HRESULT __stdcall SetScrollPercent(double horizontalPercent, double verticalPercent) noexcept final
     {
         try
         {
-            *value = detach(this->shim().HorizontalScrollPercent());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_HorizontalViewSize(double * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().HorizontalViewSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_VerticallyScrollable(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().VerticallyScrollable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_VerticalScrollPercent(double * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().VerticalScrollPercent());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_VerticalViewSize(double * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().VerticalViewSize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_Scroll(Windows::UI::Xaml::Automation::ScrollAmount horizontalAmount, Windows::UI::Xaml::Automation::ScrollAmount verticalAmount) noexcept override
-    {
-        try
-        {
-            this->shim().Scroll(horizontalAmount, verticalAmount);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_SetScrollPercent(double horizontalPercent, double verticalPercent) noexcept override
-    {
-        try
-        {
+            typename D::abi_guard guard(this->shim());
             this->shim().SetScrollPercent(horizontalPercent, verticalPercent);
             return S_OK;
         }
@@ -726,37 +1401,25 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IScrollProvider> : pr
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider>
 {
-    HRESULT __stdcall get_IsSelected(bool * value) noexcept override
+    HRESULT __stdcall get_IsSelected(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSelected());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSelected());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SelectionContainer(abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> value) noexcept override
+    HRESULT __stdcall get_SelectionContainer(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SelectionContainer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SelectionContainer());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_AddToSelection() noexcept override
+    HRESULT __stdcall AddToSelection() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().AddToSelection();
             return S_OK;
         }
@@ -766,10 +1429,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvide
         }
     }
 
-    HRESULT __stdcall abi_RemoveFromSelection() noexcept override
+    HRESULT __stdcall RemoveFromSelection() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().RemoveFromSelection();
             return S_OK;
         }
@@ -779,10 +1443,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvide
         }
     }
 
-    HRESULT __stdcall abi_Select() noexcept override
+    HRESULT __stdcall Select() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Select();
             return S_OK;
         }
@@ -796,37 +1461,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvide
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ISelectionProvider>
 {
-    HRESULT __stdcall get_CanSelectMultiple(bool * value) noexcept override
+    HRESULT __stdcall get_CanSelectMultiple(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanSelectMultiple());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanSelectMultiple());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsSelectionRequired(bool * value) noexcept override
+    HRESULT __stdcall get_IsSelectionRequired(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsSelectionRequired());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsSelectionRequired());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSelection(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetSelection(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetSelection());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetSelection());
             return S_OK;
         }
         catch (...)
@@ -841,25 +1495,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISelectionProvider> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider>
 {
-    HRESULT __stdcall get_Formula(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Formula(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Formula());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Formula());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetAnnotationObjects(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetAnnotationObjects(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetAnnotationObjects());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetAnnotationObjects());
             return S_OK;
         }
         catch (...)
@@ -870,11 +1518,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvi
         }
     }
 
-    HRESULT __stdcall abi_GetAnnotationTypes(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::AnnotationType> * returnValue) noexcept override
+    HRESULT __stdcall GetAnnotationTypes(uint32_t* __returnValueSize, Windows::UI::Xaml::Automation::AnnotationType** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetAnnotationTypes());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetAnnotationTypes());
             return S_OK;
         }
         catch (...)
@@ -889,11 +1538,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvi
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider>
 {
-    HRESULT __stdcall abi_GetItemByName(abi_arg_in<hstring> name, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> returnValue) noexcept override
+    HRESULT __stdcall GetItemByName(HSTRING name, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetItemByName(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItemByName(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -907,109 +1557,64 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IStylesProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IStylesProvider>
 {
-    HRESULT __stdcall get_ExtendedProperties(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ExtendedProperties(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExtendedProperties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExtendedProperties());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FillColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_FillColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FillColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FillColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FillPatternColor(abi_arg_out<Windows::UI::Color> value) noexcept override
+    HRESULT __stdcall get_FillPatternColor(struct_of<4>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FillPatternColor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FillPatternColor());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FillPatternStyle(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FillPatternStyle(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FillPatternStyle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FillPatternStyle());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Shape(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Shape(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Shape());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Shape());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StyleId(int32_t * value) noexcept override
+    HRESULT __stdcall get_StyleId(int32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StyleId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StyleId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_StyleName(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_StyleName(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().StyleName());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().StyleName());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider>
 {
-    HRESULT __stdcall abi_Cancel() noexcept override
+    HRESULT __stdcall Cancel() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Cancel();
             return S_OK;
         }
@@ -1019,11 +1624,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISynchronizedInputPro
         }
     }
 
-    HRESULT __stdcall abi_StartListening(Windows::UI::Xaml::Automation::SynchronizedInputType inputType) noexcept override
+    HRESULT __stdcall StartListening(Windows::UI::Xaml::Automation::SynchronizedInputType inputType) noexcept final
     {
         try
         {
-            this->shim().StartListening(inputType);
+            typename D::abi_guard guard(this->shim());
+            this->shim().StartListening(*reinterpret_cast<Windows::UI::Xaml::Automation::SynchronizedInputType const*>(&inputType));
             return S_OK;
         }
         catch (...)
@@ -1036,11 +1642,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ISynchronizedInputPro
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITableItemProvider>
 {
-    HRESULT __stdcall abi_GetColumnHeaderItems(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetColumnHeaderItems(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetColumnHeaderItems());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetColumnHeaderItems());
             return S_OK;
         }
         catch (...)
@@ -1051,11 +1658,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableItemProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetRowHeaderItems(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetRowHeaderItems(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetRowHeaderItems());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetRowHeaderItems());
             return S_OK;
         }
         catch (...)
@@ -1070,24 +1678,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableItemProvider> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITableProvider>
 {
-    HRESULT __stdcall get_RowOrColumnMajor(Windows::UI::Xaml::Automation::RowOrColumnMajor * value) noexcept override
+    HRESULT __stdcall get_RowOrColumnMajor(Windows::UI::Xaml::Automation::RowOrColumnMajor* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RowOrColumnMajor());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RowOrColumnMajor());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetColumnHeaders(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetColumnHeaders(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetColumnHeaders());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetColumnHeaders());
             return S_OK;
         }
         catch (...)
@@ -1098,11 +1701,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableProvider> : pro
         }
     }
 
-    HRESULT __stdcall abi_GetRowHeaders(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetRowHeaders(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetRowHeaders());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetRowHeaders());
             return S_OK;
         }
         catch (...)
@@ -1117,43 +1721,30 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITableProvider> : pro
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextChildProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextChildProvider>
 {
-    HRESULT __stdcall get_TextContainer(abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> value) noexcept override
+    HRESULT __stdcall get_TextContainer(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TextContainer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TextContainer());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TextRange(abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> value) noexcept override
+    HRESULT __stdcall get_TextRange(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TextRange());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TextRange());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextEditProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextEditProvider>
 {
-    HRESULT __stdcall abi_GetActiveComposition(abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall GetActiveComposition(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetActiveComposition());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetActiveComposition());
             return S_OK;
         }
         catch (...)
@@ -1163,11 +1754,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextEditProvider> : 
         }
     }
 
-    HRESULT __stdcall abi_GetConversionTarget(abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall GetConversionTarget(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetConversionTarget());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetConversionTarget());
             return S_OK;
         }
         catch (...)
@@ -1181,38 +1773,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextEditProvider> : 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextProvider>
 {
-    HRESULT __stdcall get_DocumentRange(abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> value) noexcept override
+    HRESULT __stdcall get_DocumentRange(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DocumentRange());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DocumentRange());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SupportedTextSelection(Windows::UI::Xaml::Automation::SupportedTextSelection * value) noexcept override
+    HRESULT __stdcall get_SupportedTextSelection(Windows::UI::Xaml::Automation::SupportedTextSelection* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SupportedTextSelection());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SupportedTextSelection());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSelection(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> * returnValue) noexcept override
+    HRESULT __stdcall GetSelection(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetSelection());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetSelection());
             return S_OK;
         }
         catch (...)
@@ -1223,11 +1803,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetVisibleRanges(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> * returnValue) noexcept override
+    HRESULT __stdcall GetVisibleRanges(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetVisibleRanges());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetVisibleRanges());
             return S_OK;
         }
         catch (...)
@@ -1238,11 +1819,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider> : prod
         }
     }
 
-    HRESULT __stdcall abi_RangeFromChild(abi_arg_in<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> childElement, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall RangeFromChild(::IUnknown* childElement, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().RangeFromChild(*reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple *>(&childElement)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().RangeFromChild(*reinterpret_cast<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const*>(&childElement)));
             return S_OK;
         }
         catch (...)
@@ -1252,11 +1834,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider> : prod
         }
     }
 
-    HRESULT __stdcall abi_RangeFromPoint(abi_arg_in<Windows::Foundation::Point> screenLocation, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall RangeFromPoint(Windows::Foundation::Point screenLocation, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().RangeFromPoint(*reinterpret_cast<const Windows::Foundation::Point *>(&screenLocation)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().RangeFromPoint(*reinterpret_cast<Windows::Foundation::Point const*>(&screenLocation)));
             return S_OK;
         }
         catch (...)
@@ -1270,11 +1853,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider2> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextProvider2>
 {
-    HRESULT __stdcall abi_RangeFromAnnotation(abi_arg_in<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> annotationElement, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall RangeFromAnnotation(::IUnknown* annotationElement, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().RangeFromAnnotation(*reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple *>(&annotationElement)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().RangeFromAnnotation(*reinterpret_cast<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const*>(&annotationElement)));
             return S_OK;
         }
         catch (...)
@@ -1284,11 +1868,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider2> : pro
         }
     }
 
-    HRESULT __stdcall abi_GetCaretRange(bool * isActive, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall GetCaretRange(bool* isActive, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetCaretRange(*isActive));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetCaretRange(*isActive));
             return S_OK;
         }
         catch (...)
@@ -1302,11 +1887,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextProvider2> : pro
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider>
 {
-    HRESULT __stdcall abi_Clone(abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall Clone(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().Clone());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().Clone());
             return S_OK;
         }
         catch (...)
@@ -1316,11 +1902,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_Compare(abi_arg_in<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> textRangeProvider, bool * returnValue) noexcept override
+    HRESULT __stdcall Compare(::IUnknown* textRangeProvider, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().Compare(*reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider *>(&textRangeProvider)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().Compare(*reinterpret_cast<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const*>(&textRangeProvider)));
             return S_OK;
         }
         catch (...)
@@ -1329,11 +1916,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_CompareEndpoints(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, abi_arg_in<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint, int32_t * returnValue) noexcept override
+    HRESULT __stdcall CompareEndpoints(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, ::IUnknown* textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint, int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().CompareEndpoints(endpoint, *reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider *>(&textRangeProvider), targetEndpoint));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().CompareEndpoints(*reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const*>(&endpoint), *reinterpret_cast<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const*>(&textRangeProvider), *reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const*>(&targetEndpoint)));
             return S_OK;
         }
         catch (...)
@@ -1342,11 +1930,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_ExpandToEnclosingUnit(Windows::UI::Xaml::Automation::Text::TextUnit unit) noexcept override
+    HRESULT __stdcall ExpandToEnclosingUnit(Windows::UI::Xaml::Automation::Text::TextUnit unit) noexcept final
     {
         try
         {
-            this->shim().ExpandToEnclosingUnit(unit);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ExpandToEnclosingUnit(*reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextUnit const*>(&unit));
             return S_OK;
         }
         catch (...)
@@ -1355,25 +1944,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_FindAttribute(int32_t attributeId, abi_arg_in<Windows::IInspectable> value, bool backward, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
+    HRESULT __stdcall FindAttribute(int32_t attributeId, ::IUnknown* value, bool backward, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().FindAttribute(attributeId, *reinterpret_cast<const Windows::IInspectable *>(&value), backward));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_FindText(abi_arg_in<hstring> text, bool backward, bool ignoreCase, abi_arg_out<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().FindText(*reinterpret_cast<const hstring *>(&text), backward, ignoreCase));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().FindAttribute(attributeId, *reinterpret_cast<Windows::Foundation::IInspectable const*>(&value), backward));
             return S_OK;
         }
         catch (...)
@@ -1383,11 +1959,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetAttributeValue(int32_t attributeId, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall FindText(HSTRING text, bool backward, bool ignoreCase, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAttributeValue(attributeId));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().FindText(*reinterpret_cast<hstring const*>(&text), backward, ignoreCase));
             return S_OK;
         }
         catch (...)
@@ -1397,11 +1974,27 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetBoundingRectangles(uint32_t * __returnValueSize, abi_arg_out<double> * returnValue) noexcept override
+    HRESULT __stdcall GetAttributeValue(int32_t attributeId, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            this->shim().GetBoundingRectangles(detach<double>(__returnValueSize, returnValue));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAttributeValue(attributeId));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetBoundingRectangles(uint32_t* __returnValueSize, double** returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().GetBoundingRectangles(detach_abi<double>(__returnValueSize, returnValue));
             return S_OK;
         }
         catch (...)
@@ -1412,11 +2005,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetEnclosingElement(abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> returnValue) noexcept override
+    HRESULT __stdcall GetEnclosingElement(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetEnclosingElement());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetEnclosingElement());
             return S_OK;
         }
         catch (...)
@@ -1426,11 +2020,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetText(int32_t maxLength, abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetText(int32_t maxLength, HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetText(maxLength));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetText(maxLength));
             return S_OK;
         }
         catch (...)
@@ -1440,11 +2035,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_Move(Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count, int32_t * returnValue) noexcept override
+    HRESULT __stdcall Move(Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count, int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().Move(unit, count));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().Move(*reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextUnit const*>(&unit), count));
             return S_OK;
         }
         catch (...)
@@ -1453,11 +2049,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_MoveEndpointByUnit(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count, int32_t * returnValue) noexcept override
+    HRESULT __stdcall MoveEndpointByUnit(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count, int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().MoveEndpointByUnit(endpoint, unit, count));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().MoveEndpointByUnit(*reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const*>(&endpoint), *reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextUnit const*>(&unit), count));
             return S_OK;
         }
         catch (...)
@@ -1466,11 +2063,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_MoveEndpointByRange(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, abi_arg_in<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint) noexcept override
+    HRESULT __stdcall MoveEndpointByRange(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, ::IUnknown* textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint) noexcept final
     {
         try
         {
-            this->shim().MoveEndpointByRange(endpoint, *reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider *>(&textRangeProvider), targetEndpoint);
+            typename D::abi_guard guard(this->shim());
+            this->shim().MoveEndpointByRange(*reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const*>(&endpoint), *reinterpret_cast<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider const*>(&textRangeProvider), *reinterpret_cast<Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint const*>(&targetEndpoint));
             return S_OK;
         }
         catch (...)
@@ -1479,10 +2077,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_Select() noexcept override
+    HRESULT __stdcall Select() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Select();
             return S_OK;
         }
@@ -1492,10 +2091,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_AddToSelection() noexcept override
+    HRESULT __stdcall AddToSelection() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().AddToSelection();
             return S_OK;
         }
@@ -1505,10 +2105,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_RemoveFromSelection() noexcept override
+    HRESULT __stdcall RemoveFromSelection() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().RemoveFromSelection();
             return S_OK;
         }
@@ -1518,10 +2119,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_ScrollIntoView(bool alignToTop) noexcept override
+    HRESULT __stdcall ScrollIntoView(bool alignToTop) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ScrollIntoView(alignToTop);
             return S_OK;
         }
@@ -1531,11 +2133,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
         }
     }
 
-    HRESULT __stdcall abi_GetChildren(uint32_t * __returnValueSize, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> * returnValue) noexcept override
+    HRESULT __stdcall GetChildren(uint32_t* __returnValueSize, ::IUnknown*** returnValue) noexcept final
     {
         try
         {
-            std::tie(*__returnValueSize, *returnValue) = detach(this->shim().GetChildren());
+            typename D::abi_guard guard(this->shim());
+            std::tie(*__returnValueSize, *returnValue) = detach_abi(this->shim().GetChildren());
             return S_OK;
         }
         catch (...)
@@ -1550,10 +2153,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2>
 {
-    HRESULT __stdcall abi_ShowContextMenu() noexcept override
+    HRESULT __stdcall ShowContextMenu() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowContextMenu();
             return S_OK;
         }
@@ -1567,23 +2171,18 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IToggleProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IToggleProvider>
 {
-    HRESULT __stdcall get_ToggleState(Windows::UI::Xaml::Automation::ToggleState * value) noexcept override
+    HRESULT __stdcall get_ToggleState(Windows::UI::Xaml::Automation::ToggleState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ToggleState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ToggleState());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Toggle() noexcept override
+    HRESULT __stdcall Toggle() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Toggle();
             return S_OK;
         }
@@ -1597,49 +2196,32 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IToggleProvider> : pr
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider>
 {
-    HRESULT __stdcall get_CanMove(bool * value) noexcept override
+    HRESULT __stdcall get_CanMove(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanMove());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanMove());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CanResize(bool * value) noexcept override
+    HRESULT __stdcall get_CanResize(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanResize());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanResize());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CanRotate(bool * value) noexcept override
+    HRESULT __stdcall get_CanRotate(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanRotate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanRotate());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Move(double x, double y) noexcept override
+    HRESULT __stdcall Move(double x, double y) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Move(x, y);
             return S_OK;
         }
@@ -1649,10 +2231,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider> :
         }
     }
 
-    HRESULT __stdcall abi_Resize(double width, double height) noexcept override
+    HRESULT __stdcall Resize(double width, double height) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Resize(width, height);
             return S_OK;
         }
@@ -1662,10 +2245,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider> :
         }
     }
 
-    HRESULT __stdcall abi_Rotate(double degrees) noexcept override
+    HRESULT __stdcall Rotate(double degrees) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Rotate(degrees);
             return S_OK;
         }
@@ -1679,62 +2263,39 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider2> : produce_base<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider2>
 {
-    HRESULT __stdcall get_CanZoom(bool * value) noexcept override
+    HRESULT __stdcall get_CanZoom(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CanZoom());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CanZoom());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ZoomLevel(double * value) noexcept override
+    HRESULT __stdcall get_ZoomLevel(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ZoomLevel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ZoomLevel());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MaxZoom(double * value) noexcept override
+    HRESULT __stdcall get_MaxZoom(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MaxZoom());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxZoom());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_MinZoom(double * value) noexcept override
+    HRESULT __stdcall get_MinZoom(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().MinZoom());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MinZoom());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Zoom(double zoom) noexcept override
+    HRESULT __stdcall Zoom(double zoom) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Zoom(zoom);
             return S_OK;
         }
@@ -1744,11 +2305,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider2> 
         }
     }
 
-    HRESULT __stdcall abi_ZoomByUnit(Windows::UI::Xaml::Automation::ZoomUnit zoomUnit) noexcept override
+    HRESULT __stdcall ZoomByUnit(Windows::UI::Xaml::Automation::ZoomUnit zoomUnit) noexcept final
     {
         try
         {
-            this->shim().ZoomByUnit(zoomUnit);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ZoomByUnit(*reinterpret_cast<Windows::UI::Xaml::Automation::ZoomUnit const*>(&zoomUnit));
             return S_OK;
         }
         catch (...)
@@ -1761,38 +2323,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::ITransformProvider2> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IValueProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IValueProvider>
 {
-    HRESULT __stdcall get_IsReadOnly(bool * value) noexcept override
+    HRESULT __stdcall get_IsReadOnly(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsReadOnly());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsReadOnly());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Value(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Value(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Value());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Value());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_SetValue(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall SetValue(HSTRING value) noexcept final
     {
         try
         {
-            this->shim().SetValue(*reinterpret_cast<const hstring *>(&value));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetValue(*reinterpret_cast<hstring const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -1805,10 +2355,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IValueProvider> : pro
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider>
 {
-    HRESULT __stdcall abi_Realize() noexcept override
+    HRESULT __stdcall Realize() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Realize();
             return S_OK;
         }
@@ -1822,88 +2373,53 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvi
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Provider::IWindowProvider> : produce_base<D, Windows::UI::Xaml::Automation::Provider::IWindowProvider>
 {
-    HRESULT __stdcall get_IsModal(bool * value) noexcept override
+    HRESULT __stdcall get_IsModal(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsModal());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsModal());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsTopmost(bool * value) noexcept override
+    HRESULT __stdcall get_IsTopmost(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsTopmost());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsTopmost());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Maximizable(bool * value) noexcept override
+    HRESULT __stdcall get_Maximizable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Maximizable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Maximizable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Minimizable(bool * value) noexcept override
+    HRESULT __stdcall get_Minimizable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Minimizable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Minimizable());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_InteractionState(Windows::UI::Xaml::Automation::WindowInteractionState * value) noexcept override
+    HRESULT __stdcall get_InteractionState(Windows::UI::Xaml::Automation::WindowInteractionState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().InteractionState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InteractionState());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_VisualState(Windows::UI::Xaml::Automation::WindowVisualState * value) noexcept override
+    HRESULT __stdcall get_VisualState(Windows::UI::Xaml::Automation::WindowVisualState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().VisualState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().VisualState());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_Close() noexcept override
+    HRESULT __stdcall Close() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Close();
             return S_OK;
         }
@@ -1913,11 +2429,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IWindowProvider> : pr
         }
     }
 
-    HRESULT __stdcall abi_SetVisualState(Windows::UI::Xaml::Automation::WindowVisualState state) noexcept override
+    HRESULT __stdcall SetVisualState(Windows::UI::Xaml::Automation::WindowVisualState state) noexcept final
     {
         try
         {
-            this->shim().SetVisualState(state);
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetVisualState(*reinterpret_cast<Windows::UI::Xaml::Automation::WindowVisualState const*>(&state));
             return S_OK;
         }
         catch (...)
@@ -1926,11 +2443,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IWindowProvider> : pr
         }
     }
 
-    HRESULT __stdcall abi_WaitForInputIdle(int32_t milliseconds, bool * returnValue) noexcept override
+    HRESULT __stdcall WaitForInputIdle(int32_t milliseconds, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().WaitForInputIdle(milliseconds));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().WaitForInputIdle(milliseconds));
             return S_OK;
         }
         catch (...)
@@ -1942,868 +2460,123 @@ struct produce<D, Windows::UI::Xaml::Automation::Provider::IWindowProvider> : pr
 
 }
 
-namespace Windows::UI::Xaml::Automation::Provider {
-
-template <typename D> int32_t impl_IAnnotationProvider<D>::AnnotationTypeId() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IAnnotationProvider &>(static_cast<const D &>(*this))->get_AnnotationTypeId(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IAnnotationProvider<D>::AnnotationTypeName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IAnnotationProvider &>(static_cast<const D &>(*this))->get_AnnotationTypeName(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IAnnotationProvider<D>::Author() const
-{
-    hstring value;
-    check_hresult(static_cast<const IAnnotationProvider &>(static_cast<const D &>(*this))->get_Author(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IAnnotationProvider<D>::DateTime() const
-{
-    hstring value;
-    check_hresult(static_cast<const IAnnotationProvider &>(static_cast<const D &>(*this))->get_DateTime(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_IAnnotationProvider<D>::Target() const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value { nullptr };
-    check_hresult(static_cast<const IAnnotationProvider &>(static_cast<const D &>(*this))->get_Target(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::DockPosition impl_IDockProvider<D>::DockPosition() const
-{
-    Windows::UI::Xaml::Automation::DockPosition value {};
-    check_hresult(static_cast<const IDockProvider &>(static_cast<const D &>(*this))->get_DockPosition(&value));
-    return value;
-}
-
-template <typename D> void impl_IDockProvider<D>::SetDockPosition(Windows::UI::Xaml::Automation::DockPosition dockPosition) const
-{
-    check_hresult(static_cast<const IDockProvider &>(static_cast<const D &>(*this))->abi_SetDockPosition(dockPosition));
-}
-
-template <typename D> bool impl_IDragProvider<D>::IsGrabbed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IDragProvider &>(static_cast<const D &>(*this))->get_IsGrabbed(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IDragProvider<D>::DropEffect() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDragProvider &>(static_cast<const D &>(*this))->get_DropEffect(put(value)));
-    return value;
-}
-
-template <typename D> com_array<hstring> impl_IDragProvider<D>::DropEffects() const
-{
-    com_array<hstring> value;
-    check_hresult(static_cast<const IDragProvider &>(static_cast<const D &>(*this))->get_DropEffects(put_size(value), put(value)));
-    return value;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_IDragProvider<D>::GetGrabbedItems() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const IDragProvider &>(static_cast<const D &>(*this))->abi_GetGrabbedItems(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IDropTargetProvider<D>::DropEffect() const
-{
-    hstring value;
-    check_hresult(static_cast<const IDropTargetProvider &>(static_cast<const D &>(*this))->get_DropEffect(put(value)));
-    return value;
-}
-
-template <typename D> com_array<hstring> impl_IDropTargetProvider<D>::DropEffects() const
-{
-    com_array<hstring> value;
-    check_hresult(static_cast<const IDropTargetProvider &>(static_cast<const D &>(*this))->get_DropEffects(put_size(value), put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::ExpandCollapseState impl_IExpandCollapseProvider<D>::ExpandCollapseState() const
-{
-    Windows::UI::Xaml::Automation::ExpandCollapseState value {};
-    check_hresult(static_cast<const IExpandCollapseProvider &>(static_cast<const D &>(*this))->get_ExpandCollapseState(&value));
-    return value;
-}
-
-template <typename D> void impl_IExpandCollapseProvider<D>::Collapse() const
-{
-    check_hresult(static_cast<const IExpandCollapseProvider &>(static_cast<const D &>(*this))->abi_Collapse());
-}
-
-template <typename D> void impl_IExpandCollapseProvider<D>::Expand() const
-{
-    check_hresult(static_cast<const IExpandCollapseProvider &>(static_cast<const D &>(*this))->abi_Expand());
-}
-
-template <typename D> int32_t impl_IGridItemProvider<D>::Column() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridItemProvider &>(static_cast<const D &>(*this))->get_Column(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IGridItemProvider<D>::ColumnSpan() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridItemProvider &>(static_cast<const D &>(*this))->get_ColumnSpan(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_IGridItemProvider<D>::ContainingGrid() const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value { nullptr };
-    check_hresult(static_cast<const IGridItemProvider &>(static_cast<const D &>(*this))->get_ContainingGrid(put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_IGridItemProvider<D>::Row() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridItemProvider &>(static_cast<const D &>(*this))->get_Row(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IGridItemProvider<D>::RowSpan() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridItemProvider &>(static_cast<const D &>(*this))->get_RowSpan(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IGridProvider<D>::ColumnCount() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridProvider &>(static_cast<const D &>(*this))->get_ColumnCount(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IGridProvider<D>::RowCount() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IGridProvider &>(static_cast<const D &>(*this))->get_RowCount(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_IGridProvider<D>::GetItem(int32_t row, int32_t column) const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue { nullptr };
-    check_hresult(static_cast<const IGridProvider &>(static_cast<const D &>(*this))->abi_GetItem(row, column, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IInvokeProvider<D>::Invoke() const
-{
-    check_hresult(static_cast<const IInvokeProvider &>(static_cast<const D &>(*this))->abi_Invoke());
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_IItemContainerProvider<D>::FindItemByProperty(const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple & startAfter, const Windows::UI::Xaml::Automation::AutomationProperty & automationProperty, const Windows::IInspectable & value) const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue { nullptr };
-    check_hresult(static_cast<const IItemContainerProvider &>(static_cast<const D &>(*this))->abi_FindItemByProperty(get(startAfter), get(automationProperty), get(value), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IMultipleViewProvider<D>::CurrentView() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IMultipleViewProvider &>(static_cast<const D &>(*this))->get_CurrentView(&value));
-    return value;
-}
-
-template <typename D> com_array<int32_t> impl_IMultipleViewProvider<D>::GetSupportedViews() const
-{
-    com_array<int32_t> returnValue {};
-    check_hresult(static_cast<const IMultipleViewProvider &>(static_cast<const D &>(*this))->abi_GetSupportedViews(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IMultipleViewProvider<D>::GetViewName(int32_t viewId) const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IMultipleViewProvider &>(static_cast<const D &>(*this))->abi_GetViewName(viewId, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IMultipleViewProvider<D>::SetCurrentView(int32_t viewId) const
-{
-    check_hresult(static_cast<const IMultipleViewProvider &>(static_cast<const D &>(*this))->abi_SetCurrentView(viewId));
-}
-
-template <typename D> Windows::IInspectable impl_IObjectModelProvider<D>::GetUnderlyingObjectModel() const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IObjectModelProvider &>(static_cast<const D &>(*this))->abi_GetUnderlyingObjectModel(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> bool impl_IRangeValueProvider<D>::IsReadOnly() const
-{
-    bool value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_IsReadOnly(&value));
-    return value;
-}
-
-template <typename D> double impl_IRangeValueProvider<D>::LargeChange() const
-{
-    double value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_LargeChange(&value));
-    return value;
-}
-
-template <typename D> double impl_IRangeValueProvider<D>::Maximum() const
-{
-    double value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_Maximum(&value));
-    return value;
-}
-
-template <typename D> double impl_IRangeValueProvider<D>::Minimum() const
-{
-    double value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_Minimum(&value));
-    return value;
-}
-
-template <typename D> double impl_IRangeValueProvider<D>::SmallChange() const
-{
-    double value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_SmallChange(&value));
-    return value;
-}
-
-template <typename D> double impl_IRangeValueProvider<D>::Value() const
-{
-    double value {};
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->get_Value(&value));
-    return value;
-}
-
-template <typename D> void impl_IRangeValueProvider<D>::SetValue(double value) const
-{
-    check_hresult(static_cast<const IRangeValueProvider &>(static_cast<const D &>(*this))->abi_SetValue(value));
-}
-
-template <typename D> void impl_IScrollItemProvider<D>::ScrollIntoView() const
-{
-    check_hresult(static_cast<const IScrollItemProvider &>(static_cast<const D &>(*this))->abi_ScrollIntoView());
-}
-
-template <typename D> bool impl_IScrollProvider<D>::HorizontallyScrollable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_HorizontallyScrollable(&value));
-    return value;
-}
-
-template <typename D> double impl_IScrollProvider<D>::HorizontalScrollPercent() const
-{
-    double value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_HorizontalScrollPercent(&value));
-    return value;
-}
-
-template <typename D> double impl_IScrollProvider<D>::HorizontalViewSize() const
-{
-    double value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_HorizontalViewSize(&value));
-    return value;
-}
-
-template <typename D> bool impl_IScrollProvider<D>::VerticallyScrollable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_VerticallyScrollable(&value));
-    return value;
-}
-
-template <typename D> double impl_IScrollProvider<D>::VerticalScrollPercent() const
-{
-    double value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_VerticalScrollPercent(&value));
-    return value;
-}
-
-template <typename D> double impl_IScrollProvider<D>::VerticalViewSize() const
-{
-    double value {};
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->get_VerticalViewSize(&value));
-    return value;
-}
-
-template <typename D> void impl_IScrollProvider<D>::Scroll(Windows::UI::Xaml::Automation::ScrollAmount horizontalAmount, Windows::UI::Xaml::Automation::ScrollAmount verticalAmount) const
-{
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->abi_Scroll(horizontalAmount, verticalAmount));
-}
-
-template <typename D> void impl_IScrollProvider<D>::SetScrollPercent(double horizontalPercent, double verticalPercent) const
-{
-    check_hresult(static_cast<const IScrollProvider &>(static_cast<const D &>(*this))->abi_SetScrollPercent(horizontalPercent, verticalPercent));
-}
-
-template <typename D> bool impl_ISelectionItemProvider<D>::IsSelected() const
-{
-    bool value {};
-    check_hresult(static_cast<const ISelectionItemProvider &>(static_cast<const D &>(*this))->get_IsSelected(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_ISelectionItemProvider<D>::SelectionContainer() const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value { nullptr };
-    check_hresult(static_cast<const ISelectionItemProvider &>(static_cast<const D &>(*this))->get_SelectionContainer(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ISelectionItemProvider<D>::AddToSelection() const
-{
-    check_hresult(static_cast<const ISelectionItemProvider &>(static_cast<const D &>(*this))->abi_AddToSelection());
-}
-
-template <typename D> void impl_ISelectionItemProvider<D>::RemoveFromSelection() const
-{
-    check_hresult(static_cast<const ISelectionItemProvider &>(static_cast<const D &>(*this))->abi_RemoveFromSelection());
-}
-
-template <typename D> void impl_ISelectionItemProvider<D>::Select() const
-{
-    check_hresult(static_cast<const ISelectionItemProvider &>(static_cast<const D &>(*this))->abi_Select());
-}
-
-template <typename D> bool impl_ISelectionProvider<D>::CanSelectMultiple() const
-{
-    bool value {};
-    check_hresult(static_cast<const ISelectionProvider &>(static_cast<const D &>(*this))->get_CanSelectMultiple(&value));
-    return value;
-}
-
-template <typename D> bool impl_ISelectionProvider<D>::IsSelectionRequired() const
-{
-    bool value {};
-    check_hresult(static_cast<const ISelectionProvider &>(static_cast<const D &>(*this))->get_IsSelectionRequired(&value));
-    return value;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ISelectionProvider<D>::GetSelection() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ISelectionProvider &>(static_cast<const D &>(*this))->abi_GetSelection(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_ISpreadsheetItemProvider<D>::Formula() const
-{
-    hstring value;
-    check_hresult(static_cast<const ISpreadsheetItemProvider &>(static_cast<const D &>(*this))->get_Formula(put(value)));
-    return value;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ISpreadsheetItemProvider<D>::GetAnnotationObjects() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ISpreadsheetItemProvider &>(static_cast<const D &>(*this))->abi_GetAnnotationObjects(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::AnnotationType> impl_ISpreadsheetItemProvider<D>::GetAnnotationTypes() const
-{
-    com_array<Windows::UI::Xaml::Automation::AnnotationType> returnValue {};
-    check_hresult(static_cast<const ISpreadsheetItemProvider &>(static_cast<const D &>(*this))->abi_GetAnnotationTypes(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_ISpreadsheetProvider<D>::GetItemByName(hstring_ref name) const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue { nullptr };
-    check_hresult(static_cast<const ISpreadsheetProvider &>(static_cast<const D &>(*this))->abi_GetItemByName(get(name), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IStylesProvider<D>::ExtendedProperties() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_ExtendedProperties(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IStylesProvider<D>::FillColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_FillColor(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Color impl_IStylesProvider<D>::FillPatternColor() const
-{
-    Windows::UI::Color value {};
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_FillPatternColor(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStylesProvider<D>::FillPatternStyle() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_FillPatternStyle(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IStylesProvider<D>::Shape() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_Shape(put(value)));
-    return value;
-}
-
-template <typename D> int32_t impl_IStylesProvider<D>::StyleId() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_StyleId(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IStylesProvider<D>::StyleName() const
-{
-    hstring value;
-    check_hresult(static_cast<const IStylesProvider &>(static_cast<const D &>(*this))->get_StyleName(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ISynchronizedInputProvider<D>::Cancel() const
-{
-    check_hresult(static_cast<const ISynchronizedInputProvider &>(static_cast<const D &>(*this))->abi_Cancel());
-}
-
-template <typename D> void impl_ISynchronizedInputProvider<D>::StartListening(Windows::UI::Xaml::Automation::SynchronizedInputType inputType) const
-{
-    check_hresult(static_cast<const ISynchronizedInputProvider &>(static_cast<const D &>(*this))->abi_StartListening(inputType));
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ITableItemProvider<D>::GetColumnHeaderItems() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ITableItemProvider &>(static_cast<const D &>(*this))->abi_GetColumnHeaderItems(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ITableItemProvider<D>::GetRowHeaderItems() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ITableItemProvider &>(static_cast<const D &>(*this))->abi_GetRowHeaderItems(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::RowOrColumnMajor impl_ITableProvider<D>::RowOrColumnMajor() const
-{
-    Windows::UI::Xaml::Automation::RowOrColumnMajor value {};
-    check_hresult(static_cast<const ITableProvider &>(static_cast<const D &>(*this))->get_RowOrColumnMajor(&value));
-    return value;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ITableProvider<D>::GetColumnHeaders() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ITableProvider &>(static_cast<const D &>(*this))->abi_GetColumnHeaders(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ITableProvider<D>::GetRowHeaders() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ITableProvider &>(static_cast<const D &>(*this))->abi_GetRowHeaders(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_ITextChildProvider<D>::TextContainer() const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple value { nullptr };
-    check_hresult(static_cast<const ITextChildProvider &>(static_cast<const D &>(*this))->get_TextContainer(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextChildProvider<D>::TextRange() const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider value;
-    check_hresult(static_cast<const ITextChildProvider &>(static_cast<const D &>(*this))->get_TextRange(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextRangeProvider<D>::Clone() const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_Clone(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> bool impl_ITextRangeProvider<D>::Compare(const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider & textRangeProvider) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_Compare(get(textRangeProvider), &returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_ITextRangeProvider<D>::CompareEndpoints(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider & textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint) const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_CompareEndpoints(endpoint, get(textRangeProvider), targetEndpoint, &returnValue));
-    return returnValue;
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::ExpandToEnclosingUnit(Windows::UI::Xaml::Automation::Text::TextUnit unit) const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_ExpandToEnclosingUnit(unit));
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextRangeProvider<D>::FindAttribute(int32_t attributeId, const Windows::IInspectable & value, bool backward) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_FindAttribute(attributeId, get(value), backward, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextRangeProvider<D>::FindText(hstring_ref text, bool backward, bool ignoreCase) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_FindText(get(text), backward, ignoreCase, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_ITextRangeProvider<D>::GetAttributeValue(int32_t attributeId) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_GetAttributeValue(attributeId, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::GetBoundingRectangles(com_array<double> & returnValue) const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_GetBoundingRectangles(put_size(returnValue), put(returnValue)));
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_ITextRangeProvider<D>::GetEnclosingElement() const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue { nullptr };
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_GetEnclosingElement(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_ITextRangeProvider<D>::GetText(int32_t maxLength) const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_GetText(maxLength, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_ITextRangeProvider<D>::Move(Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count) const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_Move(unit, count, &returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_ITextRangeProvider<D>::MoveEndpointByUnit(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, Windows::UI::Xaml::Automation::Text::TextUnit unit, int32_t count) const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_MoveEndpointByUnit(endpoint, unit, count, &returnValue));
-    return returnValue;
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::MoveEndpointByRange(Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint endpoint, const Windows::UI::Xaml::Automation::Provider::ITextRangeProvider & textRangeProvider, Windows::UI::Xaml::Automation::Text::TextPatternRangeEndpoint targetEndpoint) const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_MoveEndpointByRange(endpoint, get(textRangeProvider), targetEndpoint));
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::Select() const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_Select());
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::AddToSelection() const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_AddToSelection());
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::RemoveFromSelection() const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_RemoveFromSelection());
-}
-
-template <typename D> void impl_ITextRangeProvider<D>::ScrollIntoView(bool alignToTop) const
-{
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_ScrollIntoView(alignToTop));
-}
-
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> impl_ITextRangeProvider<D>::GetChildren() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> returnValue { nullptr };
-    check_hresult(static_cast<const ITextRangeProvider &>(static_cast<const D &>(*this))->abi_GetChildren(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
+WINRT_EXPORT namespace winrt::Windows::UI::Xaml::Automation::Provider {
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextProvider<D>::DocumentRange() const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider value;
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->get_DocumentRange(put(value)));
-    return value;
 }
 
-template <typename D> Windows::UI::Xaml::Automation::SupportedTextSelection impl_ITextProvider<D>::SupportedTextSelection() const
-{
-    Windows::UI::Xaml::Automation::SupportedTextSelection value {};
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->get_SupportedTextSelection(&value));
-    return value;
-}
+WINRT_EXPORT namespace std {
 
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> impl_ITextProvider<D>::GetSelection() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue;
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->abi_GetSelection(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IAnnotationProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IAnnotationProvider> {};
 
-template <typename D> com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> impl_ITextProvider<D>::GetVisibleRanges() const
-{
-    com_array<Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> returnValue;
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->abi_GetVisibleRanges(put_size(returnValue), put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ICustomNavigationProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ICustomNavigationProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextProvider<D>::RangeFromChild(const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple & childElement) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->abi_RangeFromChild(get(childElement), put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IDockProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IDockProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextProvider<D>::RangeFromPoint(const Windows::Foundation::Point & screenLocation) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextProvider &>(static_cast<const D &>(*this))->abi_RangeFromPoint(get(screenLocation), put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IDragProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IDragProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextProvider2<D>::RangeFromAnnotation(const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple & annotationElement) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextProvider2 &>(static_cast<const D &>(*this))->abi_RangeFromAnnotation(get(annotationElement), put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IDropTargetProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IDropTargetProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextProvider2<D>::GetCaretRange(bool & isActive) const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextProvider2 &>(static_cast<const D &>(*this))->abi_GetCaretRange(&isActive, put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider> {};
 
-template <typename D> void impl_ITextRangeProvider2<D>::ShowContextMenu() const
-{
-    check_hresult(static_cast<const ITextRangeProvider2 &>(static_cast<const D &>(*this))->abi_ShowContextMenu());
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IGridItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IGridItemProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::ToggleState impl_IToggleProvider<D>::ToggleState() const
-{
-    Windows::UI::Xaml::Automation::ToggleState value {};
-    check_hresult(static_cast<const IToggleProvider &>(static_cast<const D &>(*this))->get_ToggleState(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IGridProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IGridProvider> {};
 
-template <typename D> void impl_IToggleProvider<D>::Toggle() const
-{
-    check_hresult(static_cast<const IToggleProvider &>(static_cast<const D &>(*this))->abi_Toggle());
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> {};
 
-template <typename D> bool impl_ITransformProvider<D>::CanMove() const
-{
-    bool value {};
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->get_CanMove(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IInvokeProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IInvokeProvider> {};
 
-template <typename D> bool impl_ITransformProvider<D>::CanResize() const
-{
-    bool value {};
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->get_CanResize(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IItemContainerProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IItemContainerProvider> {};
 
-template <typename D> bool impl_ITransformProvider<D>::CanRotate() const
-{
-    bool value {};
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->get_CanRotate(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IMultipleViewProvider> {};
 
-template <typename D> void impl_ITransformProvider<D>::Move(double x, double y) const
-{
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->abi_Move(x, y));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IObjectModelProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IObjectModelProvider> {};
 
-template <typename D> void impl_ITransformProvider<D>::Resize(double width, double height) const
-{
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->abi_Resize(width, height));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IRangeValueProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IRangeValueProvider> {};
 
-template <typename D> void impl_ITransformProvider<D>::Rotate(double degrees) const
-{
-    check_hresult(static_cast<const ITransformProvider &>(static_cast<const D &>(*this))->abi_Rotate(degrees));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IScrollItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IScrollItemProvider> {};
 
-template <typename D> bool impl_ITransformProvider2<D>::CanZoom() const
-{
-    bool value {};
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->get_CanZoom(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IScrollProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IScrollProvider> {};
 
-template <typename D> double impl_ITransformProvider2<D>::ZoomLevel() const
-{
-    double value {};
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->get_ZoomLevel(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider> {};
 
-template <typename D> double impl_ITransformProvider2<D>::MaxZoom() const
-{
-    double value {};
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->get_MaxZoom(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ISelectionProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ISelectionProvider> {};
 
-template <typename D> double impl_ITransformProvider2<D>::MinZoom() const
-{
-    double value {};
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->get_MinZoom(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ISpreadsheetItemProvider> {};
 
-template <typename D> void impl_ITransformProvider2<D>::Zoom(double zoom) const
-{
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->abi_Zoom(zoom));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ISpreadsheetProvider> {};
 
-template <typename D> void impl_ITransformProvider2<D>::ZoomByUnit(Windows::UI::Xaml::Automation::ZoomUnit zoomUnit) const
-{
-    check_hresult(static_cast<const ITransformProvider2 &>(static_cast<const D &>(*this))->abi_ZoomByUnit(zoomUnit));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IStylesProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IStylesProvider> {};
 
-template <typename D> bool impl_IValueProvider<D>::IsReadOnly() const
-{
-    bool value {};
-    check_hresult(static_cast<const IValueProvider &>(static_cast<const D &>(*this))->get_IsReadOnly(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ISynchronizedInputProvider> {};
 
-template <typename D> hstring impl_IValueProvider<D>::Value() const
-{
-    hstring value;
-    check_hresult(static_cast<const IValueProvider &>(static_cast<const D &>(*this))->get_Value(put(value)));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITableItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITableItemProvider> {};
 
-template <typename D> void impl_IValueProvider<D>::SetValue(hstring_ref value) const
-{
-    check_hresult(static_cast<const IValueProvider &>(static_cast<const D &>(*this))->abi_SetValue(get(value)));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITableProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITableProvider> {};
 
-template <typename D> void impl_IVirtualizedItemProvider<D>::Realize() const
-{
-    check_hresult(static_cast<const IVirtualizedItemProvider &>(static_cast<const D &>(*this))->abi_Realize());
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextChildProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextChildProvider> {};
 
-template <typename D> bool impl_IWindowProvider<D>::IsModal() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_IsModal(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextEditProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextEditProvider> {};
 
-template <typename D> bool impl_IWindowProvider<D>::IsTopmost() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_IsTopmost(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextProvider> {};
 
-template <typename D> bool impl_IWindowProvider<D>::Maximizable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_Maximizable(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextProvider2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextProvider2> {};
 
-template <typename D> bool impl_IWindowProvider<D>::Minimizable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_Minimizable(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::WindowInteractionState impl_IWindowProvider<D>::InteractionState() const
-{
-    Windows::UI::Xaml::Automation::WindowInteractionState value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_InteractionState(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITextRangeProvider2> {};
 
-template <typename D> Windows::UI::Xaml::Automation::WindowVisualState impl_IWindowProvider<D>::VisualState() const
-{
-    Windows::UI::Xaml::Automation::WindowVisualState value {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->get_VisualState(&value));
-    return value;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IToggleProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IToggleProvider> {};
 
-template <typename D> void impl_IWindowProvider<D>::Close() const
-{
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->abi_Close());
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITransformProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITransformProvider> {};
 
-template <typename D> void impl_IWindowProvider<D>::SetVisualState(Windows::UI::Xaml::Automation::WindowVisualState state) const
-{
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->abi_SetVisualState(state));
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::ITransformProvider2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::ITransformProvider2> {};
 
-template <typename D> bool impl_IWindowProvider<D>::WaitForInputIdle(int32_t milliseconds) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IWindowProvider &>(static_cast<const D &>(*this))->abi_WaitForInputIdle(milliseconds, &returnValue));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IValueProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IValueProvider> {};
 
-template <typename D> Windows::IInspectable impl_ICustomNavigationProvider<D>::NavigateCustom(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const ICustomNavigationProvider &>(static_cast<const D &>(*this))->abi_NavigateCustom(direction, put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextEditProvider<D>::GetActiveComposition() const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextEditProvider &>(static_cast<const D &>(*this))->abi_GetActiveComposition(put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IWindowProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IWindowProvider> {};
 
-template <typename D> Windows::UI::Xaml::Automation::Provider::ITextRangeProvider impl_ITextEditProvider<D>::GetConversionTarget() const
-{
-    Windows::UI::Xaml::Automation::Provider::ITextRangeProvider returnValue;
-    check_hresult(static_cast<const ITextEditProvider &>(static_cast<const D &>(*this))->abi_GetConversionTarget(put(returnValue)));
-    return returnValue;
-}
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple> {};
 
 }
 
-}
+WINRT_WARNING_POP

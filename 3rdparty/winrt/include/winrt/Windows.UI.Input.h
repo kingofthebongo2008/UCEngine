@@ -1,113 +1,1730 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Devices.Input.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Storage.Streams.3.h"
-#include "internal/Windows.UI.Input.3.h"
-#include "Windows.UI.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Devices.Haptics.2.h"
+#include "winrt/impl/Windows.Devices.Input.2.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Storage.Streams.2.h"
+#include "winrt/impl/Windows.UI.Core.2.h"
+#include "winrt/impl/Windows.UI.Input.2.h"
+#include "winrt/Windows.UI.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_ICrossSlidingEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ICrossSlidingEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_ICrossSlidingEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ICrossSlidingEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::CrossSlidingState consume_Windows_UI_Input_ICrossSlidingEventArgs<D>::CrossSlidingState() const noexcept
+{
+    Windows::UI::Input::CrossSlidingState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ICrossSlidingEventArgs)->get_CrossSlidingState(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IDraggingEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IDraggingEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IDraggingEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IDraggingEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::DraggingState consume_Windows_UI_Input_IDraggingEventArgs<D>::DraggingState() const noexcept
+{
+    Windows::UI::Input::DraggingState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IDraggingEventArgs)->get_DraggingState(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IEdgeGesture<D>::Starting(Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->add_Starting(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IEdgeGesture> consume_Windows_UI_Input_IEdgeGesture<D>::Starting(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IEdgeGesture>(this, &abi_t<Windows::UI::Input::IEdgeGesture>::remove_Starting, Starting(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IEdgeGesture<D>::Starting(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->remove_Starting(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IEdgeGesture<D>::Completed(Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->add_Completed(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IEdgeGesture> consume_Windows_UI_Input_IEdgeGesture<D>::Completed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IEdgeGesture>(this, &abi_t<Windows::UI::Input::IEdgeGesture>::remove_Completed, Completed(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IEdgeGesture<D>::Completed(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->remove_Completed(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IEdgeGesture<D>::Canceled(Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->add_Canceled(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IEdgeGesture> consume_Windows_UI_Input_IEdgeGesture<D>::Canceled(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IEdgeGesture>(this, &abi_t<Windows::UI::Input::IEdgeGesture>::remove_Canceled, Canceled(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IEdgeGesture<D>::Canceled(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGesture)->remove_Canceled(get_abi(token)));
+}
+
+template <typename D> Windows::UI::Input::EdgeGestureKind consume_Windows_UI_Input_IEdgeGestureEventArgs<D>::Kind() const noexcept
+{
+    Windows::UI::Input::EdgeGestureKind value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IEdgeGestureEventArgs)->get_Kind(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::EdgeGesture consume_Windows_UI_Input_IEdgeGestureStatics<D>::GetForCurrentView() const
+{
+    Windows::UI::Input::EdgeGesture current{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IEdgeGestureStatics)->GetForCurrentView(put_abi(current)));
+    return current;
+}
+
+template <typename D> Windows::UI::Input::GestureSettings consume_Windows_UI_Input_IGestureRecognizer<D>::GestureSettings() const noexcept
+{
+    Windows::UI::Input::GestureSettings value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_GestureSettings(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::GestureSettings(Windows::UI::Input::GestureSettings const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_GestureSettings(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::IsInertial() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_IsInertial(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::IsActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_IsActive(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::ShowGestureFeedback() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_ShowGestureFeedback(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ShowGestureFeedback(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_ShowGestureFeedback(value));
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IGestureRecognizer<D>::PivotCenter() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_PivotCenter(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::PivotCenter(Windows::Foundation::Point const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_PivotCenter(get_abi(value)));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::PivotRadius() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_PivotRadius(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::PivotRadius(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_PivotRadius(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaTranslationDeceleration() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaTranslationDeceleration(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaTranslationDeceleration(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaTranslationDeceleration(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaRotationDeceleration() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaRotationDeceleration(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaRotationDeceleration(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaRotationDeceleration(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaExpansionDeceleration() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaExpansionDeceleration(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaExpansionDeceleration(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaExpansionDeceleration(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaTranslationDisplacement() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaTranslationDisplacement(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaTranslationDisplacement(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaTranslationDisplacement(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaRotationAngle() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaRotationAngle(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaRotationAngle(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaRotationAngle(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaExpansion() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_InertiaExpansion(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::InertiaExpansion(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_InertiaExpansion(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationExact() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_ManipulationExact(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationExact(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_ManipulationExact(value));
+}
+
+template <typename D> Windows::UI::Input::CrossSlideThresholds consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideThresholds() const noexcept
+{
+    Windows::UI::Input::CrossSlideThresholds value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_CrossSlideThresholds(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideThresholds(Windows::UI::Input::CrossSlideThresholds const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_CrossSlideThresholds(get_abi(value)));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideHorizontally() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_CrossSlideHorizontally(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideHorizontally(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_CrossSlideHorizontally(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideExact() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_CrossSlideExact(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSlideExact(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_CrossSlideExact(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::AutoProcessInertia() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_AutoProcessInertia(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::AutoProcessInertia(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->put_AutoProcessInertia(value));
+}
+
+template <typename D> Windows::UI::Input::MouseWheelParameters consume_Windows_UI_Input_IGestureRecognizer<D>::MouseWheelParameters() const noexcept
+{
+    Windows::UI::Input::MouseWheelParameters value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->get_MouseWheelParameters(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IGestureRecognizer<D>::CanBeDoubleTap(Windows::UI::Input::PointerPoint const& value) const
+{
+    bool canBeDoubleTap{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->CanBeDoubleTap(get_abi(value), &canBeDoubleTap));
+    return canBeDoubleTap;
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ProcessDownEvent(Windows::UI::Input::PointerPoint const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->ProcessDownEvent(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ProcessMoveEvents(param::vector<Windows::UI::Input::PointerPoint> const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->ProcessMoveEvents(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ProcessUpEvent(Windows::UI::Input::PointerPoint const& value) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->ProcessUpEvent(get_abi(value)));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ProcessMouseWheelEvent(Windows::UI::Input::PointerPoint const& value, bool isShiftKeyDown, bool isControlKeyDown) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->ProcessMouseWheelEvent(get_abi(value), isShiftKeyDown, isControlKeyDown));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ProcessInertia() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->ProcessInertia());
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::CompleteGesture() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->CompleteGesture());
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::Tapped(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_Tapped(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::Tapped(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_Tapped, Tapped(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::Tapped(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_Tapped(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::RightTapped(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_RightTapped(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::RightTapped(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_RightTapped, RightTapped(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::RightTapped(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_RightTapped(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::Holding(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_Holding(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::Holding(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_Holding, Holding(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::Holding(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_Holding(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::Dragging(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_Dragging(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::Dragging(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_Dragging, Dragging(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::Dragging(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_Dragging(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationStarted(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_ManipulationStarted(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationStarted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_ManipulationStarted, ManipulationStarted(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationStarted(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_ManipulationStarted(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationUpdated(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_ManipulationUpdated(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationUpdated(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_ManipulationUpdated, ManipulationUpdated(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationUpdated(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_ManipulationUpdated(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationInertiaStarting(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_ManipulationInertiaStarting(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationInertiaStarting(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_ManipulationInertiaStarting, ManipulationInertiaStarting(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationInertiaStarting(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_ManipulationInertiaStarting(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationCompleted(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_ManipulationCompleted(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_ManipulationCompleted, ManipulationCompleted(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::ManipulationCompleted(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_ManipulationCompleted(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSliding(Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> const& handler) const
+{
+    event_token pCookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->add_CrossSliding(get_abi(handler), put_abi(pCookie)));
+    return pCookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IGestureRecognizer> consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSliding(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IGestureRecognizer>(this, &abi_t<Windows::UI::Input::IGestureRecognizer>::remove_CrossSliding, CrossSliding(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IGestureRecognizer<D>::CrossSliding(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IGestureRecognizer)->remove_CrossSliding(get_abi(cookie)));
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IHoldingEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IHoldingEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IHoldingEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IHoldingEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::HoldingState consume_Windows_UI_Input_IHoldingEventArgs<D>::HoldingState() const noexcept
+{
+    Windows::UI::Input::HoldingState value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IHoldingEventArgs)->get_HoldingState(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::IsInterceptionEnabledWhenInForeground() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->get_IsInterceptionEnabledWhenInForeground(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::IsInterceptionEnabledWhenInForeground(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->put_IsInterceptionEnabledWhenInForeground(value));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyDown(Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->add_KeyDown(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IKeyboardDeliveryInterceptor> consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyDown(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IKeyboardDeliveryInterceptor>(this, &abi_t<Windows::UI::Input::IKeyboardDeliveryInterceptor>::remove_KeyDown, KeyDown(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyDown(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->remove_KeyDown(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyUp(Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->add_KeyUp(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IKeyboardDeliveryInterceptor> consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyUp(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IKeyboardDeliveryInterceptor>(this, &abi_t<Windows::UI::Input::IKeyboardDeliveryInterceptor>::remove_KeyUp, KeyUp(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IKeyboardDeliveryInterceptor<D>::KeyUp(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptor)->remove_KeyUp(get_abi(token)));
+}
+
+template <typename D> Windows::UI::Input::KeyboardDeliveryInterceptor consume_Windows_UI_Input_IKeyboardDeliveryInterceptorStatics<D>::GetForCurrentView() const
+{
+    Windows::UI::Input::KeyboardDeliveryInterceptor keyboardDeliverySettings{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IKeyboardDeliveryInterceptorStatics)->GetForCurrentView(put_abi(keyboardDeliverySettings)));
+    return keyboardDeliverySettings;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IManipulationCompletedEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationCompletedEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IManipulationCompletedEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationCompletedEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationCompletedEventArgs<D>::Cumulative() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationCompletedEventArgs)->get_Cumulative(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationVelocities consume_Windows_UI_Input_IManipulationCompletedEventArgs<D>::Velocities() const noexcept
+{
+    Windows::UI::Input::ManipulationVelocities value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationCompletedEventArgs)->get_Velocities(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IManipulationInertiaStartingEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationInertiaStartingEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IManipulationInertiaStartingEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationInertiaStartingEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationInertiaStartingEventArgs<D>::Delta() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationInertiaStartingEventArgs)->get_Delta(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationInertiaStartingEventArgs<D>::Cumulative() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationInertiaStartingEventArgs)->get_Cumulative(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationVelocities consume_Windows_UI_Input_IManipulationInertiaStartingEventArgs<D>::Velocities() const noexcept
+{
+    Windows::UI::Input::ManipulationVelocities value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationInertiaStartingEventArgs)->get_Velocities(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IManipulationStartedEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationStartedEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IManipulationStartedEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationStartedEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationStartedEventArgs<D>::Cumulative() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationStartedEventArgs)->get_Cumulative(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IManipulationUpdatedEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationUpdatedEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IManipulationUpdatedEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationUpdatedEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationUpdatedEventArgs<D>::Delta() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationUpdatedEventArgs)->get_Delta(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationDelta consume_Windows_UI_Input_IManipulationUpdatedEventArgs<D>::Cumulative() const noexcept
+{
+    Windows::UI::Input::ManipulationDelta value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationUpdatedEventArgs)->get_Cumulative(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::ManipulationVelocities consume_Windows_UI_Input_IManipulationUpdatedEventArgs<D>::Velocities() const noexcept
+{
+    Windows::UI::Input::ManipulationVelocities value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IManipulationUpdatedEventArgs)->get_Velocities(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IMouseWheelParameters<D>::CharTranslation() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->get_CharTranslation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IMouseWheelParameters<D>::CharTranslation(Windows::Foundation::Point const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->put_CharTranslation(get_abi(value)));
+}
+
+template <typename D> float consume_Windows_UI_Input_IMouseWheelParameters<D>::DeltaScale() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->get_DeltaScale(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IMouseWheelParameters<D>::DeltaScale(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->put_DeltaScale(value));
+}
+
+template <typename D> float consume_Windows_UI_Input_IMouseWheelParameters<D>::DeltaRotationAngle() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->get_DeltaRotationAngle(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IMouseWheelParameters<D>::DeltaRotationAngle(float value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->put_DeltaRotationAngle(value));
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IMouseWheelParameters<D>::PageTranslation() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->get_PageTranslation(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IMouseWheelParameters<D>::PageTranslation(Windows::Foundation::Point const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IMouseWheelParameters)->put_PageTranslation(get_abi(value)));
+}
+
+template <typename D> Windows::Devices::Input::PointerDevice consume_Windows_UI_Input_IPointerPoint<D>::PointerDevice() const noexcept
+{
+    Windows::Devices::Input::PointerDevice value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_PointerDevice(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IPointerPoint<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IPointerPoint<D>::RawPosition() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_RawPosition(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_UI_Input_IPointerPoint<D>::PointerId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_PointerId(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_UI_Input_IPointerPoint<D>::FrameId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_FrameId(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_UI_Input_IPointerPoint<D>::Timestamp() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_Timestamp(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPoint<D>::IsInContact() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_IsInContact(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::PointerPointProperties consume_Windows_UI_Input_IPointerPoint<D>::Properties() const noexcept
+{
+    Windows::UI::Input::PointerPointProperties value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPoint)->get_Properties(put_abi(value)));
+    return value;
+}
+
+template <typename D> float consume_Windows_UI_Input_IPointerPointProperties<D>::Pressure() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_Pressure(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsInverted() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsInverted(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsEraser() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsEraser(&value));
+    return value;
+}
+
+template <typename D> float consume_Windows_UI_Input_IPointerPointProperties<D>::Orientation() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_Orientation(&value));
+    return value;
+}
+
+template <typename D> float consume_Windows_UI_Input_IPointerPointProperties<D>::XTilt() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_XTilt(&value));
+    return value;
+}
+
+template <typename D> float consume_Windows_UI_Input_IPointerPointProperties<D>::YTilt() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_YTilt(&value));
+    return value;
+}
+
+template <typename D> float consume_Windows_UI_Input_IPointerPointProperties<D>::Twist() const noexcept
+{
+    float value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_Twist(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Input_IPointerPointProperties<D>::ContactRect() const noexcept
+{
+    Windows::Foundation::Rect value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_ContactRect(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Input_IPointerPointProperties<D>::ContactRectRaw() const noexcept
+{
+    Windows::Foundation::Rect value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_ContactRectRaw(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::TouchConfidence() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_TouchConfidence(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsLeftButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsLeftButtonPressed(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsRightButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsRightButtonPressed(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsMiddleButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsMiddleButtonPressed(&value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Input_IPointerPointProperties<D>::MouseWheelDelta() const noexcept
+{
+    int32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_MouseWheelDelta(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsHorizontalMouseWheel() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsHorizontalMouseWheel(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsPrimary() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsPrimary(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsInRange() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsInRange(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsCanceled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsCanceled(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsBarrelButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsBarrelButtonPressed(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsXButton1Pressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsXButton1Pressed(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::IsXButton2Pressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_IsXButton2Pressed(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::PointerUpdateKind consume_Windows_UI_Input_IPointerPointProperties<D>::PointerUpdateKind() const noexcept
+{
+    Windows::UI::Input::PointerUpdateKind value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->get_PointerUpdateKind(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointProperties<D>::HasUsage(uint32_t usagePage, uint32_t usageId) const
+{
+    bool value{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->HasUsage(usagePage, usageId, &value));
+    return value;
+}
+
+template <typename D> int32_t consume_Windows_UI_Input_IPointerPointProperties<D>::GetUsageValue(uint32_t usagePage, uint32_t usageId) const
+{
+    int32_t value{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties)->GetUsageValue(usagePage, usageId, &value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<float> consume_Windows_UI_Input_IPointerPointProperties2<D>::ZDistance() const noexcept
+{
+    Windows::Foundation::IReference<float> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointProperties2)->get_ZDistance(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::PointerPoint consume_Windows_UI_Input_IPointerPointStatics<D>::GetCurrentPoint(uint32_t pointerId) const
+{
+    Windows::UI::Input::PointerPoint pointerPoint{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointStatics)->GetCurrentPoint(pointerId, put_abi(pointerPoint)));
+    return pointerPoint;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> consume_Windows_UI_Input_IPointerPointStatics<D>::GetIntermediatePoints(uint32_t pointerId) const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> pointerPoints{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointStatics)->GetIntermediatePoints(pointerId, put_abi(pointerPoints)));
+    return pointerPoints;
+}
+
+template <typename D> Windows::UI::Input::PointerPoint consume_Windows_UI_Input_IPointerPointStatics<D>::GetCurrentPoint(uint32_t pointerId, Windows::UI::Input::IPointerPointTransform const& transform) const
+{
+    Windows::UI::Input::PointerPoint pointerPoint{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointStatics)->GetCurrentPointTransformed(pointerId, get_abi(transform), put_abi(pointerPoint)));
+    return pointerPoint;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> consume_Windows_UI_Input_IPointerPointStatics<D>::GetIntermediatePoints(uint32_t pointerId, Windows::UI::Input::IPointerPointTransform const& transform) const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> pointerPoints{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointStatics)->GetIntermediatePointsTransformed(pointerId, get_abi(transform), put_abi(pointerPoints)));
+    return pointerPoints;
+}
+
+template <typename D> Windows::UI::Input::IPointerPointTransform consume_Windows_UI_Input_IPointerPointTransform<D>::Inverse() const noexcept
+{
+    Windows::UI::Input::IPointerPointTransform value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerPointTransform)->get_Inverse(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerPointTransform<D>::TryTransform(Windows::Foundation::Point const& inPoint, Windows::Foundation::Point& outPoint) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointTransform)->TryTransform(get_abi(inPoint), put_abi(outPoint), &returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Input_IPointerPointTransform<D>::TransformBounds(Windows::Foundation::Rect const& rect) const
+{
+    Windows::Foundation::Rect returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerPointTransform)->TransformBounds(get_abi(rect), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Input_IPointerVisualizationSettings<D>::IsContactFeedbackEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerVisualizationSettings)->put_IsContactFeedbackEnabled(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerVisualizationSettings<D>::IsContactFeedbackEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerVisualizationSettings)->get_IsContactFeedbackEnabled(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IPointerVisualizationSettings<D>::IsBarrelButtonFeedbackEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerVisualizationSettings)->put_IsBarrelButtonFeedbackEnabled(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IPointerVisualizationSettings<D>::IsBarrelButtonFeedbackEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IPointerVisualizationSettings)->get_IsBarrelButtonFeedbackEnabled(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::PointerVisualizationSettings consume_Windows_UI_Input_IPointerVisualizationSettingsStatics<D>::GetForCurrentView() const
+{
+    Windows::UI::Input::PointerVisualizationSettings visualizationSettings{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IPointerVisualizationSettingsStatics)->GetForCurrentView(put_abi(visualizationSettings)));
+    return visualizationSettings;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenu consume_Windows_UI_Input_IRadialController<D>::Menu() const noexcept
+{
+    Windows::UI::Input::RadialControllerMenu value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialController)->get_Menu(put_abi(value)));
+    return value;
+}
+
+template <typename D> double consume_Windows_UI_Input_IRadialController<D>::RotationResolutionInDegrees() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialController)->get_RotationResolutionInDegrees(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::RotationResolutionInDegrees(double value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialController)->put_RotationResolutionInDegrees(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialController<D>::UseAutomaticHapticFeedback() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialController)->get_UseAutomaticHapticFeedback(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::UseAutomaticHapticFeedback(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialController)->put_UseAutomaticHapticFeedback(value));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ScreenContactStarted(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ScreenContactStarted(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ScreenContactStarted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ScreenContactStarted, ScreenContactStarted(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ScreenContactStarted(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ScreenContactStarted(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ScreenContactEnded(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ScreenContactEnded(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ScreenContactEnded(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ScreenContactEnded, ScreenContactEnded(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ScreenContactEnded(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ScreenContactEnded(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ScreenContactContinued(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ScreenContactContinued(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ScreenContactContinued(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ScreenContactContinued, ScreenContactContinued(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ScreenContactContinued(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ScreenContactContinued(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ControlLost(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ControlLost(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ControlLost(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ControlLost, ControlLost(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ControlLost(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ControlLost(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::RotationChanged(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_RotationChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::RotationChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_RotationChanged, RotationChanged(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::RotationChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_RotationChanged(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ButtonClicked(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ButtonClicked(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ButtonClicked(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ButtonClicked, ButtonClicked(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ButtonClicked(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ButtonClicked(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController<D>::ControlAcquired(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->add_ControlAcquired(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController> consume_Windows_UI_Input_IRadialController<D>::ControlAcquired(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController>(this, &abi_t<Windows::UI::Input::IRadialController>::remove_ControlAcquired, ControlAcquired(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController<D>::ControlAcquired(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController)->remove_ControlAcquired(get_abi(cookie)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController2<D>::ButtonPressed(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonPressedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->add_ButtonPressed(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController2> consume_Windows_UI_Input_IRadialController2<D>::ButtonPressed(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonPressedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController2>(this, &abi_t<Windows::UI::Input::IRadialController2>::remove_ButtonPressed, ButtonPressed(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController2<D>::ButtonPressed(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->remove_ButtonPressed(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController2<D>::ButtonHolding(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonHoldingEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->add_ButtonHolding(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController2> consume_Windows_UI_Input_IRadialController2<D>::ButtonHolding(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonHoldingEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController2>(this, &abi_t<Windows::UI::Input::IRadialController2>::remove_ButtonHolding, ButtonHolding(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController2<D>::ButtonHolding(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->remove_ButtonHolding(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialController2<D>::ButtonReleased(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonReleasedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->add_ButtonReleased(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialController2> consume_Windows_UI_Input_IRadialController2<D>::ButtonReleased(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonReleasedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialController2>(this, &abi_t<Windows::UI::Input::IRadialController2>::remove_ButtonReleased, ButtonReleased(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialController2<D>::ButtonReleased(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialController2)->remove_ButtonReleased(get_abi(token)));
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerButtonClickedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonClickedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerButtonClickedEventArgs2<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonClickedEventArgs2)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerButtonHoldingEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonHoldingEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerButtonHoldingEventArgs<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonHoldingEventArgs)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerButtonPressedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonPressedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerButtonPressedEventArgs<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonPressedEventArgs)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerButtonReleasedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonReleasedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerButtonReleasedEventArgs<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerButtonReleasedEventArgs)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfiguration<D>::SetDefaultMenuItems(param::iterable<Windows::UI::Input::RadialControllerSystemMenuItemKind> const& buttons) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration)->SetDefaultMenuItems(get_abi(buttons)));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfiguration<D>::ResetToDefaultMenuItems() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration)->ResetToDefaultMenuItems());
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerConfiguration<D>::TrySelectDefaultMenuItem(Windows::UI::Input::RadialControllerSystemMenuItemKind const& type) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration)->TrySelectDefaultMenuItem(get_abi(type), &result));
+    return result;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfiguration2<D>::ActiveControllerWhenMenuIsSuppressed(Windows::UI::Input::RadialController const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration2)->put_ActiveControllerWhenMenuIsSuppressed(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Input::RadialController consume_Windows_UI_Input_IRadialControllerConfiguration2<D>::ActiveControllerWhenMenuIsSuppressed() const noexcept
+{
+    Windows::UI::Input::RadialController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration2)->get_ActiveControllerWhenMenuIsSuppressed(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfiguration2<D>::IsMenuSuppressed(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration2)->put_IsMenuSuppressed(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerConfiguration2<D>::IsMenuSuppressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfiguration2)->get_IsMenuSuppressed(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerConfiguration consume_Windows_UI_Input_IRadialControllerConfigurationStatics<D>::GetForCurrentView() const
+{
+    Windows::UI::Input::RadialControllerConfiguration configuration{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfigurationStatics)->GetForCurrentView(put_abi(configuration)));
+    return configuration;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfigurationStatics2<D>::AppController(Windows::UI::Input::RadialController const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfigurationStatics2)->put_AppController(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Input::RadialController consume_Windows_UI_Input_IRadialControllerConfigurationStatics2<D>::AppController() const noexcept
+{
+    Windows::UI::Input::RadialController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfigurationStatics2)->get_AppController(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerConfigurationStatics2<D>::IsAppControllerEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfigurationStatics2)->put_IsAppControllerEnabled(value));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerConfigurationStatics2<D>::IsAppControllerEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerConfigurationStatics2)->get_IsAppControllerEnabled(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerControlAcquiredEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerControlAcquiredEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerControlAcquiredEventArgs2<D>::IsButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2)->get_IsButtonPressed(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerControlAcquiredEventArgs2<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::RadialControllerMenuItem> consume_Windows_UI_Input_IRadialControllerMenu<D>::Items() const noexcept
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Input::RadialControllerMenuItem> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->get_Items(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerMenu<D>::IsEnabled() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->get_IsEnabled(&value));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerMenu<D>::IsEnabled(bool value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->put_IsEnabled(value));
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenuItem consume_Windows_UI_Input_IRadialControllerMenu<D>::GetSelectedMenuItem() const
+{
+    Windows::UI::Input::RadialControllerMenuItem result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->GetSelectedMenuItem(put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerMenu<D>::SelectMenuItem(Windows::UI::Input::RadialControllerMenuItem const& menuItem) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->SelectMenuItem(get_abi(menuItem)));
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerMenu<D>::TrySelectPreviouslySelectedMenuItem() const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenu)->TrySelectPreviouslySelectedMenuItem(&result));
+    return result;
+}
+
+template <typename D> hstring consume_Windows_UI_Input_IRadialControllerMenuItem<D>::DisplayText() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItem)->get_DisplayText(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Input_IRadialControllerMenuItem<D>::Tag() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItem)->get_Tag(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerMenuItem<D>::Tag(Windows::Foundation::IInspectable const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItem)->put_Tag(get_abi(value)));
+}
+
+template <typename D> event_token consume_Windows_UI_Input_IRadialControllerMenuItem<D>::Invoked(Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItem)->add_Invoked(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Input::IRadialControllerMenuItem> consume_Windows_UI_Input_IRadialControllerMenuItem<D>::Invoked(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Input::IRadialControllerMenuItem>(this, &abi_t<Windows::UI::Input::IRadialControllerMenuItem>::remove_Invoked, Invoked(handler));
+}
+
+template <typename D> void consume_Windows_UI_Input_IRadialControllerMenuItem<D>::Invoked(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItem)->remove_Invoked(get_abi(token)));
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenuItem consume_Windows_UI_Input_IRadialControllerMenuItemStatics<D>::CreateFromIcon(param::hstring const& displayText, Windows::Storage::Streams::RandomAccessStreamReference const& icon) const
+{
+    Windows::UI::Input::RadialControllerMenuItem result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItemStatics)->CreateFromIcon(get_abi(displayText), get_abi(icon), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenuItem consume_Windows_UI_Input_IRadialControllerMenuItemStatics<D>::CreateFromKnownIcon(param::hstring const& displayText, Windows::UI::Input::RadialControllerMenuKnownIcon const& value) const
+{
+    Windows::UI::Input::RadialControllerMenuItem result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItemStatics)->CreateFromKnownIcon(get_abi(displayText), get_abi(value), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenuItem consume_Windows_UI_Input_IRadialControllerMenuItemStatics2<D>::CreateFromFontGlyph(param::hstring const& displayText, param::hstring const& glyph, param::hstring const& fontFamily) const
+{
+    Windows::UI::Input::RadialControllerMenuItem result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItemStatics2)->CreateFromFontGlyph(get_abi(displayText), get_abi(glyph), get_abi(fontFamily), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerMenuItem consume_Windows_UI_Input_IRadialControllerMenuItemStatics2<D>::CreateFromFontGlyph(param::hstring const& displayText, param::hstring const& glyph, param::hstring const& fontFamily, Windows::Foundation::Uri const& fontUri) const
+{
+    Windows::UI::Input::RadialControllerMenuItem result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerMenuItemStatics2)->CreateFromFontGlyphWithUri(get_abi(displayText), get_abi(glyph), get_abi(fontFamily), get_abi(fontUri), put_abi(result)));
+    return result;
+}
+
+template <typename D> double consume_Windows_UI_Input_IRadialControllerRotationChangedEventArgs<D>::RotationDeltaInDegrees() const noexcept
+{
+    double value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerRotationChangedEventArgs)->get_RotationDeltaInDegrees(&value));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerRotationChangedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerRotationChangedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerRotationChangedEventArgs2<D>::IsButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerRotationChangedEventArgs2)->get_IsButtonPressed(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerRotationChangedEventArgs2<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerRotationChangedEventArgs2)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Input_IRadialControllerScreenContact<D>::Bounds() const noexcept
+{
+    Windows::Foundation::Rect value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContact)->get_Bounds(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IRadialControllerScreenContact<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContact)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerScreenContactContinuedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerScreenContactContinuedEventArgs2<D>::IsButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2)->get_IsButtonPressed(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerScreenContactContinuedEventArgs2<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerScreenContactEndedEventArgs<D>::IsButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs)->get_IsButtonPressed(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerScreenContactEndedEventArgs<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Input::RadialControllerScreenContact consume_Windows_UI_Input_IRadialControllerScreenContactStartedEventArgs<D>::Contact() const noexcept
+{
+    Windows::UI::Input::RadialControllerScreenContact value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs)->get_Contact(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerScreenContactStartedEventArgs2<D>::IsButtonPressed() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2)->get_IsButtonPressed(&value));
+    return value;
+}
+
+template <typename D> Windows::Devices::Haptics::SimpleHapticsController consume_Windows_UI_Input_IRadialControllerScreenContactStartedEventArgs2<D>::SimpleHapticsController() const noexcept
+{
+    Windows::Devices::Haptics::SimpleHapticsController value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2)->get_SimpleHapticsController(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_UI_Input_IRadialControllerStatics<D>::IsSupported() const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerStatics)->IsSupported(&result));
+    return result;
+}
+
+template <typename D> Windows::UI::Input::RadialController consume_Windows_UI_Input_IRadialControllerStatics<D>::CreateForCurrentView() const
+{
+    Windows::UI::Input::RadialController result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Input::IRadialControllerStatics)->CreateForCurrentView(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_IRightTappedEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRightTappedEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_IRightTappedEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::IRightTappedEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Devices::Input::PointerDeviceType consume_Windows_UI_Input_ITappedEventArgs<D>::PointerDeviceType() const noexcept
+{
+    Windows::Devices::Input::PointerDeviceType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ITappedEventArgs)->get_PointerDeviceType(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Input_ITappedEventArgs<D>::Position() const noexcept
+{
+    Windows::Foundation::Point value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ITappedEventArgs)->get_Position(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_UI_Input_ITappedEventArgs<D>::TapCount() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Input::ITappedEventArgs)->get_TapCount(&value));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::UI::Input::ICrossSlidingEventArgs> : produce_base<D, Windows::UI::Input::ICrossSlidingEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CrossSlidingState(Windows::UI::Input::CrossSlidingState * value) noexcept override
+    HRESULT __stdcall get_CrossSlidingState(Windows::UI::Input::CrossSlidingState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CrossSlidingState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CrossSlidingState());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IDraggingEventArgs> : produce_base<D, Windows::UI::Input::IDraggingEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DraggingState(Windows::UI::Input::DraggingState * value) noexcept override
+    HRESULT __stdcall get_DraggingState(Windows::UI::Input::DraggingState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DraggingState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DraggingState());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::UI::Input::IEdgeGesture>
 {
-    HRESULT __stdcall add_Starting(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Starting(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Starting(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Starting(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -116,11 +1733,12 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
         }
     }
 
-    HRESULT __stdcall remove_Starting(event_token token) noexcept override
+    HRESULT __stdcall remove_Starting(event_token token) noexcept final
     {
         try
         {
-            this->shim().Starting(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Starting(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -129,11 +1747,12 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
         }
     }
 
-    HRESULT __stdcall add_Completed(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Completed(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Completed(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Completed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -142,11 +1761,12 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
         }
     }
 
-    HRESULT __stdcall remove_Completed(event_token token) noexcept override
+    HRESULT __stdcall remove_Completed(event_token token) noexcept final
     {
         try
         {
-            this->shim().Completed(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Completed(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -155,11 +1775,12 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
         }
     }
 
-    HRESULT __stdcall add_Canceled(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Canceled(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Canceled(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Canceled(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -168,11 +1789,12 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
         }
     }
 
-    HRESULT __stdcall remove_Canceled(event_token token) noexcept override
+    HRESULT __stdcall remove_Canceled(event_token token) noexcept final
     {
         try
         {
-            this->shim().Canceled(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Canceled(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -185,28 +1807,23 @@ struct produce<D, Windows::UI::Input::IEdgeGesture> : produce_base<D, Windows::U
 template <typename D>
 struct produce<D, Windows::UI::Input::IEdgeGestureEventArgs> : produce_base<D, Windows::UI::Input::IEdgeGestureEventArgs>
 {
-    HRESULT __stdcall get_Kind(Windows::UI::Input::EdgeGestureKind * value) noexcept override
+    HRESULT __stdcall get_Kind(Windows::UI::Input::EdgeGestureKind* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Kind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Kind());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IEdgeGestureStatics> : produce_base<D, Windows::UI::Input::IEdgeGestureStatics>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::UI::Input::IEdgeGesture> current) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** current) noexcept final
     {
         try
         {
-            *current = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *current = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -220,11 +1837,243 @@ struct produce<D, Windows::UI::Input::IEdgeGestureStatics> : produce_base<D, Win
 template <typename D>
 struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Windows::UI::Input::IGestureRecognizer>
 {
-    HRESULT __stdcall get_GestureSettings(Windows::UI::Input::GestureSettings * value) noexcept override
+    HRESULT __stdcall get_GestureSettings(Windows::UI::Input::GestureSettings* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().GestureSettings());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_GestureSettings(Windows::UI::Input::GestureSettings value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().GestureSettings(*reinterpret_cast<Windows::UI::Input::GestureSettings const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsInertial(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsInertial());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsActive(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsActive());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ShowGestureFeedback(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ShowGestureFeedback());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_ShowGestureFeedback(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().ShowGestureFeedback(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PivotCenter(Windows::Foundation::Point* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PivotCenter());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_PivotCenter(Windows::Foundation::Point value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().PivotCenter(*reinterpret_cast<Windows::Foundation::Point const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PivotRadius(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PivotRadius());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_PivotRadius(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().PivotRadius(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaTranslationDeceleration(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaTranslationDeceleration());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaTranslationDeceleration(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaTranslationDeceleration(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaRotationDeceleration(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaRotationDeceleration());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaRotationDeceleration(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaRotationDeceleration(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaExpansionDeceleration(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaExpansionDeceleration());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaExpansionDeceleration(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaExpansionDeceleration(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaTranslationDisplacement(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaTranslationDisplacement());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaTranslationDisplacement(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaTranslationDisplacement(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaRotationAngle(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaRotationAngle());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaRotationAngle(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaRotationAngle(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_InertiaExpansion(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().InertiaExpansion());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_InertiaExpansion(float value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().InertiaExpansion(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ManipulationExact(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ManipulationExact());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_ManipulationExact(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().ManipulationExact(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_CrossSlideThresholds(struct_of<16>* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CrossSlideThresholds());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_CrossSlideThresholds(struct_of<16> value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().CrossSlideThresholds(*reinterpret_cast<Windows::UI::Input::CrossSlideThresholds const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_CrossSlideHorizontally(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CrossSlideHorizontally());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_CrossSlideHorizontally(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().CrossSlideHorizontally(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_CrossSlideExact(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CrossSlideExact());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_CrossSlideExact(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().CrossSlideExact(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_AutoProcessInertia(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AutoProcessInertia());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_AutoProcessInertia(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().AutoProcessInertia(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_MouseWheelParameters(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MouseWheelParameters());
+        return S_OK;
+    }
+
+    HRESULT __stdcall CanBeDoubleTap(::IUnknown* value, bool* canBeDoubleTap) noexcept final
     {
         try
         {
-            *value = detach(this->shim().GestureSettings());
+            typename D::abi_guard guard(this->shim());
+            *canBeDoubleTap = detach_abi(this->shim().CanBeDoubleTap(*reinterpret_cast<Windows::UI::Input::PointerPoint const*>(&value)));
             return S_OK;
         }
         catch (...)
@@ -233,11 +2082,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall put_GestureSettings(Windows::UI::Input::GestureSettings value) noexcept override
+    HRESULT __stdcall ProcessDownEvent(::IUnknown* value) noexcept final
     {
         try
         {
-            this->shim().GestureSettings(value);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ProcessDownEvent(*reinterpret_cast<Windows::UI::Input::PointerPoint const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -246,11 +2096,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall get_IsInertial(bool * value) noexcept override
+    HRESULT __stdcall ProcessMoveEvents(::IUnknown* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsInertial());
+            typename D::abi_guard guard(this->shim());
+            this->shim().ProcessMoveEvents(*reinterpret_cast<Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -259,11 +2110,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall get_IsActive(bool * value) noexcept override
+    HRESULT __stdcall ProcessUpEvent(::IUnknown* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsActive());
+            typename D::abi_guard guard(this->shim());
+            this->shim().ProcessUpEvent(*reinterpret_cast<Windows::UI::Input::PointerPoint const*>(&value));
             return S_OK;
         }
         catch (...)
@@ -272,11 +2124,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall get_ShowGestureFeedback(bool * value) noexcept override
+    HRESULT __stdcall ProcessMouseWheelEvent(::IUnknown* value, bool isShiftKeyDown, bool isControlKeyDown) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ShowGestureFeedback());
+            typename D::abi_guard guard(this->shim());
+            this->shim().ProcessMouseWheelEvent(*reinterpret_cast<Windows::UI::Input::PointerPoint const*>(&value), isShiftKeyDown, isControlKeyDown);
             return S_OK;
         }
         catch (...)
@@ -285,440 +2138,11 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall put_ShowGestureFeedback(bool value) noexcept override
+    HRESULT __stdcall ProcessInertia() noexcept final
     {
         try
         {
-            this->shim().ShowGestureFeedback(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_PivotCenter(abi_arg_out<Windows::Foundation::Point> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().PivotCenter());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_PivotCenter(abi_arg_in<Windows::Foundation::Point> value) noexcept override
-    {
-        try
-        {
-            this->shim().PivotCenter(*reinterpret_cast<const Windows::Foundation::Point *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_PivotRadius(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().PivotRadius());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_PivotRadius(float value) noexcept override
-    {
-        try
-        {
-            this->shim().PivotRadius(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaTranslationDeceleration(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaTranslationDeceleration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaTranslationDeceleration(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaTranslationDeceleration(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaRotationDeceleration(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaRotationDeceleration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaRotationDeceleration(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaRotationDeceleration(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaExpansionDeceleration(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaExpansionDeceleration());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaExpansionDeceleration(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaExpansionDeceleration(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaTranslationDisplacement(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaTranslationDisplacement());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaTranslationDisplacement(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaTranslationDisplacement(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaRotationAngle(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaRotationAngle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaRotationAngle(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaRotationAngle(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_InertiaExpansion(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().InertiaExpansion());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_InertiaExpansion(float value) noexcept override
-    {
-        try
-        {
-            this->shim().InertiaExpansion(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ManipulationExact(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ManipulationExact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_ManipulationExact(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().ManipulationExact(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_CrossSlideThresholds(abi_arg_out<Windows::UI::Input::CrossSlideThresholds> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().CrossSlideThresholds());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_CrossSlideThresholds(abi_arg_in<Windows::UI::Input::CrossSlideThresholds> value) noexcept override
-    {
-        try
-        {
-            this->shim().CrossSlideThresholds(*reinterpret_cast<const Windows::UI::Input::CrossSlideThresholds *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_CrossSlideHorizontally(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().CrossSlideHorizontally());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_CrossSlideHorizontally(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().CrossSlideHorizontally(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_CrossSlideExact(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().CrossSlideExact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_CrossSlideExact(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().CrossSlideExact(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_AutoProcessInertia(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().AutoProcessInertia());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_AutoProcessInertia(bool value) noexcept override
-    {
-        try
-        {
-            this->shim().AutoProcessInertia(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MouseWheelParameters(abi_arg_out<Windows::UI::Input::IMouseWheelParameters> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MouseWheelParameters());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_CanBeDoubleTap(abi_arg_in<Windows::UI::Input::IPointerPoint> value, bool * canBeDoubleTap) noexcept override
-    {
-        try
-        {
-            *canBeDoubleTap = detach(this->shim().CanBeDoubleTap(*reinterpret_cast<const Windows::UI::Input::PointerPoint *>(&value)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ProcessDownEvent(abi_arg_in<Windows::UI::Input::IPointerPoint> value) noexcept override
-    {
-        try
-        {
-            this->shim().ProcessDownEvent(*reinterpret_cast<const Windows::UI::Input::PointerPoint *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ProcessMoveEvents(abi_arg_in<Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint>> value) noexcept override
-    {
-        try
-        {
-            this->shim().ProcessMoveEvents(*reinterpret_cast<const Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ProcessUpEvent(abi_arg_in<Windows::UI::Input::IPointerPoint> value) noexcept override
-    {
-        try
-        {
-            this->shim().ProcessUpEvent(*reinterpret_cast<const Windows::UI::Input::PointerPoint *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ProcessMouseWheelEvent(abi_arg_in<Windows::UI::Input::IPointerPoint> value, bool isShiftKeyDown, bool isControlKeyDown) noexcept override
-    {
-        try
-        {
-            this->shim().ProcessMouseWheelEvent(*reinterpret_cast<const Windows::UI::Input::PointerPoint *>(&value), isShiftKeyDown, isControlKeyDown);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_ProcessInertia() noexcept override
-    {
-        try
-        {
+            typename D::abi_guard guard(this->shim());
             this->shim().ProcessInertia();
             return S_OK;
         }
@@ -728,10 +2152,11 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall abi_CompleteGesture() noexcept override
+    HRESULT __stdcall CompleteGesture() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().CompleteGesture();
             return S_OK;
         }
@@ -741,11 +2166,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_Tapped(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_Tapped(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().Tapped(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().Tapped(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -754,11 +2180,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_Tapped(event_token cookie) noexcept override
+    HRESULT __stdcall remove_Tapped(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().Tapped(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Tapped(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -767,11 +2194,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_RightTapped(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_RightTapped(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().RightTapped(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().RightTapped(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -780,11 +2208,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_RightTapped(event_token cookie) noexcept override
+    HRESULT __stdcall remove_RightTapped(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().RightTapped(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RightTapped(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -793,11 +2222,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_Holding(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_Holding(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().Holding(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().Holding(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -806,11 +2236,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_Holding(event_token cookie) noexcept override
+    HRESULT __stdcall remove_Holding(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().Holding(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Holding(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -819,11 +2250,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_Dragging(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_Dragging(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().Dragging(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().Dragging(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -832,11 +2264,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_Dragging(event_token cookie) noexcept override
+    HRESULT __stdcall remove_Dragging(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().Dragging(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Dragging(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -845,11 +2278,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_ManipulationStarted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_ManipulationStarted(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().ManipulationStarted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().ManipulationStarted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -858,11 +2292,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_ManipulationStarted(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ManipulationStarted(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().ManipulationStarted(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ManipulationStarted(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -871,11 +2306,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_ManipulationUpdated(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_ManipulationUpdated(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().ManipulationUpdated(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().ManipulationUpdated(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -884,11 +2320,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_ManipulationUpdated(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ManipulationUpdated(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().ManipulationUpdated(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ManipulationUpdated(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -897,11 +2334,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_ManipulationInertiaStarting(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_ManipulationInertiaStarting(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().ManipulationInertiaStarting(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().ManipulationInertiaStarting(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -910,11 +2348,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_ManipulationInertiaStarting(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ManipulationInertiaStarting(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().ManipulationInertiaStarting(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ManipulationInertiaStarting(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -923,11 +2362,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_ManipulationCompleted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_ManipulationCompleted(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().ManipulationCompleted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().ManipulationCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -936,11 +2376,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_ManipulationCompleted(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ManipulationCompleted(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().ManipulationCompleted(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ManipulationCompleted(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -949,11 +2390,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall add_CrossSliding(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs>> handler, event_token * pCookie) noexcept override
+    HRESULT __stdcall add_CrossSliding(::IUnknown* handler, event_token* pCookie) noexcept final
     {
         try
         {
-            *pCookie = detach(this->shim().CrossSliding(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *pCookie = detach_abi(this->shim().CrossSliding(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -962,11 +2404,12 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall remove_CrossSliding(event_token cookie) noexcept override
+    HRESULT __stdcall remove_CrossSliding(event_token cookie) noexcept final
     {
         try
         {
-            this->shim().CrossSliding(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().CrossSliding(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -979,54 +2422,51 @@ struct produce<D, Windows::UI::Input::IGestureRecognizer> : produce_base<D, Wind
 template <typename D>
 struct produce<D, Windows::UI::Input::IHoldingEventArgs> : produce_base<D, Windows::UI::Input::IHoldingEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_HoldingState(Windows::UI::Input::HoldingState * value) noexcept override
+    HRESULT __stdcall get_HoldingState(Windows::UI::Input::HoldingState* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().HoldingState());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().HoldingState());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptor> : produce_base<D, Windows::UI::Input::IKeyboardDeliveryInterceptor>
 {
-    HRESULT __stdcall get_IsInterceptionEnabledWhenInForeground(bool * value) noexcept override
+    HRESULT __stdcall get_IsInterceptionEnabledWhenInForeground(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsInterceptionEnabledWhenInForeground());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_IsInterceptionEnabledWhenInForeground(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsInterceptionEnabledWhenInForeground(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_KeyDown(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsInterceptionEnabledWhenInForeground());
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().KeyDown(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1035,11 +2475,12 @@ struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptor> : produce_ba
         }
     }
 
-    HRESULT __stdcall put_IsInterceptionEnabledWhenInForeground(bool value) noexcept override
+    HRESULT __stdcall remove_KeyDown(event_token token) noexcept final
     {
         try
         {
-            this->shim().IsInterceptionEnabledWhenInForeground(value);
+            typename D::abi_guard guard(this->shim());
+            this->shim().KeyDown(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1048,11 +2489,12 @@ struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptor> : produce_ba
         }
     }
 
-    HRESULT __stdcall add_KeyDown(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_KeyUp(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().KeyDown(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().KeyUp(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -1061,37 +2503,12 @@ struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptor> : produce_ba
         }
     }
 
-    HRESULT __stdcall remove_KeyDown(event_token token) noexcept override
+    HRESULT __stdcall remove_KeyUp(event_token token) noexcept final
     {
         try
         {
-            this->shim().KeyDown(token);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall add_KeyUp(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs>> handler, event_token * token) noexcept override
-    {
-        try
-        {
-            *token = detach(this->shim().KeyUp(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> *>(&handler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_KeyUp(event_token token) noexcept override
-    {
-        try
-        {
-            this->shim().KeyUp(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().KeyUp(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -1104,11 +2521,12 @@ struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptor> : produce_ba
 template <typename D>
 struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptorStatics> : produce_base<D, Windows::UI::Input::IKeyboardDeliveryInterceptorStatics>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::UI::Input::IKeyboardDeliveryInterceptor> keyboardDeliverySettings) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** keyboardDeliverySettings) noexcept final
     {
         try
         {
-            *keyboardDeliverySettings = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *keyboardDeliverySettings = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -1122,466 +2540,421 @@ struct produce<D, Windows::UI::Input::IKeyboardDeliveryInterceptorStatics> : pro
 template <typename D>
 struct produce<D, Windows::UI::Input::IManipulationCompletedEventArgs> : produce_base<D, Windows::UI::Input::IManipulationCompletedEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Cumulative(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Cumulative(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Cumulative());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Cumulative());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Velocities(abi_arg_out<Windows::UI::Input::ManipulationVelocities> value) noexcept override
+    HRESULT __stdcall get_Velocities(struct_of<16>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Velocities());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Velocities());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IManipulationInertiaStartingEventArgs> : produce_base<D, Windows::UI::Input::IManipulationInertiaStartingEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Delta(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Delta(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Delta());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Delta());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Cumulative(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Cumulative(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Cumulative());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Cumulative());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Velocities(abi_arg_out<Windows::UI::Input::ManipulationVelocities> value) noexcept override
+    HRESULT __stdcall get_Velocities(struct_of<16>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Velocities());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Velocities());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IManipulationStartedEventArgs> : produce_base<D, Windows::UI::Input::IManipulationStartedEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Cumulative(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Cumulative(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Cumulative());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Cumulative());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IManipulationUpdatedEventArgs> : produce_base<D, Windows::UI::Input::IManipulationUpdatedEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Delta(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Delta(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Delta());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Delta());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Cumulative(abi_arg_out<Windows::UI::Input::ManipulationDelta> value) noexcept override
+    HRESULT __stdcall get_Cumulative(struct_of<20>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Cumulative());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Cumulative());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Velocities(abi_arg_out<Windows::UI::Input::ManipulationVelocities> value) noexcept override
+    HRESULT __stdcall get_Velocities(struct_of<16>* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Velocities());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Velocities());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IMouseWheelParameters> : produce_base<D, Windows::UI::Input::IMouseWheelParameters>
 {
-    HRESULT __stdcall get_CharTranslation(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_CharTranslation(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CharTranslation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CharTranslation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_CharTranslation(abi_arg_in<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall put_CharTranslation(Windows::Foundation::Point value) noexcept final
     {
-        try
-        {
-            this->shim().CharTranslation(*reinterpret_cast<const Windows::Foundation::Point *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().CharTranslation(*reinterpret_cast<Windows::Foundation::Point const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DeltaScale(float * value) noexcept override
+    HRESULT __stdcall get_DeltaScale(float* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeltaScale());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeltaScale());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DeltaScale(float value) noexcept override
+    HRESULT __stdcall put_DeltaScale(float value) noexcept final
     {
-        try
-        {
-            this->shim().DeltaScale(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DeltaScale(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_DeltaRotationAngle(float * value) noexcept override
+    HRESULT __stdcall get_DeltaRotationAngle(float* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DeltaRotationAngle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DeltaRotationAngle());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_DeltaRotationAngle(float value) noexcept override
+    HRESULT __stdcall put_DeltaRotationAngle(float value) noexcept final
     {
-        try
-        {
-            this->shim().DeltaRotationAngle(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().DeltaRotationAngle(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PageTranslation(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_PageTranslation(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PageTranslation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PageTranslation());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_PageTranslation(abi_arg_in<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall put_PageTranslation(Windows::Foundation::Point value) noexcept final
     {
-        try
-        {
-            this->shim().PageTranslation(*reinterpret_cast<const Windows::Foundation::Point *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().PageTranslation(*reinterpret_cast<Windows::Foundation::Point const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerPoint> : produce_base<D, Windows::UI::Input::IPointerPoint>
 {
-    HRESULT __stdcall get_PointerDevice(abi_arg_out<Windows::Devices::Input::IPointerDevice> value) noexcept override
+    HRESULT __stdcall get_PointerDevice(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDevice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDevice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RawPosition(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_RawPosition(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RawPosition());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RawPosition());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PointerId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_PointerId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FrameId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_FrameId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FrameId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FrameId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Timestamp(uint64_t * value) noexcept override
+    HRESULT __stdcall get_Timestamp(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Timestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Timestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsInContact(bool * value) noexcept override
+    HRESULT __stdcall get_IsInContact(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsInContact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsInContact());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Properties(abi_arg_out<Windows::UI::Input::IPointerPointProperties> value) noexcept override
+    HRESULT __stdcall get_Properties(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Properties());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Properties());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerPointProperties> : produce_base<D, Windows::UI::Input::IPointerPointProperties>
 {
-    HRESULT __stdcall get_Pressure(float * value) noexcept override
+    HRESULT __stdcall get_Pressure(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Pressure());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsInverted(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsInverted());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsEraser(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsEraser());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Orientation(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Orientation());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_XTilt(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().XTilt());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_YTilt(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().YTilt());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Twist(float* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Twist());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ContactRect(Windows::Foundation::Rect* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContactRect());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ContactRectRaw(Windows::Foundation::Rect* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ContactRectRaw());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_TouchConfidence(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TouchConfidence());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsLeftButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsLeftButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsRightButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsRightButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsMiddleButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMiddleButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_MouseWheelDelta(int32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MouseWheelDelta());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsHorizontalMouseWheel(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsHorizontalMouseWheel());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsPrimary(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsPrimary());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsInRange(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsInRange());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsCanceled(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsCanceled());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsBarrelButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsBarrelButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsXButton1Pressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsXButton1Pressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsXButton2Pressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsXButton2Pressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_PointerUpdateKind(Windows::UI::Input::PointerUpdateKind* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerUpdateKind());
+        return S_OK;
+    }
+
+    HRESULT __stdcall HasUsage(uint32_t usagePage, uint32_t usageId, bool* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Pressure());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().HasUsage(usagePage, usageId));
             return S_OK;
         }
         catch (...)
@@ -1590,297 +2963,12 @@ struct produce<D, Windows::UI::Input::IPointerPointProperties> : produce_base<D,
         }
     }
 
-    HRESULT __stdcall get_IsInverted(bool * value) noexcept override
+    HRESULT __stdcall GetUsageValue(uint32_t usagePage, uint32_t usageId, int32_t* value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().IsInverted());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsEraser(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsEraser());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Orientation(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Orientation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_XTilt(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().XTilt());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_YTilt(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().YTilt());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Twist(float * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Twist());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ContactRect(abi_arg_out<Windows::Foundation::Rect> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ContactRect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_ContactRectRaw(abi_arg_out<Windows::Foundation::Rect> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().ContactRectRaw());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_TouchConfidence(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().TouchConfidence());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsLeftButtonPressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsLeftButtonPressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsRightButtonPressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsRightButtonPressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsMiddleButtonPressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsMiddleButtonPressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_MouseWheelDelta(int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().MouseWheelDelta());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsHorizontalMouseWheel(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsHorizontalMouseWheel());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsPrimary(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsPrimary());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsInRange(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsInRange());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsCanceled(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsCanceled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsBarrelButtonPressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsBarrelButtonPressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsXButton1Pressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsXButton1Pressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_IsXButton2Pressed(bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().IsXButton2Pressed());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_PointerUpdateKind(Windows::UI::Input::PointerUpdateKind * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().PointerUpdateKind());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_HasUsage(uint32_t usagePage, uint32_t usageId, bool * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().HasUsage(usagePage, usageId));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetUsageValue(uint32_t usagePage, uint32_t usageId, int32_t * value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().GetUsageValue(usagePage, usageId));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetUsageValue(usagePage, usageId));
             return S_OK;
         }
         catch (...)
@@ -1893,29 +2981,23 @@ struct produce<D, Windows::UI::Input::IPointerPointProperties> : produce_base<D,
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerPointProperties2> : produce_base<D, Windows::UI::Input::IPointerPointProperties2>
 {
-    HRESULT __stdcall get_ZDistance(abi_arg_out<Windows::Foundation::IReference<float>> value) noexcept override
+    HRESULT __stdcall get_ZDistance(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ZDistance());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ZDistance());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerPointStatics> : produce_base<D, Windows::UI::Input::IPointerPointStatics>
 {
-    HRESULT __stdcall abi_GetCurrentPoint(uint32_t pointerId, abi_arg_out<Windows::UI::Input::IPointerPoint> pointerPoint) noexcept override
+    HRESULT __stdcall GetCurrentPoint(uint32_t pointerId, ::IUnknown** pointerPoint) noexcept final
     {
         try
         {
-            *pointerPoint = detach(this->shim().GetCurrentPoint(pointerId));
+            typename D::abi_guard guard(this->shim());
+            *pointerPoint = detach_abi(this->shim().GetCurrentPoint(pointerId));
             return S_OK;
         }
         catch (...)
@@ -1925,11 +3007,12 @@ struct produce<D, Windows::UI::Input::IPointerPointStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetIntermediatePoints(uint32_t pointerId, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint>> pointerPoints) noexcept override
+    HRESULT __stdcall GetIntermediatePoints(uint32_t pointerId, ::IUnknown** pointerPoints) noexcept final
     {
         try
         {
-            *pointerPoints = detach(this->shim().GetIntermediatePoints(pointerId));
+            typename D::abi_guard guard(this->shim());
+            *pointerPoints = detach_abi(this->shim().GetIntermediatePoints(pointerId));
             return S_OK;
         }
         catch (...)
@@ -1939,11 +3022,12 @@ struct produce<D, Windows::UI::Input::IPointerPointStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetCurrentPointTransformed(uint32_t pointerId, abi_arg_in<Windows::UI::Input::IPointerPointTransform> transform, abi_arg_out<Windows::UI::Input::IPointerPoint> pointerPoint) noexcept override
+    HRESULT __stdcall GetCurrentPointTransformed(uint32_t pointerId, ::IUnknown* transform, ::IUnknown** pointerPoint) noexcept final
     {
         try
         {
-            *pointerPoint = detach(this->shim().GetCurrentPoint(pointerId, *reinterpret_cast<const Windows::UI::Input::IPointerPointTransform *>(&transform)));
+            typename D::abi_guard guard(this->shim());
+            *pointerPoint = detach_abi(this->shim().GetCurrentPoint(pointerId, *reinterpret_cast<Windows::UI::Input::IPointerPointTransform const*>(&transform)));
             return S_OK;
         }
         catch (...)
@@ -1953,11 +3037,12 @@ struct produce<D, Windows::UI::Input::IPointerPointStatics> : produce_base<D, Wi
         }
     }
 
-    HRESULT __stdcall abi_GetIntermediatePointsTransformed(uint32_t pointerId, abi_arg_in<Windows::UI::Input::IPointerPointTransform> transform, abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint>> pointerPoints) noexcept override
+    HRESULT __stdcall GetIntermediatePointsTransformed(uint32_t pointerId, ::IUnknown* transform, ::IUnknown** pointerPoints) noexcept final
     {
         try
         {
-            *pointerPoints = detach(this->shim().GetIntermediatePoints(pointerId, *reinterpret_cast<const Windows::UI::Input::IPointerPointTransform *>(&transform)));
+            typename D::abi_guard guard(this->shim());
+            *pointerPoints = detach_abi(this->shim().GetIntermediatePoints(pointerId, *reinterpret_cast<Windows::UI::Input::IPointerPointTransform const*>(&transform)));
             return S_OK;
         }
         catch (...)
@@ -1971,25 +3056,19 @@ struct produce<D, Windows::UI::Input::IPointerPointStatics> : produce_base<D, Wi
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerPointTransform> : produce_base<D, Windows::UI::Input::IPointerPointTransform>
 {
-    HRESULT __stdcall get_Inverse(abi_arg_out<Windows::UI::Input::IPointerPointTransform> value) noexcept override
+    HRESULT __stdcall get_Inverse(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Inverse());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Inverse());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_TryTransform(abi_arg_in<Windows::Foundation::Point> inPoint, abi_arg_out<Windows::Foundation::Point> outPoint, bool * returnValue) noexcept override
+    HRESULT __stdcall TryTransform(Windows::Foundation::Point inPoint, Windows::Foundation::Point* outPoint, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().TryTransform(*reinterpret_cast<const Windows::Foundation::Point *>(&inPoint), *outPoint));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().TryTransform(*reinterpret_cast<Windows::Foundation::Point const*>(&inPoint), *reinterpret_cast<Windows::Foundation::Point*>(outPoint)));
             return S_OK;
         }
         catch (...)
@@ -1998,11 +3077,12 @@ struct produce<D, Windows::UI::Input::IPointerPointTransform> : produce_base<D, 
         }
     }
 
-    HRESULT __stdcall abi_TransformBounds(abi_arg_in<Windows::Foundation::Rect> rect, abi_arg_out<Windows::Foundation::Rect> returnValue) noexcept override
+    HRESULT __stdcall TransformBounds(Windows::Foundation::Rect rect, Windows::Foundation::Rect* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().TransformBounds(*reinterpret_cast<const Windows::Foundation::Rect *>(&rect)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().TransformBounds(*reinterpret_cast<Windows::Foundation::Rect const*>(&rect)));
             return S_OK;
         }
         catch (...)
@@ -2015,67 +3095,44 @@ struct produce<D, Windows::UI::Input::IPointerPointTransform> : produce_base<D, 
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerVisualizationSettings> : produce_base<D, Windows::UI::Input::IPointerVisualizationSettings>
 {
-    HRESULT __stdcall put_IsContactFeedbackEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsContactFeedbackEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsContactFeedbackEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsContactFeedbackEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsContactFeedbackEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsContactFeedbackEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsContactFeedbackEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsContactFeedbackEnabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsBarrelButtonFeedbackEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsBarrelButtonFeedbackEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsBarrelButtonFeedbackEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsBarrelButtonFeedbackEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsBarrelButtonFeedbackEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsBarrelButtonFeedbackEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsBarrelButtonFeedbackEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsBarrelButtonFeedbackEnabled());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IPointerVisualizationSettingsStatics> : produce_base<D, Windows::UI::Input::IPointerVisualizationSettingsStatics>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::UI::Input::IPointerVisualizationSettings> visualizationSettings) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** visualizationSettings) noexcept final
     {
         try
         {
-            *visualizationSettings = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *visualizationSettings = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -2089,64 +3146,47 @@ struct produce<D, Windows::UI::Input::IPointerVisualizationSettingsStatics> : pr
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windows::UI::Input::IRadialController>
 {
-    HRESULT __stdcall get_Menu(abi_arg_out<Windows::UI::Input::IRadialControllerMenu> value) noexcept override
+    HRESULT __stdcall get_Menu(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Menu());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Menu());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RotationResolutionInDegrees(double * value) noexcept override
+    HRESULT __stdcall get_RotationResolutionInDegrees(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RotationResolutionInDegrees());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RotationResolutionInDegrees());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_RotationResolutionInDegrees(double value) noexcept override
+    HRESULT __stdcall put_RotationResolutionInDegrees(double value) noexcept final
     {
-        try
-        {
-            this->shim().RotationResolutionInDegrees(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().RotationResolutionInDegrees(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UseAutomaticHapticFeedback(bool * value) noexcept override
+    HRESULT __stdcall get_UseAutomaticHapticFeedback(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UseAutomaticHapticFeedback());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UseAutomaticHapticFeedback());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_UseAutomaticHapticFeedback(bool value) noexcept override
+    HRESULT __stdcall put_UseAutomaticHapticFeedback(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().UseAutomaticHapticFeedback(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_ScreenContactStarted(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            this->shim().UseAutomaticHapticFeedback(value);
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ScreenContactStarted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2155,11 +3195,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ScreenContactStarted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_ScreenContactStarted(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ScreenContactStarted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ScreenContactStarted(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -2168,11 +3209,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ScreenContactStarted(event_token cookie) noexcept override
+    HRESULT __stdcall add_ScreenContactEnded(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            this->shim().ScreenContactStarted(cookie);
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ScreenContactEnded(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2181,11 +3223,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ScreenContactEnded(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_ScreenContactEnded(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ScreenContactEnded(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ScreenContactEnded(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -2194,11 +3237,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ScreenContactEnded(event_token cookie) noexcept override
+    HRESULT __stdcall add_ScreenContactContinued(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            this->shim().ScreenContactEnded(cookie);
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ScreenContactContinued(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2207,11 +3251,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ScreenContactContinued(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_ScreenContactContinued(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ScreenContactContinued(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ScreenContactContinued(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -2220,11 +3265,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ScreenContactContinued(event_token cookie) noexcept override
+    HRESULT __stdcall add_ControlLost(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            this->shim().ScreenContactContinued(cookie);
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ControlLost(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2233,11 +3279,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ControlLost(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_ControlLost(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ControlLost(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ControlLost(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -2246,11 +3293,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ControlLost(event_token cookie) noexcept override
+    HRESULT __stdcall add_RotationChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            this->shim().ControlLost(cookie);
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().RotationChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2259,11 +3307,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_RotationChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall remove_RotationChanged(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().RotationChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RotationChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2272,11 +3321,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_RotationChanged(event_token token) noexcept override
+    HRESULT __stdcall add_ButtonClicked(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            this->shim().RotationChanged(token);
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ButtonClicked(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2285,11 +3335,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ButtonClicked(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall remove_ButtonClicked(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ButtonClicked(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ButtonClicked(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2298,11 +3349,12 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ButtonClicked(event_token token) noexcept override
+    HRESULT __stdcall add_ControlAcquired(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            this->shim().ButtonClicked(token);
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().ControlAcquired(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2311,11 +3363,30 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall add_ControlAcquired(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs>> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_ControlAcquired(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().ControlAcquired(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ControlAcquired(*reinterpret_cast<event_token const*>(&cookie));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialController2> : produce_base<D, Windows::UI::Input::IRadialController2>
+{
+    HRESULT __stdcall add_ButtonPressed(::IUnknown* handler, event_token* token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ButtonPressed(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonPressedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2324,11 +3395,68 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
         }
     }
 
-    HRESULT __stdcall remove_ControlAcquired(event_token cookie) noexcept override
+    HRESULT __stdcall remove_ButtonPressed(event_token token) noexcept final
     {
         try
         {
-            this->shim().ControlAcquired(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ButtonPressed(*reinterpret_cast<event_token const*>(&token));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall add_ButtonHolding(::IUnknown* handler, event_token* token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ButtonHolding(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonHoldingEventArgs> const*>(&handler)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall remove_ButtonHolding(event_token token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ButtonHolding(*reinterpret_cast<event_token const*>(&token));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall add_ButtonReleased(::IUnknown* handler, event_token* token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ButtonReleased(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonReleasedEventArgs> const*>(&handler)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall remove_ButtonReleased(event_token token) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            this->shim().ButtonReleased(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2341,29 +3469,88 @@ struct produce<D, Windows::UI::Input::IRadialController> : produce_base<D, Windo
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerButtonClickedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerButtonClickedEventArgs>
 {
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::UI::Input::IRadialControllerScreenContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerButtonClickedEventArgs2> : produce_base<D, Windows::UI::Input::IRadialControllerButtonClickedEventArgs2>
+{
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerButtonHoldingEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerButtonHoldingEventArgs>
+{
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerButtonPressedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerButtonPressedEventArgs>
+{
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerButtonReleasedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerButtonReleasedEventArgs>
+{
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerConfiguration> : produce_base<D, Windows::UI::Input::IRadialControllerConfiguration>
 {
-    HRESULT __stdcall abi_SetDefaultMenuItems(abi_arg_in<Windows::Foundation::Collections::IIterable<winrt::Windows::UI::Input::RadialControllerSystemMenuItemKind>> buttons) noexcept override
+    HRESULT __stdcall SetDefaultMenuItems(::IUnknown* buttons) noexcept final
     {
         try
         {
-            this->shim().SetDefaultMenuItems(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<winrt::Windows::UI::Input::RadialControllerSystemMenuItemKind> *>(&buttons));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetDefaultMenuItems(*reinterpret_cast<Windows::Foundation::Collections::IIterable<Windows::UI::Input::RadialControllerSystemMenuItemKind> const*>(&buttons));
             return S_OK;
         }
         catch (...)
@@ -2372,10 +3559,11 @@ struct produce<D, Windows::UI::Input::IRadialControllerConfiguration> : produce_
         }
     }
 
-    HRESULT __stdcall abi_ResetToDefaultMenuItems() noexcept override
+    HRESULT __stdcall ResetToDefaultMenuItems() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ResetToDefaultMenuItems();
             return S_OK;
         }
@@ -2385,11 +3573,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerConfiguration> : produce_
         }
     }
 
-    HRESULT __stdcall abi_TrySelectDefaultMenuItem(Windows::UI::Input::RadialControllerSystemMenuItemKind type, bool * result) noexcept override
+    HRESULT __stdcall TrySelectDefaultMenuItem(Windows::UI::Input::RadialControllerSystemMenuItemKind type, bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TrySelectDefaultMenuItem(type));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TrySelectDefaultMenuItem(*reinterpret_cast<Windows::UI::Input::RadialControllerSystemMenuItemKind const*>(&type)));
             return S_OK;
         }
         catch (...)
@@ -2400,13 +3589,46 @@ struct produce<D, Windows::UI::Input::IRadialControllerConfiguration> : produce_
 };
 
 template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerConfiguration2> : produce_base<D, Windows::UI::Input::IRadialControllerConfiguration2>
+{
+    HRESULT __stdcall put_ActiveControllerWhenMenuIsSuppressed(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().ActiveControllerWhenMenuIsSuppressed(*reinterpret_cast<Windows::UI::Input::RadialController const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_ActiveControllerWhenMenuIsSuppressed(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActiveControllerWhenMenuIsSuppressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_IsMenuSuppressed(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsMenuSuppressed(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsMenuSuppressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsMenuSuppressed());
+        return S_OK;
+    }
+};
+
+template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerConfigurationStatics> : produce_base<D, Windows::UI::Input::IRadialControllerConfigurationStatics>
 {
-    HRESULT __stdcall abi_GetForCurrentView(abi_arg_out<Windows::UI::Input::IRadialControllerConfiguration> configuration) noexcept override
+    HRESULT __stdcall GetForCurrentView(::IUnknown** configuration) noexcept final
     {
         try
         {
-            *configuration = detach(this->shim().GetForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *configuration = detach_abi(this->shim().GetForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -2418,71 +3640,96 @@ struct produce<D, Windows::UI::Input::IRadialControllerConfigurationStatics> : p
 };
 
 template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerConfigurationStatics2> : produce_base<D, Windows::UI::Input::IRadialControllerConfigurationStatics2>
+{
+    HRESULT __stdcall put_AppController(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().AppController(*reinterpret_cast<Windows::UI::Input::RadialController const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_AppController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AppController());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_IsAppControllerEnabled(bool value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsAppControllerEnabled(value);
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_IsAppControllerEnabled(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsAppControllerEnabled());
+        return S_OK;
+    }
+};
+
+template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerControlAcquiredEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerControlAcquiredEventArgs>
 {
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::UI::Input::IRadialControllerScreenContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2> : produce_base<D, Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2>
+{
+    HRESULT __stdcall get_IsButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerMenu> : produce_base<D, Windows::UI::Input::IRadialControllerMenu>
 {
-    HRESULT __stdcall get_Items(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Input::RadialControllerMenuItem>> value) noexcept override
+    HRESULT __stdcall get_Items(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Items());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Items());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsEnabled(bool * value) noexcept override
+    HRESULT __stdcall get_IsEnabled(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsEnabled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsEnabled());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_IsEnabled(bool value) noexcept override
+    HRESULT __stdcall put_IsEnabled(bool value) noexcept final
     {
-        try
-        {
-            this->shim().IsEnabled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().IsEnabled(value);
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetSelectedMenuItem(abi_arg_out<Windows::UI::Input::IRadialControllerMenuItem> result) noexcept override
+    HRESULT __stdcall GetSelectedMenuItem(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetSelectedMenuItem());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetSelectedMenuItem());
             return S_OK;
         }
         catch (...)
@@ -2492,11 +3739,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenu> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_SelectMenuItem(abi_arg_in<Windows::UI::Input::IRadialControllerMenuItem> menuItem) noexcept override
+    HRESULT __stdcall SelectMenuItem(::IUnknown* menuItem) noexcept final
     {
         try
         {
-            this->shim().SelectMenuItem(*reinterpret_cast<const Windows::UI::Input::RadialControllerMenuItem *>(&menuItem));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SelectMenuItem(*reinterpret_cast<Windows::UI::Input::RadialControllerMenuItem const*>(&menuItem));
             return S_OK;
         }
         catch (...)
@@ -2505,11 +3753,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenu> : produce_base<D, W
         }
     }
 
-    HRESULT __stdcall abi_TrySelectPreviouslySelectedMenuItem(bool * result) noexcept override
+    HRESULT __stdcall TrySelectPreviouslySelectedMenuItem(bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TrySelectPreviouslySelectedMenuItem());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TrySelectPreviouslySelectedMenuItem());
             return S_OK;
         }
         catch (...)
@@ -2522,39 +3771,33 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenu> : produce_base<D, W
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerMenuItem> : produce_base<D, Windows::UI::Input::IRadialControllerMenuItem>
 {
-    HRESULT __stdcall get_DisplayText(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_DisplayText(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().DisplayText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().DisplayText());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Tag(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Tag(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Tag());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Tag());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Tag(abi_arg_in<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall put_Tag(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Tag(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_Invoked(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            this->shim().Tag(*reinterpret_cast<const Windows::IInspectable *>(&value));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Invoked(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -2563,24 +3806,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenuItem> : produce_base<
         }
     }
 
-    HRESULT __stdcall add_Invoked(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall remove_Invoked(event_token token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Invoked(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::IInspectable> *>(&handler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_Invoked(event_token token) noexcept override
-    {
-        try
-        {
-            this->shim().Invoked(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Invoked(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -2593,11 +3824,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenuItem> : produce_base<
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerMenuItemStatics> : produce_base<D, Windows::UI::Input::IRadialControllerMenuItemStatics>
 {
-    HRESULT __stdcall abi_CreateFromIcon(abi_arg_in<hstring> displayText, abi_arg_in<Windows::Storage::Streams::IRandomAccessStreamReference> icon, abi_arg_out<Windows::UI::Input::IRadialControllerMenuItem> result) noexcept override
+    HRESULT __stdcall CreateFromIcon(HSTRING displayText, ::IUnknown* icon, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().CreateFromIcon(*reinterpret_cast<const hstring *>(&displayText), *reinterpret_cast<const Windows::Storage::Streams::RandomAccessStreamReference *>(&icon)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateFromIcon(*reinterpret_cast<hstring const*>(&displayText), *reinterpret_cast<Windows::Storage::Streams::RandomAccessStreamReference const*>(&icon)));
             return S_OK;
         }
         catch (...)
@@ -2607,11 +3839,46 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenuItemStatics> : produc
         }
     }
 
-    HRESULT __stdcall abi_CreateFromKnownIcon(abi_arg_in<hstring> displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value, abi_arg_out<Windows::UI::Input::IRadialControllerMenuItem> result) noexcept override
+    HRESULT __stdcall CreateFromKnownIcon(HSTRING displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().CreateFromKnownIcon(*reinterpret_cast<const hstring *>(&displayText), value));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateFromKnownIcon(*reinterpret_cast<hstring const*>(&displayText), *reinterpret_cast<Windows::UI::Input::RadialControllerMenuKnownIcon const*>(&value)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *result = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerMenuItemStatics2> : produce_base<D, Windows::UI::Input::IRadialControllerMenuItemStatics2>
+{
+    HRESULT __stdcall CreateFromFontGlyph(HSTRING displayText, HSTRING glyph, HSTRING fontFamily, ::IUnknown** result) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateFromFontGlyph(*reinterpret_cast<hstring const*>(&displayText), *reinterpret_cast<hstring const*>(&glyph), *reinterpret_cast<hstring const*>(&fontFamily)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *result = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall CreateFromFontGlyphWithUri(HSTRING displayText, HSTRING glyph, HSTRING fontFamily, ::IUnknown* fontUri, ::IUnknown** result) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateFromFontGlyph(*reinterpret_cast<hstring const*>(&displayText), *reinterpret_cast<hstring const*>(&glyph), *reinterpret_cast<hstring const*>(&fontFamily), *reinterpret_cast<Windows::Foundation::Uri const*>(&fontUri)));
             return S_OK;
         }
         catch (...)
@@ -2625,108 +3892,142 @@ struct produce<D, Windows::UI::Input::IRadialControllerMenuItemStatics> : produc
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerRotationChangedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerRotationChangedEventArgs>
 {
-    HRESULT __stdcall get_RotationDeltaInDegrees(double * value) noexcept override
+    HRESULT __stdcall get_RotationDeltaInDegrees(double* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RotationDeltaInDegrees());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RotationDeltaInDegrees());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::UI::Input::IRadialControllerScreenContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerRotationChangedEventArgs2> : produce_base<D, Windows::UI::Input::IRadialControllerRotationChangedEventArgs2>
+{
+    HRESULT __stdcall get_IsButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerScreenContact> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContact>
 {
-    HRESULT __stdcall get_Bounds(abi_arg_out<Windows::Foundation::Rect> value) noexcept override
+    HRESULT __stdcall get_Bounds(Windows::Foundation::Rect* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Bounds());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Bounds());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs>
 {
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::UI::Input::IRadialControllerScreenContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2>
+{
+    HRESULT __stdcall get_IsButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs>
+{
+    HRESULT __stdcall get_IsButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs>
 {
-    HRESULT __stdcall get_Contact(abi_arg_out<Windows::UI::Input::IRadialControllerScreenContact> value) noexcept override
+    HRESULT __stdcall get_Contact(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Contact());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Contact());
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2> : produce_base<D, Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2>
+{
+    HRESULT __stdcall get_IsButtonPressed(bool* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsButtonPressed());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_SimpleHapticsController(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SimpleHapticsController());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::IRadialControllerStatics> : produce_base<D, Windows::UI::Input::IRadialControllerStatics>
 {
-    HRESULT __stdcall abi_IsSupported(bool * result) noexcept override
+    HRESULT __stdcall IsSupported(bool* result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().IsSupported());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsSupported());
             return S_OK;
         }
         catch (...)
@@ -2735,11 +4036,12 @@ struct produce<D, Windows::UI::Input::IRadialControllerStatics> : produce_base<D
         }
     }
 
-    HRESULT __stdcall abi_CreateForCurrentView(abi_arg_out<Windows::UI::Input::IRadialController> result) noexcept override
+    HRESULT __stdcall CreateForCurrentView(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().CreateForCurrentView());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().CreateForCurrentView());
             return S_OK;
         }
         catch (...)
@@ -2753,1500 +4055,53 @@ struct produce<D, Windows::UI::Input::IRadialControllerStatics> : produce_base<D
 template <typename D>
 struct produce<D, Windows::UI::Input::IRightTappedEventArgs> : produce_base<D, Windows::UI::Input::IRightTappedEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Input::ITappedEventArgs> : produce_base<D, Windows::UI::Input::ITappedEventArgs>
 {
-    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType * value) noexcept override
+    HRESULT __stdcall get_PointerDeviceType(Windows::Devices::Input::PointerDeviceType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PointerDeviceType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PointerDeviceType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Position(abi_arg_out<Windows::Foundation::Point> value) noexcept override
+    HRESULT __stdcall get_Position(Windows::Foundation::Point* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Position());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Position());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TapCount(uint32_t * value) noexcept override
+    HRESULT __stdcall get_TapCount(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TapCount());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TapCount());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::UI::Input {
-
-template <typename D> Windows::UI::Input::EdgeGestureKind impl_IEdgeGestureEventArgs<D>::Kind() const
-{
-    Windows::UI::Input::EdgeGestureKind value {};
-    check_hresult(static_cast<const IEdgeGestureEventArgs &>(static_cast<const D &>(*this))->get_Kind(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::EdgeGesture impl_IEdgeGestureStatics<D>::GetForCurrentView() const
-{
-    Windows::UI::Input::EdgeGesture current { nullptr };
-    check_hresult(static_cast<const IEdgeGestureStatics &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(current)));
-    return current;
-}
-
-template <typename D> event_token impl_IEdgeGesture<D>::Starting(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->add_Starting(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IEdgeGesture> impl_IEdgeGesture<D>::Starting(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IEdgeGesture>(this, &ABI::Windows::UI::Input::IEdgeGesture::remove_Starting, Starting(handler));
-}
-
-template <typename D> void impl_IEdgeGesture<D>::Starting(event_token token) const
-{
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->remove_Starting(token));
-}
-
-template <typename D> event_token impl_IEdgeGesture<D>::Completed(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->add_Completed(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IEdgeGesture> impl_IEdgeGesture<D>::Completed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IEdgeGesture>(this, &ABI::Windows::UI::Input::IEdgeGesture::remove_Completed, Completed(handler));
-}
-
-template <typename D> void impl_IEdgeGesture<D>::Completed(event_token token) const
-{
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->remove_Completed(token));
-}
-
-template <typename D> event_token impl_IEdgeGesture<D>::Canceled(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->add_Canceled(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IEdgeGesture> impl_IEdgeGesture<D>::Canceled(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::EdgeGesture, Windows::UI::Input::EdgeGestureEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IEdgeGesture>(this, &ABI::Windows::UI::Input::IEdgeGesture::remove_Canceled, Canceled(handler));
-}
-
-template <typename D> void impl_IEdgeGesture<D>::Canceled(event_token token) const
-{
-    check_hresult(static_cast<const IEdgeGesture &>(static_cast<const D &>(*this))->remove_Canceled(token));
-}
-
-template <typename D> bool impl_IKeyboardDeliveryInterceptor<D>::IsInterceptionEnabledWhenInForeground() const
-{
-    bool value {};
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->get_IsInterceptionEnabledWhenInForeground(&value));
-    return value;
-}
-
-template <typename D> void impl_IKeyboardDeliveryInterceptor<D>::IsInterceptionEnabledWhenInForeground(bool value) const
-{
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->put_IsInterceptionEnabledWhenInForeground(value));
-}
-
-template <typename D> event_token impl_IKeyboardDeliveryInterceptor<D>::KeyDown(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->add_KeyDown(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IKeyboardDeliveryInterceptor> impl_IKeyboardDeliveryInterceptor<D>::KeyDown(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IKeyboardDeliveryInterceptor>(this, &ABI::Windows::UI::Input::IKeyboardDeliveryInterceptor::remove_KeyDown, KeyDown(handler));
-}
-
-template <typename D> void impl_IKeyboardDeliveryInterceptor<D>::KeyDown(event_token token) const
-{
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->remove_KeyDown(token));
-}
-
-template <typename D> event_token impl_IKeyboardDeliveryInterceptor<D>::KeyUp(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->add_KeyUp(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IKeyboardDeliveryInterceptor> impl_IKeyboardDeliveryInterceptor<D>::KeyUp(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::KeyboardDeliveryInterceptor, Windows::UI::Core::KeyEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IKeyboardDeliveryInterceptor>(this, &ABI::Windows::UI::Input::IKeyboardDeliveryInterceptor::remove_KeyUp, KeyUp(handler));
-}
-
-template <typename D> void impl_IKeyboardDeliveryInterceptor<D>::KeyUp(event_token token) const
-{
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptor &>(static_cast<const D &>(*this))->remove_KeyUp(token));
-}
-
-template <typename D> Windows::UI::Input::KeyboardDeliveryInterceptor impl_IKeyboardDeliveryInterceptorStatics<D>::GetForCurrentView() const
-{
-    Windows::UI::Input::KeyboardDeliveryInterceptor keyboardDeliverySettings { nullptr };
-    check_hresult(static_cast<const IKeyboardDeliveryInterceptorStatics &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(keyboardDeliverySettings)));
-    return keyboardDeliverySettings;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_ITappedEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const ITappedEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_ITappedEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const ITappedEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_ITappedEventArgs<D>::TapCount() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const ITappedEventArgs &>(static_cast<const D &>(*this))->get_TapCount(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IRightTappedEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IRightTappedEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IRightTappedEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IRightTappedEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IHoldingEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IHoldingEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IHoldingEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IHoldingEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::HoldingState impl_IHoldingEventArgs<D>::HoldingState() const
-{
-    Windows::UI::Input::HoldingState value {};
-    check_hresult(static_cast<const IHoldingEventArgs &>(static_cast<const D &>(*this))->get_HoldingState(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IDraggingEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IDraggingEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IDraggingEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IDraggingEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::DraggingState impl_IDraggingEventArgs<D>::DraggingState() const
-{
-    Windows::UI::Input::DraggingState value {};
-    check_hresult(static_cast<const IDraggingEventArgs &>(static_cast<const D &>(*this))->get_DraggingState(&value));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IManipulationStartedEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IManipulationStartedEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IManipulationStartedEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IManipulationStartedEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationStartedEventArgs<D>::Cumulative() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationStartedEventArgs &>(static_cast<const D &>(*this))->get_Cumulative(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IManipulationUpdatedEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IManipulationUpdatedEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IManipulationUpdatedEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IManipulationUpdatedEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationUpdatedEventArgs<D>::Delta() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationUpdatedEventArgs &>(static_cast<const D &>(*this))->get_Delta(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationUpdatedEventArgs<D>::Cumulative() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationUpdatedEventArgs &>(static_cast<const D &>(*this))->get_Cumulative(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationVelocities impl_IManipulationUpdatedEventArgs<D>::Velocities() const
-{
-    Windows::UI::Input::ManipulationVelocities value {};
-    check_hresult(static_cast<const IManipulationUpdatedEventArgs &>(static_cast<const D &>(*this))->get_Velocities(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IManipulationInertiaStartingEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IManipulationInertiaStartingEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IManipulationInertiaStartingEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IManipulationInertiaStartingEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationInertiaStartingEventArgs<D>::Delta() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationInertiaStartingEventArgs &>(static_cast<const D &>(*this))->get_Delta(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationInertiaStartingEventArgs<D>::Cumulative() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationInertiaStartingEventArgs &>(static_cast<const D &>(*this))->get_Cumulative(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationVelocities impl_IManipulationInertiaStartingEventArgs<D>::Velocities() const
-{
-    Windows::UI::Input::ManipulationVelocities value {};
-    check_hresult(static_cast<const IManipulationInertiaStartingEventArgs &>(static_cast<const D &>(*this))->get_Velocities(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_IManipulationCompletedEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const IManipulationCompletedEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IManipulationCompletedEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IManipulationCompletedEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationDelta impl_IManipulationCompletedEventArgs<D>::Cumulative() const
-{
-    Windows::UI::Input::ManipulationDelta value {};
-    check_hresult(static_cast<const IManipulationCompletedEventArgs &>(static_cast<const D &>(*this))->get_Cumulative(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::ManipulationVelocities impl_IManipulationCompletedEventArgs<D>::Velocities() const
-{
-    Windows::UI::Input::ManipulationVelocities value {};
-    check_hresult(static_cast<const IManipulationCompletedEventArgs &>(static_cast<const D &>(*this))->get_Velocities(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Devices::Input::PointerDeviceType impl_ICrossSlidingEventArgs<D>::PointerDeviceType() const
-{
-    Windows::Devices::Input::PointerDeviceType value {};
-    check_hresult(static_cast<const ICrossSlidingEventArgs &>(static_cast<const D &>(*this))->get_PointerDeviceType(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_ICrossSlidingEventArgs<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const ICrossSlidingEventArgs &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::CrossSlidingState impl_ICrossSlidingEventArgs<D>::CrossSlidingState() const
-{
-    Windows::UI::Input::CrossSlidingState value {};
-    check_hresult(static_cast<const ICrossSlidingEventArgs &>(static_cast<const D &>(*this))->get_CrossSlidingState(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IMouseWheelParameters<D>::CharTranslation() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->get_CharTranslation(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IMouseWheelParameters<D>::CharTranslation(const Windows::Foundation::Point & value) const
-{
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->put_CharTranslation(get(value)));
-}
-
-template <typename D> float impl_IMouseWheelParameters<D>::DeltaScale() const
-{
-    float value {};
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->get_DeltaScale(&value));
-    return value;
-}
-
-template <typename D> void impl_IMouseWheelParameters<D>::DeltaScale(float value) const
-{
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->put_DeltaScale(value));
-}
-
-template <typename D> float impl_IMouseWheelParameters<D>::DeltaRotationAngle() const
-{
-    float value {};
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->get_DeltaRotationAngle(&value));
-    return value;
-}
-
-template <typename D> void impl_IMouseWheelParameters<D>::DeltaRotationAngle(float value) const
-{
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->put_DeltaRotationAngle(value));
-}
-
-template <typename D> Windows::Foundation::Point impl_IMouseWheelParameters<D>::PageTranslation() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->get_PageTranslation(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IMouseWheelParameters<D>::PageTranslation(const Windows::Foundation::Point & value) const
-{
-    check_hresult(static_cast<const IMouseWheelParameters &>(static_cast<const D &>(*this))->put_PageTranslation(get(value)));
-}
-
-template <typename D> Windows::UI::Input::GestureSettings impl_IGestureRecognizer<D>::GestureSettings() const
-{
-    Windows::UI::Input::GestureSettings value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_GestureSettings(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::GestureSettings(Windows::UI::Input::GestureSettings value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_GestureSettings(value));
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::IsInertial() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_IsInertial(&value));
-    return value;
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::IsActive() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_IsActive(&value));
-    return value;
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::ShowGestureFeedback() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_ShowGestureFeedback(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ShowGestureFeedback(bool value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_ShowGestureFeedback(value));
-}
-
-template <typename D> Windows::Foundation::Point impl_IGestureRecognizer<D>::PivotCenter() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_PivotCenter(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::PivotCenter(const Windows::Foundation::Point & value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_PivotCenter(get(value)));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::PivotRadius() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_PivotRadius(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::PivotRadius(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_PivotRadius(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaTranslationDeceleration() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaTranslationDeceleration(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaTranslationDeceleration(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaTranslationDeceleration(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaRotationDeceleration() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaRotationDeceleration(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaRotationDeceleration(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaRotationDeceleration(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaExpansionDeceleration() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaExpansionDeceleration(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaExpansionDeceleration(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaExpansionDeceleration(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaTranslationDisplacement() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaTranslationDisplacement(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaTranslationDisplacement(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaTranslationDisplacement(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaRotationAngle() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaRotationAngle(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaRotationAngle(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaRotationAngle(value));
-}
-
-template <typename D> float impl_IGestureRecognizer<D>::InertiaExpansion() const
-{
-    float value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_InertiaExpansion(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::InertiaExpansion(float value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_InertiaExpansion(value));
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::ManipulationExact() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_ManipulationExact(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ManipulationExact(bool value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_ManipulationExact(value));
-}
-
-template <typename D> Windows::UI::Input::CrossSlideThresholds impl_IGestureRecognizer<D>::CrossSlideThresholds() const
-{
-    Windows::UI::Input::CrossSlideThresholds value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_CrossSlideThresholds(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::CrossSlideThresholds(const Windows::UI::Input::CrossSlideThresholds & value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_CrossSlideThresholds(get(value)));
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::CrossSlideHorizontally() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_CrossSlideHorizontally(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::CrossSlideHorizontally(bool value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_CrossSlideHorizontally(value));
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::CrossSlideExact() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_CrossSlideExact(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::CrossSlideExact(bool value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_CrossSlideExact(value));
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::AutoProcessInertia() const
-{
-    bool value {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_AutoProcessInertia(&value));
-    return value;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::AutoProcessInertia(bool value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->put_AutoProcessInertia(value));
-}
-
-template <typename D> Windows::UI::Input::MouseWheelParameters impl_IGestureRecognizer<D>::MouseWheelParameters() const
-{
-    Windows::UI::Input::MouseWheelParameters value { nullptr };
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->get_MouseWheelParameters(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IGestureRecognizer<D>::CanBeDoubleTap(const Windows::UI::Input::PointerPoint & value) const
-{
-    bool canBeDoubleTap {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_CanBeDoubleTap(get(value), &canBeDoubleTap));
-    return canBeDoubleTap;
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ProcessDownEvent(const Windows::UI::Input::PointerPoint & value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_ProcessDownEvent(get(value)));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ProcessMoveEvents(const Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> & value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_ProcessMoveEvents(get(value)));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ProcessUpEvent(const Windows::UI::Input::PointerPoint & value) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_ProcessUpEvent(get(value)));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ProcessMouseWheelEvent(const Windows::UI::Input::PointerPoint & value, bool isShiftKeyDown, bool isControlKeyDown) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_ProcessMouseWheelEvent(get(value), isShiftKeyDown, isControlKeyDown));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ProcessInertia() const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_ProcessInertia());
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::CompleteGesture() const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->abi_CompleteGesture());
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::Tapped(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_Tapped(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::Tapped(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::TappedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_Tapped, Tapped(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::Tapped(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_Tapped(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::RightTapped(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_RightTapped(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::RightTapped(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::RightTappedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_RightTapped, RightTapped(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::RightTapped(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_RightTapped(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::Holding(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_Holding(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::Holding(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::HoldingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_Holding, Holding(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::Holding(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_Holding(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::Dragging(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_Dragging(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::Dragging(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::DraggingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_Dragging, Dragging(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::Dragging(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_Dragging(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::ManipulationStarted(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_ManipulationStarted(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::ManipulationStarted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationStartedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_ManipulationStarted, ManipulationStarted(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ManipulationStarted(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_ManipulationStarted(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::ManipulationUpdated(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_ManipulationUpdated(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::ManipulationUpdated(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationUpdatedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_ManipulationUpdated, ManipulationUpdated(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ManipulationUpdated(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_ManipulationUpdated(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::ManipulationInertiaStarting(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_ManipulationInertiaStarting(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::ManipulationInertiaStarting(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationInertiaStartingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_ManipulationInertiaStarting, ManipulationInertiaStarting(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ManipulationInertiaStarting(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_ManipulationInertiaStarting(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::ManipulationCompleted(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_ManipulationCompleted(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::ManipulationCompleted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::ManipulationCompletedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_ManipulationCompleted, ManipulationCompleted(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::ManipulationCompleted(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_ManipulationCompleted(cookie));
-}
-
-template <typename D> event_token impl_IGestureRecognizer<D>::CrossSliding(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> & handler) const
-{
-    event_token pCookie {};
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->add_CrossSliding(get(handler), &pCookie));
-    return pCookie;
-}
-
-template <typename D> event_revoker<IGestureRecognizer> impl_IGestureRecognizer<D>::CrossSliding(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::GestureRecognizer, Windows::UI::Input::CrossSlidingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IGestureRecognizer>(this, &ABI::Windows::UI::Input::IGestureRecognizer::remove_CrossSliding, CrossSliding(handler));
-}
-
-template <typename D> void impl_IGestureRecognizer<D>::CrossSliding(event_token cookie) const
-{
-    check_hresult(static_cast<const IGestureRecognizer &>(static_cast<const D &>(*this))->remove_CrossSliding(cookie));
-}
-
-template <typename D> Windows::UI::Input::PointerPoint impl_IPointerPointStatics<D>::GetCurrentPoint(uint32_t pointerId) const
-{
-    Windows::UI::Input::PointerPoint pointerPoint { nullptr };
-    check_hresult(static_cast<const IPointerPointStatics &>(static_cast<const D &>(*this))->abi_GetCurrentPoint(pointerId, put(pointerPoint)));
-    return pointerPoint;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> impl_IPointerPointStatics<D>::GetIntermediatePoints(uint32_t pointerId) const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> pointerPoints;
-    check_hresult(static_cast<const IPointerPointStatics &>(static_cast<const D &>(*this))->abi_GetIntermediatePoints(pointerId, put(pointerPoints)));
-    return pointerPoints;
-}
-
-template <typename D> Windows::UI::Input::PointerPoint impl_IPointerPointStatics<D>::GetCurrentPoint(uint32_t pointerId, const Windows::UI::Input::IPointerPointTransform & transform) const
-{
-    Windows::UI::Input::PointerPoint pointerPoint { nullptr };
-    check_hresult(static_cast<const IPointerPointStatics &>(static_cast<const D &>(*this))->abi_GetCurrentPointTransformed(pointerId, get(transform), put(pointerPoint)));
-    return pointerPoint;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> impl_IPointerPointStatics<D>::GetIntermediatePoints(uint32_t pointerId, const Windows::UI::Input::IPointerPointTransform & transform) const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> pointerPoints;
-    check_hresult(static_cast<const IPointerPointStatics &>(static_cast<const D &>(*this))->abi_GetIntermediatePointsTransformed(pointerId, get(transform), put(pointerPoints)));
-    return pointerPoints;
-}
-
-template <typename D> Windows::UI::Input::IPointerPointTransform impl_IPointerPointTransform<D>::Inverse() const
-{
-    Windows::UI::Input::IPointerPointTransform value;
-    check_hresult(static_cast<const IPointerPointTransform &>(static_cast<const D &>(*this))->get_Inverse(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointTransform<D>::TryTransform(const Windows::Foundation::Point & inPoint, Windows::Foundation::Point & outPoint) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IPointerPointTransform &>(static_cast<const D &>(*this))->abi_TryTransform(get(inPoint), put(outPoint), &returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IPointerPointTransform<D>::TransformBounds(const Windows::Foundation::Rect & rect) const
-{
-    Windows::Foundation::Rect returnValue {};
-    check_hresult(static_cast<const IPointerPointTransform &>(static_cast<const D &>(*this))->abi_TransformBounds(get(rect), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Devices::Input::PointerDevice impl_IPointerPoint<D>::PointerDevice() const
-{
-    Windows::Devices::Input::PointerDevice value { nullptr };
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_PointerDevice(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IPointerPoint<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IPointerPoint<D>::RawPosition() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_RawPosition(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPointerPoint<D>::PointerId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_PointerId(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IPointerPoint<D>::FrameId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_FrameId(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IPointerPoint<D>::Timestamp() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_Timestamp(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPoint<D>::IsInContact() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_IsInContact(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::PointerPointProperties impl_IPointerPoint<D>::Properties() const
-{
-    Windows::UI::Input::PointerPointProperties value { nullptr };
-    check_hresult(static_cast<const IPointerPoint &>(static_cast<const D &>(*this))->get_Properties(put(value)));
-    return value;
-}
-
-template <typename D> float impl_IPointerPointProperties<D>::Pressure() const
-{
-    float value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_Pressure(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsInverted() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsInverted(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsEraser() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsEraser(&value));
-    return value;
-}
-
-template <typename D> float impl_IPointerPointProperties<D>::Orientation() const
-{
-    float value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_Orientation(&value));
-    return value;
-}
-
-template <typename D> float impl_IPointerPointProperties<D>::XTilt() const
-{
-    float value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_XTilt(&value));
-    return value;
-}
-
-template <typename D> float impl_IPointerPointProperties<D>::YTilt() const
-{
-    float value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_YTilt(&value));
-    return value;
-}
-
-template <typename D> float impl_IPointerPointProperties<D>::Twist() const
-{
-    float value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_Twist(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IPointerPointProperties<D>::ContactRect() const
-{
-    Windows::Foundation::Rect value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_ContactRect(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IPointerPointProperties<D>::ContactRectRaw() const
-{
-    Windows::Foundation::Rect value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_ContactRectRaw(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::TouchConfidence() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_TouchConfidence(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsLeftButtonPressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsLeftButtonPressed(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsRightButtonPressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsRightButtonPressed(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsMiddleButtonPressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsMiddleButtonPressed(&value));
-    return value;
-}
-
-template <typename D> int32_t impl_IPointerPointProperties<D>::MouseWheelDelta() const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_MouseWheelDelta(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsHorizontalMouseWheel() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsHorizontalMouseWheel(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsPrimary() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsPrimary(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsInRange() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsInRange(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsCanceled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsCanceled(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsBarrelButtonPressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsBarrelButtonPressed(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsXButton1Pressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsXButton1Pressed(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::IsXButton2Pressed() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_IsXButton2Pressed(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::PointerUpdateKind impl_IPointerPointProperties<D>::PointerUpdateKind() const
-{
-    Windows::UI::Input::PointerUpdateKind value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->get_PointerUpdateKind(&value));
-    return value;
-}
-
-template <typename D> bool impl_IPointerPointProperties<D>::HasUsage(uint32_t usagePage, uint32_t usageId) const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->abi_HasUsage(usagePage, usageId, &value));
-    return value;
-}
-
-template <typename D> int32_t impl_IPointerPointProperties<D>::GetUsageValue(uint32_t usagePage, uint32_t usageId) const
-{
-    int32_t value {};
-    check_hresult(static_cast<const IPointerPointProperties &>(static_cast<const D &>(*this))->abi_GetUsageValue(usagePage, usageId, &value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<float> impl_IPointerPointProperties2<D>::ZDistance() const
-{
-    Windows::Foundation::IReference<float> value;
-    check_hresult(static_cast<const IPointerPointProperties2 &>(static_cast<const D &>(*this))->get_ZDistance(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IPointerVisualizationSettings<D>::IsContactFeedbackEnabled(bool value) const
-{
-    check_hresult(static_cast<const IPointerVisualizationSettings &>(static_cast<const D &>(*this))->put_IsContactFeedbackEnabled(value));
-}
-
-template <typename D> bool impl_IPointerVisualizationSettings<D>::IsContactFeedbackEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerVisualizationSettings &>(static_cast<const D &>(*this))->get_IsContactFeedbackEnabled(&value));
-    return value;
-}
-
-template <typename D> void impl_IPointerVisualizationSettings<D>::IsBarrelButtonFeedbackEnabled(bool value) const
-{
-    check_hresult(static_cast<const IPointerVisualizationSettings &>(static_cast<const D &>(*this))->put_IsBarrelButtonFeedbackEnabled(value));
-}
-
-template <typename D> bool impl_IPointerVisualizationSettings<D>::IsBarrelButtonFeedbackEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IPointerVisualizationSettings &>(static_cast<const D &>(*this))->get_IsBarrelButtonFeedbackEnabled(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::PointerVisualizationSettings impl_IPointerVisualizationSettingsStatics<D>::GetForCurrentView() const
-{
-    Windows::UI::Input::PointerVisualizationSettings visualizationSettings { nullptr };
-    check_hresult(static_cast<const IPointerVisualizationSettingsStatics &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(visualizationSettings)));
-    return visualizationSettings;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IRadialControllerScreenContact<D>::Bounds() const
-{
-    Windows::Foundation::Rect value {};
-    check_hresult(static_cast<const IRadialControllerScreenContact &>(static_cast<const D &>(*this))->get_Bounds(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Point impl_IRadialControllerScreenContact<D>::Position() const
-{
-    Windows::Foundation::Point value {};
-    check_hresult(static_cast<const IRadialControllerScreenContact &>(static_cast<const D &>(*this))->get_Position(put(value)));
-    return value;
-}
-
-template <typename D> double impl_IRadialControllerRotationChangedEventArgs<D>::RotationDeltaInDegrees() const
-{
-    double value {};
-    check_hresult(static_cast<const IRadialControllerRotationChangedEventArgs &>(static_cast<const D &>(*this))->get_RotationDeltaInDegrees(&value));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerScreenContact impl_IRadialControllerRotationChangedEventArgs<D>::Contact() const
-{
-    Windows::UI::Input::RadialControllerScreenContact value { nullptr };
-    check_hresult(static_cast<const IRadialControllerRotationChangedEventArgs &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerScreenContact impl_IRadialControllerScreenContactStartedEventArgs<D>::Contact() const
-{
-    Windows::UI::Input::RadialControllerScreenContact value { nullptr };
-    check_hresult(static_cast<const IRadialControllerScreenContactStartedEventArgs &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerScreenContact impl_IRadialControllerScreenContactContinuedEventArgs<D>::Contact() const
-{
-    Windows::UI::Input::RadialControllerScreenContact value { nullptr };
-    check_hresult(static_cast<const IRadialControllerScreenContactContinuedEventArgs &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerScreenContact impl_IRadialControllerButtonClickedEventArgs<D>::Contact() const
-{
-    Windows::UI::Input::RadialControllerScreenContact value { nullptr };
-    check_hresult(static_cast<const IRadialControllerButtonClickedEventArgs &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerScreenContact impl_IRadialControllerControlAcquiredEventArgs<D>::Contact() const
-{
-    Windows::UI::Input::RadialControllerScreenContact value { nullptr };
-    check_hresult(static_cast<const IRadialControllerControlAcquiredEventArgs &>(static_cast<const D &>(*this))->get_Contact(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerMenu impl_IRadialController<D>::Menu() const
-{
-    Windows::UI::Input::RadialControllerMenu value { nullptr };
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->get_Menu(put(value)));
-    return value;
-}
-
-template <typename D> double impl_IRadialController<D>::RotationResolutionInDegrees() const
-{
-    double value {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->get_RotationResolutionInDegrees(&value));
-    return value;
-}
-
-template <typename D> void impl_IRadialController<D>::RotationResolutionInDegrees(double value) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->put_RotationResolutionInDegrees(value));
-}
-
-template <typename D> bool impl_IRadialController<D>::UseAutomaticHapticFeedback() const
-{
-    bool value {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->get_UseAutomaticHapticFeedback(&value));
-    return value;
-}
-
-template <typename D> void impl_IRadialController<D>::UseAutomaticHapticFeedback(bool value) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->put_UseAutomaticHapticFeedback(value));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ScreenContactStarted(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ScreenContactStarted(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ScreenContactStarted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ScreenContactStarted, ScreenContactStarted(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ScreenContactStarted(event_token cookie) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ScreenContactStarted(cookie));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ScreenContactEnded(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ScreenContactEnded(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ScreenContactEnded(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ScreenContactEnded, ScreenContactEnded(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ScreenContactEnded(event_token cookie) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ScreenContactEnded(cookie));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ScreenContactContinued(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ScreenContactContinued(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ScreenContactContinued(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ScreenContactContinued, ScreenContactContinued(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ScreenContactContinued(event_token cookie) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ScreenContactContinued(cookie));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ControlLost(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ControlLost(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ControlLost(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ControlLost, ControlLost(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ControlLost(event_token cookie) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ControlLost(cookie));
-}
-
-template <typename D> event_token impl_IRadialController<D>::RotationChanged(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_RotationChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::RotationChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerRotationChangedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_RotationChanged, RotationChanged(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::RotationChanged(event_token token) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_RotationChanged(token));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ButtonClicked(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ButtonClicked(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ButtonClicked(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerButtonClickedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ButtonClicked, ButtonClicked(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ButtonClicked(event_token token) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ButtonClicked(token));
-}
-
-template <typename D> event_token impl_IRadialController<D>::ControlAcquired(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->add_ControlAcquired(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<IRadialController> impl_IRadialController<D>::ControlAcquired(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialController, Windows::UI::Input::RadialControllerControlAcquiredEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialController>(this, &ABI::Windows::UI::Input::IRadialController::remove_ControlAcquired, ControlAcquired(handler));
-}
-
-template <typename D> void impl_IRadialController<D>::ControlAcquired(event_token cookie) const
-{
-    check_hresult(static_cast<const IRadialController &>(static_cast<const D &>(*this))->remove_ControlAcquired(cookie));
-}
-
-template <typename D> bool impl_IRadialControllerStatics<D>::IsSupported() const
-{
-    bool result {};
-    check_hresult(static_cast<const IRadialControllerStatics &>(static_cast<const D &>(*this))->abi_IsSupported(&result));
-    return result;
-}
-
-template <typename D> Windows::UI::Input::RadialController impl_IRadialControllerStatics<D>::CreateForCurrentView() const
-{
-    Windows::UI::Input::RadialController result { nullptr };
-    check_hresult(static_cast<const IRadialControllerStatics &>(static_cast<const D &>(*this))->abi_CreateForCurrentView(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Input::RadialControllerMenuItem> impl_IRadialControllerMenu<D>::Items() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Input::RadialControllerMenuItem> value;
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->get_Items(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IRadialControllerMenu<D>::IsEnabled() const
-{
-    bool value {};
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->get_IsEnabled(&value));
-    return value;
-}
-
-template <typename D> void impl_IRadialControllerMenu<D>::IsEnabled(bool value) const
-{
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->put_IsEnabled(value));
-}
-
-template <typename D> Windows::UI::Input::RadialControllerMenuItem impl_IRadialControllerMenu<D>::GetSelectedMenuItem() const
-{
-    Windows::UI::Input::RadialControllerMenuItem result { nullptr };
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->abi_GetSelectedMenuItem(put(result)));
-    return result;
-}
-
-template <typename D> void impl_IRadialControllerMenu<D>::SelectMenuItem(const Windows::UI::Input::RadialControllerMenuItem & menuItem) const
-{
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->abi_SelectMenuItem(get(menuItem)));
-}
-
-template <typename D> bool impl_IRadialControllerMenu<D>::TrySelectPreviouslySelectedMenuItem() const
-{
-    bool result {};
-    check_hresult(static_cast<const IRadialControllerMenu &>(static_cast<const D &>(*this))->abi_TrySelectPreviouslySelectedMenuItem(&result));
-    return result;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerMenuItem impl_IRadialControllerMenuItemStatics<D>::CreateFromIcon(hstring_ref displayText, const Windows::Storage::Streams::RandomAccessStreamReference & icon) const
-{
-    Windows::UI::Input::RadialControllerMenuItem result { nullptr };
-    check_hresult(static_cast<const IRadialControllerMenuItemStatics &>(static_cast<const D &>(*this))->abi_CreateFromIcon(get(displayText), get(icon), put(result)));
-    return result;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerMenuItem impl_IRadialControllerMenuItemStatics<D>::CreateFromKnownIcon(hstring_ref displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value) const
-{
-    Windows::UI::Input::RadialControllerMenuItem result { nullptr };
-    check_hresult(static_cast<const IRadialControllerMenuItemStatics &>(static_cast<const D &>(*this))->abi_CreateFromKnownIcon(get(displayText), value, put(result)));
-    return result;
-}
-
-template <typename D> hstring impl_IRadialControllerMenuItem<D>::DisplayText() const
-{
-    hstring value;
-    check_hresult(static_cast<const IRadialControllerMenuItem &>(static_cast<const D &>(*this))->get_DisplayText(put(value)));
-    return value;
-}
-
-template <typename D> Windows::IInspectable impl_IRadialControllerMenuItem<D>::Tag() const
-{
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IRadialControllerMenuItem &>(static_cast<const D &>(*this))->get_Tag(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IRadialControllerMenuItem<D>::Tag(const Windows::IInspectable & value) const
-{
-    check_hresult(static_cast<const IRadialControllerMenuItem &>(static_cast<const D &>(*this))->put_Tag(get(value)));
-}
-
-template <typename D> event_token impl_IRadialControllerMenuItem<D>::Invoked(const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IRadialControllerMenuItem &>(static_cast<const D &>(*this))->add_Invoked(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IRadialControllerMenuItem> impl_IRadialControllerMenuItem<D>::Invoked(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Input::RadialControllerMenuItem, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IRadialControllerMenuItem>(this, &ABI::Windows::UI::Input::IRadialControllerMenuItem::remove_Invoked, Invoked(handler));
-}
-
-template <typename D> void impl_IRadialControllerMenuItem<D>::Invoked(event_token token) const
-{
-    check_hresult(static_cast<const IRadialControllerMenuItem &>(static_cast<const D &>(*this))->remove_Invoked(token));
-}
-
-template <typename D> void impl_IRadialControllerConfiguration<D>::SetDefaultMenuItems(const Windows::Foundation::Collections::IIterable<winrt::Windows::UI::Input::RadialControllerSystemMenuItemKind> & buttons) const
-{
-    check_hresult(static_cast<const IRadialControllerConfiguration &>(static_cast<const D &>(*this))->abi_SetDefaultMenuItems(get(buttons)));
-}
-
-template <typename D> void impl_IRadialControllerConfiguration<D>::ResetToDefaultMenuItems() const
-{
-    check_hresult(static_cast<const IRadialControllerConfiguration &>(static_cast<const D &>(*this))->abi_ResetToDefaultMenuItems());
-}
-
-template <typename D> bool impl_IRadialControllerConfiguration<D>::TrySelectDefaultMenuItem(Windows::UI::Input::RadialControllerSystemMenuItemKind type) const
-{
-    bool result {};
-    check_hresult(static_cast<const IRadialControllerConfiguration &>(static_cast<const D &>(*this))->abi_TrySelectDefaultMenuItem(type, &result));
-    return result;
-}
-
-template <typename D> Windows::UI::Input::RadialControllerConfiguration impl_IRadialControllerConfigurationStatics<D>::GetForCurrentView() const
-{
-    Windows::UI::Input::RadialControllerConfiguration configuration { nullptr };
-    check_hresult(static_cast<const IRadialControllerConfigurationStatics &>(static_cast<const D &>(*this))->abi_GetForCurrentView(put(configuration)));
-    return configuration;
-}
+WINRT_EXPORT namespace winrt::Windows::UI::Input {
 
 inline Windows::UI::Input::EdgeGesture EdgeGesture::GetForCurrentView()
 {
-    return get_activation_factory<EdgeGesture, IEdgeGestureStatics>().GetForCurrentView();
+    return get_activation_factory<EdgeGesture, Windows::UI::Input::IEdgeGestureStatics>().GetForCurrentView();
 }
 
 inline GestureRecognizer::GestureRecognizer() :
@@ -4255,59 +4110,333 @@ inline GestureRecognizer::GestureRecognizer() :
 
 inline Windows::UI::Input::KeyboardDeliveryInterceptor KeyboardDeliveryInterceptor::GetForCurrentView()
 {
-    return get_activation_factory<KeyboardDeliveryInterceptor, IKeyboardDeliveryInterceptorStatics>().GetForCurrentView();
+    return get_activation_factory<KeyboardDeliveryInterceptor, Windows::UI::Input::IKeyboardDeliveryInterceptorStatics>().GetForCurrentView();
 }
 
 inline Windows::UI::Input::PointerPoint PointerPoint::GetCurrentPoint(uint32_t pointerId)
 {
-    return get_activation_factory<PointerPoint, IPointerPointStatics>().GetCurrentPoint(pointerId);
+    return get_activation_factory<PointerPoint, Windows::UI::Input::IPointerPointStatics>().GetCurrentPoint(pointerId);
 }
 
 inline Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> PointerPoint::GetIntermediatePoints(uint32_t pointerId)
 {
-    return get_activation_factory<PointerPoint, IPointerPointStatics>().GetIntermediatePoints(pointerId);
+    return get_activation_factory<PointerPoint, Windows::UI::Input::IPointerPointStatics>().GetIntermediatePoints(pointerId);
 }
 
-inline Windows::UI::Input::PointerPoint PointerPoint::GetCurrentPoint(uint32_t pointerId, const Windows::UI::Input::IPointerPointTransform & transform)
+inline Windows::UI::Input::PointerPoint PointerPoint::GetCurrentPoint(uint32_t pointerId, Windows::UI::Input::IPointerPointTransform const& transform)
 {
-    return get_activation_factory<PointerPoint, IPointerPointStatics>().GetCurrentPoint(pointerId, transform);
+    return get_activation_factory<PointerPoint, Windows::UI::Input::IPointerPointStatics>().GetCurrentPoint(pointerId, transform);
 }
 
-inline Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> PointerPoint::GetIntermediatePoints(uint32_t pointerId, const Windows::UI::Input::IPointerPointTransform & transform)
+inline Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> PointerPoint::GetIntermediatePoints(uint32_t pointerId, Windows::UI::Input::IPointerPointTransform const& transform)
 {
-    return get_activation_factory<PointerPoint, IPointerPointStatics>().GetIntermediatePoints(pointerId, transform);
+    return get_activation_factory<PointerPoint, Windows::UI::Input::IPointerPointStatics>().GetIntermediatePoints(pointerId, transform);
 }
 
 inline Windows::UI::Input::PointerVisualizationSettings PointerVisualizationSettings::GetForCurrentView()
 {
-    return get_activation_factory<PointerVisualizationSettings, IPointerVisualizationSettingsStatics>().GetForCurrentView();
+    return get_activation_factory<PointerVisualizationSettings, Windows::UI::Input::IPointerVisualizationSettingsStatics>().GetForCurrentView();
 }
 
 inline bool RadialController::IsSupported()
 {
-    return get_activation_factory<RadialController, IRadialControllerStatics>().IsSupported();
+    return get_activation_factory<RadialController, Windows::UI::Input::IRadialControllerStatics>().IsSupported();
 }
 
 inline Windows::UI::Input::RadialController RadialController::CreateForCurrentView()
 {
-    return get_activation_factory<RadialController, IRadialControllerStatics>().CreateForCurrentView();
+    return get_activation_factory<RadialController, Windows::UI::Input::IRadialControllerStatics>().CreateForCurrentView();
 }
 
 inline Windows::UI::Input::RadialControllerConfiguration RadialControllerConfiguration::GetForCurrentView()
 {
-    return get_activation_factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics>().GetForCurrentView();
+    return get_activation_factory<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfigurationStatics>().GetForCurrentView();
 }
 
-inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromIcon(hstring_ref displayText, const Windows::Storage::Streams::RandomAccessStreamReference & icon)
+inline void RadialControllerConfiguration::AppController(Windows::UI::Input::RadialController const& value)
 {
-    return get_activation_factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics>().CreateFromIcon(displayText, icon);
+    get_activation_factory<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfigurationStatics2>().AppController(value);
 }
 
-inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromKnownIcon(hstring_ref displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value)
+inline Windows::UI::Input::RadialController RadialControllerConfiguration::AppController()
 {
-    return get_activation_factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics>().CreateFromKnownIcon(displayText, value);
+    return get_activation_factory<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfigurationStatics2>().AppController();
+}
+
+inline void RadialControllerConfiguration::IsAppControllerEnabled(bool value)
+{
+    get_activation_factory<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfigurationStatics2>().IsAppControllerEnabled(value);
+}
+
+inline bool RadialControllerConfiguration::IsAppControllerEnabled()
+{
+    return get_activation_factory<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfigurationStatics2>().IsAppControllerEnabled();
+}
+
+inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromIcon(param::hstring const& displayText, Windows::Storage::Streams::RandomAccessStreamReference const& icon)
+{
+    return get_activation_factory<RadialControllerMenuItem, Windows::UI::Input::IRadialControllerMenuItemStatics>().CreateFromIcon(displayText, icon);
+}
+
+inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromKnownIcon(param::hstring const& displayText, Windows::UI::Input::RadialControllerMenuKnownIcon const& value)
+{
+    return get_activation_factory<RadialControllerMenuItem, Windows::UI::Input::IRadialControllerMenuItemStatics>().CreateFromKnownIcon(displayText, value);
+}
+
+inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromFontGlyph(param::hstring const& displayText, param::hstring const& glyph, param::hstring const& fontFamily)
+{
+    return get_activation_factory<RadialControllerMenuItem, Windows::UI::Input::IRadialControllerMenuItemStatics2>().CreateFromFontGlyph(displayText, glyph, fontFamily);
+}
+
+inline Windows::UI::Input::RadialControllerMenuItem RadialControllerMenuItem::CreateFromFontGlyph(param::hstring const& displayText, param::hstring const& glyph, param::hstring const& fontFamily, Windows::Foundation::Uri const& fontUri)
+{
+    return get_activation_factory<RadialControllerMenuItem, Windows::UI::Input::IRadialControllerMenuItemStatics2>().CreateFromFontGlyph(displayText, glyph, fontFamily, fontUri);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Input::ICrossSlidingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ICrossSlidingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IDraggingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IDraggingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IEdgeGesture> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IEdgeGesture> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IEdgeGestureEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IEdgeGestureEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IEdgeGestureStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IEdgeGestureStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IGestureRecognizer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IGestureRecognizer> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IHoldingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IHoldingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IKeyboardDeliveryInterceptor> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IKeyboardDeliveryInterceptor> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IKeyboardDeliveryInterceptorStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IKeyboardDeliveryInterceptorStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IManipulationCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IManipulationCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IManipulationInertiaStartingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IManipulationInertiaStartingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IManipulationStartedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IManipulationStartedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IManipulationUpdatedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IManipulationUpdatedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IMouseWheelParameters> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IMouseWheelParameters> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerPoint> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerPoint> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerPointProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerPointProperties> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerPointProperties2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerPointProperties2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerPointStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerPointStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerPointTransform> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerPointTransform> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerVisualizationSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerVisualizationSettings> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IPointerVisualizationSettingsStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IPointerVisualizationSettingsStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialController> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialController2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialController2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerButtonClickedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerButtonClickedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerButtonClickedEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerButtonClickedEventArgs2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerButtonHoldingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerButtonHoldingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerButtonPressedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerButtonPressedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerButtonReleasedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerButtonReleasedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerConfiguration> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerConfiguration2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerConfiguration2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerConfigurationStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerConfigurationStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerConfigurationStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerConfigurationStatics2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerControlAcquiredEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerControlAcquiredEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerMenu> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerMenu> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerMenuItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerMenuItem> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerMenuItemStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerMenuItemStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerMenuItemStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerMenuItemStatics2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerRotationChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerRotationChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerRotationChangedEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerRotationChangedEventArgs2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContact> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContact> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRadialControllerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRadialControllerStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Input::IRightTappedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::IRightTappedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::ITappedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ITappedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::CrossSlidingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::CrossSlidingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::DraggingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::DraggingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::EdgeGesture> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::EdgeGesture> {};
+
+template<> struct hash<winrt::Windows::UI::Input::EdgeGestureEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::EdgeGestureEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::GestureRecognizer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::GestureRecognizer> {};
+
+template<> struct hash<winrt::Windows::UI::Input::HoldingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::HoldingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::KeyboardDeliveryInterceptor> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::KeyboardDeliveryInterceptor> {};
+
+template<> struct hash<winrt::Windows::UI::Input::ManipulationCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ManipulationCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::ManipulationInertiaStartingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ManipulationInertiaStartingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::ManipulationStartedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ManipulationStartedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::ManipulationUpdatedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::ManipulationUpdatedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::MouseWheelParameters> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::MouseWheelParameters> {};
+
+template<> struct hash<winrt::Windows::UI::Input::PointerPoint> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::PointerPoint> {};
+
+template<> struct hash<winrt::Windows::UI::Input::PointerPointProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::PointerPointProperties> {};
+
+template<> struct hash<winrt::Windows::UI::Input::PointerVisualizationSettings> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::PointerVisualizationSettings> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialController> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialController> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerButtonClickedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerButtonClickedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerButtonHoldingEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerButtonHoldingEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerButtonPressedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerButtonPressedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerButtonReleasedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerButtonReleasedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerConfiguration> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerConfiguration> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerControlAcquiredEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerControlAcquiredEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerMenu> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerMenu> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerMenuItem> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerMenuItem> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerRotationChangedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerRotationChangedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerScreenContact> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerScreenContact> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerScreenContactEndedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerScreenContactEndedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RadialControllerScreenContactStartedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::RightTappedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::RightTappedEventArgs> {};
+
+template<> struct hash<winrt::Windows::UI::Input::TappedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Input::TappedEventArgs> {};
+
 }
+
+WINRT_WARNING_POP

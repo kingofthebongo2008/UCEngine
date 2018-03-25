@@ -1,27 +1,126 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Graphics.Imaging.3.h"
-#include "internal/Windows.Globalization.3.h"
-#include "internal/Windows.Media.Ocr.3.h"
-#include "Windows.Media.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Globalization.2.h"
+#include "winrt/impl/Windows.Graphics.Imaging.2.h"
+#include "winrt/impl/Windows.Media.Ocr.2.h"
+#include "winrt/Windows.Media.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Ocr::OcrResult> consume_Windows_Media_Ocr_IOcrEngine<D>::RecognizeAsync(Windows::Graphics::Imaging::SoftwareBitmap const& bitmap) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Media::Ocr::OcrResult> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Ocr::IOcrEngine)->RecognizeAsync(get_abi(bitmap), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Globalization::Language consume_Windows_Media_Ocr_IOcrEngine<D>::RecognizerLanguage() const noexcept
+{
+    Windows::Globalization::Language value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrEngine)->get_RecognizerLanguage(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Media_Ocr_IOcrEngineStatics<D>::MaxImageDimension() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrEngineStatics)->get_MaxImageDimension(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language> consume_Windows_Media_Ocr_IOcrEngineStatics<D>::AvailableRecognizerLanguages() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrEngineStatics)->get_AvailableRecognizerLanguages(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_Media_Ocr_IOcrEngineStatics<D>::IsLanguageSupported(Windows::Globalization::Language const& language) const
+{
+    bool result{};
+    check_hresult(WINRT_SHIM(Windows::Media::Ocr::IOcrEngineStatics)->IsLanguageSupported(get_abi(language), &result));
+    return result;
+}
+
+template <typename D> Windows::Media::Ocr::OcrEngine consume_Windows_Media_Ocr_IOcrEngineStatics<D>::TryCreateFromLanguage(Windows::Globalization::Language const& language) const
+{
+    Windows::Media::Ocr::OcrEngine result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Ocr::IOcrEngineStatics)->TryCreateFromLanguage(get_abi(language), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Media::Ocr::OcrEngine consume_Windows_Media_Ocr_IOcrEngineStatics<D>::TryCreateFromUserProfileLanguages() const
+{
+    Windows::Media::Ocr::OcrEngine result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Ocr::IOcrEngineStatics)->TryCreateFromUserProfileLanguages(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrWord> consume_Windows_Media_Ocr_IOcrLine<D>::Words() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrWord> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrLine)->get_Words(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Ocr_IOcrLine<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrLine)->get_Text(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrLine> consume_Windows_Media_Ocr_IOcrResult<D>::Lines() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrLine> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrResult)->get_Lines(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<double> consume_Windows_Media_Ocr_IOcrResult<D>::TextAngle() const noexcept
+{
+    Windows::Foundation::IReference<double> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrResult)->get_TextAngle(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Ocr_IOcrResult<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrResult)->get_Text(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_Media_Ocr_IOcrWord<D>::BoundingRect() const noexcept
+{
+    Windows::Foundation::Rect value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrWord)->get_BoundingRect(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_Media_Ocr_IOcrWord<D>::Text() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Ocr::IOcrWord)->get_Text(put_abi(value)));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Media::Ocr::IOcrEngine> : produce_base<D, Windows::Media::Ocr::IOcrEngine>
 {
-    HRESULT __stdcall abi_RecognizeAsync(abi_arg_in<Windows::Graphics::Imaging::ISoftwareBitmap> bitmap, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Media::Ocr::OcrResult>> result) noexcept override
+    HRESULT __stdcall RecognizeAsync(::IUnknown* bitmap, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RecognizeAsync(*reinterpret_cast<const Windows::Graphics::Imaging::SoftwareBitmap *>(&bitmap)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RecognizeAsync(*reinterpret_cast<Windows::Graphics::Imaging::SoftwareBitmap const*>(&bitmap)));
             return S_OK;
         }
         catch (...)
@@ -31,29 +130,37 @@ struct produce<D, Windows::Media::Ocr::IOcrEngine> : produce_base<D, Windows::Me
         }
     }
 
-    HRESULT __stdcall get_RecognizerLanguage(abi_arg_out<Windows::Globalization::ILanguage> value) noexcept override
+    HRESULT __stdcall get_RecognizerLanguage(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RecognizerLanguage());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RecognizerLanguage());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Ocr::IOcrEngineStatics> : produce_base<D, Windows::Media::Ocr::IOcrEngineStatics>
 {
-    HRESULT __stdcall get_MaxImageDimension(uint32_t * value) noexcept override
+    HRESULT __stdcall get_MaxImageDimension(uint32_t* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().MaxImageDimension());
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_AvailableRecognizerLanguages(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AvailableRecognizerLanguages());
+        return S_OK;
+    }
+
+    HRESULT __stdcall IsLanguageSupported(::IUnknown* language, bool* result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().MaxImageDimension());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().IsLanguageSupported(*reinterpret_cast<Windows::Globalization::Language const*>(&language)));
             return S_OK;
         }
         catch (...)
@@ -62,38 +169,12 @@ struct produce<D, Windows::Media::Ocr::IOcrEngineStatics> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall get_AvailableRecognizerLanguages(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language>> value) noexcept override
+    HRESULT __stdcall TryCreateFromLanguage(::IUnknown* language, ::IUnknown** result) noexcept final
     {
         try
         {
-            *value = detach(this->shim().AvailableRecognizerLanguages());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_IsLanguageSupported(abi_arg_in<Windows::Globalization::ILanguage> language, bool * result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().IsLanguageSupported(*reinterpret_cast<const Windows::Globalization::Language *>(&language)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_TryCreateFromLanguage(abi_arg_in<Windows::Globalization::ILanguage> language, abi_arg_out<Windows::Media::Ocr::IOcrEngine> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().TryCreateFromLanguage(*reinterpret_cast<const Windows::Globalization::Language *>(&language)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TryCreateFromLanguage(*reinterpret_cast<Windows::Globalization::Language const*>(&language)));
             return S_OK;
         }
         catch (...)
@@ -103,11 +184,12 @@ struct produce<D, Windows::Media::Ocr::IOcrEngineStatics> : produce_base<D, Wind
         }
     }
 
-    HRESULT __stdcall abi_TryCreateFromUserProfileLanguages(abi_arg_out<Windows::Media::Ocr::IOcrEngine> result) noexcept override
+    HRESULT __stdcall TryCreateFromUserProfileLanguages(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().TryCreateFromUserProfileLanguages());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().TryCreateFromUserProfileLanguages());
             return S_OK;
         }
         catch (...)
@@ -121,239 +203,124 @@ struct produce<D, Windows::Media::Ocr::IOcrEngineStatics> : produce_base<D, Wind
 template <typename D>
 struct produce<D, Windows::Media::Ocr::IOcrLine> : produce_base<D, Windows::Media::Ocr::IOcrLine>
 {
-    HRESULT __stdcall get_Words(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrWord>> value) noexcept override
+    HRESULT __stdcall get_Words(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Words());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Words());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Ocr::IOcrResult> : produce_base<D, Windows::Media::Ocr::IOcrResult>
 {
-    HRESULT __stdcall get_Lines(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrLine>> value) noexcept override
+    HRESULT __stdcall get_Lines(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Lines());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Lines());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TextAngle(abi_arg_out<Windows::Foundation::IReference<double>> value) noexcept override
+    HRESULT __stdcall get_TextAngle(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TextAngle());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TextAngle());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Ocr::IOcrWord> : produce_base<D, Windows::Media::Ocr::IOcrWord>
 {
-    HRESULT __stdcall get_BoundingRect(abi_arg_out<Windows::Foundation::Rect> value) noexcept override
+    HRESULT __stdcall get_BoundingRect(Windows::Foundation::Rect* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().BoundingRect());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().BoundingRect());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Text(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Text(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Text());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Text());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Media::Ocr {
-
-template <typename D> Windows::Foundation::Rect impl_IOcrWord<D>::BoundingRect() const
-{
-    Windows::Foundation::Rect value {};
-    check_hresult(static_cast<const IOcrWord &>(static_cast<const D &>(*this))->get_BoundingRect(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IOcrWord<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IOcrWord &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrWord> impl_IOcrLine<D>::Words() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrWord> value;
-    check_hresult(static_cast<const IOcrLine &>(static_cast<const D &>(*this))->get_Words(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IOcrLine<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IOcrLine &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrLine> impl_IOcrResult<D>::Lines() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Ocr::OcrLine> value;
-    check_hresult(static_cast<const IOcrResult &>(static_cast<const D &>(*this))->get_Lines(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<double> impl_IOcrResult<D>::TextAngle() const
-{
-    Windows::Foundation::IReference<double> value;
-    check_hresult(static_cast<const IOcrResult &>(static_cast<const D &>(*this))->get_TextAngle(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IOcrResult<D>::Text() const
-{
-    hstring value;
-    check_hresult(static_cast<const IOcrResult &>(static_cast<const D &>(*this))->get_Text(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Media::Ocr::OcrResult> impl_IOcrEngine<D>::RecognizeAsync(const Windows::Graphics::Imaging::SoftwareBitmap & bitmap) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Ocr::OcrResult> result;
-    check_hresult(static_cast<const IOcrEngine &>(static_cast<const D &>(*this))->abi_RecognizeAsync(get(bitmap), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Globalization::Language impl_IOcrEngine<D>::RecognizerLanguage() const
-{
-    Windows::Globalization::Language value { nullptr };
-    check_hresult(static_cast<const IOcrEngine &>(static_cast<const D &>(*this))->get_RecognizerLanguage(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IOcrEngineStatics<D>::MaxImageDimension() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IOcrEngineStatics &>(static_cast<const D &>(*this))->get_MaxImageDimension(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language> impl_IOcrEngineStatics<D>::AvailableRecognizerLanguages() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language> value;
-    check_hresult(static_cast<const IOcrEngineStatics &>(static_cast<const D &>(*this))->get_AvailableRecognizerLanguages(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IOcrEngineStatics<D>::IsLanguageSupported(const Windows::Globalization::Language & language) const
-{
-    bool result {};
-    check_hresult(static_cast<const IOcrEngineStatics &>(static_cast<const D &>(*this))->abi_IsLanguageSupported(get(language), &result));
-    return result;
-}
-
-template <typename D> Windows::Media::Ocr::OcrEngine impl_IOcrEngineStatics<D>::TryCreateFromLanguage(const Windows::Globalization::Language & language) const
-{
-    Windows::Media::Ocr::OcrEngine result { nullptr };
-    check_hresult(static_cast<const IOcrEngineStatics &>(static_cast<const D &>(*this))->abi_TryCreateFromLanguage(get(language), put(result)));
-    return result;
-}
-
-template <typename D> Windows::Media::Ocr::OcrEngine impl_IOcrEngineStatics<D>::TryCreateFromUserProfileLanguages() const
-{
-    Windows::Media::Ocr::OcrEngine result { nullptr };
-    check_hresult(static_cast<const IOcrEngineStatics &>(static_cast<const D &>(*this))->abi_TryCreateFromUserProfileLanguages(put(result)));
-    return result;
-}
+WINRT_EXPORT namespace winrt::Windows::Media::Ocr {
 
 inline uint32_t OcrEngine::MaxImageDimension()
 {
-    return get_activation_factory<OcrEngine, IOcrEngineStatics>().MaxImageDimension();
+    return get_activation_factory<OcrEngine, Windows::Media::Ocr::IOcrEngineStatics>().MaxImageDimension();
 }
 
 inline Windows::Foundation::Collections::IVectorView<Windows::Globalization::Language> OcrEngine::AvailableRecognizerLanguages()
 {
-    return get_activation_factory<OcrEngine, IOcrEngineStatics>().AvailableRecognizerLanguages();
+    return get_activation_factory<OcrEngine, Windows::Media::Ocr::IOcrEngineStatics>().AvailableRecognizerLanguages();
 }
 
-inline bool OcrEngine::IsLanguageSupported(const Windows::Globalization::Language & language)
+inline bool OcrEngine::IsLanguageSupported(Windows::Globalization::Language const& language)
 {
-    return get_activation_factory<OcrEngine, IOcrEngineStatics>().IsLanguageSupported(language);
+    return get_activation_factory<OcrEngine, Windows::Media::Ocr::IOcrEngineStatics>().IsLanguageSupported(language);
 }
 
-inline Windows::Media::Ocr::OcrEngine OcrEngine::TryCreateFromLanguage(const Windows::Globalization::Language & language)
+inline Windows::Media::Ocr::OcrEngine OcrEngine::TryCreateFromLanguage(Windows::Globalization::Language const& language)
 {
-    return get_activation_factory<OcrEngine, IOcrEngineStatics>().TryCreateFromLanguage(language);
+    return get_activation_factory<OcrEngine, Windows::Media::Ocr::IOcrEngineStatics>().TryCreateFromLanguage(language);
 }
 
 inline Windows::Media::Ocr::OcrEngine OcrEngine::TryCreateFromUserProfileLanguages()
 {
-    return get_activation_factory<OcrEngine, IOcrEngineStatics>().TryCreateFromUserProfileLanguages();
+    return get_activation_factory<OcrEngine, Windows::Media::Ocr::IOcrEngineStatics>().TryCreateFromUserProfileLanguages();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Media::Ocr::IOcrEngine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::IOcrEngine> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::IOcrEngineStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::IOcrEngineStatics> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::IOcrLine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::IOcrLine> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::IOcrResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::IOcrResult> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::IOcrWord> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::IOcrWord> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::OcrEngine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::OcrEngine> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::OcrLine> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::OcrLine> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::OcrResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::OcrResult> {};
+
+template<> struct hash<winrt::Windows::Media::Ocr::OcrWord> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Ocr::OcrWord> {};
+
 }
+
+WINRT_WARNING_POP

@@ -1,24 +1,1330 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.UI.Xaml.Controls.Primitives.3.h"
-#include "internal/Windows.UI.Xaml.Controls.3.h"
-#include "internal/Windows.UI.Xaml.Automation.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.UI.Xaml.Automation.Provider.3.h"
-#include "internal/Windows.UI.Xaml.3.h"
-#include "internal/Windows.UI.Xaml.Automation.Peers.3.h"
-#include "Windows.UI.Xaml.Automation.h"
-#include "Windows.UI.Xaml.Automation.Provider.h"
-#include "internal/Windows.UI.Xaml.Automation.Peers.4.h"
-#include "internal/Windows.UI.Xaml.Automation.Peers.5.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Xaml.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.Provider.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Controls.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Controls.Primitives.2.h"
+#include "winrt/impl/Windows.UI.Xaml.Automation.Peers.2.h"
+#include "winrt/Windows.UI.Xaml.Automation.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAppBarAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::AppBar const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAppBarButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::AppBarButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAppBarToggleButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::AppBarToggleButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutoSuggestBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::AutoSuggestBox const& owner) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::EventsSource() const noexcept
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->get_EventsSource(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::EventsSource(Windows::UI::Xaml::Automation::Peers::AutomationPeer const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->put_EventsSource(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetPattern(Windows::UI::Xaml::Automation::Peers::PatternInterface const& patternInterface) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetPattern(get_abi(patternInterface), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::RaiseAutomationEvent(Windows::UI::Xaml::Automation::Peers::AutomationEvents const& eventId) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->RaiseAutomationEvent(get_abi(eventId)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::RaisePropertyChangedEvent(Windows::UI::Xaml::Automation::AutomationProperty const& automationProperty, Windows::Foundation::IInspectable const& oldValue, Windows::Foundation::IInspectable const& newValue) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->RaisePropertyChangedEvent(get_abi(automationProperty), get_abi(oldValue), get_abi(newValue)));
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetAcceleratorKey() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetAcceleratorKey(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetAccessKey() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetAccessKey(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationControlType consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetAutomationControlType() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationControlType returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetAutomationControlType(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetAutomationId() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetAutomationId(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetBoundingRectangle() const
+{
+    Windows::Foundation::Rect returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetBoundingRectangle(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetChildren() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetChildren(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetClassName() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetClassName(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetClickablePoint() const
+{
+    Windows::Foundation::Point returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetClickablePoint(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetHelpText() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetHelpText(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetItemStatus() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetItemStatus(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetItemType() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetItemType(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetLabeledBy() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetLabeledBy(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetLocalizedControlType() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetLocalizedControlType(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetName() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetName(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationOrientation consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetOrientation() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationOrientation returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetOrientation(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::HasKeyboardFocus() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->HasKeyboardFocus(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsContentElement() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsContentElement(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsControlElement() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsControlElement(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsEnabled() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsEnabled(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsKeyboardFocusable() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsKeyboardFocusable(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsOffscreen() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsOffscreen(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsPassword() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsPassword(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::IsRequiredForForm() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->IsRequiredForForm(&returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::SetFocus() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->SetFocus());
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetParent() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetParent(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::InvalidatePeer() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->InvalidatePeer());
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetPeerFromPoint(Windows::Foundation::Point const& point) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetPeerFromPoint(get_abi(point), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer<D>::GetLiveSetting() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer)->GetLiveSetting(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::Navigate(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const& direction) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->Navigate(get_abi(direction), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetElementFromPoint(Windows::Foundation::Point const& pointInWindowCoordinates) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetElementFromPoint(get_abi(pointInWindowCoordinates), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetFocusedElement() const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetFocusedElement(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::ShowContextMenu() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->ShowContextMenu());
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetControlledPeers() const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetControlledPeers(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetAnnotations() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetAnnotations(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::SetParent(Windows::UI::Xaml::Automation::Peers::AutomationPeer const& peer) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->SetParent(get_abi(peer)));
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::RaiseTextEditTextChangedEvent(Windows::UI::Xaml::Automation::AutomationTextEditChangeType const& automationTextEditChangeType, param::vector_view<hstring> const& changedData) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->RaiseTextEditTextChangedEvent(get_abi(automationTextEditChangeType), get_abi(changedData)));
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetPositionInSet() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetPositionInSet(&returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetSizeOfSet() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetSizeOfSet(&returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::GetLevel() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->GetLevel(&returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer3<D>::RaiseStructureChangedEvent(Windows::UI::Xaml::Automation::Peers::AutomationStructureChangeType const& structureChangeType, Windows::UI::Xaml::Automation::Peers::AutomationPeer const& child) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer3)->RaiseStructureChangedEvent(get_abi(structureChangeType), get_abi(child)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer4<D>::GetLandmarkType() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer4)->GetLandmarkType(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer4<D>::GetLocalizedLandmarkType() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer4)->GetLocalizedLandmarkType(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer5<D>::IsPeripheral() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer5)->IsPeripheral(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer5<D>::IsDataValidForForm() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer5)->IsDataValidForForm(&returnValue));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer5<D>::GetFullDescription() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer5)->GetFullDescription(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer6<D>::GetCulture() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer6)->GetCulture(&returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeer7<D>::RaiseNotificationEvent(Windows::UI::Xaml::Automation::Peers::AutomationNotificationKind const& notificationKind, Windows::UI::Xaml::Automation::Peers::AutomationNotificationProcessing const& notificationProcessing, param::hstring const& displayString, param::hstring const& activityId) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeer7)->RaiseNotificationEvent(get_abi(notificationKind), get_abi(notificationProcessing), get_abi(displayString), get_abi(activityId)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::AnnotationType consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation<D>::Type() const noexcept
+{
+    Windows::UI::Xaml::Automation::AnnotationType value{};
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation)->get_Type(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation<D>::Type(Windows::UI::Xaml::Automation::AnnotationType const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation)->put_Type(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation<D>::Peer() const noexcept
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation)->get_Peer(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation<D>::Peer(Windows::UI::Xaml::Automation::Peers::AutomationPeer const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation)->put_Peer(get_abi(value)));
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationFactory<D>::CreateInstance(Windows::UI::Xaml::Automation::AnnotationType const& type) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory)->CreateInstance(get_abi(type), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationFactory<D>::CreateWithPeerParameter(Windows::UI::Xaml::Automation::AnnotationType const& type, Windows::UI::Xaml::Automation::Peers::AutomationPeer const& peer) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory)->CreateWithPeerParameter(get_abi(type), get_abi(peer), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationStatics<D>::TypeProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics)->get_TypeProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::DependencyProperty consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationStatics<D>::PeerProperty() const noexcept
+{
+    Windows::UI::Xaml::DependencyProperty value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics)->get_PeerProperty(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface const& patternInterface) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetPatternCore(get_abi(patternInterface), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetAcceleratorKeyCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetAcceleratorKeyCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetAccessKeyCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetAccessKeyCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationControlType consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetAutomationControlTypeCore() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationControlType returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetAutomationControlTypeCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetAutomationIdCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetAutomationIdCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Rect consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetBoundingRectangleCore() const
+{
+    Windows::Foundation::Rect returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetBoundingRectangleCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetChildrenCore() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetChildrenCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetClassNameCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetClassNameCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Point consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetClickablePointCore() const
+{
+    Windows::Foundation::Point returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetClickablePointCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetHelpTextCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetHelpTextCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetItemStatusCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetItemStatusCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetItemTypeCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetItemTypeCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetLabeledByCore() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetLabeledByCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetLocalizedControlTypeCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetLocalizedControlTypeCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetNameCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetNameCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationOrientation consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetOrientationCore() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationOrientation returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetOrientationCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::HasKeyboardFocusCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->HasKeyboardFocusCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsContentElementCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsContentElementCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsControlElementCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsControlElementCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsEnabledCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsEnabledCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsKeyboardFocusableCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsKeyboardFocusableCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsOffscreenCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsOffscreenCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsPasswordCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsPasswordCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::IsRequiredForFormCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->IsRequiredForFormCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::SetFocusCore() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->SetFocusCore());
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetPeerFromPointCore(Windows::Foundation::Point const& point) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetPeerFromPointCore(get_abi(point), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides<D>::GetLiveSettingCore() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides)->GetLiveSettingCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides2<D>::ShowContextMenuCore() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2)->ShowContextMenuCore());
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides2<D>::GetControlledPeersCore() const
+{
+    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2)->GetControlledPeersCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::NavigateCore(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const& direction) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->NavigateCore(get_abi(direction), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetElementFromPointCore(Windows::Foundation::Point const& pointInWindowCoordinates) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetElementFromPointCore(get_abi(pointInWindowCoordinates), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetFocusedElementCore() const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetFocusedElementCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetAnnotationsCore() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetAnnotationsCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetPositionInSetCore() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetPositionInSetCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetSizeOfSetCore() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetSizeOfSetCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides3<D>::GetLevelCore() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3)->GetLevelCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides4<D>::GetLandmarkTypeCore() const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4)->GetLandmarkTypeCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides4<D>::GetLocalizedLandmarkTypeCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4)->GetLocalizedLandmarkTypeCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::IsPeripheralCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->IsPeripheralCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::IsDataValidForFormCore() const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->IsDataValidForFormCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> hstring consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::GetFullDescriptionCore() const
+{
+    hstring returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->GetFullDescriptionCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::GetDescribedByCore() const
+{
+    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->GetDescribedByCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::GetFlowsToCore() const
+{
+    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->GetFlowsToCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides5<D>::GetFlowsFromCore() const
+{
+    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5)->GetFlowsFromCore(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> int32_t consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerOverrides6<D>::GetCultureCore() const
+{
+    int32_t returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6)->GetCultureCore(&returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerProtected<D>::PeerFromProvider(Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const& provider) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected)->PeerFromProvider(get_abi(provider), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerProtected<D>::ProviderFromPeer(Windows::UI::Xaml::Automation::Peers::AutomationPeer const& peer) const
+{
+    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected)->ProviderFromPeer(get_abi(peer), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> bool consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerStatics<D>::ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents const& eventId) const
+{
+    bool returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics)->ListenerExists(get_abi(eventId), &returnValue));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId consume_Windows_UI_Xaml_Automation_Peers_IAutomationPeerStatics3<D>::GenerateRawElementProviderRuntimeId() const
+{
+    Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId returnValue{};
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3)->GenerateRawElementProviderRuntimeId(put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Button const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IButtonBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::ButtonBase const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ICaptureElementAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::CaptureElement const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ICheckBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::CheckBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ColorPickerSliderAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IColorPickerSliderAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::ColorPickerSlider const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ColorPickerSliderAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ColorSpectrumAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IColorSpectrumAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::ColorSpectrum const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ColorSpectrumAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IComboBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ComboBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IComboBoxItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ComboBoxItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IComboBoxItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IDatePickerAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::DatePicker const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFlipViewAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::FlipView const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFlipViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::FlipViewItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFlipViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFlyoutPresenterAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::FlyoutPresenter const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::UIElement consume_Windows_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeer<D>::Owner() const noexcept
+{
+    Windows::UI::Xaml::UIElement value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer)->get_Owner(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::FrameworkElement const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeerStatics<D>::FromElement(Windows::UI::Xaml::UIElement const& element) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics)->FromElement(get_abi(element), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeerStatics<D>::CreatePeerForElement(Windows::UI::Xaml::UIElement const& element) const
+{
+    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics)->CreatePeerForElement(get_abi(element), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IGridViewAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::GridView const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IGridViewHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::GridViewHeaderItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IGridViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::GridViewItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IGridViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IGroupItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::GroupItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::HubAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IHubAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Hub const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::HubAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IHubSectionAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::HubSection const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IHyperlinkButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::HyperlinkButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IImageAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Image const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Automation_Peers_IItemAutomationPeer<D>::Item() const noexcept
+{
+    Windows::Foundation::IInspectable value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer)->get_Item(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IItemAutomationPeer<D>::ItemsControlAutomationPeer() const noexcept
+{
+    Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer)->get_ItemsControlAutomationPeer(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IItemAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IItemsControlAutomationPeer2<D>::CreateItemAutomationPeer(Windows::Foundation::IInspectable const& item) const
+{
+    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2)->CreateItemAutomationPeer(get_abi(item), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IItemsControlAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ItemsControl const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IItemsControlAutomationPeerOverrides2<D>::OnCreateItemAutomationPeer(Windows::Foundation::IInspectable const& item) const
+{
+    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2)->OnCreateItemAutomationPeer(get_abi(item), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListBoxItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListBoxItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListBoxItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListView const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListViewBase const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewBaseHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListViewBaseHeaderItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListViewHeaderItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ListViewItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IListViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IMediaElementAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::MediaElement const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IMediaPlayerElementAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::MediaPlayerElement const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IMediaTransportControlsAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::MediaTransportControls const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IMenuFlyoutItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::MenuFlyoutItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IMenuFlyoutPresenterAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::MenuFlyoutPresenter const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::NavigationViewItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_INavigationViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::NavigationViewItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::NavigationViewItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IPasswordBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::PasswordBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::PersonPictureAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IPersonPictureAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::PersonPicture const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::PersonPictureAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IPivotAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Pivot const& owner) const
+{
+    Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IPivotItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::PivotItem const& owner) const
+{
+    Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IPivotItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer const& parent) const
+{
+    Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IProgressBarAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ProgressBar const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IProgressRingAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ProgressRing const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRadioButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::RadioButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRangeBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::RangeBase const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RatingControlAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRatingControlAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::RatingControl const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RatingControlAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRepeatButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::RepeatButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRichEditBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::RichEditBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRichTextBlockAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::RichTextBlock const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IRichTextBlockOverflowAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::RichTextBlockOverflow const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IScrollBarAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::ScrollBar const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IScrollViewerAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ScrollViewer const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISearchBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::SearchBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISelectorAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::Selector const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISelectorItemAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer const& parent, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory)->CreateInstanceWithParentAndItem(get_abi(item), get_abi(parent), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISemanticZoomAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::SemanticZoom const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISettingsFlyoutAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::SettingsFlyout const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ISliderAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Slider const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ITextBlockAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::TextBlock const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ITextBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::TextBox const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IThumbAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::Thumb const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_ITimePickerAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::TimePicker const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IToggleButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::Primitives::ToggleButton const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IToggleMenuFlyoutItemAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer consume_Windows_UI_Xaml_Automation_Peers_IToggleSwitchAutomationPeerFactory<D>::CreateInstanceWithOwner(Windows::UI::Xaml::Controls::ToggleSwitch const& owner, Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory)->CreateInstanceWithOwner(get_abi(owner), get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer>
@@ -27,16 +1333,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IAppBar> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::AppBar *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::AppBar const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -50,16 +1359,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IAppBarButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::AppBarButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::AppBarButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -73,16 +1385,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutom
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IAppBarToggleButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::AppBarToggleButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::AppBarToggleButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -96,11 +1411,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IAutoSuggestBox> owner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::AutoSuggestBox *>(&owner)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::AutoSuggestBox const*>(&owner)));
             return S_OK;
         }
         catch (...)
@@ -114,38 +1430,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer>
 {
-    HRESULT __stdcall get_EventsSource(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> value) noexcept override
+    HRESULT __stdcall get_EventsSource(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().EventsSource());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().EventsSource());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_EventsSource(abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> value) noexcept override
+    HRESULT __stdcall put_EventsSource(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().EventsSource(*reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().EventsSource(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_GetPattern(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetPattern(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPattern(patternInterface));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPattern(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::PatternInterface const*>(&patternInterface)));
             return S_OK;
         }
         catch (...)
@@ -155,11 +1459,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_RaiseAutomationEvent(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId) noexcept override
+    HRESULT __stdcall RaiseAutomationEvent(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId) noexcept final
     {
         try
         {
-            this->shim().RaiseAutomationEvent(eventId);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RaiseAutomationEvent(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationEvents const*>(&eventId));
             return S_OK;
         }
         catch (...)
@@ -168,11 +1473,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_RaisePropertyChangedEvent(abi_arg_in<Windows::UI::Xaml::Automation::IAutomationProperty> automationProperty, abi_arg_in<Windows::IInspectable> oldValue, abi_arg_in<Windows::IInspectable> newValue) noexcept override
+    HRESULT __stdcall RaisePropertyChangedEvent(::IUnknown* automationProperty, ::IUnknown* oldValue, ::IUnknown* newValue) noexcept final
     {
         try
         {
-            this->shim().RaisePropertyChangedEvent(*reinterpret_cast<const Windows::UI::Xaml::Automation::AutomationProperty *>(&automationProperty), *reinterpret_cast<const Windows::IInspectable *>(&oldValue), *reinterpret_cast<const Windows::IInspectable *>(&newValue));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RaisePropertyChangedEvent(*reinterpret_cast<Windows::UI::Xaml::Automation::AutomationProperty const*>(&automationProperty), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&oldValue), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&newValue));
             return S_OK;
         }
         catch (...)
@@ -181,25 +1487,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetAcceleratorKey(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetAcceleratorKey(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAcceleratorKey());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetAccessKey(abi_arg_out<hstring> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetAccessKey());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAcceleratorKey());
             return S_OK;
         }
         catch (...)
@@ -209,24 +1502,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetAutomationControlType(Windows::UI::Xaml::Automation::Peers::AutomationControlType * returnValue) noexcept override
+    HRESULT __stdcall GetAccessKey(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAutomationControlType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetAutomationId(abi_arg_out<hstring> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetAutomationId());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAccessKey());
             return S_OK;
         }
         catch (...)
@@ -236,11 +1517,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetBoundingRectangle(abi_arg_out<Windows::Foundation::Rect> returnValue) noexcept override
+    HRESULT __stdcall GetAutomationControlType(Windows::UI::Xaml::Automation::Peers::AutomationControlType* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetBoundingRectangle());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAutomationControlType());
             return S_OK;
         }
         catch (...)
@@ -249,25 +1531,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetChildren(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
+    HRESULT __stdcall GetAutomationId(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetChildren());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetClassName(abi_arg_out<hstring> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetClassName());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAutomationId());
             return S_OK;
         }
         catch (...)
@@ -277,11 +1546,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetClickablePoint(abi_arg_out<Windows::Foundation::Point> returnValue) noexcept override
+    HRESULT __stdcall GetBoundingRectangle(Windows::Foundation::Rect* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetClickablePoint());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetBoundingRectangle());
             return S_OK;
         }
         catch (...)
@@ -290,25 +1560,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetHelpText(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetChildren(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetHelpText());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetItemStatus(abi_arg_out<hstring> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetItemStatus());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetChildren());
             return S_OK;
         }
         catch (...)
@@ -318,11 +1575,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetItemType(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetClassName(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetItemType());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetClassName());
             return S_OK;
         }
         catch (...)
@@ -332,11 +1590,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetLabeledBy(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetClickablePoint(Windows::Foundation::Point* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLabeledBy());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetClickablePoint());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetHelpText(HSTRING* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetHelpText());
             return S_OK;
         }
         catch (...)
@@ -346,11 +1619,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetLocalizedControlType(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetItemStatus(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLocalizedControlType());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItemStatus());
             return S_OK;
         }
         catch (...)
@@ -360,11 +1634,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetName(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetItemType(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetName());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItemType());
             return S_OK;
         }
         catch (...)
@@ -374,11 +1649,57 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetOrientation(Windows::UI::Xaml::Automation::Peers::AutomationOrientation * returnValue) noexcept override
+    HRESULT __stdcall GetLabeledBy(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetOrientation());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLabeledBy());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetLocalizedControlType(HSTRING* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLocalizedControlType());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetName(HSTRING* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetName());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetOrientation(Windows::UI::Xaml::Automation::Peers::AutomationOrientation* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetOrientation());
             return S_OK;
         }
         catch (...)
@@ -387,11 +1708,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_HasKeyboardFocus(bool * returnValue) noexcept override
+    HRESULT __stdcall HasKeyboardFocus(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().HasKeyboardFocus());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().HasKeyboardFocus());
             return S_OK;
         }
         catch (...)
@@ -400,11 +1722,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsContentElement(bool * returnValue) noexcept override
+    HRESULT __stdcall IsContentElement(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsContentElement());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsContentElement());
             return S_OK;
         }
         catch (...)
@@ -413,11 +1736,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsControlElement(bool * returnValue) noexcept override
+    HRESULT __stdcall IsControlElement(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsControlElement());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsControlElement());
             return S_OK;
         }
         catch (...)
@@ -426,11 +1750,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsEnabled(bool * returnValue) noexcept override
+    HRESULT __stdcall IsEnabled(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsEnabled());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsEnabled());
             return S_OK;
         }
         catch (...)
@@ -439,11 +1764,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsKeyboardFocusable(bool * returnValue) noexcept override
+    HRESULT __stdcall IsKeyboardFocusable(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsKeyboardFocusable());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsKeyboardFocusable());
             return S_OK;
         }
         catch (...)
@@ -452,11 +1778,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsOffscreen(bool * returnValue) noexcept override
+    HRESULT __stdcall IsOffscreen(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsOffscreen());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsOffscreen());
             return S_OK;
         }
         catch (...)
@@ -465,11 +1792,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsPassword(bool * returnValue) noexcept override
+    HRESULT __stdcall IsPassword(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsPassword());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsPassword());
             return S_OK;
         }
         catch (...)
@@ -478,11 +1806,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_IsRequiredForForm(bool * returnValue) noexcept override
+    HRESULT __stdcall IsRequiredForForm(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsRequiredForForm());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsRequiredForForm());
             return S_OK;
         }
         catch (...)
@@ -491,10 +1820,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_SetFocus() noexcept override
+    HRESULT __stdcall SetFocus() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SetFocus();
             return S_OK;
         }
@@ -504,11 +1834,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetParent(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetParent(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetParent());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetParent());
             return S_OK;
         }
         catch (...)
@@ -518,10 +1849,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_InvalidatePeer() noexcept override
+    HRESULT __stdcall InvalidatePeer() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().InvalidatePeer();
             return S_OK;
         }
@@ -531,11 +1863,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetPeerFromPoint(abi_arg_in<Windows::Foundation::Point> point, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetPeerFromPoint(Windows::Foundation::Point point, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPeerFromPoint(*reinterpret_cast<const Windows::Foundation::Point *>(&point)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPeerFromPoint(*reinterpret_cast<Windows::Foundation::Point const*>(&point)));
             return S_OK;
         }
         catch (...)
@@ -545,11 +1878,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetLiveSetting(Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting * returnValue) noexcept override
+    HRESULT __stdcall GetLiveSetting(Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLiveSetting());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLiveSetting());
             return S_OK;
         }
         catch (...)
@@ -566,11 +1900,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3>
 {
-    HRESULT __stdcall abi_Navigate(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall Navigate(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().Navigate(direction));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().Navigate(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const*>(&direction)));
             return S_OK;
         }
         catch (...)
@@ -580,11 +1915,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetElementFromPoint(abi_arg_in<Windows::Foundation::Point> pointInWindowCoordinates, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetElementFromPoint(Windows::Foundation::Point pointInWindowCoordinates, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetElementFromPoint(*reinterpret_cast<const Windows::Foundation::Point *>(&pointInWindowCoordinates)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetElementFromPoint(*reinterpret_cast<Windows::Foundation::Point const*>(&pointInWindowCoordinates)));
             return S_OK;
         }
         catch (...)
@@ -594,11 +1930,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetFocusedElement(abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetFocusedElement(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFocusedElement());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFocusedElement());
             return S_OK;
         }
         catch (...)
@@ -608,10 +1945,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_ShowContextMenu() noexcept override
+    HRESULT __stdcall ShowContextMenu() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowContextMenu();
             return S_OK;
         }
@@ -621,11 +1959,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetControlledPeers(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
+    HRESULT __stdcall GetControlledPeers(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetControlledPeers());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetControlledPeers());
             return S_OK;
         }
         catch (...)
@@ -635,11 +1974,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetAnnotations(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation>> returnValue) noexcept override
+    HRESULT __stdcall GetAnnotations(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAnnotations());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAnnotations());
             return S_OK;
         }
         catch (...)
@@ -649,11 +1989,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_SetParent(abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> peer) noexcept override
+    HRESULT __stdcall SetParent(::IUnknown* peer) noexcept final
     {
         try
         {
-            this->shim().SetParent(*reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&peer));
+            typename D::abi_guard guard(this->shim());
+            this->shim().SetParent(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&peer));
             return S_OK;
         }
         catch (...)
@@ -662,11 +2003,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_RaiseTextEditTextChangedEvent(Windows::UI::Xaml::Automation::AutomationTextEditChangeType automationTextEditChangeType, abi_arg_in<Windows::Foundation::Collections::IVectorView<hstring>> changedData) noexcept override
+    HRESULT __stdcall RaiseTextEditTextChangedEvent(Windows::UI::Xaml::Automation::AutomationTextEditChangeType automationTextEditChangeType, ::IUnknown* changedData) noexcept final
     {
         try
         {
-            this->shim().RaiseTextEditTextChangedEvent(automationTextEditChangeType, *reinterpret_cast<const Windows::Foundation::Collections::IVectorView<hstring> *>(&changedData));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RaiseTextEditTextChangedEvent(*reinterpret_cast<Windows::UI::Xaml::Automation::AutomationTextEditChangeType const*>(&automationTextEditChangeType), *reinterpret_cast<Windows::Foundation::Collections::IVectorView<hstring> const*>(&changedData));
             return S_OK;
         }
         catch (...)
@@ -675,11 +2017,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetPositionInSet(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetPositionInSet(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPositionInSet());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPositionInSet());
             return S_OK;
         }
         catch (...)
@@ -688,11 +2031,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetSizeOfSet(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetSizeOfSet(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetSizeOfSet());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetSizeOfSet());
             return S_OK;
         }
         catch (...)
@@ -701,11 +2045,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetLevel(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetLevel(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLevel());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLevel());
             return S_OK;
         }
         catch (...)
@@ -714,11 +2059,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
         }
     }
 
-    HRESULT __stdcall abi_RaiseStructureChangedEvent(Windows::UI::Xaml::Automation::Peers::AutomationStructureChangeType structureChangeType, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> child) noexcept override
+    HRESULT __stdcall RaiseStructureChangedEvent(Windows::UI::Xaml::Automation::Peers::AutomationStructureChangeType structureChangeType, ::IUnknown* child) noexcept final
     {
         try
         {
-            this->shim().RaiseStructureChangedEvent(structureChangeType, *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&child));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RaiseStructureChangedEvent(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationStructureChangeType const*>(&structureChangeType), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&child));
             return S_OK;
         }
         catch (...)
@@ -731,11 +2077,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4>
 {
-    HRESULT __stdcall abi_GetLandmarkType(Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType * returnValue) noexcept override
+    HRESULT __stdcall GetLandmarkType(Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLandmarkType());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLandmarkType());
             return S_OK;
         }
         catch (...)
@@ -744,11 +2091,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetLocalizedLandmarkType(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetLocalizedLandmarkType(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLocalizedLandmarkType());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLocalizedLandmarkType());
             return S_OK;
         }
         catch (...)
@@ -762,11 +2110,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4> : prod
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5>
 {
-    HRESULT __stdcall abi_IsPeripheral(bool * returnValue) noexcept override
+    HRESULT __stdcall IsPeripheral(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsPeripheral());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsPeripheral());
             return S_OK;
         }
         catch (...)
@@ -775,11 +2124,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> : prod
         }
     }
 
-    HRESULT __stdcall abi_IsDataValidForForm(bool * returnValue) noexcept override
+    HRESULT __stdcall IsDataValidForForm(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsDataValidForForm());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsDataValidForForm());
             return S_OK;
         }
         catch (...)
@@ -788,11 +2138,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetFullDescription(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetFullDescription(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFullDescription());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFullDescription());
             return S_OK;
         }
         catch (...)
@@ -804,53 +2155,14 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> : prod
 };
 
 template <typename D>
-struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6>
 {
-    HRESULT __stdcall get_Type(Windows::UI::Xaml::Automation::AnnotationType * value) noexcept override
+    HRESULT __stdcall GetCulture(int32_t* returnValue) noexcept final
     {
         try
         {
-            *value = detach(this->shim().Type());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Type(Windows::UI::Xaml::Automation::AnnotationType value) noexcept override
-    {
-        try
-        {
-            this->shim().Type(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_Peer(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().Peer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Peer(abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> value) noexcept override
-    {
-        try
-        {
-            this->shim().Peer(*reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&value));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetCulture());
             return S_OK;
         }
         catch (...)
@@ -861,13 +2173,64 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotatio
 };
 
 template <typename D>
-struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7>
 {
-    HRESULT __stdcall abi_CreateInstance(Windows::UI::Xaml::Automation::AnnotationType type, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> instance) noexcept override
+    HRESULT __stdcall RaiseNotificationEvent(Windows::UI::Xaml::Automation::Peers::AutomationNotificationKind notificationKind, Windows::UI::Xaml::Automation::Peers::AutomationNotificationProcessing notificationProcessing, HSTRING displayString, HSTRING activityId) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(type));
+            typename D::abi_guard guard(this->shim());
+            this->shim().RaiseNotificationEvent(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationNotificationKind const*>(&notificationKind), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationNotificationProcessing const*>(&notificationProcessing), *reinterpret_cast<hstring const*>(&displayString), *reinterpret_cast<hstring const*>(&activityId));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation>
+{
+    HRESULT __stdcall get_Type(Windows::UI::Xaml::Automation::AnnotationType* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Type());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_Type(Windows::UI::Xaml::Automation::AnnotationType value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Type(*reinterpret_cast<Windows::UI::Xaml::Automation::AnnotationType const*>(&value));
+        return S_OK;
+    }
+
+    HRESULT __stdcall get_Peer(::IUnknown** value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Peer());
+        return S_OK;
+    }
+
+    HRESULT __stdcall put_Peer(::IUnknown* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        this->shim().Peer(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&value));
+        return S_OK;
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory>
+{
+    HRESULT __stdcall CreateInstance(Windows::UI::Xaml::Automation::AnnotationType type, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::UI::Xaml::Automation::AnnotationType const*>(&type)));
             return S_OK;
         }
         catch (...)
@@ -877,11 +2240,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotatio
         }
     }
 
-    HRESULT __stdcall abi_CreateWithPeerParameter(Windows::UI::Xaml::Automation::AnnotationType type, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> peer, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> instance) noexcept override
+    HRESULT __stdcall CreateWithPeerParameter(Windows::UI::Xaml::Automation::AnnotationType type, ::IUnknown* peer, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateWithPeerParameter(type, *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&peer)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateWithPeerParameter(*reinterpret_cast<Windows::UI::Xaml::Automation::AnnotationType const*>(&type), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&peer)));
             return S_OK;
         }
         catch (...)
@@ -895,48 +2259,37 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics>
 {
-    HRESULT __stdcall get_TypeProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_TypeProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TypeProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TypeProperty());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_PeerProperty(abi_arg_out<Windows::UI::Xaml::IDependencyProperty> value) noexcept override
+    HRESULT __stdcall get_PeerProperty(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().PeerProperty());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().PeerProperty());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -946,11 +2299,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides>
 {
-    HRESULT __stdcall abi_GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPatternCore(patternInterface));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPatternCore(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::PatternInterface const*>(&patternInterface)));
             return S_OK;
         }
         catch (...)
@@ -960,11 +2314,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetAcceleratorKeyCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetAcceleratorKeyCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAcceleratorKeyCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAcceleratorKeyCore());
             return S_OK;
         }
         catch (...)
@@ -974,11 +2329,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetAccessKeyCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetAccessKeyCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAccessKeyCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAccessKeyCore());
             return S_OK;
         }
         catch (...)
@@ -988,11 +2344,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetAutomationControlTypeCore(Windows::UI::Xaml::Automation::Peers::AutomationControlType * returnValue) noexcept override
+    HRESULT __stdcall GetAutomationControlTypeCore(Windows::UI::Xaml::Automation::Peers::AutomationControlType* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAutomationControlTypeCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAutomationControlTypeCore());
             return S_OK;
         }
         catch (...)
@@ -1001,38 +2358,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetAutomationIdCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetAutomationIdCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAutomationIdCore());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetBoundingRectangleCore(abi_arg_out<Windows::Foundation::Rect> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetBoundingRectangleCore());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetChildrenCore(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetChildrenCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAutomationIdCore());
             return S_OK;
         }
         catch (...)
@@ -1042,11 +2373,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetClassNameCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetBoundingRectangleCore(Windows::Foundation::Rect* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetClassNameCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetBoundingRectangleCore());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetChildrenCore(::IUnknown** returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetChildrenCore());
             return S_OK;
         }
         catch (...)
@@ -1056,24 +2402,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetClickablePointCore(abi_arg_out<Windows::Foundation::Point> returnValue) noexcept override
+    HRESULT __stdcall GetClassNameCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetClickablePointCore());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetHelpTextCore(abi_arg_out<hstring> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetHelpTextCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetClassNameCore());
             return S_OK;
         }
         catch (...)
@@ -1083,11 +2417,26 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetItemStatusCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetClickablePointCore(Windows::Foundation::Point* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetItemStatusCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetClickablePointCore());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetHelpTextCore(HSTRING* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetHelpTextCore());
             return S_OK;
         }
         catch (...)
@@ -1097,11 +2446,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetItemTypeCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetItemStatusCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetItemTypeCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItemStatusCore());
             return S_OK;
         }
         catch (...)
@@ -1111,11 +2461,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetLabeledByCore(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetItemTypeCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLabeledByCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetItemTypeCore());
             return S_OK;
         }
         catch (...)
@@ -1125,11 +2476,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetLocalizedControlTypeCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetLabeledByCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLocalizedControlTypeCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLabeledByCore());
             return S_OK;
         }
         catch (...)
@@ -1139,11 +2491,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetNameCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetLocalizedControlTypeCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetNameCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLocalizedControlTypeCore());
             return S_OK;
         }
         catch (...)
@@ -1153,11 +2506,27 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetOrientationCore(Windows::UI::Xaml::Automation::Peers::AutomationOrientation * returnValue) noexcept override
+    HRESULT __stdcall GetNameCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetOrientationCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetNameCore());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetOrientationCore(Windows::UI::Xaml::Automation::Peers::AutomationOrientation* returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetOrientationCore());
             return S_OK;
         }
         catch (...)
@@ -1166,11 +2535,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_HasKeyboardFocusCore(bool * returnValue) noexcept override
+    HRESULT __stdcall HasKeyboardFocusCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().HasKeyboardFocusCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().HasKeyboardFocusCore());
             return S_OK;
         }
         catch (...)
@@ -1179,11 +2549,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsContentElementCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsContentElementCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsContentElementCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsContentElementCore());
             return S_OK;
         }
         catch (...)
@@ -1192,11 +2563,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsControlElementCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsControlElementCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsControlElementCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsControlElementCore());
             return S_OK;
         }
         catch (...)
@@ -1205,11 +2577,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsEnabledCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsEnabledCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsEnabledCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsEnabledCore());
             return S_OK;
         }
         catch (...)
@@ -1218,11 +2591,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsKeyboardFocusableCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsKeyboardFocusableCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsKeyboardFocusableCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsKeyboardFocusableCore());
             return S_OK;
         }
         catch (...)
@@ -1231,11 +2605,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsOffscreenCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsOffscreenCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsOffscreenCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsOffscreenCore());
             return S_OK;
         }
         catch (...)
@@ -1244,11 +2619,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsPasswordCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsPasswordCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsPasswordCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsPasswordCore());
             return S_OK;
         }
         catch (...)
@@ -1257,11 +2633,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsRequiredForFormCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsRequiredForFormCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsRequiredForFormCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsRequiredForFormCore());
             return S_OK;
         }
         catch (...)
@@ -1270,10 +2647,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_SetFocusCore() noexcept override
+    HRESULT __stdcall SetFocusCore() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().SetFocusCore();
             return S_OK;
         }
@@ -1283,11 +2661,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetPeerFromPointCore(abi_arg_in<Windows::Foundation::Point> point, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetPeerFromPointCore(Windows::Foundation::Point point, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPeerFromPointCore(*reinterpret_cast<const Windows::Foundation::Point *>(&point)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPeerFromPointCore(*reinterpret_cast<Windows::Foundation::Point const*>(&point)));
             return S_OK;
         }
         catch (...)
@@ -1297,11 +2676,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetLiveSettingCore(Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting * returnValue) noexcept override
+    HRESULT __stdcall GetLiveSettingCore(Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLiveSettingCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLiveSettingCore());
             return S_OK;
         }
         catch (...)
@@ -1314,10 +2694,11 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2>
 {
-    HRESULT __stdcall abi_ShowContextMenuCore() noexcept override
+    HRESULT __stdcall ShowContextMenuCore() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().ShowContextMenuCore();
             return S_OK;
         }
@@ -1327,11 +2708,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetControlledPeersCore(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
+    HRESULT __stdcall GetControlledPeersCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetControlledPeersCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetControlledPeersCore());
             return S_OK;
         }
         catch (...)
@@ -1345,11 +2727,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3>
 {
-    HRESULT __stdcall abi_NavigateCore(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall NavigateCore(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().NavigateCore(direction));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().NavigateCore(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const*>(&direction)));
             return S_OK;
         }
         catch (...)
@@ -1359,11 +2742,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetElementFromPointCore(abi_arg_in<Windows::Foundation::Point> pointInWindowCoordinates, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetElementFromPointCore(Windows::Foundation::Point pointInWindowCoordinates, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetElementFromPointCore(*reinterpret_cast<const Windows::Foundation::Point *>(&pointInWindowCoordinates)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetElementFromPointCore(*reinterpret_cast<Windows::Foundation::Point const*>(&pointInWindowCoordinates)));
             return S_OK;
         }
         catch (...)
@@ -1373,11 +2757,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetFocusedElementCore(abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetFocusedElementCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFocusedElementCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFocusedElementCore());
             return S_OK;
         }
         catch (...)
@@ -1387,11 +2772,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetAnnotationsCore(abi_arg_out<Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation>> returnValue) noexcept override
+    HRESULT __stdcall GetAnnotationsCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetAnnotationsCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetAnnotationsCore());
             return S_OK;
         }
         catch (...)
@@ -1401,11 +2787,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetPositionInSetCore(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetPositionInSetCore(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetPositionInSetCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetPositionInSetCore());
             return S_OK;
         }
         catch (...)
@@ -1414,11 +2801,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetSizeOfSetCore(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetSizeOfSetCore(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetSizeOfSetCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetSizeOfSetCore());
             return S_OK;
         }
         catch (...)
@@ -1427,11 +2815,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetLevelCore(int32_t * returnValue) noexcept override
+    HRESULT __stdcall GetLevelCore(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLevelCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLevelCore());
             return S_OK;
         }
         catch (...)
@@ -1444,11 +2833,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4>
 {
-    HRESULT __stdcall abi_GetLandmarkTypeCore(Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType * returnValue) noexcept override
+    HRESULT __stdcall GetLandmarkTypeCore(Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLandmarkTypeCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLandmarkTypeCore());
             return S_OK;
         }
         catch (...)
@@ -1457,11 +2847,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetLocalizedLandmarkTypeCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetLocalizedLandmarkTypeCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetLocalizedLandmarkTypeCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetLocalizedLandmarkTypeCore());
             return S_OK;
         }
         catch (...)
@@ -1475,11 +2866,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5>
 {
-    HRESULT __stdcall abi_IsPeripheralCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsPeripheralCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsPeripheralCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsPeripheralCore());
             return S_OK;
         }
         catch (...)
@@ -1488,11 +2880,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_IsDataValidForFormCore(bool * returnValue) noexcept override
+    HRESULT __stdcall IsDataValidForFormCore(bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().IsDataValidForFormCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().IsDataValidForFormCore());
             return S_OK;
         }
         catch (...)
@@ -1501,25 +2894,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetFullDescriptionCore(abi_arg_out<hstring> returnValue) noexcept override
+    HRESULT __stdcall GetFullDescriptionCore(HSTRING* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFullDescriptionCore());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *returnValue = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetDescribedByCore(abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
-    {
-        try
-        {
-            *returnValue = detach(this->shim().GetDescribedByCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFullDescriptionCore());
             return S_OK;
         }
         catch (...)
@@ -1529,11 +2909,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetFlowsToCore(abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
+    HRESULT __stdcall GetDescribedByCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFlowsToCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetDescribedByCore());
             return S_OK;
         }
         catch (...)
@@ -1543,11 +2924,27 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
         }
     }
 
-    HRESULT __stdcall abi_GetFlowsFromCore(abi_arg_out<Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer>> returnValue) noexcept override
+    HRESULT __stdcall GetFlowsToCore(::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetFlowsFromCore());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFlowsToCore());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *returnValue = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall GetFlowsFromCore(::IUnknown** returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetFlowsFromCore());
             return S_OK;
         }
         catch (...)
@@ -1559,13 +2956,32 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides
 };
 
 template <typename D>
-struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6>
 {
-    HRESULT __stdcall abi_PeerFromProvider(abi_arg_in<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> provider, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall GetCultureCore(int32_t* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().PeerFromProvider(*reinterpret_cast<const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple *>(&provider)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetCultureCore());
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected>
+{
+    HRESULT __stdcall PeerFromProvider(::IUnknown* provider, ::IUnknown** returnValue) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().PeerFromProvider(*reinterpret_cast<Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple const*>(&provider)));
             return S_OK;
         }
         catch (...)
@@ -1575,11 +2991,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected
         }
     }
 
-    HRESULT __stdcall abi_ProviderFromPeer(abi_arg_in<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> peer, abi_arg_out<Windows::UI::Xaml::Automation::Provider::IIRawElementProviderSimple> returnValue) noexcept override
+    HRESULT __stdcall ProviderFromPeer(::IUnknown* peer, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().ProviderFromPeer(*reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::AutomationPeer *>(&peer)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().ProviderFromPeer(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationPeer const*>(&peer)));
             return S_OK;
         }
         catch (...)
@@ -1593,11 +3010,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics>
 {
-    HRESULT __stdcall abi_ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId, bool * returnValue) noexcept override
+    HRESULT __stdcall ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId, bool* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().ListenerExists(eventId));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().ListenerExists(*reinterpret_cast<Windows::UI::Xaml::Automation::Peers::AutomationEvents const*>(&eventId)));
             return S_OK;
         }
         catch (...)
@@ -1610,11 +3028,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3>
 {
-    HRESULT __stdcall abi_GenerateRawElementProviderRuntimeId(abi_arg_out<Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId> returnValue) noexcept override
+    HRESULT __stdcall GenerateRawElementProviderRuntimeId(struct_of<8>* returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GenerateRawElementProviderRuntimeId());
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GenerateRawElementProviderRuntimeId());
             return S_OK;
         }
         catch (...)
@@ -1631,16 +3050,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Button *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Button const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1654,16 +3076,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPee
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IButtonBase> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::ButtonBase *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::ButtonBase const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1677,16 +3102,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ICaptureElement> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::CaptureElement *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::CaptureElement const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1700,16 +3128,71 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ICheckBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::CheckBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::CheckBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
+            *instance = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeer>
+{};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory>
+{
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::ColorPickerSlider const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
+            return S_OK;
+        }
+        catch (...)
+        {
+            if (inner) *inner = nullptr;
+            *instance = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeer>
+{};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory>
+{
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::ColorSpectrum const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
+            return S_OK;
+        }
+        catch (...)
+        {
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1723,16 +3206,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IComboBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ComboBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ComboBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1746,16 +3232,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IComboBoxItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ComboBoxItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ComboBoxItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1769,16 +3258,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomat
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1792,16 +3284,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPee
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IDatePicker> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::DatePicker *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::DatePicker const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1819,16 +3314,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IFlipView> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::FlipView *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::FlipView const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1842,16 +3340,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IFlipViewItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::FlipViewItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::FlipViewItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1865,16 +3366,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomat
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1888,16 +3392,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomati
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IFlyoutPresenter> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::FlyoutPresenter *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::FlyoutPresenter const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1907,34 +3414,30 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomati
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer>
 {
-    HRESULT __stdcall get_Owner(abi_arg_out<Windows::UI::Xaml::IUIElement> value) noexcept override
+    HRESULT __stdcall get_Owner(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Owner());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Owner());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::IFrameworkElement> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::FrameworkElement *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::FrameworkElement const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -1944,11 +3447,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomat
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics>
 {
-    HRESULT __stdcall abi_FromElement(abi_arg_in<Windows::UI::Xaml::IUIElement> element, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall FromElement(::IUnknown* element, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().FromElement(*reinterpret_cast<const Windows::UI::Xaml::UIElement *>(&element)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().FromElement(*reinterpret_cast<Windows::UI::Xaml::UIElement const*>(&element)));
             return S_OK;
         }
         catch (...)
@@ -1958,11 +3462,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomat
         }
     }
 
-    HRESULT __stdcall abi_CreatePeerForElement(abi_arg_in<Windows::UI::Xaml::IUIElement> element, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall CreatePeerForElement(::IUnknown* element, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().CreatePeerForElement(*reinterpret_cast<const Windows::UI::Xaml::UIElement *>(&element)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().CreatePeerForElement(*reinterpret_cast<Windows::UI::Xaml::UIElement const*>(&element)));
             return S_OK;
         }
         catch (...)
@@ -1980,16 +3485,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IGridView> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::GridView *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::GridView const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2003,16 +3511,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutom
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IGridViewHeaderItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::GridViewHeaderItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::GridViewHeaderItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2026,16 +3537,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IGridViewItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::GridViewItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::GridViewItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2049,16 +3563,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomat
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2072,16 +3589,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IGroupItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::GroupItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::GroupItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2095,16 +3615,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeer> : pr
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IHub> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IHubAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Hub *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Hub const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2118,16 +3641,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPee
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IHubSection> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::HubSection *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::HubSection const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2141,16 +3667,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomati
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IHyperlinkButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::HyperlinkButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::HyperlinkButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2164,16 +3693,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeer> : 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IImage> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IImageAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Image *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Image const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2187,48 +3719,37 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IInkToolbarAutomationPee
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer>
 {
-    HRESULT __stdcall get_Item(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall get_Item(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Item());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Item());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ItemsControlAutomationPeer(abi_arg_out<Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer> value) noexcept override
+    HRESULT __stdcall get_ItemsControlAutomationPeer(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ItemsControlAutomationPeer());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ItemsControlAutomationPeer());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2242,11 +3763,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2>
 {
-    HRESULT __stdcall abi_CreateItemAutomationPeer(abi_arg_in<Windows::IInspectable> item, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall CreateItemAutomationPeer(::IUnknown* item, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().CreateItemAutomationPeer(*reinterpret_cast<const Windows::IInspectable *>(&item)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().CreateItemAutomationPeer(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item)));
             return S_OK;
         }
         catch (...)
@@ -2260,16 +3782,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IItemsControl> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ItemsControl *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ItemsControl const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2279,11 +3804,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2>
 {
-    HRESULT __stdcall abi_OnCreateItemAutomationPeer(abi_arg_in<Windows::IInspectable> item, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> returnValue) noexcept override
+    HRESULT __stdcall OnCreateItemAutomationPeer(::IUnknown* item, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().OnCreateItemAutomationPeer(*reinterpret_cast<const Windows::IInspectable *>(&item)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().OnCreateItemAutomationPeer(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item)));
             return S_OK;
         }
         catch (...)
@@ -2301,16 +3827,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2324,16 +3853,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPe
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListBoxItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListBoxItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListBoxItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2347,16 +3879,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomati
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2374,16 +3909,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListView> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListView *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListView const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2397,16 +3935,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListViewBase> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListViewBase *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListViewBase const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2420,16 +3961,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemA
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListViewBaseHeaderItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListViewBaseHeaderItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListViewBaseHeaderItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2443,16 +3987,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutom
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListViewHeaderItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListViewHeaderItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListViewHeaderItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2466,16 +4013,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IListViewItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ListViewItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ListViewItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2489,16 +4039,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomat
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2528,16 +4081,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IMediaElement> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::MediaElement *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::MediaElement const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2551,16 +4107,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutom
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IMediaPlayerElement> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::MediaPlayerElement *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::MediaPlayerElement const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2574,16 +4133,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsA
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IMediaTransportControls> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::MediaTransportControls *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::MediaTransportControls const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2597,16 +4159,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IMenuFlyoutItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::MenuFlyoutItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::MenuFlyoutItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2620,16 +4185,45 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAuto
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IMenuFlyoutPresenter> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::MenuFlyoutPresenter *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::MenuFlyoutPresenter const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
+            *instance = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeer>
+{};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory>
+{
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::NavigationViewItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
+            return S_OK;
+        }
+        catch (...)
+        {
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2643,16 +4237,45 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPe
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IPasswordBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::PasswordBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::PasswordBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
+            *instance = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeer>
+{};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory>
+{
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::PersonPicture const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
+            return S_OK;
+        }
+        catch (...)
+        {
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2670,11 +4293,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeer> : 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IPivot> owner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Pivot *>(&owner)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Pivot const*>(&owner)));
             return S_OK;
         }
         catch (...)
@@ -2692,11 +4316,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IPivotItem> owner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::PivotItem *>(&owner)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::PivotItem const*>(&owner)));
             return S_OK;
         }
         catch (...)
@@ -2714,11 +4339,12 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomation
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeer> parent, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer *>(&parent)));
+            typename D::abi_guard guard(this->shim());
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer const*>(&parent)));
             return S_OK;
         }
         catch (...)
@@ -2736,16 +4362,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPe
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IProgressBar> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ProgressBar *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ProgressBar const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2759,16 +4388,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IProgressRing> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ProgressRing *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ProgressRing const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2782,16 +4414,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPe
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IRadioButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::RadioButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::RadioButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2805,16 +4440,45 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IRangeBase> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::RangeBase *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::RangeBase const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
+            *instance = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeer> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeer>
+{};
+
+template <typename D>
+struct produce<D, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory>
+{
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::RatingControl const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
+            return S_OK;
+        }
+        catch (...)
+        {
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2828,16 +4492,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IRepeatButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::RepeatButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::RepeatButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2851,16 +4518,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPe
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IRichEditBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::RichEditBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::RichEditBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2874,16 +4544,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomation
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IRichTextBlock> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::RichTextBlock *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::RichTextBlock const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2897,16 +4570,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAu
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IRichTextBlockOverflow> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::RichTextBlockOverflow *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::RichTextBlockOverflow const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2920,16 +4596,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IScrollBar> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::ScrollBar *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::ScrollBar const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2943,16 +4622,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IScrollViewer> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ScrollViewer *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ScrollViewer const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2966,16 +4648,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ISearchBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::SearchBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::SearchBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -2989,16 +4674,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer>
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::ISelector> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::Selector *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::Selector const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3012,16 +4700,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithParentAndItem(abi_arg_in<Windows::IInspectable> item, abi_arg_in<Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer> parent, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithParentAndItem(::IUnknown* item, ::IUnknown* parent, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<const Windows::IInspectable *>(&item), *reinterpret_cast<const Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer *>(&parent), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithParentAndItem(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&item), *reinterpret_cast<Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer const*>(&parent), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3035,16 +4726,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ISemanticZoom> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::SemanticZoom *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::SemanticZoom const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3058,16 +4752,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomatio
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ISettingsFlyout> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::SettingsFlyout *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::SettingsFlyout const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3081,16 +4778,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer> :
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ISlider> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Slider *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Slider const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3104,16 +4804,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeer
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ITextBlock> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::TextBlock *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::TextBlock const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3127,16 +4830,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeer> 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ITextBox> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::TextBox *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::TextBox const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3150,16 +4856,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeer> : 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IThumb> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::Thumb *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::Thumb const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3173,16 +4882,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPee
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::ITimePicker> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::TimePicker *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::TimePicker const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3200,16 +4912,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::Primitives::IToggleButton> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::Primitives::ToggleButton *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::Primitives::ToggleButton const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3223,16 +4938,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAut
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IToggleMenuFlyoutItem> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3246,16 +4964,19 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationP
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory> : produce_base<D, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory>
 {
-    HRESULT __stdcall abi_CreateInstanceWithOwner(abi_arg_in<Windows::UI::Xaml::Controls::IToggleSwitch> owner, abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeer> instance) noexcept override
+    HRESULT __stdcall CreateInstanceWithOwner(::IUnknown* owner, ::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstanceWithOwner(*reinterpret_cast<const Windows::UI::Xaml::Controls::ToggleSwitch *>(&owner), *reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstanceWithOwner(*reinterpret_cast<Windows::UI::Xaml::Controls::ToggleSwitch const*>(&owner), *reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -3264,1699 +4985,2568 @@ struct produce<D, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationP
 
 }
 
-namespace Windows::UI::Xaml::Automation::Peers {
+WINRT_EXPORT namespace winrt::Windows::UI::Xaml::Automation::Peers {
 
-template <typename D> Windows::IInspectable impl_IItemAutomationPeer<D>::Item() const
+inline AppBarAutomationPeer::AppBarAutomationPeer(Windows::UI::Xaml::Controls::AppBar const& owner)
 {
-    Windows::IInspectable value;
-    check_hresult(static_cast<const IItemAutomationPeer &>(static_cast<const D &>(*this))->get_Item(put(value)));
-    return value;
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<AppBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-template <typename D> Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer impl_IItemAutomationPeer<D>::ItemsControlAutomationPeer() const
+inline AppBarButtonAutomationPeer::AppBarButtonAutomationPeer(Windows::UI::Xaml::Controls::AppBarButton const& owner)
 {
-    Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer value { nullptr };
-    check_hresult(static_cast<const IItemAutomationPeer &>(static_cast<const D &>(*this))->get_ItemsControlAutomationPeer(put(value)));
-    return value;
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<AppBarButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer impl_IItemAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
+inline AppBarToggleButtonAutomationPeer::AppBarToggleButtonAutomationPeer(Windows::UI::Xaml::Controls::AppBarToggleButton const& owner)
 {
-    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<AppBarToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-template <typename D> Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer impl_IButtonBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::ButtonBase & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IButtonBaseAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer impl_ICaptureElementAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::CaptureElement & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ICaptureElementAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer impl_IComboBoxItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ComboBoxItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IComboBoxItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer impl_IFlipViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::FlipViewItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IFlipViewItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer impl_IGroupItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::GroupItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IGroupItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer impl_IImageAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Image & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IImageAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer impl_IItemsControlAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ItemsControl & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IItemsControlAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer impl_IItemsControlAutomationPeer2<D>::CreateItemAutomationPeer(const Windows::IInspectable & item) const
-{
-    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IItemsControlAutomationPeer2 &>(static_cast<const D &>(*this))->abi_CreateItemAutomationPeer(get(item), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer impl_IItemsControlAutomationPeerOverrides2<D>::OnCreateItemAutomationPeer(const Windows::IInspectable & item) const
-{
-    Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IItemsControlAutomationPeerOverrides2 &>(static_cast<const D &>(*this))->abi_OnCreateItemAutomationPeer(get(item), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer impl_IListBoxItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListBoxItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListBoxItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer impl_IMediaTransportControlsAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::MediaTransportControls & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IMediaTransportControlsAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer impl_IPasswordBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::PasswordBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IPasswordBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer impl_IProgressRingAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ProgressRing & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IProgressRingAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer impl_IRangeBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::RangeBase & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRangeBaseAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer impl_IRichEditBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::RichEditBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRichEditBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer impl_IRichTextBlockAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::RichTextBlock & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRichTextBlockAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer impl_IRichTextBlockOverflowAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::RichTextBlockOverflow & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRichTextBlockOverflowAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer impl_ISelectorItemAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISelectorItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer impl_ISemanticZoomAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::SemanticZoom & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISemanticZoomAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer impl_ISettingsFlyoutAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::SettingsFlyout & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISettingsFlyoutAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer impl_ITextBlockAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::TextBlock & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ITextBlockAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer impl_ITextBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::TextBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ITextBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer impl_IThumbAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::Thumb & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IThumbAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer impl_IToggleSwitchAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ToggleSwitch & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IToggleSwitchAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer impl_IButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Button & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer impl_IComboBoxItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IComboBoxItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer impl_IFlipViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IFlipViewItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer impl_IHyperlinkButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::HyperlinkButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IHyperlinkButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer impl_IListBoxItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListBoxItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer impl_IProgressBarAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ProgressBar & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IProgressBarAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer impl_IRepeatButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::RepeatButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRepeatButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer impl_IScrollBarAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::ScrollBar & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IScrollBarAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer impl_ISelectorAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::Selector & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISelectorAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer impl_ISliderAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Slider & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISliderAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer impl_IToggleButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Primitives::ToggleButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IToggleButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer impl_ICheckBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::CheckBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ICheckBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer impl_IComboBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ComboBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IComboBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer impl_IFlipViewAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::FlipView & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IFlipViewAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer impl_IListBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer impl_IRadioButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::RadioButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IRadioButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer impl_IAppBarAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::AppBar & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IAppBarAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer impl_IAutoSuggestBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::AutoSuggestBox & owner) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IAutoSuggestBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer impl_IDatePickerAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::DatePicker & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IDatePickerAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer impl_IFlyoutPresenterAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::FlyoutPresenter & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IFlyoutPresenterAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer impl_IGridViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::GridViewItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IGridViewItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::HubAutomationPeer impl_IHubAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Hub & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::HubAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IHubAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer impl_IHubSectionAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::HubSection & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IHubSectionAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer impl_IListViewBaseHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListViewBaseHeaderItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewBaseHeaderItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer impl_IListViewItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListViewItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer impl_IMediaElementAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::MediaElement & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IMediaElementAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer impl_IMediaPlayerElementAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::MediaPlayerElement & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IMediaPlayerElementAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer impl_IMenuFlyoutItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::MenuFlyoutItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IMenuFlyoutItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer impl_IScrollViewerAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ScrollViewer & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IScrollViewerAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer impl_ISearchBoxAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::SearchBox & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ISearchBoxAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer impl_ITimePickerAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::TimePicker & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const ITimePickerAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer impl_IToggleMenuFlyoutItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IToggleMenuFlyoutItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer impl_IGridViewHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::GridViewHeaderItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IGridViewHeaderItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer impl_IGridViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IGridViewItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer impl_IListViewHeaderItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListViewHeaderItem & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewHeaderItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer impl_IListViewItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer & parent, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer impl_IMenuFlyoutPresenterAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::MenuFlyoutPresenter & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IMenuFlyoutPresenterAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer impl_IAppBarButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::AppBarButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IAppBarButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer impl_IAppBarToggleButtonAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::AppBarToggleButton & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IAppBarToggleButtonAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer impl_IListViewBaseAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListViewBase & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewBaseAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer impl_IGridViewAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::GridView & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IGridViewAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer impl_IListViewAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::ListView & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IListViewAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeer<D>::EventsSource() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer value { nullptr };
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->get_EventsSource(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IAutomationPeer<D>::EventsSource(const Windows::UI::Xaml::Automation::Peers::AutomationPeer & value) const
-{
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->put_EventsSource(get(value)));
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeer<D>::GetPattern(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetPattern(patternInterface, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer<D>::RaiseAutomationEvent(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId) const
-{
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_RaiseAutomationEvent(eventId));
-}
-
-template <typename D> void impl_IAutomationPeer<D>::RaisePropertyChangedEvent(const Windows::UI::Xaml::Automation::AutomationProperty & automationProperty, const Windows::IInspectable & oldValue, const Windows::IInspectable & newValue) const
-{
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_RaisePropertyChangedEvent(get(automationProperty), get(oldValue), get(newValue)));
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetAcceleratorKey() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetAcceleratorKey(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetAccessKey() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetAccessKey(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationControlType impl_IAutomationPeer<D>::GetAutomationControlType() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationControlType returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetAutomationControlType(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetAutomationId() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetAutomationId(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IAutomationPeer<D>::GetBoundingRectangle() const
-{
-    Windows::Foundation::Rect returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetBoundingRectangle(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeer<D>::GetChildren() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetChildren(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetClassName() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetClassName(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Point impl_IAutomationPeer<D>::GetClickablePoint() const
-{
-    Windows::Foundation::Point returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetClickablePoint(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetHelpText() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetHelpText(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetItemStatus() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetItemStatus(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetItemType() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetItemType(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeer<D>::GetLabeledBy() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetLabeledBy(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetLocalizedControlType() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetLocalizedControlType(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer<D>::GetName() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetName(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationOrientation impl_IAutomationPeer<D>::GetOrientation() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationOrientation returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetOrientation(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::HasKeyboardFocus() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_HasKeyboardFocus(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsContentElement() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsContentElement(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsControlElement() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsControlElement(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsEnabled() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsEnabled(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsKeyboardFocusable() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsKeyboardFocusable(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsOffscreen() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsOffscreen(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsPassword() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsPassword(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer<D>::IsRequiredForForm() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_IsRequiredForForm(&returnValue));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer<D>::SetFocus() const
-{
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_SetFocus());
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeer<D>::GetParent() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetParent(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer<D>::InvalidatePeer() const
-{
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_InvalidatePeer());
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeer<D>::GetPeerFromPoint(const Windows::Foundation::Point & point) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetPeerFromPoint(get(point), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting impl_IAutomationPeer<D>::GetLiveSetting() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting returnValue {};
-    check_hresult(static_cast<const IAutomationPeer &>(static_cast<const D &>(*this))->abi_GetLiveSetting(&returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeerOverrides<D>::GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface patternInterface) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetPatternCore(patternInterface, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetAcceleratorKeyCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetAcceleratorKeyCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetAccessKeyCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetAccessKeyCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationControlType impl_IAutomationPeerOverrides<D>::GetAutomationControlTypeCore() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationControlType returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetAutomationControlTypeCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetAutomationIdCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetAutomationIdCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Rect impl_IAutomationPeerOverrides<D>::GetBoundingRectangleCore() const
-{
-    Windows::Foundation::Rect returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetBoundingRectangleCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeerOverrides<D>::GetChildrenCore() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetChildrenCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetClassNameCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetClassNameCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Point impl_IAutomationPeerOverrides<D>::GetClickablePointCore() const
-{
-    Windows::Foundation::Point returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetClickablePointCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetHelpTextCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetHelpTextCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetItemStatusCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetItemStatusCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetItemTypeCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetItemTypeCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeerOverrides<D>::GetLabeledByCore() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetLabeledByCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetLocalizedControlTypeCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetLocalizedControlTypeCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides<D>::GetNameCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetNameCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationOrientation impl_IAutomationPeerOverrides<D>::GetOrientationCore() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationOrientation returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetOrientationCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::HasKeyboardFocusCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_HasKeyboardFocusCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsContentElementCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsContentElementCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsControlElementCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsControlElementCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsEnabledCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsEnabledCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsKeyboardFocusableCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsKeyboardFocusableCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsOffscreenCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsOffscreenCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsPasswordCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsPasswordCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides<D>::IsRequiredForFormCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_IsRequiredForFormCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeerOverrides<D>::SetFocusCore() const
-{
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_SetFocusCore());
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeerOverrides<D>::GetPeerFromPointCore(const Windows::Foundation::Point & point) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetPeerFromPointCore(get(point), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting impl_IAutomationPeerOverrides<D>::GetLiveSettingCore() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides &>(static_cast<const D &>(*this))->abi_GetLiveSettingCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeerProtected<D>::PeerFromProvider(const Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple & provider) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeerProtected &>(static_cast<const D &>(*this))->abi_PeerFromProvider(get(provider), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple impl_IAutomationPeerProtected<D>::ProviderFromPeer(const Windows::UI::Xaml::Automation::Peers::AutomationPeer & peer) const
-{
-    Windows::UI::Xaml::Automation::Provider::IRawElementProviderSimple returnValue { nullptr };
-    check_hresult(static_cast<const IAutomationPeerProtected &>(static_cast<const D &>(*this))->abi_ProviderFromPeer(get(peer), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerStatics<D>::ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId) const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerStatics &>(static_cast<const D &>(*this))->abi_ListenerExists(eventId, &returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeerFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> void impl_IAutomationPeerOverrides2<D>::ShowContextMenuCore() const
-{
-    check_hresult(static_cast<const IAutomationPeerOverrides2 &>(static_cast<const D &>(*this))->abi_ShowContextMenuCore());
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeerOverrides2<D>::GetControlledPeersCore() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides2 &>(static_cast<const D &>(*this))->abi_GetControlledPeersCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeer3<D>::Navigate(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_Navigate(direction, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeer3<D>::GetElementFromPoint(const Windows::Foundation::Point & pointInWindowCoordinates) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetElementFromPoint(get(pointInWindowCoordinates), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeer3<D>::GetFocusedElement() const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetFocusedElement(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer3<D>::ShowContextMenu() const
-{
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_ShowContextMenu());
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeer3<D>::GetControlledPeers() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetControlledPeers(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> impl_IAutomationPeer3<D>::GetAnnotations() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> returnValue;
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetAnnotations(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer3<D>::SetParent(const Windows::UI::Xaml::Automation::Peers::AutomationPeer & peer) const
-{
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_SetParent(get(peer)));
-}
-
-template <typename D> void impl_IAutomationPeer3<D>::RaiseTextEditTextChangedEvent(Windows::UI::Xaml::Automation::AutomationTextEditChangeType automationTextEditChangeType, const Windows::Foundation::Collections::IVectorView<hstring> & changedData) const
-{
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_RaiseTextEditTextChangedEvent(automationTextEditChangeType, get(changedData)));
-}
-
-template <typename D> int32_t impl_IAutomationPeer3<D>::GetPositionInSet() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetPositionInSet(&returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IAutomationPeer3<D>::GetSizeOfSet() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetSizeOfSet(&returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IAutomationPeer3<D>::GetLevel() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_GetLevel(&returnValue));
-    return returnValue;
-}
-
-template <typename D> void impl_IAutomationPeer3<D>::RaiseStructureChangedEvent(Windows::UI::Xaml::Automation::Peers::AutomationStructureChangeType structureChangeType, const Windows::UI::Xaml::Automation::Peers::AutomationPeer & child) const
-{
-    check_hresult(static_cast<const IAutomationPeer3 &>(static_cast<const D &>(*this))->abi_RaiseStructureChangedEvent(structureChangeType, get(child)));
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeerOverrides3<D>::NavigateCore(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection direction) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_NavigateCore(direction, put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeerOverrides3<D>::GetElementFromPointCore(const Windows::Foundation::Point & pointInWindowCoordinates) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetElementFromPointCore(get(pointInWindowCoordinates), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::IInspectable impl_IAutomationPeerOverrides3<D>::GetFocusedElementCore() const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetFocusedElementCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> impl_IAutomationPeerOverrides3<D>::GetAnnotationsCore() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetAnnotationsCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IAutomationPeerOverrides3<D>::GetPositionInSetCore() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetPositionInSetCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IAutomationPeerOverrides3<D>::GetSizeOfSetCore() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetSizeOfSetCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> int32_t impl_IAutomationPeerOverrides3<D>::GetLevelCore() const
-{
-    int32_t returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides3 &>(static_cast<const D &>(*this))->abi_GetLevelCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId impl_IAutomationPeerStatics3<D>::GenerateRawElementProviderRuntimeId() const
-{
-    Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId returnValue {};
-    check_hresult(static_cast<const IAutomationPeerStatics3 &>(static_cast<const D &>(*this))->abi_GenerateRawElementProviderRuntimeId(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType impl_IAutomationPeer4<D>::GetLandmarkType() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType returnValue {};
-    check_hresult(static_cast<const IAutomationPeer4 &>(static_cast<const D &>(*this))->abi_GetLandmarkType(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer4<D>::GetLocalizedLandmarkType() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer4 &>(static_cast<const D &>(*this))->abi_GetLocalizedLandmarkType(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType impl_IAutomationPeerOverrides4<D>::GetLandmarkTypeCore() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides4 &>(static_cast<const D &>(*this))->abi_GetLandmarkTypeCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides4<D>::GetLocalizedLandmarkTypeCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides4 &>(static_cast<const D &>(*this))->abi_GetLocalizedLandmarkTypeCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer5<D>::IsPeripheral() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer5 &>(static_cast<const D &>(*this))->abi_IsPeripheral(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeer5<D>::IsDataValidForForm() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeer5 &>(static_cast<const D &>(*this))->abi_IsDataValidForForm(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeer5<D>::GetFullDescription() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeer5 &>(static_cast<const D &>(*this))->abi_GetFullDescription(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides5<D>::IsPeripheralCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_IsPeripheralCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> bool impl_IAutomationPeerOverrides5<D>::IsDataValidForFormCore() const
-{
-    bool returnValue {};
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_IsDataValidForFormCore(&returnValue));
-    return returnValue;
-}
-
-template <typename D> hstring impl_IAutomationPeerOverrides5<D>::GetFullDescriptionCore() const
-{
-    hstring returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_GetFullDescriptionCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeerOverrides5<D>::GetDescribedByCore() const
-{
-    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_GetDescribedByCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeerOverrides5<D>::GetFlowsToCore() const
-{
-    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_GetFlowsToCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> impl_IAutomationPeerOverrides5<D>::GetFlowsFromCore() const
-{
-    Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> returnValue;
-    check_hresult(static_cast<const IAutomationPeerOverrides5 &>(static_cast<const D &>(*this))->abi_GetFlowsFromCore(put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::AnnotationType impl_IAutomationPeerAnnotation<D>::Type() const
-{
-    Windows::UI::Xaml::Automation::AnnotationType value {};
-    check_hresult(static_cast<const IAutomationPeerAnnotation &>(static_cast<const D &>(*this))->get_Type(&value));
-    return value;
-}
-
-template <typename D> void impl_IAutomationPeerAnnotation<D>::Type(Windows::UI::Xaml::Automation::AnnotationType value) const
-{
-    check_hresult(static_cast<const IAutomationPeerAnnotation &>(static_cast<const D &>(*this))->put_Type(value));
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IAutomationPeerAnnotation<D>::Peer() const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer value { nullptr };
-    check_hresult(static_cast<const IAutomationPeerAnnotation &>(static_cast<const D &>(*this))->get_Peer(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IAutomationPeerAnnotation<D>::Peer(const Windows::UI::Xaml::Automation::Peers::AutomationPeer & value) const
-{
-    check_hresult(static_cast<const IAutomationPeerAnnotation &>(static_cast<const D &>(*this))->put_Peer(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_IAutomationPeerAnnotationStatics<D>::TypeProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const IAutomationPeerAnnotationStatics &>(static_cast<const D &>(*this))->get_TypeProperty(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::DependencyProperty impl_IAutomationPeerAnnotationStatics<D>::PeerProperty() const
-{
-    Windows::UI::Xaml::DependencyProperty value { nullptr };
-    check_hresult(static_cast<const IAutomationPeerAnnotationStatics &>(static_cast<const D &>(*this))->get_PeerProperty(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation impl_IAutomationPeerAnnotationFactory<D>::CreateInstance(Windows::UI::Xaml::Automation::AnnotationType type) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation instance { nullptr };
-    check_hresult(static_cast<const IAutomationPeerAnnotationFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(type, put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation impl_IAutomationPeerAnnotationFactory<D>::CreateWithPeerParameter(Windows::UI::Xaml::Automation::AnnotationType type, const Windows::UI::Xaml::Automation::Peers::AutomationPeer & peer) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation instance { nullptr };
-    check_hresult(static_cast<const IAutomationPeerAnnotationFactory &>(static_cast<const D &>(*this))->abi_CreateWithPeerParameter(type, get(peer), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::UIElement impl_IFrameworkElementAutomationPeer<D>::Owner() const
-{
-    Windows::UI::Xaml::UIElement value { nullptr };
-    check_hresult(static_cast<const IFrameworkElementAutomationPeer &>(static_cast<const D &>(*this))->get_Owner(put(value)));
-    return value;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IFrameworkElementAutomationPeerStatics<D>::FromElement(const Windows::UI::Xaml::UIElement & element) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IFrameworkElementAutomationPeerStatics &>(static_cast<const D &>(*this))->abi_FromElement(get(element), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer impl_IFrameworkElementAutomationPeerStatics<D>::CreatePeerForElement(const Windows::UI::Xaml::UIElement & element) const
-{
-    Windows::UI::Xaml::Automation::Peers::AutomationPeer returnValue { nullptr };
-    check_hresult(static_cast<const IFrameworkElementAutomationPeerStatics &>(static_cast<const D &>(*this))->abi_CreatePeerForElement(get(element), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer impl_IFrameworkElementAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::FrameworkElement & owner, const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IFrameworkElementAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), get(outer), put(inner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer impl_IPivotItemAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::PivotItem & owner) const
-{
-    Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IPivotItemAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer impl_IPivotItemDataAutomationPeerFactory<D>::CreateInstanceWithParentAndItem(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer & parent) const
-{
-    Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IPivotItemDataAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithParentAndItem(get(item), get(parent), put(instance)));
-    return instance;
-}
-
-template <typename D> Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer impl_IPivotAutomationPeerFactory<D>::CreateInstanceWithOwner(const Windows::UI::Xaml::Controls::Pivot & owner) const
-{
-    Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer instance { nullptr };
-    check_hresult(static_cast<const IPivotAutomationPeerFactory &>(static_cast<const D &>(*this))->abi_CreateInstanceWithOwner(get(owner), put(instance)));
-    return instance;
-}
-
-inline AppBarAutomationPeer::AppBarAutomationPeer(const Windows::UI::Xaml::Controls::AppBar & owner)
-{
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<AppBarAutomationPeer, IAppBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
-}
-
-inline AppBarButtonAutomationPeer::AppBarButtonAutomationPeer(const Windows::UI::Xaml::Controls::AppBarButton & owner)
-{
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<AppBarButtonAutomationPeer, IAppBarButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
-}
-
-inline AppBarToggleButtonAutomationPeer::AppBarToggleButtonAutomationPeer(const Windows::UI::Xaml::Controls::AppBarToggleButton & owner)
-{
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<AppBarToggleButtonAutomationPeer, IAppBarToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
-}
-
-inline AutoSuggestBoxAutomationPeer::AutoSuggestBoxAutomationPeer(const Windows::UI::Xaml::Controls::AutoSuggestBox & owner) :
-    AutoSuggestBoxAutomationPeer(get_activation_factory<AutoSuggestBoxAutomationPeer, IAutoSuggestBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner))
+inline AutoSuggestBoxAutomationPeer::AutoSuggestBoxAutomationPeer(Windows::UI::Xaml::Controls::AutoSuggestBox const& owner) :
+    AutoSuggestBoxAutomationPeer(get_activation_factory<AutoSuggestBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner))
 {}
 
-inline bool AutomationPeer::ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents eventId)
+inline bool AutomationPeer::ListenerExists(Windows::UI::Xaml::Automation::Peers::AutomationEvents const& eventId)
 {
-    return get_activation_factory<AutomationPeer, IAutomationPeerStatics>().ListenerExists(eventId);
+    return get_activation_factory<AutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics>().ListenerExists(eventId);
 }
 
 inline Windows::UI::Xaml::Automation::Peers::RawElementProviderRuntimeId AutomationPeer::GenerateRawElementProviderRuntimeId()
 {
-    return get_activation_factory<AutomationPeer, IAutomationPeerStatics3>().GenerateRawElementProviderRuntimeId();
+    return get_activation_factory<AutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3>().GenerateRawElementProviderRuntimeId();
 }
 
 inline AutomationPeerAnnotation::AutomationPeerAnnotation() :
     AutomationPeerAnnotation(activate_instance<AutomationPeerAnnotation>())
 {}
 
-inline AutomationPeerAnnotation::AutomationPeerAnnotation(Windows::UI::Xaml::Automation::AnnotationType type) :
-    AutomationPeerAnnotation(get_activation_factory<AutomationPeerAnnotation, IAutomationPeerAnnotationFactory>().CreateInstance(type))
+inline AutomationPeerAnnotation::AutomationPeerAnnotation(Windows::UI::Xaml::Automation::AnnotationType const& type) :
+    AutomationPeerAnnotation(get_activation_factory<AutomationPeerAnnotation, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory>().CreateInstance(type))
 {}
 
-inline AutomationPeerAnnotation::AutomationPeerAnnotation(Windows::UI::Xaml::Automation::AnnotationType type, const Windows::UI::Xaml::Automation::Peers::AutomationPeer & peer) :
-    AutomationPeerAnnotation(get_activation_factory<AutomationPeerAnnotation, IAutomationPeerAnnotationFactory>().CreateWithPeerParameter(type, peer))
+inline AutomationPeerAnnotation::AutomationPeerAnnotation(Windows::UI::Xaml::Automation::AnnotationType const& type, Windows::UI::Xaml::Automation::Peers::AutomationPeer const& peer) :
+    AutomationPeerAnnotation(get_activation_factory<AutomationPeerAnnotation, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory>().CreateWithPeerParameter(type, peer))
 {}
 
 inline Windows::UI::Xaml::DependencyProperty AutomationPeerAnnotation::TypeProperty()
 {
-    return get_activation_factory<AutomationPeerAnnotation, IAutomationPeerAnnotationStatics>().TypeProperty();
+    return get_activation_factory<AutomationPeerAnnotation, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics>().TypeProperty();
 }
 
 inline Windows::UI::Xaml::DependencyProperty AutomationPeerAnnotation::PeerProperty()
 {
-    return get_activation_factory<AutomationPeerAnnotation, IAutomationPeerAnnotationStatics>().PeerProperty();
+    return get_activation_factory<AutomationPeerAnnotation, Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics>().PeerProperty();
 }
 
-inline ButtonAutomationPeer::ButtonAutomationPeer(const Windows::UI::Xaml::Controls::Button & owner)
+inline ButtonAutomationPeer::ButtonAutomationPeer(Windows::UI::Xaml::Controls::Button const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ButtonAutomationPeer, IButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline CaptureElementAutomationPeer::CaptureElementAutomationPeer(const Windows::UI::Xaml::Controls::CaptureElement & owner)
+inline CaptureElementAutomationPeer::CaptureElementAutomationPeer(Windows::UI::Xaml::Controls::CaptureElement const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<CaptureElementAutomationPeer, ICaptureElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<CaptureElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline CheckBoxAutomationPeer::CheckBoxAutomationPeer(const Windows::UI::Xaml::Controls::CheckBox & owner)
+inline CheckBoxAutomationPeer::CheckBoxAutomationPeer(Windows::UI::Xaml::Controls::CheckBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<CheckBoxAutomationPeer, ICheckBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<CheckBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ComboBoxAutomationPeer::ComboBoxAutomationPeer(const Windows::UI::Xaml::Controls::ComboBox & owner)
+inline ColorPickerSliderAutomationPeer::ColorPickerSliderAutomationPeer(Windows::UI::Xaml::Controls::Primitives::ColorPickerSlider const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ComboBoxAutomationPeer, IComboBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ColorPickerSliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ComboBoxItemAutomationPeer::ComboBoxItemAutomationPeer(const Windows::UI::Xaml::Controls::ComboBoxItem & owner)
+inline ColorSpectrumAutomationPeer::ColorSpectrumAutomationPeer(Windows::UI::Xaml::Controls::Primitives::ColorSpectrum const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ComboBoxItemAutomationPeer, IComboBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ColorSpectrumAutomationPeer, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ComboBoxItemDataAutomationPeer::ComboBoxItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer & parent)
+inline ComboBoxAutomationPeer::ComboBoxAutomationPeer(Windows::UI::Xaml::Controls::ComboBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ComboBoxItemDataAutomationPeer, IComboBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ComboBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline DatePickerAutomationPeer::DatePickerAutomationPeer(const Windows::UI::Xaml::Controls::DatePicker & owner)
+inline ComboBoxItemAutomationPeer::ComboBoxItemAutomationPeer(Windows::UI::Xaml::Controls::ComboBoxItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<DatePickerAutomationPeer, IDatePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ComboBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline FlipViewAutomationPeer::FlipViewAutomationPeer(const Windows::UI::Xaml::Controls::FlipView & owner)
+inline ComboBoxItemDataAutomationPeer::ComboBoxItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<FlipViewAutomationPeer, IFlipViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ComboBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline FlipViewItemAutomationPeer::FlipViewItemAutomationPeer(const Windows::UI::Xaml::Controls::FlipViewItem & owner)
+inline DatePickerAutomationPeer::DatePickerAutomationPeer(Windows::UI::Xaml::Controls::DatePicker const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<FlipViewItemAutomationPeer, IFlipViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<DatePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline FlipViewItemDataAutomationPeer::FlipViewItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer & parent)
+inline FlipViewAutomationPeer::FlipViewAutomationPeer(Windows::UI::Xaml::Controls::FlipView const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<FlipViewItemDataAutomationPeer, IFlipViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<FlipViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline FlyoutPresenterAutomationPeer::FlyoutPresenterAutomationPeer(const Windows::UI::Xaml::Controls::FlyoutPresenter & owner)
+inline FlipViewItemAutomationPeer::FlipViewItemAutomationPeer(Windows::UI::Xaml::Controls::FlipViewItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<FlyoutPresenterAutomationPeer, IFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<FlipViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline FrameworkElementAutomationPeer::FrameworkElementAutomationPeer(const Windows::UI::Xaml::FrameworkElement & owner)
+inline FlipViewItemDataAutomationPeer::FlipViewItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<FlipViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline Windows::UI::Xaml::Automation::Peers::AutomationPeer FrameworkElementAutomationPeer::FromElement(const Windows::UI::Xaml::UIElement & element)
+inline FlyoutPresenterAutomationPeer::FlyoutPresenterAutomationPeer(Windows::UI::Xaml::Controls::FlyoutPresenter const& owner)
 {
-    return get_activation_factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerStatics>().FromElement(element);
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<FlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline Windows::UI::Xaml::Automation::Peers::AutomationPeer FrameworkElementAutomationPeer::CreatePeerForElement(const Windows::UI::Xaml::UIElement & element)
+inline FrameworkElementAutomationPeer::FrameworkElementAutomationPeer(Windows::UI::Xaml::FrameworkElement const& owner)
 {
-    return get_activation_factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerStatics>().CreatePeerForElement(element);
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<FrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline GridViewAutomationPeer::GridViewAutomationPeer(const Windows::UI::Xaml::Controls::GridView & owner)
+inline Windows::UI::Xaml::Automation::Peers::AutomationPeer FrameworkElementAutomationPeer::FromElement(Windows::UI::Xaml::UIElement const& element)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<GridViewAutomationPeer, IGridViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    return get_activation_factory<FrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics>().FromElement(element);
 }
 
-inline GridViewHeaderItemAutomationPeer::GridViewHeaderItemAutomationPeer(const Windows::UI::Xaml::Controls::GridViewHeaderItem & owner)
+inline Windows::UI::Xaml::Automation::Peers::AutomationPeer FrameworkElementAutomationPeer::CreatePeerForElement(Windows::UI::Xaml::UIElement const& element)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<GridViewHeaderItemAutomationPeer, IGridViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    return get_activation_factory<FrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics>().CreatePeerForElement(element);
 }
 
-inline GridViewItemAutomationPeer::GridViewItemAutomationPeer(const Windows::UI::Xaml::Controls::GridViewItem & owner)
+inline GridViewAutomationPeer::GridViewAutomationPeer(Windows::UI::Xaml::Controls::GridView const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<GridViewItemAutomationPeer, IGridViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<GridViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline GridViewItemDataAutomationPeer::GridViewItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer & parent)
+inline GridViewHeaderItemAutomationPeer::GridViewHeaderItemAutomationPeer(Windows::UI::Xaml::Controls::GridViewHeaderItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<GridViewItemDataAutomationPeer, IGridViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<GridViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline GroupItemAutomationPeer::GroupItemAutomationPeer(const Windows::UI::Xaml::Controls::GroupItem & owner)
+inline GridViewItemAutomationPeer::GridViewItemAutomationPeer(Windows::UI::Xaml::Controls::GridViewItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<GroupItemAutomationPeer, IGroupItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<GridViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline HubAutomationPeer::HubAutomationPeer(const Windows::UI::Xaml::Controls::Hub & owner)
+inline GridViewItemDataAutomationPeer::GridViewItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<HubAutomationPeer, IHubAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<GridViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline HubSectionAutomationPeer::HubSectionAutomationPeer(const Windows::UI::Xaml::Controls::HubSection & owner)
+inline GroupItemAutomationPeer::GroupItemAutomationPeer(Windows::UI::Xaml::Controls::GroupItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<HubSectionAutomationPeer, IHubSectionAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<GroupItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline HyperlinkButtonAutomationPeer::HyperlinkButtonAutomationPeer(const Windows::UI::Xaml::Controls::HyperlinkButton & owner)
+inline HubAutomationPeer::HubAutomationPeer(Windows::UI::Xaml::Controls::Hub const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<HyperlinkButtonAutomationPeer, IHyperlinkButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<HubAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ImageAutomationPeer::ImageAutomationPeer(const Windows::UI::Xaml::Controls::Image & owner)
+inline HubSectionAutomationPeer::HubSectionAutomationPeer(Windows::UI::Xaml::Controls::HubSection const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ImageAutomationPeer, IImageAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<HubSectionAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ItemAutomationPeer::ItemAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer & parent)
+inline HyperlinkButtonAutomationPeer::HyperlinkButtonAutomationPeer(Windows::UI::Xaml::Controls::HyperlinkButton const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ItemAutomationPeer, IItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<HyperlinkButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ItemsControlAutomationPeer::ItemsControlAutomationPeer(const Windows::UI::Xaml::Controls::ItemsControl & owner)
+inline ImageAutomationPeer::ImageAutomationPeer(Windows::UI::Xaml::Controls::Image const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ItemsControlAutomationPeer, IItemsControlAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ImageAutomationPeer, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListBoxAutomationPeer::ListBoxAutomationPeer(const Windows::UI::Xaml::Controls::ListBox & owner)
+inline ItemAutomationPeer::ItemAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListBoxAutomationPeer, IListBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline ListBoxItemAutomationPeer::ListBoxItemAutomationPeer(const Windows::UI::Xaml::Controls::ListBoxItem & owner)
+inline ItemsControlAutomationPeer::ItemsControlAutomationPeer(Windows::UI::Xaml::Controls::ItemsControl const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListBoxItemAutomationPeer, IListBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListBoxItemDataAutomationPeer::ListBoxItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer & parent)
+inline ListBoxAutomationPeer::ListBoxAutomationPeer(Windows::UI::Xaml::Controls::ListBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListBoxItemDataAutomationPeer, IListBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListViewAutomationPeer::ListViewAutomationPeer(const Windows::UI::Xaml::Controls::ListView & owner)
+inline ListBoxItemAutomationPeer::ListBoxItemAutomationPeer(Windows::UI::Xaml::Controls::ListBoxItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListViewAutomationPeer, IListViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListViewBaseAutomationPeer::ListViewBaseAutomationPeer(const Windows::UI::Xaml::Controls::ListViewBase & owner)
+inline ListBoxItemDataAutomationPeer::ListBoxItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListViewBaseAutomationPeer, IListViewBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline ListViewHeaderItemAutomationPeer::ListViewHeaderItemAutomationPeer(const Windows::UI::Xaml::Controls::ListViewHeaderItem & owner)
+inline ListViewAutomationPeer::ListViewAutomationPeer(Windows::UI::Xaml::Controls::ListView const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListViewHeaderItemAutomationPeer, IListViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListViewItemAutomationPeer::ListViewItemAutomationPeer(const Windows::UI::Xaml::Controls::ListViewItem & owner)
+inline ListViewBaseAutomationPeer::ListViewBaseAutomationPeer(Windows::UI::Xaml::Controls::ListViewBase const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListViewItemAutomationPeer, IListViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListViewBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ListViewItemDataAutomationPeer::ListViewItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer & parent)
+inline ListViewHeaderItemAutomationPeer::ListViewHeaderItemAutomationPeer(Windows::UI::Xaml::Controls::ListViewHeaderItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ListViewItemDataAutomationPeer, IListViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline MediaElementAutomationPeer::MediaElementAutomationPeer(const Windows::UI::Xaml::Controls::MediaElement & owner)
+inline ListViewItemAutomationPeer::ListViewItemAutomationPeer(Windows::UI::Xaml::Controls::ListViewItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<MediaElementAutomationPeer, IMediaElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline MediaPlayerElementAutomationPeer::MediaPlayerElementAutomationPeer(const Windows::UI::Xaml::Controls::MediaPlayerElement & owner)
+inline ListViewItemDataAutomationPeer::ListViewItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<MediaPlayerElementAutomationPeer, IMediaPlayerElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ListViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline MediaTransportControlsAutomationPeer::MediaTransportControlsAutomationPeer(const Windows::UI::Xaml::Controls::MediaTransportControls & owner)
+inline MediaElementAutomationPeer::MediaElementAutomationPeer(Windows::UI::Xaml::Controls::MediaElement const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<MediaTransportControlsAutomationPeer, IMediaTransportControlsAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<MediaElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline MenuFlyoutItemAutomationPeer::MenuFlyoutItemAutomationPeer(const Windows::UI::Xaml::Controls::MenuFlyoutItem & owner)
+inline MediaPlayerElementAutomationPeer::MediaPlayerElementAutomationPeer(Windows::UI::Xaml::Controls::MediaPlayerElement const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<MenuFlyoutItemAutomationPeer, IMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<MediaPlayerElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline MenuFlyoutPresenterAutomationPeer::MenuFlyoutPresenterAutomationPeer(const Windows::UI::Xaml::Controls::MenuFlyoutPresenter & owner)
+inline MediaTransportControlsAutomationPeer::MediaTransportControlsAutomationPeer(Windows::UI::Xaml::Controls::MediaTransportControls const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<MenuFlyoutPresenterAutomationPeer, IMenuFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<MediaTransportControlsAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline PasswordBoxAutomationPeer::PasswordBoxAutomationPeer(const Windows::UI::Xaml::Controls::PasswordBox & owner)
+inline MenuFlyoutItemAutomationPeer::MenuFlyoutItemAutomationPeer(Windows::UI::Xaml::Controls::MenuFlyoutItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<PasswordBoxAutomationPeer, IPasswordBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<MenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline PivotAutomationPeer::PivotAutomationPeer(const Windows::UI::Xaml::Controls::Pivot & owner) :
-    PivotAutomationPeer(get_activation_factory<PivotAutomationPeer, IPivotAutomationPeerFactory>().CreateInstanceWithOwner(owner))
+inline MenuFlyoutPresenterAutomationPeer::MenuFlyoutPresenterAutomationPeer(Windows::UI::Xaml::Controls::MenuFlyoutPresenter const& owner)
+{
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<MenuFlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+}
+
+inline NavigationViewItemAutomationPeer::NavigationViewItemAutomationPeer(Windows::UI::Xaml::Controls::NavigationViewItem const& owner)
+{
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<NavigationViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+}
+
+inline PasswordBoxAutomationPeer::PasswordBoxAutomationPeer(Windows::UI::Xaml::Controls::PasswordBox const& owner)
+{
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<PasswordBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+}
+
+inline PersonPictureAutomationPeer::PersonPictureAutomationPeer(Windows::UI::Xaml::Controls::PersonPicture const& owner)
+{
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<PersonPictureAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+}
+
+inline PivotAutomationPeer::PivotAutomationPeer(Windows::UI::Xaml::Controls::Pivot const& owner) :
+    PivotAutomationPeer(get_activation_factory<PivotAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory>().CreateInstanceWithOwner(owner))
 {}
 
-inline PivotItemAutomationPeer::PivotItemAutomationPeer(const Windows::UI::Xaml::Controls::PivotItem & owner) :
-    PivotItemAutomationPeer(get_activation_factory<PivotItemAutomationPeer, IPivotItemAutomationPeerFactory>().CreateInstanceWithOwner(owner))
+inline PivotItemAutomationPeer::PivotItemAutomationPeer(Windows::UI::Xaml::Controls::PivotItem const& owner) :
+    PivotItemAutomationPeer(get_activation_factory<PivotItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory>().CreateInstanceWithOwner(owner))
 {}
 
-inline PivotItemDataAutomationPeer::PivotItemDataAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer & parent) :
-    PivotItemDataAutomationPeer(get_activation_factory<PivotItemDataAutomationPeer, IPivotItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent))
+inline PivotItemDataAutomationPeer::PivotItemDataAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer const& parent) :
+    PivotItemDataAutomationPeer(get_activation_factory<PivotItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent))
 {}
 
-inline ProgressBarAutomationPeer::ProgressBarAutomationPeer(const Windows::UI::Xaml::Controls::ProgressBar & owner)
+inline ProgressBarAutomationPeer::ProgressBarAutomationPeer(Windows::UI::Xaml::Controls::ProgressBar const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ProgressBarAutomationPeer, IProgressBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ProgressBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ProgressRingAutomationPeer::ProgressRingAutomationPeer(const Windows::UI::Xaml::Controls::ProgressRing & owner)
+inline ProgressRingAutomationPeer::ProgressRingAutomationPeer(Windows::UI::Xaml::Controls::ProgressRing const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ProgressRingAutomationPeer, IProgressRingAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ProgressRingAutomationPeer, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RadioButtonAutomationPeer::RadioButtonAutomationPeer(const Windows::UI::Xaml::Controls::RadioButton & owner)
+inline RadioButtonAutomationPeer::RadioButtonAutomationPeer(Windows::UI::Xaml::Controls::RadioButton const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RadioButtonAutomationPeer, IRadioButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RadioButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RangeBaseAutomationPeer::RangeBaseAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::RangeBase & owner)
+inline RangeBaseAutomationPeer::RangeBaseAutomationPeer(Windows::UI::Xaml::Controls::Primitives::RangeBase const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RangeBaseAutomationPeer, IRangeBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RepeatButtonAutomationPeer::RepeatButtonAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::RepeatButton & owner)
+inline RatingControlAutomationPeer::RatingControlAutomationPeer(Windows::UI::Xaml::Controls::RatingControl const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RepeatButtonAutomationPeer, IRepeatButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RatingControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RichEditBoxAutomationPeer::RichEditBoxAutomationPeer(const Windows::UI::Xaml::Controls::RichEditBox & owner)
+inline RepeatButtonAutomationPeer::RepeatButtonAutomationPeer(Windows::UI::Xaml::Controls::Primitives::RepeatButton const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RichEditBoxAutomationPeer, IRichEditBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RepeatButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RichTextBlockAutomationPeer::RichTextBlockAutomationPeer(const Windows::UI::Xaml::Controls::RichTextBlock & owner)
+inline RichEditBoxAutomationPeer::RichEditBoxAutomationPeer(Windows::UI::Xaml::Controls::RichEditBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RichTextBlockAutomationPeer, IRichTextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RichEditBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline RichTextBlockOverflowAutomationPeer::RichTextBlockOverflowAutomationPeer(const Windows::UI::Xaml::Controls::RichTextBlockOverflow & owner)
+inline RichTextBlockAutomationPeer::RichTextBlockAutomationPeer(Windows::UI::Xaml::Controls::RichTextBlock const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<RichTextBlockOverflowAutomationPeer, IRichTextBlockOverflowAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RichTextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ScrollBarAutomationPeer::ScrollBarAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::ScrollBar & owner)
+inline RichTextBlockOverflowAutomationPeer::RichTextBlockOverflowAutomationPeer(Windows::UI::Xaml::Controls::RichTextBlockOverflow const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ScrollBarAutomationPeer, IScrollBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<RichTextBlockOverflowAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ScrollViewerAutomationPeer::ScrollViewerAutomationPeer(const Windows::UI::Xaml::Controls::ScrollViewer & owner)
+inline ScrollBarAutomationPeer::ScrollBarAutomationPeer(Windows::UI::Xaml::Controls::Primitives::ScrollBar const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ScrollViewerAutomationPeer, IScrollViewerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ScrollBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline SearchBoxAutomationPeer::SearchBoxAutomationPeer(const Windows::UI::Xaml::Controls::SearchBox & owner)
+inline ScrollViewerAutomationPeer::ScrollViewerAutomationPeer(Windows::UI::Xaml::Controls::ScrollViewer const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SearchBoxAutomationPeer, ISearchBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ScrollViewerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline SelectorAutomationPeer::SelectorAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::Selector & owner)
+inline SearchBoxAutomationPeer::SearchBoxAutomationPeer(Windows::UI::Xaml::Controls::SearchBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SelectorAutomationPeer, ISelectorAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SearchBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline SelectorItemAutomationPeer::SelectorItemAutomationPeer(const Windows::IInspectable & item, const Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer & parent)
+inline SelectorAutomationPeer::SelectorAutomationPeer(Windows::UI::Xaml::Controls::Primitives::Selector const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SelectorItemAutomationPeer, ISelectorItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SelectorAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline SemanticZoomAutomationPeer::SemanticZoomAutomationPeer(const Windows::UI::Xaml::Controls::SemanticZoom & owner)
+inline SelectorItemAutomationPeer::SelectorItemAutomationPeer(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer const& parent)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SemanticZoomAutomationPeer, ISemanticZoomAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, outer, inner));
 }
 
-inline SettingsFlyoutAutomationPeer::SettingsFlyoutAutomationPeer(const Windows::UI::Xaml::Controls::SettingsFlyout & owner)
+inline SemanticZoomAutomationPeer::SemanticZoomAutomationPeer(Windows::UI::Xaml::Controls::SemanticZoom const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SettingsFlyoutAutomationPeer, ISettingsFlyoutAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SemanticZoomAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline SliderAutomationPeer::SliderAutomationPeer(const Windows::UI::Xaml::Controls::Slider & owner)
+inline SettingsFlyoutAutomationPeer::SettingsFlyoutAutomationPeer(Windows::UI::Xaml::Controls::SettingsFlyout const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<SliderAutomationPeer, ISliderAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SettingsFlyoutAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline TextBlockAutomationPeer::TextBlockAutomationPeer(const Windows::UI::Xaml::Controls::TextBlock & owner)
+inline SliderAutomationPeer::SliderAutomationPeer(Windows::UI::Xaml::Controls::Slider const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<TextBlockAutomationPeer, ITextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<SliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline TextBoxAutomationPeer::TextBoxAutomationPeer(const Windows::UI::Xaml::Controls::TextBox & owner)
+inline TextBlockAutomationPeer::TextBlockAutomationPeer(Windows::UI::Xaml::Controls::TextBlock const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<TextBoxAutomationPeer, ITextBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<TextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ThumbAutomationPeer::ThumbAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::Thumb & owner)
+inline TextBoxAutomationPeer::TextBoxAutomationPeer(Windows::UI::Xaml::Controls::TextBox const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ThumbAutomationPeer, IThumbAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<TextBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline TimePickerAutomationPeer::TimePickerAutomationPeer(const Windows::UI::Xaml::Controls::TimePicker & owner)
+inline ThumbAutomationPeer::ThumbAutomationPeer(Windows::UI::Xaml::Controls::Primitives::Thumb const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<TimePickerAutomationPeer, ITimePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ThumbAutomationPeer, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ToggleButtonAutomationPeer::ToggleButtonAutomationPeer(const Windows::UI::Xaml::Controls::Primitives::ToggleButton & owner)
+inline TimePickerAutomationPeer::TimePickerAutomationPeer(Windows::UI::Xaml::Controls::TimePicker const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ToggleButtonAutomationPeer, IToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<TimePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ToggleMenuFlyoutItemAutomationPeer::ToggleMenuFlyoutItemAutomationPeer(const Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem & owner)
+inline ToggleButtonAutomationPeer::ToggleButtonAutomationPeer(Windows::UI::Xaml::Controls::Primitives::ToggleButton const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ToggleMenuFlyoutItemAutomationPeer, IToggleMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
 
-inline ToggleSwitchAutomationPeer::ToggleSwitchAutomationPeer(const Windows::UI::Xaml::Controls::ToggleSwitch & owner)
+inline ToggleMenuFlyoutItemAutomationPeer::ToggleMenuFlyoutItemAutomationPeer(Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem const& owner)
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<ToggleSwitchAutomationPeer, IToggleSwitchAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ToggleMenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
 }
+
+inline ToggleSwitchAutomationPeer::ToggleSwitchAutomationPeer(Windows::UI::Xaml::Controls::ToggleSwitch const& owner)
+{
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<ToggleSwitchAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory>().CreateInstanceWithOwner(owner, outer, inner));
+}
+
+template <typename D> Windows::Foundation::IInspectable IAutomationPeerOverridesT<D>::GetPatternCore(Windows::UI::Xaml::Automation::Peers::PatternInterface const& patternInterface) const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetPatternCore(patternInterface);
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetAcceleratorKeyCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetAcceleratorKeyCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetAccessKeyCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetAccessKeyCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationControlType IAutomationPeerOverridesT<D>::GetAutomationControlTypeCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetAutomationControlTypeCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetAutomationIdCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetAutomationIdCore();
+}
+
+template <typename D> Windows::Foundation::Rect IAutomationPeerOverridesT<D>::GetBoundingRectangleCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetBoundingRectangleCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeer> IAutomationPeerOverridesT<D>::GetChildrenCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetChildrenCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetClassNameCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetClassNameCore();
+}
+
+template <typename D> Windows::Foundation::Point IAutomationPeerOverridesT<D>::GetClickablePointCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetClickablePointCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetHelpTextCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetHelpTextCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetItemStatusCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetItemStatusCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetItemTypeCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetItemTypeCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer IAutomationPeerOverridesT<D>::GetLabeledByCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetLabeledByCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetLocalizedControlTypeCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetLocalizedControlTypeCore();
+}
+
+template <typename D> hstring IAutomationPeerOverridesT<D>::GetNameCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetNameCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationOrientation IAutomationPeerOverridesT<D>::GetOrientationCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetOrientationCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::HasKeyboardFocusCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().HasKeyboardFocusCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsContentElementCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsContentElementCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsControlElementCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsControlElementCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsEnabledCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsEnabledCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsKeyboardFocusableCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsKeyboardFocusableCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsOffscreenCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsOffscreenCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsPasswordCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsPasswordCore();
+}
+
+template <typename D> bool IAutomationPeerOverridesT<D>::IsRequiredForFormCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().IsRequiredForFormCore();
+}
+
+template <typename D> void IAutomationPeerOverridesT<D>::SetFocusCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().SetFocusCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationPeer IAutomationPeerOverridesT<D>::GetPeerFromPointCore(Windows::Foundation::Point const& point) const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetPeerFromPointCore(point);
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLiveSetting IAutomationPeerOverridesT<D>::GetLiveSettingCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides>().GetLiveSettingCore();
+}
+
+template <typename D> void IAutomationPeerOverrides2T<D>::ShowContextMenuCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides2>().ShowContextMenuCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Automation::Peers::AutomationPeer> IAutomationPeerOverrides2T<D>::GetControlledPeersCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides2>().GetControlledPeersCore();
+}
+
+template <typename D> Windows::Foundation::IInspectable IAutomationPeerOverrides3T<D>::NavigateCore(Windows::UI::Xaml::Automation::Peers::AutomationNavigationDirection const& direction) const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().NavigateCore(direction);
+}
+
+template <typename D> Windows::Foundation::IInspectable IAutomationPeerOverrides3T<D>::GetElementFromPointCore(Windows::Foundation::Point const& pointInWindowCoordinates) const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetElementFromPointCore(pointInWindowCoordinates);
+}
+
+template <typename D> Windows::Foundation::IInspectable IAutomationPeerOverrides3T<D>::GetFocusedElementCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetFocusedElementCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> IAutomationPeerOverrides3T<D>::GetAnnotationsCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetAnnotationsCore();
+}
+
+template <typename D> int32_t IAutomationPeerOverrides3T<D>::GetPositionInSetCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetPositionInSetCore();
+}
+
+template <typename D> int32_t IAutomationPeerOverrides3T<D>::GetSizeOfSetCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetSizeOfSetCore();
+}
+
+template <typename D> int32_t IAutomationPeerOverrides3T<D>::GetLevelCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides3>().GetLevelCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::AutomationLandmarkType IAutomationPeerOverrides4T<D>::GetLandmarkTypeCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides4>().GetLandmarkTypeCore();
+}
+
+template <typename D> hstring IAutomationPeerOverrides4T<D>::GetLocalizedLandmarkTypeCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides4>().GetLocalizedLandmarkTypeCore();
+}
+
+template <typename D> bool IAutomationPeerOverrides5T<D>::IsPeripheralCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().IsPeripheralCore();
+}
+
+template <typename D> bool IAutomationPeerOverrides5T<D>::IsDataValidForFormCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().IsDataValidForFormCore();
+}
+
+template <typename D> hstring IAutomationPeerOverrides5T<D>::GetFullDescriptionCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().GetFullDescriptionCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> IAutomationPeerOverrides5T<D>::GetDescribedByCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().GetDescribedByCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> IAutomationPeerOverrides5T<D>::GetFlowsToCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().GetFlowsToCore();
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<Windows::UI::Xaml::Automation::Peers::AutomationPeer> IAutomationPeerOverrides5T<D>::GetFlowsFromCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides5>().GetFlowsFromCore();
+}
+
+template <typename D> int32_t IAutomationPeerOverrides6T<D>::GetCultureCore() const
+{
+    return shim().template try_as<IAutomationPeerOverrides6>().GetCultureCore();
+}
+
+template <typename D> Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer IItemsControlAutomationPeerOverrides2T<D>::OnCreateItemAutomationPeer(Windows::Foundation::IInspectable const& item) const
+{
+    return shim().template try_as<IItemsControlAutomationPeerOverrides2>().OnCreateItemAutomationPeer(item);
+}
+
+template <typename D, typename ... Interfaces>
+struct AppBarAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::Automation::Provider::IWindowProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = AppBarAutomationPeer;
+
+protected:
+    AppBarAutomationPeerT(Windows::UI::Xaml::Controls::AppBar const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct AppBarButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IInvokeProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = AppBarButtonAutomationPeer;
+
+protected:
+    AppBarButtonAutomationPeerT(Windows::UI::Xaml::Controls::AppBarButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct AppBarToggleButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = AppBarToggleButtonAutomationPeer;
+
+protected:
+    AppBarToggleButtonAutomationPeerT(Windows::UI::Xaml::Controls::AppBarToggleButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct AutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = AutomationPeer;
+
+protected:
+    AutomationPeerT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::AutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory>().CreateInstance(*this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IInvokeProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ButtonAutomationPeer;
+
+protected:
+    ButtonAutomationPeerT(Windows::UI::Xaml::Controls::Button const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ButtonBaseAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ButtonBaseAutomationPeer;
+
+protected:
+    ButtonBaseAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::ButtonBase const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct CaptureElementAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = CaptureElementAutomationPeer;
+
+protected:
+    CaptureElementAutomationPeerT(Windows::UI::Xaml::Controls::CaptureElement const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct CheckBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = CheckBoxAutomationPeer;
+
+protected:
+    CheckBoxAutomationPeerT(Windows::UI::Xaml::Controls::CheckBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ColorPickerSliderAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ColorPickerSliderAutomationPeer;
+
+protected:
+    ColorPickerSliderAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::ColorPickerSlider const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ColorPickerSliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ColorSpectrumAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ColorSpectrumAutomationPeer;
+
+protected:
+    ColorSpectrumAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::ColorSpectrum const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ColorSpectrumAutomationPeer, Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ComboBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IExpandCollapseProvider, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::Automation::Provider::IValueProvider, Windows::UI::Xaml::Automation::Provider::IWindowProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = ComboBoxAutomationPeer;
+
+protected:
+    ComboBoxAutomationPeerT(Windows::UI::Xaml::Controls::ComboBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ComboBoxItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ComboBoxItemAutomationPeer;
+
+protected:
+    ComboBoxItemAutomationPeerT(Windows::UI::Xaml::Controls::ComboBoxItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ComboBoxItemDataAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ComboBoxItemDataAutomationPeer;
+
+protected:
+    ComboBoxItemDataAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct DatePickerAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = DatePickerAutomationPeer;
+
+protected:
+    DatePickerAutomationPeerT(Windows::UI::Xaml::Controls::DatePicker const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct FlipViewAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = FlipViewAutomationPeer;
+
+protected:
+    FlipViewAutomationPeerT(Windows::UI::Xaml::Controls::FlipView const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct FlipViewItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = FlipViewItemAutomationPeer;
+
+protected:
+    FlipViewItemAutomationPeerT(Windows::UI::Xaml::Controls::FlipViewItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct FlipViewItemDataAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = FlipViewItemDataAutomationPeer;
+
+protected:
+    FlipViewItemDataAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct FlyoutPresenterAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = FlyoutPresenterAutomationPeer;
+
+protected:
+    FlyoutPresenterAutomationPeerT(Windows::UI::Xaml::Controls::FlyoutPresenter const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct FrameworkElementAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = FrameworkElementAutomationPeer;
+
+protected:
+    FrameworkElementAutomationPeerT(Windows::UI::Xaml::FrameworkElement const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct GridViewAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IDropTargetProvider, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = GridViewAutomationPeer;
+
+protected:
+    GridViewAutomationPeerT(Windows::UI::Xaml::Controls::GridView const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct GridViewHeaderItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = GridViewHeaderItemAutomationPeer;
+
+protected:
+    GridViewHeaderItemAutomationPeerT(Windows::UI::Xaml::Controls::GridViewHeaderItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct GridViewItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = GridViewItemAutomationPeer;
+
+protected:
+    GridViewItemAutomationPeerT(Windows::UI::Xaml::Controls::GridViewItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct GridViewItemDataAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = GridViewItemDataAutomationPeer;
+
+protected:
+    GridViewItemDataAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct GroupItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = GroupItemAutomationPeer;
+
+protected:
+    GroupItemAutomationPeerT(Windows::UI::Xaml::Controls::GroupItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct HubAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = HubAutomationPeer;
+
+protected:
+    HubAutomationPeerT(Windows::UI::Xaml::Controls::Hub const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::HubAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct HubSectionAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = HubSectionAutomationPeer;
+
+protected:
+    HubSectionAutomationPeerT(Windows::UI::Xaml::Controls::HubSection const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct HyperlinkButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IInvokeProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = HyperlinkButtonAutomationPeer;
+
+protected:
+    HyperlinkButtonAutomationPeerT(Windows::UI::Xaml::Controls::HyperlinkButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ImageAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ImageAutomationPeer;
+
+protected:
+    ImageAutomationPeerT(Windows::UI::Xaml::Controls::Image const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer, Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ItemAutomationPeer;
+
+protected:
+    ItemAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ItemsControlAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = ItemsControlAutomationPeer;
+
+protected:
+    ItemsControlAutomationPeerT(Windows::UI::Xaml::Controls::ItemsControl const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = ListBoxAutomationPeer;
+
+protected:
+    ListBoxAutomationPeerT(Windows::UI::Xaml::Controls::ListBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListBoxItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListBoxItemAutomationPeer;
+
+protected:
+    ListBoxItemAutomationPeerT(Windows::UI::Xaml::Controls::ListBoxItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListBoxItemDataAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListBoxItemDataAutomationPeer;
+
+protected:
+    ListBoxItemDataAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IDropTargetProvider, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = ListViewAutomationPeer;
+
+protected:
+    ListViewAutomationPeerT(Windows::UI::Xaml::Controls::ListView const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewBaseAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Provider::IDropTargetProvider, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = ListViewBaseAutomationPeer;
+
+protected:
+    ListViewBaseAutomationPeerT(Windows::UI::Xaml::Controls::ListViewBase const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewBaseHeaderItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListViewBaseHeaderItemAutomationPeer;
+
+protected:
+    ListViewBaseHeaderItemAutomationPeerT(Windows::UI::Xaml::Controls::ListViewBaseHeaderItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewHeaderItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListViewHeaderItemAutomationPeer;
+
+protected:
+    ListViewHeaderItemAutomationPeerT(Windows::UI::Xaml::Controls::ListViewHeaderItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListViewItemAutomationPeer;
+
+protected:
+    ListViewItemAutomationPeerT(Windows::UI::Xaml::Controls::ListViewItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ListViewItemDataAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollItemProvider, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ListViewItemDataAutomationPeer;
+
+protected:
+    ListViewItemDataAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct MediaElementAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = MediaElementAutomationPeer;
+
+protected:
+    MediaElementAutomationPeerT(Windows::UI::Xaml::Controls::MediaElement const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct MediaPlayerElementAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = MediaPlayerElementAutomationPeer;
+
+protected:
+    MediaPlayerElementAutomationPeerT(Windows::UI::Xaml::Controls::MediaPlayerElement const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct MediaTransportControlsAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = MediaTransportControlsAutomationPeer;
+
+protected:
+    MediaTransportControlsAutomationPeerT(Windows::UI::Xaml::Controls::MediaTransportControls const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct MenuFlyoutItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IInvokeProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = MenuFlyoutItemAutomationPeer;
+
+protected:
+    MenuFlyoutItemAutomationPeerT(Windows::UI::Xaml::Controls::MenuFlyoutItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct MenuFlyoutPresenterAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = MenuFlyoutPresenterAutomationPeer;
+
+protected:
+    MenuFlyoutPresenterAutomationPeerT(Windows::UI::Xaml::Controls::MenuFlyoutPresenter const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer, Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct NavigationViewItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = NavigationViewItemAutomationPeer;
+
+protected:
+    NavigationViewItemAutomationPeerT(Windows::UI::Xaml::Controls::NavigationViewItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::NavigationViewItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct PasswordBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = PasswordBoxAutomationPeer;
+
+protected:
+    PasswordBoxAutomationPeerT(Windows::UI::Xaml::Controls::PasswordBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct PersonPictureAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = PersonPictureAutomationPeer;
+
+protected:
+    PersonPictureAutomationPeerT(Windows::UI::Xaml::Controls::PersonPicture const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::PersonPictureAutomationPeer, Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ProgressBarAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ProgressBarAutomationPeer;
+
+protected:
+    ProgressBarAutomationPeerT(Windows::UI::Xaml::Controls::ProgressBar const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ProgressRingAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ProgressRingAutomationPeer;
+
+protected:
+    ProgressRingAutomationPeerT(Windows::UI::Xaml::Controls::ProgressRing const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer, Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RadioButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RadioButtonAutomationPeer;
+
+protected:
+    RadioButtonAutomationPeerT(Windows::UI::Xaml::Controls::RadioButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RangeBaseAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RangeBaseAutomationPeer;
+
+protected:
+    RangeBaseAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::RangeBase const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RatingControlAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RatingControlAutomationPeer;
+
+protected:
+    RatingControlAutomationPeerT(Windows::UI::Xaml::Controls::RatingControl const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RatingControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RepeatButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IInvokeProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RepeatButtonAutomationPeer;
+
+protected:
+    RepeatButtonAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::RepeatButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RichEditBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RichEditBoxAutomationPeer;
+
+protected:
+    RichEditBoxAutomationPeerT(Windows::UI::Xaml::Controls::RichEditBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RichTextBlockAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RichTextBlockAutomationPeer;
+
+protected:
+    RichTextBlockAutomationPeerT(Windows::UI::Xaml::Controls::RichTextBlock const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct RichTextBlockOverflowAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = RichTextBlockOverflowAutomationPeer;
+
+protected:
+    RichTextBlockOverflowAutomationPeerT(Windows::UI::Xaml::Controls::RichTextBlockOverflow const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ScrollBarAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ScrollBarAutomationPeer;
+
+protected:
+    ScrollBarAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::ScrollBar const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer, Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ScrollViewerAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IScrollProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ScrollViewerAutomationPeer;
+
+protected:
+    ScrollViewerAutomationPeerT(Windows::UI::Xaml::Controls::ScrollViewer const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SearchBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = SearchBoxAutomationPeer;
+
+protected:
+    SearchBoxAutomationPeerT(Windows::UI::Xaml::Controls::SearchBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SelectorAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2, Windows::UI::Xaml::Automation::Provider::IItemContainerProvider, Windows::UI::Xaml::Automation::Provider::ISelectionProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>, Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2T<D>
+{
+    using composable = SelectorAutomationPeer;
+
+protected:
+    SelectorAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::Selector const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SelectorItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer, Windows::UI::Xaml::Automation::Provider::ISelectionItemProvider, Windows::UI::Xaml::Automation::Provider::IVirtualizedItemProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = SelectorItemAutomationPeer;
+
+protected:
+    SelectorItemAutomationPeerT(Windows::Foundation::IInspectable const& item, Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer const& parent)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory>().CreateInstanceWithParentAndItem(item, parent, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SemanticZoomAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = SemanticZoomAutomationPeer;
+
+protected:
+    SemanticZoomAutomationPeerT(Windows::UI::Xaml::Controls::SemanticZoom const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SettingsFlyoutAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = SettingsFlyoutAutomationPeer;
+
+protected:
+    SettingsFlyoutAutomationPeerT(Windows::UI::Xaml::Controls::SettingsFlyout const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct SliderAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer, Windows::UI::Xaml::Automation::Provider::IRangeValueProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = SliderAutomationPeer;
+
+protected:
+    SliderAutomationPeerT(Windows::UI::Xaml::Controls::Slider const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer, Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct TextBlockAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = TextBlockAutomationPeer;
+
+protected:
+    TextBlockAutomationPeerT(Windows::UI::Xaml::Controls::TextBlock const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct TextBoxAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = TextBoxAutomationPeer;
+
+protected:
+    TextBoxAutomationPeerT(Windows::UI::Xaml::Controls::TextBox const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ThumbAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ThumbAutomationPeer;
+
+protected:
+    ThumbAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::Thumb const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer, Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct TimePickerAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = TimePickerAutomationPeer;
+
+protected:
+    TimePickerAutomationPeerT(Windows::UI::Xaml::Controls::TimePicker const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer, Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ToggleButtonAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ToggleButtonAutomationPeer;
+
+protected:
+    ToggleButtonAutomationPeerT(Windows::UI::Xaml::Controls::Primitives::ToggleButton const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ToggleMenuFlyoutItemAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ToggleMenuFlyoutItemAutomationPeer;
+
+protected:
+    ToggleMenuFlyoutItemAutomationPeerT(Windows::UI::Xaml::Controls::ToggleMenuFlyoutItem const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
+
+template <typename D, typename ... Interfaces>
+struct ToggleSwitchAutomationPeerT :
+    implements<D, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer, Windows::UI::Xaml::Automation::Peers::IAutomationPeer2, Windows::UI::Xaml::Automation::Peers::IAutomationPeer3, Windows::UI::Xaml::Automation::Peers::IAutomationPeer4, Windows::UI::Xaml::Automation::Peers::IAutomationPeer5, Windows::UI::Xaml::Automation::Peers::IAutomationPeer6, Windows::UI::Xaml::Automation::Peers::IAutomationPeer7, Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected, Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer, Windows::UI::Xaml::Automation::Provider::IToggleProvider, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>,
+    Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverridesT<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5T<D>, Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6T<D>
+{
+    using composable = ToggleSwitchAutomationPeer;
+
+protected:
+    ToggleSwitchAutomationPeerT(Windows::UI::Xaml::Controls::ToggleSwitch const& owner)
+    {
+        get_activation_factory<Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer, Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory>().CreateInstanceWithOwner(owner, *this, this->m_inner);
+    }
+};
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAppBarToggleButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutoSuggestBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer2> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer3> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer4> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer5> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer6> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer6> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer7> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeer7> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotation> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerAnnotationStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides2> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides3> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides4> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides5> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerOverrides6> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerProtected> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IAutomationPeerStatics3> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IButtonBaseAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ICaptureElementAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ICheckBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IColorPickerSliderAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IColorSpectrumAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IComboBoxItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IDatePickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlipViewItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFlyoutPresenterAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IFrameworkElementAutomationPeerStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewHeaderItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGridViewItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IGroupItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHubAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHubAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHubAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHubSectionAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IHyperlinkButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IImageAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IImageAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IImageAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IInkToolbarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IInkToolbarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeer2> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IItemsControlAutomationPeerOverrides2> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListBoxItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListPickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListPickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewBaseHeaderItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewHeaderItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IListViewItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ILoopingSelectorItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMapControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMapControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaElementAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaPlayerElementAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMediaTransportControlsAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IMenuFlyoutPresenterAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::INavigationViewItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPasswordBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPersonPictureAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IPivotItemDataAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IProgressBarAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IProgressRingAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRadioButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRangeBaseAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRatingControlAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRepeatButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichEditBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IRichTextBlockOverflowAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IScrollBarAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IScrollViewerAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISearchBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISelectorItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISemanticZoomAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISettingsFlyoutAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ISliderAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITextBlockAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITextBoxAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IThumbAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ITimePickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleButtonAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleMenuFlyoutItemAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::IToggleSwitchAutomationPeerFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AppBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AppBarButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AppBarToggleButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AutoSuggestBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::AutomationPeerAnnotation> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ButtonBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::CaptureElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::CheckBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ColorPickerSliderAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ColorPickerSliderAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ColorSpectrumAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ColorSpectrumAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ComboBoxItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::DatePickerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::DatePickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::DatePickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::FlipViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::FlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::FrameworkElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::GridViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::GridViewHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::GridViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::GridViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::GroupItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::HubAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::HubAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::HubSectionAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::HyperlinkButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ImageAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::InkToolbarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::InkToolbarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ItemsControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListBoxItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListPickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListPickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewBaseHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewHeaderItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ListViewItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::LoopingSelectorItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MapControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MapControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MediaElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MediaPlayerElementAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MediaTransportControlsAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MenuFlyoutItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::MenuFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::NavigationViewItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::NavigationViewItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PasswordBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PersonPictureAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PersonPictureAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PivotAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PivotItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::PivotItemDataAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ProgressBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ProgressRingAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RadioButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RangeBaseAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RatingControlAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RatingControlAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RepeatButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RichEditBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RichTextBlockAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::RichTextBlockOverflowAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ScrollBarAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ScrollViewerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SearchBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SelectorAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SelectorItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SemanticZoomAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SettingsFlyoutAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::SliderAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::TextBlockAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::TextBoxAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ThumbAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::TimePickerAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::TimePickerFlyoutPresenterAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::TimePickerFlyoutPresenterAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ToggleButtonAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ToggleMenuFlyoutItemAutomationPeer> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Automation::Peers::ToggleSwitchAutomationPeer> {};
+
 }
+
+WINRT_WARNING_POP

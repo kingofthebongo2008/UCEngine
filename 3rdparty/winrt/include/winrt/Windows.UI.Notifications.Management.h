@@ -1,25 +1,89 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.UI.Notifications.3.h"
-#include "internal/Windows.UI.Notifications.Management.3.h"
-#include "Windows.UI.Notifications.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Notifications.2.h"
+#include "winrt/impl/Windows.UI.Notifications.Management.2.h"
+#include "winrt/Windows.UI.Notifications.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus> consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::RequestAccessAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->RequestAccessAsync(put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::GetAccessStatus() const
+{
+    Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus accessStatus{};
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->GetAccessStatus(put_abi(accessStatus)));
+    return accessStatus;
+}
+
+template <typename D> event_token consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::NotificationChanged(Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->add_NotificationChanged(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::UI::Notifications::Management::IUserNotificationListener> consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::NotificationChanged(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::UI::Notifications::Management::IUserNotificationListener>(this, &abi_t<Windows::UI::Notifications::Management::IUserNotificationListener>::remove_NotificationChanged, NotificationChanged(handler));
+}
+
+template <typename D> void consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::NotificationChanged(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->remove_NotificationChanged(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::UI::Notifications::UserNotification>> consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::GetNotificationsAsync(Windows::UI::Notifications::NotificationKinds const& kinds) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::UI::Notifications::UserNotification>> result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->GetNotificationsAsync(get_abi(kinds), put_abi(result)));
+    return result;
+}
+
+template <typename D> Windows::UI::Notifications::UserNotification consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::GetNotification(uint32_t notificationId) const
+{
+    Windows::UI::Notifications::UserNotification result{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->GetNotification(notificationId, put_abi(result)));
+    return result;
+}
+
+template <typename D> void consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::ClearNotifications() const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->ClearNotifications());
+}
+
+template <typename D> void consume_Windows_UI_Notifications_Management_IUserNotificationListener<D>::RemoveNotification(uint32_t notificationId) const
+{
+    check_hresult(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListener)->RemoveNotification(notificationId));
+}
+
+template <typename D> Windows::UI::Notifications::Management::UserNotificationListener consume_Windows_UI_Notifications_Management_IUserNotificationListenerStatics<D>::Current() const noexcept
+{
+    Windows::UI::Notifications::Management::UserNotificationListener result{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Notifications::Management::IUserNotificationListenerStatics)->get_Current(put_abi(result)));
+    return result;
+}
 
 template <typename D>
 struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListener> : produce_base<D, Windows::UI::Notifications::Management::IUserNotificationListener>
 {
-    HRESULT __stdcall abi_RequestAccessAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus>> result) noexcept override
+    HRESULT __stdcall RequestAccessAsync(::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().RequestAccessAsync());
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().RequestAccessAsync());
             return S_OK;
         }
         catch (...)
@@ -29,11 +93,12 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall abi_GetAccessStatus(Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus * accessStatus) noexcept override
+    HRESULT __stdcall GetAccessStatus(Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus* accessStatus) noexcept final
     {
         try
         {
-            *accessStatus = detach(this->shim().GetAccessStatus());
+            typename D::abi_guard guard(this->shim());
+            *accessStatus = detach_abi(this->shim().GetAccessStatus());
             return S_OK;
         }
         catch (...)
@@ -42,11 +107,12 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall add_NotificationChanged(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_NotificationChanged(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().NotificationChanged(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().NotificationChanged(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -55,11 +121,12 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall remove_NotificationChanged(event_token token) noexcept override
+    HRESULT __stdcall remove_NotificationChanged(event_token token) noexcept final
     {
         try
         {
-            this->shim().NotificationChanged(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().NotificationChanged(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -68,25 +135,12 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall abi_GetNotificationsAsync(Windows::UI::Notifications::NotificationKinds kinds, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::UI::Notifications::UserNotification>>> result) noexcept override
+    HRESULT __stdcall GetNotificationsAsync(Windows::UI::Notifications::NotificationKinds kinds, ::IUnknown** result) noexcept final
     {
         try
         {
-            *result = detach(this->shim().GetNotificationsAsync(kinds));
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetNotification(uint32_t notificationId, abi_arg_out<Windows::UI::Notifications::IUserNotification> result) noexcept override
-    {
-        try
-        {
-            *result = detach(this->shim().GetNotification(notificationId));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetNotificationsAsync(*reinterpret_cast<Windows::UI::Notifications::NotificationKinds const*>(&kinds)));
             return S_OK;
         }
         catch (...)
@@ -96,10 +150,26 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall abi_ClearNotifications() noexcept override
+    HRESULT __stdcall GetNotification(uint32_t notificationId, ::IUnknown** result) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetNotification(notificationId));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *result = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall ClearNotifications() noexcept final
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
             this->shim().ClearNotifications();
             return S_OK;
         }
@@ -109,10 +179,11 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
         }
     }
 
-    HRESULT __stdcall abi_RemoveNotification(uint32_t notificationId) noexcept override
+    HRESULT __stdcall RemoveNotification(uint32_t notificationId) noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().RemoveNotification(notificationId);
             return S_OK;
         }
@@ -126,92 +197,36 @@ struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListe
 template <typename D>
 struct produce<D, Windows::UI::Notifications::Management::IUserNotificationListenerStatics> : produce_base<D, Windows::UI::Notifications::Management::IUserNotificationListenerStatics>
 {
-    HRESULT __stdcall get_Current(abi_arg_out<Windows::UI::Notifications::Management::IUserNotificationListener> result) noexcept override
+    HRESULT __stdcall get_Current(::IUnknown** result) noexcept final
     {
-        try
-        {
-            *result = detach(this->shim().Current());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *result = detach_abi(this->shim().Current());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::UI::Notifications::Management {
-
-template <typename D> Windows::UI::Notifications::Management::UserNotificationListener impl_IUserNotificationListenerStatics<D>::Current() const
-{
-    Windows::UI::Notifications::Management::UserNotificationListener result { nullptr };
-    check_hresult(static_cast<const IUserNotificationListenerStatics &>(static_cast<const D &>(*this))->get_Current(put(result)));
-    return result;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus> impl_IUserNotificationListener<D>::RequestAccessAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus> result;
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_RequestAccessAsync(put(result)));
-    return result;
-}
-
-template <typename D> Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus impl_IUserNotificationListener<D>::GetAccessStatus() const
-{
-    Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus accessStatus {};
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_GetAccessStatus(&accessStatus));
-    return accessStatus;
-}
-
-template <typename D> event_token impl_IUserNotificationListener<D>::NotificationChanged(const Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->add_NotificationChanged(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IUserNotificationListener> impl_IUserNotificationListener<D>::NotificationChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Notifications::Management::UserNotificationListener, Windows::UI::Notifications::UserNotificationChangedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IUserNotificationListener>(this, &ABI::Windows::UI::Notifications::Management::IUserNotificationListener::remove_NotificationChanged, NotificationChanged(handler));
-}
-
-template <typename D> void impl_IUserNotificationListener<D>::NotificationChanged(event_token token) const
-{
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->remove_NotificationChanged(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::UI::Notifications::UserNotification>> impl_IUserNotificationListener<D>::GetNotificationsAsync(Windows::UI::Notifications::NotificationKinds kinds) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::UI::Notifications::UserNotification>> result;
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_GetNotificationsAsync(kinds, put(result)));
-    return result;
-}
-
-template <typename D> Windows::UI::Notifications::UserNotification impl_IUserNotificationListener<D>::GetNotification(uint32_t notificationId) const
-{
-    Windows::UI::Notifications::UserNotification result { nullptr };
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_GetNotification(notificationId, put(result)));
-    return result;
-}
-
-template <typename D> void impl_IUserNotificationListener<D>::ClearNotifications() const
-{
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_ClearNotifications());
-}
-
-template <typename D> void impl_IUserNotificationListener<D>::RemoveNotification(uint32_t notificationId) const
-{
-    check_hresult(static_cast<const IUserNotificationListener &>(static_cast<const D &>(*this))->abi_RemoveNotification(notificationId));
-}
+WINRT_EXPORT namespace winrt::Windows::UI::Notifications::Management {
 
 inline Windows::UI::Notifications::Management::UserNotificationListener UserNotificationListener::Current()
 {
-    return get_activation_factory<UserNotificationListener, IUserNotificationListenerStatics>().Current();
+    return get_activation_factory<UserNotificationListener, Windows::UI::Notifications::Management::IUserNotificationListenerStatics>().Current();
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Notifications::Management::IUserNotificationListener> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Notifications::Management::IUserNotificationListener> {};
+
+template<> struct hash<winrt::Windows::UI::Notifications::Management::IUserNotificationListenerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Notifications::Management::IUserNotificationListenerStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Notifications::Management::UserNotificationListener> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Notifications::Management::UserNotificationListener> {};
+
 }
+
+WINRT_WARNING_POP

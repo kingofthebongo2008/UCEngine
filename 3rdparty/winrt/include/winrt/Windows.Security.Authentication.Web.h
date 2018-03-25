@@ -1,24 +1,98 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.Security.Authentication.Web.3.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Foundation.Collections.2.h"
+#include "winrt/impl/Windows.Security.Authentication.Web.2.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics<D>::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions const& options, Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics)->AuthenticateWithCallbackUriAsync(get_abi(options), get_abi(requestUri), get_abi(callbackUri), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics<D>::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions const& options, Windows::Foundation::Uri const& requestUri) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics)->AuthenticateWithoutCallbackUriAsync(get_abi(options), get_abi(requestUri), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics<D>::GetCurrentApplicationCallbackUri() const
+{
+    Windows::Foundation::Uri callbackUri{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics)->GetCurrentApplicationCallbackUri(put_abi(callbackUri)));
+    return callbackUri;
+}
+
+template <typename D> void consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri) const
+{
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2)->AuthenticateAndContinue(get_abi(requestUri)));
+}
+
+template <typename D> void consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri) const
+{
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2)->AuthenticateWithCallbackUriAndContinue(get_abi(requestUri), get_abi(callbackUri)));
+}
+
+template <typename D> void consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri, Windows::Foundation::Collections::ValueSet const& continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions const& options) const
+{
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2)->AuthenticateWithCallbackUriContinuationDataAndOptionsAndContinue(get_abi(requestUri), get_abi(callbackUri), get_abi(continuationData), get_abi(options)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics2<D>::AuthenticateSilentlyAsync(Windows::Foundation::Uri const& requestUri) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2)->AuthenticateSilentlyAsync(get_abi(requestUri), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> consume_Windows_Security_Authentication_Web_IWebAuthenticationBrokerStatics2<D>::AuthenticateSilentlyAsync(Windows::Foundation::Uri const& requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions const& options) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2)->AuthenticateSilentlyWithOptionsAsync(get_abi(requestUri), get_abi(options), put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> hstring consume_Windows_Security_Authentication_Web_IWebAuthenticationResult<D>::ResponseData() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationResult)->get_ResponseData(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Security::Authentication::Web::WebAuthenticationStatus consume_Windows_Security_Authentication_Web_IWebAuthenticationResult<D>::ResponseStatus() const noexcept
+{
+    Windows::Security::Authentication::Web::WebAuthenticationStatus value{};
+    check_terminate(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationResult)->get_ResponseStatus(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Security_Authentication_Web_IWebAuthenticationResult<D>::ResponseErrorDetail() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Security::Authentication::Web::IWebAuthenticationResult)->get_ResponseErrorDetail(&value));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics> : produce_base<D, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics>
 {
-    HRESULT __stdcall abi_AuthenticateWithCallbackUriAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, abi_arg_in<Windows::Foundation::IUriRuntimeClass> callbackUri, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult>> asyncInfo) noexcept override
+    HRESULT __stdcall AuthenticateWithCallbackUriAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, ::IUnknown* requestUri, ::IUnknown* callbackUri, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().AuthenticateAsync(options, *reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri), *reinterpret_cast<const Windows::Foundation::Uri *>(&callbackUri)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().AuthenticateAsync(*reinterpret_cast<Windows::Security::Authentication::Web::WebAuthenticationOptions const*>(&options), *reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri), *reinterpret_cast<Windows::Foundation::Uri const*>(&callbackUri)));
             return S_OK;
         }
         catch (...)
@@ -28,11 +102,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_AuthenticateWithoutCallbackUriAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult>> asyncInfo) noexcept override
+    HRESULT __stdcall AuthenticateWithoutCallbackUriAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, ::IUnknown* requestUri, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().AuthenticateAsync(options, *reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().AuthenticateAsync(*reinterpret_cast<Windows::Security::Authentication::Web::WebAuthenticationOptions const*>(&options), *reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri)));
             return S_OK;
         }
         catch (...)
@@ -42,11 +117,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_GetCurrentApplicationCallbackUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> callbackUri) noexcept override
+    HRESULT __stdcall GetCurrentApplicationCallbackUri(::IUnknown** callbackUri) noexcept final
     {
         try
         {
-            *callbackUri = detach(this->shim().GetCurrentApplicationCallbackUri());
+            typename D::abi_guard guard(this->shim());
+            *callbackUri = detach_abi(this->shim().GetCurrentApplicationCallbackUri());
             return S_OK;
         }
         catch (...)
@@ -60,11 +136,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
 template <typename D>
 struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2> : produce_base<D, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>
 {
-    HRESULT __stdcall abi_AuthenticateAndContinue(abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri) noexcept override
+    HRESULT __stdcall AuthenticateAndContinue(::IUnknown* requestUri) noexcept final
     {
         try
         {
-            this->shim().AuthenticateAndContinue(*reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri));
+            typename D::abi_guard guard(this->shim());
+            this->shim().AuthenticateAndContinue(*reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri));
             return S_OK;
         }
         catch (...)
@@ -73,11 +150,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_AuthenticateWithCallbackUriAndContinue(abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, abi_arg_in<Windows::Foundation::IUriRuntimeClass> callbackUri) noexcept override
+    HRESULT __stdcall AuthenticateWithCallbackUriAndContinue(::IUnknown* requestUri, ::IUnknown* callbackUri) noexcept final
     {
         try
         {
-            this->shim().AuthenticateAndContinue(*reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri), *reinterpret_cast<const Windows::Foundation::Uri *>(&callbackUri));
+            typename D::abi_guard guard(this->shim());
+            this->shim().AuthenticateAndContinue(*reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri), *reinterpret_cast<Windows::Foundation::Uri const*>(&callbackUri));
             return S_OK;
         }
         catch (...)
@@ -86,11 +164,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_AuthenticateWithCallbackUriContinuationDataAndOptionsAndContinue(abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, abi_arg_in<Windows::Foundation::IUriRuntimeClass> callbackUri, abi_arg_in<Windows::Foundation::Collections::IPropertySet> continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions options) noexcept override
+    HRESULT __stdcall AuthenticateWithCallbackUriContinuationDataAndOptionsAndContinue(::IUnknown* requestUri, ::IUnknown* callbackUri, ::IUnknown* continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions options) noexcept final
     {
         try
         {
-            this->shim().AuthenticateAndContinue(*reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri), *reinterpret_cast<const Windows::Foundation::Uri *>(&callbackUri), *reinterpret_cast<const Windows::Foundation::Collections::ValueSet *>(&continuationData), options);
+            typename D::abi_guard guard(this->shim());
+            this->shim().AuthenticateAndContinue(*reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri), *reinterpret_cast<Windows::Foundation::Uri const*>(&callbackUri), *reinterpret_cast<Windows::Foundation::Collections::ValueSet const*>(&continuationData), *reinterpret_cast<Windows::Security::Authentication::Web::WebAuthenticationOptions const*>(&options));
             return S_OK;
         }
         catch (...)
@@ -99,11 +178,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_AuthenticateSilentlyAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult>> asyncInfo) noexcept override
+    HRESULT __stdcall AuthenticateSilentlyAsync(::IUnknown* requestUri, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().AuthenticateSilentlyAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri)));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().AuthenticateSilentlyAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri)));
             return S_OK;
         }
         catch (...)
@@ -113,11 +193,12 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
         }
     }
 
-    HRESULT __stdcall abi_AuthenticateSilentlyWithOptionsAsync(abi_arg_in<Windows::Foundation::IUriRuntimeClass> requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions options, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult>> asyncInfo) noexcept override
+    HRESULT __stdcall AuthenticateSilentlyWithOptionsAsync(::IUnknown* requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions options, ::IUnknown** asyncInfo) noexcept final
     {
         try
         {
-            *asyncInfo = detach(this->shim().AuthenticateSilentlyAsync(*reinterpret_cast<const Windows::Foundation::Uri *>(&requestUri), options));
+            typename D::abi_guard guard(this->shim());
+            *asyncInfo = detach_abi(this->shim().AuthenticateSilentlyAsync(*reinterpret_cast<Windows::Foundation::Uri const*>(&requestUri), *reinterpret_cast<Windows::Security::Authentication::Web::WebAuthenticationOptions const*>(&options)));
             return S_OK;
         }
         catch (...)
@@ -131,162 +212,91 @@ struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationBrok
 template <typename D>
 struct produce<D, Windows::Security::Authentication::Web::IWebAuthenticationResult> : produce_base<D, Windows::Security::Authentication::Web::IWebAuthenticationResult>
 {
-    HRESULT __stdcall get_ResponseData(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ResponseData(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResponseData());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResponseData());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ResponseStatus(Windows::Security::Authentication::Web::WebAuthenticationStatus * value) noexcept override
+    HRESULT __stdcall get_ResponseStatus(Windows::Security::Authentication::Web::WebAuthenticationStatus* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResponseStatus());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResponseStatus());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ResponseErrorDetail(uint32_t * value) noexcept override
+    HRESULT __stdcall get_ResponseErrorDetail(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResponseErrorDetail());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResponseErrorDetail());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Security::Authentication::Web {
+WINRT_EXPORT namespace winrt::Windows::Security::Authentication::Web {
 
-template <typename D> hstring impl_IWebAuthenticationResult<D>::ResponseData() const
+inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions const& options, Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri)
 {
-    hstring value;
-    check_hresult(static_cast<const IWebAuthenticationResult &>(static_cast<const D &>(*this))->get_ResponseData(put(value)));
-    return value;
+    return get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics>().AuthenticateAsync(options, requestUri, callbackUri);
 }
 
-template <typename D> Windows::Security::Authentication::Web::WebAuthenticationStatus impl_IWebAuthenticationResult<D>::ResponseStatus() const
+inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions const& options, Windows::Foundation::Uri const& requestUri)
 {
-    Windows::Security::Authentication::Web::WebAuthenticationStatus value {};
-    check_hresult(static_cast<const IWebAuthenticationResult &>(static_cast<const D &>(*this))->get_ResponseStatus(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IWebAuthenticationResult<D>::ResponseErrorDetail() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IWebAuthenticationResult &>(static_cast<const D &>(*this))->get_ResponseErrorDetail(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> impl_IWebAuthenticationBrokerStatics<D>::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo;
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics &>(static_cast<const D &>(*this))->abi_AuthenticateWithCallbackUriAsync(options, get(requestUri), get(callbackUri), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> impl_IWebAuthenticationBrokerStatics<D>::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, const Windows::Foundation::Uri & requestUri) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo;
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics &>(static_cast<const D &>(*this))->abi_AuthenticateWithoutCallbackUriAsync(options, get(requestUri), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IWebAuthenticationBrokerStatics<D>::GetCurrentApplicationCallbackUri() const
-{
-    Windows::Foundation::Uri callbackUri { nullptr };
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics &>(static_cast<const D &>(*this))->abi_GetCurrentApplicationCallbackUri(put(callbackUri)));
-    return callbackUri;
-}
-
-template <typename D> void impl_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri) const
-{
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics2 &>(static_cast<const D &>(*this))->abi_AuthenticateAndContinue(get(requestUri)));
-}
-
-template <typename D> void impl_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri) const
-{
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics2 &>(static_cast<const D &>(*this))->abi_AuthenticateWithCallbackUriAndContinue(get(requestUri), get(callbackUri)));
-}
-
-template <typename D> void impl_IWebAuthenticationBrokerStatics2<D>::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri, const Windows::Foundation::Collections::ValueSet & continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions options) const
-{
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics2 &>(static_cast<const D &>(*this))->abi_AuthenticateWithCallbackUriContinuationDataAndOptionsAndContinue(get(requestUri), get(callbackUri), get(continuationData), options));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> impl_IWebAuthenticationBrokerStatics2<D>::AuthenticateSilentlyAsync(const Windows::Foundation::Uri & requestUri) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo;
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics2 &>(static_cast<const D &>(*this))->abi_AuthenticateSilentlyAsync(get(requestUri), put(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> impl_IWebAuthenticationBrokerStatics2<D>::AuthenticateSilentlyAsync(const Windows::Foundation::Uri & requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions options) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> asyncInfo;
-    check_hresult(static_cast<const IWebAuthenticationBrokerStatics2 &>(static_cast<const D &>(*this))->abi_AuthenticateSilentlyWithOptionsAsync(get(requestUri), options, put(asyncInfo)));
-    return asyncInfo;
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri)
-{
-    return get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics>().AuthenticateAsync(options, requestUri, callbackUri);
-}
-
-inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateAsync(Windows::Security::Authentication::Web::WebAuthenticationOptions options, const Windows::Foundation::Uri & requestUri)
-{
-    return get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics>().AuthenticateAsync(options, requestUri);
+    return get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics>().AuthenticateAsync(options, requestUri);
 }
 
 inline Windows::Foundation::Uri WebAuthenticationBroker::GetCurrentApplicationCallbackUri()
 {
-    return get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics>().GetCurrentApplicationCallbackUri();
+    return get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics>().GetCurrentApplicationCallbackUri();
 }
 
-inline void WebAuthenticationBroker::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri)
+inline void WebAuthenticationBroker::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri)
 {
-    get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri);
+    get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri);
 }
 
-inline void WebAuthenticationBroker::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri)
+inline void WebAuthenticationBroker::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri)
 {
-    get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri, callbackUri);
+    get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri, callbackUri);
 }
 
-inline void WebAuthenticationBroker::AuthenticateAndContinue(const Windows::Foundation::Uri & requestUri, const Windows::Foundation::Uri & callbackUri, const Windows::Foundation::Collections::ValueSet & continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions options)
+inline void WebAuthenticationBroker::AuthenticateAndContinue(Windows::Foundation::Uri const& requestUri, Windows::Foundation::Uri const& callbackUri, Windows::Foundation::Collections::ValueSet const& continuationData, Windows::Security::Authentication::Web::WebAuthenticationOptions const& options)
 {
-    get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri, callbackUri, continuationData, options);
+    get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>().AuthenticateAndContinue(requestUri, callbackUri, continuationData, options);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateSilentlyAsync(const Windows::Foundation::Uri & requestUri)
+inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateSilentlyAsync(Windows::Foundation::Uri const& requestUri)
 {
-    return get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics2>().AuthenticateSilentlyAsync(requestUri);
+    return get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>().AuthenticateSilentlyAsync(requestUri);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateSilentlyAsync(const Windows::Foundation::Uri & requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions options)
+inline Windows::Foundation::IAsyncOperation<Windows::Security::Authentication::Web::WebAuthenticationResult> WebAuthenticationBroker::AuthenticateSilentlyAsync(Windows::Foundation::Uri const& requestUri, Windows::Security::Authentication::Web::WebAuthenticationOptions const& options)
 {
-    return get_activation_factory<WebAuthenticationBroker, IWebAuthenticationBrokerStatics2>().AuthenticateSilentlyAsync(requestUri, options);
+    return get_activation_factory<WebAuthenticationBroker, Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2>().AuthenticateSilentlyAsync(requestUri, options);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics> {};
+
+template<> struct hash<winrt::Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Security::Authentication::Web::IWebAuthenticationBrokerStatics2> {};
+
+template<> struct hash<winrt::Windows::Security::Authentication::Web::IWebAuthenticationResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Security::Authentication::Web::IWebAuthenticationResult> {};
+
+template<> struct hash<winrt::Windows::Security::Authentication::Web::WebAuthenticationBroker> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Security::Authentication::Web::WebAuthenticationBroker> {};
+
+template<> struct hash<winrt::Windows::Security::Authentication::Web::WebAuthenticationResult> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Security::Authentication::Web::WebAuthenticationResult> {};
+
 }
+
+WINRT_WARNING_POP

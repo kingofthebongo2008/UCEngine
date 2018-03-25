@@ -1,84 +1,149 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Media.Capture.3.h"
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Media.Capture.Core.3.h"
-#include "Windows.Media.Capture.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Media.Capture.2.h"
+#include "winrt/impl/Windows.Media.Capture.Core.2.h"
+#include "winrt/Windows.Media.Capture.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::Media::Capture::CapturedFrame consume_Windows_Media_Capture_Core_IVariablePhotoCapturedEventArgs<D>::Frame() const noexcept
+{
+    Windows::Media::Capture::CapturedFrame value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs)->get_Frame(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::TimeSpan consume_Windows_Media_Capture_Core_IVariablePhotoCapturedEventArgs<D>::CaptureTimeOffset() const noexcept
+{
+    Windows::Foundation::TimeSpan value{};
+    check_terminate(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs)->get_CaptureTimeOffset(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<uint32_t> consume_Windows_Media_Capture_Core_IVariablePhotoCapturedEventArgs<D>::UsedFrameControllerIndex() const noexcept
+{
+    Windows::Foundation::IReference<uint32_t> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs)->get_UsedFrameControllerIndex(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Media::Capture::CapturedFrameControlValues consume_Windows_Media_Capture_Core_IVariablePhotoCapturedEventArgs<D>::CapturedFrameControlValues() const noexcept
+{
+    Windows::Media::Capture::CapturedFrameControlValues value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs)->get_CapturedFrameControlValues(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::StartAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->StartAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::StopAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->StopAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::FinishAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->FinishAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> event_token consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::PhotoCaptured(Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->add_PhotoCaptured(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::PhotoCaptured(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture>(this, &abi_t<Windows::Media::Capture::Core::IVariablePhotoSequenceCapture>::remove_PhotoCaptured, PhotoCaptured(handler));
+}
+
+template <typename D> void consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::PhotoCaptured(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->remove_PhotoCaptured(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::Stopped(Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Foundation::IInspectable> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->add_Stopped(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::Stopped(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Foundation::IInspectable> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture>(this, &abi_t<Windows::Media::Capture::Core::IVariablePhotoSequenceCapture>::remove_Stopped, Stopped(handler));
+}
+
+template <typename D> void consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture<D>::Stopped(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture)->remove_Stopped(get_abi(token)));
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_Media_Capture_Core_IVariablePhotoSequenceCapture2<D>::UpdateSettingsAsync() const
+{
+    Windows::Foundation::IAsyncAction operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2)->UpdateSettingsAsync(put_abi(operation)));
+    return operation;
+}
 
 template <typename D>
 struct produce<D, Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs> : produce_base<D, Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs>
 {
-    HRESULT __stdcall get_Frame(abi_arg_out<Windows::Media::Capture::ICapturedFrame> value) noexcept override
+    HRESULT __stdcall get_Frame(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Frame());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Frame());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CaptureTimeOffset(abi_arg_out<Windows::Foundation::TimeSpan> value) noexcept override
+    HRESULT __stdcall get_CaptureTimeOffset(Windows::Foundation::TimeSpan* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CaptureTimeOffset());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CaptureTimeOffset());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_UsedFrameControllerIndex(abi_arg_out<Windows::Foundation::IReference<uint32_t>> value) noexcept override
+    HRESULT __stdcall get_UsedFrameControllerIndex(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().UsedFrameControllerIndex());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().UsedFrameControllerIndex());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CapturedFrameControlValues(abi_arg_out<Windows::Media::Capture::ICapturedFrameControlValues> value) noexcept override
+    HRESULT __stdcall get_CapturedFrameControlValues(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CapturedFrameControlValues());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CapturedFrameControlValues());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> : produce_base<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture>
 {
-    HRESULT __stdcall abi_StartAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall StartAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().StartAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().StartAsync());
             return S_OK;
         }
         catch (...)
@@ -88,11 +153,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall abi_StopAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall StopAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().StopAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().StopAsync());
             return S_OK;
         }
         catch (...)
@@ -102,11 +168,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall abi_FinishAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall FinishAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().FinishAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().FinishAsync());
             return S_OK;
         }
         catch (...)
@@ -116,11 +183,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall add_PhotoCaptured(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_PhotoCaptured(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().PhotoCaptured(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().PhotoCaptured(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -129,11 +197,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall remove_PhotoCaptured(event_token token) noexcept override
+    HRESULT __stdcall remove_PhotoCaptured(event_token token) noexcept final
     {
         try
         {
-            this->shim().PhotoCaptured(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().PhotoCaptured(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -142,11 +211,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall add_Stopped(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::IInspectable>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_Stopped(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().Stopped(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::IInspectable> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().Stopped(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Foundation::IInspectable> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -155,11 +225,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
         }
     }
 
-    HRESULT __stdcall remove_Stopped(event_token token) noexcept override
+    HRESULT __stdcall remove_Stopped(event_token token) noexcept final
     {
         try
         {
-            this->shim().Stopped(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().Stopped(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -172,11 +243,12 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> 
 template <typename D>
 struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2> : produce_base<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2>
 {
-    HRESULT __stdcall abi_UpdateSettingsAsync(abi_arg_out<Windows::Foundation::IAsyncAction> operation) noexcept override
+    HRESULT __stdcall UpdateSettingsAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().UpdateSettingsAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().UpdateSettingsAsync());
             return S_OK;
         }
         catch (...)
@@ -189,98 +261,27 @@ struct produce<D, Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2>
 
 }
 
-namespace Windows::Media::Capture::Core {
-
-template <typename D> Windows::Media::Capture::CapturedFrame impl_IVariablePhotoCapturedEventArgs<D>::Frame() const
-{
-    Windows::Media::Capture::CapturedFrame value { nullptr };
-    check_hresult(static_cast<const IVariablePhotoCapturedEventArgs &>(static_cast<const D &>(*this))->get_Frame(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::TimeSpan impl_IVariablePhotoCapturedEventArgs<D>::CaptureTimeOffset() const
-{
-    Windows::Foundation::TimeSpan value {};
-    check_hresult(static_cast<const IVariablePhotoCapturedEventArgs &>(static_cast<const D &>(*this))->get_CaptureTimeOffset(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<uint32_t> impl_IVariablePhotoCapturedEventArgs<D>::UsedFrameControllerIndex() const
-{
-    Windows::Foundation::IReference<uint32_t> value;
-    check_hresult(static_cast<const IVariablePhotoCapturedEventArgs &>(static_cast<const D &>(*this))->get_UsedFrameControllerIndex(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Media::Capture::CapturedFrameControlValues impl_IVariablePhotoCapturedEventArgs<D>::CapturedFrameControlValues() const
-{
-    Windows::Media::Capture::CapturedFrameControlValues value { nullptr };
-    check_hresult(static_cast<const IVariablePhotoCapturedEventArgs &>(static_cast<const D &>(*this))->get_CapturedFrameControlValues(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IVariablePhotoSequenceCapture<D>::StartAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->abi_StartAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IVariablePhotoSequenceCapture<D>::StopAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->abi_StopAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IVariablePhotoSequenceCapture<D>::FinishAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->abi_FinishAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> event_token impl_IVariablePhotoSequenceCapture<D>::PhotoCaptured(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->add_PhotoCaptured(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVariablePhotoSequenceCapture> impl_IVariablePhotoSequenceCapture<D>::PhotoCaptured(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IVariablePhotoSequenceCapture>(this, &ABI::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture::remove_PhotoCaptured, PhotoCaptured(handler));
-}
-
-template <typename D> void impl_IVariablePhotoSequenceCapture<D>::PhotoCaptured(event_token token) const
-{
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->remove_PhotoCaptured(token));
-}
-
-template <typename D> event_token impl_IVariablePhotoSequenceCapture<D>::Stopped(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->add_Stopped(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IVariablePhotoSequenceCapture> impl_IVariablePhotoSequenceCapture<D>::Stopped(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::Core::VariablePhotoSequenceCapture, Windows::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, IVariablePhotoSequenceCapture>(this, &ABI::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture::remove_Stopped, Stopped(handler));
-}
-
-template <typename D> void impl_IVariablePhotoSequenceCapture<D>::Stopped(event_token token) const
-{
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture &>(static_cast<const D &>(*this))->remove_Stopped(token));
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_IVariablePhotoSequenceCapture2<D>::UpdateSettingsAsync() const
-{
-    Windows::Foundation::IAsyncAction operation;
-    check_hresult(static_cast<const IVariablePhotoSequenceCapture2 &>(static_cast<const D &>(*this))->abi_UpdateSettingsAsync(put(operation)));
-    return operation;
-}
+WINRT_EXPORT namespace winrt::Windows::Media::Capture::Core {
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Capture::Core::IVariablePhotoCapturedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture> {};
+
+template<> struct hash<winrt::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Capture::Core::IVariablePhotoSequenceCapture2> {};
+
+template<> struct hash<winrt::Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Capture::Core::VariablePhotoCapturedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Media::Capture::Core::VariablePhotoSequenceCapture> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Media::Capture::Core::VariablePhotoSequenceCapture> {};
+
 }
+
+WINRT_WARNING_POP

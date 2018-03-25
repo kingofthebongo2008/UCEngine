@@ -1,88 +1,633 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Storage.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.ApplicationModel.Store.3.h"
-#include "Windows.ApplicationModel.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.Storage.2.h"
+#include "winrt/impl/Windows.ApplicationModel.Store.2.h"
+#include "winrt/Windows.ApplicationModel.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace Windows::ApplicationModel::Store {
-
-template <typename L> LicenseChangedEventHandler::LicenseChangedEventHandler(L lambda) :
-    LicenseChangedEventHandler(impl::make_delegate<impl_LicenseChangedEventHandler<L>, LicenseChangedEventHandler>(std::forward<L>(lambda)))
-{}
-
-template <typename F> LicenseChangedEventHandler::LicenseChangedEventHandler(F * function) :
-    LicenseChangedEventHandler([=](auto && ... args) { function(args ...); })
-{}
-
-template <typename O, typename M> LicenseChangedEventHandler::LicenseChangedEventHandler(O * object, M method) :
-    LicenseChangedEventHandler([=](auto && ... args) { ((*object).*(method))(args ...); })
-{}
-
-inline void LicenseChangedEventHandler::operator()() const
+template <typename D> Windows::ApplicationModel::Store::LicenseInformation consume_Windows_ApplicationModel_Store_ICurrentApp<D>::LicenseInformation() const noexcept
 {
-    check_hresult((*this)->abi_Invoke());
+    Windows::ApplicationModel::Store::LicenseInformation value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->get_LicenseInformation(put_abi(value)));
+    return value;
 }
 
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Store_ICurrentApp<D>::LinkUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->get_LinkUri(put_abi(value)));
+    return value;
 }
 
-namespace impl {
+template <typename D> GUID consume_Windows_ApplicationModel_Store_ICurrentApp<D>::AppId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->get_AppId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp<D>::RequestAppPurchaseAsync(bool includeReceipt) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> requestAppPurchaseOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->RequestAppPurchaseAsync(includeReceipt, put_abi(requestAppPurchaseOperation)));
+    return requestAppPurchaseOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp<D>::RequestProductPurchaseAsync(param::hstring const& productId, bool includeReceipt) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> requestProductPurchaseOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->RequestProductPurchaseAsync(get_abi(productId), includeReceipt, put_abi(requestProductPurchaseOperation)));
+    return requestProductPurchaseOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentApp<D>::LoadListingInformationAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->LoadListingInformationAsync(put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp<D>::GetAppReceiptAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> appReceiptOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->GetAppReceiptAsync(put_abi(appReceiptOperation)));
+    return appReceiptOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp<D>::GetProductReceiptAsync(param::hstring const& productId) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> getProductReceiptOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp)->GetProductReceiptAsync(get_abi(productId), put_abi(getProductReceiptOperation)));
+    return getProductReceiptOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp2Statics<D>::GetCustomerPurchaseIdAsync(param::hstring const& serviceTicket, param::hstring const& publisherUserId) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp2Statics)->GetCustomerPurchaseIdAsync(get_abi(serviceTicket), get_abi(publisherUserId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentApp2Statics<D>::GetCustomerCollectionsIdAsync(param::hstring const& serviceTicket, param::hstring const& publisherUserId) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentApp2Statics)->GetCustomerCollectionsIdAsync(get_abi(serviceTicket), get_abi(publisherUserId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::ApplicationModel::Store::LicenseInformation consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::LicenseInformation() const noexcept
+{
+    Windows::ApplicationModel::Store::LicenseInformation value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->get_LicenseInformation(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::LinkUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->get_LinkUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::AppId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->get_AppId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::RequestAppPurchaseAsync(bool includeReceipt) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> requestAppPurchaseOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->RequestAppPurchaseAsync(includeReceipt, put_abi(requestAppPurchaseOperation)));
+    return requestAppPurchaseOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::RequestProductPurchaseAsync(param::hstring const& productId, bool includeReceipt) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> requestProductPurchaseOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->RequestProductPurchaseAsync(get_abi(productId), includeReceipt, put_abi(requestProductPurchaseOperation)));
+    return requestProductPurchaseOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::LoadListingInformationAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->LoadListingInformationAsync(put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::GetAppReceiptAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> appReceiptOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->GetAppReceiptAsync(put_abi(appReceiptOperation)));
+    return appReceiptOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::GetProductReceiptAsync(param::hstring const& productId) const
+{
+    Windows::Foundation::IAsyncOperation<hstring> getProductReceiptOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->GetProductReceiptAsync(get_abi(productId), put_abi(getProductReceiptOperation)));
+    return getProductReceiptOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncAction consume_Windows_ApplicationModel_Store_ICurrentAppSimulator<D>::ReloadSimulatorAsync(Windows::Storage::StorageFile const& simulatorSettingsFile) const
+{
+    Windows::Foundation::IAsyncAction reloadSimulatorOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulator)->ReloadSimulatorAsync(get_abi(simulatorSettingsFile), put_abi(reloadSimulatorOperation)));
+    return reloadSimulatorOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorStaticsWithFiltering<D>::LoadListingInformationByProductIdsAsync(param::async_iterable<hstring> const& productIds) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering)->LoadListingInformationByProductIdsAsync(get_abi(productIds), put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorStaticsWithFiltering<D>::LoadListingInformationByKeywordsAsync(param::async_iterable<hstring> const& keywords) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering)->LoadListingInformationByKeywordsAsync(get_abi(keywords), put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorWithCampaignId<D>::GetAppPurchaseCampaignIdAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId)->GetAppPurchaseCampaignIdAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorWithConsumables<D>::ReportConsumableFulfillmentAsync(param::hstring const& productId, GUID const& transactionId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> reportConsumableFulfillmentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables)->ReportConsumableFulfillmentAsync(get_abi(productId), get_abi(transactionId), put_abi(reportConsumableFulfillmentOperation)));
+    return reportConsumableFulfillmentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorWithConsumables<D>::RequestProductPurchaseAsync(param::hstring const& productId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithResultsOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables)->RequestProductPurchaseWithResultsAsync(get_abi(productId), put_abi(requestProductPurchaseWithResultsOperation)));
+    return requestProductPurchaseWithResultsOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorWithConsumables<D>::RequestProductPurchaseAsync(param::hstring const& productId, param::hstring const& offerId, Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const& displayProperties) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithDisplayPropertiesOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables)->RequestProductPurchaseWithDisplayPropertiesAsync(get_abi(productId), get_abi(offerId), get_abi(displayProperties), put_abi(requestProductPurchaseWithDisplayPropertiesOperation)));
+    return requestProductPurchaseWithDisplayPropertiesOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> consume_Windows_ApplicationModel_Store_ICurrentAppSimulatorWithConsumables<D>::GetUnfulfilledConsumablesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> getUnfulfilledConsumablesOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables)->GetUnfulfilledConsumablesAsync(put_abi(getUnfulfilledConsumablesOperation)));
+    return getUnfulfilledConsumablesOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentAppStaticsWithFiltering<D>::LoadListingInformationByProductIdsAsync(param::async_iterable<hstring> const& productIds) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering)->LoadListingInformationByProductIdsAsync(get_abi(productIds), put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> consume_Windows_ApplicationModel_Store_ICurrentAppStaticsWithFiltering<D>::LoadListingInformationByKeywordsAsync(param::async_iterable<hstring> const& keywords) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering)->LoadListingInformationByKeywordsAsync(get_abi(keywords), put_abi(loadListingOperation)));
+    return loadListingOperation;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Store_ICurrentAppStaticsWithFiltering<D>::ReportProductFulfillment(param::hstring const& productId) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering)->ReportProductFulfillment(get_abi(productId)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<hstring> consume_Windows_ApplicationModel_Store_ICurrentAppWithCampaignId<D>::GetAppPurchaseCampaignIdAsync() const
+{
+    Windows::Foundation::IAsyncOperation<hstring> operation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppWithCampaignId)->GetAppPurchaseCampaignIdAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> consume_Windows_ApplicationModel_Store_ICurrentAppWithConsumables<D>::ReportConsumableFulfillmentAsync(param::hstring const& productId, GUID const& transactionId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> reportConsumableFulfillmentOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppWithConsumables)->ReportConsumableFulfillmentAsync(get_abi(productId), get_abi(transactionId), put_abi(reportConsumableFulfillmentOperation)));
+    return reportConsumableFulfillmentOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> consume_Windows_ApplicationModel_Store_ICurrentAppWithConsumables<D>::RequestProductPurchaseAsync(param::hstring const& productId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithResultsOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppWithConsumables)->RequestProductPurchaseWithResultsAsync(get_abi(productId), put_abi(requestProductPurchaseWithResultsOperation)));
+    return requestProductPurchaseWithResultsOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> consume_Windows_ApplicationModel_Store_ICurrentAppWithConsumables<D>::RequestProductPurchaseAsync(param::hstring const& productId, param::hstring const& offerId, Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const& displayProperties) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithDisplayPropertiesOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppWithConsumables)->RequestProductPurchaseWithDisplayPropertiesAsync(get_abi(productId), get_abi(offerId), get_abi(displayProperties), put_abi(requestProductPurchaseWithDisplayPropertiesOperation)));
+    return requestProductPurchaseWithDisplayPropertiesOperation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> consume_Windows_ApplicationModel_Store_ICurrentAppWithConsumables<D>::GetUnfulfilledConsumablesAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> getUnfulfilledConsumablesOperation{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ICurrentAppWithConsumables)->GetUnfulfilledConsumablesAsync(put_abi(getUnfulfilledConsumablesOperation)));
+    return getUnfulfilledConsumablesOperation;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense> consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::ProductLicenses() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->get_ProductLicenses(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::IsActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->get_IsActive(&value));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::IsTrial() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->get_IsTrial(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::ExpirationDate() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->get_ExpirationDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> event_token consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::LicenseChanged(Windows::ApplicationModel::Store::LicenseChangedEventHandler const& handler) const
+{
+    event_token cookie{};
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->add_LicenseChanged(get_abi(handler), put_abi(cookie)));
+    return cookie;
+}
+
+template <typename D> event_revoker<Windows::ApplicationModel::Store::ILicenseInformation> consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::LicenseChanged(auto_revoke_t, Windows::ApplicationModel::Store::LicenseChangedEventHandler const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::ApplicationModel::Store::ILicenseInformation>(this, &abi_t<Windows::ApplicationModel::Store::ILicenseInformation>::remove_LicenseChanged, LicenseChanged(handler));
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Store_ILicenseInformation<D>::LicenseChanged(event_token const& cookie) const
+{
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::ILicenseInformation)->remove_LicenseChanged(get_abi(cookie)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation<D>::CurrentMarket() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_CurrentMarket(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> consume_Windows_ApplicationModel_Store_IListingInformation<D>::ProductListings() const noexcept
+{
+    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_ProductListings(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation<D>::FormattedPrice() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_FormattedPrice(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_ApplicationModel_Store_IListingInformation<D>::AgeRating() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation)->get_AgeRating(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation2<D>::FormattedBasePrice() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation2)->get_FormattedBasePrice(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Store_IListingInformation2<D>::SaleEndDate() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation2)->get_SaleEndDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_IListingInformation2<D>::IsOnSale() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation2)->get_IsOnSale(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IListingInformation2<D>::CurrencyCode() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IListingInformation2)->get_CurrencyCode(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductLicense<D>::ProductId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductLicense)->get_ProductId(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_IProductLicense<D>::IsActive() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductLicense)->get_IsActive(&value));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Store_IProductLicense<D>::ExpirationDate() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductLicense)->get_ExpirationDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_IProductLicenseWithFulfillment<D>::IsConsumable() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductLicenseWithFulfillment)->get_IsConsumable(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListing<D>::ProductId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing)->get_ProductId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListing<D>::FormattedPrice() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing)->get_FormattedPrice(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListing<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListing2<D>::FormattedBasePrice() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing2)->get_FormattedBasePrice(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_ApplicationModel_Store_IProductListing2<D>::SaleEndDate() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing2)->get_SaleEndDate(put_abi(value)));
+    return value;
+}
+
+template <typename D> bool consume_Windows_ApplicationModel_Store_IProductListing2<D>::IsOnSale() const noexcept
+{
+    bool value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing2)->get_IsOnSale(&value));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListing2<D>::CurrencyCode() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListing2)->get_CurrencyCode(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Store::ProductType consume_Windows_ApplicationModel_Store_IProductListingWithConsumables<D>::ProductType() const noexcept
+{
+    Windows::ApplicationModel::Store::ProductType value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithConsumables)->get_ProductType(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListingWithMetadata<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithMetadata)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IIterable<hstring> consume_Windows_ApplicationModel_Store_IProductListingWithMetadata<D>::Keywords() const noexcept
+{
+    Windows::Foundation::Collections::IIterable<hstring> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithMetadata)->get_Keywords(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Store::ProductType consume_Windows_ApplicationModel_Store_IProductListingWithMetadata<D>::ProductType() const noexcept
+{
+    Windows::ApplicationModel::Store::ProductType value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithMetadata)->get_ProductType(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductListingWithMetadata<D>::Tag() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithMetadata)->get_Tag(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Store_IProductListingWithMetadata<D>::ImageUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductListingWithMetadata)->get_ImageUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Name() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->get_Name(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Name(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->put_Name(get_abi(value)));
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Description() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->get_Description(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Description(param::hstring const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->put_Description(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Image() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->get_Image(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayProperties<D>::Image(Windows::Foundation::Uri const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties)->put_Image(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties consume_Windows_ApplicationModel_Store_IProductPurchaseDisplayPropertiesFactory<D>::CreateProductPurchaseDisplayProperties(param::hstring const& name) const
+{
+    Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties displayProperties{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory)->CreateProductPurchaseDisplayProperties(get_abi(name), put_abi(displayProperties)));
+    return displayProperties;
+}
+
+template <typename D> Windows::ApplicationModel::Store::ProductPurchaseStatus consume_Windows_ApplicationModel_Store_IPurchaseResults<D>::Status() const noexcept
+{
+    Windows::ApplicationModel::Store::ProductPurchaseStatus value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IPurchaseResults)->get_Status(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_ApplicationModel_Store_IPurchaseResults<D>::TransactionId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IPurchaseResults)->get_TransactionId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IPurchaseResults<D>::ReceiptXml() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IPurchaseResults)->get_ReceiptXml(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IPurchaseResults<D>::OfferId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IPurchaseResults)->get_OfferId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IUnfulfilledConsumable<D>::ProductId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IUnfulfilledConsumable)->get_ProductId(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_ApplicationModel_Store_IUnfulfilledConsumable<D>::TransactionId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IUnfulfilledConsumable)->get_TransactionId(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring consume_Windows_ApplicationModel_Store_IUnfulfilledConsumable<D>::OfferId() const noexcept
+{
+    hstring value{};
+    check_terminate(WINRT_SHIM(Windows::ApplicationModel::Store::IUnfulfilledConsumable)->get_OfferId(put_abi(value)));
+    return value;
+}
+
+template <> struct delegate<Windows::ApplicationModel::Store::LicenseChangedEventHandler>
+{
+    template <typename H>
+    struct type : implements_delegate<Windows::ApplicationModel::Store::LicenseChangedEventHandler, H>
+    {
+        type(H&& handler) : implements_delegate<Windows::ApplicationModel::Store::LicenseChangedEventHandler, H>(std::forward<H>(handler)) {}
+
+        HRESULT __stdcall Invoke() noexcept final
+        {
+            try
+            {
+                (*this)();
+                return S_OK;
+            }
+            catch (...)
+            {
+                return to_hresult();
+            }
+        }
+    };
+};
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<D, Windows::ApplicationModel::Store::ICurrentApp>
 {
-    HRESULT __stdcall get_LicenseInformation(abi_arg_out<Windows::ApplicationModel::Store::ILicenseInformation> value) noexcept override
+    HRESULT __stdcall get_LicenseInformation(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LicenseInformation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LicenseInformation());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LinkUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_LinkUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LinkUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LinkUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AppId(GUID * value) noexcept override
+    HRESULT __stdcall get_AppId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AppId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AppId());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_RequestAppPurchaseAsync(bool includeReceipt, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> requestAppPurchaseOperation) noexcept override
+    HRESULT __stdcall RequestAppPurchaseAsync(bool includeReceipt, ::IUnknown** requestAppPurchaseOperation) noexcept final
     {
         try
         {
-            *requestAppPurchaseOperation = detach(this->shim().RequestAppPurchaseAsync(includeReceipt));
+            typename D::abi_guard guard(this->shim());
+            *requestAppPurchaseOperation = detach_abi(this->shim().RequestAppPurchaseAsync(includeReceipt));
             return S_OK;
         }
         catch (...)
@@ -92,11 +637,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseAsync(abi_arg_in<hstring> productId, bool includeReceipt, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> requestProductPurchaseOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseAsync(HSTRING productId, bool includeReceipt, ::IUnknown** requestProductPurchaseOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId), includeReceipt));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId), includeReceipt));
             return S_OK;
         }
         catch (...)
@@ -106,11 +652,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_LoadListingInformationAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationAsync(::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationAsync());
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationAsync());
             return S_OK;
         }
         catch (...)
@@ -120,11 +667,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_GetAppReceiptAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> appReceiptOperation) noexcept override
+    HRESULT __stdcall GetAppReceiptAsync(::IUnknown** appReceiptOperation) noexcept final
     {
         try
         {
-            *appReceiptOperation = detach(this->shim().GetAppReceiptAsync());
+            typename D::abi_guard guard(this->shim());
+            *appReceiptOperation = detach_abi(this->shim().GetAppReceiptAsync());
             return S_OK;
         }
         catch (...)
@@ -134,11 +682,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<
         }
     }
 
-    HRESULT __stdcall abi_GetProductReceiptAsync(abi_arg_in<hstring> productId, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> getProductReceiptOperation) noexcept override
+    HRESULT __stdcall GetProductReceiptAsync(HSTRING productId, ::IUnknown** getProductReceiptOperation) noexcept final
     {
         try
         {
-            *getProductReceiptOperation = detach(this->shim().GetProductReceiptAsync(*reinterpret_cast<const hstring *>(&productId)));
+            typename D::abi_guard guard(this->shim());
+            *getProductReceiptOperation = detach_abi(this->shim().GetProductReceiptAsync(*reinterpret_cast<hstring const*>(&productId)));
             return S_OK;
         }
         catch (...)
@@ -152,11 +701,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp> : produce_base<
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentApp2Statics> : produce_base<D, Windows::ApplicationModel::Store::ICurrentApp2Statics>
 {
-    HRESULT __stdcall abi_GetCustomerPurchaseIdAsync(abi_arg_in<hstring> serviceTicket, abi_arg_in<hstring> publisherUserId, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetCustomerPurchaseIdAsync(HSTRING serviceTicket, HSTRING publisherUserId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetCustomerPurchaseIdAsync(*reinterpret_cast<const hstring *>(&serviceTicket), *reinterpret_cast<const hstring *>(&publisherUserId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetCustomerPurchaseIdAsync(*reinterpret_cast<hstring const*>(&serviceTicket), *reinterpret_cast<hstring const*>(&publisherUserId)));
             return S_OK;
         }
         catch (...)
@@ -166,11 +716,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp2Statics> : produ
         }
     }
 
-    HRESULT __stdcall abi_GetCustomerCollectionsIdAsync(abi_arg_in<hstring> serviceTicket, abi_arg_in<hstring> publisherUserId, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetCustomerCollectionsIdAsync(HSTRING serviceTicket, HSTRING publisherUserId, ::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetCustomerCollectionsIdAsync(*reinterpret_cast<const hstring *>(&serviceTicket), *reinterpret_cast<const hstring *>(&publisherUserId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetCustomerCollectionsIdAsync(*reinterpret_cast<hstring const*>(&serviceTicket), *reinterpret_cast<hstring const*>(&publisherUserId)));
             return S_OK;
         }
         catch (...)
@@ -184,52 +735,33 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentApp2Statics> : produ
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppSimulator>
 {
-    HRESULT __stdcall get_LicenseInformation(abi_arg_out<Windows::ApplicationModel::Store::ILicenseInformation> value) noexcept override
+    HRESULT __stdcall get_LicenseInformation(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LicenseInformation());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LicenseInformation());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LinkUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_LinkUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LinkUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LinkUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AppId(GUID * value) noexcept override
+    HRESULT __stdcall get_AppId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AppId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AppId());
+        return S_OK;
     }
 
-    HRESULT __stdcall abi_RequestAppPurchaseAsync(bool includeReceipt, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> requestAppPurchaseOperation) noexcept override
+    HRESULT __stdcall RequestAppPurchaseAsync(bool includeReceipt, ::IUnknown** requestAppPurchaseOperation) noexcept final
     {
         try
         {
-            *requestAppPurchaseOperation = detach(this->shim().RequestAppPurchaseAsync(includeReceipt));
+            typename D::abi_guard guard(this->shim());
+            *requestAppPurchaseOperation = detach_abi(this->shim().RequestAppPurchaseAsync(includeReceipt));
             return S_OK;
         }
         catch (...)
@@ -239,11 +771,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseAsync(abi_arg_in<hstring> productId, bool includeReceipt, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> requestProductPurchaseOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseAsync(HSTRING productId, bool includeReceipt, ::IUnknown** requestProductPurchaseOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId), includeReceipt));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId), includeReceipt));
             return S_OK;
         }
         catch (...)
@@ -253,11 +786,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
         }
     }
 
-    HRESULT __stdcall abi_LoadListingInformationAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationAsync(::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationAsync());
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationAsync());
             return S_OK;
         }
         catch (...)
@@ -267,11 +801,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetAppReceiptAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> appReceiptOperation) noexcept override
+    HRESULT __stdcall GetAppReceiptAsync(::IUnknown** appReceiptOperation) noexcept final
     {
         try
         {
-            *appReceiptOperation = detach(this->shim().GetAppReceiptAsync());
+            typename D::abi_guard guard(this->shim());
+            *appReceiptOperation = detach_abi(this->shim().GetAppReceiptAsync());
             return S_OK;
         }
         catch (...)
@@ -281,11 +816,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
         }
     }
 
-    HRESULT __stdcall abi_GetProductReceiptAsync(abi_arg_in<hstring> productId, abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> getProductReceiptOperation) noexcept override
+    HRESULT __stdcall GetProductReceiptAsync(HSTRING productId, ::IUnknown** getProductReceiptOperation) noexcept final
     {
         try
         {
-            *getProductReceiptOperation = detach(this->shim().GetProductReceiptAsync(*reinterpret_cast<const hstring *>(&productId)));
+            typename D::abi_guard guard(this->shim());
+            *getProductReceiptOperation = detach_abi(this->shim().GetProductReceiptAsync(*reinterpret_cast<hstring const*>(&productId)));
             return S_OK;
         }
         catch (...)
@@ -295,11 +831,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
         }
     }
 
-    HRESULT __stdcall abi_ReloadSimulatorAsync(abi_arg_in<Windows::Storage::IStorageFile> simulatorSettingsFile, abi_arg_out<Windows::Foundation::IAsyncAction> reloadSimulatorOperation) noexcept override
+    HRESULT __stdcall ReloadSimulatorAsync(::IUnknown* simulatorSettingsFile, ::IUnknown** reloadSimulatorOperation) noexcept final
     {
         try
         {
-            *reloadSimulatorOperation = detach(this->shim().ReloadSimulatorAsync(*reinterpret_cast<const Windows::Storage::StorageFile *>(&simulatorSettingsFile)));
+            typename D::abi_guard guard(this->shim());
+            *reloadSimulatorOperation = detach_abi(this->shim().ReloadSimulatorAsync(*reinterpret_cast<Windows::Storage::StorageFile const*>(&simulatorSettingsFile)));
             return S_OK;
         }
         catch (...)
@@ -313,11 +850,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulator> : prod
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering>
 {
-    HRESULT __stdcall abi_LoadListingInformationByProductIdsAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> productIds, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationByProductIdsAsync(::IUnknown* productIds, ::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationByProductIdsAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&productIds)));
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationByProductIdsAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&productIds)));
             return S_OK;
         }
         catch (...)
@@ -327,11 +865,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsW
         }
     }
 
-    HRESULT __stdcall abi_LoadListingInformationByKeywordsAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> keywords, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationByKeywordsAsync(::IUnknown* keywords, ::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationByKeywordsAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&keywords)));
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationByKeywordsAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&keywords)));
             return S_OK;
         }
         catch (...)
@@ -345,11 +884,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsW
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId>
 {
-    HRESULT __stdcall abi_GetAppPurchaseCampaignIdAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetAppPurchaseCampaignIdAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetAppPurchaseCampaignIdAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetAppPurchaseCampaignIdAsync());
             return S_OK;
         }
         catch (...)
@@ -363,11 +903,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCamp
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables>
 {
-    HRESULT __stdcall abi_ReportConsumableFulfillmentAsync(abi_arg_in<hstring> productId, GUID transactionId, abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult>> reportConsumableFulfillmentOperation) noexcept override
+    HRESULT __stdcall ReportConsumableFulfillmentAsync(HSTRING productId, GUID transactionId, ::IUnknown** reportConsumableFulfillmentOperation) noexcept final
     {
         try
         {
-            *reportConsumableFulfillmentOperation = detach(this->shim().ReportConsumableFulfillmentAsync(*reinterpret_cast<const hstring *>(&productId), transactionId));
+            typename D::abi_guard guard(this->shim());
+            *reportConsumableFulfillmentOperation = detach_abi(this->shim().ReportConsumableFulfillmentAsync(*reinterpret_cast<hstring const*>(&productId), *reinterpret_cast<GUID const*>(&transactionId)));
             return S_OK;
         }
         catch (...)
@@ -377,11 +918,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCons
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseWithResultsAsync(abi_arg_in<hstring> productId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults>> requestProductPurchaseWithResultsOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseWithResultsAsync(HSTRING productId, ::IUnknown** requestProductPurchaseWithResultsOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseWithResultsOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId)));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseWithResultsOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId)));
             return S_OK;
         }
         catch (...)
@@ -391,11 +933,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCons
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseWithDisplayPropertiesAsync(abi_arg_in<hstring> productId, abi_arg_in<hstring> offerId, abi_arg_in<Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> displayProperties, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults>> requestProductPurchaseWithDisplayPropertiesOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseWithDisplayPropertiesAsync(HSTRING productId, HSTRING offerId, ::IUnknown* displayProperties, ::IUnknown** requestProductPurchaseWithDisplayPropertiesOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseWithDisplayPropertiesOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId), *reinterpret_cast<const hstring *>(&offerId), *reinterpret_cast<const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties *>(&displayProperties)));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseWithDisplayPropertiesOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId), *reinterpret_cast<hstring const*>(&offerId), *reinterpret_cast<Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const*>(&displayProperties)));
             return S_OK;
         }
         catch (...)
@@ -405,11 +948,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCons
         }
     }
 
-    HRESULT __stdcall abi_GetUnfulfilledConsumablesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>>> getUnfulfilledConsumablesOperation) noexcept override
+    HRESULT __stdcall GetUnfulfilledConsumablesAsync(::IUnknown** getUnfulfilledConsumablesOperation) noexcept final
     {
         try
         {
-            *getUnfulfilledConsumablesOperation = detach(this->shim().GetUnfulfilledConsumablesAsync());
+            typename D::abi_guard guard(this->shim());
+            *getUnfulfilledConsumablesOperation = detach_abi(this->shim().GetUnfulfilledConsumablesAsync());
             return S_OK;
         }
         catch (...)
@@ -423,11 +967,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCons
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering>
 {
-    HRESULT __stdcall abi_LoadListingInformationByProductIdsAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> productIds, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationByProductIdsAsync(::IUnknown* productIds, ::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationByProductIdsAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&productIds)));
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationByProductIdsAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&productIds)));
             return S_OK;
         }
         catch (...)
@@ -437,11 +982,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFilter
         }
     }
 
-    HRESULT __stdcall abi_LoadListingInformationByKeywordsAsync(abi_arg_in<Windows::Foundation::Collections::IIterable<hstring>> keywords, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation>> loadListingOperation) noexcept override
+    HRESULT __stdcall LoadListingInformationByKeywordsAsync(::IUnknown* keywords, ::IUnknown** loadListingOperation) noexcept final
     {
         try
         {
-            *loadListingOperation = detach(this->shim().LoadListingInformationByKeywordsAsync(*reinterpret_cast<const Windows::Foundation::Collections::IIterable<hstring> *>(&keywords)));
+            typename D::abi_guard guard(this->shim());
+            *loadListingOperation = detach_abi(this->shim().LoadListingInformationByKeywordsAsync(*reinterpret_cast<Windows::Foundation::Collections::IIterable<hstring> const*>(&keywords)));
             return S_OK;
         }
         catch (...)
@@ -451,11 +997,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFilter
         }
     }
 
-    HRESULT __stdcall abi_ReportProductFulfillment(abi_arg_in<hstring> productId) noexcept override
+    HRESULT __stdcall ReportProductFulfillment(HSTRING productId) noexcept final
     {
         try
         {
-            this->shim().ReportProductFulfillment(*reinterpret_cast<const hstring *>(&productId));
+            typename D::abi_guard guard(this->shim());
+            this->shim().ReportProductFulfillment(*reinterpret_cast<hstring const*>(&productId));
             return S_OK;
         }
         catch (...)
@@ -468,11 +1015,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFilter
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithCampaignId> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppWithCampaignId>
 {
-    HRESULT __stdcall abi_GetAppPurchaseCampaignIdAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<hstring>> operation) noexcept override
+    HRESULT __stdcall GetAppPurchaseCampaignIdAsync(::IUnknown** operation) noexcept final
     {
         try
         {
-            *operation = detach(this->shim().GetAppPurchaseCampaignIdAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().GetAppPurchaseCampaignIdAsync());
             return S_OK;
         }
         catch (...)
@@ -486,11 +1034,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithCampaignId> :
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables> : produce_base<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables>
 {
-    HRESULT __stdcall abi_ReportConsumableFulfillmentAsync(abi_arg_in<hstring> productId, GUID transactionId, abi_arg_out<Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult>> reportConsumableFulfillmentOperation) noexcept override
+    HRESULT __stdcall ReportConsumableFulfillmentAsync(HSTRING productId, GUID transactionId, ::IUnknown** reportConsumableFulfillmentOperation) noexcept final
     {
         try
         {
-            *reportConsumableFulfillmentOperation = detach(this->shim().ReportConsumableFulfillmentAsync(*reinterpret_cast<const hstring *>(&productId), transactionId));
+            typename D::abi_guard guard(this->shim());
+            *reportConsumableFulfillmentOperation = detach_abi(this->shim().ReportConsumableFulfillmentAsync(*reinterpret_cast<hstring const*>(&productId), *reinterpret_cast<GUID const*>(&transactionId)));
             return S_OK;
         }
         catch (...)
@@ -500,11 +1049,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables> 
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseWithResultsAsync(abi_arg_in<hstring> productId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults>> requestProductPurchaseWithResultsOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseWithResultsAsync(HSTRING productId, ::IUnknown** requestProductPurchaseWithResultsOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseWithResultsOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId)));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseWithResultsOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId)));
             return S_OK;
         }
         catch (...)
@@ -514,11 +1064,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables> 
         }
     }
 
-    HRESULT __stdcall abi_RequestProductPurchaseWithDisplayPropertiesAsync(abi_arg_in<hstring> productId, abi_arg_in<hstring> offerId, abi_arg_in<Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> displayProperties, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults>> requestProductPurchaseWithDisplayPropertiesOperation) noexcept override
+    HRESULT __stdcall RequestProductPurchaseWithDisplayPropertiesAsync(HSTRING productId, HSTRING offerId, ::IUnknown* displayProperties, ::IUnknown** requestProductPurchaseWithDisplayPropertiesOperation) noexcept final
     {
         try
         {
-            *requestProductPurchaseWithDisplayPropertiesOperation = detach(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<const hstring *>(&productId), *reinterpret_cast<const hstring *>(&offerId), *reinterpret_cast<const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties *>(&displayProperties)));
+            typename D::abi_guard guard(this->shim());
+            *requestProductPurchaseWithDisplayPropertiesOperation = detach_abi(this->shim().RequestProductPurchaseAsync(*reinterpret_cast<hstring const*>(&productId), *reinterpret_cast<hstring const*>(&offerId), *reinterpret_cast<Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const*>(&displayProperties)));
             return S_OK;
         }
         catch (...)
@@ -528,11 +1079,12 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables> 
         }
     }
 
-    HRESULT __stdcall abi_GetUnfulfilledConsumablesAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>>> getUnfulfilledConsumablesOperation) noexcept override
+    HRESULT __stdcall GetUnfulfilledConsumablesAsync(::IUnknown** getUnfulfilledConsumablesOperation) noexcept final
     {
         try
         {
-            *getUnfulfilledConsumablesOperation = detach(this->shim().GetUnfulfilledConsumablesAsync());
+            typename D::abi_guard guard(this->shim());
+            *getUnfulfilledConsumablesOperation = detach_abi(this->shim().GetUnfulfilledConsumablesAsync());
             return S_OK;
         }
         catch (...)
@@ -546,51 +1098,40 @@ struct produce<D, Windows::ApplicationModel::Store::ICurrentAppWithConsumables> 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::ILicenseInformation> : produce_base<D, Windows::ApplicationModel::Store::ILicenseInformation>
 {
-    HRESULT __stdcall get_ProductLicenses(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense>> value) noexcept override
+    HRESULT __stdcall get_ProductLicenses(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductLicenses());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductLicenses());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsActive(bool * value) noexcept override
+    HRESULT __stdcall get_IsActive(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsActive());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsActive());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsTrial(bool * value) noexcept override
+    HRESULT __stdcall get_IsTrial(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsTrial());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsTrial());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExpirationDate(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_ExpirationDate(Windows::Foundation::DateTime* value) noexcept final
+    {
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExpirationDate());
+        return S_OK;
+    }
+
+    HRESULT __stdcall add_LicenseChanged(::IUnknown* handler, event_token* cookie) noexcept final
     {
         try
         {
-            *value = detach(this->shim().ExpirationDate());
+            typename D::abi_guard guard(this->shim());
+            *cookie = detach_abi(this->shim().LicenseChanged(*reinterpret_cast<Windows::ApplicationModel::Store::LicenseChangedEventHandler const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -599,24 +1140,12 @@ struct produce<D, Windows::ApplicationModel::Store::ILicenseInformation> : produ
         }
     }
 
-    HRESULT __stdcall add_LicenseChanged(abi_arg_in<Windows::ApplicationModel::Store::LicenseChangedEventHandler> handler, event_token * cookie) noexcept override
+    HRESULT __stdcall remove_LicenseChanged(event_token cookie) noexcept final
     {
         try
         {
-            *cookie = detach(this->shim().LicenseChanged(*reinterpret_cast<const Windows::ApplicationModel::Store::LicenseChangedEventHandler *>(&handler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_LicenseChanged(event_token cookie) noexcept override
-    {
-        try
-        {
-            this->shim().LicenseChanged(cookie);
+            typename D::abi_guard guard(this->shim());
+            this->shim().LicenseChanged(*reinterpret_cast<event_token const*>(&cookie));
             return S_OK;
         }
         catch (...)
@@ -629,496 +1158,279 @@ struct produce<D, Windows::ApplicationModel::Store::ILicenseInformation> : produ
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IListingInformation> : produce_base<D, Windows::ApplicationModel::Store::IListingInformation>
 {
-    HRESULT __stdcall get_CurrentMarket(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_CurrentMarket(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrentMarket());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrentMarket());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProductListings(abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing>> value) noexcept override
+    HRESULT __stdcall get_ProductListings(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductListings());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductListings());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FormattedPrice(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FormattedPrice(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FormattedPrice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FormattedPrice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_AgeRating(uint32_t * value) noexcept override
+    HRESULT __stdcall get_AgeRating(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().AgeRating());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().AgeRating());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IListingInformation2> : produce_base<D, Windows::ApplicationModel::Store::IListingInformation2>
 {
-    HRESULT __stdcall get_FormattedBasePrice(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FormattedBasePrice(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FormattedBasePrice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FormattedBasePrice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SaleEndDate(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_SaleEndDate(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SaleEndDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SaleEndDate());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsOnSale(bool * value) noexcept override
+    HRESULT __stdcall get_IsOnSale(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsOnSale());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsOnSale());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CurrencyCode(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_CurrencyCode(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrencyCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrencyCode());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductLicense> : produce_base<D, Windows::ApplicationModel::Store::IProductLicense>
 {
-    HRESULT __stdcall get_ProductId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ProductId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsActive(bool * value) noexcept override
+    HRESULT __stdcall get_IsActive(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsActive());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsActive());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ExpirationDate(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_ExpirationDate(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ExpirationDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ExpirationDate());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductLicenseWithFulfillment> : produce_base<D, Windows::ApplicationModel::Store::IProductLicenseWithFulfillment>
 {
-    HRESULT __stdcall get_IsConsumable(bool * value) noexcept override
+    HRESULT __stdcall get_IsConsumable(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsConsumable());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsConsumable());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductListing> : produce_base<D, Windows::ApplicationModel::Store::IProductListing>
 {
-    HRESULT __stdcall get_ProductId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ProductId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_FormattedPrice(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FormattedPrice(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FormattedPrice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FormattedPrice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductListing2> : produce_base<D, Windows::ApplicationModel::Store::IProductListing2>
 {
-    HRESULT __stdcall get_FormattedBasePrice(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_FormattedBasePrice(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().FormattedBasePrice());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().FormattedBasePrice());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SaleEndDate(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_SaleEndDate(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SaleEndDate());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SaleEndDate());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_IsOnSale(bool * value) noexcept override
+    HRESULT __stdcall get_IsOnSale(bool* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().IsOnSale());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().IsOnSale());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_CurrencyCode(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_CurrencyCode(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CurrencyCode());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CurrencyCode());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductListingWithConsumables> : produce_base<D, Windows::ApplicationModel::Store::IProductListingWithConsumables>
 {
-    HRESULT __stdcall get_ProductType(Windows::ApplicationModel::Store::ProductType * value) noexcept override
+    HRESULT __stdcall get_ProductType(Windows::ApplicationModel::Store::ProductType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductType());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductListingWithMetadata> : produce_base<D, Windows::ApplicationModel::Store::IProductListingWithMetadata>
 {
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Keywords(abi_arg_out<Windows::Foundation::Collections::IIterable<hstring>> value) noexcept override
+    HRESULT __stdcall get_Keywords(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Keywords());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Keywords());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProductType(Windows::ApplicationModel::Store::ProductType * value) noexcept override
+    HRESULT __stdcall get_ProductType(Windows::ApplicationModel::Store::ProductType* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductType());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductType());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Tag(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Tag(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Tag());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Tag());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ImageUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_ImageUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ImageUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ImageUri());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> : produce_base<D, Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties>
 {
-    HRESULT __stdcall get_Name(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Name(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Name());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Name());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Name(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Name(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Name(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Name(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Description(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Description(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Description());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Description());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Description(abi_arg_in<hstring> value) noexcept override
+    HRESULT __stdcall put_Description(HSTRING value) noexcept final
     {
-        try
-        {
-            this->shim().Description(*reinterpret_cast<const hstring *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Description(*reinterpret_cast<hstring const*>(&value));
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Image(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_Image(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Image());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Image());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Image(abi_arg_in<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall put_Image(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Image(*reinterpret_cast<const Windows::Foundation::Uri *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Image(*reinterpret_cast<Windows::Foundation::Uri const*>(&value));
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory> : produce_base<D, Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory>
 {
-    HRESULT __stdcall abi_CreateProductPurchaseDisplayProperties(abi_arg_in<hstring> name, abi_arg_out<Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> displayProperties) noexcept override
+    HRESULT __stdcall CreateProductPurchaseDisplayProperties(HSTRING name, ::IUnknown** displayProperties) noexcept final
     {
         try
         {
-            *displayProperties = detach(this->shim().CreateProductPurchaseDisplayProperties(*reinterpret_cast<const hstring *>(&name)));
+            typename D::abi_guard guard(this->shim());
+            *displayProperties = detach_abi(this->shim().CreateProductPurchaseDisplayProperties(*reinterpret_cast<hstring const*>(&name)));
             return S_OK;
         }
         catch (...)
@@ -1132,850 +1444,356 @@ struct produce<D, Windows::ApplicationModel::Store::IProductPurchaseDisplayPrope
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IPurchaseResults> : produce_base<D, Windows::ApplicationModel::Store::IPurchaseResults>
 {
-    HRESULT __stdcall get_Status(Windows::ApplicationModel::Store::ProductPurchaseStatus * value) noexcept override
+    HRESULT __stdcall get_Status(Windows::ApplicationModel::Store::ProductPurchaseStatus* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Status());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Status());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransactionId(GUID * value) noexcept override
+    HRESULT __stdcall get_TransactionId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransactionId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransactionId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ReceiptXml(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ReceiptXml(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ReceiptXml());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ReceiptXml());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_OfferId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_OfferId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().OfferId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().OfferId());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::ApplicationModel::Store::IUnfulfilledConsumable> : produce_base<D, Windows::ApplicationModel::Store::IUnfulfilledConsumable>
 {
-    HRESULT __stdcall get_ProductId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_ProductId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProductId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProductId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_TransactionId(GUID * value) noexcept override
+    HRESULT __stdcall get_TransactionId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().TransactionId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().TransactionId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_OfferId(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_OfferId(HSTRING* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().OfferId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().OfferId());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::ApplicationModel::Store {
-
-template <typename D> Windows::ApplicationModel::Store::LicenseInformation impl_ICurrentApp<D>::LicenseInformation() const
-{
-    Windows::ApplicationModel::Store::LicenseInformation value { nullptr };
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->get_LicenseInformation(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_ICurrentApp<D>::LinkUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->get_LinkUri(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_ICurrentApp<D>::AppId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->get_AppId(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp<D>::RequestAppPurchaseAsync(bool includeReceipt) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> requestAppPurchaseOperation;
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->abi_RequestAppPurchaseAsync(includeReceipt, put(requestAppPurchaseOperation)));
-    return requestAppPurchaseOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp<D>::RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> requestProductPurchaseOperation;
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseAsync(get(productId), includeReceipt, put(requestProductPurchaseOperation)));
-    return requestProductPurchaseOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentApp<D>::LoadListingInformationAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->abi_LoadListingInformationAsync(put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp<D>::GetAppReceiptAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> appReceiptOperation;
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->abi_GetAppReceiptAsync(put(appReceiptOperation)));
-    return appReceiptOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp<D>::GetProductReceiptAsync(hstring_ref productId) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> getProductReceiptOperation;
-    check_hresult(static_cast<const ICurrentApp &>(static_cast<const D &>(*this))->abi_GetProductReceiptAsync(get(productId), put(getProductReceiptOperation)));
-    return getProductReceiptOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> impl_ICurrentAppWithConsumables<D>::ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId) const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> reportConsumableFulfillmentOperation;
-    check_hresult(static_cast<const ICurrentAppWithConsumables &>(static_cast<const D &>(*this))->abi_ReportConsumableFulfillmentAsync(get(productId), transactionId, put(reportConsumableFulfillmentOperation)));
-    return reportConsumableFulfillmentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> impl_ICurrentAppWithConsumables<D>::RequestProductPurchaseAsync(hstring_ref productId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithResultsOperation;
-    check_hresult(static_cast<const ICurrentAppWithConsumables &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseWithResultsAsync(get(productId), put(requestProductPurchaseWithResultsOperation)));
-    return requestProductPurchaseWithResultsOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> impl_ICurrentAppWithConsumables<D>::RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithDisplayPropertiesOperation;
-    check_hresult(static_cast<const ICurrentAppWithConsumables &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseWithDisplayPropertiesAsync(get(productId), get(offerId), get(displayProperties), put(requestProductPurchaseWithDisplayPropertiesOperation)));
-    return requestProductPurchaseWithDisplayPropertiesOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> impl_ICurrentAppWithConsumables<D>::GetUnfulfilledConsumablesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> getUnfulfilledConsumablesOperation;
-    check_hresult(static_cast<const ICurrentAppWithConsumables &>(static_cast<const D &>(*this))->abi_GetUnfulfilledConsumablesAsync(put(getUnfulfilledConsumablesOperation)));
-    return getUnfulfilledConsumablesOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppWithCampaignId<D>::GetAppPurchaseCampaignIdAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const ICurrentAppWithCampaignId &>(static_cast<const D &>(*this))->abi_GetAppPurchaseCampaignIdAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp2Statics<D>::GetCustomerPurchaseIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const ICurrentApp2Statics &>(static_cast<const D &>(*this))->abi_GetCustomerPurchaseIdAsync(get(serviceTicket), get(publisherUserId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentApp2Statics<D>::GetCustomerCollectionsIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const ICurrentApp2Statics &>(static_cast<const D &>(*this))->abi_GetCustomerCollectionsIdAsync(get(serviceTicket), get(publisherUserId), put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::ApplicationModel::Store::LicenseInformation impl_ICurrentAppSimulator<D>::LicenseInformation() const
-{
-    Windows::ApplicationModel::Store::LicenseInformation value { nullptr };
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->get_LicenseInformation(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_ICurrentAppSimulator<D>::LinkUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->get_LinkUri(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_ICurrentAppSimulator<D>::AppId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->get_AppId(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppSimulator<D>::RequestAppPurchaseAsync(bool includeReceipt) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> requestAppPurchaseOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_RequestAppPurchaseAsync(includeReceipt, put(requestAppPurchaseOperation)));
-    return requestAppPurchaseOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppSimulator<D>::RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> requestProductPurchaseOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseAsync(get(productId), includeReceipt, put(requestProductPurchaseOperation)));
-    return requestProductPurchaseOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentAppSimulator<D>::LoadListingInformationAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_LoadListingInformationAsync(put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppSimulator<D>::GetAppReceiptAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> appReceiptOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_GetAppReceiptAsync(put(appReceiptOperation)));
-    return appReceiptOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppSimulator<D>::GetProductReceiptAsync(hstring_ref productId) const
-{
-    Windows::Foundation::IAsyncOperation<hstring> getProductReceiptOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_GetProductReceiptAsync(get(productId), put(getProductReceiptOperation)));
-    return getProductReceiptOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncAction impl_ICurrentAppSimulator<D>::ReloadSimulatorAsync(const Windows::Storage::StorageFile & simulatorSettingsFile) const
-{
-    Windows::Foundation::IAsyncAction reloadSimulatorOperation;
-    check_hresult(static_cast<const ICurrentAppSimulator &>(static_cast<const D &>(*this))->abi_ReloadSimulatorAsync(get(simulatorSettingsFile), put(reloadSimulatorOperation)));
-    return reloadSimulatorOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<hstring> impl_ICurrentAppSimulatorWithCampaignId<D>::GetAppPurchaseCampaignIdAsync() const
-{
-    Windows::Foundation::IAsyncOperation<hstring> operation;
-    check_hresult(static_cast<const ICurrentAppSimulatorWithCampaignId &>(static_cast<const D &>(*this))->abi_GetAppPurchaseCampaignIdAsync(put(operation)));
-    return operation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> impl_ICurrentAppSimulatorWithConsumables<D>::ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId) const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> reportConsumableFulfillmentOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorWithConsumables &>(static_cast<const D &>(*this))->abi_ReportConsumableFulfillmentAsync(get(productId), transactionId, put(reportConsumableFulfillmentOperation)));
-    return reportConsumableFulfillmentOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> impl_ICurrentAppSimulatorWithConsumables<D>::RequestProductPurchaseAsync(hstring_ref productId) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithResultsOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorWithConsumables &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseWithResultsAsync(get(productId), put(requestProductPurchaseWithResultsOperation)));
-    return requestProductPurchaseWithResultsOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> impl_ICurrentAppSimulatorWithConsumables<D>::RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> requestProductPurchaseWithDisplayPropertiesOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorWithConsumables &>(static_cast<const D &>(*this))->abi_RequestProductPurchaseWithDisplayPropertiesAsync(get(productId), get(offerId), get(displayProperties), put(requestProductPurchaseWithDisplayPropertiesOperation)));
-    return requestProductPurchaseWithDisplayPropertiesOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> impl_ICurrentAppSimulatorWithConsumables<D>::GetUnfulfilledConsumablesAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> getUnfulfilledConsumablesOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorWithConsumables &>(static_cast<const D &>(*this))->abi_GetUnfulfilledConsumablesAsync(put(getUnfulfilledConsumablesOperation)));
-    return getUnfulfilledConsumablesOperation;
-}
-
-template <typename D> Windows::ApplicationModel::Store::ProductPurchaseStatus impl_IPurchaseResults<D>::Status() const
-{
-    Windows::ApplicationModel::Store::ProductPurchaseStatus value {};
-    check_hresult(static_cast<const IPurchaseResults &>(static_cast<const D &>(*this))->get_Status(&value));
-    return value;
-}
-
-template <typename D> GUID impl_IPurchaseResults<D>::TransactionId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IPurchaseResults &>(static_cast<const D &>(*this))->get_TransactionId(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IPurchaseResults<D>::ReceiptXml() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPurchaseResults &>(static_cast<const D &>(*this))->get_ReceiptXml(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IPurchaseResults<D>::OfferId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IPurchaseResults &>(static_cast<const D &>(*this))->get_OfferId(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense> impl_ILicenseInformation<D>::ProductLicenses() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense> value;
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->get_ProductLicenses(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_ILicenseInformation<D>::IsActive() const
-{
-    bool value {};
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->get_IsActive(&value));
-    return value;
-}
-
-template <typename D> bool impl_ILicenseInformation<D>::IsTrial() const
-{
-    bool value {};
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->get_IsTrial(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_ILicenseInformation<D>::ExpirationDate() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->get_ExpirationDate(put(value)));
-    return value;
-}
-
-template <typename D> event_token impl_ILicenseInformation<D>::LicenseChanged(const Windows::ApplicationModel::Store::LicenseChangedEventHandler & handler) const
-{
-    event_token cookie {};
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->add_LicenseChanged(get(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<ILicenseInformation> impl_ILicenseInformation<D>::LicenseChanged(auto_revoke_t, const Windows::ApplicationModel::Store::LicenseChangedEventHandler & handler) const
-{
-    return impl::make_event_revoker<D, ILicenseInformation>(this, &ABI::Windows::ApplicationModel::Store::ILicenseInformation::remove_LicenseChanged, LicenseChanged(handler));
-}
-
-template <typename D> void impl_ILicenseInformation<D>::LicenseChanged(event_token cookie) const
-{
-    check_hresult(static_cast<const ILicenseInformation &>(static_cast<const D &>(*this))->remove_LicenseChanged(cookie));
-}
-
-template <typename D> hstring impl_IProductLicense<D>::ProductId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductLicense &>(static_cast<const D &>(*this))->get_ProductId(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IProductLicense<D>::IsActive() const
-{
-    bool value {};
-    check_hresult(static_cast<const IProductLicense &>(static_cast<const D &>(*this))->get_IsActive(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IProductLicense<D>::ExpirationDate() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IProductLicense &>(static_cast<const D &>(*this))->get_ExpirationDate(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation<D>::CurrentMarket() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_CurrentMarket(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> impl_IListingInformation<D>::ProductListings() const
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> value;
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_ProductListings(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation<D>::FormattedPrice() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_FormattedPrice(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IListingInformation<D>::AgeRating() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IListingInformation &>(static_cast<const D &>(*this))->get_AgeRating(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation2<D>::FormattedBasePrice() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation2 &>(static_cast<const D &>(*this))->get_FormattedBasePrice(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IListingInformation2<D>::SaleEndDate() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IListingInformation2 &>(static_cast<const D &>(*this))->get_SaleEndDate(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IListingInformation2<D>::IsOnSale() const
-{
-    bool value {};
-    check_hresult(static_cast<const IListingInformation2 &>(static_cast<const D &>(*this))->get_IsOnSale(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IListingInformation2<D>::CurrencyCode() const
-{
-    hstring value;
-    check_hresult(static_cast<const IListingInformation2 &>(static_cast<const D &>(*this))->get_CurrencyCode(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListing<D>::ProductId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListing &>(static_cast<const D &>(*this))->get_ProductId(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListing<D>::FormattedPrice() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListing &>(static_cast<const D &>(*this))->get_FormattedPrice(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListing<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListing &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Store::ProductType impl_IProductListingWithConsumables<D>::ProductType() const
-{
-    Windows::ApplicationModel::Store::ProductType value {};
-    check_hresult(static_cast<const IProductListingWithConsumables &>(static_cast<const D &>(*this))->get_ProductType(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListing2<D>::FormattedBasePrice() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListing2 &>(static_cast<const D &>(*this))->get_FormattedBasePrice(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IProductListing2<D>::SaleEndDate() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IProductListing2 &>(static_cast<const D &>(*this))->get_SaleEndDate(put(value)));
-    return value;
-}
-
-template <typename D> bool impl_IProductListing2<D>::IsOnSale() const
-{
-    bool value {};
-    check_hresult(static_cast<const IProductListing2 &>(static_cast<const D &>(*this))->get_IsOnSale(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListing2<D>::CurrencyCode() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListing2 &>(static_cast<const D &>(*this))->get_CurrencyCode(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentAppStaticsWithFiltering<D>::LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentAppStaticsWithFiltering &>(static_cast<const D &>(*this))->abi_LoadListingInformationByProductIdsAsync(get(productIds), put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentAppStaticsWithFiltering<D>::LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentAppStaticsWithFiltering &>(static_cast<const D &>(*this))->abi_LoadListingInformationByKeywordsAsync(get(keywords), put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> void impl_ICurrentAppStaticsWithFiltering<D>::ReportProductFulfillment(hstring_ref productId) const
-{
-    check_hresult(static_cast<const ICurrentAppStaticsWithFiltering &>(static_cast<const D &>(*this))->abi_ReportProductFulfillment(get(productId)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentAppSimulatorStaticsWithFiltering<D>::LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorStaticsWithFiltering &>(static_cast<const D &>(*this))->abi_LoadListingInformationByProductIdsAsync(get(productIds), put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> impl_ICurrentAppSimulatorStaticsWithFiltering<D>::LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords) const
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> loadListingOperation;
-    check_hresult(static_cast<const ICurrentAppSimulatorStaticsWithFiltering &>(static_cast<const D &>(*this))->abi_LoadListingInformationByKeywordsAsync(get(keywords), put(loadListingOperation)));
-    return loadListingOperation;
-}
-
-template <typename D> bool impl_IProductLicenseWithFulfillment<D>::IsConsumable() const
-{
-    bool value {};
-    check_hresult(static_cast<const IProductLicenseWithFulfillment &>(static_cast<const D &>(*this))->get_IsConsumable(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListingWithMetadata<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListingWithMetadata &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IIterable<hstring> impl_IProductListingWithMetadata<D>::Keywords() const
-{
-    Windows::Foundation::Collections::IIterable<hstring> value;
-    check_hresult(static_cast<const IProductListingWithMetadata &>(static_cast<const D &>(*this))->get_Keywords(put(value)));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Store::ProductType impl_IProductListingWithMetadata<D>::ProductType() const
-{
-    Windows::ApplicationModel::Store::ProductType value {};
-    check_hresult(static_cast<const IProductListingWithMetadata &>(static_cast<const D &>(*this))->get_ProductType(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IProductListingWithMetadata<D>::Tag() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductListingWithMetadata &>(static_cast<const D &>(*this))->get_Tag(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IProductListingWithMetadata<D>::ImageUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IProductListingWithMetadata &>(static_cast<const D &>(*this))->get_ImageUri(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IUnfulfilledConsumable<D>::ProductId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IUnfulfilledConsumable &>(static_cast<const D &>(*this))->get_ProductId(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IUnfulfilledConsumable<D>::TransactionId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IUnfulfilledConsumable &>(static_cast<const D &>(*this))->get_TransactionId(&value));
-    return value;
-}
-
-template <typename D> hstring impl_IUnfulfilledConsumable<D>::OfferId() const
-{
-    hstring value;
-    check_hresult(static_cast<const IUnfulfilledConsumable &>(static_cast<const D &>(*this))->get_OfferId(put(value)));
-    return value;
-}
-
-template <typename D> hstring impl_IProductPurchaseDisplayProperties<D>::Name() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->get_Name(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IProductPurchaseDisplayProperties<D>::Name(hstring_ref value) const
-{
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->put_Name(get(value)));
-}
-
-template <typename D> hstring impl_IProductPurchaseDisplayProperties<D>::Description() const
-{
-    hstring value;
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->get_Description(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IProductPurchaseDisplayProperties<D>::Description(hstring_ref value) const
-{
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->put_Description(get(value)));
-}
-
-template <typename D> Windows::Foundation::Uri impl_IProductPurchaseDisplayProperties<D>::Image() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->get_Image(put(value)));
-    return value;
-}
-
-template <typename D> void impl_IProductPurchaseDisplayProperties<D>::Image(const Windows::Foundation::Uri & value) const
-{
-    check_hresult(static_cast<const IProductPurchaseDisplayProperties &>(static_cast<const D &>(*this))->put_Image(get(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties impl_IProductPurchaseDisplayPropertiesFactory<D>::CreateProductPurchaseDisplayProperties(hstring_ref name) const
-{
-    Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties displayProperties { nullptr };
-    check_hresult(static_cast<const IProductPurchaseDisplayPropertiesFactory &>(static_cast<const D &>(*this))->abi_CreateProductPurchaseDisplayProperties(get(name), put(displayProperties)));
-    return displayProperties;
-}
+WINRT_EXPORT namespace winrt::Windows::ApplicationModel::Store {
 
 inline Windows::ApplicationModel::Store::LicenseInformation CurrentApp::LicenseInformation()
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().LicenseInformation();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().LicenseInformation();
 }
 
 inline Windows::Foundation::Uri CurrentApp::LinkUri()
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().LinkUri();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().LinkUri();
 }
 
 inline GUID CurrentApp::AppId()
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().AppId();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().AppId();
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::RequestAppPurchaseAsync(bool includeReceipt)
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().RequestAppPurchaseAsync(includeReceipt);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().RequestAppPurchaseAsync(includeReceipt);
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::RequestProductPurchaseAsync(param::hstring const& productId, bool includeReceipt)
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().RequestProductPurchaseAsync(productId, includeReceipt);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().RequestProductPurchaseAsync(productId, includeReceipt);
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentApp::LoadListingInformationAsync()
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().LoadListingInformationAsync();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().LoadListingInformationAsync();
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetAppReceiptAsync()
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().GetAppReceiptAsync();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().GetAppReceiptAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetProductReceiptAsync(hstring_ref productId)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetProductReceiptAsync(param::hstring const& productId)
 {
-    return get_activation_factory<CurrentApp, ICurrentApp>().GetProductReceiptAsync(productId);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp>().GetProductReceiptAsync(productId);
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetCustomerPurchaseIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetCustomerPurchaseIdAsync(param::hstring const& serviceTicket, param::hstring const& publisherUserId)
 {
-    return get_activation_factory<CurrentApp, ICurrentApp2Statics>().GetCustomerPurchaseIdAsync(serviceTicket, publisherUserId);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp2Statics>().GetCustomerPurchaseIdAsync(serviceTicket, publisherUserId);
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetCustomerCollectionsIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetCustomerCollectionsIdAsync(param::hstring const& serviceTicket, param::hstring const& publisherUserId)
 {
-    return get_activation_factory<CurrentApp, ICurrentApp2Statics>().GetCustomerCollectionsIdAsync(serviceTicket, publisherUserId);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentApp2Statics>().GetCustomerCollectionsIdAsync(serviceTicket, publisherUserId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentApp::LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentApp::LoadListingInformationByProductIdsAsync(param::async_iterable<hstring> const& productIds)
 {
-    return get_activation_factory<CurrentApp, ICurrentAppStaticsWithFiltering>().LoadListingInformationByProductIdsAsync(productIds);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering>().LoadListingInformationByProductIdsAsync(productIds);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentApp::LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentApp::LoadListingInformationByKeywordsAsync(param::async_iterable<hstring> const& keywords)
 {
-    return get_activation_factory<CurrentApp, ICurrentAppStaticsWithFiltering>().LoadListingInformationByKeywordsAsync(keywords);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering>().LoadListingInformationByKeywordsAsync(keywords);
 }
 
-inline void CurrentApp::ReportProductFulfillment(hstring_ref productId)
+inline void CurrentApp::ReportProductFulfillment(param::hstring const& productId)
 {
-    get_activation_factory<CurrentApp, ICurrentAppStaticsWithFiltering>().ReportProductFulfillment(productId);
+    get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering>().ReportProductFulfillment(productId);
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentApp::GetAppPurchaseCampaignIdAsync()
 {
-    return get_activation_factory<CurrentApp, ICurrentAppWithCampaignId>().GetAppPurchaseCampaignIdAsync();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppWithCampaignId>().GetAppPurchaseCampaignIdAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> CurrentApp::ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> CurrentApp::ReportConsumableFulfillmentAsync(param::hstring const& productId, GUID const& transactionId)
 {
-    return get_activation_factory<CurrentApp, ICurrentAppWithConsumables>().ReportConsumableFulfillmentAsync(productId, transactionId);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppWithConsumables>().ReportConsumableFulfillmentAsync(productId, transactionId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentApp::RequestProductPurchaseAsync(hstring_ref productId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentApp::RequestProductPurchaseAsync(param::hstring const& productId)
 {
-    return get_activation_factory<CurrentApp, ICurrentAppWithConsumables>().RequestProductPurchaseAsync(productId);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppWithConsumables>().RequestProductPurchaseAsync(productId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentApp::RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentApp::RequestProductPurchaseAsync(param::hstring const& productId, param::hstring const& offerId, Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const& displayProperties)
 {
-    return get_activation_factory<CurrentApp, ICurrentAppWithConsumables>().RequestProductPurchaseAsync(productId, offerId, displayProperties);
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppWithConsumables>().RequestProductPurchaseAsync(productId, offerId, displayProperties);
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> CurrentApp::GetUnfulfilledConsumablesAsync()
 {
-    return get_activation_factory<CurrentApp, ICurrentAppWithConsumables>().GetUnfulfilledConsumablesAsync();
+    return get_activation_factory<CurrentApp, Windows::ApplicationModel::Store::ICurrentAppWithConsumables>().GetUnfulfilledConsumablesAsync();
 }
 
 inline Windows::ApplicationModel::Store::LicenseInformation CurrentAppSimulator::LicenseInformation()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().LicenseInformation();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().LicenseInformation();
 }
 
 inline Windows::Foundation::Uri CurrentAppSimulator::LinkUri()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().LinkUri();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().LinkUri();
 }
 
 inline GUID CurrentAppSimulator::AppId()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().AppId();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().AppId();
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::RequestAppPurchaseAsync(bool includeReceipt)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().RequestAppPurchaseAsync(includeReceipt);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().RequestAppPurchaseAsync(includeReceipt);
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::RequestProductPurchaseAsync(param::hstring const& productId, bool includeReceipt)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().RequestProductPurchaseAsync(productId, includeReceipt);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().RequestProductPurchaseAsync(productId, includeReceipt);
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentAppSimulator::LoadListingInformationAsync()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().LoadListingInformationAsync();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().LoadListingInformationAsync();
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::GetAppReceiptAsync()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().GetAppReceiptAsync();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().GetAppReceiptAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::GetProductReceiptAsync(hstring_ref productId)
+inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::GetProductReceiptAsync(param::hstring const& productId)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().GetProductReceiptAsync(productId);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().GetProductReceiptAsync(productId);
 }
 
-inline Windows::Foundation::IAsyncAction CurrentAppSimulator::ReloadSimulatorAsync(const Windows::Storage::StorageFile & simulatorSettingsFile)
+inline Windows::Foundation::IAsyncAction CurrentAppSimulator::ReloadSimulatorAsync(Windows::Storage::StorageFile const& simulatorSettingsFile)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulator>().ReloadSimulatorAsync(simulatorSettingsFile);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulator>().ReloadSimulatorAsync(simulatorSettingsFile);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentAppSimulator::LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentAppSimulator::LoadListingInformationByProductIdsAsync(param::async_iterable<hstring> const& productIds)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorStaticsWithFiltering>().LoadListingInformationByProductIdsAsync(productIds);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering>().LoadListingInformationByProductIdsAsync(productIds);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentAppSimulator::LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> CurrentAppSimulator::LoadListingInformationByKeywordsAsync(param::async_iterable<hstring> const& keywords)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorStaticsWithFiltering>().LoadListingInformationByKeywordsAsync(keywords);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering>().LoadListingInformationByKeywordsAsync(keywords);
 }
 
 inline Windows::Foundation::IAsyncOperation<hstring> CurrentAppSimulator::GetAppPurchaseCampaignIdAsync()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorWithCampaignId>().GetAppPurchaseCampaignIdAsync();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId>().GetAppPurchaseCampaignIdAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> CurrentAppSimulator::ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::FulfillmentResult> CurrentAppSimulator::ReportConsumableFulfillmentAsync(param::hstring const& productId, GUID const& transactionId)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorWithConsumables>().ReportConsumableFulfillmentAsync(productId, transactionId);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables>().ReportConsumableFulfillmentAsync(productId, transactionId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentAppSimulator::RequestProductPurchaseAsync(hstring_ref productId)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentAppSimulator::RequestProductPurchaseAsync(param::hstring const& productId)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorWithConsumables>().RequestProductPurchaseAsync(productId);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables>().RequestProductPurchaseAsync(productId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentAppSimulator::RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties)
+inline Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> CurrentAppSimulator::RequestProductPurchaseAsync(param::hstring const& productId, param::hstring const& offerId, Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties const& displayProperties)
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorWithConsumables>().RequestProductPurchaseAsync(productId, offerId, displayProperties);
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables>().RequestProductPurchaseAsync(productId, offerId, displayProperties);
 }
 
 inline Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> CurrentAppSimulator::GetUnfulfilledConsumablesAsync()
 {
-    return get_activation_factory<CurrentAppSimulator, ICurrentAppSimulatorWithConsumables>().GetUnfulfilledConsumablesAsync();
+    return get_activation_factory<CurrentAppSimulator, Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables>().GetUnfulfilledConsumablesAsync();
 }
 
 inline ProductPurchaseDisplayProperties::ProductPurchaseDisplayProperties() :
     ProductPurchaseDisplayProperties(activate_instance<ProductPurchaseDisplayProperties>())
 {}
 
-inline ProductPurchaseDisplayProperties::ProductPurchaseDisplayProperties(hstring_ref name) :
-    ProductPurchaseDisplayProperties(get_activation_factory<ProductPurchaseDisplayProperties, IProductPurchaseDisplayPropertiesFactory>().CreateProductPurchaseDisplayProperties(name))
+inline ProductPurchaseDisplayProperties::ProductPurchaseDisplayProperties(param::hstring const& name) :
+    ProductPurchaseDisplayProperties(get_activation_factory<ProductPurchaseDisplayProperties, Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory>().CreateProductPurchaseDisplayProperties(name))
 {}
 
+template <typename L> LicenseChangedEventHandler::LicenseChangedEventHandler(L handler) :
+    LicenseChangedEventHandler(impl::make_delegate<LicenseChangedEventHandler>(std::forward<L>(handler)))
+{}
+
+template <typename F> LicenseChangedEventHandler::LicenseChangedEventHandler(F* handler) :
+    LicenseChangedEventHandler([=](auto&& ... args) { handler(args ...); })
+{}
+
+template <typename O, typename M> LicenseChangedEventHandler::LicenseChangedEventHandler(O* object, M method) :
+    LicenseChangedEventHandler([=](auto&& ... args) { ((*object).*(method))(args ...); })
+{}
+
+inline void LicenseChangedEventHandler::operator()() const
+{
+    check_hresult((*(abi_t<LicenseChangedEventHandler>**)this)->Invoke());
 }
 
 }
+
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentApp> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentApp> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentApp2Statics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentApp2Statics> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorStaticsWithFiltering> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorWithCampaignId> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppSimulatorWithConsumables> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppStaticsWithFiltering> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppWithCampaignId> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppWithCampaignId> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ICurrentAppWithConsumables> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ICurrentAppWithConsumables> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ILicenseInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ILicenseInformation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IListingInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IListingInformation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IListingInformation2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IListingInformation2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductLicense> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductLicense> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductLicenseWithFulfillment> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductLicenseWithFulfillment> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductListing> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductListing> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductListing2> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductListing2> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductListingWithConsumables> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductListingWithConsumables> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductListingWithMetadata> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductListingWithMetadata> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductPurchaseDisplayProperties> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IProductPurchaseDisplayPropertiesFactory> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IPurchaseResults> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IPurchaseResults> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::IUnfulfilledConsumable> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::IUnfulfilledConsumable> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::CurrentApp> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::CurrentApp> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::CurrentAppSimulator> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::CurrentAppSimulator> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::LicenseInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::LicenseInformation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ListingInformation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ListingInformation> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ProductLicense> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ProductLicense> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ProductListing> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ProductListing> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::PurchaseResults> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::PurchaseResults> {};
+
+template<> struct hash<winrt::Windows::ApplicationModel::Store::UnfulfilledConsumable> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::ApplicationModel::Store::UnfulfilledConsumable> {};
+
+}
+
+WINRT_WARNING_POP

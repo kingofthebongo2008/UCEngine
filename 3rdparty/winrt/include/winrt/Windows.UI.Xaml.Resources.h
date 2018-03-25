@@ -1,16 +1,42 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.UI.Xaml.Resources.3.h"
-#include "Windows.UI.Xaml.h"
-#include "internal/Windows.UI.Xaml.Resources.4.h"
-#include "internal/Windows.UI.Xaml.Resources.5.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.UI.Xaml.Resources.2.h"
+#include "winrt/Windows.UI.Xaml.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> Windows::UI::Xaml::Resources::CustomXamlResourceLoader consume_Windows_UI_Xaml_Resources_ICustomXamlResourceLoaderFactory<D>::CreateInstance(Windows::Foundation::IInspectable const& outer, Windows::Foundation::IInspectable& inner) const
+{
+    Windows::UI::Xaml::Resources::CustomXamlResourceLoader instance{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory)->CreateInstance(get_abi(outer), put_abi(inner), put_abi(instance)));
+    return instance;
+}
+
+template <typename D> Windows::Foundation::IInspectable consume_Windows_UI_Xaml_Resources_ICustomXamlResourceLoaderOverrides<D>::GetResource(param::hstring const& resourceId, param::hstring const& objectType, param::hstring const& propertyName, param::hstring const& propertyType) const
+{
+    Windows::Foundation::IInspectable returnValue{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides)->GetResource(get_abi(resourceId), get_abi(objectType), get_abi(propertyName), get_abi(propertyType), put_abi(returnValue)));
+    return returnValue;
+}
+
+template <typename D> Windows::UI::Xaml::Resources::CustomXamlResourceLoader consume_Windows_UI_Xaml_Resources_ICustomXamlResourceLoaderStatics<D>::Current() const noexcept
+{
+    Windows::UI::Xaml::Resources::CustomXamlResourceLoader value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics)->get_Current(put_abi(value)));
+    return value;
+}
+
+template <typename D> void consume_Windows_UI_Xaml_Resources_ICustomXamlResourceLoaderStatics<D>::Current(Windows::UI::Xaml::Resources::CustomXamlResourceLoader const& value) const noexcept
+{
+    check_terminate(WINRT_SHIM(Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics)->put_Current(get_abi(value)));
+}
 
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> : produce_base<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoader>
@@ -19,16 +45,19 @@ struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> : pro
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory> : produce_base<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory>
 {
-    HRESULT __stdcall abi_CreateInstance(abi_arg_in<Windows::IInspectable> outer, abi_arg_out<Windows::IInspectable> inner, abi_arg_out<Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> instance) noexcept override
+    HRESULT __stdcall CreateInstance(::IUnknown* outer, ::IUnknown** inner, ::IUnknown** instance) noexcept final
     {
         try
         {
-            *instance = detach(this->shim().CreateInstance(*reinterpret_cast<const Windows::IInspectable *>(&outer), *inner));
+            typename D::abi_guard guard(this->shim());
+            Windows::Foundation::IInspectable __local_inner;
+            *instance = detach_abi(this->shim().CreateInstance(*reinterpret_cast<Windows::Foundation::IInspectable const*>(&outer), __local_inner));
+            if (inner) *inner = detach_abi(__local_inner);
             return S_OK;
         }
         catch (...)
         {
-            *inner = nullptr;
+            if (inner) *inner = nullptr;
             *instance = nullptr;
             return impl::to_hresult();
         }
@@ -38,11 +67,12 @@ struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides> : produce_base<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides>
 {
-    HRESULT __stdcall abi_GetResource(abi_arg_in<hstring> resourceId, abi_arg_in<hstring> objectType, abi_arg_in<hstring> propertyName, abi_arg_in<hstring> propertyType, abi_arg_out<Windows::IInspectable> returnValue) noexcept override
+    HRESULT __stdcall GetResource(HSTRING resourceId, HSTRING objectType, HSTRING propertyName, HSTRING propertyType, ::IUnknown** returnValue) noexcept final
     {
         try
         {
-            *returnValue = detach(this->shim().GetResource(*reinterpret_cast<const hstring *>(&resourceId), *reinterpret_cast<const hstring *>(&objectType), *reinterpret_cast<const hstring *>(&propertyName), *reinterpret_cast<const hstring *>(&propertyType)));
+            typename D::abi_guard guard(this->shim());
+            *returnValue = detach_abi(this->shim().GetResource(*reinterpret_cast<hstring const*>(&resourceId), *reinterpret_cast<hstring const*>(&objectType), *reinterpret_cast<hstring const*>(&propertyName), *reinterpret_cast<hstring const*>(&propertyType)));
             return S_OK;
         }
         catch (...)
@@ -56,80 +86,80 @@ struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrid
 template <typename D>
 struct produce<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics> : produce_base<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics>
 {
-    HRESULT __stdcall get_Current(abi_arg_out<Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> value) noexcept override
+    HRESULT __stdcall get_Current(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Current());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Current());
+        return S_OK;
     }
 
-    HRESULT __stdcall put_Current(abi_arg_in<Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> value) noexcept override
+    HRESULT __stdcall put_Current(::IUnknown* value) noexcept final
     {
-        try
-        {
-            this->shim().Current(*reinterpret_cast<const Windows::UI::Xaml::Resources::CustomXamlResourceLoader *>(&value));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        this->shim().Current(*reinterpret_cast<Windows::UI::Xaml::Resources::CustomXamlResourceLoader const*>(&value));
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::UI::Xaml::Resources {
-
-template <typename D> Windows::IInspectable impl_ICustomXamlResourceLoaderOverrides<D>::GetResource(hstring_ref resourceId, hstring_ref objectType, hstring_ref propertyName, hstring_ref propertyType) const
-{
-    Windows::IInspectable returnValue;
-    check_hresult(static_cast<const ICustomXamlResourceLoaderOverrides &>(static_cast<const D &>(*this))->abi_GetResource(get(resourceId), get(objectType), get(propertyName), get(propertyType), put(returnValue)));
-    return returnValue;
-}
-
-template <typename D> Windows::UI::Xaml::Resources::CustomXamlResourceLoader impl_ICustomXamlResourceLoaderStatics<D>::Current() const
-{
-    Windows::UI::Xaml::Resources::CustomXamlResourceLoader value { nullptr };
-    check_hresult(static_cast<const ICustomXamlResourceLoaderStatics &>(static_cast<const D &>(*this))->get_Current(put(value)));
-    return value;
-}
-
-template <typename D> void impl_ICustomXamlResourceLoaderStatics<D>::Current(const Windows::UI::Xaml::Resources::CustomXamlResourceLoader & value) const
-{
-    check_hresult(static_cast<const ICustomXamlResourceLoaderStatics &>(static_cast<const D &>(*this))->put_Current(get(value)));
-}
-
-template <typename D> Windows::UI::Xaml::Resources::CustomXamlResourceLoader impl_ICustomXamlResourceLoaderFactory<D>::CreateInstance(const Windows::IInspectable & outer, Windows::IInspectable & inner) const
-{
-    Windows::UI::Xaml::Resources::CustomXamlResourceLoader instance { nullptr };
-    check_hresult(static_cast<const ICustomXamlResourceLoaderFactory &>(static_cast<const D &>(*this))->abi_CreateInstance(get(outer), put(inner), put(instance)));
-    return instance;
-}
+WINRT_EXPORT namespace winrt::Windows::UI::Xaml::Resources {
 
 inline CustomXamlResourceLoader::CustomXamlResourceLoader()
 {
-    Windows::IInspectable outer, inner;
-    impl_move(get_activation_factory<CustomXamlResourceLoader, ICustomXamlResourceLoaderFactory>().CreateInstance(outer, inner));
+    Windows::Foundation::IInspectable outer, inner;
+    impl_move(get_activation_factory<CustomXamlResourceLoader, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory>().CreateInstance(outer, inner));
 }
 
 inline Windows::UI::Xaml::Resources::CustomXamlResourceLoader CustomXamlResourceLoader::Current()
 {
-    return get_activation_factory<CustomXamlResourceLoader, ICustomXamlResourceLoaderStatics>().Current();
+    return get_activation_factory<CustomXamlResourceLoader, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics>().Current();
 }
 
-inline void CustomXamlResourceLoader::Current(const Windows::UI::Xaml::Resources::CustomXamlResourceLoader & value)
+inline void CustomXamlResourceLoader::Current(Windows::UI::Xaml::Resources::CustomXamlResourceLoader const& value)
 {
-    get_activation_factory<CustomXamlResourceLoader, ICustomXamlResourceLoaderStatics>().Current(value);
+    get_activation_factory<CustomXamlResourceLoader, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics>().Current(value);
 }
+
+template <typename D> Windows::Foundation::IInspectable ICustomXamlResourceLoaderOverridesT<D>::GetResource(param::hstring const& resourceId, param::hstring const& objectType, param::hstring const& propertyName, param::hstring const& propertyType) const
+{
+    return shim().template try_as<ICustomXamlResourceLoaderOverrides>().GetResource(resourceId, objectType, propertyName, propertyType);
+}
+
+template <typename D, typename ... Interfaces>
+struct CustomXamlResourceLoaderT :
+    implements<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides, composing, Interfaces ...>,
+    impl::require<D, Windows::UI::Xaml::Resources::ICustomXamlResourceLoader>,
+    Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverridesT<D>
+{
+    using composable = CustomXamlResourceLoader;
+
+protected:
+    CustomXamlResourceLoaderT()
+    {
+        get_activation_factory<Windows::UI::Xaml::Resources::CustomXamlResourceLoader, Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory>().CreateInstance(*this, this->m_inner);
+    }
+};
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoader> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderFactory> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderOverrides> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Resources::ICustomXamlResourceLoaderStatics> {};
+
+template<> struct hash<winrt::Windows::UI::Xaml::Resources::CustomXamlResourceLoader> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::UI::Xaml::Resources::CustomXamlResourceLoader> {};
+
 }
+
+WINRT_WARNING_POP

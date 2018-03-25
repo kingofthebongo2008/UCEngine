@@ -1,26 +1,299 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+﻿// C++/WinRT v1.0.171013.2
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
+#include "winrt/base.h"
 
-#include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Web.Http.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.System.Diagnostics.3.h"
-#include "internal/Windows.Web.Http.Diagnostics.3.h"
-#include "Windows.Web.Http.h"
+WINRT_WARNING_PUSH
+#include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Collections.h"
+#include "winrt/impl/Windows.Foundation.2.h"
+#include "winrt/impl/Windows.System.Diagnostics.2.h"
+#include "winrt/impl/Windows.Web.Http.2.h"
+#include "winrt/impl/Windows.Web.Http.Diagnostics.2.h"
+#include "winrt/Windows.Web.Http.h"
 
-WINRT_EXPORT namespace winrt {
+namespace winrt::impl {
 
-namespace impl {
+template <typename D> void consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::Start() const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->Start());
+}
+
+template <typename D> void consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::Stop() const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->Stop());
+}
+
+template <typename D> event_token consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestSent(Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->add_RequestSent(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestSent(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>(this, &abi_t<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>::remove_RequestSent, RequestSent(handler));
+}
+
+template <typename D> void consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestSent(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->remove_RequestSent(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::ResponseReceived(Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->add_ResponseReceived(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::ResponseReceived(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>(this, &abi_t<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>::remove_ResponseReceived, ResponseReceived(handler));
+}
+
+template <typename D> void consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::ResponseReceived(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->remove_ResponseReceived(get_abi(token)));
+}
+
+template <typename D> event_token consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestResponseCompleted(Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> const& handler) const
+{
+    event_token token{};
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->add_RequestResponseCompleted(get_abi(handler), put_abi(token)));
+    return token;
+}
+
+template <typename D> event_revoker<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestResponseCompleted(auto_revoke_t, Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> const& handler) const
+{
+    return impl::make_event_revoker<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>(this, &abi_t<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>::remove_RequestResponseCompleted, RequestResponseCompleted(handler));
+}
+
+template <typename D> void consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProvider<D>::RequestResponseCompleted(event_token const& token) const
+{
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider)->remove_RequestResponseCompleted(get_abi(token)));
+}
+
+template <typename D> GUID consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ActivityId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_ActivityId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::Timestamps() const noexcept
+{
+    Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_Timestamps(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::RequestedUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_RequestedUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ProcessId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_ProcessId(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ThreadId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_ThreadId(&value));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::Initiator() const noexcept
+{
+    Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_Initiator(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::SourceLocations() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs)->get_SourceLocations(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::CacheCheckedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_CacheCheckedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ConnectionInitiatedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_ConnectionInitiatedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::NameResolvedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_NameResolvedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::SslNegotiatedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_SslNegotiatedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ConnectionCompletedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_ConnectionCompletedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::RequestSentTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_RequestSentTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::RequestCompletedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_RequestCompletedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ResponseReceivedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_ResponseReceivedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ResponseCompletedTimestamp() const noexcept
+{
+    Windows::Foundation::IReference<Windows::Foundation::DateTime> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps)->get_ResponseCompletedTimestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::Timestamp() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_Timestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::ActivityId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_ActivityId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::HttpRequestMessage consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::Message() const noexcept
+{
+    Windows::Web::Http::HttpRequestMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_Message(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::ProcessId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_ProcessId(&value));
+    return value;
+}
+
+template <typename D> uint32_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::ThreadId() const noexcept
+{
+    uint32_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_ThreadId(&value));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::Initiator() const noexcept
+{
+    Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_Initiator(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderRequestSentEventArgs<D>::SourceLocations() const noexcept
+{
+    Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs)->get_SourceLocations(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::Timestamp() const noexcept
+{
+    Windows::Foundation::DateTime value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs)->get_Timestamp(put_abi(value)));
+    return value;
+}
+
+template <typename D> GUID consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::ActivityId() const noexcept
+{
+    GUID value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs)->get_ActivityId(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::HttpResponseMessage consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::Message() const noexcept
+{
+    Windows::Web::Http::HttpResponseMessage value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs)->get_Message(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticProvider consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticProviderStatics<D>::CreateFromProcessDiagnosticInfo(Windows::System::Diagnostics::ProcessDiagnosticInfo const& processDiagnosticInfo) const
+{
+    Windows::Web::Http::Diagnostics::HttpDiagnosticProvider value{ nullptr };
+    check_hresult(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics)->CreateFromProcessDiagnosticInfo(get_abi(processDiagnosticInfo), put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Uri consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticSourceLocation<D>::SourceUri() const noexcept
+{
+    Windows::Foundation::Uri value{ nullptr };
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation)->get_SourceUri(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticSourceLocation<D>::LineNumber() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation)->get_LineNumber(&value));
+    return value;
+}
+
+template <typename D> uint64_t consume_Windows_Web_Http_Diagnostics_IHttpDiagnosticSourceLocation<D>::ColumnNumber() const noexcept
+{
+    uint64_t value{};
+    check_terminate(WINRT_SHIM(Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation)->get_ColumnNumber(&value));
+    return value;
+}
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider>
 {
-    HRESULT __stdcall abi_Start() noexcept override
+    HRESULT __stdcall Start() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Start();
             return S_OK;
         }
@@ -30,10 +303,11 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall abi_Stop() noexcept override
+    HRESULT __stdcall Stop() noexcept final
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Stop();
             return S_OK;
         }
@@ -43,11 +317,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall add_RequestSent(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_RequestSent(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().RequestSent(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().RequestSent(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -56,11 +331,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall remove_RequestSent(event_token token) noexcept override
+    HRESULT __stdcall remove_RequestSent(event_token token) noexcept final
     {
         try
         {
-            this->shim().RequestSent(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RequestSent(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -69,11 +345,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall add_ResponseReceived(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_ResponseReceived(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().ResponseReceived(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().ResponseReceived(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -82,11 +359,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall remove_ResponseReceived(event_token token) noexcept override
+    HRESULT __stdcall remove_ResponseReceived(event_token token) noexcept final
     {
         try
         {
-            this->shim().ResponseReceived(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().ResponseReceived(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -95,11 +373,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall add_RequestResponseCompleted(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_RequestResponseCompleted(::IUnknown* handler, event_token* token) noexcept final
     {
         try
         {
-            *token = detach(this->shim().RequestResponseCompleted(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().RequestResponseCompleted(*reinterpret_cast<Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> const*>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -108,11 +387,12 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
         }
     }
 
-    HRESULT __stdcall remove_RequestResponseCompleted(event_token token) noexcept override
+    HRESULT __stdcall remove_RequestResponseCompleted(event_token token) noexcept final
     {
         try
         {
-            this->shim().RequestResponseCompleted(token);
+            typename D::abi_guard guard(this->shim());
+            this->shim().RequestResponseCompleted(*reinterpret_cast<event_token const*>(&token));
             return S_OK;
         }
         catch (...)
@@ -125,380 +405,210 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : pr
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs>
 {
-    HRESULT __stdcall get_ActivityId(GUID * value) noexcept override
+    HRESULT __stdcall get_ActivityId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ActivityId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActivityId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Timestamps(abi_arg_out<Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps> value) noexcept override
+    HRESULT __stdcall get_Timestamps(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Timestamps());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Timestamps());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RequestedUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_RequestedUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestedUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestedUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProcessId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_ProcessId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProcessId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProcessId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ThreadId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_ThreadId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ThreadId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ThreadId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Initiator(Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator * value) noexcept override
+    HRESULT __stdcall get_Initiator(Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Initiator());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Initiator());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceLocations(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation>> value) noexcept override
+    HRESULT __stdcall get_SourceLocations(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceLocations());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceLocations());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps>
 {
-    HRESULT __stdcall get_CacheCheckedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_CacheCheckedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().CacheCheckedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().CacheCheckedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionInitiatedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_ConnectionInitiatedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionInitiatedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionInitiatedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_NameResolvedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_NameResolvedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().NameResolvedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().NameResolvedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SslNegotiatedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_SslNegotiatedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SslNegotiatedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SslNegotiatedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ConnectionCompletedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_ConnectionCompletedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ConnectionCompletedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ConnectionCompletedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RequestSentTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_RequestSentTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestSentTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestSentTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_RequestCompletedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_RequestCompletedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().RequestCompletedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().RequestCompletedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ResponseReceivedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_ResponseReceivedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResponseReceivedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResponseReceivedTimestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ResponseCompletedTimestamp(abi_arg_out<Windows::Foundation::IReference<Windows::Foundation::DateTime>> value) noexcept override
+    HRESULT __stdcall get_ResponseCompletedTimestamp(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ResponseCompletedTimestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ResponseCompletedTimestamp());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs>
 {
-    HRESULT __stdcall get_Timestamp(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Timestamp(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Timestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Timestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ActivityId(GUID * value) noexcept override
+    HRESULT __stdcall get_ActivityId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ActivityId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActivityId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Message(abi_arg_out<Windows::Web::Http::IHttpRequestMessage> value) noexcept override
+    HRESULT __stdcall get_Message(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Message());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ProcessId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_ProcessId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ProcessId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ProcessId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ThreadId(uint32_t * value) noexcept override
+    HRESULT __stdcall get_ThreadId(uint32_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ThreadId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ThreadId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Initiator(Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator * value) noexcept override
+    HRESULT __stdcall get_Initiator(Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Initiator());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Initiator());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_SourceLocations(abi_arg_out<Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation>> value) noexcept override
+    HRESULT __stdcall get_SourceLocations(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceLocations());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceLocations());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs>
 {
-    HRESULT __stdcall get_Timestamp(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_Timestamp(Windows::Foundation::DateTime* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Timestamp());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Timestamp());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ActivityId(GUID * value) noexcept override
+    HRESULT __stdcall get_ActivityId(GUID* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ActivityId());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ActivityId());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_Message(abi_arg_out<Windows::Web::Http::IHttpResponseMessage> value) noexcept override
+    HRESULT __stdcall get_Message(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().Message());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().Message());
+        return S_OK;
     }
 };
 
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics>
 {
-    HRESULT __stdcall abi_CreateFromProcessDiagnosticInfo(abi_arg_in<Windows::System::Diagnostics::IProcessDiagnosticInfo> processDiagnosticInfo, abi_arg_out<Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> value) noexcept override
+    HRESULT __stdcall CreateFromProcessDiagnosticInfo(::IUnknown* processDiagnosticInfo, ::IUnknown** value) noexcept final
     {
         try
         {
-            *value = detach(this->shim().CreateFromProcessDiagnosticInfo(*reinterpret_cast<const Windows::System::Diagnostics::ProcessDiagnosticInfo *>(&processDiagnosticInfo)));
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().CreateFromProcessDiagnosticInfo(*reinterpret_cast<Windows::System::Diagnostics::ProcessDiagnosticInfo const*>(&processDiagnosticInfo)));
             return S_OK;
         }
         catch (...)
@@ -512,327 +622,80 @@ struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatic
 template <typename D>
 struct produce<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation> : produce_base<D, Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation>
 {
-    HRESULT __stdcall get_SourceUri(abi_arg_out<Windows::Foundation::IUriRuntimeClass> value) noexcept override
+    HRESULT __stdcall get_SourceUri(::IUnknown** value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().SourceUri());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().SourceUri());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_LineNumber(uint64_t * value) noexcept override
+    HRESULT __stdcall get_LineNumber(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().LineNumber());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().LineNumber());
+        return S_OK;
     }
 
-    HRESULT __stdcall get_ColumnNumber(uint64_t * value) noexcept override
+    HRESULT __stdcall get_ColumnNumber(uint64_t* value) noexcept final
     {
-        try
-        {
-            *value = detach(this->shim().ColumnNumber());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
+        typename D::abi_guard guard(this->shim());
+        *value = detach_abi(this->shim().ColumnNumber());
+        return S_OK;
     }
 };
 
 }
 
-namespace Windows::Web::Http::Diagnostics {
+WINRT_EXPORT namespace winrt::Windows::Web::Http::Diagnostics {
 
-template <typename D> Windows::Foundation::Uri impl_IHttpDiagnosticSourceLocation<D>::SourceUri() const
+inline Windows::Web::Http::Diagnostics::HttpDiagnosticProvider HttpDiagnosticProvider::CreateFromProcessDiagnosticInfo(Windows::System::Diagnostics::ProcessDiagnosticInfo const& processDiagnosticInfo)
 {
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticSourceLocation &>(static_cast<const D &>(*this))->get_SourceUri(put(value)));
-    return value;
-}
-
-template <typename D> uint64_t impl_IHttpDiagnosticSourceLocation<D>::LineNumber() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticSourceLocation &>(static_cast<const D &>(*this))->get_LineNumber(&value));
-    return value;
-}
-
-template <typename D> uint64_t impl_IHttpDiagnosticSourceLocation<D>::ColumnNumber() const
-{
-    uint64_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticSourceLocation &>(static_cast<const D &>(*this))->get_ColumnNumber(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::Timestamp() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_Timestamp(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::ActivityId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_ActivityId(&value));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::HttpRequestMessage impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::Message() const
-{
-    Windows::Web::Http::HttpRequestMessage value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_Message(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::ProcessId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_ProcessId(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::ThreadId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_ThreadId(&value));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::Initiator() const
-{
-    Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_Initiator(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> impl_IHttpDiagnosticProviderRequestSentEventArgs<D>::SourceLocations() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestSentEventArgs &>(static_cast<const D &>(*this))->get_SourceLocations(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::Timestamp() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderResponseReceivedEventArgs &>(static_cast<const D &>(*this))->get_Timestamp(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::ActivityId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderResponseReceivedEventArgs &>(static_cast<const D &>(*this))->get_ActivityId(&value));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::HttpResponseMessage impl_IHttpDiagnosticProviderResponseReceivedEventArgs<D>::Message() const
-{
-    Windows::Web::Http::HttpResponseMessage value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticProviderResponseReceivedEventArgs &>(static_cast<const D &>(*this))->get_Message(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::CacheCheckedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_CacheCheckedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ConnectionInitiatedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_ConnectionInitiatedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::NameResolvedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_NameResolvedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::SslNegotiatedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_SslNegotiatedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ConnectionCompletedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_ConnectionCompletedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::RequestSentTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_RequestSentTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::RequestCompletedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_RequestCompletedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ResponseReceivedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_ResponseReceivedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::IReference<Windows::Foundation::DateTime> impl_IHttpDiagnosticProviderRequestResponseTimestamps<D>::ResponseCompletedTimestamp() const
-{
-    Windows::Foundation::IReference<Windows::Foundation::DateTime> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseTimestamps &>(static_cast<const D &>(*this))->get_ResponseCompletedTimestamp(put(value)));
-    return value;
-}
-
-template <typename D> GUID impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ActivityId() const
-{
-    GUID value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_ActivityId(&value));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::Timestamps() const
-{
-    Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_Timestamps(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Uri impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::RequestedUri() const
-{
-    Windows::Foundation::Uri value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_RequestedUri(put(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ProcessId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_ProcessId(&value));
-    return value;
-}
-
-template <typename D> uint32_t impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::ThreadId() const
-{
-    uint32_t value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_ThreadId(&value));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::Initiator() const
-{
-    Windows::Web::Http::Diagnostics::HttpDiagnosticRequestInitiator value {};
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_Initiator(&value));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> impl_IHttpDiagnosticProviderRequestResponseCompletedEventArgs<D>::SourceLocations() const
-{
-    Windows::Foundation::Collections::IVectorView<Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> value;
-    check_hresult(static_cast<const IHttpDiagnosticProviderRequestResponseCompletedEventArgs &>(static_cast<const D &>(*this))->get_SourceLocations(put(value)));
-    return value;
-}
-
-template <typename D> Windows::Web::Http::Diagnostics::HttpDiagnosticProvider impl_IHttpDiagnosticProviderStatics<D>::CreateFromProcessDiagnosticInfo(const Windows::System::Diagnostics::ProcessDiagnosticInfo & processDiagnosticInfo) const
-{
-    Windows::Web::Http::Diagnostics::HttpDiagnosticProvider value { nullptr };
-    check_hresult(static_cast<const IHttpDiagnosticProviderStatics &>(static_cast<const D &>(*this))->abi_CreateFromProcessDiagnosticInfo(get(processDiagnosticInfo), put(value)));
-    return value;
-}
-
-template <typename D> void impl_IHttpDiagnosticProvider<D>::Start() const
-{
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->abi_Start());
-}
-
-template <typename D> void impl_IHttpDiagnosticProvider<D>::Stop() const
-{
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->abi_Stop());
-}
-
-template <typename D> event_token impl_IHttpDiagnosticProvider<D>::RequestSent(const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->add_RequestSent(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IHttpDiagnosticProvider> impl_IHttpDiagnosticProvider<D>::RequestSent(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IHttpDiagnosticProvider>(this, &ABI::Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider::remove_RequestSent, RequestSent(handler));
-}
-
-template <typename D> void impl_IHttpDiagnosticProvider<D>::RequestSent(event_token token) const
-{
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->remove_RequestSent(token));
-}
-
-template <typename D> event_token impl_IHttpDiagnosticProvider<D>::ResponseReceived(const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->add_ResponseReceived(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IHttpDiagnosticProvider> impl_IHttpDiagnosticProvider<D>::ResponseReceived(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IHttpDiagnosticProvider>(this, &ABI::Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider::remove_ResponseReceived, ResponseReceived(handler));
-}
-
-template <typename D> void impl_IHttpDiagnosticProvider<D>::ResponseReceived(event_token token) const
-{
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->remove_ResponseReceived(token));
-}
-
-template <typename D> event_token impl_IHttpDiagnosticProvider<D>::RequestResponseCompleted(const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->add_RequestResponseCompleted(get(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<IHttpDiagnosticProvider> impl_IHttpDiagnosticProvider<D>::RequestResponseCompleted(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Web::Http::Diagnostics::HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, IHttpDiagnosticProvider>(this, &ABI::Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider::remove_RequestResponseCompleted, RequestResponseCompleted(handler));
-}
-
-template <typename D> void impl_IHttpDiagnosticProvider<D>::RequestResponseCompleted(event_token token) const
-{
-    check_hresult(static_cast<const IHttpDiagnosticProvider &>(static_cast<const D &>(*this))->remove_RequestResponseCompleted(token));
-}
-
-inline Windows::Web::Http::Diagnostics::HttpDiagnosticProvider HttpDiagnosticProvider::CreateFromProcessDiagnosticInfo(const Windows::System::Diagnostics::ProcessDiagnosticInfo & processDiagnosticInfo)
-{
-    return get_activation_factory<HttpDiagnosticProvider, IHttpDiagnosticProviderStatics>().CreateFromProcessDiagnosticInfo(processDiagnosticInfo);
+    return get_activation_factory<HttpDiagnosticProvider, Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics>().CreateFromProcessDiagnosticInfo(processDiagnosticInfo);
 }
 
 }
 
+WINRT_EXPORT namespace std {
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProvider> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestResponseTimestamps> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderRequestSentEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderResponseReceivedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticProviderStatics> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::IHttpDiagnosticSourceLocation> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProvider> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProvider> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseCompletedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestResponseTimestamps> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderRequestSentEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticProviderResponseReceivedEventArgs> {};
+
+template<> struct hash<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> : 
+    winrt::impl::impl_hash_unknown<winrt::Windows::Web::Http::Diagnostics::HttpDiagnosticSourceLocation> {};
+
 }
+
+WINRT_WARNING_POP
