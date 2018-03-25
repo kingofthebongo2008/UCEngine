@@ -54,18 +54,20 @@ namespace uc
 
                 struct skinned_mesh : multi_material_mesh
                 {
-                    using base = multi_material_mesh;
-                    using position_t = base::position_t;
-                    using normal_t = base::normal_t;
-                    using uv_t = base::uv_t;
-                    using blend_weight_t = storage_blend_weight;
-                    using blend_index_t = storage_blend_index;
-                    using facet_ = base::face_t;
+                    using base              = multi_material_mesh;
+                    using position_t        = base::position_t;
+                    using normal_t          = base::normal_t;
+                    using uv_t              = base::uv_t;
+                    using blend_weight_t    = storage_blend_weight;
+                    using blend_index_t     = storage_blend_index;
+                    using facet_            = base::face_t;
 
-                    using positions_t = base::positions_t;
-                    using uvs_t = base::uvs_t;
-                    using normals_t = base::normals_t;
-                    using faces_t = base::faces_t;
+                    using positions_t       = base::positions_t;
+                    using uvs_t             = base::uvs_t;
+                    using normals_t         = base::normals_t;
+                    using tangents_t        = base::tangents_t;
+                    using faces_t           = base::faces_t;
+                    
 
                     using skeleton_pose_t = skeleton_pose;
 
@@ -78,13 +80,14 @@ namespace uc
                     (
                         std::vector<positions_t>&& positions,
                         std::vector<normals_t>&& normals,
+                        std::vector<tangents_t>&& tangents,
                         std::vector<uvs_t>&& uv,
                         std::vector<faces_t>&& faces,
                         std::vector<material>&& materials,
                         std::vector<blend_weights_t>&& weights,
                         std::vector<blend_indices_t>&& indices,
                         skeleton_pose_t &&             pose
-                    ) : base(std::move(positions), std::move(normals), std::move(uv), std::move(faces), std::move(materials))
+                    ) : base(std::move(positions), std::move(normals), std::move(tangents), std::move(uv), std::move(faces), std::move(materials))
                         , m_blend_weights(std::move(weights))
                         , m_blend_indices(std::move(indices))
                         , m_skeleton_pose(pose)

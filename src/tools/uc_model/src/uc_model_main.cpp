@@ -453,6 +453,8 @@ int32_t main(int32_t argc, const char* argv[])
 
         uint32_t assimp_options = static_cast<uint32_t>(get_assimp_option(vm));
 
+        assimp_options |= aiProcess_CalcTangentSpace; //always get tangents
+
         auto model_type = get_model_type(vm);
 
         std::cout << "building model (" << get_environment() << ") " << std::endl;

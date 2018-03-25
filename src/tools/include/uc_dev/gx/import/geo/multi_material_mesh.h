@@ -14,12 +14,14 @@ namespace uc
                 {
                     using position_t    = indexed_mesh::position;
                     using normal_t      = indexed_mesh::normal;
+                    using tangent_t     = indexed_mesh::tangent;
                     using uv_t          = indexed_mesh::uv;
                     using face_t        = indexed_mesh::face;
 
                     using positions_t   = indexed_mesh::positions_t;
                     using uvs_t         = indexed_mesh::uvs_t;
                     using normals_t     = indexed_mesh::normals_t;
+                    using tangents_t    = indexed_mesh::tangents_t;
                     using faces_t       = indexed_mesh::faces_t;
 
                     enum material_type : uint16_t
@@ -40,11 +42,13 @@ namespace uc
                     (
                         std::vector<positions_t>&& positions,
                         std::vector<normals_t>&& normals,
+                        std::vector<tangents_t>&& tangents,
                         std::vector<uvs_t>&& uv,
                         std::vector<faces_t>&& faces,
                         std::vector<material>&& materials
                     ) : m_positions(std::move(positions))
                         , m_normals(std::move(normals))
+                        , m_tangents(std::move(tangents))
                         , m_uv(std::move(uv))
                         , m_faces(std::move(faces))
                         , m_materials(std::move(materials))
@@ -56,6 +60,7 @@ namespace uc
                     (
                         positions_t&& positions,
                         normals_t&& normals,
+                        tangents_t&& tangents,
                         uvs_t&& uv,
                         faces_t&& faces,
                         std::vector<material>&& materials
@@ -63,12 +68,14 @@ namespace uc
                     {
                         m_positions.emplace_back(std::move(positions));
                         m_normals.emplace_back(std::move(normals));
+                        m_tangents.emplace_back(std::move(tangents));
                         m_uv.emplace_back(std::move(uv));
                         m_faces.emplace_back(std::move(faces));
                     }
 
                     std::vector<positions_t> m_positions;
                     std::vector<normals_t>   m_normals;
+                    std::vector<tangents_t>  m_tangents;
                     std::vector<uvs_t>       m_uv;
                     std::vector<faces_t>     m_faces;
                     std::vector<material>    m_materials;
@@ -89,6 +96,7 @@ namespace uc
                     using positions_t   = multi_material_mesh::positions_t;
                     using uvs_t         = multi_material_mesh::uvs_t;
                     using normals_t     = multi_material_mesh::normals_t;
+                    using tangents_t    = multi_material_mesh::tangents_t;
                     using faces_t       = multi_material_mesh::faces_t;
                     using material      = multi_material_mesh::material;
 
@@ -122,6 +130,16 @@ namespace uc
                     const normals_t& normal(material_index idx) const
                     {
                         return m_mesh->m_normals[index(idx)];
+                    }
+
+                    tangents_t& tangent(material_index idx)
+                    {
+                        return m_mesh->m_tangents[index(idx)];
+                    }
+
+                    const tangents_t& tangent(material_index idx) const
+                    {
+                        return m_mesh->m_tangents[index(idx)];
                     }
 
                     uvs_t& uv(material_index idx)
@@ -191,12 +209,13 @@ namespace uc
                 {
                     using base = material_view < multi_material_mesh>;
 
-                    using positions_t = base::positions_t;
-                    using uvs = base::uvs_t;
-                    using normals = base::normals_t;
-                    using faces = base::faces_t;
-                    using material = base::material;
-                    using position_t = base::position_t;
+                    using positions_t   = base::positions_t;
+                    using uvs           = base::uvs_t;
+                    using normals       = base::normals_t;
+                    using tangents      = base::tangents_t;
+                    using faces         = base::faces_t;
+                    using material      = base::material;
+                    using position_t    = base::position_t;
                 };
 
                 inline multi_material_mesh_view identity(multi_material_mesh* m)

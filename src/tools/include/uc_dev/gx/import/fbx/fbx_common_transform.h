@@ -649,11 +649,17 @@ namespace uc
                     std::transform(s.cbegin(), s.cend(), r.begin(),
                         [&m](const geo::indexed_mesh::tangent& n)
                     {
-                        math::float4  r0 = math::load3u_vector(&n);
-                        math::float4  r1 = math::normalize3(math::mul(r0, m));
+                        //transform the tangent, but keep the sign
+
+                        math::float4  r0    = math::load4u(&n);
+                        math::float4  r_xyz = math::permute< math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(r0, math::zero());
+                        
+                        math::float4  r1    = math::normalize3(math::mul(r_xyz, m));
+                        math::float4  r2    = math::permute< math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(r1, r0);
 
                         geo::indexed_mesh::tangent r;
-                        math::store3u_vector(&r, r1);
+                        math::store3u_vector(&r, r2);
+
                         return r;
                     });
 
@@ -768,7 +774,8 @@ namespace uc
 
                         get_tangents_typed(mesh, f0, f1, mesh->GetElementTangent(0), vectors);
 
-                        return vectors;
+                        auto normal_node_transform = math::transpose(math::inverse(world_transform(mesh->GetNode())));
+                        return transform_tangents(normal_node_transform, vectors);
                     }
                     else
                     {
@@ -787,7 +794,8 @@ namespace uc
                         
                         get_tangents_typed(mesh, f0, f1, mesh->GetElementTangent(0), vectors);
 
-                        return vectors;
+                        auto normal_node_transform = math::transpose(math::inverse(world_transform(mesh->GetNode())));
+                        return transform_tangents(normal_node_transform, vectors);
                     }
                     else
                     {

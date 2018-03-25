@@ -455,7 +455,7 @@ namespace uc
                 }
 
                 //////////////////////
-                inline  std::vector<geo::skinned_mesh::normals_t> transform_dcc_positions(const std::vector<geo::skinned_mesh::normals_t>& normals, const fbx_context* ctx)
+                inline  std::vector<geo::skinned_mesh::normals_t> transform_dcc_normals(const std::vector<geo::skinned_mesh::normals_t>& normals, const fbx_context* ctx)
                 {
                     std::vector<geo::skinned_mesh::normals_t> r;
                     ctx;
@@ -474,6 +474,46 @@ namespace uc
                             auto v = transform_from_dcc(math::load3_point(&p0), ctx);
                             geo::skinned_mesh::normal_t s;
                             math::store3u_point(&s, v);
+                            pos.push_back(s);
+                        }
+
+                        r.push_back(pos);
+                    }
+
+                    return r;
+                }
+
+                //////////////////////
+                inline  std::vector<geo::skinned_mesh::tangents_t> transform_dcc_tangents(const std::vector<geo::skinned_mesh::tangents_t>& normals, const fbx_context* ctx)
+                {
+                    std::vector<geo::skinned_mesh::tangents_t> r;
+                    ctx;
+
+                    auto m0 = negate_z();
+
+                    r.reserve(normals.size());
+
+                    for (auto&& p : normals)
+                    {
+                        std::vector<geo::skinned_mesh::tangent_t > pos;
+                        pos.reserve(p.size());
+
+                        for (auto&& p0 : p)
+                        {
+                            auto t = math::load4(&p0);
+
+                            //skip w on transform, since it contains sideness
+
+                            math::float4  r0        = math::load4u(&p0);
+                            math::float4  r_xyz     = math::permute< math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(r0, math::zero());
+
+                            math::float4  r_xyz_t   = transform_from_dcc( r_xyz, ctx );
+                            math::float4  v         = math::permute< math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(r_xyz_t, r0);
+                            
+                            geo::skinned_mesh::tangent_t s;
+
+                            math::store4u(&s, v);
+                            
                             pos.push_back(s);
                         }
 
@@ -530,6 +570,7 @@ namespace uc
                     auto materials_indices = get_material_indices(mesh);
                     std::vector<geo::skinned_mesh::positions_t> positions;                  //positions used by every material
                     std::vector<geo::skinned_mesh::normals_t>   normals;                    //normals used by every material
+                    std::vector<geo::skinned_mesh::tangents_t>  tangents;                   //tangents used by every material
                     std::vector<geo::skinned_mesh::uvs_t>       uvs;                        //uvs used by every material
                     std::vector<geo::skinned_mesh::blend_weights_t>   blend_weights;        //blend_weights used by every material
                     std::vector<geo::skinned_mesh::blend_indices_t>   blend_indices;        //blend_indices used by every material
@@ -539,6 +580,7 @@ namespace uc
                     //get_positions
                     positions.resize(materials_indices.size());
                     normals.resize(materials_indices.size());
+                    tangents.resize(materials_indices.size());
                     uvs.resize(materials_indices.size());
                     blend_weights.resize(materials_indices.size());
                     blend_indices.resize(materials_indices.size());
@@ -547,7 +589,8 @@ namespace uc
                     {
                         positions[i] = get_positions(mesh, materials_indices[i]);   //todo: positions may be shared
                         uvs[i] = get_uvs(mesh, materials_indices[i]);               
-                        normals[i] = get_normals(mesh, materials_indices[i]);       
+                        normals[i]  = get_normals(mesh, materials_indices[i]);       
+                        tangents[i] = get_tangents(mesh, materials_indices[i]);
                         blend_weights[i] = get_blend_weights(mesh, materials_indices[i]);
                         blend_indices[i] = get_blend_indices(mesh, materials_indices[i]);
                     }
@@ -578,7 +621,8 @@ namespace uc
                     return std::make_shared<geo::skinned_mesh>(
 
                         transform_dcc_positions(positions, context),
-                        transform_dcc_positions(normals, context),
+                        transform_dcc_normals(normals, context),
+                        transform_dcc_tangents(tangents, context),
                         std::move(uvs),
                         std::move(faces),
                         get_materials(mesh_node, static_cast<uint32_t>(materials_indices.size())),
@@ -601,8 +645,17 @@ namespace uc
                     {
                         m->RemoveBadPolygons();
                         m->ComputeBBox();
-                        m->GenerateNormals();
-                        m->GenerateTangentsData();
+
+                        if ( !has_normals( m ) )
+                        {
+                            m->GenerateNormals();
+                        }
+
+                        if (!has_tangents(m))
+                        {
+                            m->GenerateTangentsData();
+                        }
+
                     }
 
                     std::vector<  std::shared_ptr<geo::skinned_mesh> > multimeshes;
@@ -619,6 +672,7 @@ namespace uc
                     //merge all multimaterial meshes into one
                     std::vector< geo::skinned_mesh::positions_t > pos;
                     std::vector< geo::skinned_mesh::normals_t >   normals;
+                    std::vector< geo::skinned_mesh::tangents_t >  tangents;
                     std::vector< geo::skinned_mesh::uvs_t >       uv;
                     std::vector< geo::skinned_mesh::faces_t >     faces;
                     std::vector< geo::skinned_mesh::material >    mat;
@@ -631,6 +685,7 @@ namespace uc
                     {
                         pos.insert(pos.end(), m->m_positions.begin(), m->m_positions.end());
                         normals.insert(normals.end(), m->m_normals.begin(), m->m_normals.end());
+                        tangents.insert(tangents.end(), m->m_tangents.begin(), m->m_tangents.end());
                         uv.insert(uv.end(), m->m_uv.begin(), m->m_uv.end());
                         faces.insert(faces.end(), m->m_faces.begin(), m->m_faces.end());
                         mat.insert(mat.end(), m->m_materials.begin(), m->m_materials.end());
@@ -642,6 +697,7 @@ namespace uc
                     return std::make_shared<geo::skinned_mesh>(
                         std::move(pos), 
                         std::move(normals),
+                        std::move(tangents),
                         std::move(uv),
                         std::move(faces),
                         std::move(mat),

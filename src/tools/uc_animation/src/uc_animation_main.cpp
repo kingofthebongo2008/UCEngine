@@ -76,6 +76,7 @@ int32_t main(int32_t argc, const char* argv[])
 
         uint32_t ai_o = 0;
         ai_o |= make_left_handed ? aiProcess_MakeLeftHanded : 0;
+        ai_o |= aiProcess_CalcTangentSpace; //
         std::cout << "assimp options:" << uc::gx::import::assimp::assimp_postprocess_option_to_string(ai_o) << std::endl;
 
         std::experimental::filesystem::path path(input_animation);

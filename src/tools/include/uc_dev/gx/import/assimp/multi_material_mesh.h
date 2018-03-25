@@ -92,6 +92,27 @@ namespace uc
                     return normal;
                 }
 
+                inline std::vector< geo::multi_material_mesh::tangent_t > tangent(const aiMesh* mesh)
+                {
+                    using tangent_t = geo::multi_material_mesh::tangent_t;
+                    std::vector< tangent_t > tangent;
+                    tangent.reserve(mesh->mNumVertices);
+
+                    auto normal_span = gsl::make_span(mesh->mTangents, mesh->mNumVertices);
+
+                    for (auto&& i : normal_span)
+                    {
+                        tangent_t p;
+                        p.x = i.x;
+                        p.y = i.y;
+                        p.z = i.z;
+                        p.w = 0;
+                        tangent.push_back(p);
+                    }
+
+                    return tangent;
+                }
+
                 inline std::vector< geo::multi_material_mesh::uvs_t > uvs(const gsl::span<aiMesh*> meshes)
                 {
                     using uvs_t = geo::multi_material_mesh::uvs_t;
@@ -114,6 +135,19 @@ namespace uc
                     concurrency::parallel_for(0U, static_cast<uint32_t>(meshes.size()), [&vertices, &meshes](uint32_t i)
                     {
                         vertices[i] = normal(meshes[i]);
+                    });
+                    return vertices;
+                }
+
+                inline std::vector< geo::multi_material_mesh::tangents_t > tangents(const gsl::span<aiMesh*> meshes)
+                {
+                    using tangents_t = geo::multi_material_mesh::tangents_t;
+                    std::vector< tangents_t > vertices;
+                    vertices.resize(meshes.size());
+
+                    concurrency::parallel_for(0U, static_cast<uint32_t>(meshes.size()), [&vertices, &meshes](uint32_t i)
+                    {
+                        vertices[i] = tangent(meshes[i]);
                     });
                     return vertices;
                 }
@@ -218,14 +252,15 @@ namespace uc
                     auto scene = load_assimp_scene(file_name, import_flags);
                     validate_scene(scene.get(), validation_option::meshes);
 
-                    auto meshes = gsl::make_span(scene->mMeshes, scene->mNumMeshes);
-                    auto v      = vertices(meshes);
-                    auto uv     = uvs(meshes);
-                    auto face   = faces(meshes);
-                    auto mat    = materials(scene.get(), meshes);
-                    auto normal = normals(meshes);
+                    auto meshes     = gsl::make_span(scene->mMeshes, scene->mNumMeshes);
+                    auto v          = vertices(meshes);
+                    auto uv         = uvs(meshes);
+                    auto face       = faces(meshes);
+                    auto mat        = materials(scene.get(), meshes);
+                    auto normal     = normals(meshes);
+                    auto tangent    = tangents(meshes);
 
-                    return std::make_unique<geo::multi_material_mesh>(std::move(v), std::move(normal), std::move(uv), std::move(face), std::move(mat));
+                    return std::make_unique<geo::multi_material_mesh>(std::move(v), std::move(normal), std::move(tangent), std::move(uv), std::move(face), std::move(mat));
                 }
 
                 inline std::vector< geo::multi_material_mesh::faces_t > create_multi_material_mesh_faces(const std::string& file_name, uint32_t import_flags = aiProcess_ImproveCacheLocality | aiProcess_ValidateDataStructure | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_FindInvalidData)

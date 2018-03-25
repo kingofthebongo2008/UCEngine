@@ -449,13 +449,14 @@ namespace uc
                     auto uv = uvs(meshes);
                     auto face = faces(meshes);
                     auto normal = normals(meshes);
+                    auto tangent = tangents(meshes);
                     auto mat = materials(scene.get(), meshes);
                     auto weights = blend_weights(meshes);
                     auto poses = skeleton_poses(scene.get(), meshes);
                     auto indices = blend_indices(poses.m_skeleton, meshes);
 
 
-                    return std::make_unique<gx::import::geo::skinned_mesh>(std::move(v), std::move(normal), std::move(uv), std::move(face), std::move(mat), std::move(weights), std::move(indices), std::move(poses));
+                    return std::make_unique<gx::import::geo::skinned_mesh>(std::move(v), std::move(normal), std::move(tangent), std::move(uv), std::move(face), std::move(mat), std::move(weights), std::move(indices), std::move(poses));
                 }
               
             }
