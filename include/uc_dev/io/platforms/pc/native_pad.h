@@ -76,12 +76,12 @@ namespace uc
 
             private:
 
-            void on_gamepad_added(const winrt::Windows::IInspectable&, const winrt::Windows::Gaming::Input::Gamepad& pad)
+            void on_gamepad_added(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::Gaming::Input::Gamepad& pad)
             {
                 m_pad = pad;
             }
 
-            void on_gamepad_removed(const winrt::Windows::IInspectable&, const winrt::Windows::Gaming::Input::Gamepad&)
+            void on_gamepad_removed(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::Gaming::Input::Gamepad&)
             {
                 m_pad = nullptr;
             }

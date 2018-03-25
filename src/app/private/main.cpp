@@ -16,11 +16,11 @@
 
 #include "uwp/uc_uwp_renderer.h"
 
+
 using namespace winrt::Windows::ApplicationModel;
 using namespace winrt::Windows::ApplicationModel::Core;
 using namespace winrt::Windows::ApplicationModel::Activation;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::Graphics::Display;
 
@@ -52,7 +52,7 @@ public:
 
 #if defined(_DEBUG)
 
-        ApplicationView::PreferredLaunchViewSize(Size(1600, 900));
+        ApplicationView::PreferredLaunchViewSize(winrt::Windows::Foundation::Size(1600, 900));
         ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::PreferredLaunchViewSize);
 
 #else
@@ -95,7 +95,7 @@ public:
         m_renderer->refresh_display_layout();
     }
 
-    virtual void Load( winrt::hstring_ref)
+    virtual void Load( winrt::hstring)
     {
 
     }
@@ -160,7 +160,7 @@ protected:
         CoreWindow::GetForCurrentThread().Activate();
     }
 
-    void OnSuspending( const winrt::Windows::IInspectable&, const SuspendingEventArgs& args)
+    void OnSuspending( const winrt::Windows::Foundation::IInspectable&, const SuspendingEventArgs& args)
     {
         auto deferral = args.SuspendingOperation().GetDeferral();
 
@@ -170,7 +170,7 @@ protected:
         });
     }
 
-    void OnResuming(const winrt::Windows::IInspectable&, const winrt::Windows::IInspectable&)
+    void OnResuming(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::Foundation::IInspectable&)
     {
 
     }
@@ -198,7 +198,7 @@ protected:
     }
 
     // DisplayInformation event handlers.
-    void OnDpiChanged(const DisplayInformation& sender, const winrt::Windows::IInspectable&)
+    void OnDpiChanged(const DisplayInformation& sender, const winrt::Windows::Foundation::IInspectable&)
     {
         m_display_information = sender;
 
@@ -211,7 +211,7 @@ protected:
         m_renderer->refresh_display_layout();
     }
 
-    void OnOrientationChanged(const DisplayInformation& sender, const winrt::Windows::IInspectable&)
+    void OnOrientationChanged(const DisplayInformation& sender, const winrt::Windows::Foundation::IInspectable&)
     {
         m_display_information = sender;
 
@@ -224,7 +224,7 @@ protected:
         m_renderer->refresh_display_layout();
     }
 
-    void OnDisplayContentsInvalidated(const DisplayInformation& sender, const winrt::Windows::IInspectable&)
+    void OnDisplayContentsInvalidated(const DisplayInformation& sender, const winrt::Windows::Foundation::IInspectable&)
     {
         m_display_information = sender;
 
