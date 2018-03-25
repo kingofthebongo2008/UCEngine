@@ -77,6 +77,8 @@ namespace uc
 
             void gpu_upload_queue_impl::sync()
             {
+                std::lock_guard<std::mutex> lock(m_executing_tasks_lock);
+
                 m_buffer_index = ( m_buffer_index + 1 ) % 3;
 
                 auto& v = m_executing_tasks[m_buffer_index];
