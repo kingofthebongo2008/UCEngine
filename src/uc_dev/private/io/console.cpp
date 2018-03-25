@@ -2,6 +2,8 @@
 
 #include <uc_dev/io/console.h>
 
+#include <atomic>
+
 namespace uc
 {
     namespace io
@@ -33,10 +35,12 @@ namespace uc
             {
                 std::lock_guard<std::mutex> guard(m_lock);
                
-                std::remove_if(m_notifiers.begin(), m_notifiers.end(), [&n](const auto& p)
+                auto v = std::remove_if(m_notifiers.begin(), m_notifiers.end(), [&n](const auto& p)
                 {
                     return p == n;
                 });
+
+                v;
             }
 
             void console_updater::register_thread_info(thread_info*      info)
@@ -49,10 +53,12 @@ namespace uc
             {
                 std::lock_guard<std::mutex> guard(m_lock);
 
-                std::remove_if(m_infos.begin(), m_infos.end(), [&info](const auto& p)
+                auto v = std::remove_if(m_infos.begin(), m_infos.end(), [&info](const auto& p)
                 {
                     return p == info;
                 });
+
+                v;
             }
 
             void console_updater::update()
@@ -117,6 +123,7 @@ namespace uc
             void runner::stop()
             {
                 m_stop_thread = true;
+                std::atomic_thread_fence(std::memory_order_release);
                 m_thread.join();
             }
 
