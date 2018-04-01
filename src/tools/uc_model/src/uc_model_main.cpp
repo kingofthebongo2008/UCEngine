@@ -280,7 +280,7 @@ namespace uc
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
-        static void convert_indexed_mesh_assimp(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a)
+        static void convert_model_assimp(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a)
         {
             auto m = create_lip_model(input_file_name, [a](const std::string& f)
             {
@@ -289,7 +289,12 @@ namespace uc
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
-        static void convert_indexed_mesh_fbx(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a)
+        static void convert_model_assimp_bridge(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
+        {
+            convert_model_assimp(input_file_name, output_file_name, a);
+        }
+
+        static void convert_model_fbx(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a)
         {
             auto m = create_lip_model(input_file_name, [a](const std::string& f)
             {
@@ -298,7 +303,12 @@ namespace uc
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
-        static void convert_parmetrized_mesh_assimp(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
+        static void convert_model_fbx_bridge(const file_name_t& input_file_name, const file_name_t output_file_name, assimp_flags_t a, const std::vector<file_name_t>& , const std::vector<file_name_t>& )
+        {
+            return convert_model_fbx(input_file_name, output_file_name, a);
+        }
+
+        static void convert_parametrized_mesh_assimp(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
         {
             auto m = create_parametrized_model(input_file_name, [a](const std::string& f)
             {
@@ -307,13 +317,23 @@ namespace uc
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
-        static void convert_parmetrized_mesh_fbx(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
+        static void convert_parametrized_mesh_assimp_bridge(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
+        {
+            convert_parametrized_mesh_assimp(input_file_name, output_file_name, a);
+        }
+
+        static void convert_parametrized_mesh_fbx(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
         {
             auto m = create_parametrized_model(input_file_name, [a](const std::string& f)
             {
                 return gx::import::fbx::create_mesh(f);
             });
             uc::lip::serialize_object(std::move(m), output_file_name);
+        }
+
+        static void convert_parametrized_mesh_fbx_bridge(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
+        {
+            convert_parametrized_mesh_fbx(input_file_name, output_file_name, a);
         }
 
         static void convert_multi_textured_mesh_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
@@ -403,7 +423,18 @@ namespace uc
     }
 }
 
-inline std::string get_environment()
+namespace uc
+{
+    namespace model
+    {
+        using convert_function = std::function<void(const file_name_t&, const file_name_t&, assimp_flags_t, const std::vector<file_name_t>&, const std::vector<file_name_t>& texture_format )>;
+
+        
+
+    }
+}
+
+static std::string get_environment()
 {
 #if defined(_X86)
     return "x86";
@@ -412,6 +443,147 @@ inline std::string get_environment()
 #if defined(_X64)
     return "x64";
 #endif
+}
+
+namespace uc
+{
+    namespace lip
+    {
+        template <typename t>
+        std::string model_to_string_type();
+
+        template <>
+        std::string model_to_string_type<model>()
+        {
+            return "model";
+        }
+
+        template <>
+        std::string model_to_string_type<normal_model>()
+        {
+            return "normal_model";
+        }
+
+        template <>
+        std::string model_to_string_type<parametrized_model>()
+        {
+            return "parametrized_model";
+        }
+
+        template <>
+        std::string model_to_string_type<normal_parametrized_model>()
+        {
+            return "normal_parametrized_model";
+        }
+
+        template <>
+        std::string model_to_string_type<derivatives_parametrized_model>()
+        {
+            return "derivatives_parametrized_model";
+        }
+
+        template <>
+        std::string model_to_string_type<textured_model>()
+        {
+            return "textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<normal_textured_model>()
+        {
+            return "normal_textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<derivatives_textured_model>()
+        {
+            return "derivatives_textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<multi_textured_model>()
+        {
+            return "multi_textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<normal_multi_textured_model>()
+        {
+            return "normal_multi_textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<derivatives_multi_textured_model>()
+        {
+            return "derivatives_multi_textured_model";
+        }
+
+        template <>
+        std::string model_to_string_type<skinned_model>()
+        {
+            return "skinned_model";
+        }
+
+        template <>
+        std::string model_to_string_type<normal_skinned_model>()
+        {
+            return "normal_skinned_model";
+        }
+
+        template <>
+        std::string model_to_string_type<derivatives_skinned_model>()
+        {
+            return "derivatives_skinned_model";
+        }
+    }
+}
+
+namespace uc
+{
+    namespace model
+    {
+        struct convertor
+        {
+            std::string         m_model_type;
+            convert_function    m_convert_function_fbx;
+            convert_function    m_convert_function_assimp;
+        };
+
+        template <typename > convertor make_convertor();
+
+
+        template<> convertor make_convertor<lip::model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::model>(),
+                convert_model_fbx_bridge,
+                convert_model_assimp_bridge
+            };
+        }
+
+        template<> convertor make_convertor<lip::parametrized_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::parametrized_model>(),
+                convert_parametrized_mesh_fbx_bridge,
+                convert_parametrized_mesh_assimp_bridge
+            };
+        }
+
+        std::vector< convertor > make_convertors()
+        {
+            //todo: typelists
+
+            std::vector< convertor > r;
+
+            r.push_back(make_convertor<lip::model>());
+            r.push_back(make_convertor<lip::parametrized_model>());
+
+            return r;
+        }
+    }
 }
 
 
@@ -470,11 +642,11 @@ int32_t main(int32_t argc, const char* argv[])
 
                 if ( e == L".fbx" )
                 {
-                    convert_indexed_mesh_fbx(input_model, output_model, assimp_options);
+                    convert_model_fbx(input_model, output_model, assimp_options);
                 }
                 else
                 {
-                    convert_indexed_mesh_assimp(input_model, output_model, assimp_options);
+                    convert_model_assimp(input_model, output_model, assimp_options);
                 }
             }
         }
@@ -489,11 +661,11 @@ int32_t main(int32_t argc, const char* argv[])
 
                 if (e == L".fbx")
                 {
-                    convert_parmetrized_mesh_fbx(input_model, output_model, assimp_options);
+                    convert_parametrized_mesh_fbx(input_model, output_model, assimp_options);
                 }
                 else
                 {
-                    convert_parmetrized_mesh_assimp(input_model, output_model, assimp_options);
+                    convert_parametrized_mesh_assimp(input_model, output_model, assimp_options);
                 }
             }
             else if (model_type == "textured")
