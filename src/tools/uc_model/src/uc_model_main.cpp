@@ -103,6 +103,24 @@ namespace uc
             return m;
         }
 
+        template <typename mesh_create_functor> std::unique_ptr<lip::normal_parametrized_model> create_normal_parametrized_model(const file_name_t& input_file_name, const mesh_create_functor& create_mesh)
+        {
+            auto mesh = create_mesh(input_file_name);
+            std::unique_ptr< uc::lip::normal_parametrized_model > m = std::make_unique<uc::lip::normal_parametrized_model>();
+
+            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
+            m->m_positions.m_data.resize(mesh->m_positions.size());
+            m->m_normals.m_data.resize(mesh->m_normals.size());
+            m->m_uv.m_data.resize(mesh->m_uv.size());
+
+            copy_indices(mesh->m_faces, m->m_indices.m_data);
+            copy_positions(mesh->m_positions, m->m_positions.m_data);
+            copy_uv(mesh->m_uv, m->m_uv.m_data);
+            copy_normals(mesh->m_normals, m->m_normals.m_data);
+
+            return m;
+        }
+
         template <typename mesh_create_functor> std::unique_ptr<lip::textured_model> create_textured_model(const file_name_t& input_file_name, const mesh_create_functor& create_mesh)
         {
             auto mesh = create_mesh(input_file_name);
@@ -353,6 +371,20 @@ namespace uc
         {
             convert_normal_model_assimp(input_file_name, output_file_name, a);
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void convert_normal_parametrized_model_assimp(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
+        {
+            auto m = create_normal_parametrized_model(input_file_name, [a](const std::string& f)
+            {
+                return gx::import::assimp::create_mesh(f, a);
+            });
+            uc::lip::serialize_object(std::move(m), output_file_name);
+        }
+
+        static void convert_normal_parametrized_model_assimp_bridge(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
+        {
+            convert_normal_parametrized_model_assimp(input_file_name, output_file_name, a);
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         static void convert_parametrized_model_fbx(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
@@ -382,6 +414,20 @@ namespace uc
         static void convert_normal_model_fbx_bridge(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
         {
             convert_normal_model_fbx(input_file_name, output_file_name, a);
+        } 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void convert_normal_parametrized_model_fbx(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a)
+        {
+            auto m = create_normal_parametrized_model(input_file_name, [a](const std::string& f)
+            {
+                return gx::import::fbx::create_mesh(f);
+            });
+            uc::lip::serialize_object(std::move(m), output_file_name);
+        }
+
+        static void convert_normal_parametrized_model_fbx_bridge(const std::string& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>&, const std::vector<file_name_t>&)
+        {
+            convert_normal_parametrized_model_fbx(input_file_name, output_file_name, a);
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -631,6 +677,16 @@ namespace uc
             };
         }
 
+        template<> convertor make_convertor<lip::normal_parametrized_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::normal_parametrized_model>(),
+                convert_normal_parametrized_model_fbx_bridge,
+                convert_normal_parametrized_model_assimp_bridge
+            };
+        }
+
         std::vector< convertor > make_convertors()
         {
             //todo: typelists
@@ -640,6 +696,7 @@ namespace uc
             r.push_back(make_convertor<lip::model>());
             r.push_back(make_convertor<lip::parametrized_model>());
             r.push_back(make_convertor<lip::normal_model>());
+            r.push_back(make_convertor<lip::normal_parametrized_model>());
 
 
 
