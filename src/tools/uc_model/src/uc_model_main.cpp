@@ -613,7 +613,7 @@ namespace uc
             convert_derivatives_textured_model_fbx(input_file_name, output_file_name, a, textures[0], texture_formats[0]);
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        static void convert_multi_textured_mesh_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        static void convert_multi_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
             {
@@ -623,7 +623,7 @@ namespace uc
             convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
         }
 
-        static void convert_multi_textured_mesh_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        static void convert_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
             {
@@ -633,7 +633,7 @@ namespace uc
             convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
         }
 
-        static void convert_skinned_mesh_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        static void convert_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
             {
@@ -643,7 +643,7 @@ namespace uc
             convert_skinned_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
         }
 
-        static void convert_skinned_mesh_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        static void convert_skinned_model_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
             {
@@ -1027,11 +1027,11 @@ int32_t main(int32_t argc, const char* argv[])
 
                 if (e == L".fbx")
                 {
-                    convert_multi_textured_mesh_fbx(input_model, output_model, assimp_options, textures, texture_formats);
+                    convert_multi_textured_model_fbx(input_model, output_model, assimp_options, textures, texture_formats);
                 }
                 else
                 {
-                    convert_multi_textured_mesh_assimp(input_model, output_model, assimp_options, textures, texture_formats);
+                    convert_multi_textured_model_assimp(input_model, output_model, assimp_options, textures, texture_formats);
                 }
             }
             else if (model_type == "skinned")
@@ -1049,11 +1049,11 @@ int32_t main(int32_t argc, const char* argv[])
 
                 if (e == L".fbx")
                 {
-                    convert_skinned_mesh_fbx(input_model, output_model, assimp_options, textures, texture_formats);
+                    convert_skinned_model_fbx(input_model, output_model, assimp_options, textures, texture_formats);
                 }
                 else
                 {
-                    convert_skinned_mesh_assimp(input_model, output_model, assimp_options, textures, texture_formats);
+                    convert_skinned_model_assimp(input_model, output_model, assimp_options, textures, texture_formats);
                 }
             }
             else 
