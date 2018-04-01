@@ -26,6 +26,7 @@
 
 
   <ItemDefinitionGroup>
+
     <Model>
         <TrackerLogDirectory Condition="$(TLogLocation)== ''">$(IntermediateOutputPath)</TrackerLogDirectory>
         <InputModel>%(FileName)</InputModel>
@@ -38,9 +39,48 @@
         <OptionFlipUVs>true</OptionFlipUVs>
         <OptionPreTransformVertices>false</OptionPreTransformVertices>
         <OptionFlipWindingOrder>true</OptionFlipWindingOrder>
-
-    <Name>noname</Name>
+        <Name>noname</Name>
     </Model>
+
+    <NormalModel>
+    </NormalModel>
+
+    <ParametrizedModel>
+    </ParametrizedModel>
+
+    <NormalParametrizedModel>
+    </NormalParametrizedModel>
+
+    <DerivativesParametrizedModel>
+    </DerivativesParametrizedModel>
+
+    <TexturedModel>
+    </TexturedModel>
+
+    <NormalTexturedModel>
+    </NormalTexturedModel>
+
+    <DerivativesTexturedModel>
+    </DerivativesTexturedModel>
+
+    <MultiTexturedModel>
+    </MultiTexturedModel>
+
+    <NormalMultiTexturedModel>
+    </NormalMultiTexturedModel>
+
+    <DerivativesMultiTexturedModel>
+    </DerivativesMultiTexturedModel>
+
+    <SkinnedModel>
+    </SkinnedModel>
+
+    <NormalSkinnedModel>
+    </NormalSkinnedModel>
+
+    <DerivativesSkinnedModel>
+    </DerivativesSkinnedModel>
+
 
   </ItemDefinitionGroup>
 
@@ -113,8 +153,11 @@
       TrackerLogDirectory             ="$(TrackerLogDirectory)"
       ToolPath                        ="$(ModelToolPath)"
     >
+
     <Output TaskParameter="OutputModel" ItemName="BinaryModels" />
     </Model>
+
+
     
     <ItemGroup>
       <BinaryModels>
