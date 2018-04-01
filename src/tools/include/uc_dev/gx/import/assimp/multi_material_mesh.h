@@ -106,7 +106,7 @@ namespace uc
                         p.x = i.x;
                         p.y = i.y;
                         p.z = i.z;
-                        p.w = 0;
+                        //p.w = 0;
                         tangent.push_back(p);
                     }
 

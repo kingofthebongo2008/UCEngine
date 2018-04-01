@@ -56,6 +56,20 @@ namespace uc
         }
 
         template <typename t>
+        void copy_tangents(const std::vector< gx::import::geo::indexed_mesh::tangent >& tangents, t& out)
+        {
+            size_t vertex = 0;
+
+            for (auto&& i : tangents)
+            {
+                out[vertex].m_x = i.x;
+                out[vertex].m_y = i.y;
+                out[vertex].m_z = i.z;
+                vertex++;
+            }
+        }
+
+        template <typename t>
         void copy_uv(const std::vector< gx::import::geo::indexed_mesh::uv >& uv, t& out)
         {
             size_t vertex = 0;

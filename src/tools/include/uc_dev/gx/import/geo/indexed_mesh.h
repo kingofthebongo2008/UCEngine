@@ -59,7 +59,6 @@ namespace uc
                     float x = 0.0f;
                     float y = 0.0f;
                     float z = 0.0f;
-                    float w = 0.0f; //1.0f, -1.0f shows the sign
                 };
 
                 inline bool operator==(const storage_tangent& a, const storage_tangent& b)
@@ -248,11 +247,13 @@ namespace uc
                     indexed_mesh(
                         std::vector< position > &&      positions,
                         std::vector< normal >  &&       normals,
+                        std::vector< tangent >  &&      tangents,
                         std::vector< uv > &&            uv,
                         std::vector< face >   &&        faces
                     ) :
                         m_positions(std::move(positions))
                         , m_normals(std::move(normals))
+                        , m_tangents(std::move(tangents))
                         , m_uv(std::move(uv))
                         , m_faces(std::move(faces))
                     {
@@ -296,6 +297,7 @@ namespace uc
 
                     std::vector< position >              m_positions;
                     std::vector< normal >                m_normals;
+                    std::vector< tangent >               m_tangents;
                     std::vector< uv >                    m_uv;
                     std::vector< face >                  m_faces;
                     std::vector< half_edge >             m_edges_storage;
