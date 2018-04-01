@@ -886,6 +886,16 @@ namespace uc
                 convert_derivatives_textured_model_assimp_bridge
             };
         }
+
+        template<> convertor make_convertor<lip::multi_textured_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::multi_textured_model>(),
+                convert_multi_textured_model_fbx,
+                convert_multi_textured_model_assimp
+            };
+        }
         
 
         std::vector< convertor > make_convertors()
@@ -903,6 +913,8 @@ namespace uc
             r.push_back(make_convertor<lip::textured_model>());
             r.push_back(make_convertor<lip::normal_textured_model>());
             r.push_back(make_convertor<lip::derivatives_textured_model>());
+
+            r.push_back(make_convertor<lip::multi_textured_model>());
 
 
             return r;
