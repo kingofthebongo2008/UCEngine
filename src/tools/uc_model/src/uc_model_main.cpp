@@ -121,6 +121,26 @@ namespace uc
             return m;
         }
 
+        template <typename mesh_create_functor> std::unique_ptr<lip::derivatives_parametrized_model> create_derivatives_parametrized_model(const file_name_t& input_file_name, const mesh_create_functor& create_mesh)
+        {
+            auto mesh = create_mesh(input_file_name);
+            std::unique_ptr< uc::lip::derivatives_parametrized_model > m = std::make_unique<uc::lip::derivatives_parametrized_model>();
+
+            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
+            m->m_positions.m_data.resize(mesh->m_positions.size());
+            m->m_normals.m_data.resize(mesh->m_normals.size());
+            m->m_uv.m_data.resize(mesh->m_uv.size());
+            m->m_tangents.m_data.resize(mesh->m_tangents.size());
+
+            copy_indices(mesh->m_faces, m->m_indices.m_data);
+            copy_positions(mesh->m_positions, m->m_positions.m_data);
+            copy_uv(mesh->m_uv, m->m_uv.m_data);
+            copy_normals(mesh->m_normals, m->m_normals.m_data);
+            copy_tangents(mesh->m_tangents, m->m_tangents.m_data);
+
+            return m;
+        }
+
         template <typename mesh_create_functor> std::unique_ptr<lip::textured_model> create_textured_model(const file_name_t& input_file_name, const mesh_create_functor& create_mesh)
         {
             auto mesh = create_mesh(input_file_name);
@@ -430,7 +450,38 @@ namespace uc
             convert_normal_parametrized_model_fbx(input_file_name, output_file_name, a);
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void convert_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const file_name_t& texture_file_name, const std::string& texture_format)
+        {
+            auto m = create_textured_model(input_file_name, [a](const std::string& f)
+            {
+                return gx::import::assimp::create_mesh(f, a);
+            });
 
+            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            uc::lip::serialize_object(std::move(m), output_file_name);
+        }
+
+        static void convert_textured_model_assimp_bridge(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>& textures, const std::vector<file_name_t>& texture_formats)
+        {
+            convert_textured_model_assimp(input_file_name, output_file_name, a, textures[0], texture_formats[0]);
+        }
+
+        static void convert_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t, const file_name_t& texture_file_name, const std::string& texture_format)
+        {
+            auto m = create_textured_model(input_file_name, [](const std::string& f)
+            {
+                return gx::import::fbx::create_mesh(f);
+            });
+
+            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            uc::lip::serialize_object(std::move(m), output_file_name);
+        }
+
+        static void convert_textured_model_fbx_bridge(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<file_name_t>& textures, const std::vector<file_name_t>& texture_formats)
+        {
+            convert_textured_model_fbx(input_file_name, output_file_name, a, textures[0], texture_formats[0]);
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         static void convert_multi_textured_mesh_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
@@ -469,28 +520,6 @@ namespace uc
             };
 
             convert_skinned_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
-        }
-
-        static void convert_textured_mesh_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const file_name_t& texture_file_name, const std::string& texture_format)
-        {
-            auto m = create_textured_model(input_file_name, [a](const std::string& f)
-            {
-                return gx::import::assimp::create_mesh(f, a);
-            });
-
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
-            uc::lip::serialize_object(std::move(m), output_file_name);
-        }
-
-        static void convert_textured_mesh_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t, const file_name_t& texture_file_name, const std::string& texture_format)
-        {
-            auto m = create_textured_model(input_file_name, [](const std::string& f)
-            {
-                return gx::import::fbx::create_mesh(f);
-            });
-
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
-            uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
         static std::tuple< std::vector<std::string>, std::vector<std::string> > clean_duplicate_textures(const std::vector<std::string>& texture_names, const std::vector<std::string>& texture_formats)
@@ -687,6 +716,16 @@ namespace uc
             };
         }
 
+        template<> convertor make_convertor<lip::textured_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::textured_model>(),
+                convert_textured_model_fbx_bridge,
+                convert_textured_model_assimp_bridge
+            };
+        }
+
         std::vector< convertor > make_convertors()
         {
             //todo: typelists
@@ -697,6 +736,8 @@ namespace uc
             r.push_back(make_convertor<lip::parametrized_model>());
             r.push_back(make_convertor<lip::normal_model>());
             r.push_back(make_convertor<lip::normal_parametrized_model>());
+
+            r.push_back(make_convertor<lip::textured_model>());
 
 
 
@@ -799,11 +840,11 @@ int32_t main(int32_t argc, const char* argv[])
 
                 if (e == L".fbx")
                 {
-                    convert_textured_mesh_fbx(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
+                    convert_textured_model_fbx(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
                 }
                 else
                 {
-                    convert_textured_mesh_assimp(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
+                    convert_textured_model_assimp(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
                 }
             }
             else if (model_type == "multi_textured")
