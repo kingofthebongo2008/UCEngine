@@ -270,6 +270,86 @@ namespace uc
             return p.size() * sizeof(float3);
         }
 
+        struct tangents
+        {
+            lip::reloc_array < vector3 > m_data;
+
+            explicit tangents(const lip::load_context& c) : m_data(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)            
+            tangents()
+            {
+
+            }
+
+            tangents(const lip::reloc_array<vector3>& data) : m_data(data)
+            {
+
+            }
+
+            tangents(lip::reloc_array<vector3>&& data) : m_data(std::move(data))
+            {}
+
+            tangents(const tangents& o) : m_data(o.m_data)
+            {}
+
+            tangents(tangents&& o) : m_data(std::move(o.m_data))
+            {}
+
+            tangents& operator=(const tangents& o)
+            {
+                m_data = o.m_data;
+                return *this;
+            }
+
+            tangents& operator=(tangents&& o)
+            {
+                m_data = std::move(o.m_data);
+                return *this;
+            }
+
+            ~tangents() = default;
+#endif
+            size_t size() const
+            {
+                return m_data.size();
+            }
+
+            vector3* data()
+            {
+                return m_data.data();
+            }
+
+            const vector3* data() const
+            {
+                return m_data.data();
+            }
+
+#if defined(UC_TOOLS)            
+            bool operator ==(const tangents& rhs) const
+            {
+                return m_data == rhs.m_data;
+            }
+
+            bool operator !=(const tangents& rhs) const
+            {
+                return m_data != rhs.m_data;
+            }
+#endif
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::tangents)
+
+            inline size_t size(const tangents& p)
+        {
+            return p.size() * sizeof(float3);
+        }
+
         struct model
         {
             indices                         m_indices;
@@ -420,6 +500,25 @@ namespace uc
         };
 
         LIP_DECLARE_TYPE_ID(uc::lip::normal_parametrized_model)
+
+        struct derivatives_parametrized_model : public normal_parametrized_model
+        {
+            using base = normal_parametrized_model;
+            tangents    m_tangents;
+
+            explicit derivatives_parametrized_model(const lip::load_context& c) : base(c), m_tangents(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)
+            derivatives_parametrized_model() {}
+#endif
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::derivatives_parametrized_model)
 
         //todo: make this serializale
         enum class storage_format : uint16_t
@@ -585,6 +684,36 @@ namespace uc
 
         LIP_DECLARE_TYPE_ID(uc::lip::normal_textured_model)
 
+        struct derivatives_textured_model : public derivatives_parametrized_model
+        {
+            using base = derivatives_parametrized_model;
+
+            texture2d m_texture;
+
+            const texture2d* texture() const
+            {
+                return &m_texture;
+            }
+
+            texture2d* texture()
+            {
+                return &m_texture;
+            }
+
+            explicit derivatives_textured_model(const lip::load_context& c) : base(c), m_texture(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)
+            derivatives_textured_model() {}
+#endif
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::derivatives_textured_model)
+
         struct primitive_range
         {
             uint32_t m_begin;
@@ -643,6 +772,29 @@ namespace uc
 
         LIP_DECLARE_TYPE_ID(uc::lip::normal_multi_textured_model)
 
+        struct derivatives_multi_textured_model : public derivatives_parametrized_model
+        {
+            using base = derivatives_parametrized_model;
+
+            lip::reloc_array < texture2d >          m_textures;
+            lip::reloc_array < primitive_range >    m_primitive_ranges;
+
+            explicit derivatives_multi_textured_model(const lip::load_context& c) : base(c)
+                , m_textures(c)
+                , m_primitive_ranges(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)
+            derivatives_multi_textured_model() {}
+#endif
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::derivatives_multi_textured_model)
+
         struct skinned_model : public multi_textured_model
         {
             using base = multi_textured_model;
@@ -687,6 +839,29 @@ namespace uc
         };
 
         LIP_DECLARE_TYPE_ID(uc::lip::normal_skinned_model)
+
+
+        struct derivatives_skinned_model : public derivatives_multi_textured_model
+        {
+            using base = derivatives_multi_textured_model;
+
+            lip::reloc_array < float4 >          m_blend_weights;
+            lip::reloc_array < ubyte4 >          m_blend_indices;
+
+            explicit derivatives_skinned_model(const lip::load_context& c) : base(c)
+                , m_blend_weights(c)
+                , m_blend_indices(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)            
+            derivatives_skinned_model() {}
+#endif
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::derivatives_skinned_model)
 
     }
 }

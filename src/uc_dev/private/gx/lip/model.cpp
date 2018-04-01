@@ -43,6 +43,11 @@ namespace uc
             LIP_RTTI_MEMBER(normal_parametrized_model, m_normals)
         LIP_END_DEFINE_RTTI(normal_parametrized_model)
 
+        LIP_BEGIN_DEFINE_RTTI(derivatives_parametrized_model)
+            LIP_RTTI_BASE_CLASS(parametrized_model)
+            LIP_RTTI_MEMBER(derivatives_parametrized_model, m_tangents)
+        LIP_END_DEFINE_RTTI(derivatives_parametrized_model)
+
         LIP_BEGIN_DEFINE_RTTI(texture2d)
             LIP_RTTI_MEMBER(texture2d, m_data)
             LIP_RTTI_MEMBER(texture2d, m_width)
@@ -62,6 +67,11 @@ namespace uc
             LIP_RTTI_MEMBER(normal_textured_model, m_texture)
         LIP_END_DEFINE_RTTI(normal_textured_model)
 
+        LIP_BEGIN_DEFINE_RTTI(derivatives_textured_model)
+            LIP_RTTI_BASE_CLASS(derivatives_parametrized_model)
+            LIP_RTTI_MEMBER(derivatives_textured_model, m_texture)
+        LIP_END_DEFINE_RTTI(derivatives_textured_model)
+
         LIP_BEGIN_DEFINE_RTTI(primitive_range)
             LIP_RTTI_MEMBER(primitive_range, m_begin)
             LIP_RTTI_MEMBER(primitive_range, m_end)
@@ -79,6 +89,12 @@ namespace uc
             LIP_RTTI_MEMBER(normal_multi_textured_model, m_primitive_ranges)
         LIP_END_DEFINE_RTTI(normal_multi_textured_model)
 
+        LIP_BEGIN_DEFINE_RTTI(derivatives_multi_textured_model)
+            LIP_RTTI_BASE_CLASS(derivatives_parametrized_model)
+            LIP_RTTI_MEMBER(derivatives_multi_textured_model, m_textures)
+            LIP_RTTI_MEMBER(derivatives_multi_textured_model, m_primitive_ranges)
+        LIP_END_DEFINE_RTTI(derivatives_multi_textured_model)
+
         LIP_BEGIN_DEFINE_RTTI(skinned_model)
             LIP_RTTI_BASE_CLASS(multi_textured_model)
             LIP_RTTI_MEMBER(skinned_model, m_blend_weights)
@@ -90,6 +106,12 @@ namespace uc
             LIP_RTTI_MEMBER(normal_skinned_model, m_blend_weights)
             LIP_RTTI_MEMBER(normal_skinned_model, m_blend_indices)
         LIP_END_DEFINE_RTTI(normal_skinned_model)
+
+        LIP_BEGIN_DEFINE_RTTI(derivatives_skinned_model)
+            LIP_RTTI_BASE_CLASS(derivatives_multi_textured_model)
+            LIP_RTTI_MEMBER(derivatives_skinned_model, m_blend_weights)
+            LIP_RTTI_MEMBER(derivatives_skinned_model, m_blend_indices)
+        LIP_END_DEFINE_RTTI(derivatives_skinned_model)
         
     }
 }
