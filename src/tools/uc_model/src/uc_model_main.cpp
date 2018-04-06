@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <iostream>
 #include <set>
+#include <type_traits>
 
 #include <boost/program_options.hpp>
 
@@ -248,10 +249,11 @@ namespace uc
             return r;
         }
 
-        template <typename mesh_create_functor> void convert_multi_textured_mesh( const file_name_t& input_file_name, const file_name_t& output_file_name, const mesh_create_functor& create_mesh, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format )
+        template <typename mesh_create_functor, typename model_create_functor, typename copy_attributes> void convert_multi_textured_mesh( const file_name_t& input_file_name, const file_name_t& output_file_name, const mesh_create_functor& create_mesh, const model_create_functor& create_model, const copy_attributes copy_attributes,  const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format )
         {
-            std::unique_ptr< uc::lip::multi_textured_model > m = std::make_unique<uc::lip::multi_textured_model>();
-            std::shared_ptr<gx::import::geo::multi_material_mesh> mesh;
+            auto m          = create_model();
+            auto mesh       = create_mesh(input_file_name);
+
 
             concurrency::task_group g;
 
@@ -273,15 +275,20 @@ namespace uc
             }
             #endif
 
+
             auto mats = materials(texture_file_name);
-            g.run( [&m, &mesh, &input_file_name, &mats, &create_mesh ]()
+            g.run( [&m, &mesh, &input_file_name, &mats, &create_mesh, &copy_attributes ]()
             {
-                mesh           = create_mesh(input_file_name);
                 auto view      = gx::import::geo::multi_mesh_material_view(mesh.get(), material_indices( mats, mesh->m_materials));
                 auto positions = gx::import::geo::merge_positions(&view);
                 auto uvs       = gx::import::geo::merge_uvs(&view);
                 auto faces     = gx::import::geo::merge_faces(&view);
                 auto ranges    = model::ranges(&view);
+
+                auto p0 = m.get();
+                auto p1 = mesh.get();
+
+                copy_attributes(m.get(), mesh.get() );
 
                 m->m_indices.m_data.resize( faces.size() * 3 );
                 m->m_positions.m_data.resize( positions.size());
@@ -615,6 +622,49 @@ namespace uc
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         static void convert_multi_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::assimp::create_multi_material_mesh(input_file_name, a);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<lip::multi_textured_model>();
+            };
+
+            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s)
+            {
+                d;
+                s;
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
+
+        static void convert_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::assimp::create_multi_material_mesh(input_file_name, a);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<lip::multi_textured_model>();
+            };
+
+            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s)
+            {
+                d;
+                s;
+            };
+
+            convert_multi_textured_mesh<decltype(f0), decltype(f1), decltype(f2) >(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*
+        static void convert_normal_multi_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        {
             auto f = [a](const file_name_t& input_file_name)
             {
                 return gx::import::assimp::create_multi_material_mesh(input_file_name, a);
@@ -623,7 +673,7 @@ namespace uc
             convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
         }
 
-        static void convert_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        static void convert_normal_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
             {
@@ -632,7 +682,7 @@ namespace uc
 
             convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
         }
-
+        */
         static void convert_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
         {
             auto f = [a](const file_name_t& input_file_name)
