@@ -58,16 +58,131 @@ namespace uc
         using assimp_flags_t  = uint32_t;
         using file_name_t     = std::string;
 
+        template <typename t> struct has_positions_trait { static const bool value = false; };
+        template <typename t> struct has_indices_trait { static const bool value = false; };
+        template <typename t> struct has_uvs_trait { static const bool value = false; };
+        template <typename t> struct has_normals_trait { static const bool value = false; };
+        template <typename t> struct has_tangents_trait { static const bool value = false; };
+
+
+        template <typename source, typename destination> struct copy_attributes_struct
+        {
+            private:
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            template <bool> static void do_copy_tangents(destination* d, const source* s);
+
+            template <> static void do_copy_tangents<false>(destination* , const source* ) {}
+
+            template <> static void do_copy_tangents<true>(destination* d, const source* s)
+            {
+                d->m_tangents.m_data.resize(s->m_tangents.size());
+                copy_tangents(s->m_tangents, d->m_tangents.m_data);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            template <bool> static void do_copy_normals(destination* d, const source* s);
+
+            template <> static void do_copy_normals<false>(destination*, const source* ) {}
+
+            template <> static void do_copy_normals<true>(destination* d, const source* s)
+            {
+                d->m_normals.m_data.resize(s->m_normals.size());
+                copy_normals(s->m_normals, d->m_normals.m_data);
+            }
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            template <bool> static void do_copy_uvs(destination* d, const source* s);
+
+            template <> static void do_copy_uvs<false>(destination* , const source* ) {}
+
+            template <> static void do_copy_uvs<true>(destination* d, const source* s)
+            {
+                d->m_uv.m_data.resize(s->m_uv.size());
+                copy_uv(s->m_uv, d->m_uv.m_data);
+            }
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            template <bool> static void do_copy_positions(destination* d, const source* s);
+
+            template <> static void do_copy_positions<false>(destination* , const source* ) {}
+
+            template <> static void do_copy_positions<true>(destination* d, const source* s)
+            {
+                d->m_positions.m_data.resize(s->m_positions.size());
+                copy_positions(s->m_positions, d->m_positions.m_data);
+            }
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            template <bool> static void do_copy_indices(destination* d, const source* s);
+
+            template <> static void do_copy_indices<false>(destination* , const source* ) {}
+
+            template <> static void do_copy_indices<true>(destination* d, const source* s)
+            {
+                d->m_indices.m_data.resize(s->m_faces.size() * 3);
+                copy_indices(s->m_faces, d->m_indices.m_data);
+            }
+
+            public:
+
+            static void do_copy_attributes(destination* d, const source* s)
+            {
+                do_copy_indices<has_indices_trait<destination>::value>(d, s);
+                do_copy_positions<has_positions_trait<destination>::value>(d, s);
+                do_copy_uvs<has_uvs_trait<destination>::value>(d, s);
+                do_copy_normals<has_normals_trait<destination>::value>(d, s);
+                do_copy_tangents<has_tangents_trait<destination>::value>(d, s);
+            }
+        };
+
+        template <> struct has_positions_trait<lip::model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::model>   { static const bool value = true; };
+
+
+        template <> struct has_positions_trait<lip::normal_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::normal_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::normal_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::parametrized_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::parametrized_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::parametrized_model> { static const bool value = true; };
+
+
+        template <> struct has_positions_trait<lip::normal_parametrized_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::normal_parametrized_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::normal_parametrized_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::normal_parametrized_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::derivatives_parametrized_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::derivatives_parametrized_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::derivatives_parametrized_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::derivatives_parametrized_model> { static const bool value = true; };
+        template <> struct has_tangents_trait<lip::derivatives_parametrized_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::textured_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::normal_textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::normal_textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::normal_textured_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::normal_textured_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::derivatives_textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::derivatives_textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::derivatives_textured_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::derivatives_textured_model> { static const bool value = true; };
+        template <> struct has_tangents_trait<lip::derivatives_textured_model> { static const bool value = true; };
+
+
+        template <typename source, typename destination> void copy_attributes( destination* d, const source* s)
+        {
+            copy_attributes_struct<source, destination>::do_copy_attributes(d, s);
+        }
+
         template <typename mesh_create_functor> std::unique_ptr<lip::model> create_model( const file_name_t& input_file_name, const mesh_create_functor& create_mesh)
         {
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< lip::model > m = std::make_unique<lip::model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -77,13 +192,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< lip::normal_model > m = std::make_unique<lip::normal_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_normals.m_data.resize(mesh->m_normals.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_normals(mesh->m_normals, m->m_normals.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -93,13 +202,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::parametrized_model > m = std::make_unique<uc::lip::parametrized_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -109,15 +212,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::normal_parametrized_model > m = std::make_unique<uc::lip::normal_parametrized_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_normals.m_data.resize(mesh->m_normals.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
-            copy_normals(mesh->m_normals, m->m_normals.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -127,17 +222,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::derivatives_parametrized_model > m = std::make_unique<uc::lip::derivatives_parametrized_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_normals.m_data.resize(mesh->m_normals.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-            m->m_tangents.m_data.resize(mesh->m_tangents.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
-            copy_normals(mesh->m_normals, m->m_normals.m_data);
-            copy_tangents(mesh->m_tangents, m->m_tangents.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -147,13 +232,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::textured_model > m = std::make_unique<uc::lip::textured_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -163,15 +242,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::normal_textured_model > m = std::make_unique<uc::lip::normal_textured_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-            m->m_normals.m_data.resize(mesh->m_normals.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
-            copy_normals(mesh->m_normals, m->m_normals.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -181,17 +252,7 @@ namespace uc
             auto mesh = create_mesh(input_file_name);
             std::unique_ptr< uc::lip::derivatives_textured_model > m = std::make_unique<uc::lip::derivatives_textured_model>();
 
-            m->m_indices.m_data.resize(mesh->m_faces.size() * 3);
-            m->m_positions.m_data.resize(mesh->m_positions.size());
-            m->m_uv.m_data.resize(mesh->m_uv.size());
-            m->m_normals.m_data.resize(mesh->m_normals.size());
-            m->m_tangents.m_data.resize(mesh->m_tangents.size());
-
-            copy_indices(mesh->m_faces, m->m_indices.m_data);
-            copy_positions(mesh->m_positions, m->m_positions.m_data);
-            copy_uv(mesh->m_uv, m->m_uv.m_data);
-            copy_normals(mesh->m_normals, m->m_normals.m_data);
-            copy_tangents(mesh->m_tangents, m->m_tangents.m_data);
+            copy_attributes(m.get(), mesh.get());
 
             return m;
         }
@@ -285,8 +346,6 @@ namespace uc
                 auto faces     = gx::import::geo::merge_faces(&view);
                 auto ranges    = model::ranges(&view);
 
-                auto p0 = m.get();
-                auto p1 = mesh.get();
 
                 copy_attributes(m.get(), mesh.get() );
 
