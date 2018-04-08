@@ -56,7 +56,7 @@ namespace uc
 
                     if (!has_tangents(mesh))
                     {
-                        mesh->GenerateTangentsData();
+                        mesh->GenerateTangentsDataForAllUVSets(true);
                     }
 
                     assert(mesh->GetPolygonSize(0));

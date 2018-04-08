@@ -512,7 +512,8 @@ namespace uc
                             
                             geo::skinned_mesh::tangent_t s;
 
-                            math::store4u(&s, v);
+                            //todo: store sideness in the last bit
+                            math::store3u(&s, v);
                             
                             pos.push_back(s);
                         }
@@ -653,7 +654,7 @@ namespace uc
 
                         if (!has_tangents(m))
                         {
-                            m->GenerateTangentsData();
+                            m->GenerateTangentsDataForAllUVSets(true);
                         }
 
                     }

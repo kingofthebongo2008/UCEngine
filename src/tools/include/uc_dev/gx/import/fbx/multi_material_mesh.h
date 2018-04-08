@@ -139,7 +139,7 @@ namespace uc
 
                         if (!has_tangents(m))
                         {
-                            m->GenerateTangentsData();
+                            m->GenerateTangentsDataForAllUVSets(true);
                         }
                     }
 

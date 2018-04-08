@@ -613,9 +613,12 @@ namespace uc
                             math::float4  vq1 = vr1;// math::normalize3(math::mul(vr1, normal_node_transform));
                             math::float4  vq2 = vr2;// math::normalize3(math::mul(vr2, normal_node_transform));
 
-                            math::store4u(&normalp0, vq0);
-                            math::store4u(&normalp1, vq1);
-                            math::store4u(&normalp2, vq2);
+
+                            //todo: store sideness in the last bit
+
+                            math::store3u(&normalp0, vq0);
+                            math::store3u(&normalp1, vq1);
+                            math::store3u(&normalp2, vq2);
 
                             vectors.push_back(normalp0);
                             vectors.push_back(normalp1);
