@@ -15,12 +15,6 @@ namespace uc
     {
         namespace gxu
         {
-            struct multi_material_render_object : private util::noncopyable
-            {
-                std::vector<gx::dx12::managed_gpu_texture_2d> m_opaque_textures;
-                gx::geo::multi_material_geometry              m_geometry;       
-            };
-
             struct skinned_render_object : private util::noncopyable
             {
                 std::vector<gx::dx12::managed_gpu_texture_2d> m_opaque_textures;
