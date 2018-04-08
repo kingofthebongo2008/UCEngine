@@ -62,7 +62,7 @@ namespace uc
 
                 g.run([this, c]
                 {
-                    m_military_mechanic = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/military_mechanic.skinned.model", c->m_resources, c->m_geometry);
+                    m_military_mechanic = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/military_mechanic.derivatives_skinned_model.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]

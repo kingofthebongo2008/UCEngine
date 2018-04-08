@@ -57,16 +57,17 @@ namespace uc
             {
                 std::unique_ptr< skinned_render_object > r = std::make_unique< skinned_render_object >();
 
-                auto mesh = lip::create_from_compressed_lip_file<lip::normal_skinned_model>(file_name);
+                auto mesh = lip::create_from_compressed_lip_file<lip::derivatives_skinned_model>(file_name);
 
                 auto span_uv            = gsl::make_span(mesh->m_uv.data(), mesh->m_uv.size());
                 auto span_normals       = gsl::make_span(mesh->m_normals.data(), mesh->m_normals.size());
+                auto span_tangents      = gsl::make_span(mesh->m_tangents.data(), mesh->m_tangents.size());
                 auto span_indices       = gsl::make_span(mesh->m_indices.data(), mesh->m_indices.size());
                 auto span_positions     = gsl::make_span(mesh->m_positions.data(), mesh->m_positions.size());
                 auto span_blend_weights = gsl::make_span(mesh->m_blend_weights.data(), mesh->m_blend_weights.size());
                 auto span_blend_indices = gsl::make_span(mesh->m_blend_indices.data(), mesh->m_blend_indices.size());
 
-                r->m_geometry           = gx::geo::create_skinned_mesh(allocator, resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_uv), gsl::as_bytes(span_normals), gsl::as_bytes(span_blend_weights), gsl::as_bytes(span_blend_indices));
+                r->m_geometry           = gx::geo::create_skinned_mesh(allocator, resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_uv), gsl::as_bytes(span_normals), gsl::as_bytes(span_tangents), gsl::as_bytes(span_blend_weights), gsl::as_bytes(span_blend_indices));
                 r->m_indices            = gx::geo::create_indexed_geometry(allocator, resources->upload_queue(), gsl::as_bytes(span_indices) );
 
                 r->m_opaque_textures.resize(mesh->m_textures.size());

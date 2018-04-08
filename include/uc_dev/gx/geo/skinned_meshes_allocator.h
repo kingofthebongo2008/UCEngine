@@ -29,6 +29,7 @@ namespace uc
                     position = 0,
                     uv,
                     normal,
+                    tangent,
                     blend_weight,
                     blend_index
                 };
@@ -62,12 +63,14 @@ namespace uc
                     gpu_virtual_address m_positions;
                     gpu_virtual_address m_uv;
                     gpu_virtual_address m_normal;
+                    gpu_virtual_address m_tangent;
                     gpu_virtual_address m_blend_weights;
                     gpu_virtual_address m_blend_indices;
 
                     uint32_t            m_positions_size;
                     uint32_t            m_uv_size;
                     uint32_t            m_normal_size;
+                    uint32_t            m_tangent_size;
                     uint32_t            m_blend_weights_size;
                     uint32_t            m_blend_indices_size;
                 };

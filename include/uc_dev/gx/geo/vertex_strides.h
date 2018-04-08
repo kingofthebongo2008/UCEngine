@@ -32,6 +32,14 @@ namespace uc
                 };
             };
 
+            struct default_geometry_tangent
+            {
+                enum stride
+                {
+                    value = static_cast<uint32_t>(3 * sizeof(float))
+                };
+            };
+
             struct default_geometry_index
             {
                 enum stride
