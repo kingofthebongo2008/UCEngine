@@ -345,7 +345,7 @@ namespace uc
 
         LIP_DECLARE_TYPE_ID(uc::lip::tangents)
 
-            inline size_t size(const tangents& p)
+        inline size_t size(const tangents& p)
         {
             return p.size() * sizeof(float3);
         }

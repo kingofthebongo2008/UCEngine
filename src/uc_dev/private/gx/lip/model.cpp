@@ -23,6 +23,10 @@ namespace uc
             LIP_RTTI_MEMBER(normals, m_data)
         LIP_END_DEFINE_RTTI(normals)
 
+        LIP_BEGIN_DEFINE_RTTI(tangents)
+            LIP_RTTI_MEMBER(tangents, m_data)
+        LIP_END_DEFINE_RTTI(tangents)
+
         LIP_BEGIN_DEFINE_RTTI(model)
             LIP_RTTI_MEMBER(model, m_indices)
             LIP_RTTI_MEMBER(model, m_positions)
