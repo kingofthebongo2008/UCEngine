@@ -27,6 +27,11 @@ namespace uc
                     return vertex_count * default_geometry_normal::stride::value;
                 }
 
+                static inline uint32_t make_tangent_size(uint32_t vertex_count)
+                {
+                    return vertex_count * default_geometry_tangent::stride::value;
+                }
+
                 static inline uint32_t make_blend_weight_size(uint32_t vertex_count)
                 {
                     return vertex_count * default_geometry_blend_weight::stride::value;
@@ -46,6 +51,7 @@ namespace uc
                     const dx12::gpu_buffer* positions,
                     const dx12::gpu_buffer* uv,
                     const dx12::gpu_buffer* normal,
+                    const dx12::gpu_buffer* tangent,
                     const dx12::gpu_buffer* blend_weight,
                     const dx12::gpu_buffer* blend_index)
                 {
@@ -67,6 +73,11 @@ namespace uc
                     }
 
                     {
+                        r.m_tangent = tangent->virtual_address();
+                        r.m_tangent_size = static_cast<uint32_t>(size(tangent));
+                    }
+
+                    {
                         r.m_blend_weights       = blend_weight->virtual_address();
                         r.m_blend_weights_size  = static_cast<uint32_t>(size(blend_weight));
                     }
@@ -84,9 +95,10 @@ namespace uc
             m_skinned_mesh_position (dx12::create_buffer(rc, details::make_positions_size( vertex_count)))
             , m_skinned_mesh_uv(dx12::create_buffer(rc, details::make_uv_size(vertex_count)))
             , m_skinned_mesh_normal(dx12::create_buffer(rc, details::make_normal_size(vertex_count)))
+            , m_skinned_mesh_tangent(dx12::create_buffer(rc, details::make_tangent_size(vertex_count)))
             , m_skinned_mesh_blend_weight(dx12::create_buffer(rc, details::make_blend_weight_size(vertex_count)))
             , m_skinned_mesh_blend_index(dx12::create_buffer(rc, details::make_blend_index_size(vertex_count)))
-            , m_skinned_meshes(details::make_skinned_addresses( m_skinned_mesh_position.get(), m_skinned_mesh_uv.get(), m_skinned_mesh_normal.get(), m_skinned_mesh_blend_weight.get(), m_skinned_mesh_blend_index.get()))
+            , m_skinned_meshes(details::make_skinned_addresses( m_skinned_mesh_position.get(), m_skinned_mesh_uv.get(), m_skinned_mesh_normal.get(), m_skinned_mesh_tangent.get(), m_skinned_mesh_blend_weight.get(), m_skinned_mesh_blend_index.get()))
             {
 
             }
@@ -116,6 +128,11 @@ namespace uc
                 return m_skinned_mesh_normal.get();
             }
 
+            dx12::gpu_buffer* skinned_geometry_allocator::skinned_mesh_tangent() const
+            {
+                return m_skinned_mesh_tangent.get();
+            }
+
             dx12::gpu_buffer* skinned_geometry_allocator::skinned_mesh_blend_weight() const
             {
                 return m_skinned_mesh_blend_weight.get();
@@ -139,6 +156,11 @@ namespace uc
             vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_normal_view() const
             {
                 return m_skinned_meshes.view(gx::geo::skinned_meshes_allocator::component::normal);
+            }
+
+            vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_tangent_view() const
+            {
+                return m_skinned_meshes.view(gx::geo::skinned_meshes_allocator::component::tangent);
             }
 
             vertex_buffer_view   skinned_geometry_allocator::skinned_mesh_blend_weight_view() const

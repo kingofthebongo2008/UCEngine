@@ -34,13 +34,14 @@ namespace uc
 
                 struct allocator_views
                 {
-                    gpu_virtual_address m_addresses[5];
-                    uint32_t            m_sizes[5];
-                    uint32_t            m_strides[5] = 
+                    gpu_virtual_address m_addresses[6];
+                    uint32_t            m_sizes[6];
+                    uint32_t            m_strides[6] = 
                     { 
                         default_geometry_position::stride::value, 
                         default_geometry_uv::stride::value, 
                         default_geometry_normal::stride::value,
+                        default_geometry_tangent::stride::value,
                         default_geometry_blend_weight::stride::value, 
                         default_geometry_blend_index::stride::value };
                 };
@@ -72,12 +73,14 @@ namespace uc
                     r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::position)] = options.m_positions;
                     r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::uv)] = options.m_uv;
                     r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::normal)] = options.m_normal;
+                    r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::tangent)] = options.m_tangent;
                     r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::blend_weight)] = options.m_blend_weights;
                     r.m_addresses[static_cast<uint32_t>(skinned_meshes_allocator::component::blend_index)] = options.m_blend_indices;
 
                     r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::position)] = options.m_positions_size;
                     r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::uv)] = options.m_uv_size;
                     r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::normal)] = options.m_normal_size;
+                    r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::tangent)] = options.m_tangent_size;
                     r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::blend_weight)] = options.m_blend_weights_size;
                     r.m_sizes[static_cast<uint32_t>(skinned_meshes_allocator::component::blend_index)] = options.m_blend_indices_size;
 
@@ -172,11 +175,12 @@ namespace uc
 
             uint32_t skinned_meshes_allocator::allocation::byte_size(skinned_meshes_allocator::component c) const
             {
-                uint32_t strides[5] =
+                uint32_t strides[] =
                 { 
                     default_geometry_position::stride::value, 
                     default_geometry_uv::stride::value, 
                     default_geometry_normal::stride::value,
+                    default_geometry_tangent::stride::value,
                     default_geometry_blend_weight::stride::value, 
                     default_geometry_blend_index::stride::value
                 };
@@ -185,11 +189,12 @@ namespace uc
 
             uint32_t skinned_meshes_allocator::allocation::byte_offset(skinned_meshes_allocator::component c) const
             {
-                uint32_t strides[5] =
+                uint32_t strides[] =
                 {
                     default_geometry_position::stride::value,
                     default_geometry_uv::stride::value,
                     default_geometry_normal::stride::value,
+                    default_geometry_tangent::stride::value,
                     default_geometry_blend_weight::stride::value,
                     default_geometry_blend_index::stride::value
                 };

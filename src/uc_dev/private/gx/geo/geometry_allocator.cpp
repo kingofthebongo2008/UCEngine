@@ -56,6 +56,11 @@ namespace uc
                 return m_skinned_meshes.skinned_mesh_normal();
             }
 
+            dx12::gpu_buffer* geometry_allocator::skinned_mesh_tangent() const
+            {
+                return m_skinned_meshes.skinned_mesh_tangent();
+            }
+
             dx12::gpu_buffer* geometry_allocator::skinned_mesh_blend_weight() const
             {
                 return m_skinned_meshes.skinned_mesh_blend_weight();
