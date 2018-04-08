@@ -4,7 +4,6 @@
 
 #include <gsl/gsl>
 
-#include <uc_dev/gx/geo/indexed_geometry_factory.h>
 #include <uc_dev/gx/geo/skinned_geometry_factory.h>
 #include <uc_dev/gx/lip/file.h>
 #include <uc_dev/gx/lip_utils.h>
@@ -16,35 +15,6 @@ namespace uc
     {
         namespace gxu
         {
-            std::unique_ptr<multi_material_render_object> render_object_factory< multi_material_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources)
-            {
-                std::unique_ptr< multi_material_render_object > r = std::make_unique< multi_material_render_object  >();
-
-                auto mesh = lip::create_from_compressed_lip_file<lip::multi_textured_model>(file_name);
-
-                auto span_uv = gsl::make_span(mesh->m_uv.data(), mesh->m_uv.size());
-                auto span_indices = gsl::make_span(mesh->m_indices.data(), mesh->m_indices.size());
-                auto span_positions = gsl::make_span(mesh->m_positions.data(), mesh->m_positions.size());
-
-                r->m_geometry = gx::geo::create_multi_material_geometry(resources->resource_create_context(), resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_indices), gsl::as_bytes(span_uv), mesh->m_primitive_ranges);
-
-                r->m_opaque_textures.resize(mesh->m_textures.size());
-
-                for (auto i = 0U; i < mesh->m_textures.size(); ++i)
-                {
-                    auto& texture = mesh->m_textures[i];
-
-                    auto w = texture.m_width;
-                    auto h = texture.m_height;
-
-                    r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
-                    D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
-                    resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
-                }
-
-                return r;
-            }
-
             /*
             std::unique_ptr<skinned_multi_material_render_object> render_object_factory< skinned_multi_material_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources)
             {
