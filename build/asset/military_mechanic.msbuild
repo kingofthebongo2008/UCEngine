@@ -18,7 +18,7 @@
       <format>bc1_unorm_srgb</format>
     </military_mechanic-textures>
     <Model Include="..\data\meshes_animated\military_mechanic\military_mechanic.fbx">
-      <ModelType>skinned</ModelType>
+      <ModelType>derivatives_skinned_model</ModelType>
 
       <Name>military_mechanic</Name>
       <OptionMakeLeftHanded>true</OptionMakeLeftHanded>
