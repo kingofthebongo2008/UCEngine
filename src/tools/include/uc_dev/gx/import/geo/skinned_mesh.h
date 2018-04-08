@@ -133,7 +133,7 @@ namespace uc
                     }
                 };
 
-                inline skinned_mesh_view skinned_mesh_material_view(skinned_mesh* m, std::vector<uint32_t>&& indices)
+                inline skinned_mesh_view skinned_mesh_material_view(const skinned_mesh* m, std::vector<uint32_t>&& indices)
                 {
                     skinned_mesh_view v;
                     v.m_mesh = m;
