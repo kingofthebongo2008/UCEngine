@@ -45,8 +45,8 @@ namespace uc
                 size_t vertex_count = positions.size() / 12;    //stride
 
                 managed_static_mesh_geometry r = make_managed_static_mesh_geometry(rc, vertex_count);
-                upload_queue->upload_buffer(rc->static_mesh_position(), &positions[0], positions.size(), r->byte_offset(static_meshes_allocator::component::position));
-                upload_queue->upload_buffer(rc->static_mesh_uv(), &uv[0], uv.size(), r->byte_offset(static_meshes_allocator::component::uv));
+                upload_queue->upload_buffer(rc->parametrized_mesh_position(), &positions[0], positions.size(), r->byte_offset(static_meshes_allocator::component::position));
+                upload_queue->upload_buffer(rc->parametrized_mesh_uv(), &uv[0], uv.size(), r->byte_offset(static_meshes_allocator::component::uv));
 
                 return r;
             }

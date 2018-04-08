@@ -71,10 +71,10 @@ namespace uc
 
 
                 // static meshes
-                dx12::gpu_buffer*    static_mesh_position() const;
-                dx12::gpu_buffer*    static_mesh_uv() const;
-                vertex_buffer_view   static_mesh_position_view() const;
-                vertex_buffer_view   static_mesh_uv_view() const;
+                dx12::gpu_buffer*    parametrized_mesh_position() const;
+                dx12::gpu_buffer*    parametrized_mesh_uv() const;
+                vertex_buffer_view   parametrized_mesh_position_view() const;
+                vertex_buffer_view   parametrized_mesh_uv_view() const;
 
                 // normal meshes
                 dx12::gpu_buffer*    normal_mesh_position() const;

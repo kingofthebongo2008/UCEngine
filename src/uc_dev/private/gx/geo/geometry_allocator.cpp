@@ -112,22 +112,22 @@ namespace uc
                 m_static_meshes.free(free);
             }
             
-            dx12::gpu_buffer* geometry_allocator::static_mesh_position() const
+            dx12::gpu_buffer* geometry_allocator::parametrized_mesh_position() const
             {
                 return m_static_meshes.static_mesh_position();
             }
 
-            dx12::gpu_buffer*  geometry_allocator::static_mesh_uv() const
+            dx12::gpu_buffer*  geometry_allocator::parametrized_mesh_uv() const
             {
                 return m_static_meshes.static_mesh_uv();
             }
 
-            vertex_buffer_view  geometry_allocator::static_mesh_position_view() const
+            vertex_buffer_view  geometry_allocator::parametrized_mesh_position_view() const
             {
                 return m_static_meshes.static_mesh_position_view();
             }
 
-            vertex_buffer_view  geometry_allocator::static_mesh_uv_view() const
+            vertex_buffer_view  geometry_allocator::parametrized_mesh_uv_view() const
             {
                 return m_static_meshes.static_mesh_uv_view();
             }

@@ -10,9 +10,6 @@
 #include <uc_dev/gx/lip_utils.h>
 #include <uc_dev/gx/img_utils.h>
 
-#include <uc_dev/gx/geo/indexed_geometry_factory.h>
-
-
 #include <autogen/shaders/textured_solid_graphics.h>
 #include <autogen/shaders/textured_depth_only_graphics.h>
 
@@ -51,8 +48,6 @@ namespace uc
                 g.run([this, c]()
                 {
                     m_deer  = gxu::make_render_object_from_file<static_render_object>(L"appdata/meshes/deer-3ds.multi_textured.model", c->m_resources, c->m_geometry);
-                    //m_deer = gxu::make_render_object_from_file<static_render_object>(L"appdata/meshes/military_mechanic_multi_textured.multi_textured.model", c->m_resources, c->m_geometry);
-                    //m_deer = gxu::make_render_object_from_file<static_render_object>(L"appdata/meshes/robot_multi_textured.multi_textured.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -120,8 +115,8 @@ namespace uc
                     graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
                     //geometry
-                    graphics->set_vertex_buffer(0, ctx->m_geometry->static_mesh_position_view());
-                    graphics->set_vertex_buffer(1, ctx->m_geometry->static_mesh_uv_view());
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->parametrized_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->parametrized_mesh_uv_view());
                     graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
                     for (auto i = 0; i < m_deer->m_opaque_textures.size(); ++i)
