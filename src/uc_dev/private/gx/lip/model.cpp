@@ -48,7 +48,7 @@ namespace uc
         LIP_END_DEFINE_RTTI(normal_parametrized_model)
 
         LIP_BEGIN_DEFINE_RTTI(derivatives_parametrized_model)
-            LIP_RTTI_BASE_CLASS(parametrized_model)
+            LIP_RTTI_BASE_CLASS(normal_parametrized_model)
             LIP_RTTI_MEMBER(derivatives_parametrized_model, m_tangents)
         LIP_END_DEFINE_RTTI(derivatives_parametrized_model)
 
