@@ -172,6 +172,26 @@ namespace uc
         template <> struct has_tangents_trait<lip::derivatives_textured_model> { static const bool value = true; };
 
 
+        template <> struct has_positions_trait<lip::multi_textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::multi_textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::multi_textured_model> { static const bool value = true; };
+
+        template <> struct has_positions_trait<lip::normal_multi_textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::normal_multi_textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::normal_multi_textured_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::normal_multi_textured_model> { static const bool value = true; };
+
+
+        template <> struct has_positions_trait<lip::derivatives_multi_textured_model> { static const bool value = true; };
+        template <> struct has_indices_trait<lip::derivatives_multi_textured_model> { static const bool value = true; };
+        template <> struct has_uvs_trait<lip::derivatives_multi_textured_model> { static const bool value = true; };
+        template <> struct has_normals_trait<lip::derivatives_multi_textured_model> { static const bool value = true; };
+        template <> struct has_tangents_trait<lip::derivatives_multi_textured_model> { static const bool value = true; };
+
+
+        
+        
+
         template <typename source, typename destination> void copy_attributes( destination* d, const source* s)
         {
             copy_attributes_struct<source, destination>::do_copy_attributes(d, s);
@@ -310,18 +330,16 @@ namespace uc
             return r;
         }
 
-        template <typename mesh_create_functor, typename model_create_functor, typename copy_attributes> void convert_multi_textured_mesh( const file_name_t& input_file_name, const file_name_t& output_file_name, const mesh_create_functor& create_mesh, const model_create_functor& create_model, const copy_attributes copy_attributes,  const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format )
+        template <typename mesh_create_functor, typename model_create_functor, typename copy_attributes> void convert_multi_textured_mesh( const file_name_t& input_file_name, const file_name_t& output_file_name, const mesh_create_functor& create_mesh, const model_create_functor& create_model, const copy_attributes& copy_attributes,  const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format )
         {
             auto m          = create_model();
             auto mesh       = create_mesh(input_file_name);
-
 
             concurrency::task_group g;
 
             size_t s = texture_file_name.size();
             m->m_textures.resize(s);
 
-            #if defined(_X64)
             for (auto i = 0U; i < s ; ++i)
             {
                 g.run([i, &m, &texture_file_name, &texture_format]()
@@ -329,42 +347,12 @@ namespace uc
                     m->m_textures[i] = create_texture_2d(texture_file_name[i], texture_format[i]);
                 });
             }
-            #else 
-            for (auto i = 0U; i < s; ++i)
-            {
-                m->m_textures[i] = create_texture_2d(texture_file_name[i], texture_format[i]);
-            }
-            #endif
-
 
             auto mats = materials(texture_file_name);
+
             g.run( [&m, &mesh, &input_file_name, &mats, &create_mesh, &copy_attributes ]()
             {
-                auto view      = gx::import::geo::multi_mesh_material_view(mesh.get(), material_indices( mats, mesh->m_materials));
-                auto positions = gx::import::geo::merge_positions(&view);
-                auto uvs       = gx::import::geo::merge_uvs(&view);
-                auto faces     = gx::import::geo::merge_faces(&view);
-                auto ranges    = model::ranges(&view);
-
-
-                copy_attributes(m.get(), mesh.get() );
-
-                m->m_indices.m_data.resize( faces.size() * 3 );
-                m->m_positions.m_data.resize( positions.size());
-                m->m_uv.m_data.resize(uvs.size());
-
-                copy_indices(faces, m->m_indices.m_data);
-                copy_positions(positions, m->m_positions.m_data);
-                copy_uv(uvs, m->m_uv.m_data);
-
-                for (auto&& i : ranges)
-                {
-                    lip::primitive_range r = i;
-
-                    r.m_begin *= 3;
-                    r.m_end   *= 3;
-                    m->m_primitive_ranges.push_back(r);
-                }
+                copy_attributes(m.get(), mesh.get(), mats );
             });
 
             g.wait();
@@ -691,16 +679,108 @@ namespace uc
                 return std::make_unique<lip::multi_textured_model>();
             };
 
-            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s)
+            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s, const std::vector<std::string>& mats)
             {
-                d;
-                s;
+                auto view = gx::import::geo::multi_mesh_material_view(s, material_indices(mats, s->m_materials));
+                auto positions = gx::import::geo::merge_positions(&view);
+                auto uvs = gx::import::geo::merge_uvs(&view);
+                auto faces = gx::import::geo::merge_faces(&view);
+                auto ranges = model::ranges(&view);
+
+                d->m_indices.m_data.resize( faces.size() * 3 );
+                d->m_positions.m_data.resize( positions.size());
+                d->m_uv.m_data.resize(uvs.size());
+
+                copy_indices(faces, d->m_indices.m_data);
+                copy_positions(positions, d->m_positions.m_data);
+                copy_uv(uvs, d->m_uv.m_data);
+
+                for (auto&& i : ranges)
+                {
+                    lip::primitive_range r = i;
+
+                    r.m_begin *= 3;
+                    r.m_end *= 3;
+                    d->m_primitive_ranges.push_back(r);
+                }
+
             };
 
             convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
         }
 
-        static void convert_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        static void convert_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        {
+            auto f0 = [](const file_name_t& input_file_name)
+            {
+                return gx::import::fbx::create_multi_material_mesh(input_file_name);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<lip::multi_textured_model>();
+            };
+
+            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s, const std::vector<std::string>& mats)
+            {
+                auto view = gx::import::geo::multi_mesh_material_view(s, material_indices(mats, s->m_materials));
+                auto positions = gx::import::geo::merge_positions(&view);
+                auto uvs = gx::import::geo::merge_uvs(&view);
+                auto faces = gx::import::geo::merge_faces(&view);
+                auto ranges = model::ranges(&view);
+
+                d->m_indices.m_data.resize(faces.size() * 3);
+                d->m_positions.m_data.resize(positions.size());
+                d->m_uv.m_data.resize(uvs.size());
+
+                copy_indices(faces, d->m_indices.m_data);
+                copy_positions(positions, d->m_positions.m_data);
+                copy_uv(uvs, d->m_uv.m_data);
+
+                for (auto&& i : ranges)
+                {
+                    lip::primitive_range r = i;
+
+                    r.m_begin *= 3;
+                    r.m_end *= 3;
+                    d->m_primitive_ranges.push_back(r);
+                }
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void copy_attributes_normal_multi_textured_model( lip::normal_multi_textured_model* d, const gx::import::geo::multi_material_mesh* s, const std::vector<std::string>& mats)
+        {
+            auto view = gx::import::geo::multi_mesh_material_view(s, material_indices(mats, s->m_materials));
+            auto positions = gx::import::geo::merge_positions(&view);
+            auto uvs = gx::import::geo::merge_uvs(&view);
+            auto faces = gx::import::geo::merge_faces(&view);
+            auto normals = gx::import::geo::merge_normals(&view);
+
+            d->m_indices.m_data.resize(faces.size() * 3);
+            d->m_positions.m_data.resize(positions.size());
+            d->m_uv.m_data.resize(uvs.size());
+            d->m_normals.m_data.resize(normals.size());
+
+            copy_indices(faces, d->m_indices.m_data);
+            copy_positions(positions, d->m_positions.m_data);
+            copy_uv(uvs, d->m_uv.m_data);
+            copy_normals(normals, d->m_normals.m_data);
+
+            auto ranges = model::ranges(&view);
+
+            for (auto&& i : ranges)
+            {
+                lip::primitive_range r = i;
+
+                r.m_begin *= 3;
+                r.m_end *= 3;
+                d->m_primitive_ranges.push_back(r);
+            }
+        }
+
+        static void convert_normal_multi_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
             auto f0 = [a](const file_name_t& input_file_name)
             {
@@ -709,59 +789,277 @@ namespace uc
 
             auto f1 = []()
             {
-                return std::make_unique<lip::multi_textured_model>();
+                return std::make_unique<lip::normal_multi_textured_model>();
             };
 
-            auto f2 = [](lip::multi_textured_model* d, const gx::import::geo::multi_material_mesh* s)
+            auto f2 = [](lip::normal_multi_textured_model* d, const gx::import::geo::multi_material_mesh* s, const std::vector<std::string>& mats)
             {
-                d;
-                s;
+                copy_attributes_normal_multi_textured_model(d, s, mats);
             };
 
-            convert_multi_textured_mesh<decltype(f0), decltype(f1), decltype(f2) >(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
-        }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*
-        static void convert_normal_multi_textured_model_assimp(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
-        {
-            auto f = [a](const file_name_t& input_file_name)
-            {
-                return gx::import::assimp::create_multi_material_mesh(input_file_name, a);
-            };
-
-            convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
         }
 
-        static void convert_normal_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t a, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
+        static void convert_normal_multi_textured_model_fbx(const file_name_t& input_file_name, const file_name_t& output_file_name, assimp_flags_t, const std::vector<std::string>& texture_file_name, const std::vector<std::string>& texture_format)
         {
-            auto f = [a](const file_name_t& input_file_name)
+            auto f0 = [](const file_name_t& input_file_name)
             {
                 return gx::import::fbx::create_multi_material_mesh(input_file_name);
             };
 
-            convert_multi_textured_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
+            auto f1 = []()
+            {
+                return std::make_unique<lip::normal_multi_textured_model>();
+            };
+
+            auto f2 = [](lip::normal_multi_textured_model* d, const gx::import::geo::multi_material_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_normal_multi_textured_model(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
         }
-        */
-        static void convert_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void copy_attributes_normal_skinned_model_assimp(lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
         {
-            auto f = [a](const file_name_t& input_file_name)
+            auto view = gx::import::geo::skinned_mesh_material_view(s, material_indices(mats, s->m_materials));
+            auto positions = gx::import::geo::merge_positions(&view);
+
+            auto uvs = gx::import::geo::merge_uvs(&view);
+            auto faces = gx::import::geo::merge_faces(&view);
+            auto normals = gx::import::geo::merge_normals(&view);
+
+            auto weights = gx::import::geo::merge_blend_weights(&view);
+            auto indices = gx::import::geo::merge_blend_indices(&view);
+            auto ranges = model::ranges(&view);
+
+            d->m_indices.m_data.resize(faces.size() * 3);
+            d->m_positions.m_data.resize(positions.size());
+            d->m_normals.m_data.resize(normals.size());
+            d->m_uv.m_data.resize(uvs.size());
+            d->m_blend_weights.resize(weights.size());
+            d->m_blend_indices.resize(indices.size());
+
+            copy_indices(faces, d->m_indices.m_data);
+            copy_positions(positions, d->m_positions.m_data);
+            copy_normals(normals, d->m_normals.m_data);
+            copy_uv(uvs, d->m_uv.m_data);
+
+            copy_blend_weights(weights, d->m_blend_weights);
+            copy_blend_indices(indices, d->m_blend_indices);
+
+            for (auto&& i : ranges)
+            {
+                lip::primitive_range r = i;
+
+                r.m_begin *= 3;
+                r.m_end *= 3;
+                d->m_primitive_ranges.push_back(r);
+            }
+        }
+
+        static void convert_normal_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
             {
                 return gx::import::assimp::create_skinned_mesh(input_file_name, a);
             };
 
-            convert_skinned_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::normal_skinned_model>();
+            };
+
+            auto f2 = [](lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_normal_skinned_model_assimp(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+
         }
 
-        static void convert_skinned_model_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        static void convert_normal_skinned_model_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
         {
-            auto f = [a](const file_name_t& input_file_name)
+            auto f0 = [a](const file_name_t& input_file_name)
             {
                 return gx::import::fbx::create_skinned_mesh(input_file_name);
             };
 
-            convert_skinned_mesh(input_file_name, output_file_name, f, texture_file_name, texture_format);
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::normal_skinned_model>();
+            };
+
+            auto f2 = [](lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_normal_skinned_model_assimp(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        void copy_attributes_skinned_model(lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+        {
+            auto view = gx::import::geo::skinned_mesh_material_view(s, material_indices(mats, s->m_materials));
+            auto positions = gx::import::geo::merge_positions(&view);
+
+            auto uvs = gx::import::geo::merge_uvs(&view);
+            auto faces = gx::import::geo::merge_faces(&view);
+            auto normals = gx::import::geo::merge_normals(&view);
+
+            auto weights = gx::import::geo::merge_blend_weights(&view);
+            auto indices = gx::import::geo::merge_blend_indices(&view);
+            auto ranges = model::ranges(&view);
+
+            d->m_indices.m_data.resize(faces.size() * 3);
+            d->m_positions.m_data.resize(positions.size());
+            d->m_uv.m_data.resize(uvs.size());
+            d->m_blend_weights.resize(weights.size());
+            d->m_blend_indices.resize(indices.size());
+
+            copy_indices(faces, d->m_indices.m_data);
+            copy_positions(positions, d->m_positions.m_data);
+            copy_normals(normals, d->m_normals.m_data);
+            copy_uv(uvs, d->m_uv.m_data);
+
+            copy_blend_weights(weights, d->m_blend_weights);
+            copy_blend_indices(indices, d->m_blend_indices);
+
+            for (auto&& i : ranges)
+            {
+                lip::primitive_range r = i;
+
+                r.m_begin *= 3;
+                r.m_end *= 3;
+                d->m_primitive_ranges.push_back(r);
+            }
         }
 
+        static void convert_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::assimp::create_skinned_mesh(input_file_name, a);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::normal_skinned_model>();
+            };
+
+            auto f2 = [](lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_skinned_model(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+
+        }
+
+        static void convert_skinned_model_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::fbx::create_skinned_mesh(input_file_name);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::normal_skinned_model>();
+            };
+
+            auto f2 = [](lip::normal_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_skinned_model(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void copy_attributes_derivatives_skinned_model(lip::derivatives_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+        {
+            auto view = gx::import::geo::skinned_mesh_material_view(s, material_indices(mats, s->m_materials));
+            auto positions = gx::import::geo::merge_positions(&view);
+
+            auto uvs = gx::import::geo::merge_uvs(&view);
+            auto faces = gx::import::geo::merge_faces(&view);
+            auto normals = gx::import::geo::merge_normals(&view);
+
+            auto weights = gx::import::geo::merge_blend_weights(&view);
+            auto indices = gx::import::geo::merge_blend_indices(&view);
+            auto tangents = gx::import::geo::merge_tangents(&view);
+            auto ranges = model::ranges(&view);
+
+            d->m_indices.m_data.resize(faces.size() * 3);
+            d->m_positions.m_data.resize(positions.size());
+            d->m_normals.m_data.resize(normals.size());
+            d->m_uv.m_data.resize(uvs.size());
+            d->m_tangents.m_data.resize(tangents.size());
+
+            d->m_blend_weights.resize(weights.size());
+            d->m_blend_indices.resize(indices.size());
+
+            copy_indices(faces, d->m_indices.m_data);
+            copy_positions(positions, d->m_positions.m_data);
+            copy_normals(normals, d->m_normals.m_data);
+            copy_uv(uvs, d->m_uv.m_data);
+            copy_tangents(tangents, d->m_tangents.m_data);
+
+            copy_blend_weights(weights, d->m_blend_weights);
+            copy_blend_indices(indices, d->m_blend_indices);
+
+
+            for (auto&& i : ranges)
+            {
+                lip::primitive_range r = i;
+
+                r.m_begin *= 3;
+                r.m_end *= 3;
+                d->m_primitive_ranges.push_back(r);
+            }
+        }
+
+        static void convert_derivatives_skinned_model_assimp(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::assimp::create_skinned_mesh(input_file_name, a);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::derivatives_skinned_model>();
+            };
+
+            auto f2 = [](lip::derivatives_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_derivatives_skinned_model(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+
+        }
+
+        static void convert_derivatives_skinned_model_fbx(const std::string& input_file_name, const std::string& output_file_name, assimp_flags_t a, const std::vector< std::string>& texture_file_name, const std::vector< std::string>& texture_format)
+        {
+            auto f0 = [a](const file_name_t& input_file_name)
+            {
+                return gx::import::fbx::create_skinned_mesh(input_file_name);
+            };
+
+            auto f1 = []()
+            {
+                return std::make_unique<uc::lip::derivatives_skinned_model>();
+            };
+
+            auto f2 = [](lip::derivatives_skinned_model* d, const gx::import::geo::skinned_mesh* s, const std::vector<std::string>& mats)
+            {
+                copy_attributes_derivatives_skinned_model(d, s, mats);
+            };
+
+            convert_multi_textured_mesh(input_file_name, output_file_name, f0, f1, f2, texture_file_name, texture_format);
+        }
         static std::tuple< std::vector<std::string>, std::vector<std::string> > clean_duplicate_textures(const std::vector<std::string>& texture_names, const std::vector<std::string>& texture_formats)
         {
             using namespace std;
@@ -909,6 +1207,7 @@ namespace uc
         struct convertor
         {
             std::string         m_model_type;
+            bool                m_needs_textures;
             convert_function    m_convert_function_fbx;
             convert_function    m_convert_function_assimp;
         };
@@ -921,6 +1220,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::model>(),
+                false,
                 convert_model_fbx_bridge,
                 convert_model_assimp_bridge
             };
@@ -931,6 +1231,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::normal_model>(),
+                false,
                 convert_normal_model_fbx_bridge,
                 convert_normal_model_assimp_bridge
             };
@@ -941,6 +1242,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::parametrized_model>(),
+                false,
                 convert_parametrized_model_fbx_bridge,
                 convert_parametrized_model_assimp_bridge
             };
@@ -951,6 +1253,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::normal_parametrized_model>(),
+                false,
                 convert_normal_parametrized_model_fbx_bridge,
                 convert_normal_parametrized_model_assimp_bridge
             };
@@ -961,6 +1264,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::derivatives_parametrized_model>(),
+                false,
                 convert_derivatives_parametrized_model_fbx_bridge,
                 convert_derivatives_parametrized_model_assimp_bridge
             };
@@ -971,6 +1275,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::textured_model>(),
+                true,
                 convert_textured_model_fbx_bridge,
                 convert_textured_model_assimp_bridge
             };
@@ -981,6 +1286,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::normal_textured_model>(),
+                true,
                 convert_normal_textured_model_fbx_bridge,
                 convert_normal_textured_model_assimp_bridge
             };
@@ -991,6 +1297,7 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::derivatives_textured_model>(),
+                true,
                 convert_derivatives_textured_model_fbx_bridge,
                 convert_derivatives_textured_model_assimp_bridge
             };
@@ -1001,11 +1308,44 @@ namespace uc
             return
             {
                 lip::model_to_string_type<lip::multi_textured_model>(),
+                true,
                 convert_multi_textured_model_fbx,
                 convert_multi_textured_model_assimp
             };
         }
-        
+
+        template<> convertor make_convertor<lip::normal_skinned_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::normal_skinned_model>(),
+                true,
+                convert_normal_skinned_model_fbx,
+                convert_normal_skinned_model_assimp
+            };
+        }
+
+        template<> convertor make_convertor<lip::derivatives_skinned_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::derivatives_skinned_model>(),
+                true,
+                convert_derivatives_skinned_model_fbx,
+                convert_derivatives_skinned_model_assimp
+            };
+        }
+
+        template<> convertor make_convertor<lip::skinned_model>()
+        {
+            return
+            {
+                lip::model_to_string_type<lip::skinned_model>(),
+                true,
+                convert_skinned_model_fbx,
+                convert_skinned_model_assimp
+            };
+        }
 
         std::vector< convertor > make_convertors()
         {
@@ -1024,9 +1364,29 @@ namespace uc
             r.push_back(make_convertor<lip::derivatives_textured_model>());
 
             r.push_back(make_convertor<lip::multi_textured_model>());
+            r.push_back(make_convertor<lip::normal_skinned_model>());
+            r.push_back(make_convertor<lip::skinned_model>());
+            r.push_back(make_convertor<lip::derivatives_skinned_model>());
 
 
             return r;
+        }
+
+        const convertor get_convertor(const std::string& v)
+        {
+            static auto convertors = make_convertors();
+
+            auto r = std::find_if(convertors.cbegin(), convertors.cend(), [&v](const auto& v0)
+            {
+                return v0.m_model_type == v;
+            });
+
+            if (r == convertors.end())
+            {
+                raise_error<exception>("cannot find convertor for model " + v);
+            }
+
+            return *r;
         }
     }
 }
@@ -1077,111 +1437,61 @@ int32_t main(int32_t argc, const char* argv[])
         std::cout << "building model (" << get_environment() << ") " << std::endl;
         std::cout << "assimp options:" << uc::gx::import::assimp::assimp_postprocess_option_to_string(assimp_options) << std::endl;
 
-        if ( model_type == "default")
+        if (model_type == "default")
         {
-            std::cout << "building default model:" << input_model << std::endl;
-            
-            {
-                std::experimental::filesystem::path path(input_model);
-                auto e = path.extension().wstring();
-
-                if ( e == L".fbx" )
-                {
-                    convert_model_fbx(input_model, output_model, assimp_options);
-                }
-                else
-                {
-                    convert_model_assimp(input_model, output_model, assimp_options);
-                }
-            }
+            model_type = "model";
         }
-        else
+
+        if (model_type == "parametrized")
         {
-            if (model_type == "parametrized")
+            model_type = "parametrized_model";
+        }
+
+        if (model_type == "multi_textured")
+        {
+            model_type = "multi_textured_model";
+        }
+
+        if (model_type == "textured")
+        {
+            model_type = "textured_model";
+        }
+
+        if (model_type == "skinned")
+        {
+            model_type = "normal_skinned_model";
+        }
+
+        auto convertor = get_convertor(model_type);
+
+        std::cout << "building model:"      << input_model << std::endl;
+        std::cout << "building model type:" << convertor.m_model_type << std::endl;
+
+        
+        {
+            std::experimental::filesystem::path path(input_model);
+            auto e = path.extension().wstring();
+
+            std::vector<std::string> textures;
+            std::vector<std::string> texture_formats;
+
+            if (convertor.m_needs_textures)
             {
-                std::cout << "building parametrized model:" << input_model << std::endl;
-
-                std::experimental::filesystem::path path(input_model);
-                auto e = path.extension().wstring();
-
-                if (e == L".fbx")
-                {
-                    convert_parametrized_model_fbx(input_model, output_model, assimp_options);
-                }
-                else
-                {
-                    convert_parametrized_model_assimp(input_model, output_model, assimp_options);
-                }
-            }
-            else if (model_type == "textured")
-            {
-                std::cout << "building textured model:" << input_model << std::endl;
-
-                auto textures        = get_textures(vm);
-                auto texture_formats = get_texture_formats(vm);
-
-                std::experimental::filesystem::path path(input_model);
-                auto e = path.extension().wstring();
-
-                if (e == L".fbx")
-                {
-                    convert_textured_model_fbx(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
-                }
-                else
-                {
-                    convert_textured_model_assimp(input_model, output_model, assimp_options, textures[0], texture_formats[0]);
-                }
-            }
-            else if (model_type == "multi_textured")
-            {
-                using namespace std;
-
-                cout << "building multi textured model:" << input_model << endl;
-
-                vector<string> textures;
-                vector<string> texture_formats;
-
-                tie( textures, texture_formats) = uc::model::clean_duplicate_textures(get_textures(vm), get_texture_formats(vm));
-                
-                std::experimental::filesystem::path path(input_model);
-                auto e = path.extension().wstring();
-
-                if (e == L".fbx")
-                {
-                    convert_multi_textured_model_fbx(input_model, output_model, assimp_options, textures, texture_formats);
-                }
-                else
-                {
-                    convert_multi_textured_model_assimp(input_model, output_model, assimp_options, textures, texture_formats);
-                }
-            }
-            else if (model_type == "skinned")
-            {
-                using namespace std;
-                cout << "building skinned model:" << input_model << endl;
-
-                vector<string> textures;
-                vector<string> texture_formats;
-
                 tie(textures, texture_formats) = uc::model::clean_duplicate_textures(get_textures(vm), get_texture_formats(vm));
-
-                std::experimental::filesystem::path path(input_model);
-                auto e = path.extension().wstring();
-
-                if (e == L".fbx")
-                {
-                    convert_skinned_model_fbx(input_model, output_model, assimp_options, textures, texture_formats);
-                }
-                else
-                {
-                    convert_skinned_model_assimp(input_model, output_model, assimp_options, textures, texture_formats);
-                }
             }
-            else 
+
+            if (e == L".fbx")
             {
-                raise_error<exception>( "model type must be one of : default, parametrized, textured" );
+                std::cout << "building importer: fbx" << std::endl;
+                convertor.m_convert_function_fbx(input_model, output_model, assimp_options, textures, texture_formats);
+            }
+            else
+            {
+                std::cout << "building importer: assimp" << std::endl;
+                convertor.m_convert_function_assimp(input_model, output_model, assimp_options, textures, texture_formats);
             }
         }
+       
     }
 
     catch (const std::exception& e)
