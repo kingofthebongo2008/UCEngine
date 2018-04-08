@@ -83,6 +83,31 @@ namespace uc
                 }
 
                 template <typename mesh_view>
+                inline auto merge_tangents(mesh_view* v)
+                {
+                    using tangent = typename mesh_view::tangent_t;
+                    std::vector< tangent > r;
+
+                    r.resize(v->vertex_count());
+
+                    auto s = v->material_count();
+                    auto vc = size_t(0);
+
+                    for (auto i = 0U; i < s; ++i)
+                    {
+                        auto&& p = v->tangent(i);
+
+                        auto source = &p[0];
+                        auto destination = &r[vc];
+
+                        std::copy(source, source + p.size(), destination);
+                        vc += p.size();
+                    }
+
+                    return r;
+                }
+
+                template <typename mesh_view>
                 inline auto merge_faces(mesh_view* v)
                 {
                     using face_t = typename mesh_view::face_t;
