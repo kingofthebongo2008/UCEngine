@@ -83,10 +83,11 @@ namespace uc
 
                 template <typename mesh> struct mesh_view
                 {
-                    mesh*                       m_mesh;
+                    const mesh*         m_mesh;
                     using position_t    = typename mesh::position_t;
                     using uv_t          = typename mesh::uv_t;
                     using normal_t      = typename mesh::normal_t;
+                    using tangent_t     = typename mesh::tangent_t;
                     using face_t        = typename mesh::face_t;
                 };
 
@@ -102,6 +103,7 @@ namespace uc
 
                     using position_t    = typename base::position_t;
                     using normal_t      = typename base::normal_t;
+                    using tangent_t     = typename base::tangent_t;
                     using uv_t          = typename base::uv_t;
                     using face_t        = typename base::face_t;
 
@@ -112,19 +114,9 @@ namespace uc
                         return m_indices[i];
                     }
 
-                    positions_t& position(material_index idx)
-                    {
-                        return m_mesh->m_positions[index(idx)];
-                    }
-
                     const positions_t& position(material_index idx) const
                     {
                         return m_mesh->m_positions[index(idx)];
-                    }
-
-                    normals_t& normal(material_index idx)
-                    {
-                        return m_mesh->m_normals[index(idx)];
                     }
 
                     const normals_t& normal(material_index idx) const
@@ -132,29 +124,14 @@ namespace uc
                         return m_mesh->m_normals[index(idx)];
                     }
 
-                    tangents_t& tangent(material_index idx)
-                    {
-                        return m_mesh->m_tangents[index(idx)];
-                    }
-
                     const tangents_t& tangent(material_index idx) const
                     {
                         return m_mesh->m_tangents[index(idx)];
                     }
 
-                    uvs_t& uv(material_index idx)
-                    {
-                        return m_mesh->m_uv[index(idx)];
-                    }
-
                     const uvs_t& uv(material_index idx) const
                     {
                         return m_mesh->m_uv[index(idx)];
-                    }
-
-                    faces_t& face(material_index idx)
-                    {
-                        return m_mesh->m_faces[index(idx)];
                     }
 
                     const faces_t& face(material_index idx) const
@@ -231,7 +208,7 @@ namespace uc
                     return v;
                 }
 
-                template<typename permutator> inline multi_material_mesh_view permute(multi_material_mesh* m, permutator p)
+                template<typename permutator> inline multi_material_mesh_view permute(const multi_material_mesh* m, permutator p)
                 {
                     multi_material_mesh_view v;
                     v.m_mesh = m;
@@ -245,7 +222,7 @@ namespace uc
                     return v;
                 }
 
-                inline multi_material_mesh_view multi_mesh_material_view(multi_material_mesh* m, std::vector<uint32_t>&& indices)
+                inline multi_material_mesh_view multi_mesh_material_view(const multi_material_mesh* m, std::vector<uint32_t>&& indices)
                 {
                     multi_material_mesh_view v;
                     v.m_mesh = m;
