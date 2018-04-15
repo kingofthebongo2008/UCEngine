@@ -119,6 +119,17 @@ void MainPage::OnCompositionScaleChanged(Windows::UI::Xaml::Controls::SwapChainP
     m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
 
+template <typename T>
+T from_cx(Platform::Object^ from)
+{
+    T to{ nullptr };
+
+    winrt::check_hresult(reinterpret_cast<::IUnknown*>(from)->QueryInterface(winrt::guid_of<T>(),
+        reinterpret_cast<void**>(winrt::put_abi(to))));
+
+    return to;
+}
+
 void MainPage::OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ d, Object^ args)
 {
     std::unique_lock<std::mutex> lock(m_render_lock);
@@ -131,13 +142,14 @@ void MainPage::OnDpiChanged(Windows::Graphics::Display::DisplayInformation^ d, O
     m_device_resources->ResetViewDependentResources();
 
     //Recreate the resources and buffers
-    winrt::ABI::Windows::Graphics::Display::IDisplayInformation* inspectable = reinterpret_cast<winrt::ABI::Windows::Graphics::Display::IDisplayInformation*>(d);
-    winrt::Windows::Graphics::Display::DisplayInformation d0(nullptr);
-    winrt::attach(d0, inspectable);
-    m_background_swap_chain->SetDisplayInformation(d0);
+    m_background_swap_chain->SetDisplayInformation(from_cx<winrt::Windows::Graphics::Display::DisplayInformation>(d));
 
     m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }
+
+
+
+
 
 void MainPage::OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ d, Object^ args)
 {
@@ -149,11 +161,6 @@ void MainPage::OnOrientationChanged(Windows::Graphics::Display::DisplayInformati
     //Reset view dependent heaps
     m_depth_buffer.reset();
     m_device_resources->ResetViewDependentResources();
-
-    //Recreate the resources and buffers
-    winrt::ABI::Windows::Graphics::Display::IDisplayInformation* inspectable = reinterpret_cast<winrt::ABI::Windows::Graphics::Display::IDisplayInformation*>(d);
-    winrt::Windows::Graphics::Display::DisplayInformation d0(nullptr);
-    winrt::attach(d0, inspectable);
 
     m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
 }

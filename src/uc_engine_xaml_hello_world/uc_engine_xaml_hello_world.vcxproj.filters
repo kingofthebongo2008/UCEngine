@@ -51,6 +51,7 @@
   <ItemGroup>
     <None Include="ucdev_app_key.pfx" />
     <None Include="packages.config" />
+    <None Include="uc_engine_xaml_hello_world_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />

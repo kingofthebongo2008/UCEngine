@@ -21,15 +21,12 @@
 
 
 using namespace winrt::Windows::ApplicationModel;
-using namespace winrt::Windows::ApplicationModel::Core;
 using namespace winrt::Windows::ApplicationModel::Activation;
-using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::Graphics::Display;
 
 
-class ViewProvider : public winrt::implements<ViewProvider, IFrameworkView, IFrameworkViewSource>
+class ViewProvider : public winrt::implements<ViewProvider, winrt::Windows::ApplicationModel::Core::IFrameworkView, winrt::Windows::ApplicationModel::Core::IFrameworkViewSource>
 {
 
 public:
@@ -39,18 +36,18 @@ public:
         
     }
 
-    IFrameworkView CreateView()
+    winrt::Windows::ApplicationModel::Core::IFrameworkView CreateView()
     {
         return *this;
     }
 
     // IFrameworkView methods
-    virtual void Initialize( const CoreApplicationView& view)
+    virtual void Initialize( const winrt::Windows::ApplicationModel::Core::CoreApplicationView& view)
     {
         m_activated = view.Activated(winrt::auto_revoke, { this, &ViewProvider::OnActivated });
 
 #if defined(_DEBUG)
-        ApplicationView::PreferredLaunchViewSize(Size(1600, 900));
+        ApplicationView::PreferredLaunchViewSize(winrt::Windows::Foundation::Size(1600, 900));
         ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::PreferredLaunchViewSize);
 #else
         ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::FullScreen);
@@ -64,7 +61,7 @@ public:
 
     }
 
-    virtual void SetWindow( const CoreWindow& window)
+    virtual void SetWindow( const winrt::Windows::UI::Core::CoreWindow& window)
     {
         auto w = window;
         auto d = DisplayInformation::GetForCurrentView();
@@ -88,8 +85,8 @@ public:
         m_orientation_changed = currentDisplayInformation.OrientationChanged(winrt::auto_revoke, { this, &ViewProvider::OnOrientationChanged });
         m_display_contents_invalidated = currentDisplayInformation.DisplayContentsInvalidated(winrt::auto_revoke, { this, &ViewProvider::OnDisplayContentsInvalidated });
     }
-
-    virtual void Load( winrt::hstring_ref)
+    
+    virtual void Load( winrt::hstring)
     {
         m_full_screen_main = UniqueCreator::Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
     }
@@ -98,7 +95,7 @@ public:
     {
         while (true)
         {
-            CoreWindow::GetForCurrentThread().Dispatcher().ProcessEvents(CoreProcessEventsOption::ProcessAllIfPresent);
+            winrt::Windows::UI::Core::CoreWindow::GetForCurrentThread().Dispatcher().ProcessEvents(winrt::Windows::UI::Core::CoreProcessEventsOption::ProcessAllIfPresent);
 
 
             //Sampling the mouse
@@ -212,13 +209,13 @@ public:
 
 protected:
     // Event handlers
-    void OnActivated(const CoreApplicationView&, const IActivatedEventArgs&)
+    void OnActivated(const winrt::Windows::ApplicationModel::Core::CoreApplicationView&, const IActivatedEventArgs&)
     {
-        auto w = CoreWindow::GetForCurrentThread();
+        auto w = winrt::Windows::UI::Core::CoreWindow::GetForCurrentThread();
         w.Activate();
     }
 
-    void OnSuspending( const winrt::Windows::IInspectable&, const SuspendingEventArgs& args)
+    void OnSuspending( const winrt::Windows::Foundation::IInspectable&, const SuspendingEventArgs& args)
     {
         auto deferral = args.SuspendingOperation().GetDeferral();
 
@@ -228,7 +225,7 @@ protected:
         });
     }
 
-    void OnResuming(const winrt::Windows::IInspectable&, const winrt::Windows::IInspectable&)
+    void OnResuming(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::Foundation::IInspectable&)
     {
 
     }
@@ -238,7 +235,7 @@ protected:
         return UniqueCreator::Graphics::Size2D { s.Width, s.Height };
     }
 
-    void OnWindowSizeChanged( const CoreWindow&, const WindowSizeChangedEventArgs& args)
+    void OnWindowSizeChanged( const winrt::Windows::UI::Core::CoreWindow&, const winrt::Windows::UI::Core::WindowSizeChangedEventArgs& args)
     {
         //stall and do not submit more work
         m_device_resources->WaitForGpu();
@@ -255,18 +252,18 @@ protected:
         m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
-    void OnWindowClosed(const CoreWindow&, const CoreWindowEventArgs&)
+    void OnWindowClosed(const winrt::Windows::UI::Core::CoreWindow&, const winrt::Windows::UI::Core::CoreWindowEventArgs&)
     {
         
     }
 
-    void OnVisibilityChanged(const CoreWindow& , const VisibilityChangedEventArgs&)
+    void OnVisibilityChanged(const winrt::Windows::UI::Core::CoreWindow& , const winrt::Windows::UI::Core::VisibilityChangedEventArgs&)
     {
 
     }
 
     // DisplayInformation event handlers.
-    void OnDpiChanged(const DisplayInformation& d, const winrt::Windows::IInspectable&)
+    void OnDpiChanged(const DisplayInformation& d, const winrt::Windows::Foundation::IInspectable&)
     {
         //stall and do not submit more work
         m_device_resources->WaitForGpu();
@@ -283,7 +280,7 @@ protected:
         m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
-    void OnOrientationChanged(const DisplayInformation& d, const winrt::Windows::IInspectable&)
+    void OnOrientationChanged(const DisplayInformation& d, const winrt::Windows::Foundation::IInspectable&)
     {
         //stall and do not submit more work
         m_device_resources->WaitForGpu();
@@ -300,18 +297,18 @@ protected:
         m_depth_buffer = m_resource_create_context->CreateViewDepthBuffer(m_background_swap_chain->GetBackBuffer()->GetSize2D(), UniqueCreator::Graphics::DepthBufferFormat::Depth32Float);
     }
 
-    void OnDisplayContentsInvalidated(const DisplayInformation&, const winrt::Windows::IInspectable&)
+    void OnDisplayContentsInvalidated(const DisplayInformation&, const winrt::Windows::Foundation::IInspectable&)
     {
         
     }
 
 private:
 
-    CoreApplicationView::Activated_revoker                                          m_activated;
+    winrt::Windows::ApplicationModel::Core::CoreApplicationView::Activated_revoker  m_activated;
 
-    CoreWindow::SizeChanged_revoker                                                 m_size_changed;
-    CoreWindow::VisibilityChanged_revoker                                           m_visibility_changed;
-    CoreWindow::Closed_revoker                                                      m_closed;
+    winrt::Windows::UI::Core::CoreWindow::SizeChanged_revoker                       m_size_changed;
+    winrt::Windows::UI::Core::CoreWindow::VisibilityChanged_revoker                 m_visibility_changed;
+    winrt::Windows::UI::Core::CoreWindow::Closed_revoker                            m_closed;
 
     DisplayInformation::DpiChanged_revoker                                          m_dpi_changed;
     DisplayInformation::OrientationChanged_revoker                                  m_orientation_changed;
@@ -343,7 +340,7 @@ private:
 int32_t __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int32_t)
 {
     CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-    CoreApplication::Run(ViewProvider());
+    winrt::Windows::ApplicationModel::Core::CoreApplication::Run(ViewProvider());
     return 0;
 }
 

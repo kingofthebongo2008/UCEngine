@@ -15,9 +15,9 @@ namespace UniqueCreator
         struct WindowEnviroment
         {
             // Cached device properties.
-            winrt::Windows::Foundation::Size                          m_back_buffer_size;     //back buffer
-            winrt::ABI::Windows::Foundation::Size                          m_output_size;          //window size in pixels
-            winrt::ABI::Windows::Foundation::Size                          m_logical_size;         //window logical size in dips
+            winrt::Windows::Foundation::Size                               m_back_buffer_size;     //back buffer
+            winrt::Windows::Foundation::Size                               m_output_size;          //window size in pixels
+            winrt::Windows::Foundation::Size                               m_logical_size;         //window logical size in dips
             winrt::Windows::Graphics::Display::DisplayOrientations		   m_native_orientation;   //native screen orientation
             winrt::Windows::Graphics::Display::DisplayOrientations		   m_current_orientation;  //current orientation from the user
             float														   m_dpi;                  //dpi from the display
@@ -96,18 +96,18 @@ namespace UniqueCreator
 
             WindowEnviroment result = {};
 
-            winrt::ABI::Windows::Foundation::Rect bounds;
-            window->get_Bounds(&bounds);
+            winrt::Windows::Foundation::Rect bounds;
+            bounds = window.Bounds();
 
             result.m_logical_size.Width = bounds.Width;
             result.m_logical_size.Height = bounds.Height;
 
             float f;
 
-            HRESULT s = currentDisplayInformation->get_NativeOrientation(&result.m_native_orientation);
-            s = currentDisplayInformation->get_CurrentOrientation(&result.m_current_orientation);
-            s = currentDisplayInformation->get_LogicalDpi(&result.m_dpi);
-            s = currentDisplayInformation->get_LogicalDpi(&f);
+            result.m_native_orientation = currentDisplayInformation.NativeOrientation();
+            result.m_current_orientation = currentDisplayInformation.CurrentOrientation();
+            result.m_dpi = currentDisplayInformation.LogicalDpi();
+            f = result.m_dpi;
 
             result.m_effective_dpi = result.m_dpi;     //no scaling for now, scaling is used for phones to save power.
 

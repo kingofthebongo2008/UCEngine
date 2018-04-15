@@ -36,11 +36,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <PackageCertificateThumbprint>206635E46C0429629039508BA74A1F3A4A769887</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>ucdev_app_key.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>131E07F8AFFA60DEE9D2C75BE2DF511C5B5CFD18</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>uc_engine_skeleton_animation_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package_uc_engine_skeleton_animation.appxmanifest">
@@ -48,6 +48,7 @@
     </AppxManifest>
     <None Include="packages.config" />
     <None Include="ucdev_app_key.pfx" />
+    <None Include="uc_engine_skeleton_animation_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\lockscreenlogo.scale-200.png" />

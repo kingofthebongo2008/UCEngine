@@ -26,7 +26,6 @@ using namespace winrt::Windows::ApplicationModel;
 using namespace winrt::Windows::ApplicationModel::Core;
 using namespace winrt::Windows::ApplicationModel::Activation;
 using namespace winrt::Windows::UI::Core;
-using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::Graphics::Display;
 
@@ -54,7 +53,7 @@ public:
         m_activated = view.Activated(winrt::auto_revoke, { this, &ViewProvider::OnActivated });
 
 #if defined(_DEBUG)
-        ApplicationView::PreferredLaunchViewSize(Size(1600, 900));
+        ApplicationView::PreferredLaunchViewSize(winrt::Windows::Foundation::Size(1600, 900));
         ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::PreferredLaunchViewSize);
 #else
         ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::FullScreen);
@@ -95,7 +94,7 @@ public:
         m_display_contents_invalidated = currentDisplayInformation.DisplayContentsInvalidated(winrt::auto_revoke, { this, &ViewProvider::OnDisplayContentsInvalidated });
     }
 
-    virtual void Load( winrt::hstring_ref)
+    virtual void Load( winrt::hstring)
     {
         m_full_screen_main = Graphics::PipelineStates::full_screen_graphics::Create(m_resource_create_context.get());
 
@@ -300,7 +299,7 @@ protected:
         w.Activate();
     }
 
-    void OnSuspending( const winrt::Windows::IInspectable&, const SuspendingEventArgs& args)
+    void OnSuspending( const winrt::Windows::Foundation::IInspectable&, const SuspendingEventArgs& args)
     {
         auto deferral = args.SuspendingOperation().GetDeferral();
 
@@ -310,7 +309,7 @@ protected:
         });
     }
 
-    void OnResuming(const winrt::Windows::IInspectable&, const winrt::Windows::IInspectable&)
+    void OnResuming(const winrt::Windows::Foundation::IInspectable&, const winrt::Windows::Foundation::IInspectable&)
     {
 
     }
@@ -349,7 +348,7 @@ protected:
     }
 
     // DisplayInformation event handlers.
-    void OnDpiChanged(const DisplayInformation& d, const winrt::Windows::IInspectable&)
+    void OnDpiChanged(const DisplayInformation& d, const winrt::Windows::Foundation::IInspectable&)
     {
         //stall and do not submit more work
         m_device_resources->WaitForGpu();
@@ -368,7 +367,7 @@ protected:
         
     }
 
-    void OnOrientationChanged(const DisplayInformation& d, const winrt::Windows::IInspectable&)
+    void OnOrientationChanged(const DisplayInformation& d, const winrt::Windows::Foundation::IInspectable&)
     {
         //stall and do not submit more work
         m_device_resources->WaitForGpu();
@@ -389,7 +388,7 @@ protected:
         
     }
 
-    void OnDisplayContentsInvalidated(const DisplayInformation&, const winrt::Windows::IInspectable&)
+    void OnDisplayContentsInvalidated(const DisplayInformation&, const winrt::Windows::Foundation::IInspectable&)
     {
         
     }

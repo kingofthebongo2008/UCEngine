@@ -1,5 +1,6 @@
 #include "pch.h"
 
+/*
 #include <uc_dev/gx/geo/indexed_geometry_factory.h>
 
 #include <uc_dev/mem/alloc.h>
@@ -95,3 +96,4 @@ namespace uc
         }
     }
 }
+*/

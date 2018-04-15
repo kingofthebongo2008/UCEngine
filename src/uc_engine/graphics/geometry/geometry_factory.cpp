@@ -70,8 +70,8 @@ namespace UniqueCreator
 
             const auto position_stride          = uc::gx::geo::default_geometry_position::stride::value;
             const auto uv_stride                = uc::gx::geo::default_geometry_uv::stride::value;
-            const auto weights_stride           = uc::gx::geo::skinned_geometry::blend_weights_stride;
-            const auto weights_indices_stride   = uc::gx::geo::skinned_geometry::blend_indices_stride;
+            const auto weights_stride           = uc::gx::geo::default_geometry_blend_weight::value;
+            const auto weights_indices_stride   = uc::gx::geo::default_geometry_index::value;
             
             auto vertices                       = uc::gx::dx12::create_buffer(rcu, vertexCount, position_stride);
             auto indices                        = uc::gx::dx12::create_buffer(rcu, indexCount, 4);

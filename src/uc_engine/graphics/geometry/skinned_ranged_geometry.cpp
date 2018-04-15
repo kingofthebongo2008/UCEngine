@@ -45,14 +45,14 @@ namespace UniqueCreator
             const auto&& v = GetBlendWeightsBuffer();
             r.m_bufferLocation = v->GetVirtualAddress();
             r.m_sizeInBytes = v->GetSize();
-            r.m_strideInBytes = uc::gx::geo::skinned_geometry::blend_weights_stride;
+            r.m_strideInBytes = uc::gx::geo::default_geometry_blend_weight::value;
             return r;
         }
 
         const VertexBufferView SkinnedRangedGeometry::GetBlendWeightsView(uint32_t offsetInVertices, uint32_t vertexCount) const
         {
             VertexBufferView r;
-            const auto stride = uc::gx::geo::skinned_geometry::blend_weights_stride;
+            const auto stride = uc::gx::geo::default_geometry_blend_weight::value;
             const auto&& v = GetBlendWeightsBuffer();
             r.m_bufferLocation = v->GetVirtualAddress() + offsetInVertices * stride;
             r.m_sizeInBytes = vertexCount * stride;
@@ -67,7 +67,7 @@ namespace UniqueCreator
             const auto&& v      = GetBlendIndicesBuffer();
             r.m_bufferLocation  = v->GetVirtualAddress();
             r.m_sizeInBytes     = v->GetSize();
-            r.m_strideInBytes   = uc::gx::geo::skinned_geometry::blend_indices_stride;
+            r.m_strideInBytes   = uc::gx::geo::default_geometry_blend_index::value;
             return r;
         }
 

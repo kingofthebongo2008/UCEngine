@@ -1,5 +1,6 @@
 #include "pch.h"
 
+/*
 #include <uc_dev/gx/geo/geometry_allocators.h>
 #include <uc_dev/util/pimpl_impl.h>
 
@@ -102,4 +103,4 @@ namespace uc
         }
     }
 }
-
+*/

@@ -49,7 +49,7 @@ namespace UniqueCreator
                 uc::gx::dx12::throw_if_failed(
                     factory->CreateSwapChainForCoreWindow(
                         queue,
-                        reinterpret_cast<IUnknown*>(winrt::get(window)),
+                        reinterpret_cast<IUnknown*>(winrt::get_abi(window)),
                         &swapChainDesc,
                         nullptr,
                         &result
