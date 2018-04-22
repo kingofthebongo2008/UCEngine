@@ -13,6 +13,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ucdev_app.vcxproj" />
+    <None Include="ucdev_app_TemporaryKey.pfx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E97E2A28-0291-4337-9863-AF619A7C606F}</ProjectGuid>
@@ -58,8 +59,8 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <PackageCertificateThumbprint>206635E46C0429629039508BA74A1F3A4A769887</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>ucdev_app_key.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>EB13CCFB606EE7EBBD5B1E97A5E6A71E16E30390</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>ucdev_app_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
