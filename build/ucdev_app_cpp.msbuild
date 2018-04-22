@@ -20,10 +20,8 @@
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_3.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_4.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_5.cpp" />
-<ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_6.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_7.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_8.cpp" />
-<ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_9.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_default.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_factory.cpp" />
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_manager.cpp" />
