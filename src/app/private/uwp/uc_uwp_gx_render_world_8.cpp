@@ -55,7 +55,7 @@ namespace uc
 
                 g.run([this, c]
                 {
-                    m_robot = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/robot.skinned.model", c->m_resources, c->m_geometry);
+                    m_robot = gxu::make_render_object_from_file<skinned_render_object>(L"appdata/meshes/robot.derivatives_skinned_model.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -202,8 +202,9 @@ namespace uc
                     graphics->set_vertex_buffer(0, ctx->m_geometry->skinned_mesh_position_view());
                     graphics->set_vertex_buffer(1, ctx->m_geometry->skinned_mesh_uv_view());
                     graphics->set_vertex_buffer(2, ctx->m_geometry->skinned_mesh_normal_view());
-                    graphics->set_vertex_buffer(3, ctx->m_geometry->skinned_mesh_blend_weight_view());
-                    graphics->set_vertex_buffer(4, ctx->m_geometry->skinned_mesh_blend_index_view());
+                    graphics->set_vertex_buffer(3, ctx->m_geometry->skinned_mesh_tangent_view());
+                    graphics->set_vertex_buffer(4, ctx->m_geometry->skinned_mesh_blend_weight_view());
+                    graphics->set_vertex_buffer(5, ctx->m_geometry->skinned_mesh_blend_index_view());
                     graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
                     size_t start = 0;

@@ -40,6 +40,11 @@ namespace uc
             {
                 static std::unique_ptr< static_render_object > make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* r);
             };
+
+            template<> struct render_object_factory< parametrized_render_object>
+            {
+                static std::unique_ptr< parametrized_render_object > make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* r);
+            };
         }
     }
 }

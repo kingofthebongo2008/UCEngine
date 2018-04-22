@@ -91,6 +91,12 @@ namespace uc
                 return m_skinned_meshes.skinned_mesh_normal_view();
             }
 
+            vertex_buffer_view   geometry_allocator::skinned_mesh_tangent_view() const
+            {
+                return m_skinned_meshes.skinned_mesh_tangent_view();
+            }
+
+
             vertex_buffer_view   geometry_allocator::skinned_mesh_blend_weight_view() const
             {
                 return m_skinned_meshes.skinned_mesh_blend_weight_view();

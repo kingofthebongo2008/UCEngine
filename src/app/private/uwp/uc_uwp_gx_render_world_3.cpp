@@ -8,8 +8,6 @@
 #include <uc_dev/gx/lip_utils.h>
 #include <uc_dev/gx/img_utils.h>
 
-#include <uc_dev/gx/geo/indexed_geometry_factory.h>
-
 #include <uc_dev/gx/dx12/gpu/texture_2d.h>
 
 #include <autogen/shaders/textured_solid_graphics.h>
@@ -72,9 +70,7 @@ namespace uc
                 //load bear mesh
                 g.run([this, c]()
                 {
-                    auto resources = c->m_resources;
-                    auto mesh = lip::create_from_compressed_lip_file<lip::parametrized_model>(L"appdata/meshes/bear.parametrized.model");
-                    m_bear = gx::geo::create_parametrized_geometry(resources->resource_create_context(), resources->upload_queue(), mesh->m_positions.data(), lip::size(mesh->m_positions), mesh->m_indices.data(), lip::size(mesh->m_indices), mesh->m_uv.data(), lip::size(mesh->m_uv));
+                    m_bear = gxu::make_render_object_from_file<parametrized_render_object>(L"appdata/meshes/bear.parametrized.model", c->m_resources, c->m_geometry);
                 });
 
                 g.run([this, c]
@@ -144,16 +140,22 @@ namespace uc
                     graphics->set_primitive_topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
                     //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_bear));
-                    graphics->set_vertex_buffer(1, gx::geo::make_uv_buffer_view(&m_bear));
-                    graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_bear));
 
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->parametrized_mesh_position_view());
+                    graphics->set_vertex_buffer(1, ctx->m_geometry->parametrized_mesh_uv_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
                     //material
                     graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, m_texture_bear->srv());
 
                     //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_bear.m_index_count);
+
+                    auto  base_index_offset = m_bear->m_indices->index_offset();
+                    auto  base_vertex_offset = m_bear->m_geometry->draw_offset();
+                    auto  index_count = m_bear->m_indices->index_count();
+
+                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
+                    graphics->draw_indexed(index_count, base_index_offset, base_vertex_offset);
                 }
 
                 end_render(ctx, graphics.get());
@@ -196,11 +198,16 @@ namespace uc
 
 
                     //geometry
-                    graphics->set_vertex_buffer(0, gx::geo::make_position_buffer_view(&m_bear));
-                    graphics->set_index_buffer(gx::geo::make_index_buffer_view(&m_bear));
+                    graphics->set_vertex_buffer(0, ctx->m_geometry->parametrized_mesh_position_view());
+                    graphics->set_index_buffer(ctx->m_geometry->indices_view());
 
                     //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
-                    graphics->draw_indexed(m_bear.m_index_count);
+                    auto  base_index_offset = m_bear->m_indices->index_offset();
+                    auto  base_vertex_offset = m_bear->m_geometry->draw_offset();
+                    auto  index_count = m_bear->m_indices->index_count();
+
+                    //Draw call -> frequency 2 ( nvidia take care these should be on a sub 1 ms granularity)
+                    graphics->draw_indexed(index_count, base_index_offset, base_vertex_offset);
                 }
 
                 end_render_depth(ctx, graphics.get());

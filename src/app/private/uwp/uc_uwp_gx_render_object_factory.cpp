@@ -98,6 +98,25 @@ namespace uc
                 return r;
             }
 
+            std::unique_ptr< parametrized_render_object > render_object_factory< parametrized_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* allocator)
+            {
+                std::unique_ptr< parametrized_render_object > r = std::make_unique< parametrized_render_object  >();
+
+                auto mesh = lip::create_from_compressed_lip_file<lip::parametrized_model>(file_name);
+
+                auto span_uv = gsl::make_span(mesh->m_uv.data(), mesh->m_uv.size());
+                auto span_indices = gsl::make_span(mesh->m_indices.data(), mesh->m_indices.size());
+                auto span_positions = gsl::make_span(mesh->m_positions.data(), mesh->m_positions.size());
+
+                r->m_geometry = gx::geo::create_static_mesh(allocator, resources->upload_queue(), gsl::as_bytes(span_positions), gsl::as_bytes(span_uv));
+                r->m_indices = gx::geo::create_indexed_geometry(allocator, resources->upload_queue(), gsl::as_bytes(span_indices));
+
+                //todo: to processing on the compute queue
+                resources->compute_queue()->insert_wait_on(resources->upload_queue()->flush());
+
+                return r;
+            }
+
             std::unique_ptr< static_render_object > render_object_factory< static_render_object >::make_render_object(const wchar_t* file_name, device_resources* resources, gx::geo::geometry_allocator* allocator)
             {
                 std::unique_ptr< static_render_object > r = std::make_unique< static_render_object  >();

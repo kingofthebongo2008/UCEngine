@@ -14,6 +14,7 @@ namespace uc
     {
         namespace gxu
         {
+            struct parametrized_render_object;
             class render_world_3 : public render_world
             {
                 using base = render_world;
@@ -30,7 +31,7 @@ namespace uc
                 std::unique_ptr< submitable >do_render_depth(render_context* ctx) override;
 
 
-                gx::geo::parametrized_geometry                                  m_bear;
+                std::unique_ptr< parametrized_render_object >                   m_bear;
                 gx::dx12::managed_gpu_texture_2d                                m_texture_bear;
 
                 gx::dx12::graphics_pipeline_state*                              m_textured;

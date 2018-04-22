@@ -23,6 +23,12 @@ namespace uc
                 gx::geo::managed_skinned_mesh_geometry        m_geometry;
             };
 
+            struct parametrized_render_object : private util::noncopyable
+            {
+                gx::geo::managed_indexed_geometry             m_indices;
+                gx::geo::managed_static_mesh_geometry         m_geometry;
+            };
+
             struct static_render_object : private util::noncopyable
             {
                 std::vector<gx::dx12::managed_gpu_texture_2d> m_opaque_textures;
