@@ -74,7 +74,12 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ucdev_include_parser</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+
+    <ISPC_file>simple</ISPC_file>
+    <!--default_targets>sse2-i32x4,sse4-i32x8,avx1-i32x8,avx2-i32x8,avx512knl-i32x16,avx512skx-i32x16</default_targets-->
+    <default_targets>avx2-i32x8</default_targets>
   </PropertyGroup>
+
   <PropertyGroup>
     <OutputBinDirectory Condition="'$(OutputBinDirectory)'==''">$(ProjectDir)..\..\bin</OutputBinDirectory>
     <OutputLibDirectory Condition="'$(OutputLibDirectory)'==''">$(ProjectDir)..\..\lib</OutputLibDirectory>
@@ -99,7 +104,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IntDir);../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>$(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -119,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="ispc.props" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
