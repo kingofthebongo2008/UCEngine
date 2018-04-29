@@ -114,7 +114,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
@@ -126,7 +126,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>

@@ -37,6 +37,9 @@
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
+    <ClCompile Include="..\src\uc_model_texture_mips.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\pch.h">
@@ -177,5 +180,8 @@
     <ClInclude Include="..\..\..\..\include\uc_dev\gx\lip\base.h">
       <Filter>include</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ISPC_file).ispc" />
   </ItemGroup>
 </Project>

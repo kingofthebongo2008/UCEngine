@@ -20,6 +20,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\uc_model_main.cpp" />
+    <ClCompile Include="..\src\uc_model_texture_mips.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\include\uc_dev\gx\geo\geo_indexed_geometry.h" />
@@ -114,8 +115,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>$(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);../../../../3rdparty/compressonator/include;../../../../3rdparty/gsl/include;../../../../3rdparty/lzham/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -26,6 +26,8 @@
 #include "uc_model_texture.h"
 #include <uc_dev/mem/alloc.h>
 
+#include "simple_ispc.h"
+
 
 namespace uc
 {

@@ -292,6 +292,21 @@ namespace uc
             }
         }
 
+        static uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const file_name_t& input_file_name, const std::string& texture_format)
+        {
+            auto storage = string_to_storage_format(texture_format);
+            auto view = string_to_view_format(texture_format);
+
+            if (storage == lip::storage_format::unknown)
+            {
+                return create_texture_2d_mip_chain(input_file_name);
+            }
+            else
+            {
+                return create_texture_2d_mip_chain(input_file_name, storage, view);
+            }
+        }
+
         static std::vector<std::string> materials( const std::vector<std::string>& names )
         {
             std::vector<std::string> s;
@@ -344,7 +359,7 @@ namespace uc
             {
                 g.run([i, &m, &texture_file_name, &texture_format]()
                 {
-                    m->m_textures[i] = create_texture_2d(texture_file_name[i], texture_format[i]);
+                    m->m_textures[i] = create_texture_2d_mip_chain(texture_file_name[i], texture_format[i]);
                 });
             }
 
@@ -578,7 +593,7 @@ namespace uc
                 return gx::import::assimp::create_mesh(f, a);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
@@ -594,7 +609,7 @@ namespace uc
                 return gx::import::fbx::create_mesh(f);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
@@ -610,7 +625,7 @@ namespace uc
                 return gx::import::assimp::create_mesh(f, a);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
@@ -626,7 +641,7 @@ namespace uc
                 return gx::import::fbx::create_mesh(f);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
@@ -642,7 +657,7 @@ namespace uc
                 return gx::import::assimp::create_mesh(f, a);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
@@ -658,7 +673,7 @@ namespace uc
                 return gx::import::fbx::create_mesh(f);
             });
 
-            m->m_texture = create_texture_2d(texture_file_name, texture_format);
+            m->m_texture = create_texture_2d_mip_chain(texture_file_name, texture_format);
             uc::lip::serialize_object(std::move(m), output_file_name);
         }
 
