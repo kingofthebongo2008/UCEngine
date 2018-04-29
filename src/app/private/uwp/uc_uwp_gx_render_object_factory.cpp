@@ -76,12 +76,12 @@ namespace uc
                 {
                     auto& texture = mesh->m_textures[i];
 
-                    auto w = texture.m_width;
-                    auto h = texture.m_height;
+                    auto w = texture.m_levels[0].m_width;
+                    auto h = texture.m_levels[0].m_height;
 
-                    r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
+                    r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.m_levels[0].view()));
 
-                    D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
+                    D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture.m_levels[0]);
                     resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 
@@ -136,12 +136,12 @@ namespace uc
                 {
                     auto& texture = mesh->m_textures[i];
 
-                    auto w = texture.m_width;
-                    auto h = texture.m_height;
+                    auto w = texture.m_levels[0].m_width;
+                    auto h = texture.m_levels[0].m_height;
 
-                    r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.view()));
+                    r->m_opaque_textures[i] = gx::dx12::create_texture_2d(resources->resource_create_context(), w, h, static_cast<DXGI_FORMAT>(texture.m_levels[0].view()));
 
-                    D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture);
+                    D3D12_SUBRESOURCE_DATA s = gx::sub_resource_data(&texture.m_levels[0]);
                     resources->upload_queue()->upload_texture_2d(r->m_opaque_textures[i].get(), 0, 1, &s);
                 }
 

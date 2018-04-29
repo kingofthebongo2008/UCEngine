@@ -66,7 +66,21 @@ namespace uc
             return w * wh;
         }
 
-        inline D3D12_SUBRESOURCE_DATA sub_resource_data( const lip::texture2d* t )
+        inline D3D12_SUBRESOURCE_DATA sub_resource_data(const lip::texture2d* t)
+        {
+            D3D12_SUBRESOURCE_DATA s = {};
+
+            auto w = t->m_width;
+            auto h = t->m_height;
+
+            s.pData = t->data();
+            s.RowPitch = row_pitch(t->storage(), w);
+            s.SlicePitch = slice_pitch(t->storage(), w, h);
+
+            return s;
+        }
+
+        inline D3D12_SUBRESOURCE_DATA sub_resource_data( const lip::texture2d_mip_level* t )
         {
             D3D12_SUBRESOURCE_DATA s = {};
 
