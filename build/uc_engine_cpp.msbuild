@@ -18,6 +18,7 @@
 <ClCompile Include = "..\src\uc_engine\assets\graphics\skinned_model_factory.cpp" />
 <ClCompile Include = "..\src\uc_engine\assets\graphics\texture_2d.cpp" />
 <ClCompile Include = "..\src\uc_engine\assets\graphics\texture_2d_factory.cpp" />
+<ClCompile Include = "..\src\uc_engine\assets\graphics\texture_2d_mip_chain.cpp" />
 <ClCompile Include = "..\src\uc_engine\dll_main.cpp" />
 <ClCompile Include = "..\src\uc_engine\graphics\back_buffer.cpp" />
 <ClCompile Include = "..\src\uc_engine\graphics\back_buffer_internal.cpp" />

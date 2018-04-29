@@ -132,7 +132,7 @@ public:
         {
             //Geometry and materials
             auto asset_factory = std::make_unique<Assets::SkinnedModelFactory>();
-            auto asset = asset_factory->CreateFromFile(L"appdata/meshes/military_mechanic.skinned.model");
+            auto asset = asset_factory->CreateFromFile(L"appdata/meshes/military_mechanic.derivatives_skinned_model.model");
             auto render_object_factory = std::make_unique<Render::SkinnedRenderObjectFactory>();
             m_model = render_object_factory->Create(asset.get(), m_geometry.get(), m_indices.get(), m_device_resources->GetUploadQueue(), m_device_resources->GetResourceCreateContext());
 

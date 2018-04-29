@@ -8,7 +8,7 @@ namespace UniqueCreator
 {
     namespace Assets
     {
-        class Texture2D;
+        class Texture2DMipChain;
 
         class SkinnedModel : private NonCopyable
         {
@@ -16,8 +16,8 @@ namespace UniqueCreator
 
             struct Texture2DDescription
             {
-                Texture2D** m_textures;
-                size_t      m_textures_size;
+                Texture2DMipChain** m_textures;
+                size_t              m_textures_size;
             };
 
             class Impl;

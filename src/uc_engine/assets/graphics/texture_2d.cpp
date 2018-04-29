@@ -47,7 +47,7 @@ namespace UniqueCreator
             
             r.m_width = texture->m_width;
             r.m_height = texture->m_height;
-            r.m_mip_levels = texture->m_mip_levels;
+            r.m_mip_levels = 1;
             r.m_storage_format = static_cast<StorageFormat>(texture->storage());
             r.m_view_format = static_cast<ViewFormat>(texture->view());
 

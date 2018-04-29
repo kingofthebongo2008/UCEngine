@@ -6,7 +6,7 @@
 
 #include "skinned_model_factory_impl.h"
 #include "skinned_model_impl.h"
-#include "texture_2d_impl.h"
+#include "texture_2d_mip_chain_impl.h"
 #include <uc_dev/gx/lip/file.h>
 
 namespace UniqueCreator
@@ -26,7 +26,7 @@ namespace UniqueCreator
         {
         public:
 
-            SkinnedModelInternal(uc::lip::unique_lip_pointer<uc::lip::normal_skinned_model> && model)
+            SkinnedModelInternal(uc::lip::unique_lip_pointer<uc::lip::derivatives_skinned_model> && model)
             {
                 m_impl = std::move(model);
             }
@@ -52,7 +52,7 @@ namespace UniqueCreator
 
         std::unique_ptr<SkinnedModel> SkinnedModelFactory::CreateFromFile(const wchar_t* fileName)
         {
-            auto model = uc::lip::create_from_compressed_lip_file<uc::lip::normal_skinned_model>(fileName);
+            auto model = uc::lip::create_from_compressed_lip_file<uc::lip::derivatives_skinned_model>(fileName);
             return std::make_unique<SkinnedModelInternal>(std::move(model));
         }
     }

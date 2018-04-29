@@ -5,7 +5,7 @@
 #include <uc_public/uc_pimpl_impl.h>
 
 #include "skinned_model_impl.h"
-#include "texture_2d_impl.h"
+#include "texture_2d_mip_chain_impl.h"
 
 namespace UniqueCreator
 {
