@@ -584,7 +584,6 @@ namespace uc
                 
             uint16_t m_width;
             uint16_t m_height;
-            uint16_t m_mip_levels;
             uint16_t m_storage_format;
             uint16_t m_view_format;
   
@@ -614,7 +613,7 @@ namespace uc
             }
 
 #if defined(UC_TOOLS)
-            texture2d() : m_storage_format(0), m_width(0), m_height(0), m_mip_levels(0), m_view_format(0)
+            texture2d() : m_storage_format(0), m_width(0), m_height(0), m_view_format(0)
             {
 
             }
@@ -625,18 +624,87 @@ namespace uc
         
         LIP_DECLARE_TYPE_ID(uc::lip::texture2d)
 
+        struct texture2d_mip_level
+        {
+            lip::reloc_array < uint8_t >    m_data;
+            uint16_t                        m_width;
+            uint16_t                        m_height;
+            uint16_t                        m_mip_levels;
+            uint16_t                        m_storage_format;
+            uint16_t                        m_view_format;
+
+            explicit texture2d_mip_level(const lip::load_context& c) : m_data(c)
+            {
+
+            }
+
+            size_t size() const
+            {
+                return m_data.size();
+            }
+
+            const void* data() const
+            {
+                return m_data.data();
+            }
+
+            storage_format storage() const
+            {
+                return static_cast<storage_format>(m_storage_format);
+            }
+
+            view_format view() const
+            {
+                return static_cast<view_format>(m_view_format);
+            }
+
+#if defined(UC_TOOLS)
+            texture2d_mip_level() : m_storage_format(0), m_width(0), m_height(0), m_mip_levels(0), m_view_format(0)
+            {
+
+            }
+#endif
+
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::texture2d_mip_level)
+
+        struct texture2d_mip_chain
+        {
+            lip::reloc_array < texture2d_mip_level > m_levels;
+
+            explicit texture2d_mip_chain(const lip::load_context& c) : m_levels(c)
+            {
+
+            }
+
+#if defined(UC_TOOLS)
+            texture2d_mip_chain()
+            {
+
+            }
+#endif
+            LIP_DECLARE_RTTI()
+        };
+
+        LIP_DECLARE_TYPE_ID(uc::lip::reloc_array < texture2d_mip_level >)
+
+        LIP_DECLARE_TYPE_ID(uc::lip::texture2d_mip_chain)
+
+
         struct textured_model : public parametrized_model
         {
             using base = parametrized_model;
 
-            texture2d m_texture;
+            texture2d_mip_chain m_texture;
 
-            const texture2d* texture() const
+            const texture2d_mip_chain* texture() const
             {
                 return &m_texture;
             }
 
-            texture2d* texture()
+            texture2d_mip_chain* texture()
             {
                 return &m_texture;
             }
@@ -658,14 +726,14 @@ namespace uc
         {
             using base = normal_parametrized_model;
 
-            texture2d m_texture;
+            texture2d_mip_chain m_texture;
 
-            const texture2d* texture() const
+            const texture2d_mip_chain* texture() const
             {
                 return &m_texture;
             }
 
-            texture2d* texture()
+            texture2d_mip_chain* texture()
             {
                 return &m_texture;
             }
@@ -688,14 +756,14 @@ namespace uc
         {
             using base = derivatives_parametrized_model;
 
-            texture2d m_texture;
+            texture2d_mip_chain m_texture;
 
-            const texture2d* texture() const
+            const texture2d_mip_chain* texture() const
             {
                 return &m_texture;
             }
 
-            texture2d* texture()
+            texture2d_mip_chain* texture()
             {
                 return &m_texture;
             }
@@ -728,8 +796,8 @@ namespace uc
         {
             using base = parametrized_model;
 
-            lip::reloc_array < texture2d >          m_textures;
-            lip::reloc_array < primitive_range >    m_primitive_ranges;
+            lip::reloc_array < texture2d_mip_chain >        m_textures;
+            lip::reloc_array < primitive_range >            m_primitive_ranges;
             
             explicit multi_textured_model(const lip::load_context& c) : base( c)
                 , m_textures(c)
@@ -744,7 +812,7 @@ namespace uc
             LIP_DECLARE_RTTI()
         };
 
-        LIP_DECLARE_TYPE_ID(uc::lip::reloc_array < texture2d >)
+        LIP_DECLARE_TYPE_ID(uc::lip::reloc_array < texture2d_mip_chain >)
         LIP_DECLARE_TYPE_ID(uc::lip::reloc_array < primitive_range >)
         LIP_DECLARE_TYPE_ID(uc::lip::multi_textured_model)
 
@@ -753,8 +821,8 @@ namespace uc
         {
             using base = normal_parametrized_model;
 
-            lip::reloc_array < texture2d >          m_textures;
-            lip::reloc_array < primitive_range >    m_primitive_ranges;
+            lip::reloc_array < texture2d_mip_chain >    m_textures;
+            lip::reloc_array < primitive_range >        m_primitive_ranges;
 
             explicit normal_multi_textured_model(const lip::load_context& c) : base(c)
                 , m_textures(c)
@@ -776,8 +844,8 @@ namespace uc
         {
             using base = derivatives_parametrized_model;
 
-            lip::reloc_array < texture2d >          m_textures;
-            lip::reloc_array < primitive_range >    m_primitive_ranges;
+            lip::reloc_array < texture2d_mip_chain > m_textures;
+            lip::reloc_array < primitive_range >     m_primitive_ranges;
 
             explicit derivatives_multi_textured_model(const lip::load_context& c) : base(c)
                 , m_textures(c)

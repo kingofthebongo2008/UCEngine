@@ -56,10 +56,22 @@ namespace uc
             LIP_RTTI_MEMBER(texture2d, m_data)
             LIP_RTTI_MEMBER(texture2d, m_width)
             LIP_RTTI_MEMBER(texture2d, m_height)
-            LIP_RTTI_MEMBER(texture2d, m_mip_levels)
             LIP_RTTI_MEMBER(texture2d, m_storage_format)
             LIP_RTTI_MEMBER(texture2d, m_view_format)
         LIP_END_DEFINE_RTTI(texture2d)
+
+        LIP_BEGIN_DEFINE_RTTI(texture2d_mip_level)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_data)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_width)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_height)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_mip_levels)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_storage_format)
+            LIP_RTTI_MEMBER(texture2d_mip_level, m_view_format)
+        LIP_END_DEFINE_RTTI(texture2d_mip_level)
+
+        LIP_BEGIN_DEFINE_RTTI(texture2d_mip_chain)
+            LIP_RTTI_MEMBER(texture2d_mip_chain, m_levels)
+        LIP_END_DEFINE_RTTI(texture2d_mip_chain)
 
         LIP_BEGIN_DEFINE_RTTI(textured_model)
             LIP_RTTI_BASE_CLASS(parametrized_model)
