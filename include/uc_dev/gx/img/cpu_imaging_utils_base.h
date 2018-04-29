@@ -166,7 +166,25 @@ namespace uc
             template <typename pixels_storage>
             class texture : public pixels_storage
             {
+                private:
+
+                std::vector<uint8_t> make_pixels(uint32_t size)
+                {
+                    std::vector<uint8_t> r;
+                    r.resize(size);
+                    return r;
+                }
+
                 public:
+                texture(uint32_t width, uint32_t height, image_type type) :
+                    pixels_storage( make_pixels( get_size( type, width, height)))
+                    , m_image_type(type)
+                    , m_width(width)
+                    , m_height(height)
+
+                {
+
+                }
 
                 texture(uint32_t width, uint32_t height, image_type type, std::vector<uint8_t>&& pixels) :
                       pixels_storage(std::move(pixels))
