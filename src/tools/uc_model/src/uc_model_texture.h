@@ -133,6 +133,253 @@ namespace uc
             return t;
         }
 
+
+        namespace mip_level_computation
+        {
+            using image_type = gx::imaging::image_type;
+
+            struct mip_level
+            {
+                uint32_t             m_width;
+                uint32_t             m_height;
+                std::vector<uint8_t> m_data;
+            };
+
+            struct float4
+            {
+                __m128 m_data;
+            };
+
+            namespace f16
+            {
+                inline float4 unpack_float4( uint64_t v )
+                {
+                    float4 r;
+                    return r;
+                }
+
+                inline uint64_t pack_float4( float4 v )
+                {
+                    return 0;
+                }
+
+                inline uint64_t pack_float4_unorm( float4 v )
+                {
+                    return 0;
+                }
+
+                inline float4 unpack_float4_unorm( uint64_t v )
+                {
+                    float4 r;
+                    return r;
+                }
+            }
+
+            namespace u32
+            {
+                inline uint32_t pack_float4_unorm(float4 v)
+                {
+                    return 0;
+                }
+
+                inline float4 unpack_float4_unorm(uint32_t v)
+                {
+                    float4 r;
+                    return r;
+                }
+            }
+
+            namespace xr
+            {
+                inline float xr_to_float(uint32_t xr_component)
+                {
+                    // The & 0x3ff shows that only 10 bits contribute to the conversion. 
+                    return (float)((xr_component & 0x3ff) & 0x180) / 510.f;
+                }
+
+                inline uint32_t float_to_xr(float f)
+                {
+                    return 0;
+                }
+            }
+
+            inline int32_t clamp(int32_t x, int32_t min_value, int32_t max_value)
+            {
+                x = x < min_value ? min_value : x;
+                x = x > max_value ? max_value : x;
+
+                return x;
+            }
+
+            inline const void* sample_address_read(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height )
+            {
+                x = clamp(x, 0, width - 1);
+                y = clamp(y, 0, height - 1);
+                return reinterpret_cast<const uint8_t*>(img) + y * pitch + x;
+            }
+
+            inline void* sample_address_write(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height)
+            {
+                return reinterpret_cast<uint8_t*>(img) + y * pitch + x;
+            }
+
+            template <int32_t> struct sample_image
+            {
+                static float4 sample(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height);
+            };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    const float* address = reinterpret_cast<const float*> (sample_address_read(x, y, img, pitch, width, height));
+                    float4 r;
+                    r.m_data = _mm_loadu_ps(address);
+                    return r;
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    float* address = reinterpret_cast<float*> (sample_address_write(x, y, img, pitch, width, height));
+                    _mm_storeu_ps(address, v.m_data);
+                }
+            };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_float)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    const int64_t* address = reinterpret_cast<const int64_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    __m128i        as_int = _mm_cvtsi64_si128(*address);
+                    
+                    float4 r;
+                    r.m_data        = _mm_cvtph_ps(as_int);
+
+                    return r;
+
+                    //_mm_cvtsi64_si128
+                    //_mm_cvtsi128_si64
+                    
+                    //float _cvtsh_ss(unsigned short x, int imm);
+                    //unsigned short _cvtss_sh(float x, int imm);
+                    //__m128 _mm_cvtph_ps(__m128i x, int imm);
+                    //__m128i _mm_cvtps_ph(_m128 x, int imm);
+                    
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    int64_t* address = reinterpret_cast<int64_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    __m128i  as_int  = _mm_cvtps_ph(v.m_data,0);
+                    int64_t  value   = _mm_cvtsi128_si64(as_int);
+                    *address  = value;
+                }
+            };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    const int64_t* address      = reinterpret_cast<const int64_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    __m128i        as_int       = _mm_cvtsi64_si128(*address);
+                    __m128         as_float     = _mm_cvtepi32_ps(as_int);
+                    __m128         normalize    = _mm_div_ps(as_float, _mm_set_ps1(65535));
+
+                    float4 r;
+                    r.m_data = normalize;
+                    return r;
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    int64_t* address        = reinterpret_cast<int64_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    __m128   as_float       = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
+                    __m128i  as_int         = _mm_cvtps_epi32(as_float);
+                    int64_t  value          = _mm_cvtsi128_si64(as_int);
+
+                    *address = value;
+                }
+            };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::r8_g8_b8_a8_unorm)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    //todo
+                    const int32_t* address      = reinterpret_cast<const int32_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    __m128i        as_int       = _mm_cvtsi32_si128(*address);
+                    __m128         as_float     = _mm_cvtepi32_ps(as_int);
+                    __m128         normalize    = _mm_div_ps(as_float, _mm_set_ps1(255));
+
+                    float4 r;
+                    r.m_data = normalize;
+                    return r;
+
+                    //_mm_cvtsi64_si128
+                    //_mm_cvtsi128_si64
+
+                    //float _cvtsh_ss(unsigned short x, int imm);
+                    //unsigned short _cvtss_sh(float x, int imm);
+                    //__m128 _mm_cvtph_ps(__m128i x, int imm);
+                    //__m128i _mm_cvtps_ph(_m128 x, int imm);
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    int64_t* address = reinterpret_cast<int64_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    __m128   as_float = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
+                    __m128i  as_int = _mm_cvtps_epi32(as_float);
+                    int64_t  value = _mm_cvtsi128_si64(as_int);
+
+                    *address = value;
+                }
+            };
+
+
+            void test()
+            {
+                static float4 r = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
+            }
+
+            /*
+            mip_level make_mip_level(const mip_level& p, image_type t)
+            {
+
+                auto w          = o.width();
+                auto h          = o.height();
+                auto pitch      = o.row_pitch();
+                auto pixels_s   = reinterpret_cast<const swizzle_t*> (o.pixels().get_pixels_cpu());
+                //auto size = o.size();
+
+                auto pixels_d = reinterpret_cast<swizzle_t*> (pixels_out);
+
+                for (auto i = 0U; i < h; ++i)
+                {
+                    auto rs = pixels_s + i * pitch;
+                    auto ds = pixels_d + i * pitch;
+
+                    for (auto j = 0U; j < w; ++j)
+                    {
+                        //rgba to 
+                        swizzle_t r = *rs; rs++;
+                        swizzle_t g = *rs; rs++;
+                        swizzle_t b = *rs; rs++;
+                        swizzle_t a = *rs; rs++;
+
+                        //argb conversion
+                        *ds = b; ds++;
+                        *ds = g; ds++;
+                        *ds = r; ds++;
+                        *ds = a; ds++;
+                    }
+                }
+
+                mip_level m;
+                return m;
+            }
+            */
+        }
+
         inline uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const std::string& file_name, lip::storage_format storage, lip::view_format view)
         {
             auto r0 = gx::imaging::read_image(file_name.c_str());
@@ -148,6 +395,7 @@ namespace uc
 
             r.m_width = static_cast<uint16_t>(w);
             r.m_height = static_cast<uint16_t>(h);
+
 
             auto bc = convert_cmp(compressonator::make_texture(std::move(r0)), lip_to_cmp(storage));
 
