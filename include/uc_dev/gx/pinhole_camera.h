@@ -118,6 +118,16 @@ namespace uc
             {
                 c->set_up(math::normalize3(math::set(x, y, z, 0.0f)));
             }
+
+            inline void set_look_at(pinhole_camera* c, math::float4 position, math::float4 look_at, math::float4 up )
+            {
+                math::float4 forward_   = math::normalize3(math::sub(look_at, position));
+                math::float4 up_        = math::normalize3(up);
+
+                c->set_view_position(position);
+                c->set_forward(forward_);
+                c->set_up(up_);
+            }
         }
 
         struct orthographic_camera
