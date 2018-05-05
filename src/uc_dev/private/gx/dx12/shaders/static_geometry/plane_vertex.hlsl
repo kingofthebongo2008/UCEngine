@@ -22,13 +22,13 @@ cbuffer per_draw_call : register(b1)
 
 static const float3 g_triangle_0[6] =
 {
-    float3(-2, 0, -2),
-    float3( 2, 0, -2),
-    float3(-2, 0,  2),
+    float3(-32, 0, -32),
+    float3( 32, 0, -32),
+    float3(-32, 0,  32),
 
-    float3(2, 0,  2),
-    float3(-2, 0,  2),
-    float3(2, 0, -2),
+    float3(32, 0,  32),
+    float3(-32, 0, 32),
+    float3(32, 0, -32),
 };
 
 

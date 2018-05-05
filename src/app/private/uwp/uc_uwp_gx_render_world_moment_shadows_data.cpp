@@ -143,7 +143,7 @@ namespace uc
                 {
                     //do a scene bounding volume, something that encompasses all meshes, should be as tight as possible. transform it to view space and make the orthogonal projection
                     math::float4 p0 = math::point3(0.0f, 0.0f, 0.0f);
-                    math::float4 p1 = math::vector3(2.0f, 2.0f, 2.0f);
+                    math::float4 p1 = math::vector3(25.0f, 25.0f, 25.0f);
                     math::aabb1 scene = { p0, p1 };
 
                     math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
