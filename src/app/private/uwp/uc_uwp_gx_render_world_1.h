@@ -7,6 +7,7 @@
 #include <uc_dev/gx/geo/indexed_geometry.h>
 #include <uc_dev/gx/anm/animation_instance.h>
 #include <uc_dev/gx/structs.h>
+#include <uc_dev/gx/blue_noise/moment_shadow_maps_blue_noise.h>
 
 #include "uc_uwp_gx_render_world.h"
 
@@ -51,13 +52,23 @@ namespace uc
             private:
 
                 void do_update(update_context* ctx) override;
-                std::unique_ptr< submitable >do_render(render_context* ctx) override;
-                std::unique_ptr< submitable >do_render_depth(render_context* ctx) override;
+                std::unique_ptr< submitable >   do_render(render_context* ctx) override;
+                std::unique_ptr< submitable >   do_render_depth(render_context* ctx) override;
+                std::unique_ptr< submitable >   do_render_shadows(shadow_render_context* ctx) override;
+                shadow_buffers_descriptor render_world_1::on_shadow_map_descriptor() override;
 
-                std::unique_ptr<gxu::skinned_render_object>      m_robot;
+                std::unique_ptr<gxu::skinned_render_object>                     m_robot;
 
-                gx::dx12::graphics_pipeline_state*                              m_textured_skinned;
-                gx::dx12::graphics_pipeline_state*                              m_textured_skinned_depth;
+                gx::dx12::graphics_pipeline_state*                              m_skinned;
+                gx::dx12::graphics_pipeline_state*                              m_skinned_depth;
+                gx::dx12::graphics_pipeline_state*                              m_skinned_shadows;
+
+                gx::dx12::graphics_pipeline_state*                              m_plane;
+                gx::dx12::graphics_pipeline_state*                              m_plane_depth;
+                gx::dx12::graphics_pipeline_state*                              m_plane_shadows;
+
+
+                std::unique_ptr<gx::blue_noise::ldr_rg01_64x64>                 m_blue_noise;
 
                 lip::unique_lip_pointer<lip::skeleton>                          m_skeleton;
                 std::vector< lip::unique_lip_pointer<lip::joint_animations> >   m_animations;
@@ -69,6 +80,18 @@ namespace uc
 
                 //update state
                 math::managed_float4x4                                          m_robot_transform = math::make_float4x4();
+
+                //shadows
+                gx::dx12::compute_pipeline_state*                               m_shadows_resolve;
+                mem::aligned_unique_ptr<gx::orthographic_camera>                m_shadow_camera = mem::make_aligned_unique_ptr<gx::orthographic_camera>();
+
+                //per frame and per pass constants
+                frame_constants        m_constants_frame;
+                frame_constants        m_constants_frame_shadows;
+                skinned_draw_constants m_constants_pass;
+
+                math::float4           m_light_direction;
+
             };
         }
     }
