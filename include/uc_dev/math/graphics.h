@@ -310,7 +310,7 @@ namespace uc
         {
             float4 v1 = sub(look_at_position, eye_position);
             float4 v2 = normalize3(v1);
-            float4 v3 = normalize2(up_direction);
+            float4 v3 = normalize3(up_direction);
             return view(eye_position, v2, v3);
         }
 
@@ -319,7 +319,7 @@ namespace uc
         {
             float4 v1 = sub(look_at_position, eye_position);
             float4 v2 = normalize3(v1);
-            float4 v3 = normalize2(up_direction);
+            float4 v3 = normalize3(up_direction);
             return inverse_view(eye_position, v2, v3);
         }
 
