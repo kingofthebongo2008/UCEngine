@@ -301,31 +301,25 @@ namespace uc
             {
                 static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
                 {
-                    //todo
-                    const int32_t* address      = reinterpret_cast<const int32_t*> (sample_address_read(x, y, img, pitch, width, height));
-                    __m128i        as_int       = _mm_cvtsi32_si128(*address);
-                    __m128         as_float     = _mm_cvtepi32_ps(as_int);
-                    __m128         normalize    = _mm_div_ps(as_float, _mm_set_ps1(255));
+                    auto    address     = reinterpret_cast<const int32_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    auto    as_int0     = _mm_cvtsi32_si128(*address);
+                    auto    as_int1     = _mm_cvtepu8_epi32(as_int0);
+                    auto    as_float    = _mm_cvtepi32_ps(as_int1);
+                    auto    normalize   = _mm_div_ps(as_float, _mm_set_ps1(255));
 
                     float4 r;
                     r.m_data = normalize;
                     return r;
-
-                    //_mm_cvtsi64_si128
-                    //_mm_cvtsi128_si64
-
-                    //float _cvtsh_ss(unsigned short x, int imm);
-                    //unsigned short _cvtss_sh(float x, int imm);
-                    //__m128 _mm_cvtph_ps(__m128i x, int imm);
-                    //__m128i _mm_cvtps_ph(_m128 x, int imm);
                 }
 
                 static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
                 {
-                    int64_t* address = reinterpret_cast<int64_t*> (sample_address_write(x, y, img, pitch, width, height));
-                    __m128   as_float = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
-                    __m128i  as_int = _mm_cvtps_epi32(as_float);
-                    int64_t  value = _mm_cvtsi128_si64(as_int);
+                    auto    address     = reinterpret_cast<int32_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    auto    as_float    = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
+                    auto    as_int0     = _mm_cvtps_epi32(as_float);
+                    auto    as_int1     = _mm_packus_epi32(as_int0, as_int0);
+                    auto    as_int2     = _mm_packus_epi16(as_int1, as_int1);
+                    auto    value       = _mm_cvtsi128_si32(as_int2);
 
                     *address = value;
                 }
