@@ -1409,6 +1409,16 @@ namespace uc
 
 int32_t main(int32_t argc, const char* argv[])
 {
+    alignas(16)    int32_t address_data;
+
+    char* address = reinterpret_cast<char*> (&address_data);
+    __m128   as_float = _mm_mul_ps(_mm_set_ps1(0.0f), _mm_set_ps1(255));
+    __m128i  as_int = _mm_set_epi32(0xFF, 0xFF, 0xFF,0xFF);
+    __m128i  y = _mm_packus_epi32(as_int, as_int);        // Pack down to 16 bits
+    y = _mm_packus_epi16(y, y);        // Pack down to 8 bits
+    address_data = _mm_cvtsi128_si32(y);
+
+
     using namespace uc::model;
 
     std::string input_model_error = "uc_dev_model_r.exe";
