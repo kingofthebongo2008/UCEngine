@@ -270,6 +270,17 @@ namespace uc
                 }
             };
 
+            static inline __m128 quantize(__m128 value, float levels)
+            {
+                //midtread quantizer
+                return _mm_floor_ps(_mm_add_ps(_mm_mul_ps(value, _mm_set_ps1(levels)), _mm_set_ps1(0.5f)));
+            }
+
+            static inline __m128 dequantize(__m128 value, float levels)
+            {
+                return _mm_mul_ps(value, _mm_set_ps1(1.0f / levels));
+            }
+
             template <> struct sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>
             {
                 static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
@@ -278,7 +289,7 @@ namespace uc
                     auto    as_int0      = _mm_cvtsi64_si128(*address);
                     auto    as_int1      = _mm_cvtepu16_epi32(as_int0);
                     auto    as_float     = _mm_cvtepi32_ps(as_int1);
-                    auto    normalize    = _mm_div_ps(as_float, _mm_set_ps1(65535));
+                    auto    normalize    = dequantize(as_float, 65535.0f);
 
                     float4 r;
                     r.m_data = normalize;
@@ -288,11 +299,10 @@ namespace uc
                 static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
                 {
                     auto    address     = reinterpret_cast<int64_t*> (sample_address_write(x, y, img, pitch, width, height));
-                    auto    as_float    = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
+                    auto    as_float    = quantize(v.m_data, 65535.0f);
                     auto    as_int0     = _mm_cvtps_epi32(as_float);
                     auto    as_int1     = _mm_packus_epi32(as_int0, as_int0);
                     auto    value       = _mm_cvtsi128_si64(as_int1);
-
                     *address = value;
                 }
             };
@@ -305,7 +315,7 @@ namespace uc
                     auto    as_int0     = _mm_cvtsi32_si128(*address);
                     auto    as_int1     = _mm_cvtepu8_epi32(as_int0);
                     auto    as_float    = _mm_cvtepi32_ps(as_int1);
-                    auto    normalize   = _mm_div_ps(as_float, _mm_set_ps1(255));
+                    auto    normalize   = dequantize(as_float, 255.0f);
 
                     float4 r;
                     r.m_data = normalize;
@@ -315,7 +325,7 @@ namespace uc
                 static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
                 {
                     auto    address     = reinterpret_cast<int32_t*> (sample_address_write(x, y, img, pitch, width, height));
-                    auto    as_float    = _mm_mul_ps(v.m_data, _mm_set_ps1(65535));
+                    auto    as_float    = quantize(v.m_data, 255.0f);
                     auto    as_int0     = _mm_cvtps_epi32(as_float);
                     auto    as_int1     = _mm_packus_epi32(as_int0, as_int0);
                     auto    as_int2     = _mm_packus_epi16(as_int1, as_int1);
@@ -328,7 +338,10 @@ namespace uc
 
             void test()
             {
-                static float4 r = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r0 = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r1 = sample_image<static_cast<int32_t>(image_type::r8_g8_b8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r2 = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r3 = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_float)>::load(0, 0, nullptr, 0, 0, 0);
             }
 
             /*
