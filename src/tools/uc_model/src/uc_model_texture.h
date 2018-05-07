@@ -278,7 +278,7 @@ namespace uc
 
             static inline __m128 dequantize(__m128 value, float levels)
             {
-                return _mm_mul_ps(value, _mm_set_ps1(1.0f / levels));
+                return _mm_div_ps(value, _mm_set_ps1(levels));
             }
 
             template <> struct sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>
@@ -391,6 +391,53 @@ namespace uc
                 }
             };
 
+            template <> struct sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_unorm)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    auto    address         = reinterpret_cast<const int32_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    auto    address_value   = *address;
+
+                    auto    channel0        = address_value & 0x3ff;
+                    auto    channel1        = (address_value >> 10) & 0x3ff;
+                    auto    channel2        = (address_value >> 20) & 0x3ff;
+                    auto    channel3        = (address_value >> 30) & 0x1;
+
+                    auto    channels        = _mm_set_epi32(0, channel2, channel1, channel0);
+                    auto    alpha           = _mm_set_epi32(channel3, 0, 0, 0);
+                    
+                    auto    channels_float  = _mm_cvtepi32_ps(channels);
+                    auto    channels_norm   = dequantize(channels_float, 1023.0f);
+
+                    auto    alpha_float     = _mm_cvtepi32_ps(alpha);
+                    auto    alpha_norm      = dequantize(alpha_float, 1.0f);
+
+                    float4 r;
+                    r.m_data                = _mm_add_ps(channels_norm, alpha_norm);
+                    return r; h
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    auto    address             = reinterpret_cast<int32_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    auto    channels_float      = _mm_mul_ps(v.m_data, _mm_set_ps(0.0, 1.0, 1.0, 1.0));
+                    auto    alpha_float         = _mm_mul_ps(v.m_data, _mm_set_ps(1.0, 0.0, 0.0, 0.0));
+                    auto    channels_quantized  = quantize(channels_float, 1023.0f);
+                    auto    alpha_quantized     = quantize(alpha_float, 1.0);
+
+                    auto    as_int0             = _mm_cvtps_epi32(channels_quantized);
+                    auto    as_int0             = _mm_cvtps_epi32(alpha_quantized);
+
+                    //todo
+
+                    *address = 0;
+                }
+            };
+
+            
+
+            
+
             void test()
             {
                 static float4 r0 = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
@@ -399,6 +446,7 @@ namespace uc
                 static float4 r3 = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_float)>::load(0, 0, nullptr, 0, 0, 0);
                 static float4 r5 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_x8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
                 static float4 r6 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r7 = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_unorm)>::load(0, 0, nullptr, 0, 0, 0);
             }
 
             /*
