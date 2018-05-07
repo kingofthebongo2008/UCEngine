@@ -414,7 +414,7 @@ namespace uc
 
                     float4 r;
                     r.m_data                = _mm_add_ps(channels_norm, alpha_norm);
-                    return r; h
+                    return r;
                 }
 
                 static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
@@ -425,12 +425,14 @@ namespace uc
                     auto    channels_quantized  = quantize(channels_float, 1023.0f);
                     auto    alpha_quantized     = quantize(alpha_float, 1.0);
 
-                    auto    as_int0             = _mm_cvtps_epi32(channels_quantized);
-                    auto    as_int0             = _mm_cvtps_epi32(alpha_quantized);
+                    auto    channel0            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(0, 0, 0, 0)));
+                    auto    channel1            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(1, 1, 1, 1)));
+                    auto    channel2            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(2, 2, 2, 2)));
+
+                    auto    channel3            = _mm_cvt_ss2si(_mm_permute_ps(alpha_quantized, _MM_SHUFFLE(3,3,3,3)));
 
                     //todo
-
-                    *address = 0;
+                    *address                    = channel0 | (channel1 >> 10) | (channel2 >> 20) | (channel3 >> 30);
                 }
             };
 
