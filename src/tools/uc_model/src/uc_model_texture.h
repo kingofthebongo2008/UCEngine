@@ -461,7 +461,7 @@ namespace uc
 
                 static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
                 {
-                    auto    address = reinterpret_cast<int32_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    auto    address = reinterpret_cast<uint16_t*> (sample_address_write(x, y, img, pitch, width, height));
                     auto    channels_float = _mm_mul_ps(v.m_data, _mm_set_ps(0.0, 1.0, 1.0, 1.0));
                     auto    alpha_float = _mm_mul_ps(v.m_data, _mm_set_ps(1.0, 0.0, 0.0, 0.0));
                     auto    channels_quantized = quantize(channels_float, 31.0f);
@@ -474,6 +474,49 @@ namespace uc
                     *address = channel0 | (channel1 >> 5) | (channel2 >> 10) | (channel3 >> 15);
                 }
             };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::b5_g6_r5_unorm)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    auto    address         = reinterpret_cast<const uint16_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    auto    address_value   = *address;
+
+                    auto    channel0        = address_value & 0x1f;
+                    auto    channel1        = (address_value >> 5) & 0x3f;
+                    auto    channel2        = (address_value >> 11) & 0x1f;
+                    auto    channel3        = 0;
+
+                    auto    red_blue        = _mm_set_epi32(0, channel2, 0, channel0);
+                    auto    green           = _mm_set_epi32(channel3, 0, channel1, 0);
+
+                    auto    red_blue_float  = _mm_cvtepi32_ps(red_blue);
+                    auto    red_blue_norm   = dequantize(red_blue_float, 31.0f);
+
+                    auto    green_float     = _mm_cvtepi32_ps(green);
+                    auto    green_norm      = dequantize(green_float, 63.0f);
+
+                    float4 r;
+                    r.m_data = _mm_add_ps(red_blue_norm, green_norm);
+                    return r;
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    auto    address             = reinterpret_cast<int16_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    auto    red_blue_float      = _mm_mul_ps(v.m_data, _mm_set_ps(0.0, 1.0, 0.0, 1.0));
+                    auto    green_float         = _mm_mul_ps(v.m_data, _mm_set_ps(0.0, 0.0, 1.0, 0.0));
+                    auto    red_blue_quantized  = quantize(red_blue_float, 31.0f);
+                    auto    green_quantized     = quantize(red_blue_float, 63.0f);
+
+                    auto    channel0 = _mm_cvt_ss2si(_mm_permute_ps(red_blue_quantized, _MM_SHUFFLE(0, 0, 0, 0)));
+                    auto    channel1 = _mm_cvt_ss2si(_mm_permute_ps(green_quantized, _MM_SHUFFLE(1, 1, 1, 1)));
+                    auto    channel2 = _mm_cvt_ss2si(_mm_permute_ps(red_blue_quantized, _MM_SHUFFLE(2, 2, 2, 2)));
+                    *address = channel0 | (channel1 >> 5) | (channel2 >> 11);
+                }
+            };
+
+            
 
             
 
@@ -490,6 +533,8 @@ namespace uc
                 static float4 r5 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_x8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
                 static float4 r6 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
                 static float4 r7 = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r8 = sample_image<static_cast<int32_t>(image_type::b5_g5_r5_a1_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r9 = sample_image<static_cast<int32_t>(image_type::b5_g6_r5_unorm)>::load(0, 0, nullptr, 0, 0, 0);
             }
 
             /*
