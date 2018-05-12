@@ -428,13 +428,54 @@ namespace uc
                     auto    channel0            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(0, 0, 0, 0)));
                     auto    channel1            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(1, 1, 1, 1)));
                     auto    channel2            = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(2, 2, 2, 2)));
-
                     auto    channel3            = _mm_cvt_ss2si(_mm_permute_ps(alpha_quantized, _MM_SHUFFLE(3,3,3,3)));
-
-                    //todo
                     *address                    = channel0 | (channel1 >> 10) | (channel2 >> 20) | (channel3 >> 30);
                 }
             };
+
+            template <> struct sample_image<static_cast<int32_t>(image_type::b5_g5_r5_a1_unorm)>
+            {
+                static float4 load(int32_t x, int32_t y, const void* img, int32_t pitch, int32_t width, int32_t height)
+                {
+                    auto    address = reinterpret_cast<const uint16_t*> (sample_address_read(x, y, img, pitch, width, height));
+                    auto    address_value = *address;
+
+                    auto    channel0 = address_value & 0x1f;
+                    auto    channel1 = (address_value >> 5) & 0x1f;
+                    auto    channel2 = (address_value >> 10) & 0x1f;
+                    auto    channel3 = (address_value >> 15) & 0x1;
+
+                    auto    channels = _mm_set_epi32(0, channel2, channel1, channel0);
+                    auto    alpha = _mm_set_epi32(channel3, 0, 0, 0);
+
+                    auto    channels_float = _mm_cvtepi32_ps(channels);
+                    auto    channels_norm = dequantize(channels_float, 31.0f);
+
+                    auto    alpha_float = _mm_cvtepi32_ps(alpha);
+                    auto    alpha_norm = dequantize(alpha_float, 1.0f);
+
+                    float4 r;
+                    r.m_data = _mm_add_ps(channels_norm, alpha_norm);
+                    return r;
+                }
+
+                static void store(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height, float4 v)
+                {
+                    auto    address = reinterpret_cast<int32_t*> (sample_address_write(x, y, img, pitch, width, height));
+                    auto    channels_float = _mm_mul_ps(v.m_data, _mm_set_ps(0.0, 1.0, 1.0, 1.0));
+                    auto    alpha_float = _mm_mul_ps(v.m_data, _mm_set_ps(1.0, 0.0, 0.0, 0.0));
+                    auto    channels_quantized = quantize(channels_float, 31.0f);
+                    auto    alpha_quantized = quantize(alpha_float, 1.0);
+
+                    auto    channel0 = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(0, 0, 0, 0)));
+                    auto    channel1 = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(1, 1, 1, 1)));
+                    auto    channel2 = _mm_cvt_ss2si(_mm_permute_ps(channels_quantized, _MM_SHUFFLE(2, 2, 2, 2)));
+                    auto    channel3 = _mm_cvt_ss2si(_mm_permute_ps(alpha_quantized, _MM_SHUFFLE(3, 3, 3, 3)));
+                    *address = channel0 | (channel1 >> 5) | (channel2 >> 10) | (channel3 >> 15);
+                }
+            };
+
+            
 
             
 
