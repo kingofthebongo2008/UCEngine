@@ -1406,12 +1406,20 @@ namespace uc
     }
 }
 
-
 int32_t main(int32_t argc, const char* argv[])
 {
     using namespace uc::model;
-
     std::string input_model_error = "uc_dev_model_r.exe";
+
+    __m128 v0        = _mm_set_ps(1.0, 0.15, 0.65, 0.0);
+
+    auto    channel0 = _mm_permute_ps(v0, _MM_SHUFFLE(0, 0, 0, 0));
+    auto    channel1 = _mm_permute_ps(v0, _MM_SHUFFLE(1, 1, 1, 1));
+    auto    channel2 = _mm_permute_ps(v0, _MM_SHUFFLE(2, 2, 2, 2));
+    auto    channel3 = _mm_permute_ps(v0, _MM_SHUFFLE(3, 3, 3, 3));
+    
+
+
 
     try
     {
