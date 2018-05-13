@@ -712,21 +712,21 @@ namespace uc
 
             void test()
             {
-                static float4 r0 = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r1 = sample_image<static_cast<int32_t>(image_type::r8_g8_b8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r2 = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r3 = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_float)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r5 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_x8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r6 = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r7 = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r7 = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_xr_bias)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r8 = sample_image<static_cast<int32_t>(image_type::b5_g5_r5_a1_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r9 = sample_image<static_cast<int32_t>(image_type::b5_g6_r5_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r10 = sample_image<static_cast<int32_t>(image_type::r32_float)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r11 = sample_image<static_cast<int32_t>(image_type::r16_float)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r12 = sample_image<static_cast<int32_t>(image_type::r16_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r13 = sample_image<static_cast<int32_t>(image_type::r8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
-                static float4 r14 = sample_image<static_cast<int32_t>(image_type::a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r0    = sample_image<static_cast<int32_t>(image_type::r32_g32_b32_a32_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r1    = sample_image<static_cast<int32_t>(image_type::r8_g8_b8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r2    = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r3    = sample_image<static_cast<int32_t>(image_type::r16_g16_b16_a16_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r5    = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_x8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r6    = sample_image<static_cast<int32_t>(image_type::b8_g8_r8_a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r7    = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_a2_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r8    = sample_image<static_cast<int32_t>(image_type::r10_g10_b10_xr_bias_a2_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r9    = sample_image<static_cast<int32_t>(image_type::b5_g5_r5_a1_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r10   = sample_image<static_cast<int32_t>(image_type::b5_g6_r5_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r11   = sample_image<static_cast<int32_t>(image_type::r32_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r12   = sample_image<static_cast<int32_t>(image_type::r16_float)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r13   = sample_image<static_cast<int32_t>(image_type::r16_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r14   = sample_image<static_cast<int32_t>(image_type::r8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
+                static float4 r15   = sample_image<static_cast<int32_t>(image_type::a8_unorm)>::load(0, 0, nullptr, 0, 0, 0);
             }
 
             /*
