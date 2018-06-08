@@ -4,6 +4,8 @@
 #include <tuple>
 
 #include <uc_dev/math/geometry.h>
+#include <uc_dev/math/vector.h>
+#include <uc_dev/math/matrix.h>
 
 namespace uc
 {
@@ -15,7 +17,7 @@ namespace uc
             float4x4 m_value;	
         };
 
-        //eucledean + scale, shear,  does not preserve length and angles
+        //euclidean + scale, shear,  does not preserve length and angles
         struct affine_transform_3d
         {
             float4x4 m_value;	
