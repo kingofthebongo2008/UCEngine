@@ -765,25 +765,25 @@ namespace uc
 
         inline float4 UC_MATH_CALL mask_x()
         {
-            static const uint32_t __declspec(align(16)) mask_x[4] = { 0xFFFFFFFF, 0x0, 0x0, 0x0 };
+            alignas(16) static const uint32_t mask_x[4] = { 0xFFFFFFFF, 0x0, 0x0, 0x0 };
             return load4(&mask_x[0]);
         }
 
         inline float4 UC_MATH_CALL mask_y()
         {
-            static const uint32_t __declspec(align(16)) mask_y[4] = { 0x0, 0xFFFFFFFF, 0x0, 0x0 };
+            alignas(16) static const uint32_t mask_y[4] = { 0x0, 0xFFFFFFFF, 0x0, 0x0 };
             return load4(&mask_y[0]);
         }
 
         inline float4 UC_MATH_CALL mask_z()
         {
-            static const uint32_t __declspec(align(16)) mask_z[4] = { 0x0, 0x0, 0xFFFFFFFF, 0x0 };
+            alignas(16) static const uint32_t mask_z[4] = { 0x0, 0x0, 0xFFFFFFFF, 0x0 };
             return load4(&mask_z[0]);
         }
 
         inline float4 UC_MATH_CALL mask_w()
         {
-            static const uint32_t __declspec(align(16)) mask_w[4] = { 0x0, 0x0, 0x0, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_w[4] = { 0x0, 0x0, 0x0, 0xFFFFFFFF };
             return load4(&mask_w[0]);
         }
     }
