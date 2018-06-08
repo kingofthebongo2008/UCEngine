@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <tuple>
+#include <array>
 
 #include <uc_dev/math/vector.h>
 
@@ -226,16 +227,21 @@ namespace uc
 
         using aabb = aabb_center_diagonal;
 
-        struct frustum
+        struct plane
+        {
+            float4 m_value;     //ax + by + cz + d = 0
+        };
+
+        struct frustum_planes
         {
             enum plane_type : std::uint32_t
             {
-                near_p = 0,
-                far_p = 1,
-                left_p = 2,
-                right_p = 3,
-                up_p = 4,
-                down_p = 5
+                left_p      = 0,
+                right_p     = 1,
+                up_p        = 2,
+                down_p      = 3,
+                near_p      = 4,
+                far_p       = 5,
             };
 
             enum plane_count : std::uint32_t
@@ -243,11 +249,42 @@ namespace uc
                 value = 6
             };
 
-            typedef float4 plane;
-
             //plane normals are expected to point inside the frustum
-            plane   m_planes[6];
+            std::array<plane,6> m_planes;
         };
+
+        struct frustum_points
+        {
+            enum point_type : uint32_t
+            {
+                near_bottom_left    = 0,
+                near_bottom_right   = 1,
+                near_top_right      = 2,
+                near_top_left       = 3,
+
+                far_bottom_left     = 4,
+                far_bottom_right    = 5,
+                far_top_right       = 6,
+                far_top_left        = 7
+            };
+
+            std::array<float4, 8>  m_points;
+        };
+
+        inline plane make_plane(float4 a, float4 b, float4 c)
+        {
+            float4 u    = sub(b, a);
+            float4 v    = sub(c, a);
+            float4 n    = normalize3(cross3(u, v));    //normal points inside
+            auto     d  = dot3(n, a);                  //note: if the plane equation is ax+by+cz+d, then this is negative, else positive
+            return { select(n, negate(d), math::set(0,0,0,1)) };
+        }
+
+        frustum_points  make_frustum_points(const frustum_planes& p);
+        frustum_planes  make_frustum_planes(const frustum_points& p);
+
+        frustum_points  make_frustum_points(const frustum_planes& p);
+        frustum_planes  make_frustum_planes(const frustum_points& p);
 
         enum frustum_cull_result : uint8_t
         {
@@ -339,14 +376,14 @@ namespace uc
         }
 
         //sphere approximation for the aabb, approximate test, might report intersection, when the object is outside
-        inline frustum_cull_result frustum_cull(const frustum* const __restrict f, const aabb* const __restrict b)
+        inline frustum_cull_result frustum_cull(const frustum_planes* const __restrict f, const aabb* const __restrict b)
         {
             float4 m;
             float4 n;
 
             frustum_cull_result result = frustum_cull_result::inside;
 
-            for (uint32_t i = 0; i < frustum::plane_count::value; ++i)
+            for (uint32_t i = 0; i < frustum_planes::plane_count::value; ++i)
             {
                 float4 p = load4(&f->m_planes[i]);
 
@@ -423,14 +460,14 @@ namespace uc
             }
         }
 
-        inline void frustum_cull(const frustum* __restrict f, const aabb4* __restrict b, uint32_t box_count, __m128i* __restrict results)
+        inline void frustum_cull(const frustum_planes* __restrict f, const aabb4* __restrict b, uint32_t box_count, __m128i* __restrict results)
         {
             __m128i exclude;
             __m128i intersect;
 
-            static const uint32_t __declspec(align(16))   mask_sign[4] = { 0xffffffff, 0xffffffff, 0xffffffff, 0 };
-            static const uint32_t __declspec(align(16))   intersect_mask[4] = { 0x1, 0x1, 0x1, 0x1 };
-            static const uint32_t __declspec(align(16))   exclude_mask[4] = { 0x2, 0x2, 0x2, 0x2 };
+            alignas(16) static const uint32_t mask_sign[4] = { 0xffffffff, 0xffffffff, 0xffffffff, 0 };
+            alignas(16) static const uint32_t intersect_mask[4] = { 0x1, 0x1, 0x1, 0x1 };
+            alignas(16) static const uint32_t exclude_mask[4] = { 0x2, 0x2, 0x2, 0x2 };
 
             exclude = load4i(&exclude_mask[0]);
             intersect = load4i(&intersect_mask[0]);
