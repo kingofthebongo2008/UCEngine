@@ -801,7 +801,7 @@ namespace uc
         // c    : arcball center ( 2d )
         inline float4 UC_MATH_CALL arc_ball_point_on_unit_sphere(afloat4 xy, afloat4 c, float  r)
         {
-            static const uint32_t __declspec(align(16))   mask_xy[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0, 0 };
+            alignas(16) static const uint32_t   mask_xy[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0, 0 };
             const float4 xy_ = select(zero(), xy, load4(mask_xy));
             const float4 s0 = xy_;
             const float4 v0 = div(sub(s0, c), splat(r)); // v0 = (s0-c) / r
