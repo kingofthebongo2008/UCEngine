@@ -257,15 +257,15 @@ namespace uc
         {
             enum point_type : uint32_t
             {
-                near_bottom_left    = 0,
-                near_bottom_right   = 1,
-                near_top_right      = 2,
-                near_top_left       = 3,
+                near_down_left      = 0,
+                near_down_right     = 1,
+                near_up_right       = 2,
+                near_up_left        = 3,
 
-                far_bottom_left     = 4,
-                far_bottom_right    = 5,
-                far_top_right       = 6,
-                far_top_left        = 7
+                far_down_left       = 4,
+                far_down_right      = 5,
+                far_up_right       = 6,
+                far_up_left        = 7
             };
 
             std::array<float4, 8>  m_points;
@@ -279,6 +279,23 @@ namespace uc
             auto     d  = dot3(n, a);                  //note: if the plane equation is ax+by+cz+d, then this is negative, else positive
             return { select(n, negate(d), math::set(0,0,0,1)) };
         }
+
+        inline std::array< plane, 6 > make_face_planes(const frustum_points& f)
+        {
+            std::array< plane, 6 > r;
+
+            r[frustum_planes::left_p]   = make_plane(f.m_points[frustum_points::far_up_left], f.m_points[frustum_points::near_down_left], f.m_points[frustum_points::near_up_left]);
+            r[frustum_planes::right_p]  = make_plane(f.m_points[frustum_points::far_up_right], f.m_points[frustum_points::near_down_right], f.m_points[frustum_points::far_down_right]);
+
+            r[frustum_planes::up_p]     = make_plane(f.m_points[frustum_points::far_up_left], f.m_points[frustum_points::near_up_right], f.m_points[frustum_points::far_up_right]);
+            r[frustum_planes::down_p]   = make_plane(f.m_points[frustum_points::far_down_left], f.m_points[frustum_points::near_down_right], f.m_points[frustum_points::near_down_left]);
+
+            r[frustum_planes::near_p]   = make_plane(f.m_points[frustum_points::near_up_right], f.m_points[frustum_points::near_down_left], f.m_points[frustum_points::near_down_right]);
+            r[frustum_planes::far_p]    = make_plane(f.m_points[frustum_points::far_up_right], f.m_points[frustum_points::far_down_right], f.m_points[frustum_points::far_down_left]); 
+
+            return r;
+        }
+
 
         frustum_points  make_frustum_points(const frustum_planes& p);
         frustum_planes  make_frustum_planes(const frustum_points& p);

@@ -149,9 +149,9 @@ namespace uc
                     math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
                     math::aabb1 scene_bounds_vs = math::transform(scene, view);
 
-
                     math::float4 aabb_min = math::bounds_min(scene_bounds_vs);
                     math::float4 aabb_max = math::bounds_max(scene_bounds_vs);
+
 
                     m_shadow_camera->set_x_min(math::get_x(aabb_min));
                     m_shadow_camera->set_x_max(math::get_x(aabb_max));

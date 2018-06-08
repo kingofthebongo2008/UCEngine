@@ -4,6 +4,8 @@
 #include <tuple>
 
 #include <uc_dev/math/geometry.h>
+#include <uc_dev/math/geometry_transforms.h>
+#include <uc_dev/math/graphics.h>
 
 namespace uc
 {

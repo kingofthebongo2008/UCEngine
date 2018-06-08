@@ -82,6 +82,7 @@
 <ClCompile Include = "..\src\uc_dev\private\io\platforms\pc\native_pad.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\lip\introspector_intrinsics.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\math\functions.cpp" />
+<ClCompile Include = "..\src\uc_dev\private\math\geometry_convex_clipping.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\math\half.cpp" />
 <ClCompile Include = "..\src\uc_dev\private\mem\streamflow_utils_glue.cpp" />
 <ClCompile Include = "..\src\uc_dev\public\uc_referenced_object.cpp" />
