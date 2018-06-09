@@ -860,8 +860,9 @@ namespace uc
 
             convex_polyhedron convex_hull_with_point(const convex_polyhedron& body, float4 point)
             {
-                convex_polyhedron r = body;
+                //todo: not finished
 
+                convex_polyhedron r = body;
 
                 std::vector<plane> planes;
                 planes.resize(body.m_faces.size());
