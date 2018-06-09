@@ -743,26 +743,126 @@ namespace uc
 
             convex_polyhedron convex_hull_with_direction(const convex_polyhedron& body, float4 vector)
             {
-                vector;
-                return body;
+                convex_polyhedron r = body;
+
+                std::vector<plane> planes;
+                planes.resize(body.m_faces.size());
+
+                //compute planes
+                for (auto i = 0U; i < planes.size(); ++i)
+                {
+                    const float4 a = body.m_points[body.m_faces[i].m_indices[0]];
+                    const float4 b = body.m_points[body.m_faces[i].m_indices[1]];
+                    const float4 c = body.m_points[body.m_faces[i].m_indices[2]];
+                    planes[i] = make_plane(a, b, c);
+                }
+
+                //orient normals to point inside
+                for (auto i = 0U; i < planes.size(); ++i)
+                {
+                    auto plane = planes[i];
+
+                    for (auto&& v : body.m_points)
+                    {
+                        if (get_x( dot4( plane.m_value, v ) ) > 0.00001f)
+                        {
+                            planes[i].m_value = mul(plane.m_value, set(-1.0f, -1.0f, -1.0f, 1.0f));
+                            break;
+                        }
+                    }
+                }
+
+                std::vector<bool> face_vector;
+                face_vector.resize(planes.size());
+
+                for (auto i = 0U; i < face_vector.size(); ++i)
+                {
+                    face_vector[i] = get_x(dot3(planes[i].m_value, vector) ) > 0.0f;
+                }
+
+                //1. duplicate points and indices
+                std::vector<int32_t> points_indices(body.m_points.size(), -1);
+
+                for (auto i = 0U; i < face_vector.size(); ++i)
+                {
+                    if (face_vector[i])
+                    {
+                        const auto& face = body.m_faces[i];
+                        for (auto p = 0; p < face.m_indices.size(); ++p)
+                        {
+                            //split vertex
+                            if (points_indices[face.m_indices[p]] == -1)
+                            {
+                                float4 v = r.m_points[face.m_indices[p]];
+                                r.m_points.push_back(v);
+                                int32_t index = static_cast<int32_t>(r.m_points.size()) - 1;
+                                points_indices[face.m_indices[p]] = index;
+                            }
+                        }
+                    }
+                }
+
+                //now patch with quads
+                for (auto i = 0U; i < face_vector.size(); ++i)
+                {
+                    if (face_vector[i])
+                    {
+                        const auto&     face = body.m_faces[i];
+                        const int32_t   indices_size = static_cast<int32_t>(face.m_indices.size());
+
+                        for (auto p = 0; p < indices_size; ++p)
+                        {
+                            const   int32_t computed_index_0 = p;
+                            const   int32_t computed_index_1 = (p + 1) % indices_size;
+
+                            int32_t index_0 = face.m_indices[computed_index_0];
+                            int32_t index_1 = face.m_indices[computed_index_1];
+
+                            int32_t index_0_ = points_indices[index_0];
+                            int32_t index_1_ = points_indices[index_1];
+
+                            convex_polyhedron::polygon polygon;
+
+                            polygon.m_indices.push_back(index_0);
+                            polygon.m_indices.push_back(index_1);
+                            polygon.m_indices.push_back(index_1_);
+                            polygon.m_indices.push_back(index_0_);
+
+                            r.m_faces.push_back(std::move(polygon));
+                        }
+
+                        //replace the old face indices
+                        for (auto p = 0; p < indices_size; ++p)
+                        {
+                            int32_t index_0 = face.m_indices[p];
+                            r.m_faces[i].m_indices[p] = points_indices[index_0];
+                        }
+                    }
+                }
+
+                //now move the points to the light
+                for (auto i = 0U; i < points_indices.size(); ++i)
+                {
+                    if (points_indices[i] != -1)
+                    {
+                        r.m_points[points_indices[i]] = add(r.m_points[points_indices[i]], vector);
+                    }
+                }
+
+                return r;
             }
 
             convex_polyhedron convex_hull_with_direction(const convex_polyhedron& body, float4 vector, const aabb& clip_body)
             {
-                body;
-                vector;
-                clip_body;
-                float d = 1.0f;// distance(clip_body.m_max, clip_body.m_min);
+                float d = get_x(length4(clip_body.m_diagonal));
                 return convex_hull_with_direction(body, mul( splat(d),vector));
             }
 
             convex_polyhedron convex_hull_with_point(const convex_polyhedron& body, float4 point)
             {
                 convex_polyhedron r = body;
-                body;
-                point;
 
-                /*
+
                 std::vector<plane> planes;
                 planes.resize(body.m_faces.size());
 
@@ -800,7 +900,7 @@ namespace uc
 
                         for (auto&& v : body.m_points)
                         {
-                            if (get_x(dot4(plane.m_value, point)) < -0.00001f)
+                            if (get_x(dot4(plane.m_value, v)) < -0.00001f)
                             {
                                 inside_all = inside_all + 1;
 
@@ -820,9 +920,8 @@ namespace uc
 
                 for (auto i = 0U; i < face_vector.size(); ++i)
                 {
-                    face_vector[i] = dot(planes[i].m_n, point) > 0.00001f;
+                    face_vector[i] = get_x( dot3(planes[i].m_value, point) ) > 0.00001f;
                 }
-                */
 
                 return r;
             }
