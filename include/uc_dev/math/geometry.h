@@ -225,6 +225,16 @@ namespace uc
             float4 m_diagonal;  //must be positive, connects the min-max vertex
         };
 
+        inline float4 bounds_min(const aabb_center_diagonal& b)
+        {
+            return sub(b.m_center, b.m_diagonal);
+        }
+
+        inline float4 bounds_max(const aabb_center_diagonal& b)
+        {
+            return add(b.m_center, b.m_diagonal);
+        }
+
         using aabb = aabb_center_diagonal;
 
         struct plane
@@ -296,6 +306,45 @@ namespace uc
             return r;
         }
 
+        inline std::array<float4, 8> make_points(const aabb& f)
+        {
+
+            float4 b_min = sub(f.m_center, f.m_diagonal);
+            float4 b_max = add(f.m_center, f.m_diagonal);
+
+            std::array<float4, 8> r;
+
+            r[frustum_points::near_down_left]   = permute<permute_0x, permute_0y, permute_0z, permute_0w >(b_min, b_max);
+            r[frustum_points::near_down_right]  = permute<permute_1x, permute_0y, permute_0z, permute_0w >(b_min, b_max);
+
+            r[frustum_points::near_up_left]     = permute<permute_0x, permute_1y, permute_0z, permute_0w >(b_min, b_max);
+            r[frustum_points::near_up_right]    = permute<permute_1x, permute_1y, permute_0z, permute_0w >(b_min, b_max);
+
+            r[frustum_points::far_down_left]    = permute<permute_0x, permute_0y, permute_1z, permute_0w >(b_min, b_max);
+            r[frustum_points::far_down_right]   = permute<permute_1x, permute_0y, permute_1z, permute_0w >(b_min, b_max);
+
+            r[frustum_points::far_up_left]      = permute<permute_0x, permute_1y, permute_1z, permute_0w >(b_min, b_max);
+            r[frustum_points::far_up_right]     = permute<permute_1x, permute_1y, permute_1z, permute_0w >(b_min, b_max);
+
+            return r;
+        }
+
+        inline std::array< plane, 6 > make_face_planes(const aabb& f)
+        {
+            std::array< plane, 6 > r;
+            std::array<float4, 8> points = make_points(f);
+
+            r[frustum_planes::left_p]   = make_plane(points[frustum_points::far_up_left], points[frustum_points::near_down_left], points[frustum_points::near_up_left]);
+            r[frustum_planes::right_p]  = make_plane(points[frustum_points::far_up_right], points[frustum_points::near_down_right], points[frustum_points::far_down_right]);
+
+            r[frustum_planes::up_p]     = make_plane(points[frustum_points::far_up_left], points[frustum_points::near_up_right], points[frustum_points::far_up_right]);
+            r[frustum_planes::down_p]   = make_plane(points[frustum_points::far_down_left], points[frustum_points::near_down_right], points[frustum_points::near_down_left]);
+
+            r[frustum_planes::near_p]   = make_plane(points[frustum_points::near_up_right], points[frustum_points::near_down_left], points[frustum_points::near_down_right]);
+            r[frustum_planes::far_p]    = make_plane(points[frustum_points::far_up_right], points[frustum_points::far_down_right], points[frustum_points::far_down_left]);
+
+            return r;
+        }
 
         frustum_points  make_frustum_points(const frustum_planes& p);
         frustum_planes  make_frustum_planes(const frustum_points& p);
