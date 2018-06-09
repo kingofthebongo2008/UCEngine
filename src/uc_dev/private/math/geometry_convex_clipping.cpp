@@ -269,7 +269,7 @@ namespace uc
 
                     float4 get_normal(const std::vector<int32_t>& vi)
                     {
-                        float4 normal;
+                        float4 normal = zero();
                         auto   vi_to_process = vi.size();
 
                         for (auto i = 0U; i < vi_to_process - 1; ++i)
@@ -741,25 +741,37 @@ namespace uc
                 return r;
             }
 
-            convex_polyhedron convex_hull_with_direction(const convex_polyhedron& body, const float3& vector, const aabb& clip_body)
+            convex_polyhedron convex_hull_with_direction(const convex_polyhedron& body, float4 vector)
             {
-                float d = distance(clip_body.m_max, clip_body.m_min);
-                return convex_hull_with_direction(body, d * vector);
+                vector;
+                return body;
             }
 
-            convex_polyhedron convex_hull_with_point(const convex_polyhedron& body, const float3& point)
+            convex_polyhedron convex_hull_with_direction(const convex_polyhedron& body, float4 vector, const aabb& clip_body)
+            {
+                body;
+                vector;
+                clip_body;
+                float d = 1.0f;// distance(clip_body.m_max, clip_body.m_min);
+                return convex_hull_with_direction(body, mul( splat(d),vector));
+            }
+
+            convex_polyhedron convex_hull_with_point(const convex_polyhedron& body, float4 point)
             {
                 convex_polyhedron r = body;
+                body;
+                point;
 
+                /*
                 std::vector<plane> planes;
                 planes.resize(body.m_faces.size());
 
                 //compute planes
                 for (auto i = 0U; i < planes.size(); ++i)
                 {
-                    const float3 a = body.m_points[body.m_faces[i].m_indices[0]];
-                    const float3 b = body.m_points[body.m_faces[i].m_indices[1]];
-                    const float3 c = body.m_points[body.m_faces[i].m_indices[2]];
+                    const float4 a = body.m_points[body.m_faces[i].m_indices[0]];
+                    const float4 b = body.m_points[body.m_faces[i].m_indices[1]];
+                    const float4 c = body.m_points[body.m_faces[i].m_indices[2]];
                     planes[i] = make_plane(a, b, c);
                 }
 
@@ -770,9 +782,9 @@ namespace uc
 
                     for (auto&& v : body.m_points)
                     {
-                        if (dot(plane.m_n, v) + plane.m_d > 0.00001f)
+                        if (get_x(dot4(plane.m_value, v) ) > 0.00001f)
                         {
-                            planes[i].m_n = -1.0f * plane.m_n;
+                            planes[i].m_value = mul(planes[i].m_value, set(-1.0f, -1.0f, -1.0f, 1.0f));
                             break;
                         }
                     }
@@ -788,7 +800,7 @@ namespace uc
 
                         for (auto&& v : body.m_points)
                         {
-                            if (dot(plane.m_n, point) + plane.m_d < -0.00001f)
+                            if (get_x(dot4(plane.m_value, point)) < -0.00001f)
                             {
                                 inside_all = inside_all + 1;
 
@@ -810,6 +822,7 @@ namespace uc
                 {
                     face_vector[i] = dot(planes[i].m_n, point) > 0.00001f;
                 }
+                */
 
                 return r;
             }
