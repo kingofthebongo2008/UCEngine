@@ -18,6 +18,7 @@ build/build.bat
 *.csproj.user
 *.log
 *.xbf
+build/packages/
 build/.vs/
 build/Generated Files/
 build/test_xaml/x64/
