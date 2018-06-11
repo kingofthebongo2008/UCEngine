@@ -144,8 +144,7 @@ namespace uc {
                     auto r = animate_rotation(&a->m_joint_animations[i], time, a->m_duration);
 
                     auto m = math::quaternion_2_matrix(r);
-
-                    m.r[3] = math::select(t, math::identity_r3(), math::set_uint32(0, 0, 0, 0xffffffff));
+                    m.r[3] = math::permute<math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(t, math::one());
 
                     assert(m_skeleton_map.m_data[i] != 0xffff);
                     res[m_skeleton_map.m_data[i]] = m;
