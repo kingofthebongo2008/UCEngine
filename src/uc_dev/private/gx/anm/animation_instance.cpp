@@ -128,7 +128,7 @@ namespace uc {
                 auto a = m_animations;
                 auto time = delta_time;
 
-                // every following time calculation happens in ticks
+                // every following time computation happens in ticks
                 time *= a->m_ticks_per_second;
 
                 m_time += time;
