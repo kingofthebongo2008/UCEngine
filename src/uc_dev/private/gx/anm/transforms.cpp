@@ -173,7 +173,6 @@ namespace uc {
                         auto pm = math::load4u(&joints[parent_index].r[3]);
                         auto cm = math::load4u(&joints[i].r[3]);
 
-                        //dsa
                         //swap z and y, todo: do this offline
                         //pm = math::swizzle<math::x, math::z, math::y, math::w>(pm);
                         //cm = math::swizzle<math::x, math::z, math::y, math::w>(cm);
