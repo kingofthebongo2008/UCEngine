@@ -201,11 +201,11 @@ namespace uc
                             parent = links[parents[i]];
                         }
 
-                        this_ = links[i];
+                        this_   = links[i];
                         auto t4 = parent.Inverse() * this_;
                         auto t5 = t4;
-                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t5);
-                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t5);
+                        skeleton.m_joint_local_pose[i].m_transform          = joint_transform(t5);
+                        skeleton.m_joint_local_pose[i].m_transform_matrix   = joint_transform_matrix(t5);
                     }
 
                     skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
@@ -239,8 +239,8 @@ namespace uc
 
                             auto t5 = mat_bind_pose_init;
 
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5.Inverse());
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5.Inverse());
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose     = joint_transform(t5.Inverse());
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2    = joint_transform_matrix(t5.Inverse());
                         }
                         else
                         {
@@ -600,7 +600,7 @@ namespace uc
                     std::vector<geo::skinned_mesh::faces_t>  faces; //uvs used by every material
                     faces.resize(materials_indices.size());
 
-                    auto p = triangle_permuation(context);
+                    auto p = triangle_permutaion(context);
 
                     for (auto i = 0; i < faces.size(); ++i)
                     {
