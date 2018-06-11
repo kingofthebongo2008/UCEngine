@@ -18,12 +18,8 @@ namespace uc {
             {
                 m_joint_local_transforms2.resize(m_skeleton->m_joint_local_transforms2.size());
 
-                auto s = m_skeleton->m_joint_local_transforms2.size();
-
-                for (auto i = 0U; i < s; ++i)
-                {
-                    m_joint_local_transforms2[i] = math::load44(reinterpret_cast<const float*>(&m_skeleton->m_joint_local_transforms2[i]));
-                }
+                const auto s = m_skeleton->m_joint_local_transforms2.size();
+                memcpy( &m_joint_local_transforms2[0], reinterpret_cast<const float*>(&m_skeleton->m_joint_local_transforms2[0]), s * sizeof( uc::math::float4x4) );
             }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             std::vector< math::float4x4 >& skeleton_instance::local_transforms()
