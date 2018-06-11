@@ -4,6 +4,8 @@
 #include <uc_dev/gx/anm/skeleton_instance.h>
 #include <uc_dev/gx/lip/animation.h>
 
+#include <ppl.h>
+
 namespace uc {
     namespace gx {
         namespace anm {
@@ -138,8 +140,10 @@ namespace uc {
 
                 auto s = a->m_joint_animations.size();
 
-                for (auto i = 0U; i < s; ++i)
+                //todo: do this with avx
+                concurrency::parallel_for(static_cast<size_t>(0U), s, [ this, &res, time, a ](const auto i)
                 {
+                    //todo: do this with avx
                     auto t = animate_translation(&a->m_joint_animations[i], time, a->m_duration);
                     auto r = animate_rotation(&a->m_joint_animations[i], time, a->m_duration);
 
@@ -148,7 +152,8 @@ namespace uc {
 
                     assert(m_skeleton_map.m_data[i] != 0xffff);
                     res[m_skeleton_map.m_data[i]] = m;
-                }
+
+                });
             }
         }
     }
