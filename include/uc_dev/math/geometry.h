@@ -244,7 +244,7 @@ namespace uc
 
         struct frustum_planes
         {
-            enum plane_type : std::uint32_t
+            enum plane_type
             {
                 left_p      = 0,
                 right_p     = 1,
@@ -265,7 +265,7 @@ namespace uc
 
         struct frustum_points
         {
-            enum point_type : uint32_t
+            enum point_type
             {
                 near_down_left      = 0,
                 near_down_right     = 1,

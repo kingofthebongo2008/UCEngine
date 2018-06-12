@@ -52,7 +52,7 @@ namespace uc
 
         inline float4 UC_MATH_CALL one()
         {
-            return _mm_set_ps(1.0f, 1.0f, 1.0f, 1.0f);
+            return _mm_set_ps1(1.0f);
         }
 
         inline float4 UC_MATH_CALL minus_one()

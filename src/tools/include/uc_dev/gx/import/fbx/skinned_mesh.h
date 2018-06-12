@@ -201,11 +201,11 @@ namespace uc
                             parent = links[parents[i]];
                         }
 
-                        this_ = links[i];
+                        this_   = links[i];
                         auto t4 = parent.Inverse() * this_;
                         auto t5 = t4;
-                        skeleton.m_joint_local_pose[i].m_transform = joint_transform(t5);
-                        skeleton.m_joint_local_pose[i].m_transform_matrix = joint_transform_matrix(t5);
+                        skeleton.m_joint_local_pose[i].m_transform          = joint_transform(t5);
+                        skeleton.m_joint_local_pose[i].m_transform_matrix   = joint_transform_matrix(t5);
                     }
 
                     skeleton.m_skeleton.m_joints.resize(skeletal_nodes.size());
@@ -239,8 +239,8 @@ namespace uc
 
                             auto t5 = mat_bind_pose_init;
 
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose = joint_transform(t5.Inverse());
-                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2 = joint_transform_matrix(t5.Inverse());
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose     = joint_transform(t5.Inverse());
+                            skeleton.m_skeleton.m_joints[i].m_inverse_bind_pose2    = joint_transform_matrix(t5.Inverse());
                         }
                         else
                         {
@@ -600,7 +600,7 @@ namespace uc
                     std::vector<geo::skinned_mesh::faces_t>  faces; //uvs used by every material
                     faces.resize(materials_indices.size());
 
-                    auto p = triangle_permuation(context);
+                    auto p = triangle_permutaion(context);
 
                     for (auto i = 0; i < faces.size(); ++i)
                     {
@@ -632,6 +632,204 @@ namespace uc
                         transform_dcc_pose(pose, context)
                         );
                 }
+
+                struct point
+                {
+                    float m_x = 0;
+                    float m_y = 0;
+                    float m_z = 0;
+                };
+
+                struct vector
+                {
+                    float m_x = 0;
+                    float m_y = 0;
+                    float m_z = 0;
+                };
+
+                struct sphere
+                {
+                    point m_c;
+                    float m_r = 0;
+                };
+
+                struct ray
+                {
+                    point   m_p;
+                    vector  m_d;
+                };
+
+                float dot(const vector& a, const vector& b)
+                {
+                    return a.m_x * b.m_x + a.m_y * b.m_y + a.m_z * b.m_z;
+                }
+
+                vector operator-(const vector& a, const vector& b)
+                {
+                    return { a.m_x - b.m_x,a.m_y - b.m_y,a.m_z - b.m_z };
+                }
+
+                vector operator*(const vector& a, float b)
+                {
+                    return { a.m_x * b, a.m_y *b, a.m_z * b };
+                }
+
+                point operator+(const point& a, const vector& b)
+                {
+                    return { a.m_x + b.m_x,a.m_y + b.m_y, a.m_z + b.m_z };
+                }
+
+                vector operator-(const point& a, const point& b)
+                {
+                    return { a.m_x - b.m_x, a.m_y - b.m_y, a.m_z - b.m_z };
+                }
+
+                float distance(const point& a, const point& b)
+                {
+                    vector v = b - a;
+                    return sqrtf(dot(v, v));
+                }
+
+                vector normalize(const vector& v)
+                {
+                    float norm = sqrtf(dot(v, v));
+                    return v * (1.0f / norm);
+                }
+
+                int32_t intersect_ray_sphere(const ray& r, const sphere& s, float& t, point& q)
+                {
+                    vector m = r.m_p - s.m_c;
+                    float  b = dot(m, r.m_d);
+                    float  c = dot(m, m) - s.m_r * s.m_r;
+
+                    // Exit if r’s origin outside s (c > 0) and r pointing away from s (b > 0)
+                    if (c > 0.0f && b > 0.0f) return 0;
+                    float discr = b * b - c;
+
+                    // A negative discriminant corresponds to ray missing sphere
+                    if (discr < 0.0f) return 0;
+
+                    // Ray now found to intersect sphere, compute biggest t value of intersection
+                    t = -b + sqrt(discr);
+
+                    q = r.m_p + r.m_d * t;
+                    return 1;
+                }
+
+                point make_point(const geo::storage_position& p)
+                {
+                    return { p.x, p.y, p.z };
+                }
+
+                point largest_distance(const point& x, const std::vector<geo::storage_position>& positions)
+                {
+                    float max_distance = -FLT_MAX;
+
+                    point y;
+                    auto s = positions.size();
+
+                    for (auto i = 0; i < s; ++i)
+                    {
+                        point p = make_point(positions[i]);
+                        float d = distance(x, make_point(positions[i]));
+
+                        if (d > max_distance)
+                        {
+                            y = p;
+                            max_distance = d;
+                        }
+                    }
+
+                    return y;
+                }
+
+                sphere make_enclosing_sphere(const point& a, const point& b)
+                {
+                    sphere s;
+
+                    s.m_c = { 0.5f * (a.m_x + b.m_x), 0.5f * (a.m_x + b.m_x), 0.5f * (a.m_x + b.m_x) };
+                    s.m_r = distance(a, b) * 0.5f;
+                    return s;
+                }
+
+                sphere make_enclosing_sphere(const sphere& s, const point& b)
+                {
+                    ray r;
+
+                    r.m_p = b;
+                    r.m_d = normalize(s.m_c - b);
+
+                    float t;
+                    point q;
+
+                    int32_t test = intersect_ray_sphere(r, s, t, q);
+                    assert(test == 1); //we pick the ray in such a way, that we must have an intersection
+                    return make_enclosing_sphere(q, b);
+                }
+
+                bool  point_inside_sphere(const sphere& a, const point&b)
+                {
+                    return distance(a.m_c, b) <= a.m_r;
+                }
+
+                sphere compute_enclosing_sphere(const std::vector<geo::storage_position>& positions)
+                {
+                    //naive Ritter's bounding sphere algorithm
+
+                    sphere r = { {0,0,0}, 0 };
+
+                    auto s = positions.size();
+
+                    if (s == 0)
+                    {
+                        return r;
+                    }
+
+                    point x = make_point(positions[0]);
+
+                    if (s == 1)
+                    {
+                        return { x, 0 };
+                    }
+
+                    point y = largest_distance(x, positions);
+                    point z = largest_distance(y, positions);
+
+                    sphere s0 = make_enclosing_sphere(y, z);
+
+                    std::vector<bool> points(s, false);
+
+                    int32_t points_to_check = static_cast<int32_t>(s);
+
+                    while (points_to_check > 0)
+                    {
+                        bool all_inside = true;
+
+                        for (auto i = 0U; i < positions.size(); ++i)
+                        {
+                            point p = make_point(positions[i]);
+                            if (!points[i])
+                            {
+                                if ( !point_inside_sphere(s0, p) )
+                                {
+                                    s0 = make_enclosing_sphere(s0, p);
+                                    points_to_check = points_to_check - 1;
+                                    all_inside = false;
+                                    points[i] = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (all_inside)
+                        {
+                            break;
+                        }
+                    }
+
+                    return s0;
+                }
+
 
                 //////////////////////
                 inline std::shared_ptr<geo::skinned_mesh> create_skinned_mesh(const std::string& file_name)
@@ -693,6 +891,60 @@ namespace uc
                         blend_weights.insert(blend_weights.end(), m->m_blend_weights.begin(), m->m_blend_weights.end());
                         blend_indices.insert(blend_indices.end(), m->m_blend_indices.begin(), m->m_blend_indices.end());
                         pose = m->m_skeleton_pose;
+                    }
+
+                    //for every bone, compute list of positions
+
+                    {
+                        std::vector< std::vector<geo::storage_position> >  position;
+                        std::vector<sphere>                                bone_enclosing_spheres;
+
+                        //joints 
+                        auto joints_count = pose.m_joint_local_pose.size();
+
+                        position.resize(joints_count);
+                        bone_enclosing_spheres.resize(joints_count);
+
+                        for (auto indices = 0U; indices < blend_indices.size(); ++indices)
+                        {
+                            const auto& indices_    = blend_indices[indices];
+                            const auto& weights_    = blend_weights[indices];
+                            const auto& positions   = pos[indices];
+
+                            for (auto blend_index = 0U; blend_index < indices_.size(); ++blend_index)
+                            {
+                                const auto& blend_index_ = indices_[blend_index];
+                                const auto& blend_weight_ = weights_[blend_index];
+
+                                if (blend_weight_.x > 0.0f)
+                                {
+                                    position[blend_index_.x].push_back(positions[blend_index]);
+                                }
+
+                                if (blend_weight_.y > 0.0f)
+                                {
+                                    position[blend_index_.y].push_back(positions[blend_index]);
+                                }
+
+                                if (blend_weight_.z > 0.0f)
+                                {
+                                    position[blend_index_.z].push_back(positions[blend_index]);
+                                }
+
+                                if (blend_weight_.w > 0.0f)
+                                {
+                                    position[blend_index_.w].push_back(positions[blend_index]);
+                                }
+                            }
+                        }
+
+                        for (auto i = 0U; i < joints_count; ++i)
+                        {
+                            bone_enclosing_spheres[i] = compute_enclosing_sphere(position[i]);
+                        }
+
+
+                        __debugbreak();
                     }
 
                     return std::make_shared<geo::skinned_mesh>(

@@ -61,7 +61,7 @@ namespace uc
 
                     assert(mesh->GetPolygonSize(0));
 
-                    auto p = triangle_permuation(context.get());
+                    auto p = triangle_permutaion(context.get());
 
                     return std::make_shared<geo::indexed_mesh>(transform_dcc_positions(get_positions(mesh), context.get()), get_uvs(mesh), get_faces(mesh, p));
                 }

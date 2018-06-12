@@ -425,8 +425,8 @@ namespace uc
 
                     for (auto&& joint : joints_map)
                     {
-                        auto joint_index = joint.second;
-                        auto transform   = build_local_transform_matrix(joint.first, joint_local_transforms);
+                        auto joint_index        = joint.second;
+                        auto transform          = build_local_transform_matrix(joint.first, joint_local_transforms);
                         
                         gx::import::geo::local_joint_pose l;
                         

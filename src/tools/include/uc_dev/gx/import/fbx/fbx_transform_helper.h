@@ -63,7 +63,7 @@ namespace uc
                     }
                 }
 
-                std::array<int32_t, 3> triangle_permuation(const fbx_context* ctx)
+                std::array<int32_t, 3> triangle_permutaion(const fbx_context* ctx)
                 {
                     if (ctx->m_coordinate_system_swap_y_z)
                     {

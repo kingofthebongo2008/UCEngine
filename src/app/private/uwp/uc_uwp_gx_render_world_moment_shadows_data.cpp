@@ -171,9 +171,10 @@ namespace uc
                     draw.m_world = uc::math::transpose(*m_military_mechanic_transform);
 
                     {
-                        auto skeleton = m_military_mechanic_skeleton.get();
-                        auto joints = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
+                        auto skeleton                   = m_military_mechanic_skeleton.get();
+                        auto joints                     = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
 
+                        //todo: avx2
                         for (auto i = 0U; i < joints.size(); ++i)
                         {
                             math::float4x4 bind_pose    = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);
