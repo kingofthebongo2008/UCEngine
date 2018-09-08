@@ -96,7 +96,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="../../../../msbuild/vs_default.props" />
   <Import Project="../../../../msbuild/cpp_default.props" />
-  <Import Project="../../../../msbuild/boost.props" />
   <Import Project="../../../../msbuild/gsl.props" />
   <Import Project="../../../../msbuild/lzham.props" />
   <Import Project="../../../../msbuild/assimp.props" />
