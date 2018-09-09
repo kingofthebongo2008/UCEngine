@@ -942,9 +942,6 @@ namespace uc
                         {
                             bone_enclosing_spheres[i] = compute_enclosing_sphere(position[i]);
                         }
-
-
-                        __debugbreak();
                     }
 
                     return std::make_shared<geo::skinned_mesh>(
