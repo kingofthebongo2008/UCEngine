@@ -38,7 +38,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;FUSION_MAX_VECTOR_SIZE=30;UC_BACKEND_DEV</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;FUSION_MAX_VECTOR_SIZE=30;UC_BACKEND_DEV</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -48,7 +48,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;FUSION_MAX_VECTOR_SIZE=30;UC_BACKEND_DEV</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);_CONSOLE;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;FUSION_MAX_VECTOR_SIZE=30;UC_BACKEND_DEV</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -60,9 +60,6 @@
     <ResourceCompile Include="..\resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="text_fil.bin" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\resources\dx12_gpu_pso_mypso.cpp.txt" />
     <Text Include="..\resources\dx12_gpu_pso_mypso.h.txt" />
     <Text Include="..\resources\dx12_gpu_compute_pso_mypso.cpp.txt" />
@@ -72,9 +69,21 @@
     <Text Include="..\resources\unique_creator_pso_mypso.cpp.txt" />
     <Text Include="..\resources\unique_creator_pso_mypso.h.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" />
+    <Import Project="..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets" Condition="Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" />
   </ImportGroup>
   <Import Project="ucdev_cpp.msbuild" />
   <Import Project="ucdev_h.msbuild" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.68.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets'))" />
+  </Target>
 </Project>
