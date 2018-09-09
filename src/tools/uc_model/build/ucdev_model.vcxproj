@@ -81,6 +81,9 @@
     <ClInclude Include="..\src\uc_model_swizzle.h" />
     <ClInclude Include="..\src\uc_model_texture.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7BFD660B-EC2B-4E59-8AE2-B6C3697029A5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -95,7 +98,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="../../../../msbuild/vs_default.props" />
   <Import Project="../../../../msbuild/cpp_default.props" />
-  <Import Project="../../../../msbuild/boost.props" />
   <Import Project="../../../../msbuild/gsl.props" />
   <Import Project="../../../../msbuild/lzham.props" />
   <Import Project="../../../../msbuild/assimp.props" />
@@ -138,5 +140,14 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" />
+    <Import Project="..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets" Condition="Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.68.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets'))" />
+  </Target>
 </Project>

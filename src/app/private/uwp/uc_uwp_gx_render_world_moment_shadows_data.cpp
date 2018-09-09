@@ -149,9 +149,9 @@ namespace uc
                     math::euclidean_transform_3d view = math::make_euclidean_transform_3d(gx::view_matrix(m_shadow_camera.get()));
                     math::aabb1 scene_bounds_vs = math::transform(scene, view);
 
-
                     math::float4 aabb_min = math::bounds_min(scene_bounds_vs);
                     math::float4 aabb_max = math::bounds_max(scene_bounds_vs);
+
 
                     m_shadow_camera->set_x_min(math::get_x(aabb_min));
                     m_shadow_camera->set_x_max(math::get_x(aabb_max));
@@ -171,9 +171,10 @@ namespace uc
                     draw.m_world = uc::math::transpose(*m_military_mechanic_transform);
 
                     {
-                        auto skeleton = m_military_mechanic_skeleton.get();
-                        auto joints = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
+                        auto skeleton                   = m_military_mechanic_skeleton.get();
+                        auto joints                     = gx::anm::local_to_world_joints2(skeleton, m_skeleton_instance->local_transforms());
 
+                        //todo: avx2
                         for (auto i = 0U; i < joints.size(); ++i)
                         {
                             math::float4x4 bind_pose    = math::load44(&skeleton->m_joint_inverse_bind_pose2[i].m_a0);

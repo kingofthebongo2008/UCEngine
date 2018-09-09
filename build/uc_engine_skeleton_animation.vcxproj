@@ -46,7 +46,6 @@
     <AppxManifest Include="package_uc_engine_skeleton_animation.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
     <None Include="ucdev_app_key.pfx" />
     <None Include="uc_engine_skeleton_animation_TemporaryKey.pfx" />
   </ItemGroup>
@@ -74,13 +73,4 @@
   <Import Project="uc_engine_skeleton_animation_pso.msbuild" />
   <Import Project="uc_engine_skeleton_animation_h.msbuild" />
   <Import Project="uc_engine_skeleton_animation_cpp.msbuild" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets'))" />
-  </Target>
 </Project>

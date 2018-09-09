@@ -150,56 +150,12 @@ namespace uc
                 __m128 m_data;
             };
 
-            namespace f16
-            {
-                inline float4 unpack_float4( uint64_t v )
-                {
-                    float4 r;
-                    return r;
-                }
-
-                inline uint64_t pack_float4( float4 v )
-                {
-                    return 0;
-                }
-
-                inline uint64_t pack_float4_unorm( float4 v )
-                {
-                    return 0;
-                }
-
-                inline float4 unpack_float4_unorm( uint64_t v )
-                {
-                    float4 r;
-                    return r;
-                }
-            }
-
-            namespace u32
-            {
-                inline uint32_t pack_float4_unorm(float4 v)
-                {
-                    return 0;
-                }
-
-                inline float4 unpack_float4_unorm(uint32_t v)
-                {
-                    float4 r;
-                    return r;
-                }
-            }
-
             namespace xr
             {
                 inline float xr_to_float(uint32_t xr_component)
                 {
                     // The & 0x3ff shows that only 10 bits contribute to the conversion. 
                     return (float)((xr_component & 0x3ff) & 0x180) / 510.f;
-                }
-
-                inline uint32_t float_to_xr(float f)
-                {
-                    return 0;
                 }
             }
 

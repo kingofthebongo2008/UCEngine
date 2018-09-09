@@ -80,7 +80,7 @@ namespace uc
             float sin_angle = sinf(0.5f * angle);
             float cos_angle = cosf(0.5f * angle);
 
-            static const uint32_t __declspec(align(16))   mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
+            alignas(16) static const uint32_t  mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
             static const float4	                            identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float4 n = select(normal, identity_r3, reinterpret_cast<const float4*> (&mask_w)[0]);
@@ -98,7 +98,7 @@ namespace uc
 
         inline std::tuple< float4, float > UC_MATH_CALL quaternion_axis_angle(float4 q)
         {
-            static const uint32_t __declspec(align(16))   mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
+            alignas(16) static const uint32_t mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
             return std::make_tuple< float4, float >(simd_and (q, reinterpret_cast<const float4*> (&mask_xyz)[0]), 2 * acosf(get_w(q)));
         }
 
@@ -325,7 +325,7 @@ namespace uc
         // generates quaternion from rotational matrix
         inline float4 UC_MATH_CALL matrix_2_quaternion(afloat4x4 m)
         {
-            static const uint32_t	__declspec(align(16))	mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
+            alignas(16) static const uint32_t mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
             static const float4 mask_one = { 1.0f, -1.0f, 0.0f, 0.0f };
             static const float4 mask_half = { 0.5f, 0.5f, 0.5f, 0.5f };
             static const float4 mask_quarter = { 0.25f, 0.25f, 0.25f, 0.25f };
@@ -446,7 +446,7 @@ namespace uc
         // generates quaternion from rotational matrix, does not use branches
         inline float4 UC_MATH_CALL matrix_2_quaternion_simd(afloat4x4 m)
         {
-            static const uint32_t	__declspec(align(16))	mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
+            alignas(16) static const uint32_t mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
             static const float4 mask_one = { 1.0f, -1.0f, 0.0f, 0.0f };
             static const float4 mask_half = { 0.5f, 0.5f, 0.5f, 0.5f };
             static const float4 mask_quarter = { 0.25f, 0.25f, 0.25f, 0.25f };
@@ -562,7 +562,7 @@ namespace uc
 
             const float pi = 3.141592654f;
             const float4 scale = { 0.0f, 1.0f, 2.0f, 0.0f };
-            static const uint32_t	__declspec(align(16))	mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
+            alignas(16) static const uint32_t mask_x[4] = { 0xFFFFFFFF, 0, 0, 0 };
 
             float4  v_mask_x = load4(reinterpret_cast<const float*> (&mask_x[0]));
             float4  v_mask_y = swizzle<y, x, y, y>(v_mask_x);

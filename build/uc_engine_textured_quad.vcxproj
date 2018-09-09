@@ -10,9 +10,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA00A99D-D70F-4DD9-9FA2-75FBEE9E87F2}</ProjectGuid>
     <Keyword>uc_engine_test</Keyword>

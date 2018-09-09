@@ -102,34 +102,6 @@ namespace uc
             float   m_far          = 100.0f;	//meters;
         };
 
-        namespace pinhole_camera_helper
-        {
-            inline void set_view_position(pinhole_camera* c, float x, float y, float z)
-            {
-                c->set_view_position(math::set(x, y, z, 1.0f));
-            }
-
-            inline void set_forward(pinhole_camera* c, float x, float y, float z)
-            {
-                c->set_forward(math::normalize3(math::set(x, y, z, 0.0f)));
-            }
-
-            inline void set_up(pinhole_camera* c, float x, float y, float z)
-            {
-                c->set_up(math::normalize3(math::set(x, y, z, 0.0f)));
-            }
-
-            inline void set_look_at(pinhole_camera* c, math::float4 position, math::float4 look_at, math::float4 up )
-            {
-                math::float4 forward_   = math::normalize3(math::sub(look_at, position));
-                math::float4 up_        = math::normalize3(up);
-
-                c->set_view_position(position);
-                c->set_forward(forward_);
-                c->set_up(up_);
-            }
-        }
-
         struct orthographic_camera
         {
 
@@ -256,6 +228,34 @@ namespace uc
             float   m_near          = 1.0f;     //meters
             float   m_far           = 100.0f;   //meters
         };
+
+        namespace pinhole_camera_helper
+        {
+            inline void set_view_position(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_view_position(math::set(x, y, z, 1.0f));
+            }
+
+            inline void set_forward(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_forward(math::normalize3(math::set(x, y, z, 0.0f)));
+            }
+
+            inline void set_up(pinhole_camera* c, float x, float y, float z)
+            {
+                c->set_up(math::normalize3(math::set(x, y, z, 0.0f)));
+            }
+
+            inline void set_look_at(pinhole_camera* c, math::float4 position, math::float4 look_at, math::float4 up)
+            {
+                math::float4 forward_ = math::normalize3(math::sub(look_at, position));
+                math::float4 up_ = math::normalize3(up);
+
+                c->set_view_position(position);
+                c->set_forward(forward_);
+                c->set_up(up_);
+            }
+        }
 
         inline math::float4x4 view_matrix(const pinhole_camera * camera)
         {

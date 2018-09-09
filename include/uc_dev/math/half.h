@@ -41,7 +41,7 @@ namespace uc
 
             inline __m128i UC_MATH_CALL extract_hi16(__m128i v1, __m128i v2)
             {
-                static __declspec(align(16)) const uint32_t clear_mask[4] = { 0xffff0000,	0xffff0000,	0xffff0000,	0xffff0000 };
+                alignas(16) static const uint32_t clear_mask[4] = { 0xffff0000,	0xffff0000,	0xffff0000,	0xffff0000 };
 
                 const uint32_t shuffle_k_1 = _MM_SHUFFLE(0, 2, 1, 3);
                 const uint32_t shuffle_k_2 = _MM_SHUFFLE(1, 3, 2, 0);
@@ -184,10 +184,10 @@ namespace uc
 
             inline half4_2 UC_MATH_CALL convert_f32_f16(afloat4 v1, afloat4 v2)
             {
-                static __declspec(align(16)) const uint32_t sign_mask[4] = { 0x80008000,	0x80008000,	0x80008000,	0x80008000 };
-                static __declspec(align(16)) const uint32_t exponent_offset[4] = { 0x38003800,	0x38003800,	0x38003800,	0x38003800 };	//112
-                static __declspec(align(16)) const uint32_t exponent_mask[4] = { 0x7c007c00, 0x7c007c00, 0x7c007c00, 0x7c007c00 };
-                static __declspec(align(16)) const uint32_t mantissa_mask[4] = { 0x03ff03ff, 0x03ff03ff, 0x03ff03ff, 0x03ff03ff };
+                alignas(16) static const uint32_t sign_mask[4] = { 0x80008000,	0x80008000,	0x80008000,	0x80008000 };
+                alignas(16) static const uint32_t exponent_offset[4] = { 0x38003800,	0x38003800,	0x38003800,	0x38003800 };	//112
+                alignas(16) static const uint32_t exponent_mask[4] = { 0x7c007c00, 0x7c007c00, 0x7c007c00, 0x7c007c00 };
+                alignas(16) static const uint32_t mantissa_mask[4] = { 0x03ff03ff, 0x03ff03ff, 0x03ff03ff, 0x03ff03ff };
 
                 __m128i	v_1 = _mm_castps_si128(v1);
                 __m128i	v_2 = _mm_castps_si128(v2);
@@ -281,9 +281,9 @@ namespace uc
 
             inline math::half4_2 UC_MATH_CALL convert_f32_f16(afloat4 v1, afloat4 v2)
             {
-                static __declspec(align(16)) const uint32_t sign_mask[4] = { 0x80008000,	0x80008000,	0x80008000,	0x80008000 };
-                static __declspec(align(16)) const uint32_t exponent_offset[4] = { 0x38003800,	0x38003800,	0x38003800,	0x38003800 };	// greater than 112
-                static __declspec(align(16)) const uint32_t sub_112[4] = { 0x40004000, 0x40004000, 0x40004000, 0x40004000 };
+                alignas(16) static const uint32_t sign_mask[4] = { 0x80008000,	0x80008000,	0x80008000,	0x80008000 };
+                alignas(16) static const uint32_t exponent_offset[4] = { 0x38003800,	0x38003800,	0x38003800,	0x38003800 };	// greater than 112
+                alignas(16) static const uint32_t sub_112[4] = { 0x40004000, 0x40004000, 0x40004000, 0x40004000 };
 
                 __m128i	v_1 = _mm_castps_si128(v1);
                 __m128i	v_2 = _mm_castps_si128(v2);
@@ -318,11 +318,11 @@ namespace uc
 
         inline half4 UC_MATH_CALL convert_f32_f16(afloat4 value)
         {
-            static __declspec(align(16)) const uint32_t exponent_mask[4] = { 0xff,	0xff,	0xff,	0xff };
-            static __declspec(align(16)) const uint32_t sign_mask[4] = { 0x8000,	0x8000, 0x8000, 0x8000 };
-            static __declspec(align(16)) const uint32_t manitssa_mask[4] = { 0x07ff,	0x07ff, 0x07ff,	0x07ff };
-            static __declspec(align(16)) const uint32_t e_denorm_mask[4] = { 112,	112, 112, 112 };
-            static __declspec(align(16)) const uint32_t rounddmask[4] = { 0x1,	0x1, 0x1, 0x1 };
+            alignas(16) static const uint32_t exponent_mask[4] = { 0xff,	0xff,	0xff,	0xff };
+            alignas(16) static const uint32_t sign_mask[4] = { 0x8000,	0x8000, 0x8000, 0x8000 };
+            alignas(16) static const uint32_t manitssa_mask[4] = { 0x07ff,	0x07ff, 0x07ff,	0x07ff };
+            alignas(16) static const uint32_t e_denorm_mask[4] = { 112,	112, 112, 112 };
+            alignas(16) static const uint32_t rounddmask[4] = { 0x1,	0x1, 0x1, 0x1 };
 
             __m128i	v_1 = _mm_castps_si128(value);
 
@@ -444,7 +444,7 @@ namespace uc
             float4 one = math::load1(&pad);
             one = swizzle<x, x, x, x>(one);
 
-            const uint32_t __declspec(align(16))   mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
+            alignas(16) const uint32_t mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
             size_t j = 0;
 
             for (size_t i = 0; i < count; i += 6, j += 8)

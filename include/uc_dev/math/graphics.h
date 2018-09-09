@@ -271,8 +271,8 @@ namespace uc
             //eye_direction and up_direction should be normalized;
             //eye_direction and up_direction w components should be zero
 
-            static const uint32_t   __declspec(align(16)) mask_yw[4] = { 0, 0xFFFFFFFF, 0, 0xFFFFFFFF };
-            static const uint32_t	__declspec(align(16)) mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
+            alignas(16) static const uint32_t mask_yw[4] = { 0, 0xFFFFFFFF, 0, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
 
             float4x4 m1;
             float4x4 m2;
@@ -326,7 +326,7 @@ namespace uc
         //creates left handed perspective projection matrix
         inline float4x4 UC_MATH_CALL perspective_lh(float view_width, float view_height, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f * z_near;
@@ -357,7 +357,7 @@ namespace uc
         //creates left handed inverse perspective projection matrix
         inline float4x4 UC_MATH_CALL inverse_perspective_lh(float view_width, float view_height, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f / z_near;
@@ -388,7 +388,7 @@ namespace uc
         //creates left handed perspective projection matrix
         inline float4x4 UC_MATH_CALL perspective_fov_lh(float fov, float aspect_ratio, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float r = z_far / (z_far - z_near);
@@ -420,7 +420,7 @@ namespace uc
         //creates left handed inverse perspective projection matrix
         inline float4x4 UC_MATH_CALL inverse_perspective_fov_lh(float fov, float aspect_ratio, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float r = (z_near - z_far) / (z_near * z_far);
@@ -453,7 +453,7 @@ namespace uc
         //creates left handed orthographic projection matrix
         inline float4x4 UC_MATH_CALL orthographic_lh(float view_width, float view_height, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f;
@@ -500,7 +500,7 @@ namespace uc
         //creates left handed orthographic projection matrix
         inline float4x4 UC_MATH_CALL inverse_orthographic_lh(float view_width, float view_height, float z_near, float z_far)
         {
-            static const uint32_t	__declspec(align(16))	mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
             static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f;
@@ -692,7 +692,7 @@ namespace uc
             float4 v = mul(m, cross);
             float4 w = splat(v_1 / 2.0f);
 
-            static const uint32_t __declspec(align(16))   mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
+            alignas(16) static const uint32_t mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
             return select(v, w, reinterpret_cast<const float4*> (&mask_w)[0]);
         }
 
@@ -790,7 +790,7 @@ namespace uc
         //creates a vector in 3d
         inline float4 UC_MATH_CALL vector3(float4 v)
         {
-            static const uint32_t __declspec(align(16))   mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
+            alignas(16) static const uint32_t mask_xyz[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0 };
             return select(zero(), v, load4(mask_xyz));
         }
 
@@ -801,7 +801,7 @@ namespace uc
         // c    : arcball center ( 2d )
         inline float4 UC_MATH_CALL arc_ball_point_on_unit_sphere(afloat4 xy, afloat4 c, float  r)
         {
-            static const uint32_t __declspec(align(16))   mask_xy[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0, 0 };
+            alignas(16) static const uint32_t   mask_xy[4] = { 0xFFFFFFFF, 0xFFFFFFFF, 0, 0 };
             const float4 xy_ = select(zero(), xy, load4(mask_xy));
             const float4 s0 = xy_;
             const float4 v0 = div(sub(s0, c), splat(r)); // v0 = (s0-c) / r

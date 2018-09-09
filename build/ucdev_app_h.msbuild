@@ -218,6 +218,7 @@
 <ClInclude Include = "..\include\uc_dev\math\functions.h"/>
 <ClInclude Include = "..\include\uc_dev\math\functions_misc.h"/>
 <ClInclude Include = "..\include\uc_dev\math\geometry.h"/>
+<ClInclude Include = "..\include\uc_dev\math\geometry_convex_clipping.h"/>
 <ClInclude Include = "..\include\uc_dev\math\geometry_functions.h"/>
 <ClInclude Include = "..\include\uc_dev\math\geometry_transforms.h"/>
 <ClInclude Include = "..\include\uc_dev\math\graphics.h"/>

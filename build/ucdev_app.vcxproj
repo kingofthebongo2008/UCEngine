@@ -29,7 +29,6 @@
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\msbuild\boost.props" />
   <Import Project="..\msbuild\librocket.props" />
   <Import Project="..\msbuild\gsl.props" />
   <Import Project="..\msbuild\lzham.props" />
@@ -51,6 +50,8 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" />
+    <Import Project="packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('packages\boost.1.68.0.0\build\boost.targets')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -190,9 +191,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" />
-  </ImportGroup>
   <Import Project="asset/robot.msbuild" />
   <!--Import Project="asset/robot_mid_poly.msbuild" /-->
   <Import Project="asset/deer.msbuild" />
@@ -213,6 +211,7 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.170918004\build\WinPixEventRuntime.targets'))" />
+    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets'))" />
+    <Error Condition="!Exists('packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.68.0.0\build\boost.targets'))" />
   </Target>
 </Project>

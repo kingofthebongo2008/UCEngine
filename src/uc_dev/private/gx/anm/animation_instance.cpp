@@ -4,6 +4,8 @@
 #include <uc_dev/gx/anm/skeleton_instance.h>
 #include <uc_dev/gx/lip/animation.h>
 
+#include <ppl.h>
+
 namespace uc {
     namespace gx {
         namespace anm {
@@ -126,7 +128,7 @@ namespace uc {
                 auto a = m_animations;
                 auto time = delta_time;
 
-                // every following time calculation happens in ticks
+                // every following time computation happens in ticks
                 time *= a->m_ticks_per_second;
 
                 m_time += time;
@@ -138,18 +140,20 @@ namespace uc {
 
                 auto s = a->m_joint_animations.size();
 
-                for (auto i = 0U; i < s; ++i)
+                //todo: do this with avx
+                concurrency::parallel_for(static_cast<size_t>(0U), s, [ this, &res, time, a ](const auto i)
                 {
+                    //todo: do this with avx
                     auto t = animate_translation(&a->m_joint_animations[i], time, a->m_duration);
                     auto r = animate_rotation(&a->m_joint_animations[i], time, a->m_duration);
 
                     auto m = math::quaternion_2_matrix(r);
-
-                    m.r[3] = m.r[3] = math::select(t, math::identity_r3(), math::set_uint32(0, 0, 0, 0xffffffff));
+                    m.r[3] = math::permute<math::permute_0x, math::permute_0y, math::permute_0z, math::permute_1w>(t, math::one());
 
                     assert(m_skeleton_map.m_data[i] != 0xffff);
                     res[m_skeleton_map.m_data[i]] = m;
-                }
+
+                });
             }
         }
     }

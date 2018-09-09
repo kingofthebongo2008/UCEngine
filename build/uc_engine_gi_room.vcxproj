@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="uc_engine_gi_room_TemporaryKey.pfx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -206,5 +206,6 @@
     <None Include="$(FbxSdkX64LibDirectory)\release\libfbxsdk.dll" />
     <None Include="$(FbxSdkX86LibDirectory)\debug\libfbxsdk.dll" />
     <None Include="$(FbxSdkX86LibDirectory)\release\libfbxsdk.dll" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

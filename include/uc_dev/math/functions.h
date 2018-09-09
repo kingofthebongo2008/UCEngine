@@ -13,7 +13,7 @@ namespace uc
         {
             inline float4 UC_MATH_CALL int_part(afloat4 v)
             {
-                static __declspec(align(16)) const uint32_t sign_mask[4] = { 0x80000000,	0x80000000, 0x80000000, 0x80000000 };
+                alignas(16) static const uint32_t sign_mask[4] = { 0x80000000,	0x80000000, 0x80000000, 0x80000000 };
 
                 float4 mask = load4(reinterpret_cast<const float*> (&sign_mask[0]));
                 float4 sign = simd_and(v, mask);

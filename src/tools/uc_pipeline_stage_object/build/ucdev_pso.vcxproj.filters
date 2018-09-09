@@ -242,9 +242,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="text_fil.bin" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="..\resources\resources.rc">
       <Filter>resources</Filter>
     </ResourceCompile>
@@ -274,5 +271,8 @@
     <Text Include="..\resources\unique_creator_pso_mypso.cpp.txt">
       <Filter>resources</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

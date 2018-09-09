@@ -63,6 +63,5 @@ namespace uc
             LIP_RTTI_MEMBER(joint_animations, m_duration)
             LIP_RTTI_MEMBER(joint_animations, m_ticks_per_second)
             LIP_END_DEFINE_RTTI(joint_animations)
-
         }
 }

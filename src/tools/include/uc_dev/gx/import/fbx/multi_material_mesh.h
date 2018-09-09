@@ -98,7 +98,7 @@ namespace uc
                     std::vector<geo::multi_material_mesh::faces_t>  faces; //uvs used by every material
                     faces.resize(materials_indices.size());
 
-                    auto p = triangle_permuation(context);
+                    auto p = triangle_permutaion(context);
                     for (auto i = 0; i < faces.size(); ++i)
                     {
                         //reorient triangles ccw, since they come cw from fbx

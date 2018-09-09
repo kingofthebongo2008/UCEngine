@@ -1191,7 +1191,4 @@
   <ItemGroup>
     <Shader Include="..\src\uc_dev\private\gx\dx12\shaders\default_graphics_signature.hlsl" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>
