@@ -184,4 +184,7 @@
   <ItemGroup>
     <CustomBuild Include="$(ISPC_file).ispc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
