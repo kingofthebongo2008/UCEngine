@@ -29,7 +29,6 @@
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\msbuild\boost.props" />
   <Import Project="..\msbuild\cppwinrt.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
