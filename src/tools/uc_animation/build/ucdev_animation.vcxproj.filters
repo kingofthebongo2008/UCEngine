@@ -222,10 +222,6 @@
     <None Include="$(AssImpDirectory)\bin\x64\assimp-vc140-mt.dll" />
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt-d.dll" />
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt.dll" />
-    <None Include="$(FbxSdkX64LibDirectory)\debug\libfbxsdk.dll" />
-    <None Include="$(FbxSdkX64LibDirectory)\release\libfbxsdk.dll" />
-    <None Include="$(FbxSdkX86LibDirectory)\debug\libfbxsdk.dll" />
-    <None Include="$(FbxSdkX86LibDirectory)\release\libfbxsdk.dll" />
     <None Include="packages.config" />
   </ItemGroup>
 </Project>

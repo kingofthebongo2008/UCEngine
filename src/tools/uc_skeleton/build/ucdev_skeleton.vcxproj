@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props" Condition="Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props')" />
+  <Import Project="..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props" Condition="Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|x64">
       <Configuration>debug</Configuration>
@@ -100,9 +102,7 @@
   <Import Project="../../../../msbuild/vs_default.props" />
   <Import Project="../../../../msbuild/cpp_default.props" />
   <Import Project="../../../../msbuild/gsl.props" />
-  <Import Project="../../../../msbuild/lzham.props" />
   <Import Project="../../../../msbuild/assimp.props" />
-  <Import Project="../../../../msbuild/fbxsdk.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -142,6 +142,8 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" />
     <Import Project="..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets" Condition="Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" />
+    <Import Project="..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets" Condition="Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets')" />
+    <Import Project="..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets" Condition="Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -149,5 +151,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.68.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets'))" />
+    <Error Condition="!Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props'))" />
+    <Error Condition="!Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets'))" />
+    <Error Condition="!Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props'))" />
+    <Error Condition="!Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets'))" />
   </Target>
 </Project>

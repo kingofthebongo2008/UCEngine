@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.props" Condition="Exists('..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.props')" />
+  <Import Project="..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props" Condition="Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props')" />
+  <Import Project="..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props" Condition="Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|x64">
       <Configuration>debug</Configuration>
@@ -99,9 +102,7 @@
   <Import Project="../../../../msbuild/vs_default.props" />
   <Import Project="../../../../msbuild/cpp_default.props" />
   <Import Project="../../../../msbuild/gsl.props" />
-  <Import Project="../../../../msbuild/lzham.props" />
   <Import Project="../../../../msbuild/assimp.props" />
-  <Import Project="../../../../msbuild/fbxsdk.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -117,31 +118,34 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Compressonator_MDd_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../../3rdparty/compressonator/include;../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>../../../../3rdparty/compressonator/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Compressonator_MD_DLL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" />
     <Import Project="..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets" Condition="Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" />
+    <Import Project="..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets" Condition="Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets')" />
+    <Import Project="..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets" Condition="Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets')" />
+    <Import Project="..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.targets" Condition="Exists('..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -149,5 +153,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost.1.68.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\boost_program_options-vc141.1.68.0.0\build\boost_program_options-vc141.targets'))" />
+    <Error Condition="!Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.props'))" />
+    <Error Condition="!Exists('..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\fbxsdk-2018-1-1-dll.2018.1.1\build\fbxsdk-2018-1-1-dll.targets'))" />
+    <Error Condition="!Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\lzham-win64.1.0.0\build\lzham-win64.props'))" />
+    <Error Condition="!Exists('..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\lzham-win64.1.0.0\build\lzham-win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.props'))" />
+    <Error Condition="!Exists('..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\amd-compressonator-2-3-0.2.3.0\build\amd-compressonator-2-3-0.targets'))" />
   </Target>
 </Project>
