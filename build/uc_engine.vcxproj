@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props" Condition="Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|x64">
       <Configuration>debug</Configuration>
@@ -110,6 +111,9 @@
       <Project>{e98e2a28-0291-4337-9863-af619a7c606f}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="msbuild\ucdev_render.targets" />
   <Import Project="uc_engine_h.msbuild" />
@@ -118,6 +122,7 @@
   <ImportGroup Label="ExtensionSettings">
     <Import Project="packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" />
     <Import Project="packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('packages\boost.1.68.0.0\build\boost.targets')" />
+    <Import Project="packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets" Condition="Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -125,5 +130,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets'))" />
     <Error Condition="!Exists('packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.68.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props'))" />
+    <Error Condition="!Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets'))" />
   </Target>
 </Project>
