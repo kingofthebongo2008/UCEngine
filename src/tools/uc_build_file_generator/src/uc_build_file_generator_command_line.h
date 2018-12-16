@@ -30,6 +30,7 @@ namespace uc
                 ("input,i", po::value< std::string>(),      "input directory, if missing the current directory is used")
                 ("mode,t", po::value< std::string>(),       "mode:hlsl,pso,cpp,h")
                 ("backend,b", po::value< std::string>(),    "graphics backend, dev or unique")
+                ("type,t", po::value< std::string>(),       "type:project,filters filter or project")
                 ("build,m", po::value< std::string>(),      "buildsystem:msbuild,fastbuild")
               ;
                 
@@ -102,6 +103,11 @@ namespace uc
         inline auto get_backend(const boost::program_options::variables_map & map, const std::string& default_value)
         {
             return get_input_value_optional< std::string >(map, "backend", default_value);
+        }
+
+        inline auto get_type(const boost::program_options::variables_map & map, const std::string& default_value)
+        {
+            return get_input_value_optional< std::string >(map, "type", default_value);
         }
 
         inline auto get_mode(const boost::program_options::variables_map & map)
