@@ -26,7 +26,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="..\msbuild\gsl.props" />
-  <Import Project="..\msbuild\cppwinrt.props" />
   <Import Project="..\msbuild\lzham.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
