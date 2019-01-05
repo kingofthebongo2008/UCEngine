@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props" Condition="Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="debug|x64">
       <Configuration>debug</Configuration>
@@ -31,10 +32,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="..\msbuild\librocket.props" />
   <Import Project="..\msbuild\gsl.props" />
-  <Import Project="..\msbuild\lzham.props" />
   <Import Project="..\msbuild\imgui.props" />
-  <Import Project="..\msbuild\assimp.props" />
-  <Import Project="..\msbuild\cppwinrt.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -50,8 +48,9 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" />
     <Import Project="packages\boost.1.68.0.0\build\boost.targets" Condition="Exists('packages\boost.1.68.0.0\build\boost.targets')" />
+    <Import Project="packages\WinPixEventRuntime.1.0.181206001\build\WinPixEventRuntime.targets" Condition="Exists('packages\WinPixEventRuntime.1.0.181206001\build\WinPixEventRuntime.targets')" />
+    <Import Project="packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets" Condition="Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -108,11 +107,10 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>../include;../src/streamflow/private/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4702</DisableSpecificWarnings>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,10 +135,10 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <EnablePREfast>false</EnablePREfast>
       <AdditionalIncludeDirectories>../include;../src/streamflow/private/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>true</CompileAsWinRT>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4702</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -215,7 +213,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.180612001\build\WinPixEventRuntime.targets'))" />
     <Error Condition="!Exists('packages\boost.1.68.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.68.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('packages\WinPixEventRuntime.1.0.181206001\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\WinPixEventRuntime.1.0.181206001\build\WinPixEventRuntime.targets'))" />
+    <Error Condition="!Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.props'))" />
+    <Error Condition="!Exists('packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\lzham-uwp-win64.1.0.0\build\lzham-uwp-win64.targets'))" />
   </Target>
 </Project>
