@@ -6,7 +6,7 @@
 #include <gsl/gsl>
 
 #include <uc_dev/gx/lip/geo.h>
-
+#include <uc_dev/util/utf8_conv.h>
 
 #include "uc_model_exception.h"
 #include "uc_model_compressonator.h"
@@ -85,7 +85,7 @@ namespace uc
 
         inline uc::lip::texture2d create_texture_2d(const std::string& file_name)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d r;
 
@@ -108,7 +108,7 @@ namespace uc
 
         inline uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const std::string& file_name)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d_mip_level r;
 
@@ -136,7 +136,7 @@ namespace uc
 
         inline uc::lip::texture2d create_texture_2d( const std::string& file_name, lip::storage_format storage, lip::view_format view)
         {
-            auto r0         = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d r;
             //only this is supported
@@ -159,7 +159,7 @@ namespace uc
 
         inline uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const std::string& file_name, lip::storage_format storage, lip::view_format view)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d_mip_level r;
 

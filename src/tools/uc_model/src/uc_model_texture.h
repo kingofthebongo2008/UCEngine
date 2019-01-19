@@ -85,7 +85,7 @@ namespace uc
 
         inline uc::lip::texture2d create_texture_2d(const std::string& file_name)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d r;
 
@@ -108,7 +108,7 @@ namespace uc
 
         inline uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const std::string& file_name)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d_mip_level r;
 
@@ -132,7 +132,6 @@ namespace uc
 
             return t;
         }
-
 
         namespace mip_level_computation
         {
@@ -176,6 +175,8 @@ namespace uc
 
             inline void* sample_address_write(int32_t x, int32_t y, void* img, int32_t pitch, int32_t width, int32_t height)
             {
+                x = clamp(x, 0, width - 1);
+                y = clamp(y, 0, height - 1);
                 return reinterpret_cast<uint8_t*>(img) + y * pitch + x;
             }
 
@@ -726,7 +727,7 @@ namespace uc
 
         inline uc::lip::texture2d_mip_chain create_texture_2d_mip_chain(const std::string& file_name, lip::storage_format storage, lip::view_format view)
         {
-            auto r0 = gx::imaging::read_image(file_name.c_str());
+            auto r0 = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d_mip_level r;
 
@@ -755,7 +756,7 @@ namespace uc
 
         inline uc::lip::texture2d create_texture_2d( const std::string& file_name, lip::storage_format storage, lip::view_format view)
         {
-            auto r0         = gx::imaging::read_image(file_name.c_str());
+            auto r0            = gx::imaging::read_image(util::utf16_from_utf8(file_name).c_str());
 
             uc::lip::texture2d r;
             //only this is supported
