@@ -5,11 +5,9 @@
 #include <tuple>
 
 
-#include <uc_dev/util/utf8_conv.h>
-
-#include <uc_dev/gx/img/cpu_imaging.h>
-#include <uc_dev/gx/img/cpu_imaging_utils_base.h>
-#include <uc_dev/gx/img/cpu_imaging_utils_cpu.h>
+#include "cpu_imaging.h"
+#include "cpu_imaging_utils_base.h"
+#include "cpu_imaging_utils_cpu.h"
 
 namespace uc
 {
@@ -293,12 +291,6 @@ namespace uc
             {
                 auto factory = imaging::create_factory();
                 return read_image(create_bitmap_source(memory, memory_size, factory), factory);
-            }
-
-            inline cpu_texture read_image(const char* url_path)
-            {
-                auto u = util::utf16_from_utf8(url_path);
-                return read_image(u.c_str());
             }
 
             template <typename texture > inline void write_image(const texture& t, const wchar_t* url_path)

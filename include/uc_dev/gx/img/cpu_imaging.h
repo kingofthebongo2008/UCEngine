@@ -6,7 +6,7 @@
 #include <cstdint>
 
 #include <wincodec.h>
-#include <uc_dev/gx/dx12/api/error.h>
+#include "error.h"
 
 namespace uc
 {
@@ -27,12 +27,6 @@ namespace uc
             typedef Microsoft::WRL::ComPtr<IWICFormatConverter>    wic_format_converter;
 
             typedef Microsoft::WRL::ComPtr<IPropertyBag2>          property_bag2;
-
-            inline void throw_if_failed(HRESULT hr)
-            {
-
-                dx12::throw_if_failed(hr);
-            }
 
             inline wic_imaging_factory create_factory()
             {
