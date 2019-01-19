@@ -1,8 +1,8 @@
 #pragma once
 
 #include <uc_dev/lip/lip.h>
-#include <uc_dev/gx/lip/base.h>
-#include <uc_dev/gx/lip/math.h>
+#include "base.h"
+#include "math.h"
 
 namespace uc
 {
@@ -160,9 +160,9 @@ namespace uc
         {
             //todo: subject to change, with optimizations
             reloc_array < joint_rotation >      m_rotation_keys;
-            reloc_array < joint_time >			m_rotation_times;
+            reloc_array < joint_time >          m_rotation_times;
             reloc_array < joint_translation >   m_translation_keys;
-            reloc_array < joint_time >			m_translation_times;
+            reloc_array < joint_time >          m_translation_times;
             joint_name                          m_joint_name;
 
             joint_animation()
@@ -173,7 +173,7 @@ namespace uc
             joint_animation(const lip::load_context& c) : 
                     m_rotation_keys(c)
                 ,   m_rotation_times(c)
-                ,	m_translation_keys(c)
+                ,   m_translation_keys(c)
                 ,   m_translation_times(c)
             {
 

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <uc_dev/gx/lip/geo.h>
 #include <memory>
 #include <Windows.h>
 #include <uc_dev/lzham/lzham.h>
+
+#include "geo.h"
 
 namespace uc
 {
@@ -63,15 +64,15 @@ namespace uc
 
             std::vector<uint8_t> bytes;
 
-			assert(size2 < 0xFFFFFFFF );
+            assert(size2 < 0xFFFFFFFF );
 
-			bytes.resize(static_cast<size_t>(size2));
+            bytes.resize(static_cast<size_t>(size2));
 
             auto r = ReadFile(h.get(), &bytes[0], static_cast<DWORD>(size2), nullptr, nullptr);
 
             if (r)
             {
-				size_t decompressed_size = static_cast<size_t>(*(uint64_t*)(&bytes[8]));
+                size_t decompressed_size = static_cast<size_t>(*(uint64_t*)(&bytes[8]));
                 return lzham::decompress_buffer(&bytes[16], bytes.size() - 16, decompressed_size);
             }
             else

@@ -2,9 +2,9 @@
 
 #include <uc_dev/lip/lip.h>
 
-#include <uc_dev/gx/lip/base.h>
-#include <uc_dev/gx/lip/structs.h>
-#include <uc_dev/gx/lip/math.h>
+#include "base.h"
+#include "structs.h"
+#include "math.h"
 
 namespace uc
 {
