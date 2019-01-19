@@ -33,7 +33,7 @@ namespace uc
         template <bool = true> struct is_pod_selector {};
         template <> struct is_pod_selector<false> {};
 
-        template <typename t> class typed_type_factory : public type_factory
+        template <typename t> class typed_type_factory final : public type_factory
         {
             protected:
 
