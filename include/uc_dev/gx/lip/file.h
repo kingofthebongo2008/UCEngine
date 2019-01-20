@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <Windows.h>
-#include <uc_dev/lzham/lzham.h>
+#include <uc_dev/lzham/lzham_compressor.h>
 
 #include "geo.h"
 

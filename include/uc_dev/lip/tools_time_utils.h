@@ -6,7 +6,7 @@
 
 #include "tools_time_writer.h"
 
-#include <uc_dev/lzham/lzham.h>
+#include <uc_dev/lzham/lzham_compressor.h>
 
 namespace uc
 {

@@ -16,7 +16,7 @@
 #include <uc_dev/lip/tools_time_utils.h>
 #include <uc_dev/gx/img/img.h>
 #include <uc_dev/os/windows/com_initializer.h>
-#include <uc_dev/lzham/lzham.h>
+#include <uc_dev/lzham/lzham_compressor.h>
 
 
 #include "uc_model_command_line.h"

@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include <uc_dev/lzham/loader.h>
+#include "loader.h"
 
 namespace uc
 {
@@ -74,9 +74,9 @@ namespace uc
             c->lzham_decompress_init(&params);
             uint32_t adler = 0;
 
-			std::vector<uint8_t> result(static_cast<size_t>(decompressed_size));
+            std::vector<uint8_t> result(static_cast<size_t>(decompressed_size));
 
-			auto result_size = static_cast<size_t>(decompressed_size);
+            auto result_size = static_cast<size_t>(decompressed_size);
             auto state = c->lzham_decompress_memory(&params, &result[0], &result_size, &buffer[0], static_cast<size_t>(compressed_size), &adler);
             if (state != LZHAM_DECOMP_STATUS_SUCCESS)
             {
@@ -86,9 +86,9 @@ namespace uc
             return result;
         }
 
-		inline std::vector<uint8_t>  decompress_buffer(const uint8_t* buffer, uint32_t compressed_size, uint32_t decompressed_size)
-		{
-			return decompress_buffer(buffer, static_cast<uint64_t>(compressed_size), static_cast<uint64_t>(decompressed_size));
-		}
+        inline std::vector<uint8_t>  decompress_buffer(const uint8_t* buffer, uint32_t compressed_size, uint32_t decompressed_size)
+        {
+            return decompress_buffer(buffer, static_cast<uint64_t>(compressed_size), static_cast<uint64_t>(decompressed_size));
+        }
     }
 }
