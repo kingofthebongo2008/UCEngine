@@ -8,6 +8,7 @@
 #include <uc_dev/gx/import/assimp/skinned_mesh.h>
 #include <uc_dev/gx/import/fbx/skinned_mesh.h>
 #include <uc_dev/gx/import/assimp/assimp_options.h>
+#include <uc_dev/lzham/lzham_compressor.h>
 
 #include "uc_skeleton_command_line.h"
 #include "uc_skeleton_skeleton.h"
@@ -74,12 +75,12 @@ int32_t main(int32_t argc, const char* argv[])
         if (e == L".fbx")//  && false)
         {
             auto mesh = uc::gx::import::fbx::create_skinned_mesh(input_skeleton);
-            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton);
+            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton, uc::lzham::compress_buffer);
         }
         else
         {
             auto mesh = uc::gx::import::assimp::create_skinned_mesh(input_skeleton, ai_o);
-            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton);
+            uc::lip::serialize_object(uc::skeleton::skeleton(mesh->m_skeleton_pose), output_skeleton, uc::lzham::compress_buffer);
         }
     }
     

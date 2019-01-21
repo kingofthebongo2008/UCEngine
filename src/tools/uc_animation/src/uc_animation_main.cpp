@@ -9,6 +9,7 @@
 #include <uc_dev/gx/import/assimp/animation.h>
 #include <uc_dev/gx/import/assimp/assimp_options.h>
 #include <uc_dev/gx/import/assimp/skinned_mesh.h>
+#include <uc_dev/lzham/lzham_compressor.h>
 
 #include "uc_animation_command_line.h"
 #include "uc_animation_options.h"
@@ -96,7 +97,7 @@ int32_t main(int32_t argc, const char* argv[])
         {
             auto&& a = animations.front();
             //take the 1st one only
-            uc::lip::serialize_object( uc::animation::animation(a), output_animation);
+            uc::lip::serialize_object( uc::animation::animation(a), output_animation, uc::lzham::compress_buffer);
         }
     }
     

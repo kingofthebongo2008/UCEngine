@@ -41,12 +41,12 @@ namespace uc
             if (storage == lip::storage_format::unknown)
             {
                 uc::lip::texture2d m = create_texture_2d(input_file_name);
-                uc::lip::serialize_object(&m, output_file_name);
+                uc::lip::serialize_object(&m, output_file_name, lzham::compress_buffer);
             }
             else
             {
                 uc::lip::texture2d m = create_texture_2d(input_file_name, storage, view);
-                uc::lip::serialize_object(&m, output_file_name);
+                uc::lip::serialize_object(&m, output_file_name, lzham::compress_buffer);
             }
         }
     }
