@@ -117,15 +117,15 @@ namespace uc
         }
 
         // Specialized swizzles
-        template<> inline float4      UC_MATH_CALL     swizzle<0, 1, 2, 3>(float4 v) { return v; }
+        template<> inline float4      UC_MATH_CALL     swizzle<0, 1, 2, 3>(afloat4 v) { return v; }
 
-        template<> inline float4      UC_MATH_CALL     swizzle<0, 1, 0, 1>(float4 v) { return _mm_movelh_ps(v, v); }
-        template<> inline float4      UC_MATH_CALL     swizzle<2, 3, 2, 3>(float4 v) { return _mm_movehl_ps(v, v); }
-        template<> inline float4      UC_MATH_CALL     swizzle<0, 0, 1, 1>(float4 v) { return _mm_unpacklo_ps(v, v); }
-        template<> inline float4      UC_MATH_CALL     swizzle<2, 2, 3, 3>(float4 v) { return _mm_unpackhi_ps(v, v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<0, 1, 0, 1>(afloat4 v) { return _mm_movelh_ps(v, v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<2, 3, 2, 3>(afloat4 v) { return _mm_movehl_ps(v, v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<0, 0, 1, 1>(afloat4 v) { return _mm_unpacklo_ps(v, v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<2, 2, 3, 3>(afloat4 v) { return _mm_unpackhi_ps(v, v); }
 
-        template<> inline float4      UC_MATH_CALL     swizzle<0, 0, 2, 2>(float4 v) { return _mm_moveldup_ps(v); }
-        template<> inline float4      UC_MATH_CALL     swizzle<1, 1, 3, 3>(float4 v) { return _mm_movehdup_ps(v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<0, 0, 2, 2>(afloat4 v) { return _mm_moveldup_ps(v); }
+        template<> inline float4      UC_MATH_CALL     swizzle<1, 1, 3, 3>(afloat4 v) { return _mm_movehdup_ps(v); }
 
 
         inline float4 UC_MATH_CALL merge_xy(afloat4 v1, afloat4 v2)
