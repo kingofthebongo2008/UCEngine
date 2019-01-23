@@ -4,9 +4,9 @@
 #include <cstdint>
 #include <cmath>
 
-#include <uc_dev/math/matrix.h>
-#include <uc_dev/math/vector.h>
-#include <uc_dev/math/functions.h>
+#include "matrix.h"
+#include "vector.h"
+#include "functions.h"
 
 namespace uc
 {
@@ -81,7 +81,7 @@ namespace uc
             float cos_angle = cosf(0.5f * angle);
 
             alignas(16) static const uint32_t  mask_w[4] = { 0, 0, 0, 0xFFFFFFFF };
-            static const float4	                            identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4                             identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float4 n = select(normal, identity_r3, reinterpret_cast<const float4*> (&mask_w)[0]);
 
@@ -618,7 +618,7 @@ namespace uc
         inline math::float4 UC_MATH_CALL slerp_ref(afloat4 a, afloat4 b, float factor)
         {
             //adjust signs
-			float4 b_t = b;
+            float4 b_t = b;
 
             float c;
             {

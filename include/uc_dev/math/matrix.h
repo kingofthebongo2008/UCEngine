@@ -1,6 +1,6 @@
 #pragma once
 
-#include <uc_dev/math/vector.h>
+#include "vector.h"
 
 namespace uc
 {

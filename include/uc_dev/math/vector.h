@@ -3,7 +3,7 @@
 #include <intrin.h>
 #include <cstdint>
 
-#include <uc_dev/math/defines.h>
+#include "defines.h"
 
 namespace uc
 {

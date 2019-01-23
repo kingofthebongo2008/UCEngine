@@ -3,9 +3,9 @@
 #include <limits>
 #include <tuple>
 
-#include <uc_dev/math/geometry.h>
-#include <uc_dev/math/geometry_transforms.h>
-#include <uc_dev/math/graphics.h>
+#include "geometry.h"
+#include "geometry_transforms.h"
+#include "graphics.h"
 
 namespace uc
 {

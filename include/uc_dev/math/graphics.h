@@ -4,8 +4,8 @@
 #include <tuple>
 
 #include <math.h>
-#include <uc_dev/math/matrix.h>
-#include <uc_dev/math/quaternion.h>
+#include "matrix.h"
+#include "quaternion.h"
 
 namespace uc
 {
@@ -327,7 +327,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL perspective_lh(float view_width, float view_height, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f * z_near;
 
@@ -358,7 +358,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL inverse_perspective_lh(float view_width, float view_height, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f / z_near;
 
@@ -389,7 +389,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL perspective_fov_lh(float fov, float aspect_ratio, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float r = z_far / (z_far - z_near);
 
@@ -421,7 +421,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL inverse_perspective_fov_lh(float fov, float aspect_ratio, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float r = (z_near - z_far) / (z_near * z_far);
 
@@ -454,7 +454,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL orthographic_lh(float view_width, float view_height, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f;
 
@@ -501,7 +501,7 @@ namespace uc
         inline float4x4 UC_MATH_CALL inverse_orthographic_lh(float view_width, float view_height, float z_near, float z_far)
         {
             alignas(16) static const uint32_t mask_yzw[4] = { 0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
-            static const float4	identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
+            static const float4 identity_r3 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
             float a = 2.0f;
 
@@ -544,13 +544,13 @@ namespace uc
 
             m1 = transpose(wvp);
 
-            v1 = add(wvp.r[3], m1.r[0]);	//left
-            v2 = sub(wvp.r[3], m1.r[0]);	//right
-            v3 = sub(wvp.r[3], m1.r[1]);	//top
-            v4 = add(wvp.r[3], m1.r[0]);	//bottom
+            v1 = add(wvp.r[3], m1.r[0]);    //left
+            v2 = sub(wvp.r[3], m1.r[0]);    //right
+            v3 = sub(wvp.r[3], m1.r[1]);    //top
+            v4 = add(wvp.r[3], m1.r[0]);    //bottom
 
-            v5 = m1.r[2];				    //near
-            v6 = sub(wvp.r[3], m1.r[2]);	    //far
+            v5 = m1.r[2];                   //near
+            v6 = sub(wvp.r[3], m1.r[2]);        //far
 
             v1 = normalize_plane(v1);
             v2 = normalize_plane(v2);
@@ -620,39 +620,39 @@ namespace uc
         {
             float4  v1 = perspective_transform3(v, wvp);
 
-            float	half_height = (view_port.m_bottom - view_port.m_top) * 0.5f;
-            float	half_width = (view_port.m_right - view_port.m_left) * 0.5f;
+            float   half_height = (view_port.m_bottom - view_port.m_top) * 0.5f;
+            float   half_width = (view_port.m_right - view_port.m_left) * 0.5f;
 
             float4  scale = set(half_width, -half_height, view_port.m_max_z - view_port.m_min_z, 1.0f);
             float4  offset = set(view_port.m_left + half_width, view_port.m_top + half_height, view_port.m_min_z, 0.0f);
 
-            return	mad(v1, scale, offset);
+            return  mad(v1, scale, offset);
         }
 
         //unprojects a point on the screen coordinates, removes the view port transform
         //maps from view port -> 3d space
         inline float4 UC_MATH_CALL unproject(afloat4 v, afloat4x4 inverse_wvp, const view_port view_port)
         {
-            float	half_height = (view_port.m_bottom - view_port.m_top) * 0.5f;
-            float	half_width = (view_port.m_right - view_port.m_left) * 0.5f;
+            float   half_height = (view_port.m_bottom - view_port.m_top) * 0.5f;
+            float   half_width = (view_port.m_right - view_port.m_left) * 0.5f;
 
             float4  scale = set(half_width, -half_height, view_port.m_max_z - view_port.m_min_z, 1.0f);
             float4  offset = set(view_port.m_left + half_width, view_port.m_top + half_height, view_port.m_min_z, 0.0f);
 
             //undo the view port transform
             float4  v1 = sub(v, offset);
-            float4	v2 = div(v1, scale);
+            float4  v2 = div(v1, scale);
 
             float4  v3 = perspective_transform3(v2, inverse_wvp);
 
-            return	v3;
+            return  v3;
         }
 
         //returns near and far from a projection matrix
         inline std::tuple<float, float> UC_MATH_CALL extract_near_far(afloat4x4 p)
         {
-			float a = get_y(p.r[3]);// [2];
-			float b = get_y(p.r[2]);// [2];
+            float a = get_y(p.r[3]);// [2];
+            float b = get_y(p.r[2]);// [2];
 
             //float zf = a / ( 1.0f - b );
             //float zn = - a / b;
@@ -807,16 +807,16 @@ namespace uc
             const float4 v0 = div(sub(s0, c), splat(r)); // v0 = (s0-c) / r
             const float4 dot = dot2(v0, v0);
 
-            const float4 v0_1 = mul(v0, rsqrt(dot));			//normalize v0
+            const float4 v0_1 = mul(v0, rsqrt(dot));            //normalize v0
             const float4 z_ = sqrt(sub(one(), dot));
 
             const float4 v_mask_z = mask_z();
-            const float4 v0_2 = select(v0, z_, v_mask_z);		// v0.x, v0.y,  sqrt( 1 - (vx * vy)^2), 0
+            const float4 v0_2 = select(v0, z_, v_mask_z);       // v0.x, v0.y,  sqrt( 1 - (vx * vy)^2), 0
 
             const float4 cmp = swizzle<x, x, x, x>(dot);
-            const float4 mask = compare_gt(cmp, one());		// dot > 1.0f  
+            const float4 mask = compare_gt(cmp, one());     // dot > 1.0f  
 
-            float4 result = select(v0_2, v0_1, mask);		// select of two points, depending on the coordinates. snap on the ball
+            float4 result = select(v0_2, v0_1, mask);       // select of two points, depending on the coordinates. snap on the ball
 
             // make point
             const float4 v_mask_w = mask_w();

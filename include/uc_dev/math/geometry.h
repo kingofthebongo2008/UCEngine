@@ -4,7 +4,7 @@
 #include <tuple>
 #include <array>
 
-#include <uc_dev/math/vector.h>
+#include "vector.h"
 
 namespace uc
 {
@@ -86,21 +86,21 @@ namespace uc
             }
         }
 
-		struct alignas(16) clip3_result
-		{
-			uint32_t m_value;
-			uint32_t m_padding[3];
+        struct alignas(16) clip3_result
+        {
+            uint32_t m_value;
+            uint32_t m_padding[3];
 
-			clip3_result(uint32_t value) : m_value(value)
-			{
+            clip3_result(uint32_t value) : m_value(value)
+            {
 
-			}
+            }
 
-			operator uint32_t() const
-			{
-				return m_value;
-			}
-		};
+            operator uint32_t() const
+            {
+                return m_value;
+            }
+        };
 
         //sutherland hodgeman clipping.
         //The clip3 function computes the intersection of triangle (v0; v1; v2) with the half-space (x; y; z) * n > 0
@@ -108,9 +108,9 @@ namespace uc
         //returns number of clipped triangles
         inline std::tuple< clip3_result, float4, float4, float4, float4> UC_MATH_CALL clip3(afloat4 n, afloat4 v0_i, afloat4 v1_i, bfloat4 v2_i)
         {
-			float4 v0 = v0_i;
-			float4 v1 = v1_i;
-			float4 v2 = v2_i;
+            float4 v0 = v0_i;
+            float4 v1 = v1_i;
+            float4 v2 = v2_i;
 
             const float4 d0 = dot3(v0, n);
             const float4 d1 = dot3(v1, n);
@@ -553,7 +553,7 @@ namespace uc
 
                     const aabb4* __restrict box = &b[i];
 
-                    if (mask == 0x0)	/// min, min, min - max,max,max
+                    if (mask == 0x0)    /// min, min, min - max,max,max
                     {
                         std::tuple< __m128i, bool>  r = intersect_p_n
                             <

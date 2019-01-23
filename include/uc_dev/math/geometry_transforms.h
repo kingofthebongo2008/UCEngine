@@ -3,9 +3,9 @@
 #include <limits>
 #include <tuple>
 
-#include <uc_dev/math/geometry.h>
-#include <uc_dev/math/vector.h>
-#include <uc_dev/math/matrix.h>
+#include "geometry.h"
+#include "vector.h"
+#include "matrix.h"
 
 namespace uc
 {
@@ -14,13 +14,13 @@ namespace uc
         //translation and rotation or reflection, preserve length and angles
         struct euclidean_transform_3d
         {
-            float4x4 m_value;	
+            float4x4 m_value;   
         };
 
         //euclidean + scale, shear,  does not preserve length and angles
         struct affine_transform_3d
         {
-            float4x4 m_value;	
+            float4x4 m_value;   
         };
 
         //affine + does not preserve parallel lines

@@ -5,8 +5,8 @@
 #include <optional>
 #include <vector>
 
-#include <uc_dev/math/geometry.h>
-#include <uc_dev/math/geometry_functions.h>
+#include "geometry.h"
+#include "geometry_functions.h"
 
 namespace uc
 {

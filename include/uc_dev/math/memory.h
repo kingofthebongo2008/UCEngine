@@ -1,6 +1,6 @@
 #pragma once
 
-#include <uc_dev/math/math.h>
+#include "math.h"
 
 #include <memory>
 #include <malloc.h>

@@ -2,8 +2,8 @@
 
 #include <tuple>
 
-#include <uc_dev/math/vector.h>
-#include <uc_dev/math/defines.h>
+#include "vector.h"
+#include "defines.h"
 
 namespace uc
 {

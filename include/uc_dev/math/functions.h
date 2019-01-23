@@ -2,8 +2,8 @@
 
 #include <tuple>
 
-#include <uc_dev/math/vector.h>
-#include <uc_dev/math/defines.h>
+#include "vector.h"
+#include "defines.h"
 
 namespace uc
 {
@@ -13,7 +13,7 @@ namespace uc
         {
             inline float4 UC_MATH_CALL int_part(afloat4 v)
             {
-                alignas(16) static const uint32_t sign_mask[4] = { 0x80000000,	0x80000000, 0x80000000, 0x80000000 };
+                alignas(16) static const uint32_t sign_mask[4] = { 0x80000000,  0x80000000, 0x80000000, 0x80000000 };
 
                 float4 mask = load4(reinterpret_cast<const float*> (&sign_mask[0]));
                 float4 sign = simd_and(v, mask);
@@ -23,8 +23,8 @@ namespace uc
                 //23 is the bits in the mantissa
                 float4 two_shift_23 = splat(8388608.0f);
 
-                float4 result = add(abs, two_shift_23);	//eliminate the mantissa in v
-                result = sub(result, two_shift_23);				//reconstruct the number
+                float4 result = add(abs, two_shift_23); //eliminate the mantissa in v
+                result = sub(result, two_shift_23);             //reconstruct the number
 
                 //1.6 returns 2, instead of 1
                 float4 le = compare_le(abs, result);
@@ -144,8 +144,8 @@ namespace uc
         }
 
         //does not perform parameter check. expects input parameters in -pi<=value<pi
-        float4	sin_1(float4 value);
-        float4	cos_1(float4 value);
+        float4  sin_1(float4 value);
+        float4  cos_1(float4 value);
 
         inline std::tuple<float4, float4> UC_MATH_CALL sin_cos(afloat4 value)
         {
@@ -164,13 +164,13 @@ namespace uc
             return std::make_tuple(v_1, v_2);
         }
 
-        inline float4	UC_MATH_CALL sin(afloat4 value)
+        inline float4   UC_MATH_CALL sin(afloat4 value)
         {
             float4 v = details::mod_angles(value);
             return sin_1(v);
         }
 
-        inline float4	UC_MATH_CALL cos(afloat4 value)
+        inline float4   UC_MATH_CALL cos(afloat4 value)
         {
             float4 v = details::mod_angles(value);
             return cos_1(v);
