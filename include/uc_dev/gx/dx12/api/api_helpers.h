@@ -1,7 +1,7 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/api/dxgi_helpers.h>
-#include <uc_dev/gx/dx12/api/helpers.h>
+#include "dxgi_helpers.h"
+#include "helpers.h"
 
 
 namespace uc

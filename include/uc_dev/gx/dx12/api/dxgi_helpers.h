@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dxgi1_4.h>
+#include <dxgi1_5.h>
 #include <cstdint>
 #include <wrl/client.h>
 
-#include <uc_dev/gx/dx12/api/error.h>
+#include "error.h"
 
 namespace uc
 {

@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <wrl/client.h>
 
-#include <uc_dev/gx/dx12/api/error.h>
+#include "error.h"
 
 namespace uc
 {

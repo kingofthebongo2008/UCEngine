@@ -7,7 +7,7 @@
 #include <uc_dev/mem/alloc.h>
 #include <uc_dev/sys/memcpy.h>
 
-#include <uc_dev/gx/dx12/api/helpers.h>
+#include "helpers.h"
 
 namespace uc
 {
