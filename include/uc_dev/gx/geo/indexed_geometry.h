@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <uc_dev/gx/dx12/gpu/managed_buffer.h>
-#include <uc_dev/gx/geo/vertex_strides.h>
+#include "vertex_strides.h"
 
 namespace uc
 {

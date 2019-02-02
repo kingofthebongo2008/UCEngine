@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include <uc_dev/gx/geo/normal_meshes_allocator.h>
+#include "normal_meshes_allocator.h"
 #include <uc_dev/gx/dx12/gpu/managed_buffer.h>
 
 namespace uc

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/virtual_resource.h>
+#include "virtual_resource.h"
 
 #include <cstdint>
 

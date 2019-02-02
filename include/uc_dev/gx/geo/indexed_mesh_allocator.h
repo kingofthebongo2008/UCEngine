@@ -5,7 +5,7 @@
 #include <uc_dev/util/noncopyable.h>
 #include <uc_dev/util/pimpl.h>
 #include <uc_dev/gx/dx12/gpu/managed_buffer.h>
-#include <uc_dev/gx/geo/vertex_strides.h>
+#include "vertex_strides.h"
 
 #include <d3d12.h>
 

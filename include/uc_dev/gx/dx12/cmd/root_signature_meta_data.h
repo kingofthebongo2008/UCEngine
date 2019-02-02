@@ -4,8 +4,8 @@
 #include <d3d12.h>
 
 #include <uc_dev/gx/dx12/gpu/descriptor_heap.h>
-
 #include <uc_dev/gx/dx12/api/helpers.h>
+
 namespace uc
 {
     namespace gx

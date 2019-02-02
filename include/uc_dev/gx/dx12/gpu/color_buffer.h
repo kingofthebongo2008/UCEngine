@@ -1,8 +1,8 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/virtual_resource.h>
-#include <uc_dev/gx/dx12/gpu/pixel_buffer.h>
-#include <uc_dev/gx/dx12/gpu/descriptor_heap.h>
+#include "virtual_resource.h"
+#include "pixel_buffer.h"
+#include "descriptor_heap.h"
 
 namespace uc
 {

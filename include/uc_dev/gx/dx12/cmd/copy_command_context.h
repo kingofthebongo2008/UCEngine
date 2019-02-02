@@ -1,7 +1,7 @@
 #pragma once
 
 #include <uc_dev/gx/dx12/gpu/pipeline_state.h>
-#include <uc_dev/gx/dx12/cmd/command_context.h>
+#include "command_context.h"
 
 namespace uc
 {

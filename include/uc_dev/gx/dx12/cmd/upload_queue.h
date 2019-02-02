@@ -7,8 +7,10 @@
 #include <uc_dev/mem/intrusive_ptr.h>
 #include <uc_dev/util/pimpl.h>
 
-#include <uc_dev/gx/dx12/cmd/upload_buffer_handle.h>
 #include <uc_dev/gx/dx12/gpu/fence_value.h>
+
+#include "upload_buffer_handle.h"
+
 
 namespace uc
 {

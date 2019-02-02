@@ -2,8 +2,8 @@
 
 #include <uc_dev/gx/dx12/api/helpers.h>
 
-#include <uc_dev/gx/dx12/cmd/command_allocator.h >
-#include <uc_dev/gx/dx12/cmd/command_queue.h >
+#include "command_allocator.h"
+#include "command_queue.h"
 
 namespace uc
 {

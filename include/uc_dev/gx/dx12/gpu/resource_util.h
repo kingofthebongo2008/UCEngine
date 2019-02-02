@@ -3,8 +3,8 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 
-#include <uc_dev/gx/dx12/gpu/virtual_resource.h>
 #include <uc_dev/gx/dx12/api/helpers.h>
+#include "virtual_resource.h"
 
 namespace uc
 {

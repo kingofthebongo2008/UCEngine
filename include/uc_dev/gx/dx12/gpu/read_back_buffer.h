@@ -1,8 +1,9 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/virtual_resource.h>
-#include <uc_dev/gx/dx12/gpu/descriptor_heap.h>
 #include <uc_dev/gx/dx12/api/error.h>
+
+#include "virtual_resource.h"
+#include "descriptor_heap.h"
 
 namespace uc
 {

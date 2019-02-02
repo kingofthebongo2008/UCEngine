@@ -3,7 +3,7 @@
 #include <vector>
 #include <uc_dev/math/math.h>
 
-#include <uc_dev/gx/anm/skeleton_animation_map.h>
+#include "skeleton_animation_map.h"
 
 namespace uc
 {

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/dx12_gpu_upload_buffer.h>
-#include <uc_dev/gx/dx12/gpu/dx12_gpu_resource_create_context.h>
-#include <uc_dev/gx/dx12/gpu/dx12_gpu_map_guard.h>
-
+#include "gpu_upload_buffer.h"
+#include "gpu_resource_create_context.h"
+#include "gpu_map_guard.h"
 
 namespace uc
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/cmd/upload_queue.h>
+#include "upload_queue.h"
 
 namespace uc
 {

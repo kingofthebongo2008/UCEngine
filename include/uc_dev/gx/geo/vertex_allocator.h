@@ -1,7 +1,7 @@
 #pragma once
 
 #include <uc_dev/util/noncopyable.h>
-#include <uc_dev/gx/geo/object_allocator.h>
+#include "object_allocator.h"
 
 namespace uc
 {

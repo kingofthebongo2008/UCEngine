@@ -3,7 +3,7 @@
 #include <queue>
 
 #include <uc_dev/util/noncopyable.h>
-#include <uc_dev/gx/dx12/cmd/base_command_context.h>
+#include "base_command_context.h"
 
 namespace uc
 {

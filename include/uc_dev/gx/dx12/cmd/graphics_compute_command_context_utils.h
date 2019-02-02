@@ -2,7 +2,7 @@
 
 
 #include <uc_dev/gx/dx12/cmd/graphics_compute_command_context.h>
-#include <uc_dev/gx/dx12/cmd/command_context_utils.h>
+#include "command_context_utils.h"
 
 
 namespace uc

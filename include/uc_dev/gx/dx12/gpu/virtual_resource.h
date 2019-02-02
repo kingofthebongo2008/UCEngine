@@ -3,7 +3,7 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 
-#include <uc_dev/gx/dx12/gpu/resource.h>
+#include "resource.h"
 
 namespace uc
 {

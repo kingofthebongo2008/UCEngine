@@ -1,9 +1,10 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/virtual_resource.h>
-#include <uc_dev/gx/dx12/gpu/descriptor_heap.h>
 #include <uc_dev/gx/dx12/api/error.h>
 #include <uc_dev/gx/dx12/api/helpers.h>
+
+#include "virtual_resource.h"
+#include "descriptor_heap.h"
 
 namespace uc
 {
@@ -35,8 +36,8 @@ namespace uc
                     return m_code_size;
                 }
 
-				const uint8_t*  m_code;
-				size_t          m_code_size;
+                const uint8_t*  m_code;
+                size_t          m_code_size;
             };
 
             inline Microsoft::WRL::ComPtr<ID3D12RootSignature> create_root_signature(ID3D12Device* d, gpu_root_signature_blob blob)

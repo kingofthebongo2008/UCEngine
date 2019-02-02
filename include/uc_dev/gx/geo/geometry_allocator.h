@@ -2,10 +2,10 @@
 
 #include <cstdint>
 
-#include <uc_dev/gx/geo/indexed_geometry_allocator.h>
-#include <uc_dev/gx/geo/normal_geometry_allocator.h>
-#include <uc_dev/gx/geo/skinned_geometry_allocator.h>
-#include <uc_dev/gx/geo/static_geometry_allocator.h>
+#include "indexed_geometry_allocator.h"
+#include "normal_geometry_allocator.h"
+#include "skinned_geometry_allocator.h"
+#include "static_geometry_allocator.h"
 
 #include <uc_dev/gx/dx12/gpu/managed_buffer.h>
 

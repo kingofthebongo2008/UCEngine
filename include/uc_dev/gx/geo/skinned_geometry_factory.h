@@ -1,6 +1,6 @@
 #pragma once
 
-#include <uc_dev/gx/geo/geometry_allocator.h>
+#include "geometry_allocator.h"
 #include <gsl/gsl>
 
 namespace uc

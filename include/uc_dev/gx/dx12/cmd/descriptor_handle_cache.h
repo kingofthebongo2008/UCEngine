@@ -4,7 +4,7 @@
 #include <d3d12.h>
 
 #include <uc_dev/gx/dx12/gpu/descriptor_heap.h>
-#include <uc_dev/gx/dx12/cmd/root_signature_meta_data.h>
+#include "root_signature_meta_data.h"
 
 namespace uc
 {

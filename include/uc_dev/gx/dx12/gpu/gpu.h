@@ -1,26 +1,26 @@
 #pragma once
 
-#include <uc_dev/gx/dx12/gpu/resource.h>
-#include <uc_dev/gx/dx12/gpu/depth_buffer.h>
-#include <uc_dev/gx/dx12/gpu/pixel_buffer.h>
-#include <uc_dev/gx/dx12/gpu/texture_2d.h>
-#include <uc_dev/gx/dx12/gpu/texture_2d_array.h>
+#include "resource.h"
+#include "depth_buffer.h"
+#include "pixel_buffer.h"
+#include "texture_2d.h"
+#include "texture_2d_array.h"
 
-#include <uc_dev/gx/dx12/gpu/allocators/allocators.h>
+#include "allocators/allocators.h"
 
-#include <uc_dev/gx/dx12/gpu/resource_create_context.h>
-#include <uc_dev/gx/dx12/gpu/pipeline_state.h>
+#include "resource_create_context.h"
+#include "pipeline_state.h"
 
-#include <uc_dev/gx/dx12/gpu/shaders.h>
-#include <uc_dev/gx/dx12/gpu/root_signature_blob.h>
+#include "shaders.h"
+#include "root_signature_blob.h"
 
-#include <uc_dev/gx/dx12/gpu/info.h>
+#include "info.h"
 
-#include <uc_dev/gx/dx12/gpu/managed_buffer.h>
-#include <uc_dev/gx/dx12/gpu/managed_texture_2d.h>
-#include <uc_dev/gx/dx12/gpu/managed_texture_2d_array.h>
-#include <uc_dev/gx/dx12/gpu/managed_read_write_texture_2d.h>
+#include "managed_buffer.h"
+#include "managed_texture_2d.h"
+#include "managed_texture_2d_array.h"
+#include "managed_read_write_texture_2d.h"
 
 
-#include <uc_dev/gx/dx12/gpu/pipeline_state.h>
-#include <uc_dev/gx/dx12/gpu/pipeline_state_util.h>
+#include "pipeline_state.h"
+#include "pipeline_state_util.h"

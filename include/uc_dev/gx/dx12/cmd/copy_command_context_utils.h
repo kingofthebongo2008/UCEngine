@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <uc_dev/gx/dx12/cmd/copy_command_context.h>
-#include <uc_dev/gx/dx12/cmd/command_context_utils.h>
+#include "copy_command_context.h"
+#include "command_context_utils.h"
 
 
 namespace uc

@@ -4,12 +4,13 @@
 
 #include <uc_dev/util/noncopyable.h>
 #include <uc_dev/gx/dx12/api/helpers.h>
-#include <uc_dev/gx/dx12/cmd/command_queue.h>
 #include <uc_dev/gx/dx12/gpu/allocators/upload_allocator.h>
 #include <uc_dev/gx/dx12/gpu/resource_create_context.h>
-#include <uc_dev/gx/dx12/cmd/command_manager.h>
-#include <uc_dev/gx/dx12/cmd/command_descriptor_cache.h>
-#include <uc_dev/gx/dx12/cmd/descriptor_handle_cache.h>
+
+#include "command_queue.h"
+#include "command_manager.h"
+#include "command_descriptor_cache.h"
+#include "descriptor_handle_cache.h"
 
 
 
@@ -24,13 +25,13 @@ namespace uc
 
             struct gpu_base_command_context : public util::noncopyable
             {
-                gpu_command_manager*                    m_command_manager;	        //allocate command lists here
-                gpu_command_queue*                      m_command_queue;	        //submit command lists here
+                gpu_command_manager*                    m_command_manager;          //allocate command lists here
+                gpu_command_queue*                      m_command_queue;            //submit command lists here
                 gpu_resource_create_context*            m_rc;
                 Microsoft::WRL::ComPtr<ID3D12Device>    m_device;
 
-                gpu_upload_allocator                    m_upload_allocator;	            //allocate upload data
-                gpu_command_manager::command_list       m_command_list;		            //current command list
+                gpu_upload_allocator                    m_upload_allocator;             //allocate upload data
+                gpu_command_manager::command_list       m_command_list;                 //current command list
                 gpu_command_descriptor_cache            m_descriptor_cache;             //allocate handles per frame
                 descriptor_handle_cache                 m_descriptor_handle_cache0;     //descriptor tables for the dynamic tables, if you have only graphics or compute goes here
                 descriptor_handle_cache                 m_descriptor_handle_cache1;     //descriptor tables for the dynamic tables  if you have graphics and compute, compute goes here

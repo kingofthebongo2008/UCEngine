@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include <uc_dev/gx/geo/skinned_meshes_allocator.h>
+#include "skinned_meshes_allocator.h"
 #include <uc_dev/gx/dx12/gpu/managed_buffer.h>
 
 namespace uc

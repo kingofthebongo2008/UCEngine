@@ -4,7 +4,7 @@
 #include <cstdint>
 
 #include <uc_dev/mem/alloc.h>
-#include <uc_dev/gx/dx12/gpu/pixel_format.h>
+#include "pixel_format.h"
 
 namespace uc
 {

@@ -5,11 +5,11 @@
 #include <uc_dev/gx/dx12/gpu/depth_buffer.h>
 #include <uc_dev/gx/dx12/gpu/depth_stencil_buffer.h>
 #include <uc_dev/gx/dx12/gpu/pipeline_state.h>
-#include <uc_dev/gx/dx12/cmd/command_context.h>
-
 #include <uc_dev/gx/dx12/gpu/resource_util.h>
 
 #include <uc_dev/mem/align.h>
+
+#include "command_context.h"
 
 
 namespace uc

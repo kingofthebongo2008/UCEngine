@@ -3,9 +3,9 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 
-#include <uc_dev/gx/dx12/gpu/dx12_gpu_virtual_resource.h>
-#include <uc_dev/gx/dx12/gpu/dx12_gpu_texture_2d.h>
 #include <uc_dev/gx/dx12/api/dx12_api_helpers.h>
+#include "dx12_gpu_virtual_resource.h"
+#include "dx12_gpu_texture_2d.h"
 
 namespace uc
 {

@@ -13,8 +13,6 @@
 #include <uc_dev/gx/dx12/gpu/upload_buffer.h>
 #include <uc_dev/gx/dx12/cmd/command_queue.h>
 
-
-
 namespace uc
 {
     namespace gx
