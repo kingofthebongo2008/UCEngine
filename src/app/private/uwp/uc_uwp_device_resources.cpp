@@ -51,10 +51,7 @@ namespace uc
                 if (hresult == S_OK)
                 {
                     m_debug->EnableDebugLayer();
-                    if (!IsNvidia(adapters[0].Get()))
-                    {
-                        m_debug->SetEnableGPUBasedValidation(TRUE);
-                    }
+                    m_debug->SetEnableGPUBasedValidation(TRUE);
                 }
             }
 #endif
