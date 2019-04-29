@@ -120,6 +120,7 @@
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +133,8 @@
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

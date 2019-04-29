@@ -24,6 +24,7 @@ cbuffer per_draw_call : register(b1)
 {
     euclidean_transform_3d  m_world;
     float4x4                m_joints_palette[127];
+
 };
 
 [RootSignature( MyRS1 ) ]

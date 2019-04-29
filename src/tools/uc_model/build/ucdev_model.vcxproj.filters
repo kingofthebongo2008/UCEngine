@@ -218,5 +218,8 @@
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt-d.dll" />
     <None Include="$(AssImpDirectory)\bin\x86\assimp-vc140-mt.dll" />
     <None Include="packages.config" />
+    <None Include="$(MSBuildThisFileDirectory)..\bin\win-x64\*.dll" />
+    <None Include="$(MSBuildThisFileDirectory)..\bin\win-x64\*.dll" />
+    <None Include="$(MSBuildThisFileDirectory)..\bin\win-x64\*.dll" />
   </ItemGroup>
 </Project>

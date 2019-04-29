@@ -16,7 +16,7 @@
     <RootNamespace>UniqueCreatorBuildTasks</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>uc_build_tasks</ProjectName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <OutputBinDirectory Condition="'$(OutputBinDirectory)'==''">$(ProjectDir)..\..\bin</OutputBinDirectory>

@@ -20,9 +20,16 @@ build/build.bat
 *.xbf
 build/packages/
 build/.vs/
+build/autogen/
 build/Generated Files/
 build/test_xaml/x64/
 build/x64/
+build-engine/packages/
+build-engine/.vs/
+build-engine/Generated Files/
+build-engine/test_xaml/x64/
+build-engine/x64/
+build-engine/autogen/
 lib/x64/debug/ucdev_render_x64_d.lib
 lib/x64/debug/ucdev_system_x64_d.lib
 lib/x64/release/ucdev_render_x64_r.lib
