@@ -208,7 +208,7 @@ namespace UniqueCreator
 
                     case shader_pipeline_stage::root_signature:
                     {
-                        return std::string("rootsig_1_0");
+                        return std::string("rootsig_1_1");
                     }
 
                     default:
