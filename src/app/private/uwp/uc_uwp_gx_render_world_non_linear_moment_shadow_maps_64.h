@@ -12,6 +12,8 @@
 
 #include "uc_uwp_gx_render_world_moment_shadows_data.h"
 
+#include "posenet/uc_uwp_camera_view.h"
+
 namespace uc
 {
     namespace uwp
@@ -34,6 +36,8 @@ namespace uc
                 std::unique_ptr< submitable >do_render_shadows(shadow_render_context* ctx) override;
 
                 std::unique_ptr<gx::blue_noise::ldr_rg01_64x64> m_blue_noise;
+
+                std::unique_ptr<camera_view>                    m_camera_view;
             };
         }
     }

@@ -6,6 +6,7 @@
 </ItemGroup>
 <ItemGroup>	
 <ClCompile Include = "..\src\app\private\main.cpp" />	
+<ClCompile Include = "..\src\app\private\uwp\posenet\uc_uwp_camera_view.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_resources.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_context.cpp" />	

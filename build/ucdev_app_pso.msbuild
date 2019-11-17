@@ -2,6 +2,9 @@
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
 
 <ItemGroup>	
+<GraphicsPipelineStateObject Include = "..\src\app\private\uwp\posenet\shaders\camera_view_graphics.pso"><Backend>UniqueCreatorDev</Backend><EntryPointName>camera_view_graphics</EntryPointName></GraphicsPipelineStateObject>
+</ItemGroup>
+<ItemGroup>	
 <GraphicsPipelineStateObject Include = "..\src\uc_dev\private\gx\dx12\shaders\building_graphics.pso"><Backend>UniqueCreatorDev</Backend><EntryPointName>building_graphics</EntryPointName></GraphicsPipelineStateObject>	
 <GraphicsPipelineStateObject Include = "..\src\uc_dev\private\gx\dx12\shaders\depth_prepass_lines_graphics.pso"><Backend>UniqueCreatorDev</Backend><EntryPointName>depth_prepass_lines_graphics</EntryPointName></GraphicsPipelineStateObject>	
 <GraphicsPipelineStateObject Include = "..\src\uc_dev\private\gx\dx12\shaders\full_screen_color_graphics.pso"><Backend>UniqueCreatorDev</Backend><EntryPointName>full_screen_color_graphics</EntryPointName></GraphicsPipelineStateObject>	

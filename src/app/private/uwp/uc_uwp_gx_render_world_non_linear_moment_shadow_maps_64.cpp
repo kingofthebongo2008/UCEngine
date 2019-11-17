@@ -137,7 +137,6 @@ namespace uc
                 graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, ctx->m_shadow_map->srv(), 0);
                 graphics->set_graphics_dynamic_descriptor(gx::dx12::default_root_singature::slots::srv_1, m_blue_noise->srv(),1);
 
-
                 //mechanic
                 {
                     auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Mechanic"); 
@@ -175,7 +174,6 @@ namespace uc
                     }
                 }
 
-
                 //plane
                 {
                     auto profile_event0 = uc::gx::dx12::make_profile_event(graphics.get(), L"Plane");
@@ -191,6 +189,20 @@ namespace uc
 
                     graphics->draw(6);
                 }
+
+                //Quad
+
+
+
+
+
+
+
+
+
+
+
+
 
                 end_render(ctx, graphics.get());
 

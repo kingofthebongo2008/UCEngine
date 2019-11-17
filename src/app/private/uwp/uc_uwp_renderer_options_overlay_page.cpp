@@ -197,34 +197,6 @@ namespace uc
                     *ctx->m_window_close = true;
                 }
             }
-            /*
-            static const char* menu_names[] =
-            {
-                "Robot",
-                "Military Mechanic",
-                "Bear",
-                "Deer",
-                "Skeleton",
-                "Mid Poly Robot",
-                "Full Screen Color",
-                "Control Robot",
-                "Indexed Mesh"
-            };
-
-            static gxu::world_id scene_id[] =
-            {
-                gxu::world_id::scene0,
-                gxu::world_id::scene1,
-                gxu::world_id::scene2,
-
-                gxu::world_id::scene3,
-                gxu::world_id::scene4,
-                gxu::world_id::scene5,
-                gxu::world_id::scene6,
-                gxu::world_id::scene7,
-                gxu::world_id::scene8
-            };
-            */
 
             static const char* menu_names[] =
             {
