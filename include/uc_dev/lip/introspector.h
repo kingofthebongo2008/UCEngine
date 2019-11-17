@@ -86,15 +86,15 @@ namespace uc
 
 
             template <typename f>
-            void for_each_base_class(const f& f) const
+            void for_each_base_class(const f& _f) const
             {
-                std::for_each(std::cbegin(m_base_classes), std::cend(m_base_classes), f);
+                std::for_each(std::cbegin(m_base_classes), std::cend(m_base_classes), _f);
             }
 
             template <typename f>
-            void for_each_member(const f& f) const
+            void for_each_member(const f& _f) const
             {
-                std::for_each(std::cbegin(m_members), std::cend(m_members), f);
+                std::for_each(std::cbegin(m_members), std::cend(m_members), _f);
             }
 
             private:

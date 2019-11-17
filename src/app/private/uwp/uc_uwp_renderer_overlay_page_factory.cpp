@@ -18,7 +18,7 @@ namespace uc
                 switch (id)
                 {
                     case pageid::debug_page     : return std::unique_ptr<page>(new debug_page(ctx));
-                    //case pageid::options_page   : return std::unique_ptr<page>(new options_page(ctx));
+					//case pageid::options_page   : return std::unique_ptr<page>(new options_page(ctx));
                     default: return nullptr;
                 }
             }

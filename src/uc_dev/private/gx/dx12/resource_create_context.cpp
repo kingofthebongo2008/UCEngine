@@ -606,7 +606,7 @@ namespace uc
 
             namespace details
             {
-                template <typename t, typename allocator, typename srv_heap_t> t* create_color_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state, allocator* allocator, gpu_rtv_descriptor_heap* rtv_heap, srv_heap_t* srv_heap)
+                template <typename t, typename allocator, typename srv_heap_t> t* create_color_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, D3D12_RESOURCE_STATES initial_state, allocator* _allocator, gpu_rtv_descriptor_heap* rtv_heap, srv_heap_t* srv_heap)
                 {
                     D3D12_CLEAR_VALUE v = {};
                     v.Format = format;
@@ -619,7 +619,7 @@ namespace uc
                     rtv.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
                     rtv.Texture2D.MipSlice = 0;
 
-                    resource = allocator->create_placed_resource(&desc, initial_state, &v);
+                    resource = _allocator->create_placed_resource(&desc, initial_state, &v);
                     resource->SetName(L"Color Buffer");
 
                     auto handle = rtv_heap->allocate();
@@ -648,7 +648,7 @@ namespace uc
 
                     return new t(resource.Get(), handle, srv, uav);
                 }
-                template <typename t, typename allocator, typename srv_heap_t> t* create_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
+                template <typename t, typename allocator, typename srv_heap_t> t* create_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* _allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
                 {
                     D3D12_CLEAR_VALUE v = {};
                     v.Format = format;
@@ -659,7 +659,7 @@ namespace uc
 
                     Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
 
-                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
+                    resource = _allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
                     resource->SetName(L"Depth Buffer");
 
                     // Create the shader resource view
@@ -694,7 +694,7 @@ namespace uc
 
                     return new t(resource.Get(), srv, dsv );
                 }
-                template <typename t, typename allocator, typename srv_heap_t> t* create_msaa_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
+                template <typename t, typename allocator, typename srv_heap_t> t* create_msaa_depth_buffer(ID3D12Device* d, uint32_t width, uint32_t height, DXGI_FORMAT format, float clear_value, uint8_t stencil, allocator* _allocator, gpu_dsv_descriptor_heap* dsv_heap, srv_heap_t* srv_heap)
                 {
                     D3D12_CLEAR_VALUE v = {};
                     v.Format = format;
@@ -705,7 +705,7 @@ namespace uc
 
                     Microsoft::WRL::ComPtr<ID3D12Resource>  resource;
 
-                    resource = allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
+                    resource = _allocator->create_placed_resource(&desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &v);
                     resource->SetName(L"MSAA Depth Buffer");
 
                     // Create the shader resource view

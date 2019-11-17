@@ -36,7 +36,7 @@ namespace uc
 
             private:
 
-                std::array< std::unique_ptr<page>, 3 > m_pages;
+                std::array< std::unique_ptr<page>, 2 > m_pages;
                 uint16_t                               m_active_page_index = 0xffff;
 
                 virtual void do_update(update_context* ctx);

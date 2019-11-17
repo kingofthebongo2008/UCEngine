@@ -21,13 +21,13 @@ namespace uc
                 g.run([this, c]
                 {
                     page_manager_factory factory;
-                    m_pages[1] = factory.create_page(pageid::debug_page, c);
+                    m_pages[0] = factory.create_page(pageid::debug_page, c);
                 });
 
                 g.run([this, c, m]
                 {
                     page_manager_factory factory;
-                    m_pages[2] = factory.create_options_page(c, m);
+                    m_pages[1] = factory.create_options_page(c, m);
                 });
                 
                 g.wait();
