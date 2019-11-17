@@ -86,6 +86,12 @@ namespace uc
                     m_blue_noise = gx::blue_noise::make_blue_noise(c->m_resources->resource_create_context(), c->m_resources->upload_queue());
                 });
 
+                //load
+                g.run([this, c]
+                {
+                    m_camera_view = std::make_unique<camera_view>(c);
+                });
+
                 g.wait();
             }
 
