@@ -228,12 +228,6 @@ namespace uc
 
             static const char* menu_names[] =
             {
-                "Bear",
-                "Deer",
-                "Full Screen Color",
-                "Skeleton",
-                "Robot",
-                "Military Mechanic",
                 "Shadows - Moment Shadow Maps",
                 "Shadows - Non Linear Moment Shadow Maps 64",
                 "Shadows - Non Linear Moment Shadow Maps 32"
@@ -241,12 +235,6 @@ namespace uc
 
             static gxu::world_id scene_id[] =
             {
-                gxu::world_id::scene2,
-                gxu::world_id::scene3,
-                gxu::world_id::scene6,
-                gxu::world_id::scene4,
-                gxu::world_id::scene0,
-                gxu::world_id::scene1,
                 gxu::world_id::moment_shadow_maps,
                 gxu::world_id::non_linear_moment_shadow_maps_64,
                 gxu::world_id::non_linear_moment_shadow_maps_32

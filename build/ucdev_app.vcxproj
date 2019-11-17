@@ -108,9 +108,9 @@
       <AdditionalIncludeDirectories>../include;../src/streamflow/private/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4702</DisableSpecificWarnings>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <CompileAsWinRT>false</CompileAsWinRT>
+      <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,7 +138,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4702</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
@@ -166,41 +166,8 @@
     <Image Include="assets\storelogo.png" />
     <Image Include="assets\wide310x150logo.scale-200.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="../data/images/image_0.png">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/image_0.png'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="../data/images/image_1.jpg">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/image_1.jpg'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="../data/images/deer.png">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/deer.png'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="../data/images/bear.png">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/bear.png'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="../data/images/bear.jpg">
-      <Link>$([MSBuild]::MakeRelative($(TargetDir), 'appdata/images/bear.jpg'))</Link>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="ucdev_system.vcxproj">
-      <Project>{e98e2a28-0291-4337-9863-af619a7c606f}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <Import Project="asset/robot.msbuild" />
-  <!--Import Project="asset/robot_mid_poly.msbuild" /-->
-  <Import Project="asset/deer.msbuild" />
-  <Import Project="asset/bear.msbuild" />
   <Import Project="asset/military_mechanic.msbuild" />
-  <!--Import Project="asset/military_mechanic_indexed.msbuild" /-->
-  <!--Import Project="asset/military_mechanic_multi_textured.msbuild" /-->
   <Import Project="msbuild/ucdev_render.targets" />
   <Import Project="msbuild/ucdev_render_model.targets" />
   <Import Project="msbuild/ucdev_render_skeleton.targets" />
