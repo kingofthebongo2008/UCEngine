@@ -58,9 +58,6 @@
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.h">
       <Filter>src\app\private\uwp</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_hud_page.h">
-      <Filter>src\app\private\uwp</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\app\private\uwp\uc_uwp_renderer_impl.h">
       <Filter>src\app\private\uwp</Filter>
     </ClInclude>
@@ -102,12 +99,6 @@
     </ClInclude>
     <ClInclude Include="$(ImGuiDirectory)\imgui.h" />
     <ClInclude Include="$(ImGuiDirectory)\imgui_internal.h" />
-    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.h" />
-    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.h" />
-    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_intrusive_ptr.h" />
-    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.h" />
-    <ClInclude Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.h" />
-    <ClInclude Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src" />
@@ -792,11 +783,6 @@
     </ClCompile>
     <ClCompile Include="$(ImGuiDirectory)\imgui.cpp" />
     <ClCompile Include="$(ImGuiDirectory)\imgui_draw.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.cpp" />
-    <ClCompile Include="..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src" />
@@ -848,9 +834,6 @@
       <Filter>src\app\private\uwp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.cpp">
-      <Filter>src\app\private\uwp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_hud_page.cpp">
       <Filter>src\app\private\uwp</Filter>
     </ClCompile>
     <ClCompile Include="..\src\app\private\uwp\uc_uwp_renderer_impl.cpp">
@@ -1305,5 +1288,6 @@
     <None Include="ucdev_app.vcxproj" />
     <None Include="ucdev_app_TemporaryKey.pfx" />
     <None Include="ucdev_app_key.pfx" />
+    <None Include="$(MSBuildThisFileDirectory)..\bin\win-x64\*.dll" />
   </ItemGroup>
 </Project>
