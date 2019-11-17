@@ -167,7 +167,7 @@ namespace uc
 
                 g.run([this]()
                 {
-                    m_render_world_manager->show_world(gxu::world_id::non_linear_moment_shadow_maps_32);
+                    m_render_world_manager->show_world(gxu::world_id::non_linear_moment_shadow_maps_64);
                     //m_render_world_manager->show_world(gxu::world_id::scene2);
                 });
 
@@ -230,14 +230,12 @@ namespace uc
             {
                 "Shadows - Moment Shadow Maps",
                 "Shadows - Non Linear Moment Shadow Maps 64",
-                "Shadows - Non Linear Moment Shadow Maps 32"
             };
 
             static gxu::world_id scene_id[] =
             {
                 gxu::world_id::moment_shadow_maps,
-                gxu::world_id::non_linear_moment_shadow_maps_64,
-                gxu::world_id::non_linear_moment_shadow_maps_32
+                gxu::world_id::non_linear_moment_shadow_maps_64
             };
 
             constexpr size_t  menu_count = sizeof(menu_names) / sizeof(menu_names[0]);

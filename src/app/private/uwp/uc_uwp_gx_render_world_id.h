@@ -11,8 +11,7 @@ namespace uc
             {
                 none                                = 0xffff,
                 moment_shadow_maps                  = 0,
-                non_linear_moment_shadow_maps_64    = 1,
-                non_linear_moment_shadow_maps_32    = 2
+                non_linear_moment_shadow_maps_64    = 1
             };
         }
     }

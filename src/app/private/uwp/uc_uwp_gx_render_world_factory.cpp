@@ -3,7 +3,6 @@
 
 #include "uc_uwp_gx_render_world_moment_shadow_maps.h"
 #include "uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.h"
-#include "uc_uwp_gx_render_world_non_linear_moment_shadow_maps_32.h"
 
 namespace uc
 {
@@ -17,7 +16,6 @@ namespace uc
                 {
                     case world_id::moment_shadow_maps : return std::unique_ptr<render_world>(new render_world_moment_shadow_maps(ctx));
                     case world_id::non_linear_moment_shadow_maps_64: return std::unique_ptr<render_world>(new render_world_non_linear_moment_shadow_maps_64(ctx));
-                    case world_id::non_linear_moment_shadow_maps_32: return std::unique_ptr<render_world>(new render_world_non_linear_moment_shadow_maps_32(ctx));
                     default: return nullptr;
                 }
             }
