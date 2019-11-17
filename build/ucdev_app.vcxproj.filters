@@ -6,15 +6,9 @@
 <Filter Include = "src\app"/>
 <Filter Include = "src\app\private"/>
 <Filter Include = "src\app\private\uwp"/>
-<Filter Include = "src\app\private\uwp\librocket"/>
 </ItemGroup>
 <ItemGroup>	
 <ClInclude Include = "..\src\app\private\pch.h"><Filter>src\app\private</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.h"><Filter>src\app\private\uwp\librocket</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.h"><Filter>src\app\private\uwp\librocket</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_intrusive_ptr.h"><Filter>src\app\private\uwp\librocket</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.h"><Filter>src\app\private\uwp\librocket</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.h"><Filter>src\app\private\uwp\librocket</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_device_resources.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_gx_render_context.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
@@ -31,7 +25,6 @@
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_gx_submitable.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
-<ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_hud_page.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl_command.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl_window.h"><Filter>src\app\private\uwp</Filter></ClInclude>	
@@ -315,14 +308,9 @@
 <Filter Include = "src\app"/>
 <Filter Include = "src\app\private"/>
 <Filter Include = "src\app\private\uwp"/>
-<Filter Include = "src\app\private\uwp\librocket"/>
 </ItemGroup>
 <ItemGroup>	
 <ClCompile Include = "..\src\app\private\main.cpp"><Filter>src\app\private</Filter></ClCompile>	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.cpp"><Filter>src\app\private\uwp\librocket</Filter></ClCompile>	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.cpp"><Filter>src\app\private\uwp\librocket</Filter></ClCompile>	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.cpp"><Filter>src\app\private\uwp\librocket</Filter></ClCompile>	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.cpp"><Filter>src\app\private\uwp\librocket</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_resources.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_context.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
@@ -337,7 +325,6 @@
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
-<ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_hud_page.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_impl.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_options_overlay_console.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_options_overlay_log.cpp"><Filter>src\app\private\uwp</Filter></ClCompile>	

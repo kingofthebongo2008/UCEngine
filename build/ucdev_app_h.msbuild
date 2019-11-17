@@ -3,11 +3,6 @@
 
 <ItemGroup>	
 <ClInclude Include = "..\src\app\private\pch.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_intrusive_ptr.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_device_resources.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_gx_render_context.h"/>	
@@ -24,7 +19,6 @@
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_gx_submitable.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.h"/>	
-<ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_hud_page.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl_command.h"/>	
 <ClInclude Include = "..\src\app\private\uwp\uc_uwp_renderer_impl_window.h"/>	

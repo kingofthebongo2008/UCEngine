@@ -5,7 +5,6 @@
 
 #include "uc_uwp_renderer_debug_overlay_page.h"
 #include "uc_uwp_renderer_options_overlay_page.h"
-#include "uc_uwp_renderer_hud_page.h"
 
 
 namespace uc
@@ -18,7 +17,6 @@ namespace uc
             {
                 switch (id)
                 {
-                    case pageid::hud            : return std::unique_ptr<page>(new hud_page(ctx));
                     case pageid::debug_page     : return std::unique_ptr<page>(new debug_page(ctx));
                     //case pageid::options_page   : return std::unique_ptr<page>(new options_page(ctx));
                     default: return nullptr;

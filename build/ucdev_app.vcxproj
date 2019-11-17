@@ -30,7 +30,6 @@
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\msbuild\librocket.props" />
   <Import Project="..\msbuild\gsl.props" />
   <Import Project="..\msbuild\imgui.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
@@ -172,7 +171,6 @@
   <Import Project="msbuild/ucdev_render_model.targets" />
   <Import Project="msbuild/ucdev_render_skeleton.targets" />
   <Import Project="msbuild/ucdev_render_animation.targets" />
-  <Import Project="ucdev_app_librocket.data" />
   <Import Project="ucdev_app_hlsl.msbuild" />
   <Import Project="ucdev_app_pso.msbuild" />
   <Import Project="ucdev_app_h.msbuild" />

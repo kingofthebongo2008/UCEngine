@@ -136,7 +136,6 @@ namespace uc
             {
                 overlay::pageid pages[] =
                 {
-                    overlay::pageid::hud,
                     overlay::pageid::debug_page,
                     overlay::pageid::options_page,
                     overlay::pageid::none

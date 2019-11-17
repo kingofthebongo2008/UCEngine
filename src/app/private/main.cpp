@@ -57,8 +57,9 @@ public:
 
 #else
 
-        //ApplicationView::PreferredLaunchViewSize = Size(1600, 900);
-        ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::FullScreen);
+		ApplicationView::PreferredLaunchViewSize(winrt::Windows::Foundation::Size(1600, 900));
+		ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::PreferredLaunchViewSize);
+        //ApplicationView::PreferredLaunchWindowingMode(ApplicationViewWindowingMode::FullScreen);
 #endif
 
     }

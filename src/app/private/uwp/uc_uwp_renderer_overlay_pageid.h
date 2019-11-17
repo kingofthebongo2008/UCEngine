@@ -10,9 +10,8 @@ namespace uc
             enum class pageid
             {
                 none            = 0xffff,
-                hud             = 0,
-                debug_page      = 1,
-                options_page    = 2,
+                debug_page      = 0,
+                options_page    = 1,
             };
         }
     }

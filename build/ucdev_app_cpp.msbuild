@@ -6,10 +6,6 @@
 </ItemGroup>
 <ItemGroup>	
 <ClCompile Include = "..\src\app\private\main.cpp" />	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_file_interface.cpp" />	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_initializer.cpp" />	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_render_interface.cpp" />	
-<ClCompile Include = "..\src\app\private\uwp\librocket\uc_uwp_librocket_system_interface.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_resources.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_device_swap_chain_resources.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_context.cpp" />	
@@ -24,7 +20,6 @@
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_gx_render_world_non_linear_moment_shadow_maps_64.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_debug_overlay_page.cpp" />	
-<ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_hud_page.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_impl.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_options_overlay_console.cpp" />	
 <ClCompile Include = "..\src\app\private\uwp\uc_uwp_renderer_options_overlay_log.cpp" />	

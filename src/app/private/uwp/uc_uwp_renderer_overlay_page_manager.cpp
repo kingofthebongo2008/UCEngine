@@ -21,12 +21,6 @@ namespace uc
                 g.run([this, c]
                 {
                     page_manager_factory factory;
-                    m_pages[0] = factory.create_page(pageid::hud, c);
-                });
-
-                g.run([this, c]
-                {
-                    page_manager_factory factory;
                     m_pages[1] = factory.create_page(pageid::debug_page, c);
                 });
 
