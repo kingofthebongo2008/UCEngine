@@ -1,6 +1,8 @@
 #pragma once
 #include <uc_dev/util/noncopyable.h>
 
+#include <autogen/shaders/camera_view_graphics.h>
+
 namespace uc
 {
     namespace gx
@@ -27,6 +29,7 @@ namespace uc
 
                 private:
 
+                gx::dx12::camera_view_graphics::graphics_pipeline_state* m_pso;
             };
         }
     }

@@ -196,19 +196,8 @@ namespace uc
                     graphics->draw(6);
                 }
 
-                //Quad
-
-
-
-
-
-
-
-
-
-
-
-
+                //camera view
+                m_camera_view->render(graphics.get());
 
                 end_render(ctx, graphics.get());
 
