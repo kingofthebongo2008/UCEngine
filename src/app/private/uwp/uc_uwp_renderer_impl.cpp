@@ -144,7 +144,7 @@ namespace uc
                 static uint32_t index = 0;
                 this->m_overlay_page_manager->show_page( pages[ index] );
                 index++;
-                index %= 4;
+                index %= sizeof(pages) / sizeof(pages[0]);
             }
             
 
