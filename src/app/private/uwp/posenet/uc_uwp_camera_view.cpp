@@ -4,7 +4,7 @@
 #include "../uc_uwp_gx_render_context.h"
 #include "../uc_uwp_device_resources.h"
 
-
+#include <uc_dev/gx/dx12/cmd/profiler.h>
 #include <uc_dev/gx/dx12/dx12.h>
 
 #include <autogen/shaders/camera_view_graphics.h>
@@ -21,10 +21,15 @@ namespace uc
 
             }
 
-            void camera_view::render(gx::dx12::gpu_graphics_command_context* )
+            void camera_view::render(gx::dx12::gpu_graphics_command_context* graphics)
             {
-
-
+                auto profile_event = gx::dx12::make_profile_event(graphics, L"Camera View");
+                D3D12_VERTEX_BUFFER_VIEW v = {};
+                D3D12_INDEX_BUFFER_VIEW  i = {};
+                graphics->set_vertex_buffer(0, v);
+                graphics->set_index_buffer(i);
+                graphics->set_pso(m_pso);
+                //graphics->draw(4);
             }
         }
     }

@@ -63,7 +63,7 @@ namespace uc
                 c0.m_geometry = m_geometry_allocator.get();
                 c0.m_resources = &m_resources;		
                 m_render_world_manager = std::make_unique<gxu::render_world_manager>(&c0);
-                m_render_world_manager->show_world(uc::uwp::gxu::world_id::moment_shadow_maps);
+                m_render_world_manager->show_world(uc::uwp::gxu::world_id::non_linear_moment_shadow_maps_64);
 
                 
                 {
