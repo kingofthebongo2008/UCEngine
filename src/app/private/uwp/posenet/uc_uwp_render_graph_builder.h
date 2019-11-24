@@ -14,14 +14,20 @@ namespace uc
             {
                 struct builder
                 {
-                    resource*       make_render_target(uint32_t format, uint32_t width, uint32_t height);
-                    resource*       make_depth_buffer(uint32_t format, uint32_t width, uint32_t height);
+                    writer make_render_target(uint32_t format, uint32_t width, uint32_t height);
+                    writer make_depth_buffer(uint32_t format, uint32_t width, uint32_t height);
+
                     writer          write(resource* r);
                     reader          read(resource* r);
 
                     std::vector< std::unique_ptr<resource> >    m_pass_resources;
                     std::vector< reader >                       m_pass_inputs;
                     std::vector< writer >                       m_pass_outputs;
+
+                    private:
+
+                    resource* make_render_target_(uint32_t format, uint32_t width, uint32_t height);
+                    resource* make_depth_buffer_(uint32_t format, uint32_t width, uint32_t height);
                 };
             }
         }

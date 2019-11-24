@@ -6,6 +6,7 @@
 
 #include "uc_uwp_render_graph_pass.h"
 #include "uc_uwp_render_graph_resources.h"
+#include "uc_uwp_render_graph_builder.h"
 
 namespace uc
 {
@@ -17,33 +18,19 @@ namespace uc
             {
                 struct graph
                 {
-                    void add_graphics_pass(std::unique_ptr<graphics_pass> p)
-                    {
-                        pass* pass = p.get();
-                        m_passes.emplace_back(std::move(p));
-                        m_graphics_passes.emplace_back(pass);
-                    }
+                    void add_graphics_pass(std::unique_ptr<graphics_pass> p, std::unique_ptr<builder> b);
+                    void add_compute_pass(std::unique_ptr<compute_pass> p, std::unique_ptr<builder> b);
+                    void import_resource();
 
-                    void add_compute_pass(std::unique_ptr<compute_pass> p)
-                    {
-                        pass* pass = p.get();
-                        m_passes.emplace_back(std::move(p));
-                        m_compute_passes.emplace_back(pass);
-                    }
+                    void execute();
 
-                    void import_resource()
-                    {
+                    std::vector< std::unique_ptr<pass> >                        m_passes;
+                    std::vector< pass* >                                        m_graphics_passes;
+                    std::vector< pass* >                                        m_compute_passes;
 
-                    }
-
-                    std::vector< std::unique_ptr<pass> >                    m_passes;
-                    std::vector< pass* >                                    m_graphics_passes;
-                    std::vector< pass* >                                    m_compute_passes;
-
-                    std::vector< std::vector < std::unique_ptr<resource> > > m_pass_resources;
-                    std::vector< std::vector < reader > >                    m_pass_inputs;
-                    std::vector< std::vector < writer > >                    m_pass_outputs;
-
+                    std::vector< std::vector < std::unique_ptr<resource> > >    m_pass_resources;
+                    std::vector< std::vector < reader > >                       m_pass_inputs;
+                    std::vector< std::vector < writer > >                       m_pass_outputs;
                 };
 
             }

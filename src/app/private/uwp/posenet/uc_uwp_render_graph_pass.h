@@ -23,11 +23,6 @@ namespace uc
                     pass(pass&&) = default;
                     pass& operator=(pass&&) = default;
 
-                    void setup()
-                    {
-                        on_setup();
-                    }
-
                     void execute(executor* e)
                     {
                         e;
@@ -36,7 +31,6 @@ namespace uc
 
                 private:
 
-                    virtual void on_setup() = 0;
                     virtual void on_execute(executor* e) = 0;
                 };
 
