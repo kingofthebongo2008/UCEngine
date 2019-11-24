@@ -31,13 +31,13 @@ namespace uc
                     void execute(executor* e)
                     {
                         e;
-                        on_execute();
+                        on_execute(e);
                     }
 
                 private:
 
                     virtual void on_setup() = 0;
-                    virtual void on_execute() = 0;
+                    virtual void on_execute(executor* e) = 0;
                 };
 
                 struct graphics_pass : public pass
