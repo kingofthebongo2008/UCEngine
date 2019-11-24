@@ -9,7 +9,7 @@ namespace uc
         {
             namespace render_graph
             {
-                writer make_render_target(uint32_t format, uint32_t width, uint32_t height)
+                writer builder::make_render_target(uint32_t format, uint32_t width, uint32_t height)
                 {
                     format;
                     width;
@@ -17,7 +17,7 @@ namespace uc
                     return {};
                 }
 
-                writer make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
+                writer builder::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
                 {
                     format;
                     width;

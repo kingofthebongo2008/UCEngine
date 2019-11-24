@@ -71,7 +71,7 @@ namespace uc
                             std::vector<transitions_write> trw;
 
                             pass* c     = m_passes[i].get();
-w                            
+                            
                             //scan inputs
                             for (auto inp = 0; inp < m_pass_inputs[i].size();++i)
                             {
