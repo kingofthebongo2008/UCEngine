@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "uc_uwp_render_graph.h"
+#include "uc_uwp_render_graph_builder.h"
 
 namespace uc
 {
@@ -9,43 +10,6 @@ namespace uc
         {
             namespace render_graph
             {
-                void graph::add_graphics_pass(std::unique_ptr<graphics_pass> p, std::unique_ptr<builder> b)
-                {
-                    pass* pass = p.get();
-                    m_passes.emplace_back(std::move(p));
-                    m_graphics_passes.emplace_back(pass);
-
-                    m_pass_resources.resize(m_pass_resources.size() + 1);
-                    m_pass_resources[m_pass_resources.size() - 1] = std::move(b->m_pass_resources);
-
-                    m_pass_inputs.resize(m_pass_inputs.size() + 1);
-                    m_pass_inputs[m_pass_inputs.size() - 1] = std::move(b->m_pass_inputs);
-
-                    m_pass_outputs.resize(m_pass_outputs.size() + 1);
-                    m_pass_outputs[m_pass_outputs.size() - 1] = std::move(b->m_pass_outputs);
-                }
-
-                void graph::add_compute_pass(std::unique_ptr<compute_pass> p, std::unique_ptr<builder> b)
-                {
-                    pass* pass = p.get();
-                    m_passes.emplace_back(std::move(p));
-                    m_compute_passes.emplace_back(pass);
-
-                    m_pass_resources.resize(m_pass_resources.size() + 1);
-                    m_pass_resources[m_pass_resources.size() - 1] = std::move(b->m_pass_resources);
-
-                    m_pass_inputs.resize(m_pass_inputs.size() + 1);
-                    m_pass_inputs[m_pass_inputs.size() - 1] = std::move(b->m_pass_inputs);
-
-                    m_pass_outputs.resize(m_pass_outputs.size() + 1);
-                    m_pass_outputs[m_pass_outputs.size() - 1] = std::move(b->m_pass_outputs);
-                }
-
-                void graph::import_resource()
-                {
-
-                }
-
                 void graph::execute()
                 {
                     struct transitions_read

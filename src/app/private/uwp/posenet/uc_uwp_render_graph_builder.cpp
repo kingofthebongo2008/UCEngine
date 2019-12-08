@@ -9,48 +9,81 @@ namespace uc
         {
             namespace render_graph
             {
-                writer builder::make_render_target(uint32_t format, uint32_t width, uint32_t height)
+                resource* resource_allocator::make_render_target(uint32_t format, uint32_t width, uint32_t height)
                 {
                     format;
                     width;
                     height;
-                    return {};
+                    return nullptr;
                 }
 
-                writer builder::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
+                resource* resource_allocator::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
                 {
                     format;
                     width;
                     height;
-                    return {};
+                    return nullptr;
                 }
 
-                resource* builder::make_render_target_(uint32_t format, uint32_t width, uint32_t height)
+                resource* resource_allocator::make_swap_chain(void* v)
                 {
-                    format;
-                    width;
-                    height;
-                    return {};
+                    v;
+                    return nullptr;
                 }
 
-                resource* builder::make_depth_buffer_(uint32_t format, uint32_t width, uint32_t height)
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                pass_resource_allocator::pass_resource_allocator(resource_allocator* resource_allocator) : m_resource_allocator(resource_allocator)
                 {
-                    format;
-                    width;
-                    height;
-                    return {};
+
                 }
 
-                writer builder::write(resource* r)
+                writer pass_resource_allocator::make_render_target(uint32_t format, uint32_t width, uint32_t height)
+                {
+                    return writer{ m_resource_allocator->make_render_target(format, width, height) };
+                }
+
+                writer pass_resource_allocator::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
+                {
+                    return writer{ m_resource_allocator->make_depth_buffer(format, width, height) };
+                }
+
+                writer pass_resource_allocator::make_swap_chain(void* v)
+                {
+                    return writer{ m_resource_allocator->make_swap_chain(v) };
+                }
+
+                writer pass_resource_allocator::write(resource* r)
                 {
                     r;
-                    return {};
+                    return {  };
                 }
 
-                reader  builder::read(resource* r)
+                reader pass_resource_allocator::read(resource* r)
                 {
                     r;
-                    return {};
+                    return {  };
+                }
+
+                resource* pass_resource_allocator::make_render_target_(uint32_t format, uint32_t width, uint32_t height)
+                {
+                    format;
+                    width;
+                    height;
+                    return {  };
+                }
+
+                resource* pass_resource_allocator::make_depth_buffer_(uint32_t format, uint32_t width, uint32_t height)
+                {
+                    format;
+                    width;
+                    height;
+                    return {  };
+                }
+
+                resource* pass_resource_allocator::make_swap_chain_(void* v)
+                {
+                    v;
+                    return {  };
                 }
             }
         }

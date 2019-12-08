@@ -46,9 +46,6 @@ namespace uc
                     graphics_pass& operator=(graphics_pass&&) = default;
 
                 private:
-
-                    virtual void on_setup() = 0;
-                    virtual void on_execute() = 0;
                 };
 
                 struct compute_pass : public pass
@@ -63,9 +60,6 @@ namespace uc
                     compute_pass& operator=(compute_pass&&) = default;
 
                 private:
-
-                    virtual void on_setup() = 0;
-                    virtual void on_execute() = 0;
                 };
 
             }
