@@ -25,10 +25,9 @@ namespace uc
                     return nullptr;
                 }
 
-
-                void add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> p, std::unique_ptr<pass_resource_allocator> pa)
+                graphics_pass* add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> p, std::unique_ptr<pass_resource_allocator> pa)
                 {
-                    pass* pass = p.get();
+                    graphics_pass* pass = p.get();
                     b->m_passes.emplace_back(std::move(p));
                     b->m_graphics_passes.emplace_back(pass);
 
@@ -40,6 +39,7 @@ namespace uc
 
                     b->m_pass_outputs.resize(b->m_pass_outputs.size() + 1);
                     b->m_pass_outputs[b->m_pass_outputs.size() - 1] = std::move(pa->m_pass_outputs);
+                    return pass;
                 }
             }
         }

@@ -98,29 +98,28 @@ namespace uc
                     }
                 };
 
+                template <typename t, typename ...args > t* add_graphic_pass(graph_builder* b, args&& ... a)
+                {
+                    using namespace std;
+                    unique_ptr<pass_resource_allocator> pass_allocator = make_unique<pass_resource_allocator>(b->allocator());
+                    unique_ptr<t>                       pass           = make_unique<t>(pass_allocator.get(), forward<args>(a)...);
+                    return static_cast<t*> (add_graphics_pass(b, std::move(pass), std::move(pass_allocator)));
+                }
+
                 void Test(void* swap_chain)
                 {
                     using namespace std;
 
                     graph_builder builder;
 
-                    unique_ptr<pass_resource_allocator> pa_depth    = make_unique<pass_resource_allocator>(builder.allocator());
-                    unique_ptr<pass_resource_allocator> pa_shadows  = make_unique<pass_resource_allocator>(builder.allocator());
-                    unique_ptr<pass_resource_allocator> pa_lighting = make_unique<pass_resource_allocator>(builder.allocator());
-                    unique_ptr<pass_resource_allocator> pa_compose  = make_unique<pass_resource_allocator>(builder.allocator());
+                    depth_pass*                 depth               = add_graphic_pass<depth_pass>(&builder);
+                    shadow_pass*                shadows             = add_graphic_pass<shadow_pass>(&builder);
 
-                    unique_ptr<depth_pass>     depth                = make_unique<depth_pass>(pa_depth.get());
-                    unique_ptr<shadow_pass>    shadows              = make_unique<shadow_pass>(pa_shadows.get());
+                    lighting_pass*  lighting                        = add_graphic_pass<lighting_pass>(&builder, depth->depth(), shadows->shadows() );
+                    compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, lighting->lighting(), swap_chain );
 
-                    unique_ptr<lighting_pass>  lighting             = make_unique<lighting_pass>(pa_lighting.get(), depth->depth(), shadows->shadows() );
-                    unique_ptr<compose_pass>   compose              = make_unique<compose_pass>(pa_compose.get(), lighting->lighting(), swap_chain );
-
-                    add_graphics_pass(&builder, std::move(depth),   std::move(pa_depth));
-                    add_graphics_pass(&builder, std::move(shadows), std::move(pa_shadows));
-                    add_graphics_pass(&builder, std::move(lighting), std::move(pa_lighting));
-                    add_graphics_pass(&builder, std::move(compose), std::move(pa_compose));
-
-
+                    compose;
+                    
                 }
             }
         }

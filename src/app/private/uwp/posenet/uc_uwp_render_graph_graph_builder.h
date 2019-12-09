@@ -34,10 +34,10 @@ namespace uc
                     std::vector< std::vector < reader > >                       m_pass_inputs;
                     std::vector< std::vector < writer > >                       m_pass_outputs;
 
-                    friend void add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> p, std::unique_ptr<pass_resource_allocator> pa);
+                    friend graphics_pass* add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> p, std::unique_ptr<pass_resource_allocator> pa);
                 };
 
-                void add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> pass);
+                graphics_pass* add_graphics_pass(graph_builder* b, std::unique_ptr<graphics_pass> p, std::unique_ptr<pass_resource_allocator> pa);
             }
         }
     }
