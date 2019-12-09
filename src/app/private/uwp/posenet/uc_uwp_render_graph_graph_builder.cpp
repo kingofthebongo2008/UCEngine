@@ -31,14 +31,23 @@ namespace uc
                     b->m_passes.emplace_back(std::move(p));
                     b->m_graphics_passes.emplace_back(pass);
 
-                    b->m_pass_resources.resize(b->m_pass_resources.size() + 1);
-                    b->m_pass_resources[b->m_pass_resources.size() - 1] = std::move(pa->m_pass_resources);
+                    if (!pa->m_pass_resources.empty())
+                    {
+                        b->m_pass_resources.resize(b->m_pass_resources.size() + 1);
+                        b->m_pass_resources[b->m_pass_resources.size() - 1] = std::move(pa->m_pass_resources);
+                    }
 
-                    b->m_pass_inputs.resize(b->m_pass_inputs.size() + 1);
-                    b->m_pass_inputs[b->m_pass_inputs.size() - 1] = std::move(pa->m_pass_inputs);
+                    if (!pa->m_pass_inputs.empty())
+                    {
+                        b->m_pass_inputs.resize(b->m_pass_inputs.size() + 1);
+                        b->m_pass_inputs[b->m_pass_inputs.size() - 1] = std::move(pa->m_pass_inputs);
+                    }
 
-                    b->m_pass_outputs.resize(b->m_pass_outputs.size() + 1);
-                    b->m_pass_outputs[b->m_pass_outputs.size() - 1] = std::move(pa->m_pass_outputs);
+                    if (!pa->m_pass_outputs.empty())
+                    {
+                        b->m_pass_outputs.resize(b->m_pass_outputs.size() + 1);
+                        b->m_pass_outputs[b->m_pass_outputs.size() - 1] = std::move(pa->m_pass_outputs);
+                    }
                     return pass;
                 }
             }
