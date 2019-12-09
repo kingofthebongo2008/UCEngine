@@ -23,6 +23,20 @@ namespace uc
 {
     namespace uwp
     {
+        namespace gxu
+        {
+            namespace render_graph
+            {
+                void Test(void*);
+            }
+        }
+    }
+}
+
+namespace uc
+{
+    namespace uwp
+    {
         renderer_impl::renderer_impl( bool* window_close, const winrt::Windows::UI::Core::CoreWindow& window, const winrt::Windows::Graphics::Display::DisplayInformation& display_information, ISwapChainPanelNative* swap_chain_panel) : m_main_window(window_close)
         {
             set_window(window);
@@ -49,6 +63,9 @@ namespace uc
             o.m_normal_mesh_vertex_count = 1000000;
 
             m_geometry_allocator            = std::make_unique<gx::geo::geometry_allocator>(m_resources.resource_create_context(), o);
+
+            gxu::render_graph::Test(nullptr);
+
         }
 
         void renderer_impl::initialize_resources()
