@@ -20,11 +20,13 @@ namespace uc
                 {
                     void execute();
 
+                    std::unique_ptr<resource_allocator>                         m_allocator;
+
                     std::vector< std::unique_ptr<pass> >                        m_passes;
                     std::vector< pass* >                                        m_graphics_passes;
                     std::vector< pass* >                                        m_compute_passes;
 
-                    std::vector< std::vector < std::unique_ptr<resource> > >    m_pass_resources;
+                    std::vector< std::vector < resource* > >                    m_pass_resources;
                     std::vector< std::vector < reader > >                       m_pass_inputs;
                     std::vector< std::vector < writer > >                       m_pass_outputs;
                 };

@@ -24,6 +24,11 @@ namespace uc
                         reader m_r;
                     };
 
+                    struct transitions_create
+                    {
+                        resource* m_r;
+                    };
+
                     if (!m_passes.empty())
                     {
                         for (auto i = 0U; i < m_passes.size(); ++i)
@@ -37,7 +42,7 @@ namespace uc
                             pass* c     = m_passes[i].get();
                             
                             //scan inputs
-                            for (auto inp = 0; inp < m_pass_inputs[i].size();++i)
+                            for (auto inp = 0; inp < m_pass_inputs[i].size();++inp)
                             {
                                 reader r    = m_pass_inputs[i][inp];
                                 bool b      = false;
@@ -64,13 +69,13 @@ namespace uc
                             }
                             
                             //scan outputs
-                            for (auto out = 0; out < m_pass_outputs[i].size(); ++i)
+                            for (auto out = 0; out < m_pass_outputs[i].size(); ++out)
                             {
                                 writer w = m_pass_outputs[i][out];
                                 bool b = false;
 
                                 //all passes
-                                for (auto p = -1; p >= 0; p--)
+                                for (auto p = out -1; p >= 0; p--)
                                 {
                                     for (auto inp = 0; inp < m_pass_inputs[p].size(); ++inp)
                                     {
@@ -90,9 +95,9 @@ namespace uc
                             
                             //allocate resources
                             //scan resources // transition to write if we need
-                            for (auto out = 0; out < m_pass_resources[i].size(); ++i)
+                            for (auto out = 0; out < m_pass_resources[i].size(); ++out)
                             {
-                                
+                                //create new resources, they are not supposed to be nor in the inputs, nor in the outputs
                             }
 
                             //execute transitions

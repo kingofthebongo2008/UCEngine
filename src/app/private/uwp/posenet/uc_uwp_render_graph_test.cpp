@@ -119,6 +119,10 @@ namespace uc
                     compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, lighting->lighting(), swap_chain );
 
                     compose;
+
+                    std::unique_ptr<graph> g = builder.make_graph();
+
+                    g->execute();
                     
                 }
             }

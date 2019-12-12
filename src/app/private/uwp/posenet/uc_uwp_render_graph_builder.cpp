@@ -1,4 +1,5 @@
 #include "pch.h"
+
 #include "uc_uwp_render_graph_builder.h"
 
 namespace uc
@@ -11,10 +12,15 @@ namespace uc
             {
                 resource* resource_allocator::make_render_target(uint32_t format, uint32_t width, uint32_t height)
                 {
+                    std::unique_ptr< resource > r = std::make_unique<render_target>();
+                    resource* target = r.get();
+
                     format;
                     width;
                     height;
-                    return nullptr;
+
+                    m_resources.emplace_back(std::move(r));
+                    return target;
                 }
 
                 resource* resource_allocator::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
@@ -22,13 +28,21 @@ namespace uc
                     format;
                     width;
                     height;
-                    return nullptr;
+
+                    std::unique_ptr< resource > r = std::make_unique<depth_buffer>();
+                    resource* target = r.get();
+
+                    m_resources.emplace_back(std::move(r));
+                    return target;
                 }
 
                 resource* resource_allocator::make_swap_chain(void* v)
                 {
-                    v;
-                    return nullptr;
+                    std::unique_ptr< resource > r = std::make_unique<swap_chain>( v );
+                    resource* target = r.get();
+
+                    m_resources.emplace_back(std::move(r));
+                    return target;
                 }
 
                 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,51 +53,43 @@ namespace uc
 
                 writer pass_resource_allocator::make_render_target(uint32_t format, uint32_t width, uint32_t height)
                 {
-                    return writer{ m_resource_allocator->make_render_target(format, width, height) };
+                    resource* r = m_resource_allocator->make_render_target(format, width, height);
+                    writer w = { r };
+                    m_pass_resources.push_back(r);
+                    m_pass_outputs.push_back(w);
+                    return w;
                 }
 
                 writer pass_resource_allocator::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
                 {
-                    return writer{ m_resource_allocator->make_depth_buffer(format, width, height) };
+                    resource* r = m_resource_allocator->make_depth_buffer(format, width, height);
+                    writer w = { r };
+                    m_pass_resources.push_back(r);
+                    m_pass_outputs.push_back(w);
+                    return w;
                 }
 
                 writer pass_resource_allocator::make_swap_chain(void* v)
                 {
-                    return writer{ m_resource_allocator->make_swap_chain(v) };
+                    resource* r = m_resource_allocator->make_swap_chain(v);
+                    writer w    = { r };
+                    m_pass_resources.push_back(r);
+                    m_pass_outputs.push_back(w);
+                    return w;
                 }
 
                 writer pass_resource_allocator::write(resource* r)
                 {
-                    r;
-                    return {  };
+                    writer w = { r };
+                    m_pass_outputs.push_back(w);
+                    return w;
                 }
 
                 reader pass_resource_allocator::read(resource* r)
                 {
-                    r;
-                    return {  };
-                }
-
-                resource* pass_resource_allocator::make_render_target_(uint32_t format, uint32_t width, uint32_t height)
-                {
-                    format;
-                    width;
-                    height;
-                    return {  };
-                }
-
-                resource* pass_resource_allocator::make_depth_buffer_(uint32_t format, uint32_t width, uint32_t height)
-                {
-                    format;
-                    width;
-                    height;
-                    return {  };
-                }
-
-                resource* pass_resource_allocator::make_swap_chain_(void* v)
-                {
-                    v;
-                    return {  };
+                    reader w = { r };
+                    m_pass_inputs.push_back(w);
+                    return w;
                 }
             }
         }

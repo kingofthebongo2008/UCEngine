@@ -32,6 +32,13 @@ namespace uc
 
                 };
 
+                struct swap_chain final : public resource
+                {
+                    swap_chain(void* e) : m_external_resource(e) {}
+
+                    void* m_external_resource;
+                };
+
                 struct writer
                 {
                     resource* m_resource;

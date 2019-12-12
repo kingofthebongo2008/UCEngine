@@ -197,7 +197,7 @@ namespace uc
                 }
 
                 //camera view
-                m_camera_view->render(graphics.get());
+               // m_camera_view->render(graphics.get());
 
                 end_render(ctx, graphics.get());
 

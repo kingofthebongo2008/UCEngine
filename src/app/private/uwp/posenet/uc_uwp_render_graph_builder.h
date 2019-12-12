@@ -21,7 +21,7 @@ namespace uc
 
                     private:
 
-                    std::vector< std::unique_ptr<resource> >  m_pass_resources;
+                    std::vector< std::unique_ptr<resource> >  m_resources;
                 };
 
                 struct pass_resource_allocator
@@ -44,9 +44,6 @@ namespace uc
 
                     resource_allocator* m_resource_allocator;
 
-                    resource* make_render_target_(uint32_t format, uint32_t width, uint32_t height);
-                    resource* make_depth_buffer_(uint32_t format, uint32_t width, uint32_t height);
-                    resource* make_swap_chain_(void* v);
                 };
             }
         }
