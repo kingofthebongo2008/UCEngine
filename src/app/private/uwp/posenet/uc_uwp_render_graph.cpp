@@ -235,7 +235,7 @@ namespace uc
                             execution.m_trd.emplace_back(trd);
                         }
 
-                        //simulate execution
+                        //simulate execution and filter redundant states
                         execution_device_simulator simulator;
                         for (auto i = 0; i < execution.m_passes.size(); ++i)
                         {
