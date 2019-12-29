@@ -14,27 +14,7 @@ namespace uc
             {
                 void graph::execute()
                 {
-                    struct transitions_read
-                    {
-                        reader m_r;
-                        writer m_w;
-                    };
-
-                    struct transitions_write
-                    {
-                        writer m_w;
-                        reader m_r;
-                    };
-
-                    struct transitions_create
-                    {
-                        resource* m_r;
-                    };
-
-                    struct transitions_destroy
-                    {
-                        resource* m_r;
-                    };
+                    execution_pass execution;
 
                     if (!m_passes.empty())
                     {
@@ -89,17 +69,16 @@ namespace uc
 
                         for (int32_t i = 0; i < payload.size(); ++i)
                         {
+
                             //transitions -> read  -> write
                             //transitions -> write -> read
 
                             int32_t pi = payload[i];
 
-                            std::vector<transitions_read>   trr;
-                            std::vector<transitions_write>  trw;
-                            std::vector<transitions_create> trc;
-                            std::vector<transitions_create> trd;
-
-                            //pass* c = m_passes[pi].get();
+                            std::vector<execution_pass::transitions_read>       trr;
+                            std::vector<execution_pass::transitions_write>      trw;
+                            std::vector<execution_pass::transitions_create>     trc;
+                            std::vector<execution_pass::transitions_destroy>    trd;
 
                             //scan inputs
                             for (auto inp = 0; inp < m_pass_inputs[pi].size(); ++inp)
@@ -199,6 +178,14 @@ namespace uc
                                     trd.push_back({ res });
                                 }
                             }
+
+                            pass* c = m_passes[pi].get();
+
+                            execution.m_passes.push_back(c);
+                            execution.m_trr.emplace_back(trr);
+                            execution.m_trw.emplace_back(trw);
+                            execution.m_trc.emplace_back(trc);
+                            execution.m_trd.emplace_back(trd);
                         }
                     }
                 }

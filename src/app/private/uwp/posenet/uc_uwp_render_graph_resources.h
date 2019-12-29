@@ -57,12 +57,13 @@ namespace uc
                 struct writer
                 {
                     resource* m_resource;
+                    uint64_t  m_flags;
                 };
 
                 struct reader
                 {
                     resource* m_resource;
-                    uint64_t* m_flags;
+                    uint64_t  m_flags;
                 };
             }
         }

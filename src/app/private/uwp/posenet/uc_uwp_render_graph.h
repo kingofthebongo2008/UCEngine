@@ -16,6 +16,38 @@ namespace uc
         {
             namespace render_graph
             {
+                struct execution_pass
+                {
+                    struct transitions_read
+                    {
+                        reader m_r;
+                        writer m_w;
+                    };
+
+                    struct transitions_write
+                    {
+                        writer m_w;
+                        reader m_r;
+                    };
+
+                    struct transitions_create
+                    {
+                        resource* m_r;
+                    };
+
+                    struct transitions_destroy
+                    {
+                        resource* m_r;
+                    };
+
+                    std::vector< pass* >                                        m_passes;
+
+                    std::vector<std::vector<transitions_read>>                  m_trr;  //resources that we need to read
+                    std::vector<std::vector<transitions_write>>                 m_trw;  //resources that we need to write
+                    std::vector<std::vector<transitions_create>>                m_trc;  //resources that we need to create
+                    std::vector<std::vector<transitions_destroy>>               m_trd;  //resources that we need to destroy
+                };
+
                 struct graph
                 {
                     void execute();
