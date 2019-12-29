@@ -3,6 +3,7 @@
 #include "uc_uwp_render_graph_builder.h"
 
 #include <vector>
+#include <unordered_map>
 
 namespace uc
 {
@@ -12,6 +13,53 @@ namespace uc
         {
             namespace render_graph
             {
+                namespace
+                {
+                    struct execution_device_simulator
+                    {
+                        enum state : uint32_t
+                        {
+                            read,
+                            write
+                        };
+
+                        bool can_set_state(resource* r, state s)
+                        {
+                            auto&& v = m_states.find(r);
+
+                            if (v == m_states.end())
+                            {
+                                m_states.insert({ r, s});
+                                return true;
+                            }
+                            else
+                            {
+                                if (v->second == s)
+                                {
+                                    return false;
+                                }
+                                else
+                                {
+                                    v->second = s;
+                                    return true;
+                                }
+                            }
+                        }
+
+                        bool can_set_reader(resource* r)
+                        {
+                            return can_set_state(r, state::read);
+                        }
+
+                        bool can_set_writer(resource* r)
+                        {
+                            return can_set_state(r, state::write);
+                        }
+
+                        std::unordered_map<resource*, state > m_states;
+                    };
+                }
+
                 void graph::execute()
                 {
                     execution_pass execution;
@@ -180,12 +228,50 @@ namespace uc
                             }
 
                             pass* c = m_passes[pi].get();
-
                             execution.m_passes.push_back(c);
                             execution.m_trr.emplace_back(trr);
                             execution.m_trw.emplace_back(trw);
                             execution.m_trc.emplace_back(trc);
                             execution.m_trd.emplace_back(trd);
+                        }
+
+                        //simulate execution
+                        execution_device_simulator simulator;
+                        for (auto i = 0; i < execution.m_passes.size(); ++i)
+                        {
+                            std::vector<execution_pass::transitions_read>       trr;
+                            std::vector<execution_pass::transitions_write>      trw;
+
+                            std::vector<execution_pass::transitions_create>     trc;
+                            std::vector<execution_pass::transitions_destroy>    trd;
+
+                            for (auto&& c : execution.m_trc[i])
+                            {
+                                if (simulator.can_set_writer(c.m_r))
+                                {
+                                    trc.push_back(c);
+                                }
+                            }
+
+                            for (auto&& r : execution.m_trr[i])
+                            {
+                                if (simulator.can_set_reader(r.m_r.m_resource))
+                                {
+                                    trr.push_back(r);
+                                }
+                            }
+
+                            for (auto&& w : execution.m_trw[i])
+                            {
+                                if (simulator.can_set_writer(w.m_w.m_resource))
+                                {
+                                    trw.push_back(w);
+                                }
+                            }
+
+                            execution.m_trr[i] = std::move(trr);
+                            execution.m_trw[i] = std::move(trw);
+                            execution.m_trc[i] = std::move(trc);
                         }
                     }
                 }

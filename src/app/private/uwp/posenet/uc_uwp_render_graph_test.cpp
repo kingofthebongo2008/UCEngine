@@ -53,9 +53,9 @@ namespace uc
                     }
                 };
 
-                struct lighting_pass : graphics_pass
+                struct direct_lighting_pass : graphics_pass
                 {
-                    lighting_pass(pass_resource_allocator* b, resource* depth, resource* shadows )
+                    direct_lighting_pass(pass_resource_allocator* b, resource* depth, resource* shadows )
                     {
                         m_lighting  = b->make_render_target(0, 0, 0);
                         m_shadows   = b->read(shadows);
@@ -79,17 +79,45 @@ namespace uc
                     }
                 };
 
+                struct ambient_occlusion_pass : graphics_pass
+                {
+                    ambient_occlusion_pass(pass_resource_allocator* b, resource* depth, resource* direct_lighting)
+                    {
+                        m_lighting = b->make_render_target(0, 0, 0);
+                        m_direct_lighting = b->read(direct_lighting);
+                        m_depth = b->read(depth);
+                    }
+
+                    resource* lighting() const
+                    {
+                        return m_lighting.m_resource;
+                    }
+
+                private:
+
+                    writer  m_lighting;
+                    reader  m_depth;
+                    reader  m_direct_lighting;
+
+                    void on_execute(executor*) override
+                    {
+
+                    }
+                };
+
                 struct compose_pass : graphics_pass
                 {
-                    compose_pass(pass_resource_allocator* b, resource* lighting, void* swap_chain)
+                    compose_pass(pass_resource_allocator* b, resource* direct, resource* indirect, void* swap_chain)
                     {
-                        m_lighting      = b->read(lighting);
+                        m_direct        = b->read(direct);
+                        m_indirect      = b->read(indirect);
                         m_swap_chain    = b->make_swap_chain(swap_chain);
                     }
 
                     private:
 
-                    reader  m_lighting;
+                    reader  m_direct;
+                    reader  m_indirect;
                     writer  m_swap_chain;
 
                     void on_execute( executor* ) override
@@ -115,8 +143,10 @@ namespace uc
                     depth_pass*                 depth               = add_graphic_pass<depth_pass>(&builder);
                     shadow_pass*                shadows             = add_graphic_pass<shadow_pass>(&builder);
 
-                    lighting_pass*  lighting                        = add_graphic_pass<lighting_pass>(&builder, depth->depth(), shadows->shadows() );
-                    compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, lighting->lighting(), swap_chain );
+                    direct_lighting_pass*  direct                   = add_graphic_pass<direct_lighting_pass>(&builder, depth->depth(), shadows->shadows() );
+                    ambient_occlusion_pass* indirect                = add_graphic_pass<ambient_occlusion_pass>(&builder, depth->depth(), direct->lighting());
+
+                    compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, direct->lighting(), indirect->lighting(), swap_chain );
 
                     compose;
 
