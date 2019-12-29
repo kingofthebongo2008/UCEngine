@@ -26,6 +26,12 @@ namespace uc
                     b->m_passes.emplace_back(std::move(p));
                     b->m_graphics_passes.emplace_back(pass);
 
+                    b->m_pass_new.resize(b->m_pass_new.size() + 1);
+                    if (!pa->m_pass_new.empty())
+                    {
+                        b->m_pass_new[b->m_pass_new.size() - 1] = std::move(pa->m_pass_new);
+                    }
+
                     b->m_pass_resources.resize(b->m_pass_resources.size() + 1);
                     if (!pa->m_pass_resources.empty())
                     {
@@ -56,6 +62,7 @@ namespace uc
                     g->m_compute_passes = std::move(m_compute_passes);
                     g->m_graphics_passes = std::move(m_graphics_passes);
                     g->m_passes = std::move(m_passes);
+                    g->m_pass_new = std::move(m_pass_new);
                     g->m_pass_inputs = std::move(m_pass_inputs);
                     g->m_pass_outputs = std::move(m_pass_outputs);
                     g->m_pass_resources = std::move(m_pass_resources);

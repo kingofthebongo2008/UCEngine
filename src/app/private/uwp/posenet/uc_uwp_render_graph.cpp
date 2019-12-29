@@ -2,6 +2,8 @@
 #include "uc_uwp_render_graph.h"
 #include "uc_uwp_render_graph_builder.h"
 
+#include <vector>
+
 namespace uc
 {
     namespace uwp
@@ -17,7 +19,7 @@ namespace uc
                         reader m_r;
                         writer m_w;
                     };
-                     
+
                     struct transitions_write
                     {
                         writer m_w;
@@ -29,35 +31,95 @@ namespace uc
                         resource* m_r;
                     };
 
+                    struct transitions_destroy
+                    {
+                        resource* m_r;
+                    };
+
                     if (!m_passes.empty())
                     {
-                        for (auto i = 0U; i < m_passes.size(); ++i)
+                        //obtain indices of the used passes, remove all passes not used
+                        std::vector<uint32_t> payload;
+                        payload.reserve(m_passes.size());
+
+                        for (auto p = 0; p < m_passes.size(); ++p)
+                        {
+                            bool break_pass = false;
+                            for (auto out = 0; out < m_pass_resources[p].size(); ++out)
+                            {
+                                resource* r = m_pass_resources[p][out];
+                                bool b = false;
+
+                                if (r->is_external())
+                                {
+                                    payload.push_back(p);
+                                    break_pass = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    for (auto pn = p + 1; pn < m_passes.size(); ++pn)
+                                    {
+                                        for (auto in = 0; in < m_pass_resources[pn].size(); ++in)
+                                        {
+                                            resource* rn = m_pass_resources[pn][in];
+
+                                            if (rn == r)
+                                            {
+                                                payload.push_back(p);
+                                                b = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (b)
+                                        {
+                                            break_pass = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (break_pass)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        for (int32_t i = 0; i < payload.size(); ++i)
                         {
                             //transitions -> read  -> write
                             //transitions -> write -> read
 
-                            std::vector<transitions_read>  trr;
-                            std::vector<transitions_write> trw;
+                            int32_t pi = payload[i];
 
-                            pass* c     = m_passes[i].get();
-                            
+                            std::vector<transitions_read>   trr;
+                            std::vector<transitions_write>  trw;
+                            std::vector<transitions_create> trc;
+                            std::vector<transitions_create> trd;
+
+                            //pass* c = m_passes[pi].get();
+
                             //scan inputs
-                            for (auto inp = 0; inp < m_pass_inputs[i].size();++inp)
+                            for (auto inp = 0; inp < m_pass_inputs[pi].size(); ++inp)
                             {
-                                reader r    = m_pass_inputs[i][inp];
-                                bool b      = false;
+                                reader r = m_pass_inputs[pi][inp];
+                                bool b = false;
 
-                                //all passes
-                                for (auto p = i-1; p >=0; p--)
+                                //all previous passes
+                                for (int32_t pp = i - 1; pp >= 0; pp--)
                                 {
+                                    uint32_t pl = payload[pp];
+
                                     //previous passes outputs
-                                    for (auto out = 0; out < m_pass_outputs[p].size(); ++out)
+                                    for (auto out = 0; out < m_pass_outputs[pl].size(); ++out)
                                     {
-                                        writer w = m_pass_outputs[p][out];
+                                        writer w = m_pass_outputs[pl][out];
 
                                         if (r.m_resource == w.m_resource)
                                         {
-                                           //side effect
+                                            //side effect
                                             trr.push_back({ r,w });
                                             b = true;
                                             break;
@@ -67,19 +129,29 @@ namespace uc
                                     if (b) break;
                                 }
                             }
-                            
-                            //scan outputs
-                            for (auto out = 0; out < m_pass_outputs[i].size(); ++out)
+
+                            //allocate resources
+                            //scan resources // transition to write if we need
+                            for (auto out = 0; out < m_pass_new[pi].size(); ++out)
                             {
-                                writer w = m_pass_outputs[i][out];
+                                //create new resources, they are not supposed to be nor in the inputs, nor in the outputs
+                                trc.push_back({ m_pass_new[pi][out] });
+                            }
+
+                            //scan outputs
+                            for (auto out = 0; out < m_pass_outputs[pi].size(); ++out)
+                            {
+                                writer w = m_pass_outputs[pi][out];
                                 bool b = false;
 
-                                //all passes
-                                for (auto p = out -1; p >= 0; p--)
+                                //all previous passes
+                                for (int32_t pp = i - 1; pp >= 0; pp--)
                                 {
-                                    for (auto inp = 0; inp < m_pass_inputs[p].size(); ++inp)
+                                    uint32_t pl = payload[pp];
+
+                                    for (auto inp = 0; inp < m_pass_inputs[pl].size(); ++inp)
                                     {
-                                        reader r = m_pass_inputs[p][inp];
+                                        reader r = m_pass_inputs[pl][inp];
 
                                         if (r.m_resource == w.m_resource)
                                         {
@@ -92,18 +164,41 @@ namespace uc
                                     if (b) break;
                                 }
                             }
-                            
-                            //allocate resources
-                            //scan resources // transition to write if we need
-                            for (auto out = 0; out < m_pass_resources[i].size(); ++out)
-                            {
-                                //create new resources, they are not supposed to be nor in the inputs, nor in the outputs
-                            }
 
-                            //execute transitions
-                            //note: new output resources are always in write initial state
-                            //every pass is in a separate command list, so we can benefit from promotion and decay
-                            c->execute(nullptr);
+                            //Now try to do garbage collect
+                            for (auto out = 0; out < m_pass_resources[pi].size(); ++out)
+                            {
+                                resource* res = m_pass_resources[pi][out];
+                                bool b = false;
+
+                                //scan outputs
+                                for (auto pn = i + 1; pn < payload.size(); ++pn)
+                                {
+                                    uint32_t pl = payload[pn];
+
+                                    for (auto w = 0; w < m_pass_resources[pl].size(); ++w)
+                                    {
+                                        resource* rn = m_pass_resources[pl][w];
+
+                                        if (rn == res)
+                                        {
+                                            b = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (b)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                //If the resource is found nowhere, delete it
+                                if (b == false && !res->is_external() )
+                                {
+                                    trd.push_back({ res });
+                                }
+                            }
                         }
                     }
                 }

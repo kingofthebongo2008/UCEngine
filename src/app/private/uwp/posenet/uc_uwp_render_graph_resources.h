@@ -20,6 +20,21 @@ namespace uc
 
                     resource(resource&&) = default;
                     resource& operator=(resource&&) = default;
+
+                    bool is_external() const
+                    {
+                        return m_flags == 1;
+                    }
+
+                    private:
+
+                    uint32_t m_flags = 0;
+
+                    protected:
+                    void set_flags(bool external)
+                    {
+                            m_flags = external ? 1 : 0;
+                    }
                 };
 
                 struct render_target  final : public resource
@@ -34,7 +49,7 @@ namespace uc
 
                 struct swap_chain final : public resource
                 {
-                    swap_chain(void* e) : m_external_resource(e) {}
+                    swap_chain(void* e) : m_external_resource(e) { set_flags(true); }
 
                     void* m_external_resource;
                 };

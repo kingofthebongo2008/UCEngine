@@ -56,6 +56,7 @@ namespace uc
                     resource* r = m_resource_allocator->make_render_target(format, width, height);
                     writer w = { r };
                     m_pass_resources.push_back(r);
+                    m_pass_new.push_back(r);
                     m_pass_outputs.push_back(w);
                     return w;
                 }
@@ -65,6 +66,7 @@ namespace uc
                     resource* r = m_resource_allocator->make_depth_buffer(format, width, height);
                     writer w = { r };
                     m_pass_resources.push_back(r);
+                    m_pass_new.push_back(r);
                     m_pass_outputs.push_back(w);
                     return w;
                 }
@@ -81,6 +83,7 @@ namespace uc
                 writer pass_resource_allocator::write(resource* r)
                 {
                     writer w = { r };
+                    m_pass_resources.push_back(r);
                     m_pass_outputs.push_back(w);
                     return w;
                 }
@@ -88,6 +91,7 @@ namespace uc
                 reader pass_resource_allocator::read(resource* r)
                 {
                     reader w = { r };
+                    m_pass_resources.push_back(r);
                     m_pass_inputs.push_back(w);
                     return w;
                 }

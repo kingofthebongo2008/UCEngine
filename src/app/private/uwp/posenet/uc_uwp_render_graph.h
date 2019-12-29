@@ -27,6 +27,7 @@ namespace uc
                     std::vector< pass* >                                        m_compute_passes;
 
                     std::vector< std::vector < resource* > >                    m_pass_resources;
+                    std::vector< std::vector < resource* > >                    m_pass_new;
                     std::vector< std::vector < reader > >                       m_pass_inputs;
                     std::vector< std::vector < writer > >                       m_pass_outputs;
                 };

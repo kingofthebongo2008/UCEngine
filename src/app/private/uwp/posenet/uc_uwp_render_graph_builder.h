@@ -37,6 +37,7 @@ namespace uc
                     reader  read(resource* r);
 
                     std::vector< resource* > m_pass_resources;
+                    std::vector< resource* > m_pass_new;
                     std::vector< reader >    m_pass_inputs;
                     std::vector< writer >    m_pass_outputs;
 
