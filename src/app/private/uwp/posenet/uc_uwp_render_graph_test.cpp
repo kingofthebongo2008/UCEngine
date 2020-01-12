@@ -53,13 +53,55 @@ namespace uc
                     }
                 };
 
+                struct shadow_terrain_pass : graphics_pass
+                {
+                    shadow_terrain_pass(pass_resource_allocator* b, resource* shadows)
+                    {
+                        m_shadows = b->read(shadows, flags::flags_non_pixel_shader_resource);
+                    }
+
+                    resource* shadows() const
+                    {
+                        return m_shadows.m_resource;
+                    }
+
+                private:
+                    reader  m_shadows;
+
+                    void on_execute(executor*) override
+                    {
+
+                    }
+                };
+
+                struct shadow_terrain_pass2 : graphics_pass
+                {
+                    shadow_terrain_pass2(pass_resource_allocator* b, resource* shadows)
+                    {
+                        m_shadows = b->write(shadows, flags::flags_depth_write);
+                    }
+
+                    resource* shadows() const
+                    {
+                        return m_shadows.m_resource;
+                    }
+
+                private:
+                    writer  m_shadows;
+
+                    void on_execute(executor*) override
+                    {
+
+                    }
+                };
+
                 struct direct_lighting_pass : graphics_pass
                 {
                     direct_lighting_pass(pass_resource_allocator* b, resource* depth, resource* shadows )
                     {
                         m_lighting  = b->make_render_target(0, 0, 0);
-                        m_shadows   = b->read(shadows);
-                        m_depth     = b->read(depth);
+                        m_shadows   = b->read(shadows, flags::flags_non_pixel_shader_resource);
+                        m_depth     = b->read(depth, flags::flags_non_pixel_shader_resource);
                     }
 
                     resource* lighting() const
@@ -84,8 +126,8 @@ namespace uc
                     ambient_occlusion_pass(pass_resource_allocator* b, resource* depth, resource* direct_lighting)
                     {
                         m_lighting = b->make_render_target(0, 0, 0);
-                        m_direct_lighting = b->read(direct_lighting);
-                        m_depth = b->read(depth);
+                        m_direct_lighting = b->read(direct_lighting, flags::flags_non_pixel_shader_resource);
+                        m_depth  = b->read(depth, flags::flags_non_pixel_shader_resource | flags::flags_pixel_shader_resource);
                     }
 
                     resource* lighting() const
@@ -109,8 +151,8 @@ namespace uc
                 {
                     compose_pass(pass_resource_allocator* b, resource* direct, resource* indirect, void* swap_chain)
                     {
-                        m_direct        = b->read(direct);
-                        m_indirect      = b->read(indirect);
+                        m_direct        = b->read(direct, flags::flags_non_pixel_shader_resource);
+                        m_indirect      = b->read(indirect, flags::flags_non_pixel_shader_resource);
                         m_swap_chain    = b->make_swap_chain(swap_chain);
                     }
 
@@ -142,6 +184,8 @@ namespace uc
 
                     depth_pass*                 depth               = add_graphic_pass<depth_pass>(&builder);
                     shadow_pass*                shadows             = add_graphic_pass<shadow_pass>(&builder);
+                    shadow_terrain_pass*        shadows_terrain     = add_graphic_pass<shadow_terrain_pass>(&builder,  shadows->shadows());
+                    shadow_terrain_pass2* shadows_terrain2          = add_graphic_pass<shadow_terrain_pass2>(&builder, shadows->shadows());
 
                     direct_lighting_pass*  direct                   = add_graphic_pass<direct_lighting_pass>(&builder, depth->depth(), shadows->shadows() );
                     ambient_occlusion_pass* indirect                = add_graphic_pass<ambient_occlusion_pass>(&builder, depth->depth(), direct->lighting());
@@ -149,6 +193,8 @@ namespace uc
                     compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, direct->lighting(), indirect->lighting(), swap_chain );
 
                     compose;
+                    shadows_terrain;
+                    shadows_terrain2;
 
                     std::unique_ptr<graph> g = builder.make_graph();
 

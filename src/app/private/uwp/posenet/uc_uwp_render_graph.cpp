@@ -4,6 +4,8 @@
 
 #include <vector>
 #include <unordered_map>
+#include <map>
+#include <assert.h>
 
 namespace uc
 {
@@ -15,54 +17,134 @@ namespace uc
             {
                 namespace
                 {
+                    struct transitions_read_write
+                    {
+                        reader m_r;
+                        writer m_w;
+                    };
+
+                    struct transitions_write_read
+                    {
+                        writer  m_w;
+                        reader  m_r;
+                    };
+
+                    struct transitions_read_read
+                    {
+                        reader  m_r0;
+                        reader  m_r1;
+                    };
+
+                    struct transitions_write_write
+                    {
+                        writer  m_w0;
+                        writer  m_w1;
+                    };
+
+                    inline bool operator==(const execution_pass::transition& o0, const execution_pass::transition& o1)
+                    {
+                        return o0.m_before == o1.m_before && o0.m_after == o1.m_after;
+                    }
+
                     struct execution_device_simulator
                     {
-                        enum state : uint32_t
+                        uint64_t after_state(transitions_read_read r)
                         {
-                            read,
-                            write
-                        };
+                            return r.m_r0.m_flags | r.m_r1.m_flags;
+                        }
 
-                        bool can_set_state(resource* r, state s)
+                        uint64_t after_state(transitions_read_write r)
                         {
-                            auto&& v = m_states.find(r);
+                            return r.m_w.m_flags;
+                        }
 
-                            if (v == m_states.end())
+                        uint64_t after_state(transitions_write_write r)
+                        {
+                            return r.m_w1.m_flags;
+                        }
+
+                        uint64_t after_state(transitions_write_read r)
+                        {
+                            return r.m_r.m_flags;
+                        }
+
+                        bool set_state(resource* r, execution_pass::transition t, execution_pass::transition_resource* result)
+                        {
+                            auto&& r0 = m_states.find(r);
+
+                            assert(t.m_after != t.m_before);
+
+                            if (r0 == m_states.end())
                             {
-                                m_states.insert({ r, s});
+                                m_states[r] = t;
+                                result->m_resource = r;
+                                result->m_transition = t;
                                 return true;
                             }
                             else
                             {
-                                if (v->second == s)
+                                if (r0->second == t)
                                 {
+                                    assert(false);
                                     return false;
                                 }
                                 else
                                 {
-                                    v->second = s;
+                                    assert(r0->second.m_after == t.m_before);
+                                    m_states[r] = t;
+                                    result->m_resource = r;
+                                    result->m_transition = t;
                                     return true;
                                 }
                             }
                         }
 
-                        bool can_set_reader(resource* r)
+                        bool set_state(transitions_read_read r, execution_pass::transition_resource* result)
                         {
-                            return can_set_state(r, state::read);
+                            uint64_t before = r.m_r0.m_flags;
+                            uint64_t after  = after_state(r);
+                            auto     t = execution_pass::transition{ before, after };
+                            return set_state(r.m_r0.m_resource, t, result);
                         }
 
-                        bool can_set_writer(resource* r)
+                        
+                        bool set_state(transitions_read_write r, execution_pass::transition_resource* result)
                         {
-                            return can_set_state(r, state::write);
+                            uint64_t before = r.m_r.m_flags;
+                            uint64_t after = after_state(r);
+                            auto     t = execution_pass::transition{ before, after };
+                            return set_state(r.m_r.m_resource, t, result);
                         }
 
-                        std::unordered_map<resource*, state > m_states;
+                        bool set_state(transitions_write_read r, execution_pass::transition_resource* result)
+                        {
+                            uint64_t before = r.m_w.m_flags;
+                            uint64_t after = after_state(r);
+                            auto     t = execution_pass::transition{ before, after };
+                            return set_state(r.m_r.m_resource, t, result);
+                        }
+
+                        bool set_state(transitions_write_write r, execution_pass::transition_resource* result)
+                        {
+                            uint64_t before = r.m_w0.m_flags;
+                            uint64_t after = after_state(r);
+                            auto     t = execution_pass::transition{ before, after };
+                            return set_state(r.m_w0.m_resource, t, result);
+                        }
+                        
+
+                        std::unordered_map<resource*, execution_pass::transition > m_states;
                     };
                 }
 
                 void graph::execute()
                 {
                     execution_pass execution;
+
+                    std::vector<std::vector<transitions_read_read>>              trr_;
+                    std::vector<std::vector<transitions_read_write>>             trw_;
+                    std::vector<std::vector<transitions_write_read>>             twr_;
+                    std::vector<std::vector<transitions_write_write>>            tww_;
 
                     if (!m_passes.empty())
                     {
@@ -117,22 +199,30 @@ namespace uc
 
                         for (int32_t i = 0; i < payload.size(); ++i)
                         {
-
                             //transitions -> read  -> write
                             //transitions -> write -> read
 
                             int32_t pi = payload[i];
 
-                            std::vector<execution_pass::transitions_read>       trr;
-                            std::vector<execution_pass::transitions_write>      trw;
-                            std::vector<execution_pass::transitions_create>     trc;
-                            std::vector<execution_pass::transitions_destroy>    trd;
+                            std::vector<transitions_read_read>       trr;
+                            std::vector<transitions_read_write>      trw;
+                            std::vector<transitions_write_read>      twr;
+                            std::vector<transitions_write_write>     tww;
+
+                            std::vector<execution_pass::transitions_create>          trc;
+                            std::vector<execution_pass::transitions_destroy>         trd;
 
                             //scan inputs
                             for (auto inp = 0; inp < m_pass_inputs[pi].size(); ++inp)
                             {
                                 reader r = m_pass_inputs[pi][inp];
-                                bool b = false;
+                                bool b   = false;
+
+                                int32_t  min_read_index  = -1;
+                                int32_t  min_write_index = -1;
+
+                                reader r1;
+                                writer w1;
 
                                 //all previous passes
                                 for (int32_t pp = i - 1; pp >= 0; pp--)
@@ -146,14 +236,75 @@ namespace uc
 
                                         if (r.m_resource == w.m_resource)
                                         {
-                                            //side effect
-                                            trr.push_back({ r,w });
-                                            b = true;
+                                            min_write_index = pp;
+                                            w1              = w;
+                                            b               = true;
                                             break;
                                         }
                                     }
 
                                     if (b) break;
+                                }
+
+                                //all previous passes
+                                {
+                                    b = false;
+
+                                    for (int32_t pp = i - 1; pp >= 0; pp--)
+                                    {
+                                        uint32_t pl = payload[pp];
+
+                                        //previous passes inputs
+                                        for (auto out = 0; out < m_pass_inputs[pl].size(); ++out)
+                                        {
+                                            reader w = m_pass_inputs[pl][out];
+
+                                            if (r.m_resource == w.m_resource)
+                                            {
+                                                min_read_index = pp;
+                                                r1 = w;
+                                                b = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (b) break;
+                                    }
+                                }
+
+                                //read resource not found previously. assume it is a common state
+                                if (min_read_index == -1 && min_write_index == -1)
+                                {
+                                    //twr.push_back({ r1, r } );
+                                    //assert(false);
+                                }
+                                else if (min_read_index == -1 && min_write_index != -1)
+                                {
+                                    assert(w1.m_flags != r.m_flags);
+                                    twr.push_back({ w1, r });
+                                }
+                                else if (min_read_index != -1 && min_write_index == -1)
+                                {
+                                    if (r1.m_flags != r.m_flags)
+                                    {
+                                        trr.push_back({ r1, r });
+                                    }
+                                }
+                                else
+                                {
+                                    if (min_read_index > min_write_index)
+                                    {
+                                        if (r1.m_flags != r.m_flags)
+                                        {
+                                            trr.push_back({ r1, r });
+                                        }
+                                    }
+                                    else
+                                    {
+                                        assert(min_read_index != min_write_index); //a resource cannot be input and output in the same pass
+                                        assert(w1.m_flags != r.m_flags);
+                                        twr.push_back({ w1,r });
+                                    }
                                 }
                             }
 
@@ -168,8 +319,14 @@ namespace uc
                             //scan outputs
                             for (auto out = 0; out < m_pass_outputs[pi].size(); ++out)
                             {
-                                writer w = m_pass_outputs[pi][out];
-                                bool b = false;
+                                writer w    = m_pass_outputs[pi][out];
+                                bool b      = false;
+
+                                int32_t  min_read_index = -1;
+                                int32_t  min_write_index = -1;
+
+                                reader r1;
+                                writer w1;
 
                                 //all previous passes
                                 for (int32_t pp = i - 1; pp >= 0; pp--)
@@ -182,13 +339,68 @@ namespace uc
 
                                         if (r.m_resource == w.m_resource)
                                         {
-                                            //side effect
-                                            trw.push_back({ w,r });
+                                            r1 = r;
+                                            min_read_index = pp;
                                             b = true;
                                             break;
                                         }
                                     }
+
                                     if (b) break;
+                                }
+
+                                {
+                                    b = false;
+
+                                    //all previous passes
+                                    for (int32_t pp = i - 1; pp >= 0; pp--)
+                                    {
+                                        uint32_t pl = payload[pp];
+
+                                        for (auto inp = 0; inp < m_pass_outputs[pl].size(); ++inp)
+                                        {
+                                            writer r = m_pass_outputs[pl][inp];
+
+                                            if (r.m_resource == w.m_resource && r.m_flags != w.m_flags )
+                                            {
+                                                w1 = r;
+                                                min_write_index = pp;
+                                                b = true;
+                                                break;
+                                            }
+                                        }
+                                        if (b) break;
+                                    }
+                                }
+
+                                //
+                                if (min_read_index == -1 && min_write_index == -1)
+                                {
+                                    //valid, new resources or imported external resources start with write
+                                }
+                                else if (min_read_index == -1 && min_write_index != -1)
+                                {
+                                    assert(w1.m_flags != w.m_flags);
+                                    tww.push_back({ w1, w });
+                                }
+                                else if (min_read_index != -1 && min_write_index == -1)
+                                {
+                                    assert(r1.m_flags != w.m_flags);
+                                    trw.push_back({ r1, w });
+                                }
+                                else
+                                {
+                                    if (min_read_index > min_write_index)
+                                    {
+                                        assert(r1.m_flags != w.m_flags);
+                                        trw.push_back({ r1, w });
+                                    }
+                                    else
+                                    {
+                                        assert(min_read_index != min_write_index); //a resource cannot be input and output in the same pass
+                                        assert(w1.m_flags != w.m_flags);
+                                        tww.push_back({ w1, w });
+                                    }
                                 }
                             }
 
@@ -229,49 +441,61 @@ namespace uc
 
                             pass* c = m_passes[pi].get();
                             execution.m_passes.push_back(c);
-                            execution.m_trr.emplace_back(trr);
-                            execution.m_trw.emplace_back(trw);
+                            trr_.emplace_back(trr);
+                            trw_.emplace_back(trw);
+                            twr_.emplace_back(twr);
+                            tww_.emplace_back(tww);
                             execution.m_trc.emplace_back(trc);
                             execution.m_trd.emplace_back(trd);
+                            
                         }
+
+                        execution.m_tr.resize(execution.m_passes.size());
 
                         //simulate execution and filter redundant states
                         execution_device_simulator simulator;
                         for (auto i = 0; i < execution.m_passes.size(); ++i)
                         {
-                            std::vector<execution_pass::transitions_read>       trr;
-                            std::vector<execution_pass::transitions_write>      trw;
+                            std::vector<execution_pass::transition_resource>                 tr;
 
-                            std::vector<execution_pass::transitions_create>     trc;
-                            std::vector<execution_pass::transitions_destroy>    trd;
 
-                            for (auto&& c : execution.m_trc[i])
+                            for (auto&& r : trr_[i])
                             {
-                                if (simulator.can_set_writer(c.m_r))
+                                execution_pass::transition_resource t;
+                                if (simulator.set_state(r, &t) )
                                 {
-                                    trc.push_back(c);
+                                    tr.push_back(t);
                                 }
                             }
 
-                            for (auto&& r : execution.m_trr[i])
+                            for (auto&& r : trw_[i])
                             {
-                                if (simulator.can_set_reader(r.m_r.m_resource))
+                                execution_pass::transition_resource t;
+                                if (simulator.set_state(r, &t))
                                 {
-                                    trr.push_back(r);
+                                    tr.push_back(t);
                                 }
                             }
 
-                            for (auto&& w : execution.m_trw[i])
+                            for (auto&& r : twr_[i])
                             {
-                                if (simulator.can_set_writer(w.m_w.m_resource))
+                                execution_pass::transition_resource t;
+                                if (simulator.set_state(r, &t))
                                 {
-                                    trw.push_back(w);
+                                    tr.push_back(t);
                                 }
                             }
 
-                            execution.m_trr[i] = std::move(trr);
-                            execution.m_trw[i] = std::move(trw);
-                            execution.m_trc[i] = std::move(trc);
+                            for (auto&& r : tww_[i])
+                            {
+                                execution_pass::transition_resource t;
+                                if (simulator.set_state(r, &t))
+                                {
+                                    tr.push_back(t);
+                                }
+                            }
+
+                            execution.m_tr[i] = std::move(tr);
                         }
                     }
                 }

@@ -18,21 +18,9 @@ namespace uc
             {
                 struct execution_pass
                 {
-                    struct transitions_read
-                    {
-                        reader m_r;
-                        writer m_w;
-                    };
-
-                    struct transitions_write
-                    {
-                        writer m_w;
-                        reader m_r;
-                    };
-
                     struct transitions_create
                     {
-                        resource* m_r;
+                        resource* m_r;                   
                     };
 
                     struct transitions_destroy
@@ -40,10 +28,21 @@ namespace uc
                         resource* m_r;
                     };
 
+                    struct transition
+                    {
+                        uint64_t    m_before = 0;
+                        uint64_t    m_after  = 0;
+                    };
+
+                    struct transition_resource
+                    {
+                        transition m_transition;
+                        resource*  m_resource = nullptr;
+                    };
+
                     std::vector< pass* >                                        m_passes;
 
-                    std::vector<std::vector<transitions_read>>                  m_trr;  //resources that we need to read
-                    std::vector<std::vector<transitions_write>>                 m_trw;  //resources that we need to write
+                    std::vector<std::vector<transition_resource>>               m_tr;
                     std::vector<std::vector<transitions_create>>                m_trc;  //resources that we need to create
                     std::vector<std::vector<transitions_destroy>>               m_trd;  //resources that we need to destroy
                 };

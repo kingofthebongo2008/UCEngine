@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "uc_uwp_render_graph_builder.h"
+#include <assert.h>
 
 namespace uc
 {
@@ -54,7 +55,7 @@ namespace uc
                 writer pass_resource_allocator::make_render_target(uint32_t format, uint32_t width, uint32_t height)
                 {
                     resource* r = m_resource_allocator->make_render_target(format, width, height);
-                    writer w = { r };
+                    writer w = { r, flags_render_target };
                     m_pass_resources.push_back(r);
                     m_pass_new.push_back(r);
                     m_pass_outputs.push_back(w);
@@ -64,7 +65,8 @@ namespace uc
                 writer pass_resource_allocator::make_depth_buffer(uint32_t format, uint32_t width, uint32_t height)
                 {
                     resource* r = m_resource_allocator->make_depth_buffer(format, width, height);
-                    writer w = { r };
+
+                    writer w = { r, flags_depth_write };
                     m_pass_resources.push_back(r);
                     m_pass_new.push_back(r);
                     m_pass_outputs.push_back(w);
@@ -74,25 +76,95 @@ namespace uc
                 writer pass_resource_allocator::make_swap_chain(void* v)
                 {
                     resource* r = m_resource_allocator->make_swap_chain(v);
-                    writer w    = { r };
+                    writer w    = { r, flags_render_target };
                     m_pass_resources.push_back(r);
                     m_pass_outputs.push_back(w);
                     return w;
                 }
 
-                writer pass_resource_allocator::write(resource* r)
+                writer pass_resource_allocator::write(resource* r, uint64_t flags)
                 {
-                    writer w = { r };
-                    m_pass_resources.push_back(r);
-                    m_pass_outputs.push_back(w);
-                    return w;
+                    writer w = { r , flags};
+                    return add_writer(w);
                 }
 
-                reader pass_resource_allocator::read(resource* r)
+                reader pass_resource_allocator::read(resource* r, uint64_t flags)
                 {
-                    reader w = { r };
-                    m_pass_resources.push_back(r);
-                    m_pass_inputs.push_back(w);
+                    //todo: flags;
+                    reader w = { r , flags};
+                    return add_reader(w);
+                }
+
+                reader pass_resource_allocator::add_reader(reader r)
+                {
+                    bool found = false;
+
+                    for (auto&& i : m_pass_resources)
+                    {
+                        if (i == r.m_resource)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    //merge read flags
+                    for (auto&& i : m_pass_inputs)
+                    {
+                        if (i.m_resource == r.m_resource)
+                        {
+                            i.m_flags |= r.m_flags;
+                            return i;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        m_pass_resources.push_back(r.m_resource);
+                    }
+
+                    m_pass_inputs.push_back(r);
+
+                    return r;
+                }
+
+                writer  pass_resource_allocator::add_writer(writer w)
+                {
+                    bool found = false;
+
+                    for (auto&& i : m_pass_resources)
+                    {
+                        if (i == w.m_resource)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    //cannot add twice
+                    for (auto&& i : m_pass_outputs)
+                    {
+                        if (i.m_resource == w.m_resource)
+                        {
+                            if (i.m_flags == w.m_flags)
+                            {
+                                return w;
+                            }
+                            else
+                            {
+                                assert(false);
+                                return {};
+                            }
+                            
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        m_pass_resources.push_back(w.m_resource);
+                    }
+
+                    m_pass_outputs.push_back(w);
                     return w;
                 }
             }

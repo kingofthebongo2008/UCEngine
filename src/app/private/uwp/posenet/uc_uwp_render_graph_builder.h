@@ -33,8 +33,8 @@ namespace uc
                     writer make_depth_buffer(uint32_t format, uint32_t width, uint32_t height);
                     writer make_swap_chain(void* v);
 
-                    writer  write(resource* r);
-                    reader  read(resource* r);
+                    writer  write(resource* r, uint64_t flags);
+                    reader  read(resource* r, uint64_t flags);
 
                     std::vector< resource* > m_pass_resources;
                     std::vector< resource* > m_pass_new;
@@ -44,6 +44,9 @@ namespace uc
                     private:
 
                     resource_allocator* m_resource_allocator;
+
+                    reader add_reader(reader r);
+                    writer add_writer(writer w);
 
                 };
             }
