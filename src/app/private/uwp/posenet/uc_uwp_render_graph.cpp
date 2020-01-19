@@ -137,7 +137,7 @@ namespace uc
                     };
                 }
 
-                void graph::execute()
+                execution_pass graph::execute()
                 {
                     execution_pass execution;
 
@@ -498,6 +498,8 @@ namespace uc
                             execution.m_tr[i] = std::move(tr);
                         }
                     }
+
+                    return execution;
                 }
             }
         }

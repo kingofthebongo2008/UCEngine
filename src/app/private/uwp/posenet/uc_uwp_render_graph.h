@@ -49,7 +49,7 @@ namespace uc
 
                 struct graph
                 {
-                    void execute();
+                    execution_pass execute();
 
                     std::unique_ptr<resource_allocator>                         m_allocator;
 
