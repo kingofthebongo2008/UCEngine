@@ -186,10 +186,8 @@ namespace uc
                     shadow_pass*                shadows             = add_graphic_pass<shadow_pass>(&builder);
                     shadow_terrain_pass*        shadows_terrain     = add_graphic_pass<shadow_terrain_pass>(&builder,  shadows->shadows());
                     shadow_terrain_pass2* shadows_terrain2          = add_graphic_pass<shadow_terrain_pass2>(&builder, shadows->shadows());
-
                     direct_lighting_pass*  direct                   = add_graphic_pass<direct_lighting_pass>(&builder, depth->depth(), shadows->shadows() );
                     ambient_occlusion_pass* indirect                = add_graphic_pass<ambient_occlusion_pass>(&builder, depth->depth(), direct->lighting());
-
                     compose_pass*   compose                         = add_graphic_pass<compose_pass>(&builder, direct->lighting(), indirect->lighting(), swap_chain );
 
                     compose;
@@ -197,9 +195,7 @@ namespace uc
                     shadows_terrain2;
 
                     std::unique_ptr<graph> g = builder.make_graph();
-
-                    g->execute();
-                    
+                    execution_pass plan      = g->execute();
                 }
             }
         }
