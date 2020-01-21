@@ -12,7 +12,14 @@ namespace uc
             {
                 struct resource
                 {
-                    resource() = default;
+                    enum class type : uint32_t
+                    {
+                        unknown         = 0,
+                        render_target   = 1,
+                        depth_buffer    = 2,
+                        swap_chain      = 3,
+                    };
+
                     virtual ~resource() = default;
 
                     resource(const resource&) = delete;
@@ -27,29 +34,31 @@ namespace uc
                     }
 
                     private:
-
+                    type     m_type;
                     uint32_t m_flags = 0;
 
                     protected:
+                    resource(type t) : m_type(t) {}
+
                     void set_flags(bool external)
                     {
-                            m_flags = external ? 1 : 0;
+                        m_flags = external ? 1 : 0;
                     }
                 };
 
                 struct render_target  final : public resource
                 {
-
+                    render_target() : resource(resource::type::render_target) {}
                 };
 
                 struct depth_buffer final : public resource
                 {
-
+                    depth_buffer() : resource(resource::type::depth_buffer) {}
                 };
 
                 struct swap_chain final : public resource
                 {
-                    swap_chain(void* e) : m_external_resource(e) { set_flags(true); }
+                    swap_chain(void* e) : resource(resource::type::swap_chain), m_external_resource(e) { set_flags(true); }
 
                     void* m_external_resource;
                 };
@@ -95,7 +104,6 @@ namespace uc
                     resource* m_resource = nullptr;
                     uint64_t  m_flags    = 0;
                 };
-
             }
         }
     }

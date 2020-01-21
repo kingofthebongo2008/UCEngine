@@ -19,7 +19,7 @@ namespace uc
                     resource* make_depth_buffer(uint32_t format, uint32_t width, uint32_t height);
                     resource* make_swap_chain(void* v);
 
-                    private:
+                    protected:
 
                     std::vector< std::unique_ptr<resource> >  m_resources;
                 };
