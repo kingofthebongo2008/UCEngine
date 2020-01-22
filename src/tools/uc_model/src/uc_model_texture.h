@@ -6,7 +6,7 @@
 #include <gsl/gsl>
 
 #include <uc_dev/gx/lip/geo.h>
-
+#include <uc_dev/util/utf8_conv.h>
 
 #include "uc_model_exception.h"
 #include "uc_model_compressonator.h"

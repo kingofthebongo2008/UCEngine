@@ -91,7 +91,7 @@
     <ProjectGuid>{7BFD660B-EC2B-4E59-8AE2-B6C3697029A5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ucdev_include_parser</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup>
     <OutputBinDirectory Condition="'$(OutputBinDirectory)'==''">$(ProjectDir)..\..\bin</OutputBinDirectory>
@@ -99,10 +99,15 @@
     <OutputTmpDirectory Condition="'$(OutputTempDirectory)'==''">$(ProjectDir)..\..\tmp</OutputTmpDirectory>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
   <Import Project="../../../../msbuild/vs_default.props" />
   <Import Project="../../../../msbuild/cpp_default.props" />
   <Import Project="../../../../msbuild/gsl.props" />
-  <Import Project="../../../../msbuild/assimp.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -119,7 +124,7 @@
     <ClCompile>
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
@@ -132,7 +137,7 @@
     <ClCompile>
       <PreprocessorDefinitions>%(IntDir);%(PreprocessorDefinitions);_CONSOLE;UC_TOOLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../src;../resources;../../../../include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
