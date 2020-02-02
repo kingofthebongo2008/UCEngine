@@ -99,23 +99,15 @@
     <Manifest />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.Core">
-      <!--HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Build.Utilities.Core.dll</HintPath-->
     </Reference>
-    <!--Reference Include="Microsoft.Build">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Build.dll</HintPath>
-    </Reference-->
+    <Reference Include="Microsoft.Build">
+    </Reference>
     <Reference Include="Microsoft.Build.CPPTasks.Common">
-      <!--HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Build.CPPTasks.Common.dll</HintPath-->
-      <Private>true</Private>
+    <HintPath>Microsoft.Build.CPPTasks.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Engine">
-      <!--HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Build.Engine.dll</HintPath-->
-      <Private>true</Private>
-    </Reference>
-    <Reference Include="Microsoft.Build.Framework">
-      <!--HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Build.Framework.dll</HintPath-->
-      <Private>true</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

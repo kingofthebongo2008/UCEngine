@@ -62,7 +62,7 @@ int32_t main(int32_t argc, const char* argv[])
 
         std::cout << "building skeleton (" << get_environment() << ") " << input_skeleton << std::endl;
 
-        std::experimental::filesystem::path path(input_skeleton);
+        std::filesystem::path path(input_skeleton);
         auto e = path.extension().wstring();
 
         if (e == L".fbx")//  && false)

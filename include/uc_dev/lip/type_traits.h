@@ -41,10 +41,19 @@ namespace uc
             static const constexpr bool value = std::is_polymorphic<t>::value;
         };
 
+        /*
         template <typename t> struct is_pod
         {
-            static const constexpr bool value = std::is_pod<t>::value;
+            static const constexpr bool value = std::is_standard_layout<t>::value && std::is_trivial<t>::value;
         };
+        */
+
+        template< typename t >
+        struct is_pod : std::integral_constant<
+            bool,
+            std::is_standard_layout<t>::value &&
+            std::is_trivial<t>::value
+        > {};
 
         template <typename t> struct is_union
         {

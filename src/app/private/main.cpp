@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <ppltasks.h>
-#include "winrt/base.h"
+#include <winrt/base.h>
 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.ApplicationModel.h>
@@ -268,8 +268,8 @@ private:
 int32_t __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int32_t)
 {
     uc::os::windows::com_initializer initializer;
-    //auto viewProviderFactory = ref new ViewProviderFactory();
-    CoreApplication::Run(ViewProvider());
+    auto view = winrt::make<ViewProvider>();
+    CoreApplication::Run( view.as<IFrameworkViewSource>() );
     return 0;
 }
 

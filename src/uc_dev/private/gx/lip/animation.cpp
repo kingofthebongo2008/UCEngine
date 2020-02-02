@@ -63,5 +63,10 @@ namespace uc
             LIP_RTTI_MEMBER(joint_animations, m_duration)
             LIP_RTTI_MEMBER(joint_animations, m_ticks_per_second)
             LIP_END_DEFINE_RTTI(joint_animations)
+
+            LIP_BEGIN_DEFINE_RTTI(joint_bounding_volume)
+            LIP_RTTI_MEMBER(joint_bounding_volume, m_center)
+            LIP_RTTI_MEMBER(joint_bounding_volume, m_radius)
+            LIP_END_DEFINE_RTTI(joint_bounding_volume)
         }
 }

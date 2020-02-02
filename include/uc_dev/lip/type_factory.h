@@ -49,7 +49,7 @@ namespace uc
 
             void* do_placement_new(const load_context& c) override
             {
-                return do_placement_new(c, is_pod_selector< std::is_pod<t>::value>());
+                return do_placement_new(c, is_pod_selector< is_pod<t>::value>());
             }
 
 

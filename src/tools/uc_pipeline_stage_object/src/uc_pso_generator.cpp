@@ -77,15 +77,15 @@ namespace uc
         }
 
         template <typename t>
-        bool is_nil(const t& t)
+        bool is_nil(const t& tv)
         {
-            return boost::apply_visitor(is_nil_visitor(), t);
+            return boost::apply_visitor(is_nil_visitor(), tv);
         }
 
         template <typename r, typename t>
-        r value(const t& t)
+        r value(const t& tv)
         {
-            return boost::apply_visitor(value_visitor<r>(), t);
+            return boost::apply_visitor(value_visitor<r>(), tv);
         }
 
         std::string graphics_pso_header()
@@ -1128,7 +1128,7 @@ namespace uc
 
         unit_data generate_graphics_pso_unit(const graphics_parsed_unit& p, const std::string& main_function, const std::string& header_name)
         {
-            namespace fs            = std::experimental::filesystem;
+            namespace fs            = std::filesystem;
             const auto r            = referenced(p);
             const auto& pipe        = graphics_pipeline_state_desc(main_function, r);
 
@@ -1231,7 +1231,7 @@ namespace uc
 
         unit_data generate_compute_pso_unit(const compute_parsed_unit& p, const std::string& main_function, const std::string& header_name)
         {
-            namespace fs = std::experimental::filesystem;
+            namespace fs = std::filesystem;
             const auto r = referenced(p);
             const auto& pipe = compute_pipeline_state_desc(main_function, r);
 

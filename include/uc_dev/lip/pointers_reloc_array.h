@@ -27,12 +27,12 @@ namespace uc
             using const_reference        = const t&;
 
             public:
-
+            #ifdef UC_TOOLS
             reloc_data() : m_data(nullptr), m_size(0), m_capacity(0)
             {
 
             }
-
+            #endif
             reloc_data( const load_context& c )
             { 
                 //make the offset to the real data
@@ -680,7 +680,7 @@ namespace uc
                     //write size
                     w->copy(offset + sizeof(uintptr_t), sizeof(size_t));
 
-                    if (std::is_pod<t>::value)
+                    if (is_pod<t>::value)
                     {
                         size_t    size = root->size() * sizeof(t);
                         w->begin_struct(root->data(), size, std::alignment_of<t>::value );

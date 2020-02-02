@@ -111,7 +111,7 @@ namespace uc
 
             if (base_pointer)
             {
-                return reinterpret_cast<t*>(base_pointer);// new (base_pointer) t();
+                return new (base_pointer) t();
             }
             else
             {
@@ -121,7 +121,7 @@ namespace uc
 
         template <typename t> inline t* placement_new(const load_context& c)
         {
-            return placement_new_impl<t>(c, std::is_pod<t>());
+            return placement_new_impl<t>(c, is_pod<t>());
         }
 
         template <typename t> class reloc_pointer : public std::unique_ptr< t, deleter<t> >

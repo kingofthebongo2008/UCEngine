@@ -5,18 +5,20 @@
 
 #include <winrt/windows.foundation.h>
 #include <winrt/windows.gaming.input.h>
+#include <winrt/windows.foundation.collections.h>
+
 
 #include <exception>
 
 #include <wrl/client.h>
 #include <wrl/wrappers/corewrappers.h>
-#include <windows.gaming.input.h>
-#include <Windows.Foundation.Collections.h>
+
 
 namespace uc
 {
     namespace io
     {
+            
         using namespace winrt::Windows::Gaming::Input;
 
         namespace details
@@ -29,7 +31,7 @@ namespace uc
                 {
                     using namespace winrt::Windows::Foundation::Collections;
                     
-                    auto pads   = statics.Gamepads();
+                    auto&& pads   = statics.Gamepads();
 
                     if (pads.Size() > 0)
                     {

@@ -82,12 +82,12 @@ namespace uc
         }
 
         template <typename t, typename e >
-        inline auto get_input_value(const boost::program_options::variables_map & map, const std::string& s, e e)
+        inline auto get_input_value(const boost::program_options::variables_map & map, const std::string& s, e ev)
         {
             using namespace std;
             if (!map.count(s))
             {
-                e();
+                ev();
                 return t();
             }
             else
